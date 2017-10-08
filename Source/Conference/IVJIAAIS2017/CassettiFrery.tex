@@ -49,15 +49,13 @@
 Speckled images, such as SAR imagery, are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
 In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks.
 The latter can be considered known because it can be set up during the image generation process, or estimated for the whole image.
-The scale can be easily estimated as it depends on the mean value.
-% % % JC esto quedò del abstract del jstar no aprobado. Pero no lo entiendo, lo querìa sacar
 
 The first one is related to the texture of the image, so its estimation deserves special attention.
 This paper proposes and compares methods for the estimation of the texture for the multilook case. 
 This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using asymmetric kernels.
 The Gamma and Lognormal kernels are evaluated with cross-validation to find the appropriate bandwidth.
 The properties of these estimators are assessed with simulation studies. 
-The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error \textcolor{blue}{in most of the cases studies}.
+The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error in most cases.
 \end{abstract}
 
 \keywords{Texture analysis, Synthetic Aperture Radar, Kernel estimation, Stochastic distance}
@@ -66,7 +64,7 @@ The new estimators outperform the maximum likelihood estimator regarding bias an
 Remote sensing with Synthetic Aperture Radar (SAR) data has become a vital tool for environmental studies. 
 The multiplicative model has been extensively used in the modelling and analysis of this kind of images. 
 It describes the observed image as the product of two statistically independent random variables which, respectively, represent the target information and the speckle noise. 
-In this context, the $\mathcal{G}^{0}$ model, proposed in~\cite{Frery97}, for intensity data has a good performance in describing \textcolor{blue}{texture and extremely texture areas}. 
+In this context, the $\mathcal{G}^{0}$ model, proposed in~\cite{Frery97}, for intensity data has a good performance in describing a wide range of textures, from negligible (areas with fully developed speckle) to extreme (as in urban areas). 
 The density function is indexed by three parameters: one directly associated with the texture, other being a scale parameter, and the third related to the signal-to-noise ratio.
 % % % ACF En el abstract ya presentaste los parámetros, pero de otra forma. Reescribir esto para que no parezca que son cosas diferentes.
 
@@ -90,8 +88,7 @@ This situation is of particular importance in the case of small sample sizes.
 
 In order to assess the robustness of the proposed estimators we evaluate two schemas. 
 The first one considers that in a very small proportion $\epsilon$, instead of observing outcomes from the ``correct'' model, the data comes from the same model but with different parameters.
-% % % % Lo que sigue es el otro "schema"? No se entiende así.
-\textcolor{blue}{The other} is fixing $n-1$ observations and allowing one to vary. 
+¸The other second scenario consist in fixing $n-1$ observations and allowing one to vary. 
 This is the EIF -- Empirical Influence Function, but it depends on the particular sample.
 To avoid this, Andrews et al.~\cite{Andrews1972}, proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations.
 This is the SEIF -- Stylized Empirical Influence Function that, among others, was used by Rousseeuw and Verboven~\cite{RousseeuwCSDA} for estimation with very small samples and by Allende et al.~\cite{AllendeFreryetal:JSCS:05} for AM estimators of the texture under the amplitude $\mathcal G^0$ law.
@@ -107,11 +104,9 @@ $n\in\{9, 25,49, 81,121,500\}$.
 These sample size represent different scenarios of window sizes, and a large sample situation.
 
 The estimators were also evaluated in terms of bias, mean squared error, the number of situations for which there was no convergence, and computational cost. 
-An algorithm is considered to \textcolor{blue}{no} converge if it finds an estimate $\widehat{\alpha}$ \textcolor{blue}{smaller} than $-20$.
-% % % ACF Me parece que el criterio de convergencia no está bien.
+An algorithm is considered to \textcolor{blue}{no} converge if it finds an estimate $\widehat{\alpha}$ smaller than $-20$.
 
-We show that the minimum distance estimator with \textcolor{blue}{Gamma  and Lognormal} kernel outperforms \textcolor{blue}{Inverse Gaussian one, Maximum Likelihood and Logcumulant} estimators in most of the cases studied.
-% % % Escribir sin siglas
+We show that the minimum distance estimator with Gamma and Lognormal kernel outperforms the ones based on the Inverse Gaussian kernel, on Maximum Likelihood and the Logcumulant estimators in most of the cases studied.
 
 \bibliographystyle{plain}
 \bibliography{../../../Bibliography/bib_julia}
