@@ -1,0 +1,106 @@
+
+\documentclass[a4paper]{article} %
+\usepackage{graphicx,amssymb} %
+\usepackage[left=35mm, right=35mm, top=30mm, bottom=20mm, noheadfoot]{geometry}
+\usepackage{times}
+\usepackage{bm,bbm}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx,subfigure}
+\usepackage{url}
+\usepackage{units}
+\usepackage{cite,balance}
+\usepackage{comment}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{color}
+
+\textwidth=15cm \hoffset=-1.2cm %
+\textheight=25cm \voffset=-2cm %
+
+\pagestyle{empty} %
+
+\date{} %
+
+%\def\keywords#1{\begin{center}{\bf Keywords}\\{#1}\end{center}} %
+\def\keywords#1{{\bf Keywords: }{#1}}
+
+% begin the document
+\begin{document}
+\thispagestyle{empty}
+
+\title{\textbf{Kernel Estimation and Stochastic Distance for Texture Parameter Estimation under the Intensity $\mathcal G_I^0$ for multilook case}}
+
+% Authors
+\author{Julia Cassetti{\small $^1$}, Alejandro C. Frery{\small $^2$}\\ %
+	{\small $^1$Instituto del Desarrollo Humano -  Universidad Nacional de General Sarmiento} \\
+	{\small J. M.Gutierrez 1150-Los Polvorines, Pcia. de Buenos Aires- Argentina}\\\small 
+	$^2$LaCCAN -- Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica\\
+	\small Universidade Federal de Alagoas\\
+	\small Av. Lourival Melo Mota, s/n, 57072-900 Macei\'o -- AL, Brazil\\
+	\tt{julia.cassetti@gmail.com} % Only one corresponding e-mail
+}%
+
+\date{} % <--- leave date empty
+\maketitle\thispagestyle{empty} %% <-- you need this for the first page
+
+
+\begin{abstract}
+Speckled images, such as SAR imagery, are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
+In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks.
+The latter can be considered known because it can be set up during the image generation process, or estimated for the whole image.
+The scale can be easily estimated as it depends on the mean value.
+The first one is related to the texture of the image, so its estimation deserves special attention.
+This paper proposes and compares methods for the estimation of the texture parameter for the multilook case. This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using asymmetric kernels.
+The Gamma and Lognormal kernels are evaluated along with the cross-validation method to find the appropriate bandwidth.
+The properties of these estimators are assessed with simulation studies. 
+The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error.
+
+
+\end{abstract}
+
+\keywords{texture analysis, synthetic aperture radar,kernel estimation,stochastic distance}
+
+\vspace{0.5cm}
+Remote sensing with Synthetic Aperture Radar (SAR) data has become a vital tool for environmental studies. The multiplicative model has been extensively used in the modeling and analysis of this kind of images. It describes the observed image as the product of two statistically independent random variables which represent, respectively, the target information and the speckle noise. 
+In this context, the $\mathcal{G}^{0}$  model~\cite{Frery97} for intensity data has a good performance in describing rough and extremely rough areas. The density function is indexed by three parameters: one directly associated with the texture, other being a scale parameter, and the third related to the signal-to-noise ratio.
+
+In this work we present an estimators for the texture parameter based on the minimum distance idea between the true density function and an estimation of the underlying density function. Cassetti et al~\cite{APSAR2013ParameterEstimationStochasticDistances} used the notion of minimizing a stochastic distance to propose a new estimator for $\alpha$ in the $\mathcal{G}_I^0$ distribution.
+The estimator $\widehat{\alpha}$ is the point of the parametric space that minimizes a stochastic distance between the $\mathcal{G}_I^0$ distribution and a nonparametric estimation of the underlying true density function. The authors used histograms to estimate the fixed underlying density function. Several distances were assessed: Hellinger, Bhattacharyya, R\'enyi and Triangular. They chose the triangular distance because it outperformed the others. 
+
+In Gambini et al.~\cite{gambini2015} the underlying density function was estimated using asymmetric kernels, in particular, they used the Inverse Gaussia n(IG) kernel. They found the minimum running through a grid of alpha values and used a fix bandwidth chosen empirically. 
+
+In this work we use Gamma (GA) an Lognormal (LN) kernels because  Gamma model is a limit distribution for the $\mathcal{G}^0$ model in homogeneous areas, and the Lognormal law has been used to model SAR data~\cite{Szajnowski1977}. It should be noted that the minimum value of alpha is founded by the L-BFGS-B algorithm which allows box constraints. The choice of the bandwidth is sensitive in nonparametric density estimation. For GA and LN kernels Least Squared Cross-
+Validation (LSCV) was used for this choice~\cite{Rudemo1982}.
+
+Among the desirable properties of a good estimator, resistance to contamination is very important in practical applications. That is, its ability to produce good estimations even when a proportion of the data does not come from the assumed model. This situation is of particular importance in the case of small sample sizes.
+
+In order to assess the robustness of the proposed estimators we evaluate two schemas. The first one considers that in a very small proportion $\epsilon$, instead of observing outcomes
+from the “right” model, the data comes from the same model but with different parameters.  
+Another way of assessing how the estimator behaves under contamination is fixing $n-1$ observations and allowing one to vary. This is the EIF -- Empirical Influence Function, but it depends on the particular sample.
+To avoid this, Andrews et al.~\cite{Andrews1972}, proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations.
+This is the SEIF -- Stylized Empirical Influence Function that, among others, was used by Rousseeuw and Verboven~\cite{RousseeuwCSDA} for estimation with very small samples and by Allende et al.~\cite{AllendeFreryetal:JSCS:05} for AM estimators of the texture under the amplitude $\mathcal G^0$ law.
+
+Among the estimation techniques available, moments (or analogy) and maximum likelihood (ML) estimators are among the most popular.  More recently, using a connection between the Mellin's transform, a number of estimators based on logcumulants (LC) and logmoments have been proposed~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014}.
+
+The performance of the proposed techniques is assessed twofold: with their Stylized Empirical Influence Functions (SEIFs), and through a Monte Carlo experiment with data generated with and without contamination. The latter consists of $500$ independent replications for each of several parameter values: 
+$\alpha\in\{-1.5, -3, -5, -8\}$ (they represents different levels of texture: extremely heterogeneous, heterogeneous, moderately homogeneous and homogeneous), 
+$L\in\{1,3,8\}$, and 
+$n\in\{9, 25,49, 81,121,500\}$. 
+These sample size represent different scenarios of window sizes, and a large sample situation.
+
+
+The estimators were also evaluated in terms of bias, mean squared error, the number of situations for which there was no convergence, and computational cost. 
+An algorithm is considered to converge if it finds an estimate $\widehat{\alpha}$ larger than $-20$. 
+
+We show that the minimum distance estimator with GA and LN kernel outperforms IG kernel, ML and LC estimators in most of the cases studied.
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{../../../Bibliography/bib_julia}
+\end{document}
+
