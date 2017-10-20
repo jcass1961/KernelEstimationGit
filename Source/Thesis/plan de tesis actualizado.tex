@@ -1,0 +1,163 @@
+%\documentclass[12pt,thmsa]{article}
+
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}  
+\usepackage[latin1]{inputenc} 
+\usepackage{amsmath}
+\usepackage[pctex32]{graphicx}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage{enumerate}
+
+\voffset-2.5cm 
+\hoffset 0.0cm 
+\topmargin 2cm
+\oddsidemargin-5mm% 
+\evensidemargin 0mm
+\textwidth=17cm
+\textheight=24.2cm 
+%\columnsep=0.8cm
+\pagestyle{empty}
+\renewcommand{\baselinestretch}{1}  
+\sloppy  
+\widowpenalty100000   
+\clubpenalty100000
+\parskip 2mm   
+
+\begin{document}
+
+
+\begin{center}
+\text{\textbf{\large Plan de tesis}}\\
+\medskip 
+\text{\textbf{\large Estimación de parámetros en imágenes con ruido speckle}}
+\end{center}  
+
+\section{Objetivos}
+Referidos al propósito de la investigación. El objetivo específico refleja el resultado esperable en el plazo previsto para la realización del plan. El objetivo general, al cual contribuye el objetivo específico, se orienta hacia resultados posibles de obtener en el largo plazo en la línea de investigación mediante trabajos ulteriores no incluidos en el plan.
+
+\subsection{Objetivos generales}
+La propuesta del presente plan consiste en avanzar en el modelado, análisis y procesamiento de imágenes a través del uso de técnicas derivadas de la
+Teoría de la Información y de la Estadística.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+\item Proponre nuevos estimadores de los parámetros de la distribución que modelan datos provenientes de imágenes SAR.
+\item Emplear técnicas no paramétricas de estimación junto con  conceptos de  distancias estocásticas en la definición de estos estimadores.
+\item Analizar la robustez de los estimadores propuestos bajo diferentes esquemas de contaminación.
+\item Desarrollar algoritmos rápidos y eficientes, en términos de uso de memoria y de tiempo de proceso, que permitan la interpretación automática de imágenes SAR.
+\end{itemize}
+
+\section{Planteo del problema}
+
+%\section{Introducción}
+Los sistemas de Radar (radio detection and ranging: detección y medición de distancias por radio) son instrumentos que, a través de ondas electromagnéticas, detectan un objeto e indican su distancia y posición. Estos instrumentos miden la respuesta del terreno a la radiación electromagnética emitida en forma de pulsos, el valor de esta respuesta es almacenada para su posterior procesamiento y se utiliza para formar una imagen de la zona de interés. Un Radar de Apertura Sintética (synthetic aperture radar: SAR) es un tipo de sistema que consiste en procesar, mediante algoritmos, la información capturada por la antena del radar. Mediante este proceso se consigue el mismo rendimiento que se obtendría mediante una antena mucho más grande que la que tiene en realidad, por eso se llaman de apertura sintética. 
+
+La señal recibida por el radar es un número complejo, a partir de esta señal se forma la imagen. Si consideramos el módulo de la señal recibida decimos que los datos están dados en formato amplitud, en cambio, si utilizamos el cuadrado del módulo de dicha señal diremos los datos están dados en formato intensidad. En esta tesis se trabajará con los datos dados en este último formato.
+
+Las imágenes SAR son de gran utilidad ya que permiten obtener información sobre recursos naturales, como así también, permiten detectar efectos de la acción del hombre tales como deforestación, cultivos y embalses. Este tipo de imágenes presentan ventajas y desventajas sobre las imágenes obtenidas por sensores ópticos, por ejemplo: 
+
+\medskip
+
+Ventajas:
+\begin{itemize}
+	\item El radar posee un sistema de iluminación propio que permite la adquisición de imágenes tanto de día como de noche.
+	\item Los sistemas SAR emiten radiación electromagnética a frecuencias que permiten atravesar las nubes sin pérdida en la calidad de la imagen obtenida, como así también atravesar zonas de forestación obteniendo mayor información de la zona bajo estudio.
+	\end{itemize}
+
+Desventajas: 
+\begin{itemize}
+	\item Las imágenes SAR tienen la desventaja de poseer un ruido que es inherente al proceso de captura de la imagen, ya que el tipo de iliminación que se utiliza para formar la misma es de tipo coherente \cite{goodman85}. Este ruido, llamado speckle, es multiplicativo, no gaussiano y, por lo tanto, diferente al ruido que se observa en imágenes ópticas. La presencia de este ruido hace que en este tipo de imágenes se observen, en algunos casos, un granulado o falta de contraste.
+\end{itemize}
+	
+	Con el objetivo de disminuir los efectos de este ruido, se han utilizado filtros como así también una técnica llamada procesamiento multilook.  Esta técnica se aplica a menudo durante el proceso de formación de la imagen y consiste en generar, de forma estadísticamente independientes, varias ``vistas'' o looks a partir del mismo conjunto de pulsos crudos durante el proceso de generación de la imagen. La imagen resultante es la obtenida promediando estas vistas. Tanto el procesamiento multilook como los filtros reducen la presencia del ruido speckle pero se pierde resolución. De esta manera hay un compromiso entre la calidad visual y la presencia de ruido. 
+	
+	Se han utilizado modelos estadísticos para la comprensión y análisis de imágenes SAR que tienen en cuenta la presencia de este ruido. El modelo propuesto para datos provenientes de un sistema de iluminación por radiación coherente, como son los datos SAR, es un modelo multiplicativo que considera que el valor observado en cada celda de la imagen es una variable aleatoria $Z$ que resulta del producto de dos variables aleatorias independientes: una correspondiente al backscatter o retrodispersión $X$ (que es lo que observaríamos sin la presencia del ruido speckle) y la otra correspondiente al ruido speckle $Y$ (que es inherente a todo sistema de captura de imágenes con iluminación coherente). En los últimos años, se ha utilizado exitosamente la familia de distribuciones $\mathcal{G}$: $\mathcal{G}_A^0$ para datos de amplitud y $\mathcal G_I^0$ para datos de intensidad. Este modelo fue propuesto por Frery et al. \cite{Frery97} y permite describir las áreas muy rugosas o extremadamente rugosas mejor que la distribución $\mathcal{K}$ \cite{jakeman87}.
+
+El modelo multiplicativo considerado es el siguiente:
+\begin{equation*}
+Z=X \cdot Y  
+\end{equation*}
+donde $X$ e $Y$ corresponden al backscatter y al ruido speckle, respectivamente. La variable aleatoria $Y$ se modela con la distribución $\Gamma ( L,L) $, donde $L\geq 1$ es el número equivalente  de looks, mientras que $X$ sigue una distribución Gaussiana Inversa Generalizada, denotada por  $\mathcal{N}^{-1}( \alpha ,\lambda ,\gamma ) $. De esta forma tenemos que $Z$ obedece una distribución $\mathcal G_I$ \cite{Frery97}.
+Para valores particulares de los parámetros de la distribución $\mathcal{N}^{-1}$ se obtienen las distribuciones $\Gamma ( \alpha ,\lambda ) $,  $\Gamma ^{-1}( \alpha ,\gamma ) $, que llevan a las distribuciones $\mathcal{K}$, $\mathcal{G}_I^{0}$, respectivamente. En esta tesis trabajaremos con la distribución para datos de intensidad denotada por $\mathcal{G}_I^{0}$.
+
+Su función de densidad está dada por
+\begin{equation*}
+f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
+) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+L) }\cdot  
+\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
+\label{ec_dens_gI0}
+\end{equation*}
+donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
+
+Bajo este modelo se pueden caracterizar regiones con diferente grado de textura a través de los parámetros de la distribución $\mathcal{G}_I^{0}$. Para valores de $\alpha$ cercanos a cero (típicamente en el intervalo $(-3,0)$), la zona de la imagen corresponde a una región muy texturada, como es el caso de las zonas urbanas en las imágenes SAR. A medida que el valor del parámetro $\alpha$ disminuye, corresponde a zonas con cada vez menos textura, como son las regiones de forestación (usualmente $(-6,-3]$) y pastura (en $(-\infty,-6)$). Por otro lado, el parámetro $\gamma$ (llamado parámetro de escala) posee una interpretación en términos del brillo. Cuanto mayor es su valor, mayor intensidad posee la imagen en esa región. Por estas razones, la estimación precisa de los parámetros, en particular el parámetro de textura, es de suma importancia en el análisis de imágenes con ruido speckle. 
+
+\section{Antecedentes}
+En los últimos años se han propuesto varios métodos de estimación de parámetros, Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantifican el error en la estimación del parámetro de textura para la distribución $\mathcal G_A^0$ y proponen una técnica analítica para mejorar la estimación.
+Silva et al.~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics} proponen otro método analítico para mejorar la estimación del parámetro de textura que reduce el error cuadrático medio.
+Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} proponen el uso de bootstrap para el mismo fin. 
+Allende et al.~\cite{AllendeFreryetal:JSCS:05} y Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} plantean mejoras para la estimación del parámetro de textura, pero con foco en su robustez. 
+
+Entre las técnicas de estimación paramétrica clásicas se encuentran las de máxima verosimilitud y momentos. Recientemente en ~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} se han propuesto estimadores del parámetro de textura basado logcumulants y logmomentos, donde interviene la transforamda de Mellin de la función de densidad. En Tison et al.~\cite{Tison2004} los autores mostraron que los estimadors de los parámetros de la distribución $\mathcal G^0$, para datos de amplitud, mejoran al estimador de máxima verosimilitud.
+
+Es importante mencionar que, entre las propiedades que se espera que un buen estimador posea, son la consistencia, insesgadez, eficiencia, robustez, normalidad asintótica. Son conocidas las buenas propiedades asintóticas que posee el estimador de máxima verosimilitud. Sin embargo, este estimador no se comporta adecuadamente para el caso donde el tamaño de muestra es chico. Es importante considerar este caso ya que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ or  $11 \times 11$. Por eso es de interés encontrar buenos estimadores de los parámetros de la distribución $\mathcal{G}_I^0$ para el caso de muestras de pequeño tamaño. 
+
+Por otro lado, la teoría de la información ha sido aplicada a los métodos de estadística y probabilidades con éxito~\cite{Liese2006}. 
+Shannon~\cite{Shannon1948} definió la información $I(X,Y)$ entre las variables aleatorias $X$ e $Y$ como una divergencia calculada entre sus densidades de probabilidad. 
+Estas divergencias fueron ampliamente estudiadas por Kullback y Leibler~\cite{KullbackLeibler1951} y por Rényi~\cite{renyi1961}, entre otros. 
+%El concepto de divergencias como distancias estocásticas se describe detalladamente en~\cite{Liese2006}, así como también sus propiedades.  
+% Mejorar las referencia en eventos con artigos en periódicos
+Este tipo de divergencias poseen múltiples aplicaciones en procesamiento de señales e imágenes~\cite{4218961}, análisis de imágenes médicas~\cite{5599869},
+clasificación de texturas~\cite{1246862}, restauración de imágenes~\cite{1224731} e incluso en detección automática de regiones con diferente grado de rugosidad en imágenes SAR~\cite{6377288,ClassificationPolSARSegmentsMinimizationWishartDistances}.
+
+Los estimadores del kernel clásico~\cite{Silverman1986} son populares en la estimación de la función de densidad.
+Sin embargo, si la densidad a estimar tiene soporte acotado, estos estimadores pueden dar estimaciones sesgadas en los bordes del soporte porque asignan probabilidad positiva fuera del soporte de la función.
+Una alternativa para mejorar esto es utilizar kernels asimétricos, Chen~\cite{chen1999, chensx2000} presenta núcleos Beta y Gamma, Scaillet~\cite {Scaillet2004} introduce núcleos Inverso Gaussianos (IG) y Recíproco Inverso Gaussiano (RIG), Bouezmarni et al.~\cite {bouezmarni2005} demuestran propiedades teóricas de los núcleos Gamma, IG y RIG. En~\cite{Jin2003} los autores proponen los núcleos Birnbaum-Saunders (BS) y Lognormal (LN). Es interesante señalar que  estos estimadores varían su forma de acuerdo con la observación, una característica que permite obtener diferentes grados de suavizamiento sin incurrir en los problemas antes mencionados~\cite{Scaillet2004}.
+	
+	
+\section{Hipótesis de trabajo}
+En esta tesis se propone estudiar un nuevo  estimador del parámetro de textura $\alpha$ de la distribución $\mathcal{G}_I^0$ definido como el punto del espacio paramétrico que minimiza la distancia estocástica que existe entre la función de densidad teórica $\mathcal{G}_I^0$ y una estimación no paramétrica de la función de densidad subyacente. La estimación de $\alpha$, denotada $\widehat\alpha$ se realiza de la siguiente manera:
+Sea $Z_1, \ldots, Z_n$ un conjunto de $n$ variables aleatorias independientes e idénticamente distribuidas que siguen el modelo $\mathcal{G}_I^{0}(\alpha,\gamma^*,L) $, donde $\gamma^* $ se elige de modo que $E(Z)= 1$.
+Sea $\widehat{f}_{K}$ una estimación no paramétrica, con núcleo asimétrico $K$, de la función de densidad subyacente. El estimador $\widehat{\alpha}$ está dado por la minimización de la siguiente ecuación:
+\begin{align}
+\widehat{\alpha}_{K}= \arg\min_{\alpha} d\big(f_{\mathcal{G}^{0}}(\alpha,\gamma^*, L ), \widehat f_K(z)\big),
+\label{minimization}
+\end{align}
+Se comparará el desempeño de este estimador, en términos de sesgo y error cuadrático medio y tasa de convergencia, con los presentes en la literatura. Se estudiarán las propiedades de este estimador, como así también la robustez del mismo bajo diferentes esquemas de contaminación.
+
+%Entre las alternativas no paramétricas de estimación de la función de densidad se encuentra el estimador kernel (núcleo) utilizando núcleos simétricos. Este estimador es ampliamente utilizado y posee buenas propiedades, pero cuando la función de densidad tiene soporte acotado, como es el caso de la $\mathcal{G}_I^0$, utilizar este tipo de núcleos puede conducir a estimaciones sesgadas ya que ellos asignan probabilidad positiva a valores que se encuentran fuera del soporte de la distribución.
+%
+%Algunos autores proponen utilizar núcleos asimétricos para resolver este problema. Chen~\cite{chen1999,chensx2000} presenta los núcleos Beta y Gamma,~\cite{Scaillet2004} introducen los núcleos Inverso Gaussiano y Recíproco Inverso Gaussiano. En~\cite{bouezmarni2005} los autores muestran que estos estimadores poseen buenas propiedades. 
+%
+%Esta tesis propone estimar la función de densidad subyacente utilizando núcleos asimétricos como paso previo a la obtención de los estimadores de los parámetros de la distribución a través de la minimización de la distancia estocástica. 
+
+\section{Actividades y metodología}
+En una primera instancia, se realizarán simulaciones Montecarlo para estudiar el comportamiento del estimador propuesto considerando diferentes valores del número de looks y diferentes valores de $\alpha$. Asimismo, se considerarán diferentes distancias estocásticas, entre ellas:
+
+\begin{enumerate}[a)]
+	\item Distancia de Hellinger $d_H(V,W)=1-\int_{-\infty}^{\infty}\sqrt{f_Vf_W}$.
+	\item Distancia de Bhattacharyya $d_B(V,W)=-\log\int_{-\infty}^{\infty}\sqrt{f_Vf_W}$.
+	\item Distancia Triangular $d_T(V,W)=\int_{-\infty}^{\infty}\frac{(f_V-f_W)^2}{f_V+f_W}$.
+	\item Distancia de R\'enyi con parámetro $\beta\in(0,1)$
+	$$
+	d_R^{\beta}(V,W)=\frac{1}{2(\beta-1)}\log\int_{-\infty}^{\infty}\big({f_V^{\beta}f_W^{1-\beta})+\log\int_{-\infty}^{\infty}\big(f_V^{1-\beta}f_W^{\beta}}\big).
+	$$
+\end{enumerate}
+donde $V$ y $W$ dos variables aleatorias definidas sobre el mismo espacio de probabilidad cuyas funciones de densidad son $f_V(x;\theta_1)$ y $f_W(x;\theta_2)$.
+Se puede ver que las distancias de Hellinger y Bhattacharyya obedecen $d_B=-\log(1-d_H)$. Como además la función logaritmo es creciente resulta que $$\arg\min_\alpha d_B(\alpha )=\arg\min_ \alpha d_H(\alpha )$$ por lo que las distancias de Battacharya y Hellinger poseen el mismo mínimo y por eso utilizaremos solamente la distancia de Hellinger que tiene menor costo computacional. Se evaluarán los diferentes núcleos existentes en la literatura y se elegirá la mejor combinación entre distancia y núcleo que derive en la mejor performance para este estimador. Asimismo, una vez elegida la distancia y el núcleo, se estudiarán las propiedades del estimador propuesto. 
+
+\section{Factibilidad}
+La doctoranda posee los conocimientos de estadística necesarios para llevar adelante la propuesta ya que posee una especialización en ese área. Asimismo ha realizado cursos de procesamiento de señales e imágenes con el fin de fortalecer los conocimientos necesarios para lograr los objetivos propuestos en el plan. Se dispone también del equipamiento informático necesario para realizar las simulaciones que propone el plan de tesis. 
+
+\bibliographystyle{plain}
+%\bibliography{C:/Users/usuario/Dropbox/Gamma-1porGamma/Bibtex/bib-juliana}
+%\bibliography{C:/Documents and Settings/JULITA/Misdocumentos/Dropbox/Gamma-1porGamma/Bibtex/bib-juliana}
+\bibliography{../../Bibliography/bib_julia}
+
+\end{document}
+
+
+
