@@ -14,7 +14,7 @@
 \usepackage{microtype}
 \usepackage{siunitx}
 \usepackage{color}
-
+\usepackage[normalem]{ulem} %%%% para tachar texto
 \textwidth=15cm \hoffset=-1.2cm %
 \textheight=25cm \voffset=-2cm %
 
@@ -29,8 +29,8 @@
 \begin{document}
 \thispagestyle{empty}
 
-\title{\textbf{Kernel Estimation and Stochastic Distance for Texture Parameter Estimation under the Intensity Multilook $\mathcal G_I^0$ Law}}
-
+%\title{\textbf{Kernel Estimation and Stochastic Distance for Texture Parameter Estimation under the Intensity Multilook $\mathcal G_I^0$ Law}}
+\title{\textbf{Gamma and Lognormal Kernels with Stochastic Distance for Texture Parameter Estimation under the Intensity Multilook $\mathcal G_I^0$ Law}}
 % Authors
 \author{Julia Cassetti{\small $^1$}, Alejandro C. Frery{\small $^2$}\\ %
 	{\small $^1$Instituto del Desarrollo Humano -  Universidad Nacional de General Sarmiento} \\
@@ -48,9 +48,7 @@
 \begin{abstract}
 Speckled images, such as SAR imagery, are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
 In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks.
-The latter can be considered known because it can be set up during the image generation process, or estimated for the whole image.
-
-The first one is related to the texture of the image, so its estimation deserves special attention.
+The latter can be considered known because it can be set up during the image generation process, or estimated for the whole image. The first one is related to the texture of the image, so its estimation deserves special attention.
 This paper proposes and compares methods for the estimation of the texture for the multilook case. 
 This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using asymmetric kernels.
 The Gamma and Lognormal kernels are evaluated with cross-validation to find the appropriate bandwidth.
@@ -94,7 +92,7 @@ To avoid this, Andrews et al.~\cite{Andrews1972}, proposed using the $i^{th}$ qu
 This is the SEIF -- Stylized Empirical Influence Function that, among others, was used by Rousseeuw and Verboven~\cite{RousseeuwCSDA} for estimation with very small samples and by Allende et al.~\cite{AllendeFreryetal:JSCS:05} for AM estimators of the texture under the amplitude $\mathcal G^0$ law.
 
 Among the estimation techniques available, moments (or analogy) and maximum likelihood estimators are among the most popular.  
-More recently, using a connection between the Mellin's transform, a number of estimators based on log-cumulants  and log-moments have been proposed~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014}.
+\textcolor{red}{\sout{More recently, using a connection between the Mellin's transform, a number of estimators based on log-cumulants  and log-moments have been proposed~~\mbox{\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014}.}}}
 
 The performance of the proposed techniques is assessed twofold: with their Stylized Empirical Influence Functions (SEIFs), and through a Monte Carlo experiment with data generated with and without contamination. 
 The latter consists of $500$ independent replications for each of several parameter values: 
@@ -104,10 +102,11 @@ $n\in\{9, 25,49, 81,121,500\}$.
 These sample size represent different scenarios of window sizes, and a large sample situation.
 
 The estimators were also evaluated in terms of bias, mean squared error, the number of situations for which there was no convergence, and computational cost. 
-An algorithm is considered to \textcolor{blue}{no} converge if it finds an estimate $\widehat{\alpha}$ smaller than $-20$.
+An algorithm is considered to no converge if it finds an estimate $\widehat{\alpha}$ smaller than $-20$.
 
-We show that the minimum distance estimator with Gamma and Lognormal kernel outperforms the ones based on the Inverse Gaussian kernel, on Maximum Likelihood and the Logcumulant estimators in most of the cases studied.
+We show that the minimum distance estimator with Gamma and Lognormal kernel outperforms \textcolor{red}{\sout{the ones based on the Inverse Gaussian kernel, on}} Maximum Likelihood \textcolor{red}{\sout{and the Logcumulant estimators}} in most of the cases studied.
 
 \bibliographystyle{plain}
 \bibliography{../../../Bibliography/bib_julia}
 \end{document}
+
