@@ -1,0 +1,293 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%
+% This is a LaTeX file for an A0 poster.
+%
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a0,portrait]{a0poster}
+% To modify the size of the page:
+%\usepackage{fancytikzposter} 
+%\usepackage{verbatim}
+\usepackage[dvips,a1paper,portrait,centering,top=1cm,bottom=-1cm,left=1cm,right=1cm]{geometry}
+\usepackage{multicol}
+\usepackage[latin1]{inputenc}
+\usepackage{color}
+\usepackage{times}
+\usepackage{a0poster}
+\usepackage{multirow}
+\usepackage{booktabs}
+%\usepackage{fixltx2e}
+\usepackage{subfig}
+\usepackage{graphicx} %cambiar el tamanio de la tabla
+\usepackage{tabulary} %cambiar el ancho de la tabla
+\usepackage{float}
+%\usepackage{caption}
+%\usepackage[absolute]{textpos}
+\usepackage{enumitem,xcolor}
+\usepackage{capt-of}
+
+\usepackage{fancybox}
+\usepackage{amsmath, amsthm, amsfonts}
+\usepackage{graphics}           % Include figure files.
+
+\renewcommand{\refname}{\textcolor{blue}{References}}
+
+
+\usepackage{tcolorbox}% http://ctan.org/pkg/tcolorbox
+
+\definecolor{mycolor}{rgb}{0.122, 0.435, 0.698}
+\newtcbox{\mybox}{nobeforeafter,colframe=mycolor,colback=mycolor!10!white,boxrule=1pt,arc=4pt,
+	boxsep=0pt,left=6pt,right=10pt,top=6pt,bottom=6pt,tcbox raise base}
+% -------
+\definecolor{azulillo}{rgb}{0.8,0.85,1}
+\definecolor{marronrp3}{rgb}{.9,.9,.7}
+\definecolor{salmon}{rgb}{1,.9,.8}
+\definecolor{rojo}{rgb}{.6,.1,0}
+\definecolor{ballblue}{rgb}{0.13, 0.67, 1.5}
+
+\setlength{\parindent}{0pt}% Just for this example
+
+\pagestyle{empty}
+
+\def\to{\rightarrow}
+
+% Hyphenation
+\hyphenation{}
+
+
+% ===========================================================================
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+%\maketitle
+
+\begin{center}
+	\begin{minipage}{.15\linewidth}
+		\includegraphics[width=.95\linewidth]{../../../../logos/LogoUNGS.JPG}
+	\end{minipage}
+	%&
+	\hspace{.01\linewidth}
+	\begin{minipage}{.65\linewidth}
+		\begin{center}
+			\textcolor{blue}{\huge \textbf{Gamma and Lognormal kernels with stochastic distance for texture parameter estimation under the intensity multilook $\mathcal G_I^0$ law}}\\
+			\vspace{0.5cm}
+			\textcolor{blue}{\large{ Julia Cassetti{\small $^1$}, Alejandro C. Frery{\small $^2$}}\\
+				\textcolor{blue}{\small{$^1$Instituto del Desarrollo Humano -  Universidad Nacional de General Sarmiento}}\\
+				\textcolor{blue}{\small{$^2$LaCCAN -- Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica -Universidade Federal de Alagoas}}}\\
+		\end{center}
+	\end{minipage}
+	%&
+	\hspace{.01\linewidth}
+	\begin{minipage}{0.15\linewidth}
+		\begin{center}
+			\includegraphics[scale=0.3]{../../../../logos/LogoUFAL.png}
+		\end{center}
+	\end{minipage}
+\end{center}
+
+\vspace{0.5cm}
+% ---------------------------------------------------------------------------
+
+\setlength{\columnsep}{1cm}
+\begin{multicols}{3}
+
+\noindent
+\colorbox{salmon}{
+  \begin{minipage}[t]{.96\linewidth}
+    \vspace{.2cm}
+    \centerline{\Large \textcolor{blue}{\textbf{Abstract}}}
+    \vspace{.2cm}
+
+SAR imagery are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
+In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks. The first one is related to the texture of the image, so its estimation deserves special attention.
+%The latter can be considered known because it can be set up during the image 		generation process, or estimated for the whole image. The first one is related to the texture of the image, so its estimation deserves special attention.
+This paper proposes and compares methods for the estimation of the texture for the multilook case. 
+This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using Gamma and Lognormal kernels. These estimators are assessed with simulation studies. 
+The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error in most cases.
+  \end{minipage}
+}
+
+    
+\section*{\textcolor{blue}{The $\mathcal{G_I}^0$ Model}}
+
+%The return in monopolarized SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. 
+%In this manner $Z=X Y  $ represents the return $Z$ in each pixel under the multiplicative model.
+%The speckle noise in intensity format $Y$ is modeled as a $\Gamma $ distributed random variable with unitary mean and shape parameter $L\geq1$, the number of looks, while the backscatter $X$ is considered to obey a Reciprocal of Gamma law. 
+%This gives rise to the $\mathcal{G}^{0}$ distribution for the return $Z$.
+%Given the mathematical tractability and descriptive power of the $\mathcal{G}^{0}$ distribution%~\cite{MejailJacoboFreryBustos:IJRS,mejailfreryjacobobustos2001} 
+%it represents an attractive choice for SAR data modeling.
+
+The return $Z$ in monopolarized SAR images can be modeled as $Z=X Y$  where $L$ is the number of looks, $X \sim \Gamma^{-1}(\alpha ,\gamma)$ corresponds to the backscatter and $Y \sim \Gamma(L,L)$ corresponds to the speckle noise. It leads to the $\mathcal{G}_I^{0}$ distribution whose density function is given by
+
+{\small
+\begin{equation*}
+f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
+	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+	L) }\cdot  
+\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
+\label{ec_dens_gI0}
+\end{equation*}
+}
+
+where $-\alpha,\gamma ,z>0$ and $L\geq 1$. 
+%The $r$-order moments are
+%\begin{equation}
+%\text{E}(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }
+%\frac{\Gamma (L+r )}{\Gamma (L)},
+%\label{moments_gI0}
+%\end{equation}
+%provided $\alpha<-r$, and infinite otherwise.
+
+\vspace{0.54cm}
+The $\alpha$ parameter is related to the texture of the target: $\alpha \in (0,-3)$ suggest extreme texture,  $\alpha \in (-6,-3]$ indicates forest zones and $\alpha\in(-\infty,-6]$ indicates homogeneous one.
+The $\gamma$ parameter is proportional to the brightness.
+With the purpose of reducing our analysis to a single parameter, we consider $E(Z)=1$ which links the texture and the brightness parameter by $\gamma^* =-\alpha-1$.
+
+
+%\section*{\colorbox{blue}{\textcolor{white}{Maximum Likelihood Estimator }}}
+\section*{\textcolor{blue}{Maximum Likelihood Estimator }}
+Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G_I^0(\alpha,\gamma^*,L)$ distribution.
+A maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{\tiny{ML}}}$, is any value in $(-\infty,-1)$ that maximizes
+
+%\begin{minipage}[t]{.86\linewidth}
+{\small
+\begin{align*}
+\log \Gamma(L-\widehat\alpha_{\text{ML}})-
+\widehat\alpha_{\text{ML}}\log(-1-\widehat\alpha_{\text{ML}})
+-\log\Gamma(-\widehat\alpha_{\text{ML}}) \nonumber \\
+\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log(-1-\widehat\alpha_{\text{ML}}+L Z_i).
+\label{ML}
+\end{align*}
+}
+%\end{minipage}
+
+
+\section*{\textcolor{blue}{Stochastic distance estimator}}
+Cassetti et al~\cite{APSAR2013ParameterEstimationStochasticDistances} chose the triangular distance because it outperform others distances. It is defined as:
+\begin{equation}
+d_{\text{\tiny{T}}}(f_\text{\tiny{V}},f_\text{\tiny{W}})=\int_{S}\frac{(f_\text{\tiny{V}}-f_\text{\tiny{W}})^2}{f_\text{\tiny{V}}+f_\text{\tiny{W}}}
+\label{DT}
+\end{equation}
+where $f_V$ and $f_W$ are two densities functions with common support $S$. As proposed in~\cite{gambini2015}, the proposed estimator is
+\begin{align}
+\widehat{\alpha}_\text{{\tiny{T}}}= \arg\min_{\alpha} d_{\text{{\tiny{T}}}}\big(f_{\tiny\mathcal{G}_I^{0}}(\alpha,\gamma^*, L ), \widehat f_\text{\tiny{K(z)}}\big),
+\label{minimization}
+\end{align}
+where $d_{\tiny{\text{T}}}$ is the triangular distance defined in~\eqref{DT}, $\gamma^*$ and $L$ are known and
+\begin{center}
+ \mybox{\begin{minipage}{.86\linewidth}
+		$\widehat f_\text{\tiny{K(z)}}$ is a nonparametric estimation of the underlying density function using Gamma and Lognormal kernels.
+	\end{minipage}
+}
+\end{center}
+
+
+
+%This minimization was performed searching values in $[-20,-1]$ and returning as $\widehat{\alpha}_{K}$ the value that minimizes~\eqref{minimization}.
+%
+%\section*{\textcolor{blue}{Asymmetric Kernels}}
+%\label{distance_minimization}
+%
+%Among the many available asymmetric kernels, in this work we used the Gamma $(K_{\Gamma})$ and Lognormal $(K_{\text{LN}})$ kernels defined, for every $t>0$, as:
+%\begin{align}
+%K_{{\Gamma}_{{\theta}(z,b)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
+%\label{gammakernel}
+%\end{align}
+%\begin{align}
+%K_{{\text{LN}}_{{\theta}(z,b)}}(t) & =\frac{1}{t \sqrt{2 \pi} b} \exp\Big\{-\frac{\left(\log t - \log z -b^2\right)^2}{2b^2}\Big\},
+%\label{LNkernel}
+%\end{align}
+%for $t,z,b>0$.\\
+%It is noteworthy that Gamma model is a limit distribution for the $\mathcal{G}^0$ model in homogeneous areas, and the Lognormal law has been used to model SAR data.%~\cite{Szajnowski1977}.
+
+All the optimizations where performed using the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shannon method.
+
+\section*{\textcolor{blue}{Simulation Study}}
+We perform a Monte Carlo experiment which consists of $500$ independent replications for each one of several parameter values: 
+$\alpha\in\{-1.5, -3, -5, -8\}$, $L\in\{3,8\}$, and $n\in\{9, 25,49, 81,121,500\}$. 
+Each replication produces estimators $\{\widehat{\alpha}_1, \dots, \widehat{\alpha}_{500}\}$ with which we compute the sample bias and sample mean squared error. We show the $L=3$ case, $L=8$ produces similar results.
+
+%\section*{\textcolor{blue}{Without Contamination}}
+
+\begin{center}
+ \begin{minipage}[t]{0.96\linewidth}
+  	\begin{figure}
+	\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/SinCont/alfa500_sinmenos20_NoContMVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINALbarrasdeerror_L3.pdf}\\
+	\captionof*{figure}{\small{Mean value of $\widehat{\alpha}$, $L=3$.}}
+	\end{figure}
+\end{minipage}
+\end{center}
+\vspace{0.8cm}
+\begin{center}
+	\begin{minipage}[t]{0.96\linewidth}
+		\begin{figure}
+  		\includegraphics[scale=1]{../../../../Figures/IVJIAAIS2017/SinCont/ECM_500_L3MVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINAL.pdf}
+  		\captionof*{figure}{\small{Mean squared error of $\widehat{\alpha}$, $L=3$.}}
+ 		\end{figure}
+  	\end{minipage}
+\end{center}
+
+\vspace{0.8cm}
+ 
+\section*{\textcolor{blue}{Robustness analysis}}
+\label{robustez}
+We  evaluate the robustness of the proposed estimator defining $Z=(1-B)W+BU$ where: $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ is the true model, $U \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ where $\alpha_1=-15$ and $\gamma_1^*=-\alpha_1-1$, $B \sim Ber(\epsilon)$ where $\epsilon=0.05$. 
+%The cumulative distribution function of $Z$ is $(1-\epsilon) {F}_{\alpha,\gamma^*,L}(z)+\epsilon {F}_{\alpha_1,\gamma_1^*,L}(z)$.
+\begin{center}
+	\begin{minipage}[t]{0.96\linewidth}
+		\begin{figure}
+		\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/Cont/alfa500_sinmenos20_CONTMVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALbarrasdeerror_L3.pdf}\\
+		\captionof*{figure}{\small{Mean value of $\widehat{\alpha}$, $L=3$.}}
+		\end{figure}
+	\end{minipage}
+\end{center}
+
+	
+\begin{center}
+	\begin{minipage}[t]{0.96\linewidth}
+	\begin{figure}
+		\includegraphics[scale=1]{../../../../Figures/IVJIAAIS2017/Cont/ECM_500_L3MVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALeps05.pdf}
+		\captionof*{figure}{\small{Mean squared error of $\widehat{\alpha}$, $L=3$.}}
+		\end{figure}
+	\end{minipage}
+\end{center}
+%In particular, in image processing and analysis one is seldom able to grant that the underlying hypothesis under which the techniques being employed hold, so the ability of performing well even under deviations from these assumptions is a requirement.
+
+%	\item through EIF -- Empirical Influence Function. Fixing $n-1$ observations and allowing one to vary, but it depends on the particular sample. To avoid this, Andrews et al.~\cite{Andrews1972}, proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
+%	This is the SEIF -- Stylized Empirical Influence Function.
+%\end{itemize}
+
+\section*{\textcolor{blue}{Stylized Samples}}
+Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed and one range over the support of the distribution. It depends on the particular sample so, to avoid this, Andrews et al.~\cite{Andrews1972} proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
+
+\begin{center}
+	\begin{minipage}[t]{0.96\linewidth}
+		\begin{figure}
+			\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/Cont/INFL_LNyMVyGA_alfa-3_L3n9.pdf}
+			\captionof*{figure}{\small{SEIFs for $L=3$, $\alpha=-3$ and $n=9$. \label{figure:SEIFL1}}}
+		\end{figure}
+	\end{minipage}
+\end{center}
+\hspace{.05cm}
+ 
+\section*{\textcolor{blue}{Conclusions}}
+\begin{itemize}
+	\item[\textcolor{red}{\textbullet}] The $\widehat{\alpha}_{\text{\tiny{T}}}$ estimator perform very well for extreme textured and textured zones, as they outperform the $\widehat{\alpha}_{\text{\tiny{ML}}}$ estimator in these cases in bias, and in all cases in mean squared error.
+	\item[\textcolor{red}{\textbullet}] The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using Stylized Empirical Influence Functions.
+	\item[\textcolor{red}{\textbullet}] $\widehat\alpha_{\text{\tiny{T}}}$ is more computationally intensive than $\widehat\alpha_{\text{\tiny{ML}}}$.
+	\item[\textcolor{red}{\textbullet}] The small bias this robust estimator presents is remarkable even under contamination.
+\end{itemize}
+
+
+\bibliographystyle{plain}
+
+\bibliography{../../../../Bibliography/bib_julia}
+
+\end{multicols}
+
+\end{document}
