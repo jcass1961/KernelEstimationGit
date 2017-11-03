@@ -27,6 +27,7 @@
 %\usepackage[absolute]{textpos}
 \usepackage{enumitem,xcolor}
 \usepackage{capt-of}
+\usepackage{setspace}
 
 \usepackage{pdfcolparcolumns}
 
@@ -285,9 +286,10 @@ Empirical Influence Function shows the performance of the estimator $\widehat{\a
 \section*{\textcolor{blue}{Number of cases of no convergence}}
 An algorithm is considered to converge if it finds an estimate $\widehat{\alpha}$ larger than $-20$.
 
+\begin{spacing}{0.9}
 \[
-\footnotesize{
-\begin{array}{c c c c}
+\small{
+\begin{array}{r r r r}
 \begin{tabulary}{5cm}{ 
 	c|@{\hspace{0.9cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.5cm}} }
 \hline	
@@ -315,10 +317,10 @@ $\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$
 %\begin{tabulary}{5cm}{ 
 %	c|@{\hspace{0.9cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.5cm}} }
 \hline	
-$\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$ 
-& $\widehat{\alpha}_{\textup{\tiny $\Gamma$}}$
-& $\widehat{\alpha}_{\text{\tiny{LN}}}$\\
-\hline
+%$\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$ 
+%& $\widehat{\alpha}_{\textup{\tiny $\Gamma$}}$
+%& $\widehat{\alpha}_{\text{\tiny{LN}}}$\\
+%\hline
 \multirow{6 }{*}{$-5\text{  }$} 
 & $9$   & $134$ & $44$ & $61$ \\ 
 & $25$  & $50$  & $14$ & $24$ \\ 
@@ -339,6 +341,7 @@ $\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$
 \end{array}
 }
 \]
+\end{spacing}
 
  
 \section*{\textcolor{blue}{Conclusions}}
