@@ -28,6 +28,8 @@
 \usepackage{enumitem,xcolor}
 \usepackage{capt-of}
 
+\usepackage{pdfcolparcolumns}
+
 \usepackage{fancybox}
 \usepackage{amsmath, amsthm, amsfonts}
 \usepackage{graphics}           % Include figure files.
@@ -93,34 +95,33 @@
 \vspace{0.5cm}
 % ---------------------------------------------------------------------------
 
-\setlength{\columnsep}{1cm}
-\begin{multicols}{3}
-
+\setlength{\columnsep}{0.05cm}
+\setlength{\columnseprule}{0.05cm}
+%\begin{multicols}{3}
+\begin{parcolumns}[colwidths={1=.3\textwidth,2=.39\textwidth},rulebetweencolor=blue
+	,rulebetween=true]{3}
 \noindent
-\colorbox{salmon}{
-  \begin{minipage}[t]{.96\linewidth}
-    \vspace{.2cm}
-    \centerline{\Large \textcolor{blue}{\textbf{Abstract}}}
-    \vspace{.2cm}
-
-SAR imagery are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
-In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks. The first one is related to the texture of the image, so its estimation deserves special attention.
-%The latter can be considered known because it can be set up during the image 		generation process, or estimated for the whole image. The first one is related to the texture of the image, so its estimation deserves special attention.
-This paper proposes and compares methods for the estimation of the texture for the multilook case. 
-This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using Gamma and Lognormal kernels. These estimators are assessed with simulation studies. 
-The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error in most cases.
-  \end{minipage}
+\colchunk{
+%
+ \begin{minipage}[t]{0.95\linewidth}
+  \colorbox{salmon}{
+	\begin{minipage}[t]{1\linewidth}
+		   \centerline{\Large \textcolor{blue}{\textbf{Abstract}}}
+		\vspace{.2cm}
+		SAR imagery are well described by the $\mathcal G_I^0$ model because they possess the ability to characterize areas with different degrees of texture. 
+	In the monopolarized case, this distribution depends on three parameters: the texture, the scale and the number of looks. The first one is related to the texture of the image, so its estimation deserves special attention.
+	%The latter can be considered known because it can be set up during the image 		generation process, or estimated for the whole image. The first one is related to the texture of the image, so its estimation deserves special attention.
+	This paper proposes and compares methods for the estimation of the texture for the multilook case. 
+	This parameter is estimated by minimizing a stochastic distance between $\mathcal G_I^0$ density and an estimate of the underlying density function using Gamma and Lognormal kernels. These estimators are assessed with simulation studies. 
+	The new estimators outperform the maximum likelihood estimator regarding bias and mean squared error in most cases.
+	  \end{minipage}
 }
 
-    
-\section*{\textcolor{blue}{The $\mathcal{G_I}^0$ Model}}
 
-%The return in monopolarized SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. 
-%In this manner $Z=X Y  $ represents the return $Z$ in each pixel under the multiplicative model.
-%The speckle noise in intensity format $Y$ is modeled as a $\Gamma $ distributed random variable with unitary mean and shape parameter $L\geq1$, the number of looks, while the backscatter $X$ is considered to obey a Reciprocal of Gamma law. 
-%This gives rise to the $\mathcal{G}^{0}$ distribution for the return $Z$.
-%Given the mathematical tractability and descriptive power of the $\mathcal{G}^{0}$ distribution%~\cite{MejailJacoboFreryBustos:IJRS,mejailfreryjacobobustos2001} 
-%it represents an attractive choice for SAR data modeling.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{minipage}[t]{.85\linewidth}    
+\section*{\textcolor{blue}{The $\mathcal{G_I}^0$ Model}}
 
 The return $Z$ in monopolarized SAR images can be modeled as $Z=X Y$  where $L$ is the number of looks, $X \sim \Gamma^{-1}(\alpha ,\gamma)$ corresponds to the backscatter and $Y \sim \Gamma(L,L)$ corresponds to the speckle noise. It leads to the $\mathcal{G}_I^{0}$ distribution whose density function is given by
 
@@ -134,7 +135,7 @@ f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 \end{equation*}
 }
 
-where $-\alpha,\gamma ,z>0$ and $L\geq 1$. 
+where $-\alpha,\gamma ,z>0$ and $L\geq 1$. In this work we consider $E(Z)=1$ which links the texture and the brightness parameter by $\gamma^* =-\alpha-1$.
 %The $r$-order moments are
 %\begin{equation}
 %\text{E}(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }
@@ -144,104 +145,93 @@ where $-\alpha,\gamma ,z>0$ and $L\geq 1$.
 %provided $\alpha<-r$, and infinite otherwise.
 
 \vspace{0.54cm}
-The $\alpha$ parameter is related to the texture of the target: $\alpha \in (0,-3)$ suggest extreme texture,  $\alpha \in (-6,-3]$ indicates forest zones and $\alpha\in(-\infty,-6]$ indicates homogeneous one.
-The $\gamma$ parameter is proportional to the brightness.
-With the purpose of reducing our analysis to a single parameter, we consider $E(Z)=1$ which links the texture and the brightness parameter by $\gamma^* =-\alpha-1$.
+%The $\alpha$ parameter is related to the texture of the target: $\alpha \in (0,-3)$ suggest extreme texture,  $\alpha \in (-6,-3]$ indicates forest zones and $\alpha\in(-\infty,-6]$ indicates homogeneous one.
+%The $\gamma$ parameter is proportional to the brightness.
+%With the purpose of reducing our analysis to a single parameter, we consider $E(Z)=1$ which links the texture and the brightness parameter by $\gamma^* =-\alpha-1$.
+
 
 
 %\section*{\colorbox{blue}{\textcolor{white}{Maximum Likelihood Estimator }}}
 \section*{\textcolor{blue}{Maximum Likelihood Estimator }}
-Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G_I^0(\alpha,\gamma^*,L)$ distribution.
-A maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{\tiny{ML}}}$, is any value in $(-\infty,-1)$ that maximizes
-
-%\begin{minipage}[t]{.86\linewidth}
+%Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G_I^0(\alpha,\gamma^*,L)$ distribution.
+The maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{\tiny{ML}}}$, is any value in $(-\infty,-1)$ that maximizes
 {\small
-\begin{align*}
-\log \Gamma(L-\widehat\alpha_{\text{ML}})-
-\widehat\alpha_{\text{ML}}\log(-1-\widehat\alpha_{\text{ML}})
--\log\Gamma(-\widehat\alpha_{\text{ML}}) \nonumber \\
-\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log(-1-\widehat\alpha_{\text{ML}}+L Z_i).
-\label{ML}
-\end{align*}
+	\begin{align*}
+		\log \Gamma(L-\widehat\alpha_{\text{ML}})-
+		\widehat\alpha_{\text{ML}}\log(-1-\widehat\alpha_{\text{ML}})
+		-\log\Gamma(-\widehat\alpha_{\text{ML}}) \nonumber \\
+		\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log(-1-\widehat\alpha_{\text{ML}}+L Z_i).
+		\label{ML}
+	\end{align*}
 }
-%\end{minipage}
-
-
 \section*{\textcolor{blue}{Stochastic distance estimator}}
-Cassetti et al~\cite{APSAR2013ParameterEstimationStochasticDistances} chose the triangular distance because it outperform others distances. It is defined as:
-\begin{equation}
-d_{\text{\tiny{T}}}(f_\text{\tiny{V}},f_\text{\tiny{W}})=\int_{S}\frac{(f_\text{\tiny{V}}-f_\text{\tiny{W}})^2}{f_\text{\tiny{V}}+f_\text{\tiny{W}}}
-\label{DT}
-\end{equation}
-where $f_V$ and $f_W$ are two densities functions with common support $S$. As proposed in~\cite{gambini2015}, the proposed estimator is
-\begin{align}
-\widehat{\alpha}_\text{{\tiny{T}}}= \arg\min_{\alpha} d_{\text{{\tiny{T}}}}\big(f_{\tiny\mathcal{G}_I^{0}}(\alpha,\gamma^*, L ), \widehat f_\text{\tiny{K(z)}}\big),
-\label{minimization}
-\end{align}
-where $d_{\tiny{\text{T}}}$ is the triangular distance defined in~\eqref{DT}, $\gamma^*$ and $L$ are known and
+
+\begin{center}
+	\mybox{\begin{minipage}{.86\linewidth}
+
+		$$	\widehat{\alpha}_\text{{\tiny{T}}}= \arg\min_{\alpha} d_{\text{{\tiny{T}}}}\big(f_{\tiny\mathcal{G}_I^{0}}(\alpha,\gamma^*, L ), \widehat f_\text{\tiny{K(z)}}\big)$$
+
+		\end{minipage}
+	}
+\end{center}
+
+%Cassetti et al~\cite{APSAR2013ParameterEstimationStochasticDistances} chose the triangular distance because it outperform others distances. It is defined as:
+\vspace{0.5cm}
+where 
+\vspace{0.5cm}
 \begin{center}
  \mybox{\begin{minipage}{.86\linewidth}
 		$\widehat f_\text{\tiny{K(z)}}$ is a nonparametric estimation of the underlying density function using Gamma and Lognormal kernels.
 	\end{minipage}
 }
 \end{center}
+\vspace{0.5cm}
+and the triangular distance is defined as
+\begin{equation*}
+d_{\text{\tiny{T}}}(f_\text{\tiny{V}},f_\text{\tiny{W}})=\int_{S}\frac{(f_\text{\tiny{V}}-f_\text{\tiny{W}})^2}{f_\text{\tiny{V}}+f_\text{\tiny{W}}}
+\label{DT}
+\end{equation*}
+with $f_\text{\tiny{V}}$ and $f_\text{\tiny{W}}$ are two densities functions.
 
+%where $d_{\tiny{\text{T}}}$ is the triangular distance defined in~\eqref{DT}, $\gamma^*$ and $L$ are known and
 
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%All the optimizations where performed using the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shannon method.
 
-%This minimization was performed searching values in $[-20,-1]$ and returning as $\widehat{\alpha}_{K}$ the value that minimizes~\eqref{minimization}.
-%
-%\section*{\textcolor{blue}{Asymmetric Kernels}}
-%\label{distance_minimization}
-%
-%Among the many available asymmetric kernels, in this work we used the Gamma $(K_{\Gamma})$ and Lognormal $(K_{\text{LN}})$ kernels defined, for every $t>0$, as:
-%\begin{align}
-%K_{{\Gamma}_{{\theta}(z,b)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
-%\label{gammakernel}
-%\end{align}
-%\begin{align}
-%K_{{\text{LN}}_{{\theta}(z,b)}}(t) & =\frac{1}{t \sqrt{2 \pi} b} \exp\Big\{-\frac{\left(\log t - \log z -b^2\right)^2}{2b^2}\Big\},
-%\label{LNkernel}
-%\end{align}
-%for $t,z,b>0$.\\
-%It is noteworthy that Gamma model is a limit distribution for the $\mathcal{G}^0$ model in homogeneous areas, and the Lognormal law has been used to model SAR data.%~\cite{Szajnowski1977}.
-
-All the optimizations where performed using the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shannon method.
-
-\section*{\textcolor{blue}{Simulation Study}}
-We perform a Monte Carlo experiment which consists of $500$ independent replications for each one of several parameter values: 
-$\alpha\in\{-1.5, -3, -5, -8\}$, $L\in\{3,8\}$, and $n\in\{9, 25,49, 81,121,500\}$. 
-Each replication produces estimators $\{\widehat{\alpha}_1, \dots, \widehat{\alpha}_{500}\}$ with which we compute the sample bias and sample mean squared error. We show the $L=3$ case, $L=8$ produces similar results.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\colchunk{
+\begin{minipage}[t]{1\linewidth}
+\section*{\textcolor{blue}{Monte Carlo experiment}}
+We perform  $500$ independent replications for $\alpha\in\{-1.5, -3, -5, -8\}$, $L\in\{3,8\}$, and $n\in\{9, 25,49, 81,121,500\}$, we compute the sample bias and sample mean squared error. We show the $L=3$ case, $L=8$ produces similar results.
 
 %\section*{\textcolor{blue}{Without Contamination}}
 
 \begin{center}
- \begin{minipage}[t]{0.96\linewidth}
+ \begin{minipage}[t]{0.90\linewidth}
   	\begin{figure}
-	\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/SinCont/alfa500_sinmenos20_NoContMVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINALbarrasdeerror_L3.pdf}\\
+	\includegraphics[width=20cm, height=12cm]{../../../../Figures/IVJIAAIS2017/SinCont/alfa500_sinmenos20_NoContMVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINALbarrasdeerror_L3.pdf}\\
 	\captionof*{figure}{\small{Mean value of $\widehat{\alpha}$, $L=3$.}}
 	\end{figure}
 \end{minipage}
-\end{center}
-\vspace{0.8cm}
-\begin{center}
-	\begin{minipage}[t]{0.96\linewidth}
+
+	\begin{minipage}[t]{0.90\linewidth}
 		\begin{figure}
-  		\includegraphics[scale=1]{../../../../Figures/IVJIAAIS2017/SinCont/ECM_500_L3MVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINAL.pdf}
+  		\includegraphics[width=20cm, height=12cm]{../../../../Figures/IVJIAAIS2017/SinCont/ECM_500_L3MVyGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2_FINAL.pdf}
   		\captionof*{figure}{\small{Mean squared error of $\widehat{\alpha}$, $L=3$.}}
  		\end{figure}
   	\end{minipage}
 \end{center}
 
-\vspace{0.8cm}
- 
 \section*{\textcolor{blue}{Robustness analysis}}
 \label{robustez}
 We  evaluate the robustness of the proposed estimator defining $Z=(1-B)W+BU$ where: $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ is the true model, $U \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ where $\alpha_1=-15$ and $\gamma_1^*=-\alpha_1-1$, $B \sim Ber(\epsilon)$ where $\epsilon=0.05$. 
 %The cumulative distribution function of $Z$ is $(1-\epsilon) {F}_{\alpha,\gamma^*,L}(z)+\epsilon {F}_{\alpha_1,\gamma_1^*,L}(z)$.
 \begin{center}
-	\begin{minipage}[t]{0.96\linewidth}
+	\begin{minipage}[t]{1\linewidth}
 		\begin{figure}
-		\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/Cont/alfa500_sinmenos20_CONTMVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALbarrasdeerror_L3.pdf}\\
+		\includegraphics[width=20cm, height=12cm]{../../../../Figures/IVJIAAIS2017/Cont/alfa500_sinmenos20_CONTMVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALbarrasdeerror_L3.pdf}\\
 		\captionof*{figure}{\small{Mean value of $\widehat{\alpha}$, $L=3$.}}
 		\end{figure}
 	\end{minipage}
@@ -249,9 +239,9 @@ We  evaluate the robustness of the proposed estimator defining $Z=(1-B)W+BU$ whe
 
 	
 \begin{center}
-	\begin{minipage}[t]{0.96\linewidth}
+	\begin{minipage}[t]{1\linewidth}
 	\begin{figure}
-		\includegraphics[scale=1]{../../../../Figures/IVJIAAIS2017/Cont/ECM_500_L3MVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALeps05.pdf}
+		\includegraphics[width=20cm, height=12cm]{../../../../Figures/IVJIAAIS2017/Cont/ECM_500_L3MVconX0yGAyLN_OPTIM_hasta500_MOM1_2_SinCte_Ver2FINALeps05.pdf}
 		\captionof*{figure}{\small{Mean squared error of $\widehat{\alpha}$, $L=3$.}}
 		\end{figure}
 	\end{minipage}
@@ -261,33 +251,113 @@ We  evaluate the robustness of the proposed estimator defining $Z=(1-B)W+BU$ whe
 %	\item through EIF -- Empirical Influence Function. Fixing $n-1$ observations and allowing one to vary, but it depends on the particular sample. To avoid this, Andrews et al.~\cite{Andrews1972}, proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
 %	This is the SEIF -- Stylized Empirical Influence Function.
 %\end{itemize}
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\colchunk{
+\begin{minipage}[t]{\linewidth}
 \section*{\textcolor{blue}{Stylized Samples}}
-Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed and one ranges over the support of the distribution. It depends on the particular sample so, to avoid this, Andrews et al.~\cite{Andrews1972} proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
+Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed and one ranges over the support of the distribution. It depends on the particular sample so we use the $i^{th}$ quantile of the assumed distribution to characterize the typical observations.
+
+%Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed and one ranges over the support of the distribution. It depends on the particular sample so, to avoid this, Andrews et al.~\cite{Andrews1972} proposed using the $i^{th}$ quantile of the assumed distribution to characterize the typical observations $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
 
 \begin{center}
-	\begin{minipage}[t]{0.96\linewidth}
+	\begin{minipage}[t]{1\linewidth}
 		\begin{figure}
-			\includegraphics[scale=1.1]{../../../../Figures/IVJIAAIS2017/Cont/INFL_LNyMVyGA_alfa-3_L3n9.pdf}
+			\includegraphics[scale=1.5]{../../../../Figures/IVJIAAIS2017/Cont/INFL_LNyMVyGA_alfa-3_L3n9.pdf}
 			\captionof*{figure}{\small{SEIFs for $L=3$, $\alpha=-3$ and $n=9$. \label{figure:SEIFL1}}}
 		\end{figure}
 	\end{minipage}
 \end{center}
-\hspace{.05cm}
+
+
+%\begin{center}
+%	\begin{minipage}[t]{0.85\linewidth}
+%		\begin{figure}
+%			\includegraphics[scale=1.5]{../../../../Figures/IVJIAAIS2017/CONT/INFL_LNyMVyGA_alfa-3_L3n49.pdf}
+%			\captionof*{figure}{\small{SEIFs for $L=3$, $\alpha=-3$ and $n=49$.}}
+%		\end{figure}
+%	\end{minipage}
+%\end{center}
+
+\section*{\textcolor{blue}{Number of cases of no convergence}}
+An algorithm is considered to converge if it finds an estimate $\widehat{\alpha}$ larger than $-20$.
+
+\[
+\footnotesize{
+\begin{array}{c c c c}
+\begin{tabulary}{5cm}{ 
+	c|@{\hspace{0.9cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.5cm}} }
+\hline	
+$\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$ 
+& $\widehat{\alpha}_{\textup{\tiny $\Gamma$}}$
+& $\widehat{\alpha}_{\text{\tiny{LN}}}$\\
+\hline
+\multirow{6 }{*}{$-1.5\text{  }$} 
+& $9$   &  $0$  & $0$  & $2$  \\ 
+& $25$  &  $0$  & $0$  & $0$  \\ 
+& $49$  &  $0$  & $0$  & $0$  \\ 
+& $81$  &  $0$  & $0$  & $0$  \\ 
+& $121$ &  $0$  & $0$  & $0$  \\ 
+& $500$ &  $0$  & $0$  & $0$  \\ 
+\hline
+\multirow{6 }{*}{$-3$} 
+& $9$   & $65$  & $25$ & $33$ \\ 
+& $25$  &  $5$  &  $1$ &  $4$ \\ 
+& $49$  &  $1$  &  $0$ &  $1$ \\ 
+& $81$  &  $0$  &  $0$ &  $0$ \\ 
+& $121$ &  $0$  &  $0$ &  $0$ \\ 
+& $500$ &  $0$  &  $0$ &  $0$ \\
+%\end{tabulary}
+%& \hspace{0.5cm}
+%\begin{tabulary}{5cm}{ 
+%	c|@{\hspace{0.9cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.7cm}} c @{\hspace{0.5cm}} }
+\hline	
+$\alpha$ & $n$ & $\widehat{\alpha}_{\text{\tiny{ML}}}$ 
+& $\widehat{\alpha}_{\textup{\tiny $\Gamma$}}$
+& $\widehat{\alpha}_{\text{\tiny{LN}}}$\\
+\hline
+\multirow{6 }{*}{$-5\text{  }$} 
+& $9$   & $134$ & $44$ & $61$ \\ 
+& $25$  & $50$  & $14$ & $24$ \\ 
+& $49$  & $17$  &  $7$ &  $6$ \\ 
+& $81$  &  $6$  &  $2$ &  $4$ \\ 
+& $121$ &  $2$  &  $0$ &  $1$ \\ 
+& $500$ &  $0$  &  $0$ &  $0$ \\ 
+\hline
+\multirow{6 }{*}{$-8$} 
+& $9$   & $198$  & $76$ & $88$ \\ 
+& $25$  & $143$  & $42$ & $54$ \\ 
+& $49$  & $ 92$  & $25$ & $25$ \\ 
+& $81$  & $ 60$  & $20$ & $20$ \\ 
+& $121$ & $ 29$  &  $9$ & $10$ \\ 
+& $500$ &  $ 0$  &  $0$ &  $1$ \\ 
+%\bottomrule
+\end{tabulary}
+\end{array}
+}
+\]
+
  
 \section*{\textcolor{blue}{Conclusions}}
 \begin{itemize}
-	\item[\textcolor{red}{\textbullet}] The $\widehat{\alpha}_{\text{\tiny{T}}}$ estimator perform very well for extreme textured and textured zones, as they outperform the $\widehat{\alpha}_{\text{\tiny{ML}}}$ estimator in these cases in bias, and in all cases in mean squared error.
-	\item[\textcolor{red}{\textbullet}] The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using Stylized Empirical Influence Functions.
+	\item[\textcolor{red}{\textbullet}] The $\widehat{\alpha}_{\text{\tiny{T}}}$ estimator perform very well for extreme textured and textured zones, as they outperform the $\widehat{\alpha}_{\text{\tiny{ML}}}$ estimator in almost all cases under study. %estimator in these cases in bias, and in all cases in mean squared error.
+	%\item[\textcolor{red}{\textbullet}] The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using Stylized Empirical Influence Functions.
+	%\item[\textcolor{red}{\textbullet}] The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using stylized samples.
+	\item[\textcolor{red}{\textbullet}] The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ is when stylized samples are used.
 	\item[\textcolor{red}{\textbullet}] $\widehat\alpha_{\text{\tiny{T}}}$ is more computationally intensive than $\widehat\alpha_{\text{\tiny{ML}}}$.
-	\item[\textcolor{red}{\textbullet}] The small bias this robust estimator presents is remarkable even under contamination.
+	\item[\textcolor{red}{\textbullet}] The small bias $\widehat{\alpha}_{\text{\tiny{T}}}$ presents is remarkable even under contamination.
 \end{itemize}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\bibliographystyle{plain}
-
-\bibliography{../../../../Bibliography/bib_julia}
-
-\end{multicols}
+%\bibliographystyle{plain}
+%
+%\bibliography{../../../../Bibliography/bib_julia}
+}
+%\end{multicols}
+\end{parcolumns}
 
 \end{document}
