@@ -14,6 +14,8 @@
 \usepackage{siunitx}
 \usepackage{color}
 \usepackage{enumerate}
+\usepackage{stackrel}
+
 
 \usepackage{geometry}
 \geometry{
@@ -52,7 +54,7 @@
 	\item The current methodology consist in:
 	\begin{enumerate}[i)]
 		\item Generate $Z_1,\ldots,Z_n$ ramdom variables from a $\mathcal G_I^0(\alpha,\gamma)$ where $-\alpha>0 \text{, } \gamma>0$.
-		\item Define random variables $X_i=\dfrac{Z_i}{\overline{Z}}$.
+		\item Define random variables $X_i=\dfrac{Z_i}{\overline{Z}}$. These variables $X_i \stackrel{d}{\longrightarrow} \mathcal{G}_I^{0}(-\alpha,-\alpha-1, L )$.
 		\item Estimate $X_i$ distribution with kernel estimation using kernel $K$ ($\widehat f_{\text{\tiny{X,K}}}$).
 		\item Find $\widehat{\alpha}_{\text{\tiny{K}}}= \arg\min_{\alpha} d_{\text{T}}\big(f_{\mathcal{G}^{0}}(-\alpha,\gamma^*, L ), \widehat f_{\text{\tiny{X,K}}}\big)$ where $\gamma^*=-\alpha-1$.
 	\end{enumerate}
