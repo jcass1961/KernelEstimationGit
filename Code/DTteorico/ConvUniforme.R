@@ -45,7 +45,7 @@ df3<-cbind(df,Gi.ga)
 head(df3)
 
 ##########################################################
-windows(width=10, height=4, rescale="fit")
+windows(width=5, height=4, rescale="fit")
 
 d1<-data.frame(x1=GI2(rango,alpha1,L))
 d2<-data.frame(x2=GI2(rango,alpha2,L))
@@ -63,13 +63,15 @@ p2+geom_line(data = d1, aes(rango,y = x1, colour = "Set 1", linetype = "Set 1"),
   labs(x="X-axis Label", y="Y-axis Label")                            +
   scale_colour_manual(name = "Densities", 
                       values = c("Set 1" ="blue", "Set 2" = "red","Set 3"="black"),
-                      labels = c(expression(paste(alpha," =-20    ")), 
-                                 expression(paste(alpha," =-8      ")), 
-                                 expression(paste("      ", Gamma(1,1/3)))))+
-  scale_linetype_manual(name = "Densities", values = c("Set 1" ="dotted", "Set 2" = "dashed","Set 3"="solid"),
-                        labels = c(expression(paste(alpha," =-20    ")), 
-                                   expression(paste(alpha," =-8      ")),
-                                   expression(paste("      ", Gamma(1,1/3)))))
+                      labels = c(expression(paste(" ",alpha," =-20    ")), 
+                                 expression(paste(" ",alpha," =-8      ")), 
+                                 expression(paste("   ", Gamma(1,1/3)))))+
+  scale_linetype_manual(name = "Densities", values = c("Set 1" ="dotted", "Set 2" = "twodash","Set 3"="solid"),
+                        labels = c(expression(paste(" ",alpha," =-20    ")), 
+                                   expression(paste(" ",alpha," =-8      ")),
+                                   expression(paste("   ", Gamma(1,1/3)))))+
+  labs(x="x", y = "Densities")+
+  theme(legend.position="top")
 #######################################################################
 #PDF
 trellis.device("pdf", file=graf.alfa.pdf,col = T, width=6, height=4)
