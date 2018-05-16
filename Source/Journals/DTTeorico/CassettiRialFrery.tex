@@ -27,7 +27,7 @@
 
 %%%%% THEOREMS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtheorem{corollary}{Corolario}[section]
+\newtheorem{corollary}{Corollary}[section]
 \newtheorem{lemma}{Lema}[section]
 \newtheorem{theorem}{Theorem}[section]
 
@@ -55,12 +55,12 @@
 
 %%%%% CONJUNTOS NUMERICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\T}{\ensuremath{\mathbb{\zeta}}} 
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\T}{\ensuremath{\mathbbm{\zeta}}} 
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
 
 %%%%% FUNCIONES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -152,16 +152,29 @@ Statistical modeling of SAR images has become an essential tool for analyzing an
 
 Different distributions have been proposed for modelling SAR images, for instance, Weibull~\cite{Oliver1993}, Log-Normal~\cite{oliverquegan98} and Fisher~\cite{Tupin2004} distributions for intensity data, Rayleigh~\cite{oliverquegan98} for amplitud data. In~\cite{Li2011} the authors proposed a generalized Gamma distribution for modeling SAR images for amplitud and intensity data.
 
-In recently years, the $\mathcal G$ model~\cite{Frery97} have been widely utilized to describe SAR imagery. The well-known $K$ distribution and the $\mathcal G^0$ family of distribution are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  The latter has been widely utilized to describe this kind of images because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. It is characterized by three parameters, the $\alpha$ parameter that allows to describe different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
+In recently years, the $\mathcal G$ model~\cite{Frery97} has been widely utilized to describe SAR imagery. 
+The well-known $K$ distribution and the $\mathcal G^0$ family of distribution are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  
+The latter has been widely utilized to describe this kind of images because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. 
+It is characterized by three parameters, the $\alpha$ parameter that allows to describe different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
+Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
 
-Sundry authors have studied the problem of parameter estimation for the $\mathcal G^0$ family. In Freitas et al. ~\cite{Freitas2005} the authors used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. A second order correction for the bias in the estimation of the textured parameter for the $\mathcal G^0$ model for amplitud data ($\mathcal G_A^0$) was measured by Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat}.  An  expression for the parameters estimator for the generalized Gamma distribution was derived in Li et al~\cite{Li2011} based on second-kind cumulants and using a second-order approximation  for  Polygamma  function. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implemented resampling techniques to improve the parameter estimation for the $\mathcal G_I^0$ model. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed robust estimator for the parameters of speckled data. Logmoments and log-cumulants were studied in~\cite{nicolas2002} to analyze radar images. These methods are based on the relation between the moments of the distribution and the Mellin transform. The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data. Logcumulants estimators were also applied in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. 
+Sundry authors have studied the problem of parameter estimation for the $\mathcal G^0$ family. 
+Freitas et al.~\cite{Freitas2005} used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
+Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} proposed a second order correction for the bias in the estimation of the textured parameter for the $\mathcal G^0$ model for amplitud data ($\mathcal G_A^0$).  
+Li et al~\cite{Li2011} obtained an  expression for the parameters estimator for the generalized Gamma distribution based on second-kind cumulants and a second-order approximation for  Polygamma  function. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implemented resampling techniques to improve the parameter estimation for the $\mathcal G_I^0$ model. 
+Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed robust estimator for the parameters of speckled data. Logmoments and log-cumulants were studied in~\cite{nicolas2002} to analyze radar images. 
+These methods are based on the relation between the moments of the distribution and the Mellin transform. 
+The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data. 
+Logcumulants estimators were also applied in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. 
 
-The minimum distance estimator (MDE) is another alternative to obtain parameter estimators with good properties. They comes from the idea of finding a parameter estimator as the value that minimizes some  distance measure, between the empirical  distribution function and  the  theoretical distribution function. Wolfowitz~\cite{wolfowitz1953,wolfowitz1957} proved that these estimators are strongly consistent of the parameter of interest.
+Minimum Distance Estimators (MDEs) are another approach for obtaining parameter estimators with good properties.
+They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical the  theoretical distribution functions. Wolfowitz~\cite{wolfowitz1953,wolfowitz1957} proved that these estimators are strongly consistent.
 
-In~\cite{beran1977} the author studies asymptotic and robustness properties of the minimum Hellinger distance estimator. In~\cite{Boos1981} a Cramer-von Mises distance with a weighted function is used to obtain asymptotically efficient estimators that arise from minimize this distance.
+In~\cite{beran1977} the author studies asymptotic and robustness properties of the minimum Hellinger distance estimator. 
+In~\cite{Boos1981} a Cramer-von Mises distance with a weighted function is used to obtain asymptotically efficient estimators that arise from minimize this distance.
 
-Divergence between two density functions have been widely studied in the literature. Shannon proposed the relative information between the
-two distribution functions as divergence measure or stochastic distance between them. In~\cite{KullbackBook1968,KullbackLeibler1951} Kullback and Leibler studied deeply divergences among others authors. 
+Divergence between two density functions have been widely studied in the literature. 
+Shannon proposed the relative information between the two distribution functions as divergence measure or stochastic distance between them. In~\cite{KullbackBook1968,KullbackLeibler1951} Kullback and Leibler studied deeply divergences among others authors. 
 
 These divergence or stochastic distance have multiple applications in signal and image processing~\cite{4218961}, medical image analysis diagnosis~\cite{5599869} and automatic region detection in SAR~\cite{EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}. In~\cite{Nascimento2009} the authors employ stochastic distance as a contrast measure to distinguish two image regions. Analytic expressions for test statistics based on stochastic distances were obtained in~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances}, the authors also proposed new classifier for Polarimetric SAR images using these distances. Many information on theoretic divergences measures are described in~\cite{Liese2006}.
 
@@ -169,11 +182,10 @@ In~\cite{Basu2011} density-based distance have been studied with special attenti
 
 Parr and Schucany~\cite{parr1982}, under certain conditions, prove the consistency of the minimum distance estimator between empirical distribution function and the theoretical distribution function, considering some discrepancy measure. Cao et al.~\cite{cao1995minimum} propose minimizing a distance between the theoretical density function and an estimator of the underlying density function, using the classical symmetric kernel,  to obtain minimum distance estimator. They prove, following~\cite{parr1982}, strongly consistence of these estimators under certain considerations and also study the asymptotic normality of them for the case of the $L_2$ metric. 
 
-Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ density function by  minimizing the triangular distance between the theoretical density function  and an estimation for the underlying density function using asymmetric kernels, in this case Inverse Gaussian kernel was used. The authors compared its performance with logcumulant and maximum likelihood estimators and obtained good results in terms of mean squared error, bias, convergence and robustness. In this work the authors implemented a Monte Carlo study to show the performance of their proposed but no theoretical results were shown.
+Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ density function by  minimizing the triangular distance between the theoretical density function  and an estimation for the underlying density function using asymmetric kernels, in this case Inverse Gaussian kernel was used. The authors compared its performance with logcumulant and maximum likelihood estimators and obtained good results in terms of mean squared error, bias, convergence and robustness. 
+The authors used a Monte Carlo study to show the performance of their proposal, but no theoretical results were shown.
 
-In this work we prove the consistency of the estimator presented in~\cite{gambini2015} and we generalized this result for other asymmetric kernels.
-
-
+In this work we prove the consistency of the estimator presented in~\cite{gambini2015} and we generalized this result to other asymmetric kernels.
 
 The rest of the paper unfolds as follows: 
 Section~\ref{sec_SAR} recalls the main features of the $\mathcal{G}_I^0$ model.
@@ -220,7 +232,7 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 %\frac{z^{L-1}}{\pa{\gamma +L z}^{L-\alpha}},\quad z>0,
 %\end{align*}
 
-\vspace{0.2cm}
+
 
 \begin{proposition}
 	Let $\mathcal{F}$ the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
@@ -231,7 +243,6 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 
 \begin{dem}
 	Rewriting $f_{\alpha,\gamma,L}$ as
-	
 	\begin{align*}
 	f_{\alpha,\gamma,L}\pa{z}= \frac{\Gamma\pa{L-\alpha}}{\Gamma\pa{-\alpha}\Gamma\pa{L}}
 	\frac{L}{\gamma}\pa{\frac{Lz}{\gamma+Lz}}^{L-1}
@@ -239,7 +250,6 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 	\end{align*}
 	and considering that $\pa{\frac{Lz}{\gamma+Lz}}^{L-1}<1$, it can be obtained that
 	$f_{\alpha,\gamma,L}\pa{z} \le c_{\alpha,\gamma,L} \pa{1+\frac{Lz}{\gamma}}^{-1+\alpha}$, where
-	
 	\begin{align*}
 	c_{\alpha,\gamma,L} = \frac{\Gamma\pa{L-\alpha}}{\Gamma\pa{-\alpha}\Gamma\pa{L}}
 	\frac{L}{\gamma}.
@@ -264,7 +274,7 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 	$\norm{f_{\alpha_{n},\gamma_{n},L_{n}} - f_{\alpha,\gamma,L}}\to 0$.
 \end{dem}
 
-\vspace{0.2cm}
+
 
 It is assumed that  $L$ is known and $\alpha<-1$, which implies that the first moment exists and, 
 %it is
@@ -278,7 +288,7 @@ Notice that, with the relationship between $\alpha$ and $\gamma$, $f_{\alpha}$ c
 
 \begin{align}
 f_{\gamma}(z)=\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
-\pa{\frac{L}{\gamma}}^L \frac{z^{L-1}}{\pa{1+\frac{Lz}{\gamma}}^{L+\gamma+1}}
+\pa{\frac{L}{\gamma}}^L \frac{z^{L-1}}{\pa{1+\frac{Lz}{\gamma}}^{L+\gamma+1}}.
 \label{fgamma}
 \end{align}
 
@@ -289,11 +299,11 @@ f_{\gamma}(z)=\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
 %\label{fgamma}
 %\end{align}
 
-\vspace{0.2cm}
 
-The next two results shows the uniform comvergence of $f_\alpha$ when $\alpha \to -\infty$ and $\alpha \to -1$.
 
-\vspace{0.2cm}
+The next two results show the uniform comvergence of $f_\alpha$ when $\alpha \to -\infty$ and $\alpha \to -1$.
+
+
 
 \begin{proposition}
 	For all compact interval $[z_{1},z_{2}]\subset\pa{0,\infty}$, $f_{\alpha}$ converges uniformly to $\Gamma_{(L,1/L)}$ in $[z_{1},z_{2}]$ if $\alpha\to -\infty$,
@@ -345,11 +355,12 @@ b\pa{L,\gamma,z}c\pa{L,\gamma,z}
 	then $\lim\limits_{\gamma\to-\infty} f_{\gamma}\pa{z} = L^{L}/\Gamma\pa{L}\,\e^{-Lz}z^{L-1}$
 	is obtained uniformly in $[z_{1},z_{2}]$.
 \end{dem}
-\vspace{0.2cm}
+
 Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\Gamma(3,1/3)$, when $\alpha \to -\infty$ and $L=3$. The gray area is a band of width $\epsilon=0.1$ around the $\Gamma(3,1/3)$ density function (solid line). The dotted and twodash lines represents $f_{\alpha}$ density function for $\alpha=-20$ and $\alpha=-8$ respectively. It can be seen that, as the value of $\alpha$ becomes smaller, the $f_{\alpha}$ density function falls inside the gray area. Even more, for this value of $\epsilon$, $f_{-20}$ already falls within that band.
+
 \begin{figure}[hbt]
 	\centering    
-	\includegraphics[scale=0.5]{../../../Figures/DTTeorico/ConvUniformeMenosInfinito.pdf}
+	\includegraphics[width=\linewidth]{../../../Figures/DTTeorico/ConvUniformeMenosInfinito.pdf}
 	\caption{\label{ConvInfinito}Uniform convergence of $f_{\alpha}$, to $\Gamma(3,1/3)$, when $\alpha \to -\infty$, $L=3$ and $\epsilon=0.1$.}
 \end{figure} 
 
@@ -369,10 +380,10 @@ Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\
 	\end{align*}
 	Given that $\Gamma$ is a continuous function, for $z \in [z_{1},z_{2}]$, $\lim\limits_{\gamma\to0} f_{\gamma}=0$ uniformly in $z$. So the result is obtained.
 \end{dem}
-\vspace{0.2cm}
+
 \begin{figure}[hbt]
 	\centering    
-	\includegraphics[scale=0.5]{../../../Figures/DTTeorico/ConvUnifEnCero.pdf}
+	\includegraphics[width=\linewidth]{../../../Figures/DTTeorico/ConvUnifEnCero.pdf}
 	\caption{\label{ConvEnCero}Uniform convergence of $f_{\alpha}$, to $0$, when $\alpha \to -1$, $L=3$ and $\epsilon=0.1$.}
 \end{figure}
 
@@ -386,9 +397,9 @@ function between them. Csisz\'ar~\cite{Csiszar1967} defined $f$-divergences and 
 
 Nascimento et al.~\cite{Nascimento2009} examined different stochastic distances symmetrizing $(h,\phi)$-divergence. In order to identify different areas in terms of their textured in SAR imagery, they assessed eight statistical tests based on stochastic distance under the $\mathcal{G}_I^0$ model. They obtained that the test based on the triangular contrast measure was the one that presented the best performance for heterogeneity identification.
 
-For this reason and for empirical results obtained in Gambini et al., we study the consistency of the $\widehat{\alpha}$ MDE estimator for the triangular distance case.
+For this reason and for empirical results obtained Ref.~\cite{APSAR2013ParameterEstimationStochasticDistances}, we study the consistency of the $\widehat{\alpha}$ MDE estimator for the triangular distance case.
 
-\vspace{0.2cm} 
+ 
 \begin{definition}
 	Let $\mathcal{F}$ the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
 	The triangular distance between $f,g\in\mathcal{F}$ is defined as
@@ -402,7 +413,7 @@ where $f$ and $g$ are two densities functions with common support $S$.
 
 In the following we show some theoretical properties of the triangular distance which are necessary, according to~\cite{parr1982}, to prove the consistency of the $\widehat{\alpha}$ MDE estimator.
 
-\vspace{0.2cm}
+
 \begin{lemma}
 	If $a,b,c>0$, then
 	\begin{subequations}
@@ -415,7 +426,7 @@ In the following we show some theoretical properties of the triangular distance 
 	\end{subequations}
 \end{lemma}
 
-\vspace{0.2cm}
+
 
 \begin{proposition}
 	Let $f,g,h\in\mathcal{F}$, then
@@ -427,10 +438,10 @@ In the following we show some theoretical properties of the triangular distance 
 	\end{enumerate}
 \end{proposition}
 
-\vspace{0.2cm}
+
 
 \begin{dem}
-	Items~\eqref{it: simetria} y~\eqref{it: unicidad} are immediate results from the $d_{T}$ definition.
+	Items~\eqref{it: simetria} and~\eqref{it: unicidad} are immediate results from the $d_{T}$ definition.
 	The inequality~\eqref{it: acotacion} is a consequence of the following inequality $\abs{\frac{\pa{a-b}^{2}}{a+b}} \le \abs{a-b}$ taking $a = f\pa{x}$ and $b = g\pa{x}$ and integrating.
 	% \begin{align*}
 	% \frac{\pa{f\pa{x}-g\pa{x}}^{2}}{f\pa{x}+g\pa{x}} =
@@ -439,7 +450,7 @@ In the following we show some theoretical properties of the triangular distance 
 	Considering $a = f\pa{x}$, $b = g\pa{x}$ and $c = h\pa{x}$ in~\eqref{eq: desigualdad 2},~\eqref{it: equicontinua} is obtained.
 \end{dem}
 
-\vspace{0.2cm}
+
 
 \begin{corollary}
 	The family of functions $\set{d_{T}\pa{\cdot;h}: h\in\mathcal{F}}$ is equicontinuous with respect to the $\norm{\cdot}$.
@@ -450,7 +461,7 @@ In the following we show some theoretical properties of the triangular distance 
 	It is a direct consequence of the condition~\eqref{it: equicontinua}.
 \end{dem}
 
-\vspace{0.2cm}
+
 
 Let $\set{f_{\theta}:\theta\in\Theta}\subset\mathcal{F}$ a parametric family of densities functions that verify $f_{\theta} \ne f_{\theta'}$ if $\theta,\theta'\in\Theta$, $\theta\ne\theta'$.
 Clearly $0 = d_{T}\pa{f_{\theta_{0}};f_{\theta_{0}}} < d_{T}\pa{f_{\theta};f_{\theta_{0}}}$ is verified for
@@ -462,7 +473,7 @@ $\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow}\theta\in\Theta$ (or equivale
 
 The reciprocal is not necessarily true, a condition is necessary for the result to be verified.
 
-\vspace{0.2cm}
+
 
 \begin{proposition}
 	\label{pr: convergencia}
@@ -499,7 +510,7 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	what represents a contradiction.
 \end{dem}
 
-\vspace{0.2cm}
+
 
 \begin{proposition}
 	\label{pr: falpha>0}
@@ -539,7 +550,7 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	Thus, the Proposition holds for $U=[\alpha_0,\alpha_1].$
 \end{dem}
 
-\vspace{0.2cm}
+
 
 \begin{corollary}
 	If $\set{\alpha_{k}}_{k\in\N}$ is a sequence of $I$ such that $d_{T}\pa{f_{\alpha_{k}};f_{\alpha}}\stackrel[k\to\infty]{}{\longrightarrow}  0$,
@@ -563,34 +574,27 @@ The asymmetric kernel estimators are defined as:
 %Let $Z_1 \ldots Z_n$ be a random sample where $Z_i \sim f_{\alpha}$ with $f_{\alpha}$ the theoretical density function of the $\mathcal{G}_I^{0}(\alpha,\gamma^*)$ distribution defined in~\eqref{ec_dens_gI0} and $\gamma^*=-\alpha-1$ . An asymmetric 
 
 Let $Z_1 \ldots Z_n$ be a random sample where $Z_i \sim f_{\theta}$ with $f_{\theta}$ the theoretical density function. An asymmetric kernel estimator of the underlying density function is defined as 
-
 \begin{equation}
-\widehat{f}_n(z)=\frac{1}{n}\sum_{i=1}^n K_{\theta(z,b)}(Z_i)
+\widehat{f}_n(z)=\frac{1}{n}\sum_{i=1}^n K_{\theta(z,b)}(Z_i),
 \label{fn}
 \end{equation}
 where  $b$ is the bandwidth, ${\theta}(z,b)$ is the parameter vector which depends on the kernel used, and $K$ is an asymmetric kernel  as those proposed in~\cite{bouezmarni2005}, which are: 
-
 \begin{align}
 K_{\Gamma_{\left(\frac{z}{b}+1,b\right)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
-\label{gammakernel}
-\end{align}
-
-\begin{align}
+\label{gammakernel}\\
 K_{\text{IG}_{\left( z;\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b t^3}} 
 \exp\Big\{-\frac{1}{2b z} \Big(\frac{t}{z}+\frac{z}{t}-2\Big)\Big\},
-\label{IGkernel}
-\end{align}
-
-\begin{align}
+\label{IGkernel}\\
 K_{\text{RIG}_{\left(\frac{1}{z-b},\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b t}} 
 \exp\Big\{-\frac{z-b}{2b} \Big(\frac{t}{z-b}-2+\frac{z-b}{t}\Big)\Big\}.
 \label{RIGkernel}
 \end{align}
-for $t,z,b>0$.\\
+for $t,z,b>0$.
 
 %In~\cite{bouezmarni2005} the authors prove, among others results, that under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
-In~\cite{bouezmarni2005} the authors prove several theoretical results for this estimator. One of them saids that,  under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
-\vspace{0.2cm}
+In~\cite{bouezmarni2005} the authors prove several theoretical results for this estimator. 
+One of them is that, under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
+
 
 \begin{theorem}
 	Let $f$ be a probability density function on $[0;+\infty)$ and $\widehat{f}_n$ the asymmetric kernel density estimator. Then
@@ -640,7 +644,7 @@ In this work, following the ideas presented in~\cite{parr1982},  we show that, t
 %\end{theorem}
 
 
-\vspace{0.2cm}
+
 
 \begin{theorem}
 	Let $\widehat{\alpha}=\mathop{\rm argmin}\limits_{\alpha\in I} d_T(f_{\alpha},\widehat{f}_n)$, where $d_T$ is defined in~\eqref{DT}, $f_n$ and $f_{\alpha}$ in~\eqref{fn}. Then $\widehat{\alpha}$ is a consistent estimator of $\alpha$, i.e. $\widehat{\alpha}_n \stackrel{p} {\longrightarrow} \alpha$ when $n \longrightarrow +\infty$.
