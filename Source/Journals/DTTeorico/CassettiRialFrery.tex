@@ -269,7 +269,7 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 	\begin{align*}
 	f_{\alpha',\gamma',L'}\pa{z} 
 	&\le \max\limits_{{\alpha',\gamma',L'}\in Q}c_{\alpha',\gamma',L'}
-	\pa{1+\frac{\pa{1-\varepsilon}Lz}{\pa{1+\varepsilon}\gamma}}^{-1+\pa{1-\varepsilon}\alpha} \\
+	\left({1+\frac{\pa{1-\varepsilon}Lz}{\pa{1+\varepsilon}\gamma}}\right)^{-1+\pa{1-\varepsilon}\alpha} \\
 	&= g\pa{z}.
 	\end{align*}
 	If $\pa{\alpha_{n},\gamma_{n},L_{n}}$ is a sequence in $\Omega$ such that $\pa{\alpha_{n},\gamma_{n},L_{n}}\stackrel[n\to\infty]{}{\longrightarrow}\pa{\alpha,\gamma,L}$, then for each $z>0$
@@ -332,8 +332,8 @@ so
 	
 \begin{align*}
 \lim_{\gamma\to+\infty} \frac{a\pa{L+\gamma}}{a\pa{\gamma}} = &
-\lim_{\gamma\to+\infty}\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}}\times\\
-& \; \e^{L}\gamma^{-L}\pa{1+\frac{L}{\gamma}}^{-L-\gamma-1/2} \\
+\lim_{\gamma\to+\infty}\frac{\Gamma({L+\gamma+1})}{\Gamma\pa{\gamma+1}}\times\\
+& \; \e^{L}\gamma^{-L}\left({1+\frac{L}{\gamma}}\right)^{-L-\gamma-1/2} \\
 &= 1.
 \end{align*}
 
@@ -492,24 +492,24 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 
 \begin{dem}
 	Let's suppose that $\theta_{k}\not\to\theta$, then exists $\varepsilon>0$ and a subsequence
-	$\set{\theta_{k_{j}}}_{j\in\N}$ such that $d_{\Theta}\pa{\theta_{k_{j}},\theta}\ge\varepsilon$.
-	As $d_{T}\pa{f_{\theta_{k_{j}}};f_{\theta}}\stackrel[j\to\infty]{}{\longrightarrow}  0$, exists $j_{0}\in\N$, such that 
+	$\set{\theta_{k_{j}}}_{j\in\N}$ such that $d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon$.
+	As $d_{T}({f_{\theta_{k_{j}}};f_{\theta}})\stackrel[j\to\infty]{}{\longrightarrow}  0$, exists $j_{0}\in\N$, such that 
 	\begin{align*}
-	d_{T}\pa{f_{\theta_{k_{j}}};f_{\theta}} < \inf_{\theta'\in \Theta-U}d_{T}\pa{f_{\theta'};f_{\theta}},
+	d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) < \inf_{\theta'\in \Theta-U}d_{T}({f_{\theta'};f_{\theta}}),
 	\end{align*}
 	if $j\ge j_{0}$, then $\theta_{k_{j}}\in U$. Since $U$ is a compact set, exists a convergent subsucession,
 	that we will continue calling $\set{\theta_{k_{j}}}_{j\in\N}$.
 	Since $\theta_{k_{j}}\stackrel[j\to\infty]{}{\longrightarrow} \tilde{\theta}\in U$, then
 	\begin{align*}
-	d_{T}\pa{f_{\tilde{\theta}};f_{\theta}} \le \al d_{T}\pa{f_{\theta_{k_{j}}};f_{\theta}}
-	+ \abs{d_{T}\pa{f_{\tilde{\theta}};f_{\theta}} - d_{T}\pa{f_{\theta_{k_{j}}};f_{\theta}}} \\
-	\le \al d_{T}\pa{f_{\theta_{k_{j}}};f_{\theta}} + 3 \norm{f_{\theta_{k_{j}}} - f_{\tilde{\theta}}}.
+	d_{T}({f_{\tilde{\theta}};f_{\theta}}) \le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}})
+	+ \abs{d_{T}({f_{\tilde{\theta}};f_{\theta}}) - d_{T}({f_{\theta_{k_{j}}};f_{\theta})}} \\
+	\le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) + 3 \norm{f_{\theta_{k_{j}}} - f_{\tilde{\theta}}}.
 	\end{align*}
-	Taking $j\to\infty$, we obtain $d_{T}\pa{f_{\tilde{\theta}};f_{\theta}} = 0$. Then, as $d_T$ is a stochastic distance, we obtain that $f_{\tilde{\theta}}=f_{\theta}$, therefore  $\tilde{\theta}=\theta$.
+	Taking $j\to\infty$, we obtain $d_{T}({f_{\tilde{\theta}};f_{\theta}}) = 0$. Then, as $d_T$ is a stochastic distance, we obtain that $f_{\tilde{\theta}}=f_{\theta}$, therefore  $\tilde{\theta}=\theta$.
 	
 	On the other hand
 	\begin{align*}
-	d_{\Theta}\pa{\tilde{\theta},\theta} = \lim_{j\to\infty}d_{\Theta}\pa{\theta_{k_{j}},\theta}\ge\varepsilon,
+	d_{\Theta}({\tilde{\theta},\theta}) = \lim_{j\to\infty}d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon,
 	\end{align*}
 	what represents a contradiction.
 \end{dem}
@@ -519,10 +519,10 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 \begin{proposition}
 	\label{pr: falpha>0}
 	For all $\alpha\in I=(-\infty,-1)$, exist a compact neighbourdhood $U$ of $\alpha$ such that
-	$\inf\limits_{\alpha'\in I-U}d_{T}\pa{f_{\alpha'};f_{\alpha}}>0$.
+	$\inf\limits_{\alpha'\in I-U}d_{T}({f_{\alpha'};f_{\alpha}})>0$.
 \end{proposition}
 \begin{dem}
-	Let's show that $d_{T}\pa{f_{\alpha'};f_{\alpha}}>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
+	Let's show that $d_{T}({f_{\alpha'};f_{\alpha}})>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
 	Using that $d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \int_{z_{1}}^{z_{2}}d_{T}\pa{f_{\alpha'};f_{\alpha}}dz$, it is enough to show that, the right side of this inequality is greater than $\epsilon>0$ if $\alpha'$ is far from $\alpha$.
 	
 %	Since that $f_{\alpha}\ne \Gamma_{(L,1/L)}$, exists $[z_{1},z_{2}]\subset\pa{0,\infty}$, such that
