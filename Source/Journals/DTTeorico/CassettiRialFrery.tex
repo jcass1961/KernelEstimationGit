@@ -159,30 +159,34 @@ It is characterized by three parameters, the $\alpha$ parameter that allows to d
 Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
 
 Sundry authors have studied the problem of parameter estimation for the $\mathcal G^0$ family. 
-Freitas et al.~\cite{Freitas2005} used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
+In Freitas et al.~\cite{Freitas2005} the authors used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
 Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} proposed a second order correction for the bias in the estimation of the textured parameter for the $\mathcal G^0$ model for amplitud data ($\mathcal G_A^0$).  
 Li et al~\cite{Li2011} obtained an  expression for the parameters estimator for the generalized Gamma distribution based on second-kind cumulants and a second-order approximation for  Polygamma  function. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implemented resampling techniques to improve the parameter estimation for the $\mathcal G_I^0$ model. 
-Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed robust estimator for the parameters of speckled data. Logmoments and log-cumulants were studied in~\cite{nicolas2002} to analyze radar images. 
-These methods are based on the relation between the moments of the distribution and the Mellin transform. 
-The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data. 
-Logcumulants estimators were also applied in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. 
 
-Minimum Distance Estimators (MDEs) are another approach for obtaining parameter estimators with good properties.
-They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical the  theoretical distribution functions. Wolfowitz~\cite{wolfowitz1953,wolfowitz1957} proved that these estimators are strongly consistent.
+\textcolor{blue}{Another approach to the parameter estimation problem based on logmoments and log-cumulants were studied in~\cite{nicolas2002}. These methods hinge on the relation between the moments of the distribution and the Mellin transform. The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data and in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. }
 
-In~\cite{beran1977} the author studies asymptotic and robustness properties of the minimum Hellinger distance estimator. 
-In~\cite{Boos1981} a Cramer-von Mises distance with a weighted function is used to obtain asymptotically efficient estimators that arise from minimize this distance.
+\textcolor{blue}{Robustness is an important property  that is expected to have an estimator. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed M and AM estimators to improve the performance of maximum likelihood estimator under
+contamination. They show that they proposal outperform the performance of maximum likelihood estimator but the presents  numerical problems specially with small samples. }
 
-Divergence between two density functions have been widely studied in the literature. 
-Shannon proposed the relative information between the two distribution functions as divergence measure or stochastic distance between them. In~\cite{KullbackBook1968,KullbackLeibler1951} Kullback and Leibler studied deeply divergences among others authors. 
+\textcolor{blue}{Another approach to the parameter estimation problem based on logmoments and log-cumulants were studied in~\cite{nicolas2002}. 
+These methods hinge on the relation between the moments of the distribution and the Mellin transform. 
+The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data and in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. }
 
-These divergence or stochastic distance have multiple applications in signal and image processing~\cite{4218961}, medical image analysis diagnosis~\cite{5599869} and automatic region detection in SAR~\cite{EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}. In~\cite{Nascimento2009} the authors employ stochastic distance as a contrast measure to distinguish two image regions. Analytic expressions for test statistics based on stochastic distances were obtained in~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances}, the authors also proposed new classifier for Polarimetric SAR images using these distances. Many information on theoretic divergences measures are described in~\cite{Liese2006}.
+\textcolor{blue}{Minimum Distance Estimators (MDEs) are another approach to address the problem of parameter estimation of a distribution with good properties.
+They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical and the  theoretical distribution functions.
+Minimum Hellinger distance estimator and Cramer-von Mises distance were studied in~\cite{beran1977} and~\cite{Boos1981} respectively among others distances measure. Asymptotic and robustness properties were examinated in these works. Strongly consistency war proved in Wolfowitz~\cite{wolfowitz1953,wolfowitz1957}.}
 
+\textcolor{blue}{In Parr and Schucany~\cite{parr1982}, the authors proved that, under certain conditions, the minimum distance estimator between empirical distribution function and the theoretical distribution function are consistency. Cao et al.~\cite{cao1995minimum} propose minimizing a distance between the theoretical density function and an estimator of the underlying density function, using the classical symmetric kernel estimator,  to obtain minimum distance estimator. They prove, following~\cite{parr1982}, strongly consistence of these estimators under certain considerations and also study the asymptotic normality of them for the case of the $L_2$ metric.}
+
+%In~\cite{beran1977} the author studies asymptotic and robustness properties of the minimum Hellinger distance estimator. 
+%In~\cite{Boos1981} a Cramer-von Mises distance with a weighted function is used to obtain asymptotically efficient estimators that arise from minimize this distance.
+
+\textcolor{blue}{Information Theory provides a measure, called divergence, for comparing two density functions. These divergence or stochastic distance have been widely studied in the literature and have multiple applications in signal and image processing~\cite{4218961}, medical image analysis diagnosis~\cite{5599869}, automatic region detection in SAR images~\cite{EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}, as a contrast measure to distinguish two image regions~\cite{Nascimento2009}, to obtain expressions for test statistics~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances} among others.}
 In~\cite{Basu2011} density-based distance have been studied with special attention in Hellinger distance as well as problems referred to hypothesis test based on divergences.
 
-Parr and Schucany~\cite{parr1982}, under certain conditions, prove the consistency of the minimum distance estimator between empirical distribution function and the theoretical distribution function, considering some discrepancy measure. Cao et al.~\cite{cao1995minimum} propose minimizing a distance between the theoretical density function and an estimator of the underlying density function, using the classical symmetric kernel,  to obtain minimum distance estimator. They prove, following~\cite{parr1982}, strongly consistence of these estimators under certain considerations and also study the asymptotic normality of them for the case of the $L_2$ metric. 
-
-Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ density function by  minimizing the triangular distance between the theoretical density function  and an estimation for the underlying density function using asymmetric kernels, in this case Inverse Gaussian kernel was used. The authors compared its performance with logcumulant and maximum likelihood estimators and obtained good results in terms of mean squared error, bias, convergence and robustness. 
+%\textcolor{blue}{These stochastic distance are used in~\cite{Nascimento2009} as a contrast measure to distinguish two image regions. Analytic expressions for test statistics based on stochastic distances were obtained in~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances}, where the authors also proposed new classifier for Polarimetric SAR images using these distances. Many information on theoretic divergences measures are described in~\cite{Liese2006}.
+% }
+Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ density function by  minimizing the triangular \textcolor{blue}{stochastic} distance between the theoretical density function  and an estimation for the underlying density function using asymmetric kernels, in this case Inverse Gaussian kernel was used. The authors compared its performance with logcumulant and maximum likelihood estimators and obtained good results in terms of mean squared error, bias, convergence and robustness. 
 The authors used a Monte Carlo study to show the performance of their proposal, but no theoretical results were shown.
 
 In this work we prove the consistency of the estimator presented in~\cite{gambini2015} and we generalized this result to other asymmetric kernels.
@@ -360,7 +364,7 @@ Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\
 
 \begin{figure}[hbt]
 	\centering    
-	\includegraphics[width=\linewidth]{../../../Figures/DTTeorico/ConvUniformeMenosInfinito.pdf}
+	\includegraphics[width=\linewidth]{../../../Figures/DTTeorico/ConvUniformeMenosInfinito2.pdf}
 	\caption{\label{ConvInfinito}Uniform convergence of $f_{\alpha}$, to $\Gamma(3,1/3)$, when $\alpha \to -\infty$, $L=3$ and $\epsilon=0.1$.}
 \end{figure} 
 
@@ -695,5 +699,3 @@ In this work the consistency of the minimum distance estimator of the  $\mathcal
 \vspace{11cm}
 
 \end{document}
-
-
