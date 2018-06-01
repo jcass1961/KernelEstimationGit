@@ -1,5 +1,5 @@
-\documentclass[journal]{IEEEtran}
-\usepackage{times}
+\documentclass[technote,onecolumn,draftcls,12pt]{IEEEtran}
+
 \usepackage{bm,bbm}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,subfigure}
@@ -107,19 +107,21 @@
 
 \thanks{Diego Rial \texttt{drial@dm.uba.ar} is with the Facultad de Ciencias Exactas y Naturales, Departamento de Matem\'{a}tica, Universidad de Buenos Aires, Argentina and IMAS, CONICET, Argentina.}
 
-\thanks{Alejandro C.\ Frery \texttt{acfrery@gmail.com} is with the Instituto de Computa\c c\~ao, Universidade Federal de Alagoas, 
+\thanks{Alejandro C.\ Frery \texttt{acfrery@laccan.ufal.br} is with the Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica, Universidade Federal de Alagoas, 
 Av. Lourival Melo Mota, s/n, 57072-900 Macei\'o -- AL, Brazil.} 
 }
 
 \maketitle
 
 \begin{abstract}
-	The $\mathcal{G}^0$ family of distributions has been widely used in recent years to analyze and interpret data from sensors with coherent illumination automatically. Special attention has been devoted to modeling data that come from images of Radar Synthetic Aperture using a multiplicative model and the $\mathcal{G}^0$ distributions for intensity data. This distribution has support positive and is indexed by three parameters: texture, scale and number of looks. In this paper the consistency of the minimum distance estimator for the texture parameter is proved, for the multilook case and the $\mathcal G_I^0$ model. Triangular distance is employed and the estimator is defined as the argument that minimized this stochastic distance between the theoretical distribution and a nonparametric estimation of the underlying density function based on asymmetric kernel. 
+	The $\mathcal{G}^0$ family of distributions has been widely used in recent years to analyze and interpret data from sensors with coherent illumination, e.g., sonar, laser, ultrasound-B and synthetic aperture radar imagery.
+	Special attention has been devoted to modeling data that come from images of Synthetic Aperture Radar (SAR) using a multiplicative model and the $\mathcal{G}^0$ distribution. 
+	This law has positive support and is indexed by three parameters: texture, scale and number of looks.
+	The estimation of the texture is of paramount importance, since it is able to characterize the kind of target under analysis.
+	Many techniques have been proposed, among them maximum likelihood, analogy, robust methods and, more recently, minimum-distance estimators.
+	In this paper we prove the consistency of the estimator based on the minimum Triangular Distance. 
+	This estimator is defined as the argument that minimizes this stochastic distance between the theoretical distribution and a nonparametric estimation of the underlying density function based on an asymmetric kernel. 
 	%Simulation study is presented comparing the performance of this estimator and the maximum likelihood one. We show that the former outperform the latter regarding bias and mean squared error, specially for small sample sizes.
-	
-	
-	
-	
 %	This is considered an universal one because it has the ability to discriminate areas with different textures through one of its parameters. 
 %	
 %	
@@ -145,15 +147,25 @@ Minimum distance estimator, stochastic distance, texture analysis, kernel estima
 
 \section{Introduction}
 \label{intro}
-\PARstart{S}{ynthetic} Aperture Radar (SAR) imagery are an important tool used in
-remote sensing because it allows to capture images with high resolution. They are very useful for detection of deforested areas and illegal crops, oil stains in the sea, among other applications. They are independent of weather conditions and sunlight, but this kind of images have speckle noise that makes the automatic interpretation of them a problem of difficult solution. This noise is inherent to the process of image capture and is neither additive nor Gaussian. Images obtained from systems with coherent illumination such as laser, SAR, and ultrasound have this type of noise.
+\PARstart{S}{ynthetic} Aperture Radar (SAR) images are an important tool in
+remote sensing. 
+They are very useful for detection of deforested areas, crop characterization and oil spills in the sea, among other applications. 
+%
+They can be obtained regardless of weather conditions and sunlight, but this kind of images have is contaminated by an interference pattern that makes difficult their interpretation. 
+Such patter, called \textit{speckle}, can be treated as noise and is inherent to the process of image capture. 
+Images obtained from systems with coherent illumination such as laser, SAR, and ultrasound-B suffer from this type of noise.
 
-Statistical modeling of SAR images has become an essential tool for analyzing and interpreting data with speckle noise. The multiplicative model have been succesfully used and it is based on the assumption that the return results from the product between two random variables: one corresponds to the backscatter and the other to the speckle noise~\cite{oliverquegan98}. Other models have been used, in~\cite{Gao2010} the author discuss several ones in detail.
+Statistical modeling of SAR images has become an essential tool for analyzing and interpreting data with speckle. 
+The multiplicative model have been successfully used and it is based on the assumption that the return results from the product between two random variables: one corresponding to the backscatter (the unobserved truth) and the other to the speckle~\cite{oliverquegan98}. 
+Other models have been used; Ref.~\cite{Gao2010} discusses several approaches and their relationships.
 
-Different distributions have been proposed for modelling SAR images, for instance, Weibull~\cite{Oliver1993}, Log-Normal~\cite{oliverquegan98} and Fisher~\cite{Tupin2004} distributions for intensity data, Rayleigh~\cite{oliverquegan98} for amplitud data. In~\cite{Li2011} the authors proposed a generalized Gamma distribution for modeling SAR images for amplitud and intensity data.
+%%% ACF Si el párrafo anterior dirige la atención del lector al modelo multiplicativo, en este no se puede volver atrás. Organizar mejor, y no confundir la lectura entre amplitud e intensidad; sugiero trartar sólo intensidad.
+Different distributions have been proposed for modelling SAR images, for instance, Weibull~\cite{Oliver1993}, Log-Normal~\cite{oliverquegan98} and Fisher~\cite{Tupin2004} distributions for intensity data, Rayleigh~\cite{oliverquegan98} for amplitud data. 
+In~\cite{Li2011} the authors proposed a generalized Gamma distribution for modeling SAR images for amplitud and intensity data.
 
+%%% ACF Hasta acá 1/6/18 13:40
 In recently years, the $\mathcal G$ model~\cite{Frery97} has been widely utilized to describe SAR imagery. 
-The well-known $K$ distribution and the $\mathcal G^0$ family of distribution are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  
+The $K$ and $\mathcal G^0$ distributions are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  
 The latter has been widely utilized to describe this kind of images because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. 
 It is characterized by three parameters, the $\alpha$ parameter that allows to describe different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
 Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
@@ -246,7 +258,7 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 \label{pr: continuidad}
 
 \begin{dem}
-	Rewriting $f_{\alpha,\gamma,L}$ as
+	Writing $f_{\alpha,\gamma,L}$ as
 	\begin{align*}
 	f_{\alpha,\gamma,L}\pa{z}= \frac{\Gamma\pa{L-\alpha}}{\Gamma\pa{-\alpha}\Gamma\pa{L}}
 	\frac{L}{\gamma}\pa{\frac{Lz}{\gamma+Lz}}^{L-1}
@@ -327,17 +339,15 @@ From Stirling's formula~\cite{abramowitz1964} is obtained
 \lim_{\gamma\to+\infty} a\pa{\gamma} = 
 \al \lim_{\gamma\to+\infty}\frac{\Gamma\pa{\gamma+1}\e^{\gamma}}{\sqrt{2\pi}\gamma^{\gamma+1/2}} = 1,
 \end{align*}
-	
 so
-	
 \begin{align*}
-\lim_{\gamma\to+\infty} \frac{a\pa{L+\gamma}}{a\pa{\gamma}} = &
-\lim_{\gamma\to+\infty}\frac{\Gamma({L+\gamma+1})}{\Gamma\pa{\gamma+1}}\times\\
-& \; \e^{L}\gamma^{-L}\left({1+\frac{L}{\gamma}}\right)^{-L-\gamma-1/2} \\
-&= 1.
+\lim_{\gamma\to+\infty} \frac{a\pa{L+\gamma}}{a\pa{\gamma}} = 
+\lim_{\gamma\to+\infty}\frac{\Gamma({L+\gamma+1})}{\Gamma\pa{\gamma+1}}
+ \; \e^{L}\gamma^{-L}\left({1+\frac{L}{\gamma}}\right)^{-L-\gamma-1/2}
+= 1.
 \end{align*}
 
-On the other hand, it is verified 
+On the other hand, it is verified that
 \begin{align*}
 \lim_{\gamma\to+\infty} b\pa{L,\gamma,z} =
 \al \lim_{\gamma\to+\infty}L\gamma^{L-1}\pa{\frac{Lz}{\gamma+Lz}}^{L-1} \\
@@ -350,7 +360,7 @@ where the convergence is uniform in $[z_{1},z_{2}]$.
 Being that
 \begin{align*}
 f_{\gamma}\pa{z} = \frac{a\pa{L+\gamma}}{a\pa{\gamma}\Gamma\pa{L}}\e^{-L}\pa{1+\frac{L}{\gamma}}^{L+\gamma+\frac 1 2}
-b\pa{L,\gamma,z}c\pa{L,\gamma,z}
+b\pa{L,\gamma,z}c\pa{L,\gamma,z},
 \end{align*}
 %\begin{align*}
 %	f_{\gamma}\pa{z} = \frac{a\pa{L+\gamma}}{a\pa{\gamma}\Gamma\pa{L}}\e^{L}\pa{1+\frac{L}{\gamma}}^{-L-\gamma-\frac 1 2}
@@ -408,7 +418,7 @@ For this reason and for empirical results obtained Ref.~\cite{APSAR2013Parameter
 	Let $\mathcal{F}$ the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
 	The triangular distance between $f,g\in\mathcal{F}$ is defined as
 	\begin{equation}
-	d_{\text{T}}(f,g)=\int_{S}\frac{(f-g)^2}{f+g} 
+	d_{\text{T}}(f,g)=\int_{S}\frac{(f-g)^2}{f+g} ,
 	\label{DT}
 	\end{equation}
 \end{definition}
@@ -577,7 +587,8 @@ The asymmetric kernel estimators are defined as:
 
 %Let $Z_1 \ldots Z_n$ be a random sample where $Z_i \sim f_{\alpha}$ with $f_{\alpha}$ the theoretical density function of the $\mathcal{G}_I^{0}(\alpha,\gamma^*)$ distribution defined in~\eqref{ec_dens_gI0} and $\gamma^*=-\alpha-1$ . An asymmetric 
 
-Let $Z_1 \ldots Z_n$ be a random sample where $Z_i \sim f_{\theta}$ with $f_{\theta}$ the theoretical density function. An asymmetric kernel estimator of the underlying density function is defined as 
+Let $Z_1, \ldots, Z_n$ be a random sample where $Z_i \sim f_{\theta}$ and $f_{\theta}$ is the theoretical density function. 
+An asymmetric kernel estimator of the underlying density function is defined as 
 \begin{equation}
 \widehat{f}_n(z)=\frac{1}{n}\sum_{i=1}^n K_{\theta(z,b)}(Z_i),
 \label{fn}
@@ -621,7 +632,9 @@ But, in general, $F_{\theta}$ is an absolutely continuous distribution so, the M
 
 Since our interest is to estimate the texture parameter of $\mathcal{G}_I^{0}$ distribution who has positive support, in this work $\widehat{f}_n$ is defined as in~\eqref{fn}. It should be noted that $\widehat{f}_n$ is not necessarily a density function because the integral over $\R$ may not be equal $1$. Therefore it may be necessary to normalize. In the following we will continue calling $\widehat{f}_n$ to the normalized version. 
 
-As indicated before, in Gambini et al.~\cite{gambini2015} the authors proposed triangular distance and Inverse Gaussian kernels to define $\widehat{\alpha}$, the $\alpha$ parameter estimator. They performed a Monte Carlo study to assess the  behavior of $\widehat{\alpha}$, generating samples from $\mathcal{G}_I^{0}$ and considering the brightness parameter $\gamma =-\alpha-1$. They showed that the $\widehat{\alpha}$ outperform maximum likelihood and logcumulants estimator in most of the cases studied, but they did not present any theoretical result about the statistical properties of that estimator. 
+As indicated before, Gambini et al.~\cite{gambini2015} proposed the triangular distance and Inverse Gaussian kernels to define $\widehat{\alpha}$, the $\alpha$ parameter estimator. 
+They performed a Monte Carlo study to assess the  behavior of $\widehat{\alpha}$, generating samples from $\mathcal{G}_I^{0}$ and considering the brightness parameter $\gamma =-\alpha-1$. 
+They showed that $\widehat{\alpha}$ outperforms maximum likelihood and logcumulants estimators in most of the cases studied, but they did not present any theoretical result about the statistical properties of that estimator. 
 
 In this work, following the ideas presented in~\cite{parr1982},  we show that, the MDE estimator presented in~\cite{gambini2015}, is consistent for the texture parameter of the $\mathcal{G}_I^{0}$ distribution. 
 %We recall some definitions and results  that Parr and Schucany~\cite{parr1982} introduced in their work.
@@ -678,24 +691,22 @@ In this work the consistency of the minimum distance estimator of the  $\mathcal
 \bibliographystyle{IEEEbib}
 \bibliography{../../../Bibliography/bib_julia}
 
-\begin{IEEEbiography}[{\includegraphics[height=1.8in,width=1.1in]{../../../Images/Fotos/JuliaGris7}}]{Julia Cassetti} 
-	received the B.Sc. degree in Mathematics and a postgraduate diploma in Mathematical Statistics, both from the Universidad de Buenos Aires (UBA), Argentina. \\
-	She is currently a Professor at the Universidad Nacional de General Sarmiento, Argentina.\\ 
-	Her research interests are in advanced statistical techniques in SAR image processing and applied statistics.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}[{\includegraphics[scale=0.13]{../../../Images/Fotos/Tico}}]{Diego Rial} 
-	received the B.Sc. degree in Mathematics from the Universidad de Buenos Aires, Argentina. His doctorate degree was in Science from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Río de Janeiro).
-	He is currently an Associate Professor at Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires. He is an Independent Researcher at CONICET - \textit{Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas}, Argentina. His research interests are in nonlinear partial differential equations and numerical analysis.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}[{\includegraphics[width=1in]{../../../Images/Fotos/ACFrery_gray.pdf}}]{Alejandro C.\ Frery} (S'92--SM'03)
-	received the B.Sc. degree in Electronic and Electrical Engineering from the Universidad de Mendoza, Mendoza, Argentina.
-	His M.Sc. degree was in Applied Mathematics (Statistics) from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Rio de Janeiro) and his Ph.D. degree was in Applied Computing from the Instituto Nacional de Pesquisas Espaciais (INPE, S\~ao Jos\'e dos Campos, Brazil).
-	He is currently the leader of LaCCAN -- \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica}, Universidade Federal de Alagoas, Macei\'o, Brazil.
-	His research interests are statistical computing and stochastic modelling.
-\end{IEEEbiography}
-
-\vspace{11cm}
+%\begin{IEEEbiography}[{\includegraphics[height=1.8in,width=1.1in]{../../../Images/Fotos/JuliaGris7}}]{Julia Cassetti} 
+%	received the B.Sc. degree in Mathematics and a postgraduate diploma in Mathematical Statistics, both from the Universidad de Buenos Aires (UBA), Argentina. \\
+%	She is currently a Professor at the Universidad Nacional de General Sarmiento, Argentina.\\ 
+%	Her research interests are in advanced statistical techniques in SAR image processing and applied statistics.
+%\end{IEEEbiography}
+%
+%\begin{IEEEbiography}[{\includegraphics[scale=0.13]{../../../Images/Fotos/Tico}}]{Diego Rial} 
+%	received the B.Sc. degree in Mathematics from the Universidad de Buenos Aires, Argentina. His doctorate degree was in Science from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Río de Janeiro).
+%	He is currently an Associate Professor at Facultad de Ciencias Exactas y Naturales, Universidad de Buenos Aires. He is an Independent Researcher at CONICET - \textit{Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas}, Argentina. His research interests are in nonlinear partial differential equations and numerical analysis.
+%\end{IEEEbiography}
+%
+%\begin{IEEEbiography}[{\includegraphics[width=1in]{../../../Images/Fotos/ACFrery_gray.pdf}}]{Alejandro C.\ Frery} (S'92--SM'03)
+%	received the B.Sc. degree in Electronic and Electrical Engineering from the Universidad de Mendoza, Mendoza, Argentina.
+%	His M.Sc. degree was in Applied Mathematics (Statistics) from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Rio de Janeiro) and his Ph.D. degree was in Applied Computing from the Instituto Nacional de Pesquisas Espaciais (INPE, S\~ao Jos\'e dos Campos, Brazil).
+%	He is currently the leader of LaCCAN -- \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica}, Universidade Federal de Alagoas, Macei\'o, Brazil.
+%	His research interests are statistical computing and stochastic modelling.
+%\end{IEEEbiography}
 
 \end{document}
