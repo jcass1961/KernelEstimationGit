@@ -210,7 +210,12 @@ Consistency results of the minimum distance estimator is shown in Section~\ref{M
 
 \section{The $\mathcal{G}_I^0$ Model}
 \label{sec_SAR}
-The images generated from devices that employ coherent illumination processes are contaminated with speckle noise. It is known that this kind of noise is neither Gaussian nor additive. The multiplicative model with the $\mathcal{G}_I^{0}$ model is a good combination to successfully describe areas with different degree of texture~\cite{Frery97,MejailJacoboFreryBustos:IJRS}. In the monopolarized case and intensity data, SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. In this manner $Z=X Y  $ represents the return $Z$ in each pixel under the multiplicative model.
+
+Images generated with devices that employ coherent illumination are contaminated with speckle. 
+This kind of noise is neither Gaussian nor additive. 
+In the monopolarized case and intensity data, SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. 
+In this manner $Z=X Y  $ represents the return $Z$ in each pixel.
+%The multiplicative model with the $\mathcal{G}_I^{0}$ model is a good combination to successfully describe areas with different degree of texture~\cite{Frery97,MejailJacoboFreryBustos:IJRS}. 
 
 The speckle noise in intensity format $Y$ is modeled as a random variable with $\Gamma $ distribution, with unitary mean and shape parameter $L\geq1$, that indicates the relation signal-noise and is called the number of looks. The backscatter $X$ is considered to obey a reciprocal of $\Gamma(\alpha,\gamma) $ law. The $\alpha$ parameter is related to the texture of the image and is a negative value. The $\gamma$ parameter gives information of the brigthness of the image and is a positive value. This gives rise to the $\mathcal{G}_I^{0}$ distribution for the return $Z$.
 
