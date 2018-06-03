@@ -152,23 +152,25 @@ remote sensing.
 They are very useful for detection of deforested areas, crop characterization and oil spills in the sea, among other applications. 
 %
 They can be obtained regardless of weather conditions and sunlight, but this kind of images have is contaminated by an interference pattern that makes difficult their interpretation. 
-Such patter, called \textit{speckle}, can be treated as noise and is inherent to the process of image capture. 
+Such pattern, called \textit{speckle}, can be treated as noise and is inherent to the process of image capture. 
 Images obtained from systems with coherent illumination such as laser, SAR, and ultrasound-B suffer from this type of noise.
 
 Statistical modeling of SAR images has become an essential tool for analyzing and interpreting data with speckle. 
-The multiplicative model have been successfully used and it is based on the assumption that the return results from the product between two random variables: one corresponding to the backscatter (the unobserved truth) and the other to the speckle~\cite{oliverquegan98}. 
-Other models have been used; Ref.~\cite{Gao2010} discusses several approaches and their relationships.
-
 %%% ACF Si el párrafo anterior dirige la atención del lector al modelo multiplicativo, en este no se puede volver atrás. Organizar mejor, y no confundir la lectura entre amplitud e intensidad; sugiero trartar sólo intensidad.
-Different distributions have been proposed for modelling SAR images, for instance, Weibull~\cite{Oliver1993}, Log-Normal~\cite{oliverquegan98} and Fisher~\cite{Tupin2004} distributions for intensity data, Rayleigh~\cite{oliverquegan98} for amplitud data. 
-In~\cite{Li2011} the authors proposed a generalized Gamma distribution for modeling SAR images for amplitud and intensity data.
+\textcolor{blue}{Different distributions have been proposed for modelling SAR images. Log-Normal and Weibull were introduced to caractherize high resolution data~\cite{oliverquegan98}, \textit{K} and Weibull were considered in~\cite{Oliver1993}, in~\cite{Tison2004} the authors present  Fisher distribution to model several kinds of areas. In~\cite{Li2011} the authors proposed a Generalized Gamma distribution for modeling SAR images where, for different values of the parameters, it can be obtained Weibull, \textit{K} Fisher distributions between others.}
+
+\textcolor{blue}{An alternative approach is the multiplicative model, which have been successfully used to described SAR data. It is based on the assumption that the return results from the product between two random variables: one corresponding to the backscatter (the unobserved truth) and the other to the speckle~\cite{oliverquegan98}. }
+%Other models have been used; Ref.~\cite{Gao2010} discusses several approaches and their relationships.
 
 %%% ACF Hasta acá 1/6/18 13:40
-In recently years, the $\mathcal G$ model~\cite{Frery97} has been widely utilized to describe SAR imagery. 
-The $K$ and $\mathcal G^0$ distributions are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  
-The latter has been widely utilized to describe this kind of images because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. 
-It is characterized by three parameters, the $\alpha$ parameter that allows to describe different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
-Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
+%In recently years, the $\mathcal G$ model~\cite{Frery97} has been widely utilized to describe SAR imagery. 
+%The $K$ and $\mathcal G^0$ distributions are special cases of this model, the difference lies in the choice of the distribution for the backscatter.  
+%The latter has been widely utilized to describe this kind of images because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. 
+%It is characterized by three parameters, the $\alpha$ parameter that allows to describe different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
+%Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
+
+\textcolor{blue}{In recently years the $\mathcal G$ model~\cite{Frery97} has been widely utilized to depict the return of SAR images under the multiplicative model. It has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. It is characterized by three parameters, the $\alpha$ parameter that allows to explain different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
+Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.}
 
 Sundry authors have studied the problem of parameter estimation for the $\mathcal G^0$ family. 
 In Freitas et al.~\cite{Freitas2005} the authors used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
@@ -180,11 +182,7 @@ Li et al~\cite{Li2011} obtained an  expression for the parameters estimator for 
 \textcolor{blue}{Robustness is an important property  that is expected to have an estimator. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed M and AM estimators to improve the performance of maximum likelihood estimator under
 contamination. They show that they proposal outperform the performance of maximum likelihood estimator but the presents  numerical problems specially with small samples. }
 
-\textcolor{blue}{Another approach to the parameter estimation problem based on logmoments and log-cumulants were studied in~\cite{nicolas2002}. 
-These methods hinge on the relation between the moments of the distribution and the Mellin transform. 
-The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data and in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. }
-
-\textcolor{blue}{Minimum Distance Estimators (MDEs) are another approach to address the problem of parameter estimation of a distribution with good properties.
+\textcolor{blue}{Minimum Distance Estimators (MDEs) are another alternative to avenue the problem of parameter estimation of a distribution with good properties.
 They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical and the  theoretical distribution functions.
 Minimum Hellinger distance estimator and Cramer-von Mises distance were studied in~\cite{beran1977} and~\cite{Boos1981} respectively among others distances measure. Asymptotic and robustness properties were examinated in these works. Strongly consistency war proved in Wolfowitz~\cite{wolfowitz1953,wolfowitz1957}.}
 
