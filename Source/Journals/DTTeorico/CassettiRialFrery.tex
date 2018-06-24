@@ -151,33 +151,65 @@ Minimum distance estimator, stochastic distance, texture analysis, kernel estima
 remote sensing. 
 They are very useful for detection of deforested areas, crop characterization and oil spills in the sea, among other applications. 
 %
-They can be obtained regardless of weather conditions and sunlight, but this kind of images have is contaminated by an interference pattern that makes difficult their interpretation. 
+They can be obtained regardless of weather conditions and sunlight, but this kind of images is contaminated by an interference pattern that makes difficult their interpretation. 
 Such pattern, called \textit{speckle}, can be treated as noise and is inherent to the process of image capture. 
 Images obtained from systems with coherent illumination such as laser, SAR, and ultrasound-B suffer from this type of noise.
 
 Statistical modeling of SAR images has become an essential tool for analyzing and interpreting data with speckle. 
 %%% ACF Si el párrafo anterior dirige la atención del lector al modelo multiplicativo, en este no se puede volver atrás. Organizar mejor, y no confundir la lectura entre amplitud e intensidad; sugiero trartar sólo intensidad.
-Different distributions have been proposed for modelling this kind of images. Log-Normal and Weibull were introduced to caractherize high resolution data~\cite{oliverquegan98}, \textit{K} and Weibull were considered in~\cite{Oliver1993}, in~\cite{Tison2004} the authors present  Fisher distribution to model several kinds of areas. In~\cite{Li2011} the authors proposed a Generalized Gamma distribution for modeling SAR images where, for different values of the parameters, it can be obtained Weibull, \textit{K} Fisher distributions between others.
+A number of distributions has been proposed for modelling this kind of images. 
+Log-Normal and Weibull were introduced to caractherize high resolution data~\cite{oliverquegan98}, 
+\textit{K} and Weibull were considered in~\cite{Oliver1993}, 
+in~\cite{Tison2004} the authors presented Fisher distribution to model several kinds of areas. 
+Li et al.~\cite{Li2011} proposed a Generalized Gamma distribution for modeling SAR images 
+which has the Weibull, \textit{K} and Fisher distributions, among others, as particular cases.
 
-An alternative approach is the multiplicative model, which have been successfully used to described SAR data. It is based on the assumption that the return results from the product between two random variables: one corresponding to the backscatter (the unobserved truth) and the other to the speckle~\cite{oliverquegan98}. In recently years the $\mathcal G$ model~\cite{Frery97} has been widely utilized to depict the return of SAR images under this model, because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. It is characterized by three parameters, the $\alpha$ parameter that allows to explain different areas in terms of their texture, the $\gamma$ parameter informs about the brightness of the image and the $L$ parameter is related to the signal-to-noise ratio. 
-Therefore the accuracy in the parameters estimation is a crucial problem, in particular the $\alpha$ parameter, because it describes locally the target roughness.
+The multiplicative model has been successfully used to describe SAR data. 
+It is based on the assumption that the return results from the product of two independent random variables: 
+one corresponding to the backscatter (the unobserved truth) 
+and the other to the speckle~\cite{oliverquegan98}. 
+In recently years the $\mathcal G$ model~\cite{Frery97} has been widely utilized to depict the return of SAR images under this model, because it has the ability to discriminate textured and extremely textured areas better than other models~\cite{MejailJacoboFreryBustos:IJRS}. 
+It is characterized by three parameters, the $\alpha$ parameter that models texture, the $\gamma$ parameter that informs about the brightness of the image, the number of looks $L$ is related to the signal-to-noise ratio. 
+Due to this interpretability, quality parameter estimation is crucial, in particular for $\alpha$.
 
 Sundry authors have studied the problem of parameter estimation for the $\mathcal G^0$ family. 
-In Freitas et al.~\cite{Freitas2005} the authors used first and second moment of this distribution for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
-Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} proposed a second order correction for the bias in the estimation of the textured parameter for the $\mathcal G^0$ model for amplitud data ($\mathcal G_A^0$).  
-Li et al~\cite{Li2011} obtained an  expression for the parameters estimator for the generalized Gamma distribution based on second-kind cumulants and a second-order approximation for  Polygamma  function. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implemented resampling techniques to improve the parameter estimation for the $\mathcal G_I^0$ model. Robustness is an important property  that is expected to have an estimator. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed M and AM estimators to improve the performance of maximum likelihood estimator under
-contamination. They show that they proposal outperform the performance of maximum likelihood estimator but the presents  numerical problems specially with small samples. 
+Freitas et al.~\cite{Freitas2005} used first and second for intensity data ($\mathcal G_I^0$) to estimate the texture and scale parameters. 
+Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} proposed a second order correction for the bias in the estimation of the texture parameter for amplitud data ($\mathcal G_A^0$).  
+Li et al~\cite{Li2011} obtained an expression for the estimators of the generalized Gamma distribution based on second-kind cumulants and a second-order approximation of the Polygamma  function. 
+Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implemented resampling techniques to improve the parameter estimation for the $\mathcal G_I^0$ model. 
 
-Another approach to the parameter estimation problem based on logmoments and log-cumulants were studied in~\cite{nicolas2002}. These methods hinge on the relation between the moments of the distribution and the Mellin transform. The same idea was applied in~\cite{khan2014} to estimate the parameters for the $\mathcal{G}$ model in polarimetric SAR data and in the estimation for the parameters of the $\mathcal G_A^0$ distribution~\cite{Tison2004}. 
+Robustness is an important property. 
+Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} proposed M and AM estimators to improve the performance of maximum likelihood estimator under contamination. 
+They showed that their proposals outperform the performance of maximum likelihood estimator, but they suffer from numerical problems specially with small samples. 
 
-Information Theory provides a measure, called divergence, for comparing two density functions. These divergence or stochastic distance have been widely studied in the literature and have multiple applications in signal and image processing~\cite{4218961}, medical image analysis diagnosis~\cite{5599869}, automatic region detection in SAR images~\cite{EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}, as a contrast measure to distinguish two image regions~\cite{Nascimento2009}, to obtain expressions for test statistics~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances} among others.
-In~\cite{Basu2011} density-based distance have been studied with special attention in Hellinger distance as well as problems referred to hypothesis test based on divergences.
+Nicolas and Anfinsen~\cite{nicolas2002} studied parameter estimation based on logmoments and logcumulants. 
+These methods hinge on the relation between the moments of the distribution and the Mellin transform. 
+The same idea was applied by Khan and Guida~\cite{khan2014} to estimate the parameters for the multivariate $\mathcal{G}$ model in polarimetric SAR data, and by Tison et al.~\cite{Tison2004} for estimation under the $\mathcal G_A^0$ model. 
 
-Minimum Distance Estimators (MDEs) are another alternative to avenue the problem of parameter estimation of a distribution with good properties.
-They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical and the  theoretical distribution functions. Wolfowitz~\cite{wolfowitz1953,wolfowitz1957} has studied this class of estimators and proved strongly consistency under general conditions. In~\cite{Boos1981} a weighted Cramer-von Mises distance between the empirical distribution function and the true model was studied. The author showed that these estimators are consistency and asymptotically efficient under certain weight function. In~\cite{HettmanSperger1994} unweighted minimum distance estimators in a location-scale model, generated from Cramer-von Mises distance were studied. The author showed that these estimators are asymptotic normally, and have good efficiency properties as well as good robustness properties.
-The problem of estimate the proportion of mixture in a nonparametric mixture model were studied in~\cite{beran1977}. The author addressed this problem using minimum Hellinger distance estimator between a parametric mixture model and a nonparametric density estimator, and proved important properties such us strong consistency, asymptotic normality and asymptotic eficiency.  In Parr and Schucany~\cite{parr1982}, the authors proved that, under certain conditions, the minimum distance estimator between empirical distribution function and the theoretical distribution function are consistency.
-	
-Beran, in~\cite{beran1977} studied the properties of MDEs estimator but, the minimization is between the true density model and an appropriate nonparametric density estimator of the underlying density function.  In this work, the Hellinger distances was used and asymptotic and robustness properties were examinated. Cao et al.~\cite{cao1995minimum} propose minimizing a distance between the theoretical density function and an estimator of the underlying density function, using the classical symmetric kernel estimator,  to obtain minimum distance estimator. They prove, following~\cite{parr1982}, strongly consistence of these estimators under certain considerations and also study the asymptotic normality of them for the case of the $L_2$ metric.
+Information Theory provides measure, called divergence, for comparing two density functions. 
+They have been studied in the literature and have multiple applications in 
+signal and image processing~\cite{4218961}, 
+medical image analysis diagnosis~\cite{5599869}, 
+automatic region detection in SAR images~\cite{EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}, 
+as a contrast measure to distinguish two image regions~\cite{Nascimento2009}, 
+to obtain expressions for test statistics~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances} among others.
+Basu et al.~\cite{Basu2011} studied density-based distances with special attention to the Hellinger distance, as well as problems referred to hypothesis test based on divergences.
+
+Minimum Distance Estimators (MDEs) are an alternative avenue with good properties for the problem of parameter estimation.
+They come from the idea of finding a parameter estimator as the value that minimizes some  distance measure between the empirical and the theoretical distribution functions. 
+Wolfowitz~\cite{wolfowitz1953,wolfowitz1957} studied this class of estimators and proved strongly consistency under general conditions. 
+Boos studied~\cite{Boos1981} a weighted Cramer-von Mises distance between the empirical distribution function and the true model. 
+The author showed that these estimators are consistent and asymptotically efficient under certain weight function. 
+Hettmansperger et al.~\cite{HettmanSperger1994} studied unweighted minimum distance estimators in a location-scale model generated from the Cramer-von Mises distance. 
+The author showed that these estimators are asymptotically normal, and have good efficiency properties as well as good robustness properties.
+Beran ~\cite{beran1977} studied the problem of estimating the proportion of mixtures in a nonparametric mixture model. 
+The author addressed this problem using a minimum Hellinger distance estimator between a parametric mixture model and a nonparametric density estimator, and proved important properties such us strong consistency, asymptotic normality and asymptotic efficiency.  
+Parr and Schucany~\cite{parr1982} proved that, under certain conditions, the minimum distance estimator between empirical distribution function and the theoretical distribution function are  consistent.
+
+Beran~\cite{beran1977} studied the properties of MDEs estimator, but the minimization is between the true density model and an appropriate nonparametric density estimator of the underlying density function. 
+Asymptotic and robustness properties were examined using the Hellinger distance. 
+Cao et al.~\cite{cao1995minimum} proposed minimizing a distance between the theoretical density function and an estimator of the underlying density function using the classical symmetric kernel estimator to obtain minimum distance estimators. 
+They proved, following~\cite{parr1982}, the strong consistency of these estimators under certain considerations, and also studied their asymptotic normality for the case of the $L_2$ metric.
 
 %In~\cite{beran1977} the author studies asymptotic and robustness properties of the minimum Hellinger distance estimator. 
 %In~\cite{Boos1981} a Cramer-von Mises distance with a weighted function is used to obtain asymptotically efficient estimators that arise from minimize this distance.
@@ -185,23 +217,33 @@ Beran, in~\cite{beran1977} studied the properties of MDEs estimator but, the min
 
 %\textcolor{blue}{These stochastic distance are used in~\cite{Nascimento2009} as a contrast measure to distinguish two image regions. Analytic expressions for test statistics based on stochastic distances were obtained in~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances}, where the authors also proposed new classifier for Polarimetric SAR images using these distances. Many information on theoretic divergences measures are described in~\cite{Liese2006}.
 % }
-Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ density function combining MDEs with stochastic distance. They proposed was to  minimize the triangular stochastic distance between the theoretical density function  and an estimation for the underlying density function using asymmetric kernels, in this case Inverse Gaussian kernel was used. The authors compared its performance with logcumulant and maximum likelihood estimators and obtained good results in terms of mean squared error, bias, convergence and robustness. 
-The authors used a Monte Carlo study to show the performance of their proposal, but no theoretical results were shown.
+Gambini et al.~\cite{gambini2015} proposed an estimator of the texture parameter of the $\mathcal{G}_I^0$ distribution by combining MDEs with stochastic distances. 
+They proposed minimizing the triangular stochastic distance between the theoretical density function and an estimation of the underlying density function using asymmetric kernels; in this case, the Inverse Gaussian kernel. 
+The authors compared its performance with logcumulant and maximum likelihood estimators, and obtained good results in terms of mean squared error, bias, consistency and robustness by means of a Monte Carlo study. 
+No theoretical results were shown.
 
 In this work we prove the consistency of the estimator presented in~\cite{gambini2015} and we generalized this result to other asymmetric kernels.
+A proof of this property is missing in the literature, and gives more confidence to the use of this class of estimators.
 
 The rest of the paper unfolds as follows: 
 Section~\ref{sec_SAR} recalls the main features of the $\mathcal{G}_I^0$ model.
-%Section~\ref{pareto} shows the relation between this model and the Pareto distribution, and proposes an new estimator for the single-look case.
 Section~\ref{DTsection} presents the triangular distance and some theoretical results. 
 Section~\ref{AK} defines and shows main results of asymmetric kernel estimator.
-Consistency results of the minimum distance estimator is shown in Section~\ref{MDE}. Finally conclusions are given in Section~\ref{conclusions}.
+In Section~\ref{MDE} we present the consistency results of the minimum distance estimator. 
+Finally, we draw our conclusions in Section~\ref{conclusions}.
 
 \section{The $\mathcal{G}_I^0$ Model}
 \label{sec_SAR}
-The images generated from devices that employ coherent illumination processes are contaminated with speckle noise. It is known that this kind of noise is neither Gaussian nor additive. The multiplicative model with the $\mathcal{G}_I^{0}$ model is a good combination to successfully describe areas with different degree of texture~\cite{Frery97,MejailJacoboFreryBustos:IJRS}. In the monopolarized case and intensity data, SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. In this manner $Z=X Y  $ represents the return $Z$ in each pixel under the multiplicative model.
+Images generated from devices that employ coherent illumination are contaminated with speckle. 
+It is known that this kind of interference pattern can be modeled as noise, but neither Gaussian nor additive. 
 
-The speckle noise in intensity format $Y$ is modeled as a random variable with $\Gamma $ distribution, with unitary mean and shape parameter $L\geq1$, that indicates the relation signal-noise and is called the number of looks. The backscatter $X$ is considered to obey a reciprocal of $\Gamma(\alpha,\gamma) $ law. The $\alpha$ parameter is related to the texture of the image and is a negative value. The $\gamma$ parameter gives information of the brigthness of the image and is a positive value. This gives rise to the $\mathcal{G}_I^{0}$ distribution for the return $Z$.
+SAR images can be modeled as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$. In this manner $Z=X Y  $ represents the return $Z$ in each pixel under the multiplicative model.
+The speckle noise in intensity format $Y$ is modeled as a $\Gamma $ random variable with unitary mean and shape parameter $L\geq1$, which is proportional to the signal-to-noise ratio and is called ``number of looks''. 
+
+%The multiplicative model with the $\mathcal{G}_I^{0}$ law is a good combination to successfully describe areas with varying degrees of texture~\cite{Frery97,MejailJacoboFreryBustos:IJRS}. 
+The backscatter $X$ can be modeled by a reciprocal of $\Gamma(\alpha,\gamma) $ law~\cite{Frery97,MejailJacoboFreryBustos:IJRS}. 
+The $\alpha$ parameter is related to the texture of the image and is negative. 
+The $\gamma$ parameter gives information of the brigthness of the image and is a positive value. This gives rise to the $\mathcal{G}_I^{0}$ distribution for the return $Z$.
 
 The density function for intensity data, $\mathcal{G}_I^{0}$ is given by
 \begin{equation}
@@ -228,21 +270,18 @@ The parameter $\gamma$ is proportional to the brightness, and is a scale paramet
 With the purpose of reducing our analysis to a single parameter, we based the forthcoming analysis on the condition $E(Z)=1$ which links the texture and the brightness parameter as $\gamma^* =-\alpha-1$.
 
 \subsection{Some theoretical properties of the $\mathcal{G}_I^{0}$ model}
-Let $\Omega = \pa{-\infty,0}\times\pa{0,\infty}\times\pa{1,\infty}$
-with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
+Consider $\Omega = \pa{-\infty,0}\times\pa{0,\infty}\times\pa{1,\infty}$
+with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then:
 %\begin{align*}
 %f_{\alpha,\gamma,L}\pa{z} = \frac{\gamma^{-\alpha} L^{L} \Gamma\pa{L-\alpha}}{\Gamma\pa{-\alpha}\Gamma\pa{L}}
 %\frac{z^{L-1}}{\pa{\gamma +L z}^{L-\alpha}},\quad z>0,
 %\end{align*}
 
-
-
-\begin{proposition}
-	Let $\mathcal{F}$ the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
+\begin{proposition}\label{pr: continuidad}
+	Let $\mathcal{F}$ be the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
 	The map from $\Omega$ in $\mathcal{F}$ given by 
 	$\pa{\alpha,\gamma,L}\mapsto f_{\alpha,\gamma,L}$ is continuous, where $f_{\alpha,\gamma,L}$ is defined in~\ref{ec_dens_gI0}.
 \end{proposition}
-\label{pr: continuidad}
 
 \begin{dem}
 	Writing $f_{\alpha,\gamma,L}$ as
@@ -265,19 +304,17 @@ with the usual distance in $\Rn[3]$, for each $\pa{\alpha,\gamma,L}$ then,
 		1-\varepsilon\le \textstyle{\frac{\alpha'}{\alpha},\frac{\gamma'}{\gamma},\frac{L'}{L}} \le 1+\varepsilon}.
 	\end{align*}
 	For $\pa{\alpha',\gamma',L'}\in Q$ it is verified that %$C = \max\limits_{\pa{\alpha',\gamma',L'}\in Q}c_{\alpha,\gamma,L}$, vale 
-	\begin{align*}
+	$$
 	f_{\alpha',\gamma',L'}\pa{z} 
-	&\le \max\limits_{{\alpha',\gamma',L'}\in Q}c_{\alpha',\gamma',L'}
-	\left({1+\frac{\pa{1-\varepsilon}Lz}{\pa{1+\varepsilon}\gamma}}\right)^{-1+\pa{1-\varepsilon}\alpha} \\
-	&= g\pa{z}.
-	\end{align*}
+	\le \max\limits_{{\alpha',\gamma',L'}\in Q}c_{\alpha',\gamma',L'}
+	\left({1+\frac{\pa{1-\varepsilon}Lz}{\pa{1+\varepsilon}\gamma}}\right)^{-1+\pa{1-\varepsilon}\alpha} 
+	= g\pa{z}.
+	$$
 	If $\pa{\alpha_{n},\gamma_{n},L_{n}}$ is a sequence in $\Omega$ such that $\pa{\alpha_{n},\gamma_{n},L_{n}}\stackrel[n\to\infty]{}{\longrightarrow}\pa{\alpha,\gamma,L}$, then for each $z>0$
 	$f_{\alpha_{n},\gamma_{n},L_{n}}\pa{z}\stackrel[n\to\infty]{}{\longrightarrow} f_{\alpha,\gamma,L}\pa{z}$.
 	As $g$ is an integrable function, by the dominated convergence theorem, it is verified that
 	$\norm{f_{\alpha_{n},\gamma_{n},L_{n}} - f_{\alpha,\gamma,L}}\to 0$.
 \end{dem}
-
-
 
 It is assumed that  $L$ is known and $\alpha<-1$, which implies that the first moment exists and, 
 %it is
@@ -285,10 +322,9 @@ It is assumed that  $L$ is known and $\alpha<-1$, which implies that the first m
 %m_{1} = \int_{0}^{\infty}z\,f_{\alpha,\gamma,L}\pa{z}dz = -\frac{\gamma}{\alpha+1}.
 %\end{align*}
 taking $\gamma = -\pa{\alpha+1}$, it is obtained $E(Z) = 1$.
-So, the reduced model $\set{f_{\alpha}:\alpha\in I}$ is considered,
-where $I = \pa{-\infty,-1}\label{I}$ and, in the following, we will call $f_{\alpha}$ to $f_{\alpha,-\pa{\alpha+1},L}$.
+So, we consider the reduced model $\set{f_{\alpha}:\alpha\in I}$,
+where $I = \pa{-\infty,-1}\label{I}$ and, in the following, we will denote $f_{\alpha}$ instead of $f_{\alpha,-\pa{\alpha+1},L}$.
 Notice that, with the relationship between $\alpha$ and $\gamma$, $f_{\alpha}$ can be written as
-
 \begin{align}
 f_{\gamma}(z)=\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
 \pa{\frac{L}{\gamma}}^L \frac{z^{L-1}}{\pa{1+\frac{Lz}{\gamma}}^{L+\gamma+1}}.
@@ -302,11 +338,7 @@ f_{\gamma}(z)=\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
 %\label{fgamma}
 %\end{align}
 
-
-
 The next two results show the uniform comvergence of $f_\alpha$ when $\alpha \to -\infty$ and $\alpha \to -1$.
-
-
 
 \begin{proposition}
 	For all compact interval $[z_{1},z_{2}]\subset\pa{0,\infty}$, $f_{\alpha}$ converges uniformly to $\Gamma_{(L,1/L)}$ in $[z_{1},z_{2}]$ if $\alpha\to -\infty$,
@@ -315,11 +347,9 @@ The next two results show the uniform comvergence of $f_\alpha$ when $\alpha \to
 \end{proposition}
 
 \begin{dem}
-	Notice that, studying the $\lim\limits_{\alpha\to-\infty} f_{\alpha}$ is equivalent to find
-	$\lim\limits_{\gamma\to+\infty} f_{\gamma}.$
-
-	
-From Stirling's formula~\cite{abramowitz1964} is obtained
+	Notice that, studying the $\lim\limits_{\alpha\to-\infty} f_{\alpha}$ is equivalent to finding
+	$\lim\limits_{\gamma\to+\infty} f_{\gamma}$.
+From Stirling's formula~\cite{abramowitz1964}:
 \begin{align*}
 % \lim_{\gamma\to+\infty} a\pa{L,\gamma} = 
 % \al \lim_{\gamma\to+\infty}\frac{\Gamma\pa{L+\gamma+1}\e^{L+\gamma}}{\sqrt{2\pi}\pa{L+\gamma}^{L+\gamma+1/2}} = 1,\\
@@ -357,7 +387,11 @@ b\pa{L,\gamma,z}c\pa{L,\gamma,z},
 	is obtained uniformly in $[z_{1},z_{2}]$.
 \end{dem}
 
-Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\Gamma(3,1/3)$, when $\alpha \to -\infty$ and $L=3$. The gray area is a band of width $\epsilon=0.1$ around the $\Gamma(3,1/3)$ density function (solid line). The dotted and twodash lines represents $f_{\alpha}$ density function for $\alpha=-20$ and $\alpha=-8$ respectively. It can be seen that, as the value of $\alpha$ becomes smaller, the $f_{\alpha}$ density function falls inside the gray area. Even more, for this value of $\epsilon$, $f_{-20}$ already falls within that band.
+Fig.~\ref{ConvInfinito} illustrates the uniform convergence of $f_{\alpha}$ to $\Gamma(3,1/3)$, when $\alpha \to -\infty$ and $L=3$. 
+The gray area is a band of width $\epsilon=0.1$ around the $\Gamma(3,1/3)$ density function (solid line). 
+The dotted and twodash lines represent $f_{\alpha}$ density function for $\alpha=-20$ and $\alpha=-8$ respectively. 
+It can be seen that, as the value of $\alpha$ becomes smaller, the $f_{\alpha}$ density function falls inside the gray area. 
+Even more, for this value of $\epsilon$, $f_{-20}$ already falls within that band.
 
 \begin{figure}[hbt]
 	\centering    
@@ -369,10 +403,11 @@ Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\
 	For all compact interval $[z_{1},z_{2}]\subset\pa{0,\infty}$, $f_{\alpha}$ converges uniformly to $0$ in $[z_{1},z_{2}]$ when $\alpha\to -1^{-}$.
 	\label{pr: convergenciauniforme2}
 \end{proposition}
+
 \begin{dem} 
-	Due to the relationship between $\alpha$ and $\gamma$, study the $\lim\limits_{\alpha\to-1} f_{\alpha}$ is equivalent to find
+	Due to the relationship between $\alpha$ and $\gamma$, study the $\lim\limits_{\alpha\to-1} f_{\alpha}$ is equivalent to finding
 	$\lim\limits_{\gamma\to0} f_{\gamma}.$
-	From~\ref{fgamma}
+	From~\eqref{fgamma}:
 	\begin{align*}
 	 f_{\gamma}\pa{z} = &\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
 	L^{L} \frac{z^{L-1}}{(\gamma+LZ)^{L+\gamma+1}} \gamma^{\gamma +1}  \\
@@ -388,19 +423,30 @@ Fig.~\ref{ConvInfinito} represents the uniform convergence of $f_{\alpha}$ to $\
 	\caption{\label{ConvEnCero}Uniform convergence of $f_{\alpha}$, to $0$, when $\alpha \to -1$, $L=3$ and $\epsilon=0.1$.}
 \end{figure}
 
-Fig.~\ref{ConvEnCero} shows the uniform convergence of $f_{\alpha}$ when $\alpha \to -1$. In this case, the gray band is of width $\epsilon=0.2$, around the $z$ axes. Three diferent densities where plotted: dotted, twodashed and solid which represents $f_{\alpha}$ density function for $\alpha=-1.01, \ -1.2$ and $-1.5$ respectively. It can be seen that, as the value of $\alpha$ gets closer to $-1$, $f_{\alpha}$ flattens to zero, except for $z=0$. For  $\epsilon=0.2$ and any interval $[z_1,z_2]$ is considered, $f_{\alpha}$ falls inside the band of width $\epsilon=0.2$ for $\alpha$ small enough. For example, for the interval $[1.5,2]$ and for this value of $\epsilon$, $f_{\alpha}$ gets inside the grey band since $\alpha=-1.5$. If the interval is $[0.5,1]$ this happens since $\alpha=-1.01$.
+Fig.~\ref{ConvEnCero} illustrates the uniform convergence of $f_{\alpha}$ when $\alpha \to -1$. 
+In this case, the gray band is of width $\epsilon=0.2$, around the $z$ axes. 
+Three different densities where plotted: dotted, twodashed and solid which represent $f_{\alpha}$ density functions for $\alpha=-1.01, \ -1.2$ and $-1.5$ respectively. 
+It can be seen that as the value of $\alpha$ gets closer to $-1$, $f_{\alpha}$ flattens to zero, except for $z=0$. 
+For  $\epsilon=0.2$ and any interval $[z_1,z_2]$ is considered, $f_{\alpha}$ falls inside the band of width $\epsilon=0.2$ for $\alpha$ small enough. 
+For example, for the interval $[1.5,2]$ and for this value of $\epsilon$, $f_{\alpha}$ gets inside the grey band since $\alpha=-1.5$. 
+If the interval is $[0.5,1]$ this happens since $\alpha=-1.01$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Triangular Distance}
 \label{DTsection}
 
-Discrepancy measures have been deeply studied by different authors. Sahler~\cite{Sahler1970} defined a discrepancy measure between two probability measures to any non-negative
-function between them. Csisz\'ar~\cite{Csiszar1967} defined $f$-divergences and he introduced this definition as a generalization of the Kullback-Leibler divergence. Lin~\cite{Lin1991} has widely studied divergence measures based on the Shannon entropy.  Salicru et al.~\cite{Salicru1994} established a generalization of the $f$-divergences and defined the $(h,\phi)$-divergence between two density functions. If the divergence is also a symmetric function, it is called a stochastic distance or simply a distance.
+Discrepancy measures have been deeply by a number of authors. 
+Sahler~\cite{Sahler1970} defined a discrepancy measure between two probability measures to any non-negative function between them. 
+Csisz\'ar~\cite{Csiszar1967} defined $f$-divergences and he introduced this definition as a generalization of the Kullback-Leibler divergence. 
+Lin~\cite{Lin1991} studied divergence measures based on the Shannon entropy.  
+Salicru et al.~\cite{Salicru1994} established a generalization of the $f$-divergences and defined the $(h,\phi)$-divergence between two density functions. 
+If the divergence is also a symmetric function, it is called a stochastic distance or simply a distance.
 
-Nascimento et al.~\cite{Nascimento2009} examined different stochastic distances symmetrizing $(h,\phi)$-divergence. In order to identify different areas in terms of their textured in SAR imagery, they assessed eight statistical tests based on stochastic distance under the $\mathcal{G}_I^0$ model. They obtained that the test based on the triangular contrast measure was the one that presented the best performance for heterogeneity identification.
+Nascimento et al.~\cite{Nascimento2009} examined different stochastic distances symmetrizing $(h,\phi)$-divergences. 
+In order to identify different areas in terms of their textured in SAR imagery, they assessed eight statistical tests based on stochastic distances under the $\mathcal{G}_I^0$ model. 
+They obtained that the test based on the triangular contrast measure was the one that presented the best performance for heterogeneity identification.
 
-For this reason and for empirical results obtained Ref.~\cite{APSAR2013ParameterEstimationStochasticDistances}, we study the consistency of the $\widehat{\alpha}$ MDE estimator for the triangular distance case.
+For this reason and following the empirical results obtained in Ref.~\cite{APSAR2013ParameterEstimationStochasticDistances}, we study the consistency of the $\widehat{\alpha}$ MDE estimator for the triangular distance case.
 
- 
 \begin{definition}
 	Let $\mathcal{F}$ the metric space given by the set of one-dimensional probability density functions with the metric $\norm{\cdot}$ of $L^{1}\pa{\R}$.
 	The triangular distance between $f,g\in\mathcal{F}$ is defined as
@@ -408,12 +454,10 @@ For this reason and for empirical results obtained Ref.~\cite{APSAR2013Parameter
 	d_{\text{T}}(f,g)=\int_{S}\frac{(f-g)^2}{f+g} ,
 	\label{DT}
 	\end{equation}
-\end{definition}
 where $f$ and $g$ are two densities functions with common support $S$. 
-
+\end{definition}
 
 In the following we show some theoretical properties of the triangular distance which are necessary, according to~\cite{parr1982}, to prove the consistency of the $\widehat{\alpha}$ MDE estimator.
-
 
 \begin{lemma}
 	If $a,b,c>0$, then
@@ -427,8 +471,7 @@ In the following we show some theoretical properties of the triangular distance 
 	\end{subequations}
 \end{lemma}
 
-
-
+%%% ACF Arreglar la notación $d_{\text{T}}$ en lo que sigue y en todo el artículo
 \begin{proposition}
 	Let $f,g,h\in\mathcal{F}$, then
 	\begin{enumerate}[i.]
@@ -438,8 +481,6 @@ In the following we show some theoretical properties of the triangular distance 
 		\item\label{it: equicontinua} $\abs{d_{T}\pa{f;h}-d_{T}\pa{g;h}} \le 3 \norm{f-g}$.
 	\end{enumerate}
 \end{proposition}
-
-
 
 \begin{dem}
 	Items~\eqref{it: simetria} and~\eqref{it: unicidad} are immediate results from the $d_{T}$ definition.
@@ -451,10 +492,8 @@ In the following we show some theoretical properties of the triangular distance 
 	Considering $a = f\pa{x}$, $b = g\pa{x}$ and $c = h\pa{x}$ in~\eqref{eq: desigualdad 2},~\eqref{it: equicontinua} is obtained.
 \end{dem}
 
-
-
 \begin{corollary}
-	The family of functions $\set{d_{T}\pa{\cdot;h}: h\in\mathcal{F}}$ is equicontinuous with respect to the $\norm{\cdot}$.
+	The family of functions $\set{d_{T}\pa{\cdot;h}: h\in\mathcal{F}}$ is equicontinuous with respect to the $\norm{\cdot}$ norm.
 	\label{equicont}
 \end{corollary}
 \begin{dem}
@@ -464,7 +503,7 @@ In the following we show some theoretical properties of the triangular distance 
 
 
 
-Let $\set{f_{\theta}:\theta\in\Theta}\subset\mathcal{F}$ a parametric family of densities functions that verify $f_{\theta} \ne f_{\theta'}$ if $\theta,\theta'\in\Theta$, $\theta\ne\theta'$.
+Let $\set{f_{\theta}:\theta\in\Theta}\subset\mathcal{F}$ be a parametric family of densities functions that verify $f_{\theta} \ne f_{\theta'}$ if $\theta\ne\theta'$, $\theta,\theta'\in\Theta$.
 Clearly $0 = d_{T}\pa{f_{\theta_{0}};f_{\theta_{0}}} < d_{T}\pa{f_{\theta};f_{\theta_{0}}}$ is verified for
 $\theta\ne\theta_{0}$.
 Assume that $\Theta$ is a locally compact metric space and the application $\Theta$
@@ -481,32 +520,32 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	Assuming that for any $\theta\in\Theta$ exist a compact neighborhood $U$ of $\theta$ such that
 	\begin{align}
 	\label{eq: inf>0}
-	\inf_{\theta'\in \Theta-U}d_{T}\pa{f_{\theta'};f_{\theta}}>0,
+	\inf_{\theta'\in \Theta\setminus U}d_{T}\pa{f_{\theta'};f_{\theta}}>0,
 	\end{align}
 	if $\set{\theta_{k}}_{k\in\N}$ is a sequence in $\Theta$ such that $d_{T}\pa{f_{\theta_{k}};f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow}  0$, then $\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow} \theta$.
 \end{proposition}
 
 
 \begin{dem}
-	Let's suppose that $\theta_{k}\not\to\theta$, then exists $\varepsilon>0$ and a subsequence
+	Suppose that $\theta_{k}\not\to\theta$, then exists $\varepsilon>0$ and a subsequence
 	$\set{\theta_{k_{j}}}_{j\in\N}$ such that $d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon$.
 	As $d_{T}({f_{\theta_{k_{j}}};f_{\theta}})\stackrel[j\to\infty]{}{\longrightarrow}  0$, exists $j_{0}\in\N$, such that 
 	\begin{align*}
-	d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) < \inf_{\theta'\in \Theta-U}d_{T}({f_{\theta'};f_{\theta}}),
+	d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) < \inf_{\theta'\in \Theta\setminus U}d_{T}({f_{\theta'};f_{\theta}}),
 	\end{align*}
 	if $j\ge j_{0}$, then $\theta_{k_{j}}\in U$. Since $U$ is a compact set, exists a convergent subsucession,
 	that we will continue calling $\set{\theta_{k_{j}}}_{j\in\N}$.
-	Since $\theta_{k_{j}}\stackrel[j\to\infty]{}{\longrightarrow} \tilde{\theta}\in U$, then
+	Since $\theta_{k_{j}}\stackrel[j\to\infty]{}{\longrightarrow} \widetilde{\theta}\in U$, then
 	\begin{align*}
-	d_{T}({f_{\tilde{\theta}};f_{\theta}}) \le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}})
-	+ \abs{d_{T}({f_{\tilde{\theta}};f_{\theta}}) - d_{T}({f_{\theta_{k_{j}}};f_{\theta})}} \\
-	\le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) + 3 \norm{f_{\theta_{k_{j}}} - f_{\tilde{\theta}}}.
+	d_{T}({f_{\widetilde{\theta}};f_{\theta}}) \le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}})
+	+ \abs{d_{T}({f_{\widetilde{\theta}};f_{\theta}}) - d_{T}({f_{\theta_{k_{j}}};f_{\theta})}} \\
+	\le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) + 3 \norm{f_{\theta_{k_{j}}} - f_{\widetilde{\theta}}}.
 	\end{align*}
-	Taking $j\to\infty$, we obtain $d_{T}({f_{\tilde{\theta}};f_{\theta}}) = 0$. Then, as $d_T$ is a stochastic distance, we obtain that $f_{\tilde{\theta}}=f_{\theta}$, therefore  $\tilde{\theta}=\theta$.
+	Taking $j\to\infty$, we obtain $d_{T}({f_{\widetilde{\theta}};f_{\theta}}) = 0$. Then, as $d_T$ is a stochastic distance, we obtain that $f_{\widetilde{\theta}}=f_{\theta}$, therefore  $\widetilde{\theta}=\theta$.
 	
 	On the other hand
 	\begin{align*}
-	d_{\Theta}({\tilde{\theta},\theta}) = \lim_{j\to\infty}d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon,
+	d_{\Theta}({\widetilde{\theta},\theta}) = \lim_{j\to\infty}d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon,
 	\end{align*}
 	what represents a contradiction.
 \end{dem}
@@ -519,8 +558,8 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	$\inf\limits_{\alpha'\in I-U}d_{T}({f_{\alpha'};f_{\alpha}})>0$.
 \end{proposition}
 \begin{dem}
-	Let's show that $d_{T}({f_{\alpha'};f_{\alpha}})>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
-	Using that $d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \int_{z_{1}}^{z_{2}}d_{T}\pa{f_{\alpha'};f_{\alpha}}dz$, it is enough to show that, the right side of this inequality is greater than $\epsilon>0$ if $\alpha'$ is far from $\alpha$.
+	Let us now show that $d_{T}({f_{\alpha'};f_{\alpha}})>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
+	Using that $d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \int_{z_{1}}^{z_{2}}d_{T}\pa{f_{\alpha'};f_{\alpha}}dz$, it is enough to show that the right side of this inequality is greater than $\epsilon>0$ if $\alpha'$ is far from $\alpha$.
 	
 %	Since that $f_{\alpha}\ne \Gamma_{(L,1/L)}$, exists $[z_{1},z_{2}]\subset\pa{0,\infty}$, such that
 %	\begin{align*}
@@ -551,15 +590,13 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	Thus, the Proposition holds for $U=[\alpha_0,\alpha_1].$
 \end{dem}
 
-
-
 \begin{corollary}
 	If $\set{\alpha_{k}}_{k\in\N}$ is a sequence of $I$ such that $d_{T}\pa{f_{\alpha_{k}};f_{\alpha}}\stackrel[k\to\infty]{}{\longrightarrow}  0$,
 	then $\alpha_{k}\stackrel[k\to\infty]{}{\longrightarrow} \alpha$.
 	\label{corfinal}
 \end{corollary}
 \begin{dem}
-	This statement is a consequence of the Propositions~\ref{pr: convergencia} and~\ref{pr: falpha>0}.
+	This statement is a consequence of Propositions~\ref{pr: convergencia} and~\ref{pr: falpha>0}.
 \end{dem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -567,7 +604,8 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 \section{Asymmetric Kernels}
 \label{AK}
 
-It is known the boundary bias presented by the underlying density function estimator using symmetric kernel, when the theoretical density has bounded support. In~\cite{Jones1993} the author shows some alternatives to improve this point but, some of them can give negative estimates of the true density function. In Chen~\cite{chensx2000} the author presented Gamma kernel estimator as an alternative to estimate the underlying density functions with bounded support solving the issues previously raised. This kind of estimators are free of boundary bias, always produce positive values and achieve an optimal convergence rate of $n^{-\frac{4}{5}}$ for the mean squared integrated error. In~\cite{bouezmarni2005} theoretical results about different types of convergence of asymmetric kernel density estimators were presented. 
+It is known the boundary bias presented by the underlying density function estimator using symmetric kernel, when the theoretical density has bounded support. 
+In~\cite{Jones1993} the author shows some alternatives to improve this point but, some of them can give negative estimates of the true density function. In Chen~\cite{chensx2000} the author presented Gamma kernel estimator as an alternative to estimate the underlying density functions with bounded support solving the issues previously raised. This kind of estimators are free of boundary bias, always produce positive values and achieve an optimal convergence rate of $n^{-\frac{4}{5}}$ for the mean squared integrated error. In~\cite{bouezmarni2005} theoretical results about different types of convergence of asymmetric kernel density estimators were presented. 
 %As it was indicated in section~\ref{MDE} and following Gambini et al.~\cite{gambini2015}, in this work, asymmetric kernels were used to estimate $\widehat{f}_n$. 
 
 The asymmetric kernel estimators are defined as:
