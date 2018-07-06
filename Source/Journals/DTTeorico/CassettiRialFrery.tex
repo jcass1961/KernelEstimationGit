@@ -475,15 +475,15 @@ In the following we show some theoretical properties of the triangular distance 
 \begin{proposition}
 	Let $f,g,h\in\mathcal{F}$, then
 	\begin{enumerate}[i.]
-		\item\label{it: simetria} $d_{T}\pa{f;g} = d_{T}\pa{g;f}$.
-		\item\label{it: unicidad} $d_{T}\pa{f;g} \ge 0$ and $d_{T}\pa{f;g} = 0$ if and only if $f = g$.
-		\item\label{it: acotacion} $d_{T}\pa{f;g} \le \norm{f-g}$.
-		\item\label{it: equicontinua} $\abs{d_{T}\pa{f;h}-d_{T}\pa{g;h}} \le 3 \norm{f-g}$.
+		\item\label{it: simetria} $d_{\text{T}}\pa{f;g} = d_{\text{T}}\pa{g;f}$.
+		\item\label{it: unicidad} $d_{\text{T}}\pa{f;g} \ge 0$ and $d_{\text{T}}\pa{f;g} = 0$ if and only if $f = g$.
+		\item\label{it: acotacion} $d_{\text{T}}\pa{f;g} \le \norm{f-g}$.
+		\item\label{it: equicontinua} $\abs{d_{\text{T}}\pa{f;h}-d_{\text{T}}\pa{g;h}} \le 3 \norm{f-g}$.
 	\end{enumerate}
 \end{proposition}
 
 \begin{dem}
-	Items~\eqref{it: simetria} and~\eqref{it: unicidad} are immediate results from the $d_{T}$ definition.
+	Items~\eqref{it: simetria} and~\eqref{it: unicidad} are immediate results from the $d_{\text{T}}$ definition.
 	The inequality~\eqref{it: acotacion} is a consequence of the following inequality $\abs{\frac{\pa{a-b}^{2}}{a+b}} \le \abs{a-b}$ taking $a = f\pa{x}$ and $b = g\pa{x}$ and integrating.
 	% \begin{align*}
 	% \frac{\pa{f\pa{x}-g\pa{x}}^{2}}{f\pa{x}+g\pa{x}} =
@@ -493,7 +493,7 @@ In the following we show some theoretical properties of the triangular distance 
 \end{dem}
 
 \begin{corollary}
-	The family of functions $\set{d_{T}\pa{\cdot;h}: h\in\mathcal{F}}$ is equicontinuous with respect to the $\norm{\cdot}$ norm.
+	The family of functions $\set{d_{\text{T}}\pa{\cdot;h}: h\in\mathcal{F}}$ is equicontinuous with respect to the $\norm{\cdot}$ norm.
 	\label{equicont}
 \end{corollary}
 \begin{dem}
@@ -504,12 +504,12 @@ In the following we show some theoretical properties of the triangular distance 
 
 
 Let $\set{f_{\theta}:\theta\in\Theta}\subset\mathcal{F}$ be a parametric family of densities functions that verify $f_{\theta} \ne f_{\theta'}$ if $\theta\ne\theta'$, $\theta,\theta'\in\Theta$.
-Clearly $0 = d_{T}\pa{f_{\theta_{0}};f_{\theta_{0}}} < d_{T}\pa{f_{\theta};f_{\theta_{0}}}$ is verified for
+Clearly $0 = d_{\text{T}}\pa{f_{\theta_{0}};f_{\theta_{0}}} < d_{\text{T}}\pa{f_{\theta};f_{\theta_{0}}}$ is verified for
 $\theta\ne\theta_{0}$.
 Assume that $\Theta$ is a locally compact metric space and the application $\Theta$
 in $\mathcal{F}$ given by $\theta\mapsto f_{\theta}$ is continuous, i.e.
 if $\set{\theta_{k}}_{k\in\N}$ is a sequence of $\Theta$ such that
-$\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow}\theta\in\Theta$ (or equivalently $d_{\Theta}\pa{\theta_{k},\theta}\stackrel[k\to\infty]{}{\longrightarrow} 0$), then $\norm{f_{\theta_{k}}-f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow} 0$. This implies that $d_{T}\pa{f_{\theta_{k}};f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow}  0$.
+$\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow}\theta\in\Theta$ (or equivalently $d_{\Theta}\pa{\theta_{k},\theta}\stackrel[k\to\infty]{}{\longrightarrow} 0$), then $\norm{f_{\theta_{k}}-f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow} 0$. This implies that $d_{\text{T}}\pa{f_{\theta_{k}};f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow}  0$.
 
 The reciprocal is not necessarily true, a condition is necessary for the result to be verified.
 
@@ -520,28 +520,28 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	Assuming that for any $\theta\in\Theta$ exist a compact neighborhood $U$ of $\theta$ such that
 	\begin{align}
 	\label{eq: inf>0}
-	\inf_{\theta'\in \Theta\setminus U}d_{T}\pa{f_{\theta'};f_{\theta}}>0,
+	\inf_{\theta'\in \Theta\setminus U}d_{\text{T}}\pa{f_{\theta'};f_{\theta}}>0,
 	\end{align}
-	if $\set{\theta_{k}}_{k\in\N}$ is a sequence in $\Theta$ such that $d_{T}\pa{f_{\theta_{k}};f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow}  0$, then $\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow} \theta$.
+	if $\set{\theta_{k}}_{k\in\N}$ is a sequence in $\Theta$ such that $d_{\text{T}}\pa{f_{\theta_{k}};f_{\theta}}\stackrel[k\to\infty]{}{\longrightarrow}  0$, then $\theta_{k}\stackrel[k\to\infty]{}{\longrightarrow} \theta$.
 \end{proposition}
 
 
 \begin{dem}
 	Suppose that $\theta_{k}\not\to\theta$, then exists $\varepsilon>0$ and a subsequence
 	$\set{\theta_{k_{j}}}_{j\in\N}$ such that $d_{\Theta}({\theta_{k_{j}},\theta})\ge\varepsilon$.
-	As $d_{T}({f_{\theta_{k_{j}}};f_{\theta}})\stackrel[j\to\infty]{}{\longrightarrow}  0$, exists $j_{0}\in\N$, such that 
+	As $d_{\text{T}}({f_{\theta_{k_{j}}};f_{\theta}})\stackrel[j\to\infty]{}{\longrightarrow}  0$, exists $j_{0}\in\N$, such that 
 	\begin{align*}
-	d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) < \inf_{\theta'\in \Theta\setminus U}d_{T}({f_{\theta'};f_{\theta}}),
+	d_{\text{T}}({f_{\theta_{k_{j}}};f_{\theta}}) < \inf_{\theta'\in \Theta\setminus U}d_{\text{T}}({f_{\theta'};f_{\theta}}),
 	\end{align*}
 	if $j\ge j_{0}$, then $\theta_{k_{j}}\in U$. Since $U$ is a compact set, exists a convergent subsucession,
 	that we will continue calling $\set{\theta_{k_{j}}}_{j\in\N}$.
 	Since $\theta_{k_{j}}\stackrel[j\to\infty]{}{\longrightarrow} \widetilde{\theta}\in U$, then
 	\begin{align*}
-	d_{T}({f_{\widetilde{\theta}};f_{\theta}}) \le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}})
-	+ \abs{d_{T}({f_{\widetilde{\theta}};f_{\theta}}) - d_{T}({f_{\theta_{k_{j}}};f_{\theta})}} \\
-	\le \al d_{T}({f_{\theta_{k_{j}}};f_{\theta}}) + 3 \norm{f_{\theta_{k_{j}}} - f_{\widetilde{\theta}}}.
+	d_{\text{T}}({f_{\widetilde{\theta}};f_{\theta}}) \le \al d_{\text{T}}({f_{\theta_{k_{j}}};f_{\theta}})
+	+ \abs{d_{\text{T}}({f_{\widetilde{\theta}};f_{\theta}}) - d_{\text{T}}({f_{\theta_{k_{j}}};f_{\theta})}} \\
+	\le \al d_{\text{T}}({f_{\theta_{k_{j}}};f_{\theta}}) + 3 \norm{f_{\theta_{k_{j}}} - f_{\widetilde{\theta}}}.
 	\end{align*}
-	Taking $j\to\infty$, we obtain $d_{T}({f_{\widetilde{\theta}};f_{\theta}}) = 0$. Then, as $d_T$ is a stochastic distance, we obtain that $f_{\widetilde{\theta}}=f_{\theta}$, therefore  $\widetilde{\theta}=\theta$.
+	Taking $j\to\infty$, we obtain $d_{\text{T}}({f_{\widetilde{\theta}};f_{\theta}}) = 0$. Then, as $d_{\text{T}}$ is a stochastic distance, we obtain that $f_{\widetilde{\theta}}=f_{\theta}$, therefore  $\widetilde{\theta}=\theta$.
 	
 	On the other hand
 	\begin{align*}
@@ -555,11 +555,11 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 \begin{proposition}
 	\label{pr: falpha>0}
 	For all $\alpha\in I=(-\infty,-1)$, exist a compact neighbourdhood $U$ of $\alpha$ such that
-	$\inf\limits_{\alpha'\in I-U}d_{T}({f_{\alpha'};f_{\alpha}})>0$.
+	$\inf\limits_{\alpha'\in I-U}d_{\text{T}}({f_{\alpha'};f_{\alpha}})>0$.
 \end{proposition}
 \begin{dem}
-	Let us now show that $d_{T}({f_{\alpha'};f_{\alpha}})>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
-	Using that $d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \int_{z_{1}}^{z_{2}}d_{T}\pa{f_{\alpha'};f_{\alpha}}dz$, it is enough to show that the right side of this inequality is greater than $\epsilon>0$ if $\alpha'$ is far from $\alpha$.
+	Let us now show that $d_{\text{T}}({f_{\alpha'};f_{\alpha}})>\epsilon>0$ if $\alpha'$ is far from $\alpha$. For Propositions~\ref{pr: convergenciauniforme1} and~\ref{pr: convergenciauniforme2}, $f_{\alpha'} \to \Gamma(L,1/L)$ and $f_{\alpha'} \to 0$ on any compact interval $[z_1,z_2]$, when $\alpha' \to -\infty$ and $\alpha' \to 0$ respectively.
+	Using that $d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}} \ge \int_{z_{1}}^{z_{2}}d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}}dz$, it is enough to show that the right side of this inequality is greater than $\epsilon>0$ if $\alpha'$ is far from $\alpha$.
 	
 %	Since that $f_{\alpha}\ne \Gamma_{(L,1/L)}$, exists $[z_{1},z_{2}]\subset\pa{0,\infty}$, such that
 %	\begin{align*}
@@ -569,29 +569,29 @@ The reciprocal is not necessarily true, a condition is necessary for the result 
 	Therefore
 	\begin{align*}
 	\begin{split}
-	\liminf_{\alpha'\to-\infty} d_{T}\pa{f_{\alpha'};f_{\alpha}} 
+	\liminf_{\alpha'\to-\infty} d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}} 
 	\ge \al \liminf_{\alpha'\to-\infty}\int_{z_{1}}^{z_{2}}\frac{\pa{f_{\alpha}\pa{z}-f_{\alpha'}\pa{z}}^{2}}
 	{f_{\alpha}\pa{z}+f_{\alpha'}\pa{z}}dz \\
 	= \al \int_{z_{1}}^{z_{2}}\frac{\pa{f_{\alpha}\pa{z}-\Gamma_{(L,1/L)}\pa{z}}^{2}}
 	{f_{\alpha}\pa{z}+\Gamma_{(L,1/L)}\pa{z}}dz >0.
 	\end{split}
 	\end{align*}
-	Then, there exists an $\alpha_0 < \alpha$ such that $\inf\limits_{\alpha'<\alpha_0} d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \epsilon>0.$ 
+	Then, there exists an $\alpha_0 < \alpha$ such that $\inf\limits_{\alpha'<\alpha_0} d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}} \ge \epsilon>0.$ 
 	In the same way
 	\begin{align*}
 	\begin{split}
-	\liminf_{\alpha'\to-1^{-}} d_{T}\pa{f_{\alpha'};f_{\alpha}} 
+	\liminf_{\alpha'\to-1^{-}} d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}} 
 	\ge \al \liminf_{\alpha'\to-1^{-}}\int_{z_{1}}^{z_{2}}\frac{\pa{f_{\alpha}\pa{z}-f_{\alpha'}\pa{z}}^{2}}
 	{f_{\alpha}\pa{z}+f_{\alpha'}\pa{z}}dz \\
 	= \al \int_{z_{1}}^{z_{2}}f_{\alpha}\pa{z}dz >0,
 	\end{split}
 	\end{align*}
-	Then, there exists an $\alpha_1>\alpha$ such that $\inf\limits_{\alpha'>\alpha_1} d_{T}\pa{f_{\alpha'};f_{\alpha}} \ge \epsilon>0.$ 
+	Then, there exists an $\alpha_1>\alpha$ such that $\inf\limits_{\alpha'>\alpha_1} d_{\text{T}}\pa{f_{\alpha'};f_{\alpha}} \ge \epsilon>0.$ 
 	Thus, the Proposition holds for $U=[\alpha_0,\alpha_1].$
 \end{dem}
 
 \begin{corollary}
-	If $\set{\alpha_{k}}_{k\in\N}$ is a sequence of $I$ such that $d_{T}\pa{f_{\alpha_{k}};f_{\alpha}}\stackrel[k\to\infty]{}{\longrightarrow}  0$,
+	If $\set{\alpha_{k}}_{k\in\N}$ is a sequence of $I$ such that $d_{\text{T}}\pa{f_{\alpha_{k}};f_{\alpha}}\stackrel[k\to\infty]{}{\longrightarrow}  0$,
 	then $\alpha_{k}\stackrel[k\to\infty]{}{\longrightarrow} \alpha$.
 	\label{corfinal}
 \end{corollary}
@@ -689,7 +689,7 @@ In this work, following the ideas presented in~\cite{parr1982},  we show that, t
 
 
 \begin{theorem}
-	Let $\widehat{\alpha}=\mathop{\rm argmin}\limits_{\alpha\in I} d_T(f_{\alpha},\widehat{f}_n)$, where $d_T$ is defined in~\eqref{DT}, $f_n$ and $f_{\alpha}$ in~\eqref{fn}. Then $\widehat{\alpha}$ is a consistent estimator of $\alpha$, i.e. $\widehat{\alpha}_n \stackrel{p} {\longrightarrow} \alpha$ when $n \longrightarrow +\infty$.
+	Let $\widehat{\alpha}=\mathop{\rm argmin}\limits_{\alpha\in I} d_{\text{T}}(f_{\alpha},\widehat{f}_n)$, where $d_{\text{T}}$ is defined in~\eqref{DT}, $f_n$ and $f_{\alpha}$ in~\eqref{fn}. Then $\widehat{\alpha}$ is a consistent estimator of $\alpha$, i.e. $\widehat{\alpha}_n \stackrel{p} {\longrightarrow} \alpha$ when $n \longrightarrow +\infty$.
 	
 \begin{dem}
 	This results is a consequence of the Theorem $1$ of~\cite{parr1982} where we consider convergence in probability instead of convergence almost everywhere. Condition $i)$ of this theorem is verified by~\eqref{L1}, condition $ii)$ holds by corollary~\ref{equicont}. Finally, corollary~\ref{corfinal} shows condition $iv)$ is verified.  
