@@ -24,7 +24,7 @@ elige.muestra<-function(imagen,cant.muestras)
     pos<-locator(n=2,type="n")
     
     
-    #dibuja los rectángulos
+    #dibuja los rect?ngulos
     segments(pos$x[1],pos$y[1],pos$x[2],pos$y[1],col=col[i],lty=lty,lwd=lwd)
     segments(pos$x[1],pos$y[2],pos$x[2],pos$y[2],col=col[i],lty=lty,lwd=lwd)
     segments(pos$x[1],pos$y[1],pos$x[1],pos$y[2],col=col[i],lty=lty,lwd=lwd)
@@ -53,7 +53,7 @@ elige.muestra<-function(imagen,cant.muestras)
     y1.seg[i]<-pos$y[1]
     y2.seg[i]<-floor(pos$y[2])
     
-    #muestra para estimar los parámetros
+    #muestra para estimar los par?metros
     muestra.1<-as.vector(imagen[y1:y2,x1:x2])
     
     n1<-length(muestra.1)
@@ -63,5 +63,5 @@ elige.muestra<-function(imagen,cant.muestras)
     coord.segment<-data.frame("x1.seg"=x1.seg,"x2.seg"=x2.seg,"y1.seg"=y1.seg,"y2.seg"=y2.seg)
   }
 
-  return(list("muestra"=muestra.1,"coordenadas"=coord,"tamaño"=n1,"Coord.Segment"=coord.segment))
+  return(list("muestra"=muestra.1,"coordenadas"=coord,"tamanho"=n1,"Coord.Segment"=coord.segment))
 }
