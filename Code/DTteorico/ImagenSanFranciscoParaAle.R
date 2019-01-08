@@ -48,7 +48,7 @@ aeq.imagen.recortada<-normalize(matrix(ecdf(imagen.recortada)(imagen.recortada),
                                        nrow=dim(imagen.recortada)[1], ncol=dim(imagen.recortada)[2]))
 
 ### GRAFICO LA IMAGEN RECORTADA NORMALIZADA Y ECUALIZADA
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(aeq.imagen.recortada,ncol=dim(aeq.imagen.recortada)[1], nrow=dim(aeq.imagen.recortada)[2]))
 
 ### ESTIMO NUMERO DE LOKS - HACER 6 CLIKS EN ZONAS HOMOGENEAS 
@@ -86,7 +86,7 @@ looks.CV
 ############################################################################
 ## COMPRUEBO AJUSTE MODELO GAMMA - Elijo una muestra homogénea y hago histograma
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(normalize(matrix(ecdf(imagen.recortada)(imagen.recortada), 
                                   nrow=dim(imagen.recortada)[1], ncol=dim(imagen.recortada)[2]))))
 
@@ -109,7 +109,7 @@ emvbeta
 
 ## GRAFICO HIST GAMMA Y CURVA TEORICA GAMMA
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 hist(muestra.homogenea$muestra,probability=TRUE,ylim=c(0,60),
      main="Histogram Gamma Model and True GI0 density - One look")
 curve(dgamma(x,shape=emvalpha,rate=1/emvbeta),col="red",add=T)
@@ -123,9 +123,9 @@ imagen.piramidal<-proc.piram(2,imagen.recortada)
 
 ### GRAFICO IMAGEN PIRAMIDAL NORMALIZADA Y ECUALIZADA
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(normalize(matrix(ecdf(imagen.piramidal)(imagen.piramidal), 
-     nrow=dim(imagen.piramidal)[1], ncol=dim(imagen.piramidal)[2]))))
+                                  nrow=dim(imagen.piramidal)[1], ncol=dim(imagen.piramidal)[2]))))
 
 ### ELIJO 5 MUESTRAS PARA ESTIMAR EL NÚMERO DE LOOKS EN IMAGEN PIRAMIDAL
 looks.piramidal<-estim.num.look(imagen.piramidal,5,10)
@@ -157,7 +157,7 @@ looks.CV.piramidal
 ############################################################################
 ## COMPRUEBO AJUSTE MODELO GAMMA EN IMAGEN PIRAMIDAL
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(normalize(matrix(ecdf(imagen.piramidal)(imagen.piramidal), 
                                   nrow=dim(imagen.piramidal)[1], ncol=dim(imagen.piramidal)[2]))))
 
@@ -177,7 +177,7 @@ emvalpha
 emvbeta
 
 ## GRAFICO HIST GAMMA Y CURVA TEORICA GAMMA
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 hist(muestra.homogenea$muestra,probability=TRUE, ylim=c(0,60),
      breaks="FD",main="Gamma Model and True GI0 Piramidal Image")
 curve(dgamma(x,shape=emvalpha,rate=1/emvbeta),col="red",add=T)
@@ -186,7 +186,7 @@ curve(dgamma(x,shape=emvalpha,rate=1/emvbeta),col="red",add=T)
 
 #### ESTIMO
 ##########################################################
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(normalize(matrix(ecdf(imagen.piramidal)(imagen.piramidal), 
                                   nrow=dim(imagen.piramidal)[1], ncol=dim(imagen.piramidal)[2]))))
 
@@ -216,7 +216,7 @@ a
 # L   alfa.MV gama.MV   alfa.DT  gama.DT   alfa.LC gama.LC
 # 1 2.381883 -2.956757 1.55967 -2.951008 1.447395 -2.791918     0.1
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 hist(muestra1,probability=TRUE,breaks="FD",ylim=c(0,2),main="Histogram Muestra and Theoretical Densities")
 #curve(GI0.alfagama(x,a$alfa.LC,a$gama.LC,L),col="red",add=T,lwd=2)
 curve(GI0.alfagama(x,a$alfa.MV,a$gama.MV,L),col="green",add=T,lwd=2)
@@ -225,7 +225,7 @@ legend(2, 1.9, c("ML", "DT"), col=c("green", "magenta"),lwd=2, lty=1, cex=0.8)
 
 
 ##########################################################################
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 plot(imagematrix(normalize(matrix(ecdf(imagen.piramidal)(imagen.piramidal), 
                                   nrow=dim(imagen.piramidal)[1], ncol=dim(imagen.piramidal)[2]))))
 
@@ -248,9 +248,8 @@ a3
 # L   alfa.MV    gama.MV   alfa.DT    gama.DT alfa.LC gama.LC
 # 1 2.381883 -1.881729 0.04884692 -1.881729 0.04884692     0.1     0.1
 
-windows(width=6.5, height=6.5, rescale="fit")
+x11(width=6.5, height=6.5)
 hist(muestra2,probability=TRUE,breaks="FD",main="Histogram Muestra and Theoretical Densities")
 #curve(GI0.alfagama(x,a3$alfa.LC,a$gama.LC,L),col="red",add=T,lwd=2)
 curve(GI0.alfagama(x,a3$alfa.MV,a$gama.MV,L),col="green",add=T,lwd=2)
 curve(GI0.alfagama(x,a3$alfa.DT,a$gama.DT,L),col="blue",add=T,lwd=2)
-
