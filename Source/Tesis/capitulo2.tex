@@ -1,0 +1,57 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Introducción}
+
+Los dispositivos de captura de imágenes que emplean iluminación coherente, como sucede en las imágenes de ultrasonido B, laser y
+de radar de apertura sintética – SAR (Synthetic Aperture Radar ) entre otros, introducen un ruido que es propio del sistema de captura de la imagen. Este ruido, llamado speckle, no es gaussiano ni aditivo y, por lo tanto, diferente al ruido que se observa en imágenes ópticas. Existen diferentes técnicas para disminuir la presencia de este ruido, pero como contrapartida la imagen pierde resolución.
+
+La utilización de modelos estadísticos ha sido una herramienta fundamental para analizar e interpretar datos con ruido speckle. Se han presentado varias distribuciones para modelar este tipo de imágenes. Las distribuciones Log-Normal y Weibull fueron introducidas para caracterizar datos de alta resolución~\cite{oliverquegan98}, las distribuciones \textit{K} y Weibull también fueron estudiadas en~\cite{Oliver1993}, en~\cite{Tison2004} los autores presentaron la distribución de Fisher para modelar varios tipos de áreas. Li et al.~\cite{Li2011} propusieron una distribución Gamma generalizada para modelar imágenes SAR que tiene las distribuciones Weibull, \textit{K} y Fisher, entre otras, como casos particulares.
+
+El modelo propuesto para datos provenientes de un sistema de iluminación por radiación coherente, como son los datos SAR, es un modelo multiplicativo que considera que el valor observado en cada celda de la imagen es una variable aleatoria $Z$ que resulta del producto de dos variables aleatorias independientes: una correspondiente al backscatter o retrodispersión $X$ (que es lo que observaríamos sin la presencia del ruido speckle) y la otra correspondiente al ruido speckle $Y$ (que es inherente a todo sistema de captura de imágenes con iluminación coherente)~\cite{oliverquegan98}. 
+
+En los últimos años, se ha utilizado exitosamente el modelo $\mathcal{G}^0$: $\mathcal{G}_A^0$ para datos de amplitud y $\mathcal G_I^0$ para datos de intensidad, porque tiene la capacidad de discriminar áreas muy texturadas o extremadamente texturadas mejor que otros modelos. Este modelo fue propuesto por Frery et al. \cite{Frery97} y está caracterizado por tres parámetros; el parámetro $\alpha$ que explica la textura, el parámetro $\gamma $ que informa sobre el brillo de la imagen y el número de looks $L$ que está relacionado con la relación señal-ruido.
+Debido a esta interpretabilidad, es crucial obtener estimaciones de calidad de dichos parámetros, en particular para $\alpha$.
+
+Varios autores han estudiado el problema de la estimación de parámetros para la familia $\mathcal G^0$. Freitas et al.~\cite{Freitas2005} usaron el primer y segundo momento para estimar los parámetros de textura y escala en el caso de datos de intensidad.
+Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantifican el error en la estimación del parámetro de textura para la distribución $\mathcal G_A^0$ y proponen una técnica analítica para mejorar la estimación a través de una corrección de segundo orden en el sesgo de la estimación del parámetro de textura. Li et al~\cite{Li2011} obtuvieron una expresión para los estimadores de la distribución Gamma generalizada basada en cumulants de segundo tipo y una aproximación de segundo orden de la función Polygamma. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} implementaron técnicas de remuestreo para mejorar la estimación de parámetros para el modelo $\mathcal G_I^0$.
+
+Nicolas y Anfinsen~\cite{nicolas2002} propusieron el método basado en logmomentos y logcumulants para estimar los parámetros de una distribución. Estos métodos dependen de la relación entre los momentos de la distribución y su transformada de Mellin. La misma idea fue aplicada por Khan y Guida~\cite{khan2014} para estimar los parámetros del modelo $\mathcal{G}$ multivariado en el caso de datos SAR polarimétricos y también fue utilizada por Tison et al.~\cite{Tison2004} para la estimación del modelo $\mathcal{G}$ para datos de amplitud.
+
+Unas de las propiedades deseables para un estimador es su robustez, esto es, su capacidad para dar buenas estimaciones aún en presencia de datos atípicos. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} y Allende et al.~\cite{AllendeFreryetal:JSCS:05} propusieron M y AM estimadores para mejorar el comportamiento del estimador de máxima verosimilitud bajo contaminación. Ellos mostraron que su propuesta, si bien supera la performance del estimador de máxima verosimilitud, presenta problemas numéricos especialmente para el caso de muestras de pequeño tamaño.
+
+Por otro lado, la teoría de la información ha sido aplicada a los métodos de estadística y probabilidades con éxito~\cite{Liese2006}. 
+Shannon~\cite{Shannon1948} definió la información $I(X,Y)$ entre las variables aleatorias $X$ e $Y$ como una divergencia calculada entre sus densidades de probabilidad. 
+Estas divergencias fueron ampliamente estudiadas por Kullback y Leibler~\cite{KullbackLeibler1951} y por Rényi~\cite{renyi1961} entre otros y es una medida de la distancia entre dos funciones de densidad. 
+%El concepto de divergencias como distancias estocásticas se describe detalladamente en~\cite{Liese2006}, así como también sus propiedades.  
+% Mejorar las referencia en eventos con artigos en periódicos
+Este tipo de divergencias poseen múltiples aplicaciones en procesamiento de señales e imágenes~\cite{4218961}, análisis de imágenes médicas~\cite{5599869},
+clasificación de texturas~\cite{1246862}, restauración de imágenes~\cite{1224731} e incluso en detección automática de regiones con diferente grado de rugosidad en imágenes SAR~\cite{6377288,ClassificationPolSARSegmentsMinimizationWishartDistances}.
+
+
+Los estimadores de mínima distancia mínima (MDE) son una  alternativa con buenas propiedades para el problema de la estimación de parámetros.
+Surgen de la idea de encontrar un estimador que sea el valor que minimiza la medida de la distancia entre las funciones de distribución empírica y teórica.
+Wolfowitz~\cite{wolfowitz1953, wolfowitz1957} estudió esta clase de estimadores y demostró que, bajo condiciones generales, estos estimadores son fuertemente consistentes. 
+Boos estudió~\cite{Boos1981} la distancia ponderada de Cramer-von Mises entre la función de distribución empírica y el modelo verdadero.
+El autor mostró que estos estimadores son consistentes y asintóticamente eficientes bajo cierta función de peso.
+Hettmansperger et al.~\cite{HettmanSperger1994} estudiaron estimadores de mínima distancia no pesados aplicados a un modelo de posición-escala a partir de la distancia de Cramer-von Mises. El autor demostró que estos estimadores son asintóticamente normales y tienen buenas propiedades de eficiencia y robustez.
+Beran~\cite{beran1977} estudió el problema de estimar la proporción de mezclas en un modelo no paramétrico mixto. El autor abordó este problema utilizando un estimador MDE utilizando la distancia de Hellinger entre un modelo mixto paramétrico y un estimador de densidad no paramétrico. Demostró propiedades importantes como la consistencia fuerte, la normalidad asintótica y la eficiencia asintótica.
+Parr y Schucany~\cite{parr1982} demostraron que, bajo ciertas condiciones, el estimador MDE entre la función de distribución empírica y la función de distribución teórica es consistente.
+
+Beran~\cite{beran1977} estudió las propiedades del estimador de MDE, pero la minimización la realiza entre el modelo de densidad teórico y un estimador no paramétrico apropiado de la función de densidad subyacente.
+Las propiedades asintóticas y de robustez se examinaron utilizando la distancia de Hellinger.
+Cao et al.~\cite {cao1995minimum} propuso minimizar una distancia entre la función de densidad teórica y un estimador de la función de densidad subyacente utilizando el estimador de núcleo simétrico clásico para obtener estimadores de distancia mínima. Demostraron, siguiendo~\cite{parr1982}, la consistencia fuerte de estos estimadores bajo ciertas consideraciones, y también estudiaron su normalidad asintótica para el caso de la métrica $ L_2 $.
+
+%Gambini et al.~\cite{gambini2015} propusieron un estimador del parámetro de textura de la distribución $\mathcal{G}_I^0$ combinando MDE con distancias estocásticas. 
+%combining MDEs with stochastic distances. Ellos prponen minimizar la distancia triangular entre la función de densidad teórica y una estimación no paramétrica de la función de densidad subyacente utilizando núcleos asimétricos, en este caso, utilizaron el kernel gaussiano inverso. Los autores compararon el desempeño del estimador propueston con el obtenido por logcumulación y máxima verosimilitud, y obtuvieron buenos resultados
+%en términos de error cuadrático medio, sesgo, consistencia y robustez. 
+
+Dentro de los estimadores no paramétricos de la función de densidad subyacente se encuentran los estimadores de kernel clásico, con kernel simétrico~\cite{Silverman1986} que son populares en la estimación de la función de densidad. Sin embargo, si la función de densidad a estimar tiene soporte acotado, estos estimadores pueden dar estimaciones sesgadas en los bordes del soporte porque asignan probabilidad positiva fuera del soporte de la función. Una alternativa para mejorar esto es utilizar kernels asimétricos, Chen~\cite{chen1999, chensx2000} presenta núcleos Beta y Gamma, Scaillet~\cite {Scaillet2004} introduce núcleos Inverso Gaussianos (IG) y Recíproco Inverso Gaussiano (RIG), Bouezmarni et al.~\cite {bouezmarni2005} demuestran propiedades teóricas de los núcleos Gamma, IG y RIG. En~\cite{Jin2003} los autores proponen los núcleos Birnbaum-Saunders (BS) y Lognormal (LN). Es interesante señalar que  estos estimadores varían su forma de acuerdo con la observación, una característica que permite obtener diferentes grados de suavizamiento sin incurrir en los problemas antes mencionados~\cite{Scaillet2004}. En esta tesis se propone estimar la función de densidad subyacente utilizando núcleos asimétricos.
+
+En esta tesis se propone un nuevo  estimador de los parámetros de la distribución $\mathcal{G}_I^0$ definido como el punto del espacio paramétrico que minimiza la distancia estocástica que existe entre la función de densidad teórica $\mathcal{G}_I^0$ y una estimación no paramétrica de la función de densidad subyacente. Se prueba la consistencia del estimador para el caso de distancia triangular. Se compara el desempeño de este estimador, en términos de sesgo y error cuadrático medio y tasa de convergencia, con los presentes en la literatura. También se estudia la robustez del mismo bajo diferentes esquemas de contaminación.
+
+Esta tesis está organizada de la sigiuente manera:
+

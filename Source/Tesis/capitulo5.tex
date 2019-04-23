@@ -1,0 +1,25 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Resultados}
+
+\section{Estimador Propuesto}
+\subsection{Resultados teóricos}
+\subsection{Simulaciones}
+
+En una primera instancia, se realizarán simulaciones Montecarlo para estudiar el comportamiento del estimador propuesto considerando diferentes valores del número de looks y diferentes valores de $\alpha$. Asimismo, se considerarán diferentes distancias estocásticas, entre ellas:
+
+\begin{enumerate}[a)]
+	\item Distancia de Hellinger $d_H(V,W)=1-\int_{-\infty}^{\infty}\sqrt{f_Vf_W}$.
+	\item Distancia de Bhattacharyya $d_B(V,W)=-\log\int_{-\infty}^{\infty}\sqrt{f_Vf_W}$.
+	\item Distancia Triangular $d_T(V,W)=\int_{-\infty}^{\infty}\frac{(f_V-f_W)^2}{f_V+f_W}$.
+	\item Distancia de R\'enyi con parámetro $\beta\in(0,1)$
+	$$
+	d_R^{\beta}(V,W)=\frac{1}{2(\beta-1)}\log\int_{-\infty}^{\infty}\big({f_V^{\beta}f_W^{1-\beta})+\log\int_{-\infty}^{\infty}\big(f_V^{1-\beta}f_W^{\beta}}\big).
+	$$
+\end{enumerate}
+donde $V$ y $W$ dos variables aleatorias definidas sobre el mismo espacio de probabilidad cuyas funciones de densidad son $f_V(x;\theta_1)$ y $f_W(x;\theta_2)$.
+Se puede ver que las distancias de Hellinger y Bhattacharyya obedecen $d_B=-\log(1-d_H)$. Como además la función logaritmo es creciente resulta que $$\arg\min_\alpha d_B(\alpha )=\arg\min_ \alpha d_H(\alpha )$$ por lo que las distancias de Battacharya y Hellinger poseen el mismo mínimo y por eso se utilizará solamente la distancia de Hellinger que tiene menor costo computacional. Se evaluarán los diferentes núcleos existentes en la literatura y se elegirá la mejor combinación entre distancia y núcleo que derive en la mejor performance para este estimador. Asimismo, una vez elegida la distancia y el núcleo, se estudiarán las propiedades del estimador propuesto. 

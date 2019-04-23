@@ -1,0 +1,30 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Metodología}
+
+Es sabido que tener información sobre la función de densidad o distribución de una variable aleatoria permite tener una completa descripción de la misma. Por este motivo es un problema fundamental de la Estadística obtener, a partir de la información proporcionada por una muestra,  buenas estimaciones de las funciones de densidad de una variable o vector aleatorio. 
+
+En este sentido existen dos enfoques para abordar este problema. 
+
+\begin{itemize}
+	\item Un enfoque paramétrico: donde se considera que la función de densidad teórica pertenece a una familia de funciones de densidad $f_X(\vec{\theta})$ conocida, indexada por el vector de parámetros $\theta$. Bajo esta suposición estimar la función de densidad teórica se reduce a estimar el valor de los parámetros del modelo a partir de la información proporcionada por la muestra. Los métodos clásicos de estimación paramétrica son: Método de los Momentos, Método de Máxima Verosimilitud y LogCumulants.
+	\item Un enfoque no paramétrico: donde no se hace ninguna suposición inicial sobre la familia de densidades a las que pertenece la función de densidad teórica, sino que trata de estimarla teniendo como única información los datos muestrales, y solamente se imponen las condiciones necesarias para que dicha estimación sea una función de densidad.
+\end{itemize}
+
+El principal aporte de esta tesis es proponer un nuevo método de estimación para los parámetros del modelo $\mathcal G_I^0$ con buenas propiedades que serán estudiadas a través del sesgo, del error cuadrático medio y de su capacidad para resistir presencia de datos atípicos, aún en presencia de muestras de pequeño y moderado tamaño. Este estimador surge de la minimización de distancias estocásticas entre la función de densidad teórica y una estimación de la densidad subyacente utilizando núcleos asimétricos. 
+
+
+\section{Estimación Paramétrica}
+\subsection{Método de los Momentos}
+\subsection{Método de Máxima Verosimilitud}
+\subsection{LogCumulants}
+
+\section{Estimación No Paramétrica}
+\subsection{Estimadores de Mínima Distancia}
+\subsection{Distancias Estocásticas}
+\subsection{Núcleos asimétricos}
+
