@@ -1,4 +1,4 @@
-\documentclass[oneside,numbers,spanish,nobibtoc]{ezthesis}
+\documentclass[oneside,numbers,nobibtoc]{ezthesis}
 
 \usepackage{tabularx}
 
@@ -14,7 +14,7 @@
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage[utf8]{inputenc}
-%\usepackage[spanish]{babel}
+\usepackage[spanish]{babel}
 \usepackage{amsthm}
 \usepackage{lipsum}
 %\usepackage{calligra}
@@ -31,15 +31,88 @@
 \usepackage[numbers]{natbib}
 \usepackage{multirow}
 \usepackage{color}
+\usepackage{comment}
 
 \theoremstyle{definition}
-
 \newtheorem{definition}{Definición}[chapter] % esto es para que lo numere como : capitulo. definicion
 
 
 \newcommand*{\id}{{\normalfont\hbox{1\kern-0.15em \vrule width .8pt depth-.5pt}}}
 
 %\renewcommand{\spanishtablename}{Tabla}
+
+%%%%% EQUATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\numberwithin{equation}{section}
+
+%%%%% THEOREMS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{corollary}{Corolario}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposition}{Proposición}[section]
+\newtheorem{theorem}{Teorema}[section]
+
+%%%%% demS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% PROOFS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{dem}[1][Demostración]{\begin{proof}[{\bf #1}]}{\end{proof}}
+%%%%% DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\newtheorem{definition}{Definici\'{o}n}[section]
+\newtheorem{example}{Ejemplo}[section]
+\newtheorem{remark}{Remark}[section]
+
+%%%%% NUMEROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+%%%%% CONJUNTOS NUMERICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\D}{\ensuremath{\mathrm{D}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\T}{\ensuremath{\mathbb{T}}} 
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
+%%%%% FUNCIONES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\Re}[1]{\ensuremath{\mathrm{Re}\pa{ #1 }}}
+\renewcommand{\Im}[1]{\ensuremath{\mathrm{Im}\pa{ #1 }}}
+\renewcommand{\ker}[1]{\ensuremath{\mathrm{Ker}\pa{ #1 }}}
+\newcommand{\lap}{\ensuremath{\nabla^{2}}}
+\newcommand{\ran}[1]{\ensuremath{\mathrm{Ran}\pa{ #1 }}}
+\newcommand{\inc}{\ensuremath{\iota}}
+\newcommand{\sig}[1]{\ensuremath{\mathrm{sgn}\pa{ #1 }}}
+\newcommand{\sop}[1]{\ensuremath{\mathrm{sop}\pa{ #1 }}}
+\newcommand{\tr}[1]{\ensuremath{\mathrm{tr}\pa{ #1 }}}
+\newcommand*{\bigtimes}{\mathop{\raisebox{-.5ex}{\hbox{\huge{$\times$}}}}}
+
+%%%%% LLAVES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\norm}[1]{\ensuremath{\left\| #1 \right\|}}
+\newcommand{\pa}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\pro}[2]{\ensuremath{\left( #1,#2 \right)}}
+\newcommand{\set}[1]{\ensuremath{\left\{ #1 \right\}}}
+
+%%%%% ESPACIOS VECTORIALES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rn}[1][n]{\ensuremath{\R^{#1}}}
+\newcommand{\Cn}[1][n]{\ensuremath{\C^{#1}}}
+
+%%%%% ESPACIOS FUNCIONALES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\sch}[1][n]{\ensuremath{\mathcal{S}\pa{\Rn[#1]}}}
+\newcommand{\lp}[2]{\ensuremath{L^{#1}\pa{\Rn[#2]}}}
+\newcommand{\lpw}[2]{\ensuremath{L^{#1,w}\pa{\Rn[#2]}}}
+\newcommand{\sob}[2]{\ensuremath{H^{#1}\pa{\Rn[#2]}}}
+\newcommand{\hil}{\ensuremath{\mathrm{H}}}
 
 
 
