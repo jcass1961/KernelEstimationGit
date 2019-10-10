@@ -1932,7 +1932,7 @@ etric {SAR} data},
   organization = {IEEE Press}
 }
 
-@INPROCEEDINGS{ESAR,
+@INPROCEEDINGS{Horn1996,
   author = {R. Horn},
   title = {The {DLR} airborne {SAR} project {E-SAR}},
   booktitle = {Geoscience and Remote Sensing Symposium},
@@ -3787,6 +3787,36 @@ etric {SAR} data},
 	and discussed.},
   owner = {Juliana},
   timestamp = {2012.12.28}
+}
+
+@ARTICLE{DealingMonotoneLikelihood,
+	author = {D. M. Pianto and F. Cribari-Neto},
+	title = {Dealing with monotone likelihood in a model for speckled data},
+	journal = {Computational Statistics and Data Analysis},
+	year = {2011},
+	volume = {55},
+	pages = {1394--1409},
+	abstract = {In this paper we study maximum likelihood estimation (MLE) of the
+	roughness parameter of the distribution for speckled imagery (Frery
+	et al., 1997). We discover that when a certain criterion is satisfied
+	by the sample moments, the likelihood function is monotone and MLE
+	estimates are infinite, implying an extremely homogeneous region.
+	We implement three corrected estimators in an attempt to obtain finite
+	parameter estimates. Two of the estimators are taken from the literature
+	on monotone likelihood ([Firth, 1993] and [Jeffreys, 1946]) and one,
+	based on resampling, is proposed by the authors. We perform Monte
+	Carlo experiments to compare the three estimators. We find the estimator
+	based on the Jeffreys prior to be the worst. The choice between Firth's
+	estimator and the Bootstrap estimator depends on the value of the
+	number of looks (which is given before estimation) and the specific
+	needs of the user. We also apply the estimators to real data obtained
+	from synthetic aperture radar (SAR). These results corroborate the
+	Monte Carlo findings. Further clarification of the choice between
+	the Firth and Bootstrap estimators will be obtained through future
+	studies of the classification properties of these estimators.},
+	doi = {doi:10.1016/j.csda.2010.09.029},
+	owner = {Juliana},
+	timestamp = {2012.12.28}
 }
 
 @ARTICLE{ClassificationPolSARSegmentsMinimizationWishartDistances,
@@ -5697,7 +5727,7 @@ doi = {10.1109/IGARSS.2017.8127630}
 
 
 @article{Eslinger1990,
-	author = {Eslinger P.  and  Woodward, W. },
+	author = {Eslinger, P.  and  Woodward, W. },
 	title = {Minimum hellinger distance estimation for normal models},
 	journal = {Journal of Statistical Computation and Simulation},
 	volume = {39},
@@ -5705,15 +5735,23 @@ doi = {10.1109/IGARSS.2017.8127630}
 	pages = {95-114},
 	year  = {1991},
 	publisher = {Taylor & Francis},
-	doi = {10.1080/00949659108811342},
-	
-	URL = { 
-	https://doi.org/10.1080/00949659108811342
-	
-	},
-	eprint = { 
-	https://doi.org/10.1080/00949659108811342
-	
+	doi = {10.1080/00949659108811342}
+}
+
+
+@INPROCEEDINGS{Chan2017,
+	author    = {Chan, D. and Rey, A. and Gambini, J. and Cassetti, J. and Frery, A.},
+	title     = {Methods and frameworks for sampling GI\({}^{\mbox{0}}\) data},
+	booktitle = {2017 {IEEE} International Geoscience and Remote Sensing Symposium,
+	{IGARSS} 2017, Fort Worth, TX, USA, July 23-28, 2017},
+	pages     = {3003--3006},
+	year      = {2017},
+	crossref  = {DBLP:conf/igarss/2017},
+	url       = {https://doi.org/10.1109/IGARSS.2017.8127630},
+	doi       = {10.1109/IGARSS.2017.8127630},
+	timestamp = {Fri, 22 Dec 2017 11:39:27 +0100},
+	biburl    = {https://dblp.org/rec/bib/conf/igarss/ChanRGCF17},
+	bibsource = {dblp computer science bibliography, https://dblp.org},
 	}
 	
 }
