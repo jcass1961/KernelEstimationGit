@@ -1,4 +1,10 @@
-\documentclass[oneside,numbers,nobibtoc]{ezthesis}
+\documentclass[a4paper,oneside,numbers,nobibtoc]{ezthesis}
+%\usepackage[a4paper]{geometry}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.5}
+\topmargin=-1cm
+\oddsidemargin=0.5cm
+
 
 \usepackage{tabularx}
 
@@ -23,7 +29,6 @@
 \usepackage{epstopdf}
 \usepackage{subfigure}
 %\usepackage{dsfont}
-\usepackage{tikz}
 \usepackage{filecontents}
 %\usepackage{verbatim}
 \usepackage{amssymb}
@@ -35,6 +40,19 @@
 \usepackage[small]{caption}
 \usepackage{bm,bbm}
 \spanishdecimal{.}
+\usepackage[normalem]{ulem} %%%% para tachar texto
+\usepackage{url} %%%% para citar páginas web
+\usepackage{setspace} %% setea el espacio entre filas en una tabla
+\usepackage{siunitx}
+\usepackage{float}
+
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes,arrows,trees}
+\usepackage[abs]{overpic}
+%\usepackage[active,pdftex,tightpage]{preview}
+%\usepackage{tikz-cd}
+
 
 
 \theoremstyle{definition}
@@ -73,6 +91,10 @@
 
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\ii}{\mathrm{i}}
+\renewcommand{\r}{\mathbf{r}}
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\al}{&\,}
+
 
 %%%%% CONJUNTOS NUMERICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -174,7 +196,7 @@
 %% La letra n con tilde es: \~n.
 
 \author{Julia Analía Cassetti}
-\title{Estimación de Parámetros en Imágenes SAR monopolarizadas Usando Distancias Estocásticas y Núcleos Asimétricos}
+\title{Estimación de Parámetros en Imágenes SAR Monopolarizadas Usando Distancias Estocásticas y Núcleos Asimétricos}
 \degree{Doctor en Ciencia y Tecnología}
 \supervisor{Dr. Alejandro Frery Orgambide}
 \institution{Universidad Nacional de General Sarmiento}
@@ -232,6 +254,8 @@
 \include{capitulo4}
 \include{capitulo5}
 \include{capitulo6}
+\include{capitulo7}
+\include{capitulo8}
 
 
 \appendix

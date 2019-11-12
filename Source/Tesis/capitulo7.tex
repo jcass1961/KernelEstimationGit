@@ -1,0 +1,189 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Resultados Teóricos}
+\label{ResultadosTeoricos}
+
+Los estimadores de mínima distancia (MDE) surgen como una alternativa más robusta a los estimadores paramétricos clásicos, como máxima verosimilitud (MV). La idea de la cual parte resulta muy natural, es encontrar el valor de los parámetros que minimicen la distancia entre el modelo teórico y aquel que resulta de la información muestral.
+
+Las preguntas que nos podemos hacer es 
+\begin{itemize}
+	\item ¿Cómo modelamos los datos muestrales?
+	\item ¿Qué medida de distancia considerar?
+\end{itemize}
+
+Para responder a la primera pregunta apelamos a estimar la función de densidad subyacente con núcleos asimétricos. Para responder la segunda pregunta relajamos el concepto de métrica estudiando otras medidas como las distancias estocásticas, como forma de medir la discrepancia entre dos funciones de densidad. Elegimos la distancia triangular porque, de las medidas que evaluamos, ésta fue la que mejor performance mostró. En el capítulo~\ref{ResultadosEmpiricos} hicimos un estudio, mediante simulaciones montecarlo, para evaluar la perfomance del estimador propuesto. Vimos que para datos sin contaminación la propuesta tiene un comportamiento similar al estimador MV, mientras que bajo contaminación la mejora en algunos casos estudiados.
+
+En general, los MDE estimadores se definen midiendo la discrepancia entre funciones de distribución. Wolfowitz~\cite{Wolfowitz1954}, Parr and Schucany~\cite{Parr1980} son algunas de las principales referencias. Como indican Cao et al.~\cite{cao1995minimum} en los casos más usuales la funciones de distribución son absolutamente continuas, por lo tanto extienden los resultados de Parr and Schucany~\cite{parr1982} al caso donde se miden discrepancias entre funciones de densidad. Consideran un estimador por núcleos simétricos para estimar la función de densidad subyacente en vez de utilizar la función de distribución empírica.
+
+En esta capítulo probamos la convergencia fuerte del estimador propuesto en esta tesis basándonos en los resultados~\cite{cao1995minimum,parr1982}.
+
+\subsection{Resultado de Parr}
+
+%Según mencionan Cao et al.~\cite{}, los MDE estimadores basados en funciones de densidad tienen la dificultad de que las estimaciones dependen del ancho de banda que interviene en la estimación no paramétrica de la función de densidad subyacente. Además el costo computacional suele ser más alto respecto de otros estimadores, por estos motivos no se encuentran 
+
+
+%Quizás el estudio de estimadores basados en MD se ha desalentado principalmente
+%por la dificultad de elegir una cantidad adecuada de suavizado en el estimador del núcleo
+%(2): en general, las estimaciones resultantes dependerán en gran medida del ancho de banda
+%el estimador de densidad no paramétrico fn (t; h) cuya distancia al modelo f0 va
+%ser minimizado (en 0). La elección de h Presenta año adicional indeseable
+%problema en la estimación Otra razón contra los estimadores (1) - (3) es la
+%costo computacional: la evaluación del estimador del núcleo f ~ (t; h) es computacional
+%más caro que el de la distribución empírica F,.
+
+Sea $X_1, \ldots, X_n$ una muestra de variables aleatorias que proviene de una distribución desconocida $G$, donde se supone que (podría no ser cierto) $G \in \Gamma=\{F_\theta, \theta \in \Omega\}$ una familia paramétrica de funciones de distribución. Sea $\delta(\cdot,\cdot)$ una medida de discrepancia, entonces el MDE estimador de $\theta$ basado en $G_n$ con respecto al modelo $\Gamma$ y a la discrepancia $\delta(\cdot,\cdot)$ está dado por el valor de $T$ que verifica
+
+\begin{align}
+\inf(G_n,F_T)=\inf\limits_{\theta \in \Omega} \delta(G_n,F_\theta).
+\end{align}
+
+Debido a que es posible que este ínfimo no sea único o que este infimo no pueda alcanzarse en $\Gamma$ los autores generalizan a la siguiente definición.
+
+\begin{definition}
+	Una sucesión de variables aleatorias $\{T_n\}_{n=1}^{\infty}$ es una sucesión de estimadores de mínima distancia asintótica basada en la sucesión aleatoria $\{G_n\}_{n=1}^{\infty}$ con respecto al modelo $\Gamma$ y la discrepancia $\delta(\cdot,\cdot)$ si y solo si
+	\begin{enumerate}
+		\item $T_n \in \Omega$ para todo $n\geq 1.$
+		\item Existe una función $K(n)$ positiva con $\lim_{n\to+\infty} K(n)=0$ tal que para todo $n\geq 1$
+		\begin{align}
+			\delta(G_n,F_{T_n}) \leq \inf_{\theta \in \Omega} 	\delta(G_n,F_{\theta}) + K(n).
+		\end{align}
+	\end{enumerate}
+\end{definition}
+
+PONER DIBUJO (2.2)
+
+\begin{definition}
+	Sea $(\mathcal{X},d)$ un espacio métrico. Una familia de funciones $\mathcal{S}=\{H:\mathcal{X}\longrightarrow\mathbb{R}\}$ es equicontinua en $G \in \mathcal{X}$ con respecto a la métrica $d$ si $\mid H(G,F) - H(G',F)\mid < \epsilon $ si $d(G,G') < \delta$ para toda $H \in \mathcal{S}.$
+\end{definition}
+
+Tomando en cuenta estas definiciones, Parr et al.~\cite{parr1982} prueban el siguiente teorema.
+\begin{theorem}
+	\label{TeoParr}
+	Sea $\{G_n\}_{n=1}^{\infty}$ una sucesión de funciones de distribución definidas sobre $\mathbb{R}$ y sea $\{T_n\}_{n=1}^{\infty}$ una sucesión de MDE estimadores basados en $\{G_n\}_{n=1}^{\infty}$ con respecto a la familia $\Gamma=\{F_{\theta},\theta \in \Omega\}$ y $\delta(\cdot,\cdot)$ una discimilaridad. Sea $\mathcal{F}$ el espacio de las funciones de distribución, si las siguientes condiciones valen para una distribución $G$:
+	\begin{enumerate}
+		\item Existe una métrica $\parallel \cdot \parallel$ sobre $\mathcal{F}$ tal que $\parallel G_n - G \parallel \longrightarrow 0$ con probabilidad $1$,
+		\item La clase de funciones $\{\delta(\cdot,F_{\theta}), \theta \in \Omega\}$ es equicontinua en $G$, con respecto a la métrica $\parallel \cdot \parallel$,
+		\item Existe un punto $\theta_0 \in \Omega$ tal que $\delta(G,F_{\theta_0}) \leq \delta(G,F_{\theta})$ para todo $\theta \neq \theta_0$, $\theta \in \Omega$,
+		\item Para cualquier sucesión $\{\theta_k\}_{k=1}^{\infty}$ de elementos de $\Omega$, $\lim_{k \to+\infty} \delta(G,F_{\theta_k})=\delta(G,F_{\theta_0})$,
+	\end{enumerate}
+entonces $T_n \longrightarrow \theta_0$ con probabilidad $1$.
+\end{theorem}
+
+En esta tesis nos basaremos en este resultado para probar la convergencia fuerte del estimador propuesto, y aplicaremos el teorema~\ref{TeoParr} restringido al caso de funciones de distribución absolutamente continuas. 
+
+\begin{remark}
+	Si la medida de discimilaridad $\delta(\cdot,\cdot)$ es una métrica, entonces los items i) y ii) se verifican. En efecto, al ser una métrica vale la desigualdad triangular. Entonces
+	\begin{itemize}
+		\item
+	\begin{align}
+	\delta(F,H) \leq \delta(F,G) + \delta(G,H), \text{ entonces } \delta(F,H)-\delta(G,H)\leq \delta(F,G)\\
+	\delta(G,H) \leq \delta(F,F) + \delta(F,H), \text{ entonces } \delta(G,H)-\delta(F,H)\leq \delta(F,G).\\
+	\end{align}
+	Por lo tanto, 
+	\end{itemize}
+\end{remark}
+\subsection{Nuestras demostraciones}
+
+\begin{itemize}
+	\item Propuesta de enunciado de teorema
+\end{itemize}
+
+\begin{theorem}
+	Sea $\{f_n\}_{n=1}^{\infty}$ una sucesión de funciones de densidad definidas sobre $\mathbb{R}$ y sea $\{\widehat{\alpha}_n\}_{n=1}^{\infty}$ una sucesión de MDE estimadores basados en $\{f_n\}_{n=1}^{\infty}$ con respecto a la familia $\Gamma=\{f_{\theta},\theta \in \Omega\}$ y $d_{\text{T}}(\cdot,\cdot)$ una medida de distancia. Si las siguientes condiciones valen para una distribución $F$:
+	\begin{enumerate}
+		\item Existe una métrica $\parallel \cdot \parallel$ sobre $\mathcal{F}$ (donde $\mathcal{F}$ es el espacio unidimensional de funciones de distribución) tal que $\parallel G_n - G \parallel \longrightarrow 0$ con probabilidad $1$,
+		\item La clase de funciones $\{\delta(\cdot,\cdot), \theta \in \Omega\}$ es equicontinua en $G$, con respecto a la métrica $\parallel \cdot \parallel$,
+		\item Existe un punto $\theta_0 \in \Omega$ tal que $\delta(G,F_{\theta_0}) \leq \delta(G,F_{\theta})$ para todo $\theta \neq \theta_0$, $\theta \in \Omega$,
+		\item Para cualquier sucesión $\{\theta_k\}_{k=1}^{\infty}$ de elementos de $\Omega$, $\lim_{k \to+\infty} \delta(G,F_{\theta_k})=\delta(G,F_{\theta_0})$,
+	\end{enumerate}
+	entonces $T_n \longrightarrow \theta_0$ con probabilidad $1$.
+\end{theorem}
+
+\begin{itemize}
+	\item item 1
+\end{itemize}
+
+De acuerdo al teorema~\ref{L1fuerte} 
+
+Supongamos que existe un número real $r_1=r_1(K)>0$ que depende del núcleo elegido tal que, para cada $x \in \mathrm{Sop}(f)$ 
+\begin{align}
+b_n^{r_1} \displaystyle{\int_0^{\infty}} | dK_{x,b_n}(s) | \leq c_1(x),
+\end{align}
+donde $c_1(x)$ es una función integrable en cualquier compacto que contenga a $x \in \mathrm{Sop}(f)$. Entonces si $\lim\limits_{n \rightarrow \infty} b_n=0 $ y
+
+$\parallel \widehat{f}_{A_n} - f\parallel \stackrel{c.s.} {\longrightarrow} 0 \text{ cuando } n \longrightarrow \infty$, con $r_1=1$ para los núcleos $K_{\Gamma}$, $r_1=5/2$ para el núcleo $K_{\tiny \text{IG}}$ y $r_1=2$ para el núcleo $K_{\tiny \text{LN}}$.
+
+--------------------------------------------------------------------------------------------
+\begin{itemize}
+	\item item 2
+\end{itemize}
+
+\begin{corollary}
+	La familia de funciones $\set{d_{T}\pa{\cdot;h}: h\in\mathcal{F}}$ es equicontinua
+	con respecto a $\norm{\cdot}$.
+\end{corollary}
+\begin{dem}
+	Es consecuencia directa de la condición \ref{it: equicontinua}.
+\end{dem}
+
+--------------------------------------------------------------------------------------------
+
+\begin{itemize}
+	\item \textbf{Referi dice que esto es obvio, que no es necesario un marco general}
+\end{itemize}
+
+Sea $\set{f_{\theta}:\theta\in\Omega}\subset\mathcal{F}$ una familia paramétrica de funciones de densidad
+que verifica $f_{\theta} \ne f_{\theta'}$ si $\theta,\theta'\in\Omega$, $\theta\ne\theta'$.
+Claramente se verifica $0 = d_{T}\pa{f_{\theta_{0}};f_{\theta_{0}}} < d_{T}\pa{f_{\theta};f_{\theta_{0}}}$ para
+$\theta\ne\theta_{0}$.
+Supongamos que $\Omega$ es un espacio métrico localmente compacto y que la aplicación de $\Omega$
+en $\mathcal{F}$ dada por $\theta\mapsto f_{\theta}$ es continua, es decir
+si $\set{\theta_{k}}_{k\in\N}$ una sucesión de $\Omega$ tal que
+$\theta_{k}\to\theta\in\Omega$, entonces $\norm{f_{\theta_{k}}-f_{\theta}}\to 0$,
+lo que implica $d_{T}\pa{f_{\theta_{k}};f_{\theta}}\to 0$.
+
+--------------------------------------------------------------------------------------------
+
+\begin{itemize}
+	\item item 4
+\end{itemize}
+
+Suponemos que 
+para todo $G\in\mathcal{F}$, existe $\theta_{0}\in\Omega$ y un entorno compacto $U$ de $\theta_{0}$ tal que
+\begin{align}
+\label{eq: inf>0}
+\inf_{\theta\in \Omega-U}d_{T}\pa{f_{\theta};G}>d_{T}\pa{f_{\theta_{0}};G}.
+\end{align}
+Podemos ver que vale
+\begin{proposition}
+	\label{pr: convergencia}
+	Si se verifica \eqref{eq: inf>0} y $\set{\theta_{k}}_{k\in\N}$ una sucesión de $\Omega$ tal que 
+	$d_{T}\pa{f_{\theta_{k}};G}\to d_{T}\pa{f_{\theta_{0}};G}$, entonces $\theta_{k}\to\theta_{0}$.
+\end{proposition}
+\begin{dem}
+	Supongamos que $\theta_{k}\not\to\theta_{0}$, entonces existe $\varepsilon>0$ y una subsucesión 
+	$\set{\theta_{k_{j}}}_{j\in\N}$ tales que $d_{\Omega}\pa{\theta_{k_{j}},\theta_{0}}\ge\varepsilon$.
+	Como $d_{T}(f_{\theta_{k_{j}}};G)\to d_{T}\pa{f_{\theta_{0}};G}$, existe $j_{0}\in\N$, tal que 
+	\begin{align*}
+	d_{T}(f_{\theta_{k_{j}}};G) < \inf_{\theta\in \Omega-U}d_{T}\pa{f_{\theta};G},
+	\end{align*}
+	si $j\ge j_{0}$, por lo tanto $\theta_{k_{j}}\in U$. Siendo $U$ compacto, existe una subsucesión convergente,
+	que seguiremos llamando $\set{\theta_{k_{j}}}_{j\in\N}$.
+	Si $\theta_{k_{j}}\to\theta'\in U$, entonces
+	\begin{align*}
+	d_{T}\pa{f_{\theta'};G} \le \al d_{T}\pa{f_{\theta_{k_{j}}};G}
+	+ \abs{d_{T}\pa{f_{\theta'};G} - d_{T}(f_{\theta_{k_{j}}};G)} \\
+	\le \al d_{T}(f_{\theta_{k_{j}}};G) + 3 \norm{f_{\theta_{k_{j}}} - f_{\theta'}}
+	= d_{T}\pa{f_{\theta_{0}};G}.
+	\end{align*}
+	Tomando $j\to\infty$, obtenemos $d_{T}\pa{f_{\theta'};G} = d_{T}\pa{f_{\theta_{0}};G}$. 
+	Por otro lado
+	\begin{align*}
+	d_{\Omega}\pa{\theta',\theta_{0}} = \lim_{j\to\infty}d_{\Omega}\pa{\theta_{k_{j}},\theta_{0}}\ge\varepsilon,
+	\end{align*}
+	lo que representa una contradicción.
+\end{dem}

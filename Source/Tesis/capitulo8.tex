@@ -1,0 +1,37 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Conclusiones}
+\label{Conclusiones}
+
+Propusimos un nuevo estimador para el parámetro de textura de la distribución $\mathcal{G}_I^0$ basado en la minimización de una distancia estocástica entre el modelo (que depende de dicho parámetro) y una estimación de la función de densidad subyacente utilizando núcleos asimétricos.
+Definimos tres modelos de contaminación inspirados en situaciones reales para evaluar el impacto de los valores atípicos en el desempeño de los estimadores.
+Las dificultades de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$ se investigaron más a fondo y se justificaron a través de nuevos resultados teóricos que indican que esta distribución tiene colas pesadas.
+
+Con respecto al impacto de la contaminación en el rendimiento de los estimadores, observamos lo siguiente.
+Los estimadores de Momento fraccional y Logcumulantes presentaron problemas en la convergenciar.
+
+\begin {itemize}
+	\item Caso 1: Independientemente de la intensidad de la contaminación, cuanto mayor sea el número de looks, menor será el porcentaje de situaciones para las que no se logra convergencia.
+	\item Casos 2 y 3: el porcentaje de situaciones para las que no hay convergencia aumenta con el nivel de contaminación, y se reduce con $\alpha$.
+\end {itemize}
+
+En el caso de un solo look, el estimador propuesto no presenta resultados excelentes, pero nunca deja de converger, cosa que puede suceder con los otros estimadores.
+
+El nuevo estimador presenta buenas propiedades medidas por su sesgo y error cuadrático medio. Es competitivo con los MV estimadores, momento fraccionario y Logcumulant en situaciones sin contaminación, y supera a las otras técnicas incluso en presencia de pequeños niveles de contaminación.
+
+Por esta razón, sería aconsejable usar $\widehat{\alpha}_{\text{T}} $ en cada situación, especialmente cuando se usan muestras pequeñas y/o cuando existe la posibilidad de tener datos contaminados.
+El costo computacional adicional incurrido al usar este estimador es, como máximo, veinte veces mayor que el requerido para calcular $\widehat{\alpha}_{\text{ML}}$, pero sus ventajas son más importantes que este aumento en el tiempo de procesamiento.
+
+\section{Apéndice}
+
+% \ section {Información computacional}
+
+Las simulaciones se realizaron utilizando el lenguaje y el entorno \texttt R para computación estadística~\cite{RLanguage}.
+La función \texttt{adaptIntegrate} del paquete \texttt{cubature} se utilizó para realizar la integración numérica requerida para evaluar la distancia triangular, el algoritmo utilizado es una integración multidimensional adaptativa sobre hipercubos. Para encontrar numéricamente $\widehat\alpha_{\text{LC}}$ utilizamos la función `` uniroot '' implementada en \texttt R.
+
+Una parte de las simulaciones se realizó en una plataforma compuesta por un Intel(R) Core i7 con $8$ GB de memoria y $64$ bits  Windows  7. Otra parte se hizo en un equipo similar pero con $16$ GB de memoria RAM.
+Los códigos y los datos están disponibles a solicitud del autor correspondiente.
