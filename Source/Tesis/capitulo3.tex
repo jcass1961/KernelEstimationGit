@@ -164,13 +164,13 @@ Las señales emitidas por un laser o por un radar de apertura sintética son coh
 
 \section{Espectro Electromagnético}
 
-Las ondas monocromáticas coherentes se modelan con una sinusoidal donde la longitud de onda $\lambda$ es la distancia entre los máximos de la sinusoide. La frecuencia $f$ de la onda es el número de máximos por unidad de tiempo, estos parámetros se muestran en la figura~\ref{LongOnda}. Estas medidas están relacionadas por la ecuación $c=\lambda \cdot f$ donde $c$ es la velocidad de la luz. De esta ecuación vemos que $\lambda$ y $f$ están inversamente relacionadas dado que $c$ es un valor constante.
-
-\begin{figure}[H]
-	\centering    
-	\includegraphics[scale=0.5]{../../Figures/Tesis/Capitulo3/LongOnda.png}
-	\caption{\label{LongOnda}Parámetros de una señal.}
-\end{figure} 
+Las ondas electromagnéticas se modelan con una sinusoidal donde la longitud de onda $\lambda$ es la distancia entre los máximos de la sinusoide. La frecuencia $f$ de la onda es el número de máximos por unidad de tiempo. Estas medidas están relacionadas por la ecuación $c=\lambda \cdot f$ donde $c$ es la velocidad de la luz. De esta ecuación vemos que $\lambda$ y $f$ están inversamente relacionadas dado que $c$ es un valor constante.
+%, estos parámetros se muestran en la figura~\ref{LongOnda}
+%\begin{figure}[H]
+%	\centering    
+%	\includegraphics[scale=0.5]{../../Figures/Tesis/Capitulo3/LongOnda.png}
+%	\caption{\label{LongOnda}Parámetros de una señal.}
+%\end{figure} 
 
 Como dijimos anteriormente el radar SAR emite señales en la región de microondas del espectro electromagnético (EM) y en diferentes bandas. La figura~\ref{Espectro} muestra cómo está formado el EM de acuerdo a la longitud de onda de la señal.
 
@@ -269,7 +269,7 @@ A medida que el radar se desplaza emite pulsos de radiación electromagnética y
 	\centering    
 	\subfigure[Superficie Plana]{\includegraphics[scale=0.7]{../../Figures/Tesis/Capitulo3/superficie_plana_2.pdf}}
 	\subfigure[Superficie Rugosa]{\includegraphics[scale=0.7]{../../Figures/Tesis/Capitulo3/superficie_rugosa.pdf}}
-	\caption{\label{SeñalDispersada}Dispersión de la señal emitida por un radar SAR.} %Fuente Canada Centre for Remote Sensing~\cite{ccrs2001}.}
+	\caption{\label{SeñalDispersada}Dispersión de la señal emitida por un radar SAR.}
 \end{figure} 
 %
 \subsection{Resolución}
@@ -340,9 +340,14 @@ En la teledetección por microondas la celda de resolución es de unos metros mi
 Cuando el radar ilumina una superficie la señal que retorna está compuesta por la suma de los pulsos reflejados por cada uno de los dispersores elementales que se encuentran dentro de la celda, esto se muestra en la figura~\ref{Backscatter}. El tipo de terreno dependerá de la forma en que esta señal se refleje.
 
 Estos dispersores elementales se distribuyen en forma aleatoria y, por lo tanto, la distancia entre ellos y al radar también es aleatoria~\cite{Lee2009}. 
-En el momento de la reflexión, la señal que retorna ya no es coherentes en fase pero si lo es en frecuencia. Esto se debe principalmente a la textura de la superficie. La figura~\label{CoherenciaFrec} muestra las señales incidentes y reflejadas en una superficie rugosa. La distancia $d$ da información sobre la rugosidad del objeto. Se puede observar que las ondas recibidas son coherentes en frecuencia, pero no necesariamente en fase. Cuanto mayor es el tamaño de $d$ mayor será la diferencia de fase de las ondas reflejadas por los dispersores.
+En el momento de la reflexión, la señal que retorna ya no es coherentes en fase pero si lo es en frecuencia. Esto se debe principalmente a la textura de la superficie. La figura~\ref{Reflexion} muestra las señales incidentes y reflejadas en una superficie rugosa. La línea sólida negra corresponde a la primera y la línea punteada roja corresponde a la segunda. La distancia $d$ da información sobre la rugosidad del objeto, la figura~\ref{masrugosa} representa una superficie más rugosa que~\ref{menosrugosa}. Se puede observar que las ondas recibidas son coherentes en frecuencia, pero no necesariamente en fase. Cuanto mayor es el tamaño de $d$ mayor será la diferencia de fase de las ondas reflejadas por los dispersores.
 
-PONER FIGURA TICO luz coherente, el dibujo donde la superficie esta separada una distancia d
+\begin{figure}[hbt]
+	\centering    
+	\subfigure[]{\label{menosrugosa}\includegraphics[scale=1]{../../Figures/Tesis/Capitulo3/reflexion_fina.pdf}}\hspace{10mm}
+	\subfigure[]{\label{masrugosa}\includegraphics[scale=1]{../../Figures/Tesis/Capitulo3/reflexion_gruesa.pdf}}
+	\caption{\label{Reflexion}Coherencia de la señal reflejada.} %Fuente Canada Centre for Remote Sensing~\cite{ccrs2001}.}
+\end{figure} 
 
 Entonces, las ondas electromagnéticas que provienen de la misma celda de resolución se suman de manera coherente y dan como resultado fuertes fluctuaciones en la retrodispersión de una celda de resolución a otra~\cite{oliverquegan98}. Por lo tanto el valor de gris en un pixel se obtiene como superposición coherente de las señales incidentes que, al estar desfasadas, pueden interferir de manera constructiva o destructiva, lo que produce que las señales recibidas sean más fuertes o más débiles~\cite{Shahrezaei2019}. Estas interferencias causan variaciones en la magnitud de la señal y cambios aleatorios de intensidad de píxel a píxel. Estos cambios en la intensidad se traducen en la imagen como diferentes niveles de gris. Esto explica el patrón granular que se observa en las imágenes SAR y que produce negros, correspondientes a interferencias destructivas, y puntos brillantes debido a las constructivas~\cite{Yahya2014}. Este patrón angular es lo que se conoce como \textit{Ruido Speckle}.
 

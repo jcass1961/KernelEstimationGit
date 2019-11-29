@@ -4,42 +4,43 @@
 %% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
 %% La letra n con tilde es: 'n.
 
-\chapter{Resultados Empíricos}
+\chapter{Simulaciones y aplicación a una imagen real}
 \label{ResultadosEmpiricos}
 
 %\section{Estimador Propuesto}
 
-En este capítulo se analizan varias estrategias para la la estimación del parámetro de textura de la distribución $\mathcal{G}_I^0$.
-Se ha demostrado que esta distribución es capaz de caracterizar un gran número de objetivos en las imágenes SAR monopolarizada. Está indexada por
+En este capítulo se analizan varias estrategias para la estimación del parámetro de textura de la distribución $\mathcal{G}_I^0$.
+Se ha demostrado que esta distribución es capaz de caracterizar un gran número de objetivos en las imágenes SAR, en particular, las monopolarizadas que son las estudiadas en esta tesis. Está indexada por
 tres parámetros: el número de looks $L$ que se puede estimar en toda la imagen, un parámetro de escala $\gamma$, y un parámetro de textura $\alpha$. Este último está estrechamente relacionado con el número
 de retrodispersores elementales para cada píxel, esto es una de las razones por las que recibe atención en la literatura. 
 
-Otras de las razones es que el parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ puede interpretarse en términos de la textura de la imagen. Valores cercanos a $0$, típicamente $\alpha \in [-3,0)$ sugieren zonas extremadamente texturadas como zonas urbanas. Conforme el valor de $\alpha$ decrece disminuye la heterogeneidad de la imagen. Regiones con moderada textura como son los bosques, están representadas por valores de $\alpha \in [-6,-3)$. Zonas de pastura son compatibles con valores de $\alpha \in (-\infty,-6)$. Esta es otra de las razones por las cuales es muy importante obtener estimaciones precisas de este parámetro.
+Otras de las razones es que el parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ puede interpretarse en términos de la textura de la imagen. Valores cercanos a $0$, típicamente $\alpha \in [-3,0)$ sugieren zonas extremadamente texturadas como zonas urbanas. Conforme el valor de $\alpha$ decrece disminuye la heterogeneidad de la imagen. Regiones con moderada textura como son los bosques, están representadas por valores de $\alpha \in [-6,-3)$, zonas de pastura son compatibles con valores de $\alpha \in (-\infty,-6)$. Esta es otra de las razones por las cuales es muy importante obtener estimaciones precisas de este parámetro.
 
-Entre las técnicas de estimación disponibles, el método de los momentos y el MV estimador son las técnicas clásicas de estimación paramétrica. En~\cite{Bian2013} los autores proponen un método basado en
+Entre las técnicas de estimación disponibles, el método de los momentos y el método de máxima verosimilitud son las técnicas clásicas de estimación paramétrica. En~\cite{Bian2013} los autores proponen un método basado en
 momentos fraccionarios de bajo orden para estimar la matriz de covarianza en una imagen SAR polarimétrica bajo una distribución alfa estable. En ~\cite{VasconcellosFrerySilva:CompStat,CribariFrerySilva:CSDA} los autores utilizan técnicas de remuestreo para mejorar el rendimiento de estos estimadores en términos de sesgo y error cuadrático medio, a expensas de un alto costo computacional.
 
-Más recientemente~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} los estimadores basados en la transformada de Mellin, como lo son los LogCumulants y Logmomentos estimadores, han sido implementados con éxito. Tison et al.~\cite{Tison2004} mostraron que los estimadores basados en LogCumulants tienen una mejor performance respecto del MV estimador para el modelo $\mathcal G^0$ para datos de amplitud. Sin embargo estos estimadores no han sido evaluados para el caso de datos de intensidad ni bajo la presencia de contaminación.
+Más recientemente~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} los estimadores basados en la transformada de Mellin, como lo son los  Logcumulants y Logmomentos estimadores, han sido implementados con éxito. Tison et al.~\cite{Tison2004} mostraron que los estimadores basados en  Logcumulants tienen una mejor performance respecto del MV estimador para el modelo $\mathcal G^0$ para datos de amplitud. Sin embargo estos estimadores no han sido evaluados para el caso de datos de intensidad ni bajo la presencia de contaminación.
 
-Una propiedad que es deseable que un estimador posea es ser resistente a la presencia de datos atípicos. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} y Allende et al.~\cite{AllendeFreryetal:JSCS:05} estudiaron la performance del MV estimador bajo el modelo $\mathcal{G}^{0}$ para datos de amplitud, mostrando que hay una pérdida de robustez ante la presencia de outliers moderados en áreas extremadamente texturadas, mientras que para zonas texturadas la pérdida de robustez ocurre en presencia de outliers severos. Asimismo está falta de robustez es más pronunciada en el caso de muestras de pequeño tamaño. Ellos propusieron como alternativa los M y AM estimadores que tienen un buen comportamiento bajo contaminación pero presentan problemas numéricos especialmente para tamaños de muestras chicos.
+Una propiedad que es deseable que un estimador posea es ser resistente a la presencia de datos atípicos. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} y Allende et al.~\cite{AllendeFreryetal:JSCS:05} estudiaron la performance del MV estimador bajo el modelo $\mathcal{G}^{0}$ para datos de amplitud, mostrando que hay una pérdida de robustez ante la presencia de outliers moderados en áreas extremadamente texturadas, mientras que para zonas texturadas la pérdida de robustez ocurre en presencia de outliers severos. Asimismo esta falta de robustez es más pronunciada en el caso de muestras de pequeño tamaño. Ellos propusieron como alternativa los M y AM estimadores que tienen un buen comportamiento bajo contaminación pero presentan problemas numéricos especialmente para tamaños de muestras chicos.
 
 La idea principal de este trabajo es presentar un nuevo método de estimación para el parámetro de textura del modelo $\mathcal{G}_I^0$ que tenga  buenas propiedades midiéndolas en término de su sesgo, su error cuadrático medio, su capacidad para resistir diferentes niveles de contaminación y de bajo costo computacional. Estas propiedades serán estudiadas incluso para muestras de tamaño pequeño y moderado. 
 
-Para lograr esta tarea se propone como estimador del parámetro de textura al valor del argumento que minimiza la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente, es decir,
+Para lograr esta tarea en esta tesis se propone como estimador del parámetro de textura al valor del argumento que minimiza la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente, es decir,
 \begin{align}
+\label{PropuestaMDE}
 \widehat{\theta}_n=\mathop{\rm argmin} \limits_{\theta\in\Omega} d(f_{\theta}, \widehat{f}_n)
 \end{align}
 donde $\Theta$ es el espacio paramétrico y $d$ es una medida de discrepancia, discimilaridad o distancia estocástica, entre la función de densidad teórica $f_{\theta}$ y un estimador no paramétrico $\widehat{f}_n$ de la función de densidad teórica.
 
-Esta propuesta está basada en dos pilares: la forma de estimar $\widehat{f}_n$ y la distancia estocástica elegida. En este capítulo daremos argumentos que sugieren que la mejor elección para estimar a la función de densidad subyacente son núcleos asimétricos, señalando que los núcleos Gamma y Lognormal son una buena elección. También proponemos el método para elegir el ancho de banda, como así también mostraremos que la distancia triangular es una buena medida de discrepancia para este caso.
+Esta propuesta está basada en dos pilares: la forma de estimar $\widehat{f}_n$ y la distancia estocástica elegida. En este capítulo daremos argumentos que sugieren que los núcleos asimétricos ofrecen una buena alternativa para estimar la función de densidad subyacente en forma no paramétrica, en particular los núcleos Gamma y Lognormal son una buena elección. También proponemos el método para elegir el ancho de banda, como así también mostraremos que la distancia triangular es una buena medida de discrepancia para este caso.
 
 \subsection{Generando muestras $\mathcal{G}_I^0$}
 
 Para generar muestras que provengan de una distribución $\mathcal{G}_I^0$ vamos a explotar la naturaleza multiplicativa del modelo que la genera.
 
-De acuerdo a~\ref{ModeloGI0} la distribución  $\mathcal{G}_I^0$ es el producto de las distribuciones $\Gamma^{-1}(-\alpha,\gamma)$ y $\Gamma(L,L)$ donde $-\alpha, \, \gamma >0$ y $L\geq 1$. Además, un resultado conocido es que si $X \sim \Gamma(\alpha,\beta)$, entonces $Y = 1/X \sim \Gamma^{-1}(\alpha,\beta)$.
+De acuerdo a~\ref{ModeloGI0} la distribución  $\mathcal{G}_I^0$ es el producto de las distribuciones $\Gamma^{-1}(-\alpha,\gamma)$ y $\Gamma(L,L)$ donde $-\alpha, \, \gamma >0$ y $L\geq 1$. Además, se sabe que si $X \sim \Gamma(\alpha,\beta)$, entonces $Y = 1/X \sim \Gamma^{-1}(\alpha,\beta)$.
 
-Entonces, para generar una muestra $Z_1, \ldots, Z_n$ de variables aleatorias independientes e idénticamente distribuidas con $Z_i \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ con $i=1, \ldots, n$ hacemos lo siguiente:
+Luego, para generar una muestra $Z_1, \ldots, Z_n$ de variables aleatorias independientes e idénticamente distribuidas con $Z_i \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ con $i=1, \ldots, n$ hacemos lo siguiente:
 \begin{itemize}
 	\item Fijamos $\alpha, \, \gamma$ ambos positivos y $L \leq 1$.
 	\item Generamos una muestra de tamaño $n$ de una variable aleatoria $W \sim \Gamma(\alpha,\gamma)$.
@@ -67,38 +68,38 @@ El primer objetivo de este trabajo fue elegir una distancia entre las posibles m
 	d_\text{\tiny R}^{\beta}(f_\text{\tiny V},f_\text{\tiny W}))=\frac{1}{2(\beta-1)}\log\displaystyle{\int_{-\infty}^{\infty}\big({f_\text{\tiny V}^{\beta}f_\text{\tiny W}^{1-\beta})}+\log\displaystyle{\int_{-\infty}^{\infty}\big(f_\text{\tiny V}^{1-\beta}f_\text{\tiny W}^{\beta}}}\big).
 	$$
 \end{itemize}
-donde V y W son  dos variables aleatorias definidas sobre el mismo espacio de probabilidad cuyas funciones de densidad son $f_\text{\tiny V}(x;\theta_1)$ y $f_\text{\tiny W}(x;\theta_2)$. 
+donde V y W son  dos variables aleatorias definidas sobre el mismo espacio de probabilidad cuyas funciones de densidad son $f_\text{\tiny V}$ y $f_\text{\tiny W}$. 
 Recordemos que por lo visto en la sección~\ref{MDE} las distancias de Hellinger y Bhattacharyya poseen el mismo mínimo, por este motivo solamente se analizará la distancia de Hellinger.  
 
 Para cumplir con el objetivo inicialmente planteado comenzamos calculando las curvas de distancias entre las funciones de densidad de la distribución $\mathcal G_I^0(\alpha_0, 1-\alpha_0, L)$ y $\mathcal G_I^0(\alpha,1-\alpha,L)$, $\alpha<-1$, para distintos valores de $\alpha_0$ y de $L$. Recordemos que vamos a considerar que el parámtetro de escala cumpla la condición $\gamma^*=-\alpha-1$ para que la $E(Z)=1$ donde $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$.
 
-Las figuras~\ref{DistL1},~\ref{DistL3} y~\ref{DistL8} muestran los gráficos, para los casos donde el número de looks $L=1,3,8$ respectivamente, de las distancias de Hellinger, Rényi y Triangular entre dos distribuciones $\mathcal{G}_I^0$ para valores de $\alpha_0= -2,-3,-4,-5,-6,-7$. 
+Las figuras~\ref{DistL1},~\ref{DistL3} y~\ref{DistL8} muestran los gráficos de dichas curvas, para los casos donde el número de looks $L=1,3,8$, el valor de $\alpha_0= -2,-3,-4,-5,-6,-7$ y las distancias de Hellinger, Rényi y Triangular. 
 
 \begin{figure}[h!]
 	\centering    
-	\subfigure[Hellinger]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDHL1_v2.pdf}}
-	\subfigure[Rényi]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDRL1_v2.pdf}}
-	\subfigure[Triangular]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDTL1_v2.pdf}}
+	\subfigure[Hellinger]{\includegraphics[width=.45\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDHL1_v2.pdf}}
+	\subfigure[Rényi]{\includegraphics[width=.45\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDRL1_v2.pdf}}
+	\subfigure[Triangular]{\includegraphics[width=.45\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDTL1_v2.pdf}}
 	\caption{\label{DistL1}\small Distancias Hellinger, Renyi y Triangular, $\alpha_0= -2,-3,-4,-5,-6,-7$ y $L=1$.}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering    
-	\subfigure[Hellinger]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDHL3_v2.pdf}}
-	\subfigure[Rényi]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDRL3_v2.pdf}}
-	\subfigure[Triangular]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDTL3_v2.pdf}}
+	\subfigure[Hellinger]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDHL3_v2.pdf}}
+	\subfigure[Rényi]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDRL3_v2.pdf}}
+	\subfigure[Triangular]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDTL3_v2.pdf}}
 	\caption{\label{DistL3}\small Distancias Hellinger, Renyi y Triangular, $\alpha_0= -2,-3,-4,-5,-6,-7$ y $L=3$.}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering    
-	\subfigure[Hellinger]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDHL8_v2.pdf}}
-	\subfigure[Rényi]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDRL8_v2.pdf}}
-	\subfigure[Triangular]{\includegraphics[scale=0.35]{../../Figures/Tesis/Capitulo6/GraficoDTL8_v2.pdf}}
+	\subfigure[Hellinger]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDHL8_v2.pdf}}
+	\subfigure[Rényi]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDRL8_v2.pdf}}
+	\subfigure[Triangular]{\includegraphics[width=.42\linewidth]{../../Figures/Tesis/Capitulo6/GraficoDTL8_v2.pdf}}
 	\caption{\label{DistL8}\small Distancias Hellinger, Renyi y Triangular, $\alpha_0= -2,-3,-4,-5,-6,-7$ y $L=8$.}
 \end{figure}
 
-En estos gráficos se puede observar que en todos los casos, cuanto menor es el valor de $\alpha_0$, la curva se hace más plana en un entorno  de él. Esto hace que, al momento de hallar el mínimo, los métodos de optimización sean más inestables y el mínimo sea más difícil de encontrar en forma precisa. Se puede observar también que. a medida que aumenta el valor de $L$, esta situación se revierte y es posible encontrar el mínimo de una forma más eficiente. Recordemos que el número de looks representa la relación señal ruido, por lo tanto, cuanto mayor es el número de looks menor ruido presenta la imagen siendo $L=1$ el caso de mayor ruido. Se puede observar también que la distancia de Hellinger es la que resulta más plana en un entorno del mínimo, y que las distancias de Rényi y Triangular tienen un comportamiento similar.
+En estos gráficos se puede observar que, cuanto menor es el valor de $\alpha_0$ la curva se hace más plana. Por este motivo los métodos de optimización resultan más inestables y el mínimo es más difícil de encontrar en forma precisa. Se puede observar también que, a medida que aumenta el valor de $L$, esta situación se revierte y es posible encontrar el mínimo de una forma más eficiente. Recordemos que el número de looks representa la relación señal ruido, por lo tanto, cuanto mayor es el número de looks menor ruido presenta la imagen siendo $L=1$ el caso de mayor ruido. Se puede observar también que la distancia de Hellinger es la que resulta más plana en un entorno del mínimo, y que las distancias de Rényi y Triangular tienen un comportamiento similar.
 
 Siguiendo en la búsqueda de la mejor distancia se realizaron simulaciones Montecarlo para elegir la distancia estocástica que mejor performance tiene a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$. En Cassetti et al.~\cite{cassettiast2013} se evaluaron dichas distancias pero ahora estimando el parámetro de textura y  comparando la calidad de estos estimadores con el MV estimador en términos del sesgo y del error cuadrático medio. 
 
@@ -110,14 +111,7 @@ Se realizaron $1000$ replicaciones del experimento que consiste en generar muest
 	\item Tamaño de muestra: $n=\{9, 25,49, 81,121,1000\}$. 
 \end{itemize}
 
-Como se mencionó anteriormente la elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ u  $11 \times 11$. El tamaño de la muestra $n=1000$ se elige para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande. 
-
-El valor del parámetro de escala $\gamma^*$ se elige de manera tal que $E(Z)=1$ para que los resultados sean comparables. Esto da una relación entre  $\alpha$ y $\gamma^*$ que es 
-\begin{align}
-\label{Gama*}
-\gamma^*=\alpha-1.
-\end{align}
-El uso de esta relación nos brinda la posibilidad de llevar un problema de estimación de dos parámetros a estimar un sólo parámetro. 
+Como se mencionó anteriormente la elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. Se consideró también el tamaño de la muestra $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande. Se sigue considerando el parámetro de escala $\gamma^*$ para que los resultados sean comparables. Además esta relación nos brinda la posibilidad de llevar un problema de estimación de dos parámetros a estimar un sólo parámetro. 
 
 
 En cada replicación:
@@ -135,33 +129,35 @@ De esta manera se obtuvieron $1000$ valores estimados de $\alpha$, $\{\widehat{\
 \end{itemize}
 
 
-Las figuras~\ref{ASTalfaL1},~\ref{ASTalfaL2} y~\ref{ASTalfaL3} muestran el sesgo del estimador propuesto para el parámetro de textura $\widehat{\alpha}$ utilizando las distancias de Hellinger, Rényi, Triangular y también Máxima Verosimilitud, para distintos tamaños de muestras $n$ y número de looks $L$. 
+Las figuras~\ref{ASTalfaL1},~\ref{ASTalfaL2} y~\ref{ASTalfaL3} muestran el sesgo del estimador propuesto para el parámetro de textura ($\widehat{\alpha}$) utilizando las distancias de Hellinger, Rényi, Triangular y también Máxima Verosimilitud, para distintos tamaños de muestras $n$ y número de looks $L$. 
 La línea recta azul representa el valor verdadero con el que se generaron las muestras. 
 
-En las figuras~\ref{ASTecmL1},~\ref{ASTecmL2} y~\ref{ASTecmL3} se muestra el error cuadrático medio estimado para las mismas combinaciones de parámetros. En este caso la línea azul representa el eje $x$. Los resultados se muestran en escala semilogarítmica para su mejor comprensión visual.
-Cabe señalar que la minimización se realizó recorriendo un rango de valores de alfa variando entre $-10$ y $-1$ con paso  $0.1$. 
+En las figuras~\ref{ASTecmL1},~\ref{ASTecmL2} y~\ref{ASTecmL3} se muestra el error cuadrático medio (ECM) estimado para las mismas combinaciones de parámetros. En este caso la línea azul representa el eje $x$. Los resultados se muestran en escala semilogarítmica para su mejor comprensión visual.
+Cabe señalar que la minimización se realizó recorriendo un rango de valores de alfa variando entre $-10$ y $-1$ con paso  $0.1$. Se grafica también el intervalo de confianza de nivel asintótico $95\%$ para cada una de las estimaciones realizadas.
 
- En el gráfico de $L=1$ se observa que para zonas texturadas, homogéneas y usando distancia triangular $\widehat{\alpha}$  tiene un comportamiento similiar al MV estimador en términio de sesgo y ECM. Las distancias de Hellinger y Rényi muestran mayor ECM para tamaños de muestra mayores que $9$, salvo para zonas homogéneas donde el ECM es similar en todas las distancias estudiadas. Asimismo estas distancias muestran un mayor sesgo para muestras grandes.
+ Se puede observar que, en la mayoría de los casos estudiados, los estimadores del parámetro $\alpha$ utilizando distancia triangular y el método de máxima verosimilitud ($\widehat{\alpha}_{\text{\tiny{DT}}}$ y $\widehat{\alpha}_{\text{\tiny{MV}}}$ respectivamente) tienen un comportamiento similar en término de sesgo y ECM. Mientras que  el estimador utilizando las distancias de Hellinger y Renyi ($\widehat{\alpha}_{\text{\tiny{DH}}}$ y $\widehat{\alpha}_{\text{\tiny{DR}}}$ respectivamente) tienen una performance parecida. 
+ 
+ En el gráfico de $L=1$ se observa que las distancias de Hellinger y Rényi muestran mayor ECM para tamaños de muestra mayores que $9$, salvo para zonas homogéneas donde el ECM es similar en todas las distancias estudiadas. Asimismo estas distancias muestran un mayor sesgo para muestras grandes.
 
-Para el caso de $L=3$ y $L=8$ vemos que tanto el MV estimador y la distancia triangular siguen manteniendo un comportamiento similar para todos los tipos de zonas consideradas. Incluso, en algunos casos el MDE estimador con esta distancia mejora la performance del MV estimador. Se puede observar que las otras distancias presentan un sesgo y un ECM mayor para zonas texturadas y homogéneas. Asimismo, en estos gráficos se observa que los métodos de minimización de distancias poseen menor error para valores grandes del número de looks. 
+Para el caso de $L=3$ y $L=8$ vemos que, en algunos casos el $\widehat{\alpha}_{\text{\tiny{DT}}}$ mejora la performance del $\widehat{\alpha}_{\text{\tiny{MV}}}$. Se puede observar que las otras distancias presentan un sesgo y un ECM mayor para zonas texturadas y homogéneas. Asimismo, en estos gráficos se observa que los métodos de minimización de distancias poseen menor ECM para valores grandes del número de looks. 
 
-\begin{figure}[h!]
+\begin{figure}[htb]
 	\centering    
-	\subfigure[\small $\widehat{\alpha}$]{\label{ASTalfaL1}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ALFAAST_L1.pdf}}
-	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL1}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ECMAST_L1.pdf}}
-	\caption{\small Sesgo y ECM para $\widehat{\alpha}$, L=1.}
+	\subfigure[\small $\widehat{\text{Sesgo}}$]{\label{ASTalfaL1}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L1.pdf}}
+	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL1}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L1.pdf}}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$1$.}
 \end{figure}	
-\begin{figure}[h!]
+\begin{figure}[htb]
 	\centering
-	\subfigure[\small $\widehat{\alpha}$]{\label{ASTalfaL2}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ALFAAST_L3.pdf}}
-	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL2}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ECMAST_L3.pdf}}
-	\caption{\small Sesgo y ECM para $\widehat{\alpha}$, L=3.}
+	\subfigure[\small $\widehat{\text{Sesgo}}$]{\label{ASTalfaL2}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L3.pdf}}
+	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL2}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3.pdf}}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$3$.}
 \end{figure}	
-\begin{figure}[h!]
+\begin{figure}[htb]
 	\centering
-	\subfigure[\small $\widehat{\alpha}$]{\label{ASTalfaL3}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ALFAAST_L8.pdf}}
-	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL3}\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/ECMAST_L8.pdf}}
-	\caption{\small Sesgo y ECM para $\widehat{\alpha}$, L=8.}
+	\subfigure[\small $\widehat{\text{Sesgo}}$]{\label{ASTalfaL3}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L8.pdf}}
+	\subfigure[\small $\widehat{\text{ECM}}$]{\label{ASTecmL3}\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L8.pdf}}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$8$.}
 \end{figure}
 
 En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se aplicó la metodología anterior a una imagen SAR real. En este caso se utilizó una imagen E-SAR~\cite{Horn1996} de un look de los alrededores de Munich, banda L, polarización HH, con $L=1$ en formato intensidad.
@@ -171,7 +167,7 @@ E-SAR es un sistema formado por sensores y algoritmos de procesamiento de señal
 En las figuras~\ref{ImagenReales1} y~\ref{ImagenReales1} se muestran dos imágenes E-SAR, de un look, que se utilizaron para testear la performance de las distancias estudiadas y el MV estimador. En ambas figuras se aplicó el método para cada pixel, usando ventanas deslizantes de tamaño $7 \times 7$ y $3 \times 3$ respectivamente. Se puede observar que los resultados son prometedores ya que todas tienen un comportamiento similar y estamos aplicando el método al caso de mayor ruido.
 
 
-\begin{figure}[H]
+\begin{figure}[htb]
 	\begin{minipage}[b]{0.45\linewidth} %Una minipágina que cubre la mitad de la página
 		\centering
 		\subfigure[\label{ImagenReales1} Imagen E-SAR, L=$1$.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible.pdf}}\\
@@ -201,15 +197,15 @@ Por lo anteriormente expuesto, especialmente por el resulado de las simulaciones
 \subsection{Incorporando núcleos y evaluando robustez}
 \label{jstar}
 
-Como se mencionó en la subsección~\ref{EligiendoDistancias}, en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se compararon estimadores basados en la distancia de Hellinger, Bhattacharyya, Renyi y Triangular con el MV estimador. Se mostró que la distancia Triangular es la mejor opción para definir el MDE estimador. En ese trabajo se utilizaron histogramas para estimar la función de densidad subyacente $f_S$. En~\cite{gambini2015} %articulo que publicamos en la revista \textit{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing} 
+Como se mencionó en la subsección~\ref{EligiendoDistancias}, en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se compararon estimadores basados en la distancia de Hellinger, Bhattacharyya, Renyi y Triangular con el MV estimador. Se mostró que la distancia Triangular es la mejor opción para definir el MDE estimador. En ese trabajo se utilizaron histogramas para estimar la función de densidad subyacente $f_{\text{\tiny{S}}}$. En~\cite{gambini2015} %articulo que publicamos en la revista \textit{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing} 
 presentamos mejoras con respecto a los resultados obtenidos en~\cite{APSAR2013ParameterEstimationStochasticDistances} ya que: 
 \begin{itemize}
 	\item Se evaluó el impacto de la contaminación en la estimación de $\widehat{\alpha}$.
-	\item Se emplearon núcleos asimétricos en lugar de histogramas para estimar $f_S$.
-	\item Se compararon los estimadores basados en la distancia Triangular con el ML estimador, Momentos Fraccionales y LogCumulantes. 
+	\item Se emplearon núcleos asimétricos en lugar de histogramas para estimar $f_{\text{\tiny{S}}}$.
+	\item Se compararon los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con el ML estimador ($\widehat{\alpha}_{\text{\tiny{ML}}}$), Momentos Fraccionales ($\widehat{\alpha}_{\text{\tiny{Mom12}}}$) y Logcumulants ($\widehat{\alpha}_{\text{\tiny{LC}}}$). 
 \end{itemize}
 
-Los estimadores por momentos fraccionales han sido usados por~\cite{Frery97,GambiniSC08} en el contexto de estimar el parámetro $\alpha$ para datos de amplitud. Para el caso de datos de intensidad, usando la relación $\gamma^*=-\alpha-1$ en~\ref{momento1medio} se tiene que, $\widehat{\alpha}_\text{Mom12}$, el estimador de $\alpha$ usando momentos fraccionales de orden un medio, es el valor de $\alpha$ que resuelve la ecuación:
+Los estimadores por momentos fraccionales han sido usados por~\cite{Frery97,GambiniSC08} en el contexto de estimar el parámetro $\alpha$ para datos de amplitud. Para el caso de datos de intensidad, usando la relación $\gamma^*=-\alpha-1$ en~\ref{momento1medio} se tiene que, $\widehat{\alpha}_\text{Mom12}$ es el valor de $\alpha$ que resuelve la ecuación:
 
 \begin{equation}
 \frac{1}{n} \sum_{i=1}^n \sqrt{Z_i} -\sqrt{\frac{-\widehat\alpha_{\text{Mom12}}-1}{L}}\frac{\Gamma ( -\widehat\alpha_{\text{Mom12}}-{\frac{1}{2}} )}{ \Gamma (-\widehat\alpha_{\text{Mom12}}) }
@@ -242,7 +238,7 @@ Respecto del estimador $\widehat{\alpha}_{{\text{\tiny{LC}}}}$ y $\widehat{\alph
 
 Un problema que se presenta al momento de estimar el parámetro de textura es la falta de convergencia a una solución global, especialmente en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
 
-%Un problema que se presenta al momento de estimar el parámetro de textura utilizando las técnicas propuestas incluido ML y aquellos basados en momentos fraccionales~\cite{Frery97} y LogCumulants~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} es la necesidad de contar con algoritmos iterativos para los cuales no hay garantía de convergencia a una solución global. Esta falta de convergencia sucede en general, en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
+%Un problema que se presenta al momento de estimar el parámetro de textura utilizando las técnicas propuestas incluido ML y aquellos basados en momentos fraccionales~\cite{Frery97} y  Logcumulants~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} es la necesidad de contar con algoritmos iterativos para los cuales no hay garantía de convergencia a una solución global. Esta falta de convergencia sucede en general, en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -256,31 +252,37 @@ En la figura~\ref{densidades} se muestra el gráfico de la densidad del modelo $
 \end{figure}
 
 
-Se realizó un experimento Monte Carlo para evaluar la performance de cada uno de los estimadores propuestos. El espacio parmétrico consiste en una grilla formada por:
+Se realizó un experimento Montecarlo para evaluar la performance de cada uno de los estimadores propuestos. El espacio parmétrico consiste en una grilla formada por:
 \begin{itemize}
 	\item tres valores de textura $\alpha=\{-1.5,-3,-5\}$. Los cuales representan áreas texturadas y extremadamente texturadas.
 	\item tres niveles de procesamiento señal-ruido $L=\{1,3,8\}$.
 	\item tamaños de muestra $n=\{9,25,49,81,121,1000\}$ compatibles con tamaños de ventana $3,\text{ }5,\text{ }7,\text{ }9$.
 \end{itemize}
 
-Se generaron $1000$ muestras para cada punto del espacio paramétrico, y se obtuvieron $\{\widehat{\alpha}_1, \dots, \widehat{\alpha}_{1000}\}$ estimaciones para cada una de estas combinaciones. De esta forma se estimaron la media $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$, el sesgo  $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha_i}- \alpha$ y el error cuadrático medio $\widehat{\operatorname{ECM}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$ para cada uno de los estimadores estudiados.
+Se generaron $1000$ muestras para cada punto del espacio paramétrico, y se obtuvieron $\{\widehat{\alpha}_1, \dots, \widehat{\alpha}_{1000}\}$ estimaciones para cada una de estas combinaciones. De esta forma se estimaron, para cada uno de los estimadores estudiados
+\begin{itemize}
+	\label{ExperimentoMontecarlo}
+	\item la media $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$,
+	\item el sesgo  $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha_i}- \alpha$.
+	 \item el error cuadrático medio $\widehat{\operatorname{ECM}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$.
+\end{itemize}
+  
+En las siguientes figuras ``MV'', ``DT'',``Mom12'' and ``LC'' denotarán al estimador basado en el método de Máxima Verosimilitud, distancia Triangular, $\frac{1}{2}$-momento and Logcumulant, respectivamente. En el eje de las abscisas se grafica el tamaño muestral, el cual se presenta en escala semilogarítmica.
 
-En las siguientes figuras ``MV'', ``T'',``Mom12'' and ``LC'' denotarán al estimador basado en el método de Maximum likelihood, distancia Triangular, $\frac{1}{2}$-momento and LogCumulant, respectivamente. En el eje de las abscisas se grafica el tamaño muestral, el cual se presenta en escala semilogarítmica.
-
-Las figuras~\ref{AlfasEstimadosJSTAR2013_L=1},~\ref{AlfasEstimadosJSTAR2013_L=3} y~\ref{AlfasEstimadosJSTAR2013_L=8} muestran la media de $\widehat{\alpha}$ para datos sin contaminar y para diferentes valores de $n$ y $L$. La línea azul representa el verdadero valor de $\alpha$. Se puede observar que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{DT}}$ tienen un comportamiento similar y se encuentran, en media, cercanos al verdadero valor en la mayoría de los casos estudiados. Es notable el sesgo que presentan  $\widehat{\alpha}_{\text{LC}}$ y $\widehat{\alpha}_{\text{Mom12}}$ para $\alpha=-5$. Se puede observar también que $\widehat\alpha_{\text{ML}}$ tiende a subestimar al verdadero valor de $\alpha$.
-Se puede observar que ningún método de estimación tiene el menor error cuadrático medio en todos los casos. El estimador $\widehat{\alpha}_{\text{Mom12}}$ es el que peor se comporta para zonas homogéneas.
+Las figuras~\ref{AlfasEstimadosJSTAR2013_L=1},~\ref{AlfasEstimadosJSTAR2013_L=3} y~\ref{AlfasEstimadosJSTAR2013_L=8} muestran el sesgo de $\widehat{\alpha}$ para datos sin contaminar y para diferentes valores de $n$ y $L$. La línea azul representa el verdadero valor de $\alpha$. Se puede observar que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{DT}}$ tienen un comportamiento similar y se encuentran, en media, cercanos al verdadero valor en la mayoría de los casos estudiados. Es notable el sesgo que presentan  $\widehat{\alpha}_{\text{LC}}$ y $\widehat{\alpha}_{\text{Mom12}}$ para $\alpha=-5$. Se puede observar también que $\widehat\alpha_{\text{ML}}$ tiende a subestimar al verdadero valor de $\alpha$.
+Se puede observar que ningún método de estimación tiene el menor error cuadrático medio en todos los casos. El estimador $\widehat{\alpha}_{\text{Mom12}}$ es el que peor se comporta para zonas texturadas.
 %Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} computed a first order approximation of such bias for a closely related model, and our results are in agreement with those.
 %The estimator based on the Triangular distance $\widehat\alpha_{\text T}$ compensates this bias.
 
 \begin{figure}[H]
 	\centering
-	\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\alpha}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=1.pdf}}
-	\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=1.pdf}}
+	\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013BarrasError_NoCont_L=1.pdf}}
+	\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013BarrasError_NoCont_L=1.pdf}}
 %	\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=3.pdf}}
 %	\subfigure[\label{ECMEstimadosJSTAR2013_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=3.pdf}}
 	%	\subfigure[\label{AlfasEstimadosJSTAR2013_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=8.pdf}}
 	%	\subfigure[\label{ECMEstimadosJSTAR2013_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=8.pdf}}
-	\caption{\small $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=1$.}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=1$.}
 \end{figure}
 
 
@@ -288,11 +290,11 @@ Se puede observar que ningún método de estimación tiene el menor error cuadr�
 	\centering
 %	\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=1.pdf}}
 %	\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$, L=1]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=1.pdf}}
-	\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\alpha}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=3.pdf}}
-	\subfigure[\label{ECMEstimadosJSTAR2013_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=3.pdf}}
+	\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013BarrasError_NoCont_L=3.pdf}}
+	\subfigure[\label{ECMEstimadosJSTAR2013_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013BarrasError_NoCont_L=3.pdf}}
 %	\subfigure[\label{AlfasEstimadosJSTAR2013_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=8.pdf}}
 %	\subfigure[\label{ECMEstimadosJSTAR2013_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=8.pdf}}
-	\caption{\small $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=3$.}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=3$.}
 \end{figure}
 
 \begin{figure}[H]
@@ -301,13 +303,13 @@ Se puede observar que ningún método de estimación tiene el menor error cuadr�
 %	\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$, L=1]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=1.pdf}}
 %	\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=3.pdf}}
 %	\subfigure[\label{ECMEstimadosJSTAR2013_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=3.pdf}}
-	\subfigure[\label{AlfasEstimadosJSTAR2013_L=8}$\widehat{\alpha}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_NoCont_L=8.pdf}}
-	\subfigure[\label{ECMEstimadosJSTAR2013_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_NoCont_L=8.pdf}}
-	\caption{\small $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=8$.}
+	\subfigure[\label{AlfasEstimadosJSTAR2013_L=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013BarrasError_NoCont_L=8.pdf}}
+	\subfigure[\label{ECMEstimadosJSTAR2013_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013BarrasError_NoCont_L=8.pdf}}
+	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos sin contaminar, $L=8$.}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TIEMPO
-Se calculó el tiempo medio de procesamiento, medido en segundos, para cada método y cada caso estudiado. Como  ejemplo se presenta, en la tabla~\ref{tablaDeTiemposmedios}, el tiempo medio para $L=1$ and $n=81$. Se puede observar que nuestra propuesta tiene un mayor costo computacional debido a la integración numérica presente en la definición del estimador. Los otros casos son consistentes con los datos de esta tabla. 
+Se calculó el tiempo medio de procesamiento, medido en segundos, para cada método y cada caso estudiado. Como  ejemplo se presenta, en la tabla~\ref{tablaDeTiemposmedios}, el tiempo medio para $L=1$ y $n=81$. Se puede observar que nuestra propuesta tiene un mayor costo computacional debido a la integración numérica presente en la definición del estimador. Los otros casos son consistentes con los datos de esta tabla. 
 La plataforma informática que se utilizó para realizar los procesos fue Intel(R) Core i7, con 8GB de memoria y 64 bits Windows 7. 
 
 \begin{table}[htb]
@@ -330,15 +332,15 @@ Una de las fuentes de contaminación en las imágenes SAR es el fenómeno de Dou
 Con el fin de evaluar la robustez de los estimadores, proponemos tres escenarios capaces de describir los desvíos del modelo teórico. Para cada uno de estos escenarios generamos muestras contaminadas donde $0<\epsilon \ll 1$ es la proporción de contaminación. 
 Sea  $B$ una variable aleatoria Bernoulli con probabilidad $p$ de ocurrencia de la contaminación. Sea $C \in \mathbb R_+$ un valor grande. Entonces
 \begin{itemize}
-	\item Caso~1:
+	\item \label{Caso1}Caso~1:
 	Sean $W$ y $U$ variables aleatorias tales que $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$, y $U \sim \mathcal{G}_I^0(\alpha_2,\gamma_2^*,L) $. Definimos $Z=BU+(1-B)W$, entonces generamos $\{z_1,\dots,z_n\}$ variables aleatorias independientes, idénticamente distribuidas con función de distribución acumulada dada por:
 	$$
 	(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha_2,\gamma_2^*,L)}(z),
 	$$
 	donde $\mathcal{F}_{\mathcal{G}_I^0(\alpha,\gamma,L)}$ es la función de distribución acumulada bajo el modelo $\mathcal{G}_I^0(\alpha,\gamma,L)$.
 	%
-	\item Case~2: Consideramos $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ y el retorno definido como $Z=BC+(1-B)W$.
-	\item Case~3:
+	\item \label{Caso2}Case~2: Consideramos $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ y el retorno definido como $Z=BC+(1-B)W$.
+	\item \label{Caso3}Case~3:
 	Consideramos $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ y $U\sim \mathcal{G}_I^0(\alpha,10^k\gamma^*,L) $ con $k \in \mathbb{N}$. 
 	El retorno $Z=BU+(1-B)W$, entonces $\{z_1,\dots,z_n\}$ son variables aleatorias idénticamente distribuidas con función de distribución acumulada dada por: 
 	$$
@@ -351,12 +353,12 @@ Todos estos modelos consideran desvíos de la hipótesis del modelo teórico. El
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% CASE 1, alpha_2 = -15, epsilon = 0.005
 
-Las figuras~\ref{Caso1L1},~\ref{Caso1L3} y~\ref{Caso1L8} muestran $\widehat{\alpha}$ y el error cuadrático medio estimado ($\widehat{\text{ECM}}$) para el Caso $1$ de contaminación con $\alpha_2=-15$, $\epsilon=0.01$, y variando $n$ y $L$.  
-Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observaciones casi sin textura en la muestra bajo análisis. Como se espera, la influencia de tal perturbación es más notable en aquella situaciones donde el modelo subyacente está más alejado de la contaminación. Es decir, para valores grandes de $\alpha$. Esto se ve con claridad en las figuras~\ref{ECMContJSTAR2013Caso1_L=1},\ref{ECMContJSTAR2013Caso1_L=3} y \ref{ECMContJSTAR2013Caso1_L=8} donde el $\widehat{\text{ECM}}$ de $\widehat\alpha_{\text{ML}}$, $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$ son mayores que el error cuadrático medio de $\widehat\alpha_{\text T}$ para $L=3,8$, pero esto no es tan claro para el caso de $L=1$. Lo que si se puede decir que $\widehat\alpha_{\text T}$ es competitivo respecto de los otros estimadores para $\alpha=-3,-5$.
+Las figuras~\ref{Caso1L1},~\ref{Caso1L3} y~\ref{Caso1L8} muestran el sesgo y el ECM estimado ($\widehat{\text{ECM}}$) para el Caso $1$ de contaminación con $\alpha_2=-15$, $\epsilon=0.01$, y variando $n$ y $L$.  
+Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observaciones casi sin textura en la muestra bajo análisis. Como se espera, la influencia de tal perturbación es más notable en aquella situaciones donde el modelo subyacente está más alejado de la contaminación. Es decir, para valores grandes de $\alpha$. Esto se ve con claridad en las figuras~\ref{ECMContJSTAR2013Caso1_L=1},\ref{ECMContJSTAR2013Caso1_L=3} y \ref{ECMContJSTAR2013Caso1_L=8} donde el $\widehat{\text{ECM}}$ de $\widehat\alpha_{\text{ML}}$, $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$ son mayores que el error cuadrático medio de $\widehat\alpha_{\text T}$ para $L=3,8$, pero esto no es tan claro para el caso de $L=1$. Lo que si se puede decir que $\widehat\alpha_{\text {DT}}$ es competitivo respecto de los otros estimadores para $\alpha=-3,-5$.
 
 \begin{figure}[H]
-	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=1Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
@@ -367,8 +369,8 @@ Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observa
 \begin{figure}[H]
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\alpha}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso1_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=3Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso1_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1.pdf}}
 	\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
@@ -379,19 +381,19 @@ Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observa
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso1_L=8}$\widehat{\alpha}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso1_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso1_L=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=8Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso1_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1BarrasError.pdf}}
 	\caption{\label{Caso1L8}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=8$.}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% CASE 2, alpha_2 = -15, epsilon = 0.001, C = 100
 
-Las figuras~\ref{Caso2L1},~\ref{Caso2L3} y~\ref{Caso2L8} presentan $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para el Caso $2$ de contaminación con $\epsilon=0.001$ y $C=100$. Este tipo de contaminación injecta un valor constante, en este caso $100$, con probabilidad $\epsilon=0.001$. Como estamos considerando muestras con media unitaria, este valor de $C$ respresenta un valor grande de contaminación. En este caso $\widehat\alpha_{\text T}$ es, en media, más cercano al verdadero valor que los otros métodos, y el valor de $\widehat{\text{ECM}}$ es menor.
+Las figuras~\ref{Caso2L1},~\ref{Caso2L3} y~\ref{Caso2L8} presentan $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para el Caso $2$ de contaminación con $\epsilon=0.001$ y $C=100$. Este tipo de contaminación injecta un valor constante, en este caso $100$, con probabilidad $\epsilon=0.001$. Como estamos considerando muestras con media unitaria, este valor de $C$ respresenta un valor grande de contaminación. En este caso $\widehat\alpha_{\text{DT}}$ es, en media, más cercano al verdadero valor que los otros métodos, y el valor de $\widehat{\text{ECM}}$ es menor.
 
 \begin{figure}[h!]
-	\subfigure[\label{AlfasContJSTAR2013Caso2_L=1}$\widehat{\alpha}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso2_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso2_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=1Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso2_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso2_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso2_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso2_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
@@ -402,8 +404,8 @@ Las figuras~\ref{Caso2L1},~\ref{Caso2L3} y~\ref{Caso2L8} presentan $\widehat{\al
 \begin{figure}[h!]
 %	\subfigure[\label{AlfasContJSTAR2013Caso2_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso2_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso2_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso2_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso2_L=3}$\widehat{\text{Sesgo}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=3Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso2_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso2_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso2_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1.pdf}}
 	\caption{\label{Caso2L3}\small Datos contaminados: Caso $2$, $\epsilon=0.001$ y $L=3$.}
@@ -414,17 +416,17 @@ Las figuras~\ref{Caso2L1},~\ref{Caso2L3} y~\ref{Caso2L8} presentan $\widehat{\al
 %	\subfigure[\label{ECMContJSTAR2013Caso2_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso2_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso2_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso2_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso2_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso2_L=8}$\widehat{\text{Sesgo}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=8Caso1BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso2_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1BarrasError.pdf}}
 	\caption{\label{Caso2L8}\small Datos contaminados: Caso $2$, $\epsilon=0.001$  y $L=8$.}
 \end{figure}
 %%% CASE 3, epsilon 0.001, k = 2
 
-Las figuras~\ref{Caso3L1},~\ref{Caso3L3} y~\ref{Caso3L8} muestran $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para el Caso 3 de contaminación con $\epsilon=0.005$ y $k=2$. En este caso se contamina la muestra proveniente del modelo verdadero con un observaciones que, con probabilidad $\epsilon=0.005$, provienen de una distribución $\mathcal G_I^0$ con un factor de escala cien veces más grande que el correspondiente al modelo verdadero. El comportamiento de estos estimadores sigue el mismo patrón para $L=3 \text{ y } 8$: $\widehat\alpha_{\text T}$ produce estimaciones más cercanas al verdadero valor con un ECM más chico. No hay un buen estimador para el caso $L=1$ en este caso de contaminación.
+Las figuras~\ref{Caso3L1},~\ref{Caso3L3} y~\ref{Caso3L8} muestran $\widehat{\alpha}$ y $\widehat{\text{ECM}}$ para el Caso 3 de contaminación con $\epsilon=0.005$ y $k=2$. En este caso se contamina la muestra proveniente del modelo verdadero con un observaciones que, con probabilidad $\epsilon=0.005$, provienen de una distribución $\mathcal G_I^0$ con un factor de escala cien veces más grande que el correspondiente al modelo verdadero. El comportamiento de estos estimadores sigue el mismo patrón para $L=3 \text{ y } 8$, $\widehat\alpha_{\text{DT}}$ produce estimaciones más cercanas al verdadero valor con un ECM más chico. No hay un buen estimador para el caso $L=1$ en este caso de contaminación.
 
 \begin{figure}[h!]
-	\subfigure[\label{AlfasContJSTAR2013Caso3_L=1}$\widehat{\alpha}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso3.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso3_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso3.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso3_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=1Caso3BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso3_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso3BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso3_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso3.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso3_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso3.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso3_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso3.pdf}}
@@ -435,8 +437,8 @@ Las figuras~\ref{Caso3L1},~\ref{Caso3L3} y~\ref{Caso3L8} muestran $\widehat{\alp
 \begin{figure}[h!]
 %	\subfigure[\label{AlfasContJSTAR2013Caso3_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso3.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso3_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso3.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso3_L=3}$\widehat{\alpha}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso3.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso3_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso3.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso3_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=3Caso3BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso3_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso3BarrasError.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso3_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso3.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso3_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso3.pdf}}
 	\caption{\label{Caso3L3}\small Datos contaminados: Caso $3$, $\epsilon=0.005$ y $ L=3$.}
@@ -447,12 +449,12 @@ Las figuras~\ref{Caso3L1},~\ref{Caso3L3} y~\ref{Caso3L8} muestran $\widehat{\alp
 %	\subfigure[\label{ECMContJSTAR2013Caso3_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso3.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso3_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso3.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso3_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso3.pdf}}
-	\subfigure[\label{AlfasContJSTAR2013Caso3_L=8}$\widehat{\alpha}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso3.pdf}}
-	\subfigure[\label{ECMContJSTAR2013Caso3_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso3.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso3_L=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=8Caso3BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso3_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso3BarrasError.pdf}}
 	\caption{\label{Caso3L8}\small Datos contaminados: Caso $3$, $\epsilon=0.005$ y $ L=8$.}
 \end{figure}
 
-Como se mencionó anteriormente, los algoritmos implementados para los casos de los estimadores Mom12 y LogCumulant no convergen en algunos casos. En el experimento Monte Carlo, si Mom12 o LogCumulant no convergen, eliminamos los estimadores calculados con los otros métodos en esa iteración, por lo que la cantidad de elementos para calcular $\overline{\widehat{\alpha}}$, el sesgo y el error cuadrático medio es menor que $1000$.
+Como se mencionó anteriormente, los algoritmos implementados para los casos de los estimadores Mom12 y Logcumulant no convergen en algunos casos. En el experimento Montecarlo, si Mom12 o  Logcumulant no convergen, no consideramos esta iteración al momento de estimar, por lo que la cantidad de elementos para calcular $\overline{\widehat{\alpha}}$, el sesgo y el error cuadrático medio es un poco menor que $1000$.
 
 La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de casos que fueron removidos para el Caso $1$ y $\alpha_2 = -15, \epsilon = 0.01$. Estos resultados son consistentes con los otras escenarios de contaminación, y sugieren que estos métodos son progresivamente más propensos a fallar en casos con mayor presencia de ruido speckle.
 
@@ -467,7 +469,7 @@ La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de caso
 		$8$ & $5.81$ & $6.04$  \\
 		\bottomrule
 	\end{tabular}
-\caption{\label{tabla_removidos}Porcentaje de casos de no convergencia para los estimadores de Momentos y LogCumulant en el Caso 1, $\alpha_2 = -15, \epsilon = 0.01$}
+\caption{\label{tabla_removidos}Porcentaje de casos de no convergencia para los estimadores de Momentos y  Logcumulant en el Caso 1, $\alpha_2 = -15, \epsilon = 0.01$}
 \end{table}
 
 
@@ -534,7 +536,7 @@ La tabla~\ref{resultadosalfaEstim} muestra los resultados de las estimaciones de
 Aplicamos el test de Kolmogorov-Smirnov (KS-test) como otra estrategia para evaluar a los estimadores bajo estudio. Se aplicó el test a dos muestras: una muestra $\bm x$ que proviene de la imagen, y una segunda muestra $\bm y$ simulada.
 Babu and Feigelson~\cite{Jogesh2006} alertan sobre el uso de la misma muestra para estimar los parámetros y para realizar el KS test, porque se pueden sacar conclusiones erróneas. Entonces tomamos una muestra de la imagen real $\bm x$ usada para estimar los parámetros con los cuatro métodos bajo análisis y la comparamos con una muestra simulada $\bm y$, del mismo tamaño, proveniente de una distribución $\mathcal G_I^0$ con los parámetros estimados. Se aplicó el KS test entre $\bm x$ y $\bm y$ considerando la hipótesis nula $H_0$ ``ambas muestras provienen de la misma distribución'', y el complemento de esta hipótesis como hipótesis alternativa.
 
-La tabla~\ref{resultadosTestMunich} muestra los $p$-valores. Se puede observar que no hay suficiente evidencia para rechazar la hipótesis nula con un nivel de signficación del $5$\% en cualquiera de los casos.
+La tabla~\ref{resultadosTestMunich} muestra los $p$-valores. Se puede observar que no hay suficiente evidencia para rechazar la hipótesis nula con un nivel de signficación del $5$\% en ninguno de los casos.
 %This result justifies the adequacy of the model for the data.
 %Se aplica  el test de Kolmogorov Smirnov utilizando dos muestras de datos $X$ e $Y$. La muestra $X$ proviene de la imagen real (cuyo número equivalente de looks $L$ es conocido), de tamaño $n$. Luego se estima el parámetro $\hat{\alpha}$ utilizando esta muestra. Luego se genera una muestra simulada $Y$ con distribución $\mathcal{G}^0_I(\hat{\alpha},n,L)$ y se calcula el test de hipótesis $K-S$ con la hipótesis nula $H_0= \text{Ambas muestras poseen la misma distribución}$ y $H_A= \text{Las muestras no poseen la misma distribución}$. La siguiente tambla muestra los resultados de los p-valores obtenidos. Se observa que no se rechaza la hipótesis nula en ninguno de los casos.
 
@@ -556,7 +558,7 @@ La tabla~\ref{resultadosTestMunich} muestra los $p$-valores. Se puede observar q
 
 La figura~\ref{ImagenCornerReflector} muestra una imagen con la presencia de un corner reflector, mientras que la figura~\ref{MuestrasCorner} muestra las regiones usadas para estimar el parámetro de textura para esta situcación. La tabla~\ref{resultadosCorner} presenta los valores de  $\widehat{\alpha}$ para cada área rectangular en la imagen de la figura~\ref{MuestrasCorner}.
 
-Los estimadores MV, Mom12 y LogCumulant son incapaces de producir una estimación en pequeñas muestras.  Se puede observar que tanto $\widehat\alpha_{\text{Mom12}}$ como $\widehat\alpha_{\text{LC}}$ requieren al menos un tamaño de muestra de $90$ observaciones para que se pueda dar una estimación para $\alpha$. El estimador basado en la distancia triangular produce valores plausibles bajo contaminación incluso con muestras muy pequeñas.
+Los estimadores MV, Mom12 y  Logcumulant son incapaces de producir una estimación en pequeñas muestras.  Se puede observar que tanto $\widehat\alpha_{\text{Mom12}}$ como $\widehat\alpha_{\text{LC}}$ requieren al menos un tamaño de muestra de $90$ observaciones para que se pueda dar una estimación para $\alpha$. El estimador basado en la distancia triangular produce valores plausibles bajo contaminación incluso con muestras muy pequeñas.
 
 \begin{figure}[H]
 	\centering
@@ -577,7 +579,7 @@ Los estimadores MV, Mom12 y LogCumulant son incapaces de producir una estimació
 	\caption{\label{resultadosCorner}$\widehat{\alpha}$ y tiempos de procesos para las muestras presentadas en la figura~\ref{MuestrasCorner}}
 	\begin{tabular}{c*9{c}}
 	\toprule
-	\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat\alpha_{\text MV}$} & \multirow{2 }{*}{$\widehat\alpha_{\text T}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{Mom12}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{LC}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
+	\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat\alpha_{\text{MV}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{T}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{Mom12}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{LC}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
 	&      &                        &                           &                                 &                                &  \small MV &  \small DT &   \small Mom12 &  LC \\
 	\midrule
 		Magenta     & $15$  & $-20.0$ & $-4.1$  & $NA $   & $NA $     &  $0.03$  &  $ 1.95 $    &  $ 0.03$   &  $0.03$ \\
@@ -652,7 +654,7 @@ En esta sección proponemos mejoras:
 \begin{itemize}
 	\item Consideramos otros núcleos.% estudiando el MISE que se presentó en la subsección~\ref{MISE}.
 	\item Utilizamos el método LSCV para encontrar el ancho de banda que se presentó en la subsección~\ref{LSCV}.
-	\item Utilizamos el algoritmo L-BFGS-B~\ref{jstar} para encontrar el estimador $\widehat{\alpha}_{\text{T}}$ minimizando la distancia definida en~\ref{minimization}.
+	\item Utilizamos el algoritmo L-BFGS-B~\ref{jstar} para encontrar el estimador $\widehat{\alpha}_{\text{\tiny{DT}}}$ minimizando la distancia definida en~\ref{minimization}.
 	\item Contamos casos de no convergencia de los algoritmos numéricos empleados, entendiendo que un algoritmo no converge si devuelve como valor estimado del parámetro a alguno de los extremos del intervalo de búsqueda.
 \end{itemize}  
 
@@ -675,206 +677,18 @@ Se puede observar que:
 	\item Los valores del $\widehat{\text{MISE}}$ correspondientes a los núcleos IG y con IGJstar son de varios órdenes de magnitud mayor a los otros núcleos.
 \end{itemize} 
 
-Luego evaluamos la cantidad de casos de no convergencia de cada método. La tabla~\ref{MiseyCantCasosNoConvergenciaL=3} muestra la cantidad de casos donde el valor de $\widehat{\alpha}=-20$, no se observaron situaciones donde $\widehat{\alpha}=-1.$ En negrita están marcadas las situaciones donde se presentan la mayor cantidad de estos casos. Se puede observar que, en general, el núcleo IG es el que presenta mayor cantidad de casos de no convergencia.
+Luego evaluamos la cantidad de casos de no convergencia de cada método. La tabla~\ref{MiseyCantCasosNoConvergenciaL=3} muestra el porcentaje de casos donde el valor de $\widehat{\alpha}=-20$, no se observaron situaciones donde $\widehat{\alpha}=-1.$ En negrita están marcados los casos donde se presentan el mayor porcentaje. Se puede observar que, en general, el núcleo IG es el que presenta mayor porcentaje de ocurrencias de no convergencia.
 
 Además estudiamos el sesgo y el ECM para el caso donde el número de looks es $L=3$, la tabla~\ref{SesgoyECMSinContConConstL=3} muestra los resultados obtenidos. En negrita están marcados los casos donde el sesgo y el ECM son menores con IG e IGJstar respecto de los núcleos $\Gamma$ y LN. Se puede observar que la performance de estos dos últimos núcleos  mejora al núcleo IG (en sus dos versiones) en la mayoría de los casos analizados. Sin embargo IG muestra una menor variabilidad salvo para zonas extremadamente texturadas, lo que no sucede con IGJstar. 
 
-Entonces, priorizando la calidad del ajuste, la cantidad de casos de convergencia y el sesgo continuamos el análisis con los núcleos $\Gamma$ y LN.
-
-%\begin{table}[ht]
-%	\centering
-%	\small
-%	\begin{tabular}{c*6{r}}
-%		\toprule
-%		$\alpha$ & n & $\Gamma^1$ & $\Gamma^2$ & LN & IG & IGJstar \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-1.5$} 
-%		& $9  $  & $0.407$ & $0.411$ & $0.811$ & $6.119$  & $41.330$ \\ 
-%		& $25 $  & $0.123$ & $0.145$ & $0.184$ & $2.464$  & $17.024$ \\ 
-%		& $49 $  & $0.082$ & $0.100$ & $0.538$ & $1.157$  & $9.671$ \\ 
-%		& $81 $  & $0.064$ & $0.079$ & $0.085$ & $0.753$  & $6.126$ \\ 
-%		& $121$  & $0.064$ & $0.076$ & $0.081$ & $0.528$  & $4.000$ \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-3$} 
-%		& $9  $  & $0.253$ & $0.273$ & $0.563$ & $12.473$ & $50.020$ \\ 
-%		& $25 $  & $0.080$ & $0.093$ & $0.106$ & $3.217$  & $25.401$ \\ 
-%		& $49 $  & $0.044$ & $0.053$ & $0.071$ & $0.686$  & $16.401$ \\ 
-%		& $81 $  & $0.030$ & $0.033$ & $0.034$ & $0.255$  & $11.577$ \\ 
-%		& $121$  & $0.022$ & $0.022$ & $0.029$ & $0.166$  & $8.985$ \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-5$} 
-%		& $9  $  & $0.238$ & $0.266$ & $0.432$ & $15.315$ & $63.384$ \\ 
-%		& $25 $  & $0.066$ & $0.085$ & $0.087$ & $4.647$  & $32.939$ \\ 
-%		& $49 $  & $0.042$ & $0.048$ & $0.064$ & $0.677$  & $24.405$ \\ 
-%		& $81 $  & $0.027$ & $0.027$ & $0.033$ & $0.285$  & $18.906$ \\ 
-%		& $121$  & $0.019$ & $0.016$ & $0.025$ & $0.179$  & $15.920$ \\
-%		\midrule
-%		\multirow{5 }{*}{$-8$}  
-%		& $9  $  & $0.237$ & $0.263$ & $0.383$ & $18.106$ & $73.081$ \\ 
-%		& $25 $  & $0.072$ & $0.088$ & $0.112$ & $5.134 $ & $40.479$ \\ 
-%		& $49 $  & $0.041$ & $0.044$ & $0.048$ & $0.930 $ & $30.231$ \\ 
-%		& $81 $  & $0.026$ & $0.024$ & $0.031$ & $0.329 $ & $25.712$ \\ 
-%		& $121$  & $0.017$ & $0.014$ & $0.020$ & $0.214 $ & $21.193$ \\ 
-%		\bottomrule
-%	\end{tabular}
-%	\caption{\label{MISEestimado} $\widehat{\text{MISE}}$ para L=$3$.}
-%\end{table}
-
-
-
-%\begin{table}[ht]
-%	\centering
-%	\begin{tabular}{ccccccccccc}
-%		\hline
-%		\hline	
-%		\small	
-%		$\alpha$ & n & IG & IG & NG1 & MV & RIG & NG1 & LN & NG1 & NG1 \\
-%		&  & {\tiny jstar} & {\tiny opt} &  &  &  & {\tiny LSCV} & {\tiny LSCV} & {\tiny $b_1$} & {\tiny $b_2$} \\ 
-%		\hline
-%		\hline
-%		-1.50 &   9 &  &   2 &   2 &  &  &   2 &   2 &  &  \\ 
-%		\hline
-%		-3.00 &   9 &  87 & 103 &  84 &  57 & 120 &  25 &  37 &  47 &  47 \\ 
-%		-3.00 &  25 &  19 &  21 &  19 &   6 &  26 &   2 &   3 &   8 &   8 \\ 
-%		-3.00 &  49 &   1 &   3 &   5 &   1 &   7 &   1 &  &  & \\ 
-%		\hline
-%		-5.00 &   9 & 155 & 160 & 153 & 120 & 216 &  51 &  56 & 116 & 116 \\ 
-%		-5.00 &  25 &  86 &  92 &  86 &  58 & 138 &  19 &  23 &  45 &  45 \\ 
-%		-5.00 &  49 &  39 &  42 &  36 &  21 &  62 &   6 &   5 &  19 &  19 \\ 
-%		-5.00 &  81 &  21 &  23 &  16 &   7 &  33 &   2 &   3 &   9 &   9 \\ 
-%		-5.00 & 121 &  10 &  10 &   5 &   2 &  13 &  &  &   4 &   4 \\ 
-%		\hline
-%		-8.00 &   9 & 199 & 200 & 234 & 200 & 286 &  79 &  87 & 179 & 179 \\ 
-%		-8.00 &  25 & 173 & 174 & 168 & 128 & 237 &  48 &  56 & 127 & 127 \\ 
-%		-8.00 &  49 & 130 & 139 & 127 &  86 & 187 &  27 &  39 &  89 &  89 \\ 
-%		-8.00 &  81 &  69 &  82 &  73 &  42 & 115 &  19 &  17 &  45 &  45 \\ 
-%		-8.00 & 121 &  64 &  78 &  52 &  33 & 105 &   9 &   9 &  34 &  34 \\ 
-%		%-8.00 & 1000 &   1 &   1 &  &  &   1 &  &  &  & \\ 
-%		\hline
-%	\end{tabular}
-%\caption{\label{NoConvergenciaJIAAIS2015} Cantidad de casos de no convergencia para L=$3$.
-%\end{table}
-
-%\subsection Menos 20 sin cont y sin const
-%\begin{table}[hbt]
-%	\centering
-%	\small
-%	\begin{tabular}{lrrrr}
-%		\toprule
-%		$\alpha$ & n & $\Gamma$ & LN & IG & IGJstar \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-1.5$} 
-%		\midrule
-%		9 &  & 2 & 1 &  \\ 
-%		25 &  & 0 & 0 &  \\ 
-%		49 &  & 0 & 0 &  \\ 
-%		81 &  & 0 & 0 &  \\ 
-%		121 &  & 0 & 0 &  \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-3$}
-%		9 & 25 & 33 & 34 & 21 \\ 
-%		25 & 1 & 4 & 4 & 4 \\ 
-%		49 & 0 & 1 & 0 & 0 \\ 
-%		81 & 0 & 0 & 0 & 0 \\ 
-%		121 & 0 & 0 & 0 & 0 \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-5$}
-%		9 & 44 & 61 & 77 & 37 \\ 
-%		25 & 14 & 24 & 11 & 11 \\ 
-%		49 & 7 & 6 & 5 & 2 \\ 
-%		81 & 2 & 4 & 1 & 0 \\ 
-%		121 & 0 & 1 & 0 & 0 \\ 
-%		\midrule
-%		\multirow{5 }{*}{$-8$}
-%		9 & 76 & 88 & 116 & 43 \\ 
-%		25 & 42 & 54 & 50 & 23 \\ 
-%		49 & 25 & 25 & 22 & 6 \\ 
-%		81 & 20 & 20 & 14 & 1 \\ 
-%		121 & 9 & 10 & 4 & 2 \\ 
-%		\bottomrule
-%	\end{tabular}
-%	\caption{\label{Menos20SinContSinConst} Menos20 SinCont SinConst.}
-%\end{table}
-%
-%\subsection Menos 1 sin cont y sin const
-%\begin{table}[hbt]
-%	\centering
-%	\small
-%\begin{tabular}{lrrrr}
-%	\toprule
-%	n & GA & LN & IGJstar & IG \\ 
-%	\midrule
-%	9 & 3 & 0 &  & 54 \\ 
-%	25 & 3 & 1 &  & 13 \\ 
-%	49 & 1 & 0 &  & 6 \\ 
-%	81 & 1 & 0 &  & 3 \\ 
-%	121 & 0 & 2 &  & 2 \\ 
-%	9 & 6 & 0 & 3 & 129 \\ 
-%	25 & 4 & 1 &  & 41 \\ 
-%	49 & 3 & 1 &  & 0 \\ 
-%	81 & 3 & 0 &  & 0 \\ 
-%	121 & 0 & 1 & 0 & 0 \\ 
-%	9 & 11 & 2 & 1 & 165 \\ 
-%	25 & 13 & 2 &  & 78 \\ 
-%	49 & 4 & 0 &  & 8 \\ 
-%	81 & 3 & 1 &  & 2 \\ 
-%	121 & 2 & 0 & 1 & 0 \\ 
-%	9 & 6 & 7 & 2 & 177 \\ 
-%	25 & 8 & 4 &  & 106 \\ 
-%	49 & 3 & 0 &  & 16 \\ 
-%	81 & 7 & 0 &  & 1 \\ 
-%	121 & 6 & 0 & 0 & 0 \\ 
-%	\bottomrule
-%\end{tabular}
-%	\caption{\label{Menos1SinContSinConst} Menos1 SinCont SinConst.}
-%\end{table}
-
-
-%\begin{table}[H]
-%	\centering
-%	\small
-%	\begin{tabular}{c*5{c}}
-%	\toprule
-%	$\alpha$ & n & $\Gamma$ & LN & IG & IGJstar \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-1.5$} 
-%	&  9 &  0 & 2 & 2 & 0 \\ 
-%	&  25 & 0  & 0 & 0 & 0  \\ 
-%	&  49 & 0  & 0 & 0 & 0 \\ 
-%	&  81 & 0  & 0 & 0 & 0 \\ 
-%	&  121 & 0   & 0 & 0 & 0 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-3$} 
-%	&  9 & 26 & 36 & \textbf{40} & 34 \\ 
-%	&  25 & 1 & 5 & 3 & 3 \\ 
-%	&  49 & 0 & 2 & 0 & 0 \\ 
-%	&  81 & 0 & 0 & 0 & 0 \\ 
-%	&  121 & 0 & 0 & 0 & 0 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-5$} 
-%	&  9 & 48 & 66 & \textbf{85} & 66 \\ 
-%	&  25 & 17 & \textbf{25} & 10 & 8 \\ 
-%	&  49 & 7 & 6 & 5 & 2 \\ 
-%	&  81 & 2 & 4 & 1 & 0 \\ 
-%	&  121 & 0 & 1 & 0 & 0 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-8$} 
-%	&  9 & 83 & 95 & \textbf{131} & 90 \\ 
-%	&  25 & 45 & \textbf{55} & 44 & 21 \\ 
-%	&  49 & 25 & 27 & 21 & 6 \\ 
-%	&  81 & 22 & 20 & 10 & 1 \\ 
-%	&  121 & 9 & 10 & 4 & 2 \\ 
-%	\bottomrule
-%\end{tabular}
-%	\caption{\label{Menos20SinContConConst} Cantidad de casos de no convergencia para datos sin contaminar, $L=3$.}
-%\end{table}
+Entonces, priorizando la calidad del ajuste, el porcentaje de casos de convergencia y el sesgo continuamos el análisis con los núcleos $\Gamma$ y LN.
 
 \begin{table}[hbt]										
 	\centering									
 	\small									
 	\begin{tabular}{cc|ccccc|cccc}									
 		\toprule									
-		\multirow{3 }{*}{$\alpha$} &\multirow{3 }{*}{ n  } & \multicolumn{5}{c|}{\multirow{2 }{*}{MISE}} & \multicolumn{4}{c}{Cantidad de casos de}\\
+		\multirow{3 }{*}{$\alpha$} &\multirow{3 }{*}{ n  } & \multicolumn{5}{c|}{\multirow{2 }{*}{MISE}} & \multicolumn{4}{c}{Porcentaje de casos de}\\
 		&  &            &            &    &    &         &   \multicolumn{4}{c}{no convergencia}\\
 		%\multirow{3 }{*}{$\alpha$} &\multirow{3 }{*}{ n  } & \multirow{2 }{*}{\multicolumn{5}{c|}{Mise}} & \multirow{2 }{*}{\multicolumn{4}{c}}{Cantidad de casos de}\\
 		
@@ -882,123 +696,42 @@ Entonces, priorizando la calidad del ajuste, la cantidad de casos de convergenci
 		\cmidrule(r){8-11}
 		%\midrule
 		
-		&  & $\Gamma^1$ & $\Gamma^2$ & LN & IG & IGJstar & $\Gamma$ & LN & IG & IGJstar\\ 
+		&  & $\Gamma^1$ & $\Gamma^2$ & LN & IG & IGJstar & $\Gamma$ & LN & IG & IGJstar  \\
 		\midrule				
 		\multirow{5 }{*}{$-1.5$} 
-		 &  $9  $ 	&  	 $0.407$ 	&	 $0.411$ 	&	 $0.811$ 	&	 $6.119$  	&	 $41.330$ 	&	$0$		&	$2$			&	$2$			&	$0$ \\
-		 &  $25 $ 	&  	 $0.123$ 	&	 $0.145$ 	&	 $0.184$ 	&	 $2.464$  	&	 $17.024$ 	&	$0$		&	$0$			&	$0$			&	$0$ \\
-		 &  $49 $ 	&  	 $0.082$ 	&	 $0.100$ 	&	 $0.538$ 	&	 $1.157$  	&	 $9.671$ 	&	$0$		&	$0$			&	$0$			&	$0$ \\
-		 &  $81 $ 	&  	 $0.064$ 	&	 $0.079$ 	&	 $0.085$ 	&	 $0.753$  	&	 $6.126$ 	&	$0$		&	$0$			&	$0$			&	$0$ \\
-		 &  $121$ 	&  	 $0.064$ 	&	 $0.076$ 	&	 $0.081$ 	&	 $0.528$  	&	 $4.000$ 	&	$0$		&	$0$			&	$0$			&	$0$ \\
+		 &  $9  $ 	&  	 $0.407$ 	&	 $0.411$ 	&	 $0.811$ 	&	 $6.119$  	&	 $41.330$ 	&	$0$	&	$0.4$	&	$0.4$	&	$0$ \\
+		 &  $25 $ 	&  	 $0.123$ 	&	 $0.145$ 	&	 $0.184$ 	&	 $2.464$  	&	 $17.024$ 	&	$0$	&	$0$		&	$0$		&	$0$ \\
+		 &  $49 $ 	&  	 $0.082$ 	&	 $0.100$ 	&	 $0.538$ 	&	 $1.157$  	&	 $9.671$ 	&	$0$	&	$0$		&	$0$		&	$0$ \\
+		 &  $81 $ 	&  	 $0.064$ 	&	 $0.079$ 	&	 $0.085$ 	&	 $0.753$  	&	 $6.126$ 	&	$0$	&	$0$		&	$0$		&	$0$ \\
+		 &  $121$ 	&  	 $0.064$ 	&	 $0.076$ 	&	 $0.081$ 	&	 $0.528$  	&	 $4.000$ 	&	$0$	&	$0$		&	$0$		&	$0$ \\
 		\cmidrule(r){1-7}
 		 \cmidrule(r){8-11}									
 		 \multirow{5 }{*}{$-3$}	
-		 &  $9  $ 	&  	 $0.253$ 	&	 $0.273$ 	&	 $0.563$ 	&	 $12.473$ 	&	 $50.020$ 	&	$26$	&	$36$		&\textbf{$40$} 	& $34$ \\
-		 &  $25 $ 	&  	 $0.080$ 	&	 $0.093$ 	&	 $0.106$ 	&	 $3.217$  	&	 $25.401$ 	&	$1$		&	$5$			&	$3$			&	$3$ \\
-		 &  $49 $ 	&  	 $0.044$ 	&	 $0.053$ 	&	 $0.071$ 	&	 $0.686$  	&	 $16.401$ 	&	$0$		&	$2$			&	$0$			&	$0$ \\
-		 &  $81 $ 	&  	 $0.030$ 	&	 $0.033$ 	&	 $0.034$ 	&	 $0.255$  	&	 $11.577$ 	&	$0$		&	$0$			&	$0$			&	$0$ \\
-		 &  $121$ 	&  	 $0.022$ 	&	 $0.022$ 	&	 $0.029$ 	&	 $0.166$  	&	 $8.985$ 	&	$0$		&	$0$		    &	$0$			&	$0$ \\
+		 &  $9  $ 	&  	 $0.253$ 	&	 $0.273$ 	&	 $0.563$ 	&	 $12.473$ 	&	 $50.020$ 	&	$5.2$&	$7.2$	& $\textbf{8}$	& $6.8$ \\
+		 &  $25 $ 	&  	 $0.080$ 	&	 $0.093$ 	&	 $0.106$ 	&	 $3.217$  	&	 $25.401$ 	&	$0.2$ &	$1$		&	$0.6$		& $0.6$ \\
+		 &  $49 $ 	&  	 $0.044$ 	&	 $0.053$ 	&	 $0.071$ 	&	 $0.686$  	&	 $16.401$ 	&	$0$	&	$0.4$		&	$0$		&	$0$ \\
+		 &  $81 $ 	&  	 $0.030$ 	&	 $0.033$ 	&	 $0.034$ 	&	 $0.255$  	&	 $11.577$ 	&	$0$	&	$0$		&	$0$		&	$0$ \\
+		 &  $121$ 	&  	 $0.022$ 	&	 $0.022$ 	&	 $0.029$ 	&	 $0.166$  	&	 $8.985$ 	&	$0$	&	$0$	    &	$0$		&	$0$ \\
 		\cmidrule(r){1-7}
 		\cmidrule(r){8-11}										
 		 \multirow{5 }{*}{$-5$}	
-		 &  $9  $ 	&  	 $0.238$ 	&	 $0.266$ 	&	 $0.432$ 	&	 $15.315$ 	&	 $63.384$ 	&	$48$	&	$66$		&\textbf{$85$} 	&	$66$ \\
-		 &  $25 $ 	&  	 $0.066$ 	&	 $0.085$ 	&	 $0.087$ 	&	 $4.647$  	&	 $32.939$ 	&	$17$	&\textbf{$25$} 	&	$10$ 		&	$8$ \\
-		 &  $49 $ 	&  	 $0.042$ 	&	 $0.048$ 	&	 $0.064$ 	&	 $0.677$  	&	 $24.405$ 	&	$7$		&	$6$			&	$5$			&	$2$ \\
-		 &  $81 $ 	&  	 $0.027$ 	&	 $0.027$ 	&	 $0.033$ 	&	 $0.285$  	&	 $18.906$ 	&	$2$		&	$4$			&	$1$			&	$0$ \\
-		 &  $121$ 	&  	 $0.019$ 	&	 $0.016$ 	&	 $0.025$ 	&	 $0.179$  	&	 $15.920$ 	&	$0$		&	$1$			&	$0$			&	$0$ \\
+		 &  $9  $ 	&  	 $0.238$ 	&	 $0.266$ 	&	 $0.432$ 	&	 $15.315$ 	&	 $63.384$ 	&	$9.6$	&	$13.2$		& $\textbf{17}$ 	&	$13.2$ \\
+		 &  $25 $ 	&  	 $0.066$ 	&	 $0.085$ 	&	 $0.087$ 	&	 $4.647$  	&	 $32.939$ 	&	$3.4$	& $\textbf{5}$ 	&	$2$ 		&	$1.6$ \\
+		 &  $49 $ 	&  	 $0.042$ 	&	 $0.048$ 	&	 $0.064$ 	&	 $0.677$  	&	 $24.405$ 	&	$1.4$		&	$1.2$			&	$1$			&	$0.4$ \\
+		 &  $81 $ 	&  	 $0.027$ 	&	 $0.027$ 	&	 $0.033$ 	&	 $0.285$  	&	 $18.906$ 	&	$0.4$		&	$0.8$			&	$0.2$			&	$0$ \\
+		 &  $121$ 	&  	 $0.019$ 	&	 $0.016$ 	&	 $0.025$ 	&	 $0.179$  	&	 $15.920$ 	&	$0$		&	$0.2$			&	$0$			&	$0$ \\
 		\cmidrule(r){1-7}
 		\cmidrule(r){8-11}										
 		\multirow{5 }{*}{$-8$}	
-		&  $9  $ 	&  	 $0.237$ 	&	 $0.263$ 	&	 $0.383$ 	&	 $18.106$ 	&	 $73.081$ 	&	$83$	&	$95$		&\textbf{$131$} &	$90$ \\
-		&  $25 $ 	&  	 $0.072$ 	&	 $0.088$ 	&	 $0.112$ 	&	 $5.134 $ 	&	 $40.479$ 	&	$45$	&\textbf{$55$}	&	$44$		&	$21$ \\
-		&  $49 $ 	&  	 $0.041$ 	&	 $0.044$ 	&	 $0.048$ 	&	 $0.930 $ 	&	 $30.231$ 	&	$25$	&	$27$		&	$21$		&	$6$ \\
-		&  $81 $ 	&  	 $0.026$ 	&	 $0.024$ 	&	 $0.031$ 	&	 $0.329 $ 	&	 $25.712$ 	&	$22$	&	$20$		&	$10$		&	$1$ \\
-		&  $121$ 	&  	 $0.017$ 	&	 $0.014$ 	&	 $0.020$ 	&	 $0.214 $ 	&	 $21.193$ 	&	$9$ 	&	$10$		&	$4$			&	$2$ \\
+		&  $9  $ 	&  	 $0.237$ 	&	 $0.263$ 	&	 $0.383$ 	&	 $18.106$ 	&	 $73.081$ 	&	$16.6$	&	$19$		& $\textbf{26.2}$ &	$18$ \\
+		&  $25 $ 	&  	 $0.072$ 	&	 $0.088$ 	&	 $0.112$ 	&	 $5.134 $ 	&	 $40.479$ 	&	$81.81$	& $\textbf{11}$	&	$8.8$		&	$4.2$ \\
+		&  $49 $ 	&  	 $0.041$ 	&	 $0.044$ 	&	 $0.048$ 	&	 $0.930 $ 	&	 $30.231$ 	&	$5$	&	$5.4$		&	$4.2$		&	$1.2$ \\
+		&  $81 $ 	&  	 $0.026$ 	&	 $0.024$ 	&	 $0.031$ 	&	 $0.329 $ 	&	 $25.712$ 	&	$4.4$	&	$4$		&	$2$		&	$0.2$ \\
+		&  $121$ 	&  	 $0.017$ 	&	 $0.014$ 	&	 $0.020$ 	&	 $0.214 $ 	&	 $21.193$ 	&	$1.8$ 	&	$2$		&	$0.8$			&	$0.4$ \\
+		\bottomrule
 	\end{tabular}										
-\caption{\label{MiseyCantCasosNoConvergenciaL=3} MISE y cantidad de casos de no convergencia $L=3$.}									
+\caption{\label{MiseyCantCasosNoConvergenciaL=3} MISE y porcentaje de casos de no convergencia $L=3$.}									
 \end{table}	
-
-%\begin{table}[hbt]
-%	\centering
-%	\small
-%	\begin{tabular}{c*5{r}}
-%	\toprule
-%	\multirow{2 }{*}{$\alpha$} &\multirow{2 }{*}{n} & \multicolumn{4}{c}{Sesgo} \\
-%	\cmidrule(r){3-6}
-%	%\midrule
-%	 &  & $\Gamma$ & LN & IG & IGJstar \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-1.5$} 
-%	& 9 & -0.183 & -0.117 & -0.840 & -0.525 \\ 
-%	& 25 & -0.058 & -0.007 & -0.538 & -0.182 \\ 
-%	& 49 & -0.035 & 0.002 & -0.404 & -0.105 \\ 
-%	& 81 & -0.036 & 0.005 & -0.348 & -0.072 \\ 
-%	& 121 & -0.041 & 0.014 & -0.295 & -0.046 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-3$}
-%	& 9 & -0.652 & -0.552 & -1.659 & -1.584 \\ 
-%	& 25 & -0.338 & -0.066 & -0.582 & -0.684 \\ 
-%	& 49 & -0.014 & 0.015 & -0.215 & -0.319 \\ 
-%	& 81 & 0.079 & 0.091 & -0.030 & -0.165 \\ 
-%	& 121 & 0.117 & 0.104 & 0.025 & -0.108 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-5$}
-%	& 9 & 0.084 & 0.670 & -0.645 & -0.743 \\ 
-%	& 25 & 0.225 & 0.632 & 0.092 & -0.531 \\ 
-%	& 49 & 0.362 & 0.339 & 0.604 & -0.099 \\ 
-%	& 81 & 0.318 & 0.437 & 0.771 & -0.101 \\ 
-%	& 121 & 0.360 & 0.397 & 0.896 & 0.108 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-8$}
-%	& 9 & 2.346 & 2.952 & 1.140 & 1.382 \\ 
-%	& 25 & 1.787 & 2.209 & 1.960 & 0.930 \\ 
-%	& 49 & 1.410 & 1.735 & 2.442 & 1.073 \\ 
-%	& 81 & 1.260 & 1.462 & 2.498 & 0.779 \\ 
-%	& 121 & 1.062 & 1.235 & 2.689 & 0.915 \\ 
-%	\bottomrule
-%\end{tabular}
-%	\caption{\label{SesgoSinContConConstL=3} Sesgo para datos sin contaminar $L=3$.}
-%\end{table}
-%
-%
-%\begin{table}[hbt]
-%	\centering
-%	\small
-%	\begin{tabular}{c*5{r}}
-%	\toprule
-%	$\alpha$ & n & $\Gamma$ & LN & IG & IGJstar \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-1.5$} 
-%	& 9 & 0.407 & 0.417 & 1.432 & 1.348  \\ 
-%	& 25 & 0.070 & 0.049 & 0.496 & 0.129 \\ 
-%	& 49 & 0.034 & 0.019 & 0.217 & 0.040\\ 
-%	& 81 & 0.024 & 0.011 & 0.158 & 0.021\\ 
-%	& 121 & 0.024 & 0.008 & 0.108 & 0.011\\ 
-%	\midrule
-%	\multirow{5 }{*}{$-3$}
-%	& 9 & 5.873 & 8.945 & 10.650 & 11.965\\ 
-%	& 25 & 3.542 & 2.352 & 1.843 & 3.475\\ 
-%	& 49 & 0.928 & 1.340 & 0.549 & 1.145\\ 
-%	& 81 & 0.397 & 0.441 & 0.212 & 0.490 \\ 
-%	& 121 & 0.239 & 0.285 & 0.294 & 0.287\\ 
-%	\midrule
-%	\multirow{5 }{*}{$-5$}
-%	& 9 & 11.348 & 10.726 & 9.943 & 13.158 \\ 
-%	& 25 & 6.506 & 6.648 & 4.603 & 8.359\\ 
-%	& 49 & 3.989 & 5.787 & 2.338 & 4.688\\ 
-%	& 81 & 3.045 & 2.761 & 1.852 & 3.623 \\ 
-%	& 121 & 1.950 & 2.041 & 1.454 & 1.505 \\ 
-%	\midrule
-%	\multirow{5 }{*}{$-8$}
-%	& 9 & 18.944 & 21.516 & 16.879 & 19.118 \\ 
-%	& 25 & 13.309 & 16.633 & 11.463 & 13.551 \\ 
-%	& 49 & 13.020 & 12.658 & 10.667 & 10.100 \\ 
-%	& 81 & 9.727 & 9.893 & 10.468 & 10.278  \\ 
-%& 121 & 7.425 & 8.555 & 8.983 & 5.975  \\ 
-%	\bottomrule
-%\end{tabular}
-%	\caption{\label{ECMSinContConConstL=3} ECM para datos sin contaminar L=3.}
-%\end{table}
 
 \begin{table}[hbt]										
 	\centering									
@@ -1009,7 +742,7 @@ Entonces, priorizando la calidad del ajuste, la cantidad de casos de convergenci
 		\cmidrule(r){3-6}
 		\cmidrule(r){7-10}
 		%\midrule
-		&  & $\Gamma$ & LN & IG & IGJstar & $\Gamma$ & LN & IG & IGJstar\\ 
+		&  & $\Gamma$ & LN & IG & IGJstar & $\Gamma$  & LN & IG & IGJstar \\  
 		\midrule				
 		\multirow{5 }{*}{$-1.5$} 									
 		& $9$	& $-0.183$	& $-0.117$  	& $-0.84$	& $-0.525$	& $0.407$	& $0.417$	& $1.432$ & $1.348$  \\ 
@@ -1022,34 +755,166 @@ Entonces, priorizando la calidad del ajuste, la cantidad de casos de convergenci
 		\cmidrule(r){7-10}									
 		\multirow{5 }{*}{$-3$}									
 		& $9$   & $-0.652$    & $-0.552$	& $-1.659$				& $-1.584$	& $5.873$	& $8.945$	& $10.65$	 		 & $11.965$\\ 
-		& $25$	& $-0.338$    & $-0.066$	& $-0.582$				& $-0.684$	& $3.542$	& $2.352$	& \textbf{$1.843$}	 & $3.475$ \\ 
-		& $49$	& $-0.014$    & $0.015$  	& $-0.215$				& $-0.319$	& $0.928$	& $1.34$	& \textbf{$0.549$}	 & $1.145$ \\ 
-		& $81$	& $0.079$	  & $0.091$	    & \textbf{$-0.03$}	    & $-0.165$	& $0.397$	& $0.441$	& \textbf{$0.212$}	 & $0.490$ \\ 
-		& $121$	& $0.117$	  & $0.104$	    & \textbf{$0.025$}	    & $-0.108$	& $0.239$	& $0.285$	& $0.294$	 		 & $0.287$ \\ 
+		& $25$	& $-0.338$    & $-0.066$	& $-0.582$				& $-0.684$	& $3.542$	& $2.352$	& $\textbf{1.843}$	 & $3.475$ \\ 
+		& $49$	& $-0.014$    & $0.015$  	& $-0.215$				& $-0.319$	& $0.928$	& $1.34$	& $\textbf{0.549}$	 & $1.145$ \\ 
+		& $81$	& $0.079$	  & $0.091$	    & $\textbf{-0.03}$	    & $-0.165$	& $0.397$	& $0.441$	& $\textbf{0.212}$	 & $0.490$ \\ 
+		& $121$	& $0.117$	  & $0.104$	    & $\textbf{0.025}$	    & $-0.108$	& $0.239$	& $0.285$	& $0.294$	 		 & $0.287$ \\ 
 		%\midrule
 		\cmidrule(r){1-6}
 		\cmidrule(r){7-10}									
 		\multirow{5 }{*}{$-5$}									
-		& $9$	& $0.084$	& $0.67$	& \textbf{$-0.645$}      & $-0.743$			    & $11.348$		& $10.726$  	& \textbf{$9.943$}	 & $13.158$ \\ 
-		& $25$	& $0.225$	& $0.632$	& \textbf{$0.092$}	     & $-0.531$			    & $6.506$	    & $6.648$		& \textbf{$4.603$}	 & $8.359$ \\ 
-		& $49$	& $0.36$2	& $0.339$	& $0.604$	 			 & \textbf{$-0.099$}	& $3.989$	    & $5.787$	    & \textbf{$2.338$}	 & $4.688$ \\ 
-		& $81$	& $0.318$	& $0.437$	& $0.771$	 			 & \textbf{$-0.101$}	& $3.045$	    & $2.761$	    & \textbf{$1.852$}	 & $3.623$ \\ 
-		& $121$	& $0.36$	& $0.397$	& $0.896$	 			 & \textbf{$0.108$}	    & $1.95$	    & $2.041$	    & \textbf{$1.454$}	 & \textbf{$1.505$} \\ 
+		& $9$	& $0.084$	& $0.67$	& $\textbf{-0.645}$      & $-0.743$			    & $11.348$		& $10.726$  	& $\textbf{9.943}$	 & $13.158$ \\ 
+		& $25$	& $0.225$	& $0.632$	& $\textbf{0.092}$	     & $-0.531$			    & $6.506$	    & $6.648$		& $\textbf{4.603}$	 & $8.359$ \\ 
+		& $49$	& $0.36$2	& $0.339$	& $0.604$	 			 & $\textbf{-0.099}$	& $3.989$	    & $5.787$	    & $\textbf{2.338}$	 & $4.688$ \\ 
+		& $81$	& $0.318$	& $0.437$	& $0.771$	 			 & $\textbf{-0.101}$	& $3.045$	    & $2.761$	    & $\textbf{1.852}$	 & $3.623$ \\ 
+		& $121$	& $0.36$	& $0.397$	& $0.896$	 			 & $\textbf{0.108}$	    & $1.95$	    & $2.041$	    & $\textbf{1.454}$	 & $\textbf{1.505}$ \\ 
 		%\midrule
 		\cmidrule(r){1-6}
 		\cmidrule(r){7-10}									
 		\multirow{5 }{*}{$-8$}									
-		& $9$	& $2.346$	& $2.952$ & \textbf{$1.14$}     	& $1.382$				& 18.944		& $21.516$	& \textbf{$16.879$}	 & $19.118$ \\ 
-		& $25$	& $1.787$	& $2.209$	& \textbf{$1.96$}		& $0.93$				& $13.309$	 	& $16.633$	& \textbf{$11.463$}	 & $13.551$ \\ 
-		& $49$	& $1.41$	& $1.735$	& $2.442$				& \textbf{$1.073$}		& $13.02$	    & $12.658$  & \textbf{$10.667$}	 & \textbf{$10.100$} \\ 
-		& $81$	& $1.26$	& $1.462$	& $2.498$				& \textbf{$0.779$}		& $9.727$	    & $9.893$	& $10.468$	 		 & $10.278$  \\ 
-		& $121$	& $1.062$	& $1.235$	& $2.689$				& \textbf{$0.915$}		& $7.425$	    & $8.555$	& $8.983$	         & \textbf{$5.975$}  \\ 
-		\bottomrule									
+		& $9$	& $2.346$	& $2.952$   & $\textbf{1.14}$     	& $1.382$				& 18.944		& $21.516$	& $\textbf{16.879}$	 & $19.118$ \\ 
+		& $25$	& $1.787$	& $2.209$	& $\textbf{1.96}$		& $0.93$				& $13.309$	 	& $16.633$	& $\textbf{11.463}$	 & $13.551$ \\ 
+		& $49$	& $1.41$	& $1.735$	& $2.442$				& $\textbf{1.073}$		& $13.02$	    & $12.658$  & $10.667$	         & $\textbf{10.100}$ \\ 
+		& $81$	& $1.26$	& $1.462$	& $2.498$				& $\textbf{0.779}$		& $9.727$	    & $9.893$	& $10.468$	 		 & $10.278$  \\ 
+		& $121$	& $1.062$	& $1.235$	& $2.689$				& $\textbf{0.915}$		& $7.425$	    & $8.555$	& $8.983$	         & $\textbf{5.975}$  \\ 
+ 		\bottomrule 								
 	\end{tabular}										
 	\caption{\label{SesgoyECMSinContConConstL=3} Sesgo y ECM para $L=3$.}									
 \end{table}										
 
+\begin{figure}[H]
+	%	\subfigure[\label{AlfasContJSTAR2013Caso3_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso3.pdf}}
+	%	\subfigure[\label{ECMContJSTAR2013Caso3_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso3.pdf}}
+	%	\subfigure[\label{AlfasContJSTAR2013Caso3_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso3.pdf}}
+	%	\subfigure[\label{ECMContJSTAR2013Caso3_L=3}$\widehat{\text{ECM}}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso3.pdf}}
+	\subfigure[\label{AlfasContJSTAR2013Caso3_L=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=8Caso3BarrasError.pdf}}
+	\subfigure[\label{ECMContJSTAR2013Caso3_L=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso3BarrasError.pdf}}
+	\caption{\label{Caso3L8}\small Datos contaminados: Caso $3$, $\epsilon=0.005$ y $ L=8$.}
+\end{figure}
+
+\subsection{Evaluación de la performance entre los distintos métodos de estimación}
+
+En esta sección presentamos los resultados empíricos que obtuvimos sobre la calidad de los estimadores para el parámetro de textura del modelo $\mathcal G_I^0$. Como dijimos en la subsección anterior elegimos los métodos MV (máxima verosimilitud), $\Gamma$ (núcleo Gamma), LN (núcleo Lognormal) y LC (Logcumulant). El primero y último estimador son los más usados en la literatura, los otros son los propuestos en esta tesis.
+
+A través de un experimento de Montecarlo evaluamos la calidad de los estimadores estudiando:
+\begin{itemize}
+	\item el porcentaje de casos de no convergencia y el costo computacional.
+	\item el sesgo y el ECM para diferentes escenarios.
+	\item la robustez de estos estimadores por medio del Caso 1 de contaminación~\ref{Caso1} y de la función de influencia empírica que será definida en la subsección~\ref{FIES}.
+\end{itemize} 
+
+El experimento Montecarlo realizado es como el descripto en~\ref{ExperimentoMontecarlo}, en esta oportunidad se realizadon $500$ replicaciones independientes para cada uno de los valores de los parámetros: 
+$\alpha\in\{-1.5, -3, -5, -8\}$, $L\in\{1,3,8\}$, $n\in\{9, 25,49, 81,121,500\}$, valores similares a los estudiados en~\cite{gambini2015}. 
+
+\subsubsection{Cantidad de casos de no convergencia y tiempos de proceso}
+En la tabla~\ref{NoConvMLyNGyLNyLC_L=3} se muestra el porcentaje de casos de no convergencia para $L=3$, el caso $L=8$ arrojan valores similares. Se puede observar que los método ML y LC son los que mayor porcentaje de no convergencia presentan, seguidos por el método LN y por último el método $\Gamma$. 
+
+\begin{table}[hbt]
+	\caption{Porcentaje de casos de no convergencia  L=$3$.}
+	\centering
+	\label{NoConvMLyNGyLNyLC_L=3}
+	\begin{tabular}{c*6{r}}
+			\toprule		
+			$\alpha$ & $n$ & ML & $\Gamma$ & LN &  LC\\
+			\midrule
+			\multirow{2 }{*}{$-1.5$} 
+			&   $9$ & $0$ & $0$ & $0.4$ &  $2.8$\\
+			&  $25$ & $0$ & $0$ & $0$ & $0.2$\\
+			\midrule
+			\multirow{5 }{*}{$-3$} 
+			&   $9$ & $13$    & $5.2$  & $7.2$  &  $28.4$\\ 
+			&  $25$ & $1$     & $0.2$  & $1$    &  $11.4$\\
+			&  $49$ & $0.2$   & $0$    & $0.4$  & $3.8$\\ 
+			&  $81$ & $0$     & $0$    & $0$    & $2.4$\\ 
+			& $121$ & $0$     & $0$    & $0$    & $0.2$\\ 
+			\midrule
+			\multirow{5 }{*}{$-5$} 
+			&   $9$ & $26.8$  & $9.6$  & $13.2$ &  $35.2$\\ 
+			&  $25$ & $10$    & $3.4$  & $5$    & $28.6$\\ 
+			&  $49$ & $3.4$   & $1.4$  & $1.2$  & $18.6$\\ 
+			&  $81$ & $0.2$   & $0.4$  & $0.8$  & $15.8$\\ 
+			& $121$ & $0.4$   & $0$    & $0.2$  & $9.6$\\ 
+			& $500$ & $0$     & $0$    & $0$    & $0.6$\\ 
+			\midrule
+			\multirow{5 }{*}{$-8$} 
+			&   $9$  & $39.6$ & $16.6$ & $19$   & $44.2$\\ 
+			&  $25$  & $28.6$ & $9$    & $11$   & $36.4$\\ 
+			&  $49$  & $18.4$ & $5$    & $5.4$  & $31.6$\\ 
+			&  $81$  & $12$   & $4.4$  & $4$    & $27.2$\\ 
+			& $121$  & $5.8$  & $1.8$  & $2$    & $24.6$\\ 
+			& $500$  & $0$    & $0$    & $0.2$  & $9$\\
+			\bottomrule 	
+		\end{tabular}
+\end{table}	
+
+En la tabla~\ref{tablaDeTiemposmediosMVyGAyLNyLC} se muestran los tiempos medios, medidio en segundos, para el caso de datos sin contaminación, $L=3$ y $n=81$. En esta oportunidad la plataforma informática utilizada para realizar los procesos fue Intel(R) Core i7, con 16GB de memoria, 64 bits Windows 7. Si bien se duplicó la memoria del procesador, no cambió el tiempo de proceso de los estimadores MV y LC. En cambio el tiempo de proceso de los MDE estimadores se redujo un $18\%$. Esta reducción se puede adjudicar al cambio de equipo informático como a la forma de encontrar la minimización.
+
+\begin{table}[htb]
+	\centering
+	\begin{tabular}{cccc}
+		\toprule
+		MV& $\Gamma$ & LN & LC \\
+		\midrule
+		$0.003$& $1.87$ & $1.87$ &$0.003$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{\label{tablaDeTiemposmediosMVyGAyLNyLC}\small Tiempos medios para datos simulados sin contaminación, $L=3$, $n=81$. }
+\end{table}
+
+\subsubsection{Evaluación de los métodos de estimación para datos sin contaminar}
+
+En la figura~\ref{SesgoyECMSinContL=3} se muestra el sesgo y el ECM estimados para datos sin contaminar y el caso L=3, junto con sus intervalos de confianza de nivel asintótico $0.95$. Las iteraciones consideradas son aquellas en donde todos los métodos convergen. Se puede observar que  a medida que el valor del $\alpha$ disminuye, tanto $\widehat{\text{Sesgo}}$ como $\widehat{\text{ECM}}$ van aumentando su valor en la mayoría de los métodos. Dado que por cuestiones de escala, no se puede evaluar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -5$ lo graficamos aparte, en la figura~\ref{SesgoyECMSinContL=3,-1.5y-3}. Se puede observar que el estimador MV y LC por un lado, y $\Gamma$ y LN por el otro tienen un comportamiento similar tanto en sesgo como en ECM en la mayoría de los casos. Para zonas extremadamente heterogéneas y heterogéneas los MDE estimadores presentan una mejor performance que el resto. En cambio para zonas moderadamente texturadas y homogéneas el comportamiento se revierte.
+\begin{figure}[H]
+	\subfigure[\label{SesgoSinContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasError.pdf}}
+	\subfigure[\label{ECMSinContL=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasError.pdf}}
+	\caption{\label{SesgoyECMSinContL=3}\small Sesgo y ECM estimados para datos sin contaminar y $ L=3$.}
+\end{figure}
+
+Dado que por cuestiones de escala, no se puede evaluar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -5$ hicimos un gráfico mostrando únicamente estos casos para su mejor visualización.
+
+\begin{figure}[H]
+	\subfigure[\label{SesgoSinContL=3,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3.pdf}}
+	\subfigure[\label{ECMSinContL=3,-1.5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3.pdf}}
+	\caption{\label{SesgoyECMSinContL=3,-1.5y-3}\small Sesgo y ECM estimados para datos sin contaminar, $ L=3$ y $\alpha=-1.5, -3$.}
+\end{figure}
+
+El mismo análisis se presenta en las figuras~\ref{SesgoyECMSinContL=8} y~\ref{SesgoyECMSinContL=8,-1.5y-3} para el caso $L=8$. En este caso el MV estimador es el que mejor performance muestra para zonas homogéneas, mientras que el LN estimador supera la resto en zonas extremadamente texturadas y con moderada textura.
+
+\begin{figure}[H]
+	\subfigure[\label{SesgoSinContL=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasError.pdf}}
+	\subfigure[\label{ECMSinContL=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasError.pdf}}
+	\caption{\label{SesgoyECMSinContL=8}\small Sesgo y ECM estimados para datos sin contaminar y $ L=8$.}
+\end{figure}
+
+
+\begin{figure}[H]
+	\subfigure[\label{SesgoSinContL=8,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasError-1punto5y-3.pdf}}
+	\subfigure[\label{ECMSinContL=8,-1.5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasError-1punto5y-3.pdf}}
+	\caption{\label{SesgoyECMSinContL=8,-1.5y-3}\small Sesgo y ECM estimados para datos sin contaminar, $ L=8$ y $\alpha=-1.5, -3$.}
+\end{figure}
+
+De acuerdo al estudio para datos sin contaminación podemos concluir que el estimador LN es competitivo frente al resto de los estimadores para datos sin contaminar, incluso en alguno de los casos evaluados presenta una mejor performance que el resto de los métodos estudiados.
+
+\subsubsection{Evaluación de los métodos de estimación para datos contaminados}
+
+En las figuras~\ref{SesgoyECMConContL=3} y ~\ref{SesgoyECMConContL=3} se muestran los gráficos correspondientes a datos contaminados. En esta instancia se analizó el caso 1 de contaminación, que se presentó en~\ref{Caso1}, con $\epsilon=0.05$. Se ve con mayor claridad cómo se agrupan los estimadores por desempeño. MV y LC por un lado y los MDE por otro lado. Es notable la diferencia, tanto en sesgo como en ECM, a favor de los MDE estimadores para valores grandes de $\alpha$. En zonas moderadamente texturadas todos los métodos son comparables aunque los MDE estimadores presentan un menor ECM. Para zonas homogéneas MV y LC estimadores presentan menor sesgo aunque mayor variabilidad.
+
+\begin{figure}[H]
+	\subfigure[\label{SesgoConContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasError.pdf}}
+	\subfigure[\label{ECMConContL=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasError.pdf}}
+	\caption{\label{SesgoyECMConContL=3}\small Sesgo y ECM estimados para datos contaminados, Caso 1~\ref{Caso1}, $\epsilon=0.05$ y $ L=3$.}
+\end{figure}
+
+\begin{figure}[H]
+	\subfigure[\label{SesgoConContL=3-1punto5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3.pdf}}
+	\subfigure[\label{ECMConContL=3-1punto5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3.pdf}}
+	\caption{\label{SesgoyECMConContL=3-1punto5y-3}\small Sesgo y ECM estimados para datos contaminados, Caso 1~\ref{Caso1}, $\epsilon=0.05$, $\alpha=-1.5, -3$ y $ L=3$.}
+\end{figure}
+
+De acuerdo a este análisis el LN estimador es el que mejor desempeño presenta, tanto para datos contaminados como sin contaminar, para zonas con textura.
+
 \subsection{Función de influencia empírica}
+\label{FIES}
 
 Otra forma de evaluar cómo un estimador $T_n(z_1; \ldots ; z_n)$ se comporta bajo contaminación es fijar $n-1$ observaciones y permitir que una observación varíe. Esto se conoce como \textit{Función de influencia empírica}(FIE). El problema de esta metodología es que depende de una muestra en particular. Para evitar esto Andrews et al.~\cite{Andrews1972} propusieron generar una muestra formada por los \textit{i-ésimos} cuantiles de la distribución, F, que se asume como modelo teórico. Estos cuantiles se definen como $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
 
@@ -1064,12 +929,133 @@ para todo $z>0$, donde $\Upsilon_{2L, -2\alpha}$ es la función de distribución
 
 De esta manera, los cuantiles de la distribución $\mathcal{G}_I^0(\alpha,\gamma,L)$ se pueden obtener a partir de $\Upsilon^{-1}_{2L,-2\alpha}$, que está disponible en la mayoría de los entornos computacionales.
 
-Las figuras~\ref{InflL3alfa-3n25} y~\ref{InflL3alfa-3n25} muestran las FIES para $L=3$, $n=25$ y $\alpha=-3, -8$ respectivamente. La línea horizontal azul indica el verdadero valor de $\alpha$, los ticks rojos indican el máximo y mínimo cuantil respectivamente, es decir, $F^{-1}_{-5,4,L}\big(2/(3n+1)\big)$ y $F^{-1}_{-5,4,L}\big((3n-4)/(3n+1)\big)$. 
+Las figuras~\ref{InflL3alfa-1.5n25},~\ref{InflL3alfa-3n25}~\ref{InflL3alfa-5n25} y~\ref{InflL3alfa-8n25} muestran las FIES para $L=3$, $n=25$ y $\alpha=-1.5, -3, -5, -8$ respectivamente. La línea horizontal azul indica el verdadero valor de $\alpha$, los ticks rojos indican el máximo y mínimo cuantil, es decir, $F^{-1}_{-5,4,L}\big(2/(3n+1)\big)$ y $F^{-1}_{-5,4,L}\big((3n-4)/(3n+1)\big)$. 
 
-Se puede observar que $\widehat{\text{MV}}$ y $\widehat{\text{LC}}$ tienen un comportamiento similar, esto se observa especialmente para $\alpha=-3$. Tanto $\widehat{\Gamma}$ como $\widehat{\text{LN}}$ tiene una mejor performance respecto de los otros estimadores para valores de $z$ menores que el último cuantil. Mas aún, $\widehat{\text{MV}}$ no converge para estos niveles de contaminación. Este comportamiento muestra la sensibilidad y la pérdida de robustez de $\widehat{\text{MV}}$ y $\widehat{\text{LC}}$. Todos los estimadores se comportan de manera similar para valores grandes de contaminación.
+Se puede observar que $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\text{LC}}$ y, por otro lado, $\widehat{\alpha}_{\Gamma}$ y $\widehat{\alpha}_{\text{LN}}$ tienen un comportamiento similar para $\alpha=-3, -5, -8$. Para zonas extremandamente texturadas $\widehat{\alpha}_{\text{LN}}$ es el que mejor performance tiene, mientras que para el resto de las texturas tanto $\widehat{\alpha}_{\Gamma}$ como $\widehat{\alpha}_{\text{LN}}$ tienen una mejor performance respecto de los otros estimadores, para valores de $z$ menores que el último cuantil. Mas aún, $\widehat{\alpha}_{\text{MV}}$ no converge para zonas moderadamente heterogéneas y homogéneas, mientras que $\widehat{\alpha}_{\text{LC}}$ no converge para zonas homogéneas. Todos los estimadores se comportan de manera similar para valores grandes de $z$. Este comportamiento muestra la sensibilidad y la pérdida de robustez de $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{LC}}$ frente a los otros estimadores. 
+
+Las figuras~\ref{InflL8alfa-1.5n25},~\ref{InflL8alfa-3n25}~\ref{InflL8alfa-5n25} y~\ref{InflL8alfa-8n25} muestran las FIES para $L=8$, $n=25$ y $\alpha=-1.5, -3, -5, -8$ respectivamente. El desempeño de los estimadores para este caso es similar a lo descripto para $L=3$. Hay que mencionar que todos los métodos convergen para este caso donde hay menor presencia de ruido speckle. 
 
 \begin{figure}[htb]
+	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-1punto5L3n25.pdf}}
 	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-3L3n25.pdf}}
-	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L3n25.pdf}}
-	\caption{\label{InflL3n25}\small FIES para $\widehat{\text{MV}}$, $\widehat{\Gamma}$, $\widehat{\text{LN}}$, $\widehat{\text{LC}}$ para $L=3$, $n=25$.}
+	\caption{\label{InflL3n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}
 \end{figure}
+
+\begin{figure}[htb]
+	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L3n25.pdf}}
+	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-8L3n25.pdf}}
+	\caption{\label{InflL3n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}
+\end{figure}
+
+\begin{figure}[htb]
+	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-1punto5L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-3L8n25}}
+	\caption{\label{InflL8n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}
+\end{figure}
+
+\begin{figure}[htb]
+	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-8L8n25}}
+	\caption{\label{InflL8n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}
+\end{figure}
+
+\subsection{Aplicación a una imagen real}
+\label{AplicacionImagenReal}
+
+En esta sección evaluaremos a los estimadores $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ cuando estimamos en una imagen real. En este caso utilizamos la imagen~\ref{reales2}. Esta imagen es de un solo look. Para obtener una imagen multilook calculamos nuevos píxeles promediando los valores de intensidad en ventanas deslizantes, no superpuestas, de tamaño $2\times2$. Esta técnica se conoce como procesamiento piramidal~\cite{Adelson1984}, la imagen resultante es una imagen multilook. 
+
+El número de looks se define como $E(I)^2/Var(I)$ donde $I$ es un área homogénea. En general es un parámetro conocido, pero en el caso que no lo sea se puede estimar por el número equivalente de looks definido como $ENL=1/\widehat{CV(I)}^2$, el cuadrado del recíproco del coeficiente de variación muestral $\widehat{CV}=\widehat{\sigma}/\widehat{\mu}$, donde $\widehat{\sigma}$ y $\widehat{\mu}$ son el desvío estandard y la media muestral respectivamente.
+
+Para encontrar el $ENL$ elegimos manualmente $4$ muestras de zonas homogéneas y calculamos $ENL_i$ con $i=1,\ldots,4$. El valor final de $ENL$ se obtiene haciendo un promedio ponderado por el tamaño de cada muestra. El valor de $ENL$ obtenido es $3.21$. La figura~\ref{MuestraLooks} muestra la imagen ESAR multilook junto con las muestras utilizadas para obtener $ENL$.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/MuestrasEstimNumLooks.pdf}
+	\caption{\label{MuestraLooks}\small Muestras para estimación de ENL en una imagen Esar multilook.}
+\end{figure}
+
+En la figura~\ref{TresMuestras} están graficadas tres muestras: amarilla, roja y azul. Las dos primeras de tamaño $16$, la última de tamaño $12$. La muestra roja es un desplazamiento respecto de la muestra amarilla en una fila de la matriz de datos de la imagen, la muestra azul está contenida dentro de la muestra amarilla. La tabla~\ref{TablaTresMuestras} muestra los valores de las estimaciones obtenidas con cada método de estimación en cada una de las muestras. Se puede observar que  el valor de las estimaciones en la muestra amarilla difieren considerablemente entre los métodos. Tanto máxima verosimilitud como Logcumulants arrojan estimaciones de $\widehat{\alpha}$ compatibles con una zona homogénea, mientras que $\widehat{\alpha}_{\Gamma}$ indica que la zona es heterogénea y $\widehat{\alpha}_{\text{LN}}$ está en el límite de afirmar si la zona es heterogénea o extremadamente heterogénea.
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/TresMuestras.pdf}
+	\caption{\label{TresMuestras}\small Tres muestras utilizadas para comparar  $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$.}
+\end{figure}
+
+¿Por qué sucede esto? es la pregunta inmediata. 
+%\begin{table*}[htb]
+%	\centering
+%	\caption{\label{TablaTresMuestras} Valores de $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\text{LC}}$ para la muestra amarilla de la imagen~\ref{TablaMeustraAmarillaComparaEstima}.}
+%	\begin{tabular}{c*5{c}}
+%		\toprule
+%		Color       &  n    &  $\widehat{\alpha}_{\text{MV}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{LN}}$ &  $\widehat{\alpha}_{\text{LC}}$\\
+%		\midrule
+%		Amarilla    & $16$       & $-7.212581$   & $-4.343894$    & $-3.234532$    & $-6.738052$\\
+%		%Verde       & $36$       & $-5.084925$   & $-4.031801$    & $-3.6526845$   & $-5.008744$\\
+%		%amarilla    & $64$       & $-2.345413$   & $-2.232697$    & $-2.12085$     & $-2.576072$\\
+%		\bottomrule
+%	\end{tabular}
+%\end{table*}
+
+Entonces volvimos a estimar en una ventana desplazada (muestra roja) y en una ventana contenida (muestra azul). Las estimaciones se presentan en la tabla~\ref{TablaTresMuestras}.
+\begin{table*}[htb]
+	\centering
+	\caption{\label{TablaTresMuestras} Valores de $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\text{LC}}$ para las tres muestras de la imagen~\ref{TresMuestras}.}
+	\begin{tabular}{c*5{c}}
+		\toprule
+		Color       &  n    &  $\widehat{\alpha}_{\text{MV}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{LN}}$ &  $\widehat{\alpha}_{\text{LC}}$\\
+		\midrule
+		Amarilla    & $16$  & $-7.212581$ & $-4.343894$ & $-3.234532$ & $-6.738052$\\
+		Roja        & $16$  & $-3.036808$ & $-3.420479$ & $-2.123289$ & $-3.265889$\\
+		Azul        & $12$  & $-4.611385$ & $-3.851962$ & $-2.350084$ & $-4.516257$\\
+		\bottomrule
+	\end{tabular}
+\end{table*}
+
+Se puede observar que, tanto $\widehat{\alpha}_{\text{MV}}$ como $\widehat{\alpha}_{\text{LC}}$ han cambiado sustancialmente el valor de las estimaciones, dando ahora valores compatibles con una zona heterogénea en las muestras Roja y Azul. Si bien $\widehat{\alpha}_{\Gamma}$ y $\widehat{\alpha}_{\text{LN}}$ cambiaron de valor, no se modificó el tipo de zona que describen. 
+
+Entonces, basándonos en los resultados de las simulaciones obtenidas para las FIES correspondientes a las figuras~\ref{InflL3alfa-3n25} y~\ref{InflL3alfa-3n25} que muestran la falta de robustez de MV y LC ante una contaminación con un valor bajo, volvimos a estimar quitando la primera observación que corresponde a un valor $86\%$ más bajo que la media. Las estimaciones obtenidas se presentan en la tabla~\ref{SinPrimero}
+\begin{table*}[htb]
+	\centering
+	\caption{\label{SinPrimero} Valores de $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\text{LC}}$ para la muestra amarilla sin el primer elemento.}
+	\begin{tabular}{c*4{c}}
+		\toprule
+		                n    &  $\widehat{\alpha}_{\text{MV}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{LN}}$ &  $\widehat{\alpha}_{\text{LC}}$\\
+		\midrule
+		               $15$  & $-5.733452$   & $-3.970921$    & $-3.128065$    & $-4.802438$\\
+		\bottomrule
+	\end{tabular}
+\end{table*}
+ 
+Nuevamente se puede observar el cambio significativo en el valor de las estimaciones de los MV y LC estimadores, dando ahora estimaciones compatibles con una zona homogénea. Esto muestra la robustez del estimador de distancias estocásticas frente a los estimadores MV y LC.
+
+En la figura~\ref{CincoMuestras} se presentan cinco muestras que fueron para realizar otro análisis del desempeño de los métodos de estimación. El tamaño de las muestras es $n=9,25,49,81,121$ que corresponden a ventanas cuadradas, una contenida dentro de la otra. En la figura~\ref{AlfaVsTamCincoMuestras} se muestra el valor de $\widehat{\alpha}$ para cada método y cada muestra en función del tamaño de muestra. Los valores de las estimaciones obtenidas presentan en la tabla~\ref{TablaCincoMuestras}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/CincoMuestras.pdf}
+	\caption{\label{CincoMuestras}\small Cinco muestras utilizadas para comparar  $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$.}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/AlfaVsTamCincoMuestras_v2.pdf}
+	\caption{\label{AlfaVsTamCincoMuestras}\small $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$ para cinco muestras variando el tamaño de las ventanas de la imagen~\ref{CincoMuestras}.}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{\label{TablaCincoMuestras}$\widehat{\alpha}$ para cinco muestras variando el tamaño de las ventanas de imagen~\ref{CincoMuestras}.}
+	\begin{tabular}{c*5{c}}
+		\toprule
+		Color       &  n    &  $\widehat{\alpha}_{\text{MV}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{LN}}$ &  $\widehat{\alpha}_{\text{LC}}$\\
+		\midrule
+		Amarilla    & $9$     & $-20$       & $-7.970677$ & $-4.727529$ & $-20$\\
+		Roja        & $25$    & $-10.3127$  & $-5.417753$ & $-4.301603$ & $-9.806147$\\
+		Azul        & $49$    & $-3.072795$ & $-3.119539$ & $-2.440396$ & $-3.285406$\\
+		Verde       & $81$    & $-2.244657$ & $-2.152866$ & $-2.033067$ & $-2.4545$\\
+		Magenta     & $121$   & $-2.04354$  & $-1.999166$ & $-2.048823$ & $-2.130614$\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+En este nuevo análisis se pone de manifiesto el comportamiento de los estimadores bajo estudio. Se puede observar que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{LC}}$ tienen un desempeño similar, y por otro lado esto mismo se pone de manifiesto con $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\Gamma}$. Además, para $n=9$ no convergen ninguno de los métodos MV y LC. A medida que el tamaño de muestra aumenta las estimaciones se van estabilizando mostrando que el método LN es el más estable mientras que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{LC}}$ son los más inestables, dando malas estimaciones para tamaño de muestras pequeño.

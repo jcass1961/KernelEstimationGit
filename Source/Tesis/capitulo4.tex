@@ -33,7 +33,7 @@ Este modelo considera que el valor observado en cada celda de la imagen es una v
 %\end{figure} 
 %En esta figura se puede observar que la naturaleza multiplicativa del ruido speckle se manifiesta en la recta que pasa por el origen producto del ajuste lineal que se realizó al conjunto de datos. De acuerdo a Lee y Pottier~\cite{Lee2009} los valores de las pendiendes para $1$-look y $4$-look son $0.54$ y $0.26$ respectivamente, que son razonablemente cercanos a los valores teóricos $0.5227$ y $0.261$ respectivamente.
 
-Se han utilizado algunos distribuciones estadísticas para modelar los datos SAR, entre ellas se encuentra la distribución LogNormal, la Weibull y la distribución $\mathrm{K}$~\cite{Lee2009}. 
+Se han utilizado algunos distribuciones estadísticas para modelar los datos SAR, entre ellas se encuentra la distribución Lognormal, la Weibull y la distribución $\mathrm{K}$~\cite{Lee2009}. 
 
 Un modelo común para datos que provienen de zonas homogéneas y con mucha presencia de ruido speckle son la distribución exponencial y la Rayleigh~\cite{Frery97}. En cambio las distribuciones $\mathrm{K}$~\cite{Jakeman87} han sido muy utilizada en datos SAR especialmente cuando los datos provienen de áreas texturadas. 
 
@@ -262,13 +262,13 @@ la distribución $\mathcal{G}_I$ puede aproximar muy bien a la distribución  $\
 \label{ModeloGI0}
 
 Diremos que si $Z=X \cdot Y$ con $X \sim \Gamma^{-1}(-\alpha,\gamma)$ e $Y \sim \Gamma(L,L)$ independiente, el retorno $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$. Su función de densidad está dada por 
-\begin{equation*}
+\begin{equation}
 f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
 	L) }\cdot  
 \frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
 \label{ec_dens_gI0}
-\end{equation*}
+\end{equation}
 donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
 
 Los momentos de orden $r$ están dados por
@@ -302,6 +302,7 @@ Bajo este modelo se pueden caracterizar regiones con diferentes grado de textura
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Resultados Teóricos}
+\label{ResultadosTeoricosGI0}
 
 En esta sección se darán nuevos resultados teóricos que muestran que la distribución $\mathcal{G}_I^0$ es una distribución de colas pesadas~\cite{gambini2015}. Esto explica en parte los problemas que se enfrentan al buscar estimadores de los parámetros de esta distribución.  También se presentan nuevos resultados sobre el comportamiento asintótico de la distribución $\mathcal{G}_I^0$ respectos de sus parámetros, que se necesitarán para demostrar la consistencia del estimador del parámetro de textura $\alpha$ propuesto en esta tesis.
 
