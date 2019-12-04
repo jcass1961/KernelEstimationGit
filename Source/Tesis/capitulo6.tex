@@ -182,11 +182,11 @@ En las figuras~\ref{ImagenReales1} y~\ref{ImagenReales1} se muestran dos imágen
 \hspace{0.3cm} % Si queremos tener un poco de espacio entre las dos figuras
 	\begin{minipage}[b]{0.55\linewidth} %Una minipágina que cubre la mitad de la página
 		\centering    
-		\subfigure[\label{ImagenReales2} Imagen E-SAR, L=$1$.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortadaBien.eps}}\\
-		\subfigure[\label{Real2DH} Hellinger.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3regionesDH.eps}}
-		\subfigure[\label{Real2DR} R\'enyi, $\beta=0.8$.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/munichcortada3regionesR.eps}}
-		\subfigure[\label{Real2DT} Triangular.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3regionesDT3x3.eps}}
-		\subfigure[\label{Real2MV} MV.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3RegionesMV.eps}}
+		\subfigure[\label{ImagenReales2} Imagen E-SAR, L=$1$.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortadaBien.pdf}}\\
+		\subfigure[\label{Real2DH} Hellinger.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3regionesDH.pdf}}
+		\subfigure[\label{Real2DR} R\'enyi, $\beta=0.8$.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/munichcortada3regionesR.pdf}}
+		\subfigure[\label{Real2DT} Triangular.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3regionesDT3x3.pdf}}
+		\subfigure[\label{Real2MV} MV.]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Capitulo6/MunichCortada3RegionesMV.pdf}}
 		\caption{\small Resultado de estimar el parámetro $\alpha$ para cada pixel, usando ventanas deslizantes de tamaño  $3\times 3$.}
 \end{minipage}
 \end{figure}
@@ -933,26 +933,26 @@ Se puede observar que $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\text{L
 Las figuras~\ref{InflL8alfa-1.5n25},~\ref{InflL8alfa-3n25}~\ref{InflL8alfa-5n25} y~\ref{InflL8alfa-8n25} muestran las FIES para $L=8$, $n=25$ y $\alpha=-1.5, -3, -5, -8$ respectivamente. El desempeño de los estimadores para este caso es similar a lo descripto para $L=3$. Hay que mencionar que todos los métodos convergen para este caso donde hay menor presencia de ruido speckle. 
 
 \begin{figure}[htb]
-	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-1punto5L3n25.pdf}}
-	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-3L3n25.pdf}}
+	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_1punto5L3n25.pdf}}
+	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_3L3n25.pdf}}
 	\caption{\label{InflL3n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}
 \end{figure}
 
 \begin{figure}[htb]
-	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L3n25.pdf}}
-	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-8L3n25.pdf}}
+	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_5L3n25.pdf}}
+	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_8L3n25.pdf}}
 	\caption{\label{InflL3n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}
 \end{figure}
 
 \begin{figure}[htb]
-	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-1punto5L8n25.pdf}}
-	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-3L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_1punto5L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_3L8n25.pdf}}
 	\caption{\label{InflL8n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}
 \end{figure}
 
 \begin{figure}[htb]
-	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L8n25.pdf}}
-	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../../KernelEstimation/Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-8L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_5L8n25.pdf}}
+	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa_8L8n25.pdf}}
 	\caption{\label{InflL8n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}
 \end{figure}
 
@@ -967,14 +967,14 @@ Para encontrar el $ENL$ elegimos manualmente $4$ muestras de zonas homogéneas y
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/MuestrasEstimNumLooks.pdf}
+	\includegraphics[width=0.8\linewidth]{../../Figures/Tesis/ImagenReal/MuestrasEstimNumLooks.pdf}
 	\caption{\label{MuestraLooks}\small Muestras para estimación de ENL en una imagen Esar multilook.}
 \end{figure}
 
 En la figura~\ref{TresMuestras} están graficadas tres muestras: amarilla, roja y azul. Las dos primeras de tamaño $16$, la última de tamaño $12$. La muestra roja es un desplazamiento respecto de la muestra amarilla en una fila de la matriz de datos de la imagen, la muestra azul está contenida dentro de la muestra amarilla. La tabla~\ref{TablaTresMuestras} muestra los valores de las estimaciones obtenidas con cada método de estimación en cada una de las muestras. Se puede observar que  el valor de las estimaciones en la muestra amarilla difieren considerablemente entre los métodos. Tanto máxima verosimilitud como Logcumulants arrojan estimaciones de $\widehat{\alpha}$ compatibles con una zona homogénea, mientras que $\widehat{\alpha}_{\Gamma}$ indica que la zona es heterogénea y $\widehat{\alpha}_{\text{LN}}$ está en el límite de afirmar si la zona es heterogénea o extremadamente heterogénea.
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/TresMuestras.pdf}
+	\includegraphics[width=0.8\linewidth]{../../Figures/Tesis/ImagenReal/TresMuestras.pdf}
 	\caption{\label{TresMuestras}\small Tres muestras utilizadas para comparar  $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$.}
 \end{figure}
 
@@ -1039,14 +1039,14 @@ Luego de generar las muestras bootstrap encontramos el intervalo de confianza po
 Los valores de las estimaciones obtenidas se presentan en la tabla~\ref{TablaCincoMuestras}.
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/CincoMuestras.pdf}
+	\includegraphics[width=0.7\linewidth]{../../Figures/Tesis/ImagenReal/CincoMuestras.pdf}
 	\caption{\label{CincoMuestras}\small Cinco muestras utilizadas para comparar  $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$.}
 \end{figure}
 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.8\linewidth]{../../../KernelEstimation/Figures/Tesis/ImagenReal/AlfaVsTamCincoMuestras_v2.pdf}
+	\includegraphics[width=0.8\linewidth]{../../Figures/Tesis/ImagenReal/AlfaVsTamCincoMuestras_v2.pdf}
 	\caption{\label{AlfaVsTamCincoMuestras}\small $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$ para cinco muestras variando el tamaño de las ventanas de la imagen~\ref{CincoMuestras}.}
 \end{figure}
 
