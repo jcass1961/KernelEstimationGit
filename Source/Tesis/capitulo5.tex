@@ -12,13 +12,13 @@ Es sabido que tener información sobre la función de densidad o distribución d
 En este sentido existen dos enfoques para abordar este problema. 
 
 \begin{itemize}
-	\item Un enfoque paramétrico: donde se considera que la función de densidad teórica pertenece a una familia de funciones de densidad $f_X(\theta)$ conocida, indexada por el vector de parámetros $\theta$. Bajo esta suposición estimar la función de densidad teórica se reduce a estimar el valor de los parámetros del modelo a partir de la información proporcionada por la muestra. Los métodos clásicos de estimación paramétrica son: Método de los Momentos y Método de Máxima Verosimilitud. En los últimos años el Método de Logcumulants, que se basa en la transformada de Mellin, ha ganado interés por su buena performance.
+	\item Un enfoque paramétrico: donde se considera que la función de densidad teórica pertenece a una familia de funciones de densidad $f_X(\theta)$ conocida, indexada por el vector de parámetros $\theta$. Bajo esta suposición estimar la función de densidad teórica se reduce a estimar el valor de los parámetros del modelo a partir de la información proporcionada por la muestra. Los métodos clásicos de estimación paramétrica son: Método de los Momentos y Método de Máxima Verosimilitud. En los últimos años el Método de Logcumulantes, que se basa en la transformada de Mellin, ha ganado interés por su buena performance.
 	\item Un enfoque no paramétrico: donde no se hace ninguna suposición inicial sobre la familia de densidades a las que pertenece la función de densidad teórica, sino que trata de estimarla teniendo como única información los datos muestrales, imponiendo  solamente las condiciones necesarias para que dicha estimación sea una función de densidad.
 \end{itemize}
 
 El principal aporte de esta tesis es la propuesta de un nuevo método de estimación para los parámetros del modelo $\mathcal G_I^0$ con buenas propiedades que serán estudiadas a través del sesgo, del error cuadrático medio y de su capacidad para resistir presencia de datos atípicos, aún en el caso de muestras de pequeño y moderado tamaño. Este estimador surge de la minimización de distancias estocásticas entre la función de densidad teórica y una estimación no paramétrica de la función densidad subyacente utilizando núcleos asimétricos. 
 
-En este capítulo describimos dos metodologías de estimación de la función de densidad: paramétrica y no paramétrica. Presentamos los estimadores de momento, de máxima verosimilitud y logcumulant del parámetro de textura de la distribución $\mathcal{G}_I^0$, que son los estimadores que utilizaremos para evaluar la performance del propuesto en esta tesis. También presentamos los conceptos de estimación no paramétrica de la función de densidad, núcleos asimétricos, distancias estocásticas y estimadores de mínima distancia estocástica porque son el corazón del estimador planteado.  Asimismo hacemos una discusión de diferentes distancias estocásticas estudiadas y diferentes núcleos utilizados para estimar la función de densidad subyacente. Finalmente nuestra propuesta para estimar el parámetro de textura del modelo $\mathcal{G}_I^0$ que es el argumento que minimiza una distancia estocástica entre la función de densidad teórica del modelo teórico y una estimación no paramétrica de la función de densidad subyacente. 
+En este capítulo describimos dos metodologías de estimación de la función de densidad: paramétrica y no paramétrica. Presentamos los estimadores de momento, de Máxima Verosimilitud y Logcumulantes del parámetro de textura de la distribución $\mathcal{G}_I^0$, que son los estimadores que utilizaremos para evaluar la performance del propuesto en esta tesis. También presentamos los conceptos de estimación no paramétrica de la función de densidad, núcleos asimétricos, distancias estocásticas y estimadores de mínima distancia estocástica porque son el corazón del estimador planteado.  Asimismo hacemos una discusión de diferentes distancias estocásticas estudiadas y diferentes núcleos utilizados para estimar la función de densidad subyacente. Finalmente nuestra propuesta para estimar el parámetro de textura del modelo $\mathcal{G}_I^0$ que es el argumento que minimiza una distancia estocástica entre la función de densidad teórica del modelo teórico y una estimación no paramétrica de la función de densidad subyacente. 
 
 
 \section{Estimación Paramétrica}
@@ -57,7 +57,7 @@ Las ecuaciones de momento de orden $1$ y de orden $\frac{1}{2}$ para estimar los
 \textcolor{blue}{
  El Método de Máxima Verosimilitud fue popularizado por R. Fisher entre 1912 y 1922. Sin embargo este método había sido utilizado antes por Gauss, Laplace entre otros investigadores. La idea del método consiste en, dada una muestra, estimar los parámetros de la distribución que maximice la probabilidad de que haya salido esa muestra. Esto requiere mirar a la función de densidad conjunta como función de los parámetros, a esta función se llama función de verosimilitud.
 \begin{definition}
-Si $X_1, \ldots, X_n$ es una muestra de variables aleatorias independientes e idénticamente distribuidas con función de densidad $f_{X;\theta}$  con $\theta \in \Theta \subset \mathbb{R}^k$, diremos que $\widehat{\theta}_{\text{MV}}$ es el estimador de máxima verosimilitud de $\theta$ si verifica que 
+Si $X_1, \ldots, X_n$ es una muestra de variables aleatorias independientes e idénticamente distribuidas con función de densidad $f_{X;\theta}$  con $\theta \in \Theta \subset \mathbb{R}^k$, diremos que $\widehat{\theta}_{\text{MV}}$ es el estimador de Máxima Verosimilitud de $\theta$ si verifica que 
 \begin{align}
 \widehat{\theta}_{{\text{\tiny{\text{MV}}}}}=\arg\max_{\vec{\theta \in \Theta}} L(\theta \mid \vec{X}=\vec{x}),
 \end{align}
@@ -82,12 +82,12 @@ Entonces, si $Z_1,\ldots Z_n$ una muestra de variables aleatorias independientes
 \end{align}
 }
 
-Por lo tanto, el estimador de máxima verosimilitud (ML) del parámetro de textura es:
+Por lo tanto, el estimador de Máxima Verosimilitud (MV) del parámetro de textura es:
 \begin{align}
 \widehat{\alpha}_{{\text{\tiny{MV}}}}=\arg\max_{\alpha} \log(L(\alpha)/\vec{Z}=\vec{z}).
 \end{align}
 
-Algunos autores evaluaron la performance para el estimador de máxima verosimilitud del parámetro de textura del modelo  $\mathcal G_I^0$. Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantificaron el sesgo de este estimador y propusieron una corrección de segundo orden de acuerdo a~\cite{cox1968}. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} desarrollaron una corrección del sesgo de $\widehat{\alpha}_{\text{{\text{\tiny{ML}}}}}$ del modelo $\mathcal G^0$ para datos de amplitud usando técnicas de remuestreo a expensas de un alto costo computacional.
+Algunos autores evaluaron la performance para el estimador de Máxima Verosimilitud del parámetro de textura del modelo  $\mathcal G_I^0$. Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantificaron el sesgo de este estimador y propusieron una corrección de segundo orden de acuerdo a~\cite{cox1968}. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} desarrollaron una corrección del sesgo de $\widehat{\alpha}_{\text{{\text{\tiny{MV}}}}}$ del modelo $\mathcal G^0$ para datos de amplitud usando técnicas de remuestreo a expensas de un alto costo computacional.
 
 En la figura~\ref{MV} se muestra el gráfico del logaritmo de la función de verosimilitud en función de $\alpha$, para distintos tamaños de muestra $n$ y para dos valores del parámetro de textura: $\alpha=-1.5$ y $\alpha=-5$ para el caso de $L=3$. Se puede observar que, para zonas extremadamente texturadas la función de verosimilitud muestra claramente un máximo. Sin embargo, para el caso de zonas texturadas esta función es bastante plana, incluso podría ser monótona dependiendo de la muestra. Esto puede originar problemas numéricos al momento de encontrar el máximo.  
 
@@ -110,7 +110,7 @@ También se podría encontrar $\widehat{\alpha}_{{\text{\tiny{MV}}}}$ como la so
 \end{align}
 donde $\Psi^0(\cdot)$ es la función digamma. Este sistema no tiene una solución analítica cerrada, por lo tanto es necesario la utilización de rutinas numéricas para encontrar dicha solución que puede incluso no existir.
 
-\subsection{Logmomentos y Logcumulants}
+\subsection{Logmomentos y Logcumulantes}
 
 Es conocida la relación que existe entre los momentos y la función característica de una variable aleatoria con la transformada de Fourier de su función de densidad. 
 
@@ -143,10 +143,10 @@ Si llamamos $\psi_X=\log(\phi_X)$, los cumulantes de orden $k$ se definen como
 \kappa_k=i^{-k} \psi_X^{(k)}\big\arrowvert _{t=0}\cdot
 \end{align}
 
-Nicolas et al.~\cite{nicolas2002} proponen utilizar la transformada de Mellin en lugar de la transformada de Fourier en~\eqref{fi}, para el caso donde la función de densidad $f_X$ de la variable aleatoria $X$ tiene soporte positivo. De esta manera surgen nuevas características para la variable aleatoria que son los Logmomentos (MomL) y los  Logcumulants (LC). Los autores proponen llamar a esta metodología Estadísticas de Segundo Tipo. Entonces, análogamente a la metodología descripta en~\ref{fi}, definen:
+Nicolas et al.~\cite{nicolas2002} proponen utilizar la transformada de Mellin en lugar de la transformada de Fourier en~\eqref{fi}, para el caso donde la función de densidad $f_X$ de la variable aleatoria $X$ tiene soporte positivo. De esta manera surgen nuevas características para la variable aleatoria que son los Logmomentos (MomL) y los  Logcumulantes (LC). Los autores proponen llamar a esta metodología Estadísticas de Segundo Tipo. Entonces, análogamente a la metodología descripta en~\ref{fi}, definen:
 
 \begin{itemize}
-\item Primer función característica de segundo tipo.
+\item Primera función característica de segundo tipo.
 	\begin{align}
 	\Phi_X(s)=\int_{0}^{\infty} x^{s-1} f_X(x) dx = \mathcal{M}\{f_X\}(s)\cdot
 	\label{PrimerFuncionCaract}
@@ -184,7 +184,7 @@ Nicolas et al.~\cite{nicolas2002} proponen utilizar la transformada de Mellin en
 	  \tilde{\kappa}_k=\Psi_X^{(k)}\big\arrowvert _{s=1}\cdot
 	  \end{align}
 	  
-Como en el caso de MomL, los cumulantes de segundo tipo se llamarán Logcumulant (LC).
+Como en el caso de MomL, los cumulantes de segundo tipo se llamarán Logcumulantes (LC).
 \end{itemize}
 
 Para el caso donde $f_X(u) = \mathcal{G}_I^0(u)$ se obtiene:
@@ -207,7 +207,7 @@ Además, si $Z_1,\ldots,Z_n$ es una muestra de variables aleatorias independient
 \widehat{\widetilde{k}}_1 =\dfrac{1}{n} \sum_{i=1}^k\log z_i\cdot
 \end{align}
 
-Asumiendo que vale la relación~\eqref{gama*}, $\gamma^*=-\alpha-1$, el estimador Logcumulant del parámetro de textura $\alpha$ de la distribución $\mathcal{G}_I^0$, que lo llamaremos $\widehat\alpha_{\text{\tiny{LC}}}$, es la solución de la ecuación    
+Asumiendo que vale la relación~\eqref{gama*}, $\gamma^*=-\alpha-1$, el estimador Logcumulantes del parámetro de textura $\alpha$ de la distribución $\mathcal{G}_I^0$, que lo llamaremos $\widehat\alpha_{\text{\tiny{LC}}}$, es la solución de la ecuación    
 \begin{align}
 \widehat{\widetilde{k}}_1 =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) - \Psi^0(-\alpha),
 \end{align}
@@ -232,13 +232,13 @@ Kullback y Leibler (KL)~\cite{KullbackLeibler1951} estaban interesados en propon
 En el caso continuo si $P(x)$ y $Q(x)$ son funciones de distribuci\'on de una misma variable aleatoria $X$ continua, la divergencia KL se define como 
 \begin{align}
 \label{KL}
-d_{\text{\tiny{KL}}}(P \rVert Q)=-\int_{\infty}^{\infty} p(x) \log\dfrac{q(x)}{p(x)} dx=\int_{\infty}^{\infty} q(x) \log\dfrac{p(x)}{q(x)} dx,
+d_{\text{\tiny{KL}}}(P \rVert Q)=\int_{-\infty}^{+\infty} p(x) \log\dfrac{p(x)}{q(x)} dx,
 \end{align} 
 donde $p(x)$ y $q(x)$ representan las funciones de densidad de $P$ y $Q$ respectivamente. 
 
 Se puede pensar que si $p(x)$ es el modelo verdadero, la KL divergencia mide cu\'anto me alejo del modelo verdadero, si utilizo el modelo $q$ en vez del modelo $p$. Hay que notar que si $p(x)=q(x)$ la distancia $\text{\tiny{KL}}=0.$ Esta medida de ``distancia'' no es sim\'etrica ni cumple con la desigualdad triangular,  en cambio s\'i cumple que $d_{\text{\tiny{KL}}}(p \rVert q)\geq 0$ y $d_{\text{\tiny{KL}}}(p \rVert q)= 0 \Longleftrightarrow p=q.$ 
 
-Muchas de las medidas utilizadas que se basan en determinar diferencias entre una estimación de la función de densidad subyacente y el modelo teórico no son métricas, donde por métrica entendemos que son aquellas funciones $d:X \times X\rightarrow \mathbb{R}^+$ que cumplen:
+Muchas de las medidas utilizadas que se basan en determinar diferencias entre una estimación de la función de densidad subyacente y el modelo teórico no son métricas, donde por métrica entendemos a aquellas funciones $D:X \times X\rightarrow \mathbb{R}^+$ que cumplen:
 
 \begin{enumerate}
 	\label{metrica}
@@ -250,7 +250,7 @@ Muchas de las medidas utilizadas que se basan en determinar diferencias entre un
 
 Es decir, son medidas que no cumplen la propiedad~\ref{simetrica} ni~\ref{DesigTriang} , pero sí cumplen las propiedades ~\ref{positiva} y~\ref{igual0}. Si la medida de discrepancia cumple solamente las propiedades~\ref{positiva} y~\ref{igual0} la llamaremos divergencia. Si además cumple la propiedad~\ref{simetrica} de simetría la llamaremos distancia estocástica. 
 
-Salicrú et al.~\cite{Salicru1994} propusieron una familia de medidas de divergencia, llamadas $(h,\phi) \text{-} divergencias$ que incluyen a la KL divergencia, a las $\phi \text{-} divergencias$ presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J \text{-} divergencias$ y $R \text{-} divergencias$ que fueron definidas por Taneja en~\cite{Taneja1989} entre otras medidas. Algunas de las medidas que se trabajan en esta tesis son $\phi$ divergencias y otras  $(h,\phi) \text{-} divergencias$. Por eso daremos la definción de ambas medidas.
+Salicrú et al.~\cite{Salicru1994} propusieron una familia de medidas de divergencia, llamadas $(h,\phi) \text{-} divergencias$ que incluyen a la KL divergencia, a las $\phi \text{-} divergencias$ presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J \text{-} divergencias$ y $R \text{-} divergencias$ que fueron definidas por Taneja en~\cite{Taneja1989} entre otras. Algunas de las medidas que se trabajan en esta tesis son $\phi$ divergencias y otras  $(h,\phi) \text{-} divergencias$. Por eso daremos la definición de ambas.
 
 \begin{definition}[$\phi \text{-} divergencias$]
 	\label{fiDivergencia}
@@ -294,7 +294,7 @@ Cabe realizar algunas observaciones:
 	\label{hfiDivergencia}
 	Si se mantienen las hipótesis de la definición~(\ref{fiDivergencia}) y $h: (0,+\infty)\longrightarrow [0,+\infty)$ es una función estrictamente creciente que verifica que $h(0)=0$ entonces se define la $\left(h,\phi\right) \text{-} divergencia$ como
 	\begin{align}
-	d^h_{\phi}(f, g)=h\left(\int_{S} \phi\left(\dfrac{f(x)}{g(x)}\right) g(x) \ dx\right)=E_{g}\left(\phi\left(\dfrac{f}{g}\right)\right).
+	d^h_{\phi}(f, g)=h\left(\int_{S} \phi\left(\dfrac{f(x)}{g(x)}\right) g(x) \ dx\right)=h\left(E_{g}\left(\phi\left(\dfrac{f}{g}\right)\right)\right).
 	\end{align}
 \end{definition}
 %	Distancia de Bhattacharyya $d_B(V,W)=-\log\int_{-\infty}^{\infty}\sqrt{f_Vf_W}$.
@@ -323,7 +323,7 @@ Se han encontrado muchas aplicaciones de estas medidas de divergencia en señale
 
 Cabe señalar que muchos autores han encontrado cotas superiores e inferiores que vinculan la distancia triangular con otras medidas de divergencia que se encuentran en la clase de las $\phi \text{-} divergencias$, especialmente para el caso discreto. Particularmente esto es útil ya que contribuye a obtener resultados de convergencia entre distintas divergencias. En Dragomir~\cite{Dragomir2002} el autor encuentra cotas superiores e inferiores para las $\phi \text{-} divergencias$ en términos de la KL divergencia. Jain et. al.~\cite{JainSrivastava2007} también encuentra cotas que vinculan a la distancia triangular con las discrepancias Jensen – Shannon, Simétrica Chi-square, Aritmética entre otras. Taneja~\cite{Taneja2006} estudió nuevas cotas entre la discriminación triangular (distancia triangular para el caso discreto) y la media armónica y la simétrica Chi-square divergencia.
 
-En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de máxima verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
+En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de Máxima Verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
 
 \subsection{Distancia triangular generalizada}
 
@@ -465,7 +465,7 @@ lo que muestra que $d_{\text{\tiny{T},s}}\pa{f,g}$ está definido si $f-g$ es in
 %\end{dem}
 
 \subsection{Núcleos}
-Desde hace muchos años se ha estudiado el problema de estimar una función de densidad desconocida a partir de datos muestrales. Si se conoce la familia de distribuciones de donde proviene la muestra, una estimación de los parámetros de la función de densidad subyacente se pueden dar usando la metodología presentada en~\ref{EstimacionParamétrica}. 
+Estimar una función de densidad desconocida a partir de datos muestrales es un problema clásico en estadística. Si se conoce la familia de distribuciones de donde proviene la muestra, se puede dar una estimación de los parámetros de la función de densidad subyacente usando la metodología presentada en~\ref{EstimacionParamétrica}. 
 
 Otra forma de abordar el problema de la estimación de la función de densidad subyacente $f$ es a través de una estimación no paramétrica de la misma. El más sencillo y más conocido de estos estimadores es el histograma. Supongamos que $x_1,\ldots,x_{n+1}$ son los datos muestrales donde $x_1<x_2<\ldots<x_{n+1}$, sea $B_i=[x_i,x_{i+1}) \text{ con } i=1,\ldots,n.$ Entonces el estimador $\widehat{f}$ de $f$ se define como 
 
@@ -618,12 +618,20 @@ Se consideraron estos núcleos porque el modelo $\mathcal{G}^0$ propone a la dis
 Se hizo una primera selección de los núcleos estudiando el MISE muestral para distintas combinaciones de los parámetros y tamaños muestrales. Se consideraron valores de $\alpha=\{-1.5,-3,-5,-8\}$, $\gamma=-\alpha-1$ que es el valor de $\gamma$ para que $E(X)=1$, y valores de $n=\{9,25,49,81,121\}$. Estos son los valores de los parámetros que se analizarán en esta tesis. Se utilizó el método LSCV para encontrar el ancho de banda $b$. Dado que los valores del MISE son similares para los núcleos $\Gamma^1$ y $\Gamma^2$, y para los núcleos IG y RIG respectivamente, se eligieron los núcleos $\Gamma^1$ e IG junto con el núcleo LN para abordar el problema de estimación. A partir de ahora el núcleo $\Gamma^1$ se llamará $\Gamma$.
 }}
 
-En la figura~\ref{EstimacionLN} se muestra un ejemplo de estimación de la función de densidad $\mathcal{G}_I^0$ para el caso de $\alpha=-1.5$, $\gamma=0.5$, $L=3$ y $n=10$, utilizando núcleo LN. La línea sólida es la función de densidad teórica, la línea discontinua es la estimación $\widehat{f}$ obtenida, el resto son los distintos núcleos. Para cada $x$ el valor de $\widehat{f}(x)$ se obtiene como promedio de los distintos núcleos en ese $x$. Se eligió un tamaño de muestra chico para ejemplificar la metodología de estimación. Vale la pena observar que el parámetro de posición depende del valor de $x$ donde se realiza la estimación. Por eso estos núcleos cambian de forma dependiendo del valor $x$.
-
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[scale=0.5]{../../Figures/Tesis/Capitulo5/EstimacionDensidadconLN.pdf}
-	\caption{\label{EstimacionLN}Estimación de $\mathcal{G}_I^0$ para $L=3$, $\alpha=-1.5$, $\gamma=0.5$ y $n=9$}
+	\caption{\label{EstimacionLN}Estimación de $\mathcal{G}_I^0$ para $L=3$, $\alpha=-1.5$, $\gamma=0.5$ y $n=10$}
+\end{figure}
+
+En la figura~\ref{EstimacionLN} se muestra un ejemplo de estimación de la función de densidad $\mathcal{G}_I^0$ para el caso de $\alpha=-1.5$, $\gamma=0.5$, $L=3$ y $n=10$, utilizando núcleo LN donde se utilizó un ancho de banda que se obtiene de aplicar el método LSCV explicado en la subsección~\ref{AnchoBanda}. La línea sólida es la función de densidad teórica, la línea discontinua es la estimación $\widehat{f}$ obtenida, el resto son los distintos núcleos. Para cada $x$ el valor de $\widehat{f}(x)$ se obtiene como promedio de los distintos núcleos en ese $x$. Se eligió un tamaño de muestra chico para ejemplificar la metodología de estimación. Vale la pena observar que el parámetro de posición depende del valor de $x$ donde se realiza la estimación. Por eso estos núcleos cambian de forma dependiendo del valor $x$.
+
+En la figura~\ref{EstimacionLNyGAyIG} se muestra cómo estiman los núcleos $K_{\Gamma}$, $K_{\text{\tiny{LN}}}$ y $K_{\text{\tiny{IG}}}$ al modelo $\mathcal{G}_I^0$ para un tamaño de muestra $n=25$, $L=8$ utilizando también el método LSCV para elegir el ancho de banda. Se eligieron estos núcleos porque son los que finalmente evaluaremos. Esta elección se justificará en el capítulo~\ref{ResultadosEmpiricos}.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[scale=0.5]{../../Figures/Tesis/Capitulo5/NucleosGALNyIG.pdf}
+	\caption{\label{EstimacionLNyGAyIG}Estimación de $\mathcal{G}_I^0$ para $L=8$, $\alpha=-5$, $\gamma^*=4$ y $n=25$} utilizando núcleos $K_{\Gamma}$, $K_{\text{\tiny{LN}}}$ y $K_{\text{\tiny{IG}}}$.
 \end{figure}
 
 \subsubsection{Propiedades globales}
@@ -678,6 +686,7 @@ Por lo tanto, $\widehat{f}_{\Gamma}$, $\widehat{f}_{\tiny{\text{IG}}}$ y $\wideh
 %One of them is that, under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
 
 \subsubsection{Ancho de banda}
+\label{AnchoBanda}
 
 La elección del ancho de banda $b$ es un punto crucial en estimación no paramétrica de la función de densidad. Si $b$ es muy pequeño la función de densidad estimada puede ser muy ruidosa, presentando varios picos. Si en cambio, el valor de $b$ es demasiado grande, entonces la estimación puede pasar por alto características clave porque la variabilidad disminuye.
 
@@ -984,7 +993,7 @@ Por lo anteriormente expuesto en esta tesis se propone un estimador del tipo MDE
 %
 %Como se indicó anteriormente, Gambini et al. ~ \ Cite {gambini2015} propusieron la distancia triangular y los kernels gaussianos inversos para definir $ \ widehat {\ alpha} $, el estimador de parámetros $ \ alpha $.
 %Realizaron un estudio de Monte Carlo para evaluar el comportamiento de $ \ widehat {\ alpha} $, generando muestras de $ \ mathcal {G} _I ^ {0} $ y considerando el parámetro de brillo $ \ gamma = - \ alpha-1 $ .
-%Mostraron que $ \ widehat {\ alpha} $ supera a los estimadores de probabilidad máxima y logcumulantes en la mayoría de los casos estudiados, pero no presentaron ningún resultado teórico sobre las propiedades estadísticas de ese estimador.
+%Mostraron que $ \ widehat {\ alpha} $ supera a los estimadores de probabilidad máxima y Logcumulantesulantes en la mayoría de los casos estudiados, pero no presentaron ningún resultado teórico sobre las propiedades estadísticas de ese estimador.
 %
 %En este trabajo, siguiendo las ideas presentadas en ~ \ cite {parr1982}, mostramos que, el estimador MDE presentado en ~ \ cite {gambini2015}, es consistente para el parámetro de textura de $ \ mathcal {G} _I ^ {0 } $ distribucion.
 %

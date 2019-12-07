@@ -7,7 +7,7 @@
 \chapter{Resultados Teóricos}
 \label{ResultadosTeoricos}
 
-Los estimadores de mínima distancia (MDE) surgen como una alternativa más robusta a los estimadores paramétricos clásicos, como máxima verosimilitud (MV). La idea de la cual parte resulta muy natural, es encontrar el valor del vector de parámetros que minimiza la distancia entre el modelo teórico y aquel que resulta de la información muestral.
+Los estimadores de mínima distancia (MDE) surgen como una alternativa más robusta a los estimadores paramétricos clásicos, como Máxima Verosimilitud (MV). La idea de la cual parte resulta muy natural, es encontrar el valor del vector de parámetros que minimiza la distancia entre el modelo teórico y aquel que resulta de la información muestral.
 
 %Las preguntas que nos podemos hacer es 
 %\begin{itemize}
@@ -15,9 +15,9 @@ Los estimadores de mínima distancia (MDE) surgen como una alternativa más robu
 %	\item ¿Qué medida de distancia considerar?
 %\end{itemize}
 %
-%Para responder a la primera pregunta apelamos a estimar la función de densidad subyacente con núcleos asimétricos. Para responder la segunda pregunta relajamos el concepto de métrica estudiando otras medidas como las distancias estocásticas, como forma de medir la discrepancia entre dos funciones de densidad. Elegimos la distancia triangular porque, de las medidas que evaluamos, ésta fue la que mejor performance mostró. En el capítulo~  \ref{ResultadosEmpiricos} hicimos un estudio Montecarlo para evaluar la perfomance del estimador propuesto. Vimos que para datos sin contaminación la propuesta tiene un comportamiento similar al estimador MV, mientras que bajo contaminación la mejora en algunos casos estudiados.
+%Para responder a la primera pregunta apelamos a estimar la función de densidad subyacente con núcleos asimétricos. Para responder la segunda pregunta relajamos el concepto de métrica estudiando otras medidas como las distancias estocásticas, como forma de medir la discrepancia entre dos funciones de densidad. Elegimos la distancia triangular porque, de las medidas que evaluamos, ésta fue la que mejor performance mostró. En el capítulo~  \ref{ResultadosEmpiricos} hicimos un estudio Monte Carlo para evaluar la perfomance del estimador propuesto. Vimos que para datos sin contaminación la propuesta tiene un comportamiento similar al estimador MV, mientras que bajo contaminación la mejora en algunos casos estudiados.
 
-En general, los MDE estimadores se definen midiendo la discrepancia entre funciones de distribución. Wolfowitz~\cite{Wolfowitz1954}, Parr and Schucany~\cite{Parr1980} son algunas de las principales referencias. Como indican Cao et al.~\cite{cao1995minimum} en los casos más usuales la funciones de distribución son absolutamente continuas, por lo tanto extienden los resultados de Parr and Schucany~\cite{parr1982} al caso donde se miden distancias entre funciones de densidad. Consideran un estimador por núcleos simétricos para estimar la función de densidad subyacente en vez de utilizar la función de distribución empírica.
+En general, los MDE estimadores se definen midiendo la discrepancia entre funciones de distribución. Wolfowitz~\cite{Wolfowitz1954}, Parr and Schucany~\cite{Parr1980} son algunas de las principales referencias. Como indican Cao et al.~\cite{cao1995minimum} en los casos más usuales las funciones de distribución son absolutamente continuas. Ellos aolican los resultados de Parr and Schucany~\cite{parr1982} al caso donde se miden distancias entre funciones de densidad. Consideran un estimador por núcleos simétricos para estimar la función de densidad subyacente en vez de utilizar la función de distribución empírica.
 
 En esta capítulo probaremos la convergencia fuerte del estimador propuesto en esta tesis 
 \begin{align}
@@ -27,9 +27,11 @@ En esta capítulo probaremos la convergencia fuerte del estimador propuesto en e
 donde $\mathcal{G}_I^0(\alpha,\gamma^*,L)$ es la función de densidad del modelo $G_I^0$ definida en~\ref{ModeloGI0}, $\gamma*=-\alpha-1$, $I \subseteq \mathbb{R}$, $\widehat{f}_n$ un estimador de la función de densidad subyacente usando núcleos asimétricos como los estudiados en~\ref{NucleosAsimetricos} y $d_{\tiny{\text{T}}}$ es la distancia triangular definida en~\ref{dist}.
 
 %basándonos en los resultados~\cite{cao1995minimum,parr1982}.
+\vspace{1cm}
 
-\subsection{Consistencia fuerte de $\widehat{\alpha}_{\text{T}}$}
+\noindent \textbf{{\large Consistencia fuerte de $\widehat{\alpha}_{\text{T}}$}}
 
+\vspace{0.5cm}
 %Primeramente daremos algunas definiciones y enunciaremos el resutaldo de~ Parr et al.~\cite{parr1982} que utilizaremos para obtener nuestro resultado de convergencia.
 
 %Según mencionan Cao et al.~\cite{}, los MDE estimadores basados en funciones de densidad tienen la dificultad de que las estimaciones dependen del ancho de banda que interviene en la estimación no paramétrica de la función de densidad subyacente. Además el costo computacional suele ser más alto respecto de otros estimadores, por estos motivos no se encuentran 
@@ -134,12 +136,12 @@ una familia paramétrica. Supongamos que para $g\in\mathcal{F}$ se cumplen las s
 	\begin{align*}
 	D(g,f_{\theta}) - D(g, g_{n}) \le D(g_{n},f_{\theta}) \le D(g,f_{\theta}) + D(g, g_{n}),
 	\end{align*}
-	de la condición C\ref{item: theta_0} obtenemos 
+	entonces
 	\begin{align*}
 	\inf_{\theta\in\Theta} D(g,f_{\theta}) - D(g, g_{n}) \le \inf_{\theta\in\Theta} D(g_{n},f_{\theta}) 
 	\le \inf_{\theta\in\Theta} D(g,f_{\theta}) + D(g, g_{n}),
 	\end{align*}
-	de donde se deduce
+	de la condición C\ref{item: theta_0} se obtiene
 	$D(g,f_{\theta_{*}}) - D(g, g_{n}) \le a_{n} \le D(g,f_{\theta_{*}}) + D(g, g_{n})$.
 	Dado que $g_{n} \to g$, tenemos que $a_{n} \to D(g,f_{\theta_{*}})$.
 	

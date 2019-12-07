@@ -7,7 +7,7 @@
 \chapter{Conclusiones}
 \label{Conclusiones}
 
-Esta tesis propone un nuevo estimador para el parámetro de textura de la distribución $\mathcal{G}_I^0$ basado en la minimización de una distancia estocástica entre el modelo (que depende de dicho parámetro) y una estimación de la función de densidad subyacente utilizando núcleos asimétricos $\widehat{f}$. El objetivo es obtener un estimador que tenga buen desempeño para muestras de pequeño tamaño, sea competitivo con los estimadores de Máxima Verosimilitud (MV) y Logcumulants (LC) que son los utilizados en la literatura y que tenga una buena performance frente a la presencia de diferentes niveles de contaminación.
+Esta tesis propone un nuevo estimador para el parámetro de textura de la distribución $\mathcal{G}_I^0$ basado en la minimización de una distancia estocástica entre el modelo (que depende de dicho parámetro) y una estimación de la función de densidad subyacente utilizando núcleos asimétricos $\widehat{f}$. El objetivo es obtener un estimador que tenga buen desempeño para muestras de pequeño tamaño, sea competitivo con los estimadores de Máxima Verosimilitud (MV) y Logcumulantes (LC) que son los utilizados en la literatura y que tenga una buena performance frente a la presencia de diferentes niveles de contaminación.
 
 
 %Se evaluaron diferentes núcleos para $\widehat{f}$ y se eligió el núcleo Gamma y Lognormal para continuar con el análisis, basado fundamentalmente, en el alto MISE que presentaron.
@@ -30,7 +30,7 @@ En un segundo estudio se comparó la performance del núcleo IG con el LN y el $
 
 Se volvió a realizar un análisis similar respecto del primer trabajo considerando en esta oportunidad los estimadores que provienen del método de MV, LC y el que resulta de la minimización de la distancia triangular utilizando los núcleos $\Gamma$ y LN para estimar $\widehat{f}$. Se fijó un nuevo criterio de convergencia para todos los métodos y se comparó la cantidad de casos de no convergencia. Se estudió el costo computacional y, en esta oportunidad, se incorporó la Función de Influencia Empírica para evaluar la robustez de estos estimadores, como así también el caso 1 de contaminación. Asimismo se utilizó el método LSCV para elegir el ancho de banda que interviene en la estimación de $\widehat{f}$. 
 
-En los estudios por Montecarlo se observó que:
+En los estudios por Monte Carlo se observó que:
 
 \begin{itemize}
 	\item Por un lado, los métodos MV y LC tienen comportamiento similar entre sí y, por el otro, los estimadores de mínima distancia utilizando núcleos LN y $\Gamma$ tanto para datos sin contaminar como para datos contaminados. Incluso este comportamiento se presenta al momento de analizar la Función de Influencia Empírica.

@@ -10,16 +10,15 @@
 %\section{Estimador Propuesto}
 
 En este capítulo se analizan varias estrategias para la estimación del parámetro de textura de la distribución $\mathcal{G}_I^0$.
-Se ha demostrado que esta distribución es capaz de caracterizar un gran número de objetivos en las imágenes SAR, en particular, las monopolarizadas que son las estudiadas en esta tesis. Está indexada por
-tres parámetros: el número de looks $L$ que se puede estimar en toda la imagen, un parámetro de escala $\gamma$, y un parámetro de textura $\alpha$. Este último está estrechamente relacionado con el número
+Se ha demostrado que esta distribución es capaz de caracterizar un gran número de objetivos en las imágenes SAR, en particular, las monopolarizadas que son las estudiadas en esta tesis. La distribución está caracterizada por tres parámetros: el número de looks $L$ que se puede estimar en toda la imagen, un parámetro de escala $\gamma$, y un parámetro de textura $\alpha$. Este último está estrechamente relacionado con el número
 de retrodispersores elementales para cada píxel, esto es una de las razones por las que recibe atención en la literatura. 
 
 Otras de las razones es que el parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ puede interpretarse en términos de la textura de la imagen. Valores cercanos a $0$, típicamente $\alpha \in [-3,0)$ sugieren zonas extremadamente texturadas como zonas urbanas. Conforme el valor de $\alpha$ decrece disminuye la heterogeneidad de la imagen. Regiones con moderada textura como son los bosques, están representadas por valores de $\alpha \in [-6,-3)$, zonas de pastura son compatibles con valores de $\alpha \in (-\infty,-6)$. Esta es otra de las razones por las cuales es muy importante obtener estimaciones precisas de este parámetro.
 
-Entre las técnicas de estimación disponibles, el método de los momentos y el método de máxima verosimilitud son las técnicas clásicas de estimación paramétrica. En~\cite{Bian2013} los autores proponen un método basado en
+Entre las técnicas de estimación disponibles, el método de los momentos y el método de Máxima Verosimilitud son las técnicas clásicas de estimación paramétrica. En~\cite{Bian2013} los autores proponen un método basado en
 momentos fraccionarios de bajo orden para estimar la matriz de covarianza en una imagen SAR polarimétrica bajo una distribución alfa estable. En ~\cite{VasconcellosFrerySilva:CompStat,CribariFrerySilva:CSDA} los autores utilizan técnicas de remuestreo para mejorar el rendimiento de estos estimadores en términos de sesgo y error cuadrático medio, a expensas de un alto costo computacional.
 
-Más recientemente~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} los estimadores basados en la transformada de Mellin, como lo son los  Logcumulants y Logmomentos estimadores, han sido implementados con éxito. Tison et al.~\cite{Tison2004} mostraron que los estimadores basados en  Logcumulants tienen una mejor performance respecto del MV estimador para el modelo $\mathcal G^0$ para datos de amplitud. Sin embargo estos estimadores no han sido evaluados para el caso de datos de intensidad ni bajo la presencia de contaminación.
+Más recientemente~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} los estimadores basados en la transformada de Mellin, como lo son los  Logcumulantes y Logmomentos estimadores, han sido implementados con éxito. Tison et al.~\cite{Tison2004} mostraron que los estimadores basados en  Logcumulantes tienen una mejor performance respecto del MV estimador para el modelo $\mathcal G^0$ para datos de amplitud. Sin embargo estos estimadores no han sido evaluados para el caso de datos de intensidad ni bajo la presencia de contaminación.
 
 Una propiedad que es deseable que un estimador posea es ser resistente a la presencia de datos atípicos. Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} y Allende et al.~\cite{AllendeFreryetal:JSCS:05} estudiaron la performance del MV estimador bajo el modelo $\mathcal{G}^{0}$ para datos de amplitud, mostrando que hay una pérdida de robustez ante la presencia de outliers moderados en áreas extremadamente texturadas, mientras que para zonas texturadas la pérdida de robustez ocurre en presencia de outliers severos. Asimismo esta falta de robustez es más pronunciada en el caso de muestras de pequeño tamaño. Ellos propusieron como alternativa los M y AM estimadores que tienen un buen comportamiento bajo contaminación pero presentan problemas numéricos especialmente para tamaños de muestras chicos.
 
@@ -34,23 +33,23 @@ donde $\Theta$ es el espacio paramétrico y $d$ es una medida de discrepancia, d
 
 Esta propuesta está basada en dos pilares: la forma de estimar $\widehat{f}_n$ y la distancia estocástica elegida. En este capítulo daremos argumentos que sugieren que los núcleos asimétricos ofrecen una buena alternativa para estimar la función de densidad subyacente en forma no paramétrica, en particular los núcleos Gamma y Lognormal son una buena elección. También proponemos el método para elegir el ancho de banda, como así también mostraremos que la distancia triangular es una buena medida de discrepancia para este caso.
 
-\subsection{Generando muestras $\mathcal{G}_I^0$}
+\section{Generando muestras $\mathcal{G}_I^0$}
 
 Para generar muestras que provengan de una distribución $\mathcal{G}_I^0$ vamos a explotar la naturaleza multiplicativa del modelo que la genera.
 
-De acuerdo a~\ref{ModeloGI0} la distribución  $\mathcal{G}_I^0$ es el producto de las distribuciones $\Gamma^{-1}(-\alpha,\gamma)$ y $\Gamma(L,L)$ donde $-\alpha, \, \gamma >0$ y $L\geq 1$. Además, se sabe que si $X \sim \Gamma(\alpha,\beta)$, entonces $Y = 1/X \sim \Gamma^{-1}(\alpha,\beta)$.
+De acuerdo a~\ref{ModeloGI0} la distribución  $\mathcal{G}_I^0$ es el producto de las distribuciones $\Gamma^{-1}(-\alpha,\gamma)$ y $\Gamma(L,L)$ donde $-\alpha, \, \gamma >0$ y $L\geq 1$. Además, se sabe que si $X \sim \Gamma(a,\beta)$, entonces $Y = 1/X \sim \Gamma^{-1}(a,\beta)$.
 
 Luego, para generar una muestra $Z_1, \ldots, Z_n$ de variables aleatorias independientes e idénticamente distribuidas con $Z_i \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ con $i=1, \ldots, n$ hacemos lo siguiente:
 \begin{itemize}
-	\item Fijamos $\alpha, \, \gamma$ ambos positivos y $L \leq 1$.
-	\item Generamos una muestra de tamaño $n$ de una variable aleatoria $W \sim \Gamma(\alpha,\gamma)$.
-	\item Definimos $X=1/W$, entonces $X \sim \Gamma^{-1}(\alpha,\beta)$.
+	\item Fijamos $a=-\alpha, \, \gamma$ ambos positivos y $L \geq 1$.
+	\item Generamos una muestra de tamaño $n$ de una variable aleatoria $W \sim \Gamma(a,\gamma)$.
+	\item Definimos $X=1/W$, entonces $X \sim \Gamma^{-1}(a,\beta)$.
 	\item Generamos una muestra de tamaño $n$ de una variable aleatoria $Y \sim \Gamma(L,L)$.
 	\item Obtenemos $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ definiendo $Z=X \cdot Y$.
 \end{itemize}
 
 
-\subsection{Eligiendo distancias estocásticas}
+\section{Eligiendo distancias estocásticas}
 \label{EligiendoDistancias}
 
 El primer objetivo de este trabajo fue elegir una distancia entre las posibles medidas de discimilaridad que ofrece la literatura, para luego elegir el estimador del parámetro de textura a través de la minimización de dicha distancia entre la función de densidad teórica del modelo $\mathcal{G}_I^0$ y una estimación no paramétrica de la función de densidad subyacente. Como se mencionó en el capítulo~\ref{metodologia}, se consideraron las siguientes distancias estocásticas:
@@ -101,7 +100,7 @@ Las figuras~\ref{DistL1},~\ref{DistL3} y~\ref{DistL8} muestran los gráficos de 
 
 En estos gráficos se puede observar que, cuanto menor es el valor de $\alpha_0$ la curva se hace más plana. Por este motivo los métodos de optimización resultan más inestables y el mínimo es más difícil de encontrar en forma precisa. Se puede observar también que, a medida que aumenta el valor de $L$, esta situación se revierte y es posible encontrar el mínimo de una forma más eficiente. Recordemos que el número de looks representa la relación señal ruido, por lo tanto, cuanto mayor es el número de looks menor ruido presenta la imagen siendo $L=1$ el caso de mayor ruido. Se puede observar también que la distancia de Hellinger es la que resulta más plana en un entorno del mínimo, y que las distancias de Rényi y Triangular tienen un comportamiento similar.
 
-Siguiendo en la búsqueda de la mejor distancia se realizaron simulaciones Montecarlo para elegir la distancia estocástica que mejor performance tiene a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$. En Cassetti et al.~\cite{cassettiast2013} se evaluaron dichas distancias pero ahora estimando el parámetro de textura y  comparando la calidad de estos estimadores con el MV estimador en términos del sesgo y del error cuadrático medio. 
+Siguiendo en la búsqueda de la mejor distancia se realizaron simulaciones Monte Carlo para elegir la distancia estocástica que mejor performance tiene a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$. En Cassetti et al.~\cite{cassettiast2013} se evaluaron dichas distancias pero ahora estimando el parámetro de textura y  comparando la calidad de estos estimadores con el MV estimador en términos del sesgo y del error cuadrático medio. 
 
 Se realizaron $1000$ replicaciones del experimento que consiste en generar muestras $Z_1, Z_2,\ldots,Z_n$ de variables aleatorias independientes e idénticamente distribuidas donde $Z_i \sim f_{\mathcal{G}_I^0(\alpha,\gamma^*,L)}$ donde el espacio paramétrico está formado por:
 
@@ -111,7 +110,7 @@ Se realizaron $1000$ replicaciones del experimento que consiste en generar muest
 	\item Tamaño de muestra: $n=\{9, 25,49, 81,121,1000\}$. 
 \end{itemize}
 
-Como se mencionó anteriormente la elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. Se consideró también el tamaño de la muestra $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande. Se sigue considerando el parámetro de escala $\gamma^*$ para que los resultados sean comparables. Además esta relación nos brinda la posibilidad de llevar un problema de estimación de dos parámetros a estimar un sólo parámetro. 
+Como se mencionó anteriormente la elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan ventanas deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. Se consideró también el tamaño de la muestra $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande. Se sigue considerando el parámetro de escala $\gamma^*$ para que los resultados sean comparables. Además esta relación nos brinda la posibilidad de llevar un problema de estimación de dos parámetros a estimar un sólo parámetro. 
 
 
 En cada replicación:
@@ -130,14 +129,14 @@ De esta manera se obtuvieron $1000$ valores estimados de $\alpha$, $\{\widehat{\
 
 
 Las figuras~\ref{ASTalfaL1},~\ref{ASTalfaL2} y~\ref{ASTalfaL3} muestran el sesgo del estimador propuesto para el parámetro de textura ($\widehat{\alpha}$) utilizando las distancias de Hellinger, Rényi, Triangular y también Máxima Verosimilitud, para distintos tamaños de muestras $n$ y número de looks $L$. 
-La línea recta azul representa el valor verdadero con el que se generaron las muestras. 
+La línea recta azul representa el eje $x$. 
 
-En las figuras~\ref{ASTecmL1},~\ref{ASTecmL2} y~\ref{ASTecmL3} se muestra el error cuadrático medio (ECM) estimado para las mismas combinaciones de parámetros. En este caso la línea azul representa el eje $x$. Los resultados se muestran en escala semilogarítmica para su mejor comprensión visual.
+En las figuras~\ref{ASTecmL1},~\ref{ASTecmL2} y~\ref{ASTecmL3} se muestra el error cuadrático medio (ECM) estimado para las mismas combinaciones de parámetros. Los resultados se muestran en escala semilogarítmica para su mejor comprensión visual.
 Cabe señalar que la minimización se realizó recorriendo un rango de valores de alfa variando entre $-10$ y $-1$ con paso  $0.1$. 
 
 Se grafica también el intervalo de confianza de nivel aproximado $95\%$ para cada una de las estimaciones realizadas. Se utilizó el método del percentil que está en descripto~\cite{Buckland1983}. Este método consiste en utilizar como límites superior e inferior del intervalo de confianza a los percentiles $(\alpha/2) 100\%$ y $(1-\alpha/2) 100\%$ de la distribución de $\widehat{\alpha}$ obtenida con las estimaciones en cada una de las muestas generadas. Este método fue evaluado por~\cite{Buckland1983} en el caso donde la distribución subyacente es una exponencial donde falla la simetría de la distribución. El autor muestra que este intervalo tiene un mejor desempeño que el intervalo de confianza utilizando el método de aproximación normal. El método de percentiles se aplica en cada uno de los intervalos construidos en esta tesis.
 
- Se puede observar que, en la mayoría de los casos estudiados, los estimadores del parámetro $\alpha$ utilizando distancia triangular y el método de máxima verosimilitud ($\widehat{\alpha}_{\text{\tiny{DT}}}$ y $\widehat{\alpha}_{\text{\tiny{MV}}}$ respectivamente) tienen un comportamiento similar en término de sesgo y ECM. Mientras que  el estimador utilizando las distancias de Hellinger y Renyi ($\widehat{\alpha}_{\text{\tiny{DH}}}$ y $\widehat{\alpha}_{\text{\tiny{DR}}}$ respectivamente) tienen una performance parecida. 
+ Se puede observar que, en la mayoría de los casos estudiados, los estimadores del parámetro $\alpha$ utilizando distancia triangular y el método de Máxima Verosimilitud ($\widehat{\alpha}_{\text{\tiny{DT}}}$ y $\widehat{\alpha}_{\text{\tiny{MV}}}$ respectivamente) tienen un comportamiento similar en término de sesgo y ECM. Mientras que  el estimador utilizando las distancias de Hellinger y Renyi ($\widehat{\alpha}_{\text{\tiny{DH}}}$ y $\widehat{\alpha}_{\text{\tiny{DR}}}$ respectivamente) tienen una performance parecida. 
  
  En el gráfico de $L=1$ se observa que las distancias de Hellinger y Rényi muestran mayor ECM para tamaños de muestra mayores que $9$, salvo para zonas homogéneas donde el ECM es similar en todas las distancias estudiadas. Asimismo estas distancias muestran un mayor sesgo para muestras grandes.
 
@@ -163,16 +162,16 @@ Para el caso de $L=3$ y $L=8$ vemos que, en algunos casos el $\widehat{\alpha}_{
 \end{figure}
 
 En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se aplicó la metodología anterior a una imagen SAR real. En este caso se utilizó una imagen E-SAR~\cite{Horn1996} de un look de los alrededores de Munich, banda L, polarización HH, con $L=1$ en formato intensidad.
-E-SAR es un sistema formado por sensores y algoritmos de procesamiento de señales desarrollado, entre otras instituciones, por el centro aeroespacial Deutsches Zentrum für Luft- und Raumfahrt German (DLR), un centro de investigación cuya área principal es la teledetección por microondas.  Principalmente utiliza los sistemas de radar de apertura sintética (SAR), tanto en aire y plataformas aerotransportadas. El compromiso de la institución en los proyectos internacionales ERS-1 y SIR-100 / X-SAR dio origen a los conocidos sistemas aerotransportados SAR y E-SAR. 
+E-SAR es un sistema formado por sensores y algoritmos de procesamiento de señales desarrollado, entre otras instituciones, por el centro aeroespacial Deutsches Zentrum für Luft- und Raumfahrt German (DLR), un centro de investigación cuya área principal es la teledetección por microondas.  Este centro utiliza, mayoritariamente, sistemas de radar de apertura sintética (SAR) tanto en plataformas espaciales como aerotransportadas. El compromiso de la institución en los proyectos internacionales ERS-1 y SIR-100 / X-SAR dio origen a los conocidos sistemas aerotransportados SAR y E-SAR. 
 %E-SAR opera en las bandas de frecuencia 4, x, C-, L- y P-banda, por lo tanto, cubre un rango de longitudes de onda de 3 a 85 cm. La polarización de la señal de radar es seleccionable, horizontal así como vertical. El modo polarimétrico se conmuta de impulso a impulso en la polarización (HH-HV-W-VH) -secuencia.
 
-En las figuras~\ref{ImagenReales1} y~\ref{ImagenReales1} se muestran dos imágenes E-SAR, de un look, que se utilizaron para testear la performance de las distancias estudiadas y el MV estimador. En ambas figuras se aplicó el método para cada pixel, usando ventanas deslizantes de tamaño $7 \times 7$ y $3 \times 3$ respectivamente. Se puede observar que los resultados son prometedores ya que todas tienen un comportamiento similar y estamos aplicando el método al caso de mayor ruido.
+En las figuras~\ref{ImagenReales1} y~\ref{ImagenReales1} se muestran dos imágenes E-SAR, de un look, que se utilizaron para testear la performance de las distancias estudiadas y el MV estimador. En ambas figuras se aplicó el método para cada pixel, usando ventanas deslizantes de tamaño $7 \times 7$ y $3 \times 3$ respectivamente. Se puede observar que los resultados son prometedores ya que se analizó el caso de mayor ruido donde todos los métodos presentaron un comportamiento similar.
 
 
 \begin{figure}[htb]
 	\begin{minipage}[b]{0.45\linewidth} %Una minipágina que cubre la mitad de la página
 		\centering
-		\subfigure[\label{ImagenReales1} Imagen E-SAR, L=$1$.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible.pdf}}\\
+		\subfigure[\label{ImagenReales1} Imagen E-SAR, L=$1$.]{\includegraphics[width=.46\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible.pdf}}\\
 		\subfigure[\label{Real1DH} Hellinger.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DH7x7.pdf}}
 		\subfigure[\label{Real1DR} R\'enyi, $\beta=0.8$.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DR7x7.pdf}}
 		\subfigure[\label{Real1DT} Triangular.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DT7x7.pdf}}
@@ -196,15 +195,15 @@ En las figuras~\ref{ImagenReales1} y~\ref{ImagenReales1} se muestran dos imágen
 Por lo anteriormente expuesto, especialmente por el resulado de las simulaciones, elegimos la distancia Triangular para continuar con el estudio.
 
 
-\subsection{Incorporando núcleos y evaluando robustez}
+\section{Incorporando núcleos y evaluando robustez}
 \label{jstar}
 
-Como se mencionó en la subsección~\ref{EligiendoDistancias}, en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se compararon estimadores basados en la distancia de Hellinger, Bhattacharyya, Renyi y Triangular con el MV estimador. Se mostró que la distancia Triangular es la mejor opción para definir el MDE estimador. En ese trabajo se utilizaron histogramas para estimar la función de densidad subyacente $f_{\text{\tiny{S}}}$. En~\cite{gambini2015} %articulo que publicamos en la revista \textit{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing} 
+Como se mencionó en la sección~\ref{EligiendoDistancias}, en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se compararon estimadores basados en la distancia de Hellinger, Bhattacharyya, Renyi y Triangular con el MV estimador. Se mostró que la distancia Triangular es la mejor opción para definir el MDE estimador. En ese trabajo se utilizaron histogramas para estimar la función de densidad subyacente $f_{\text{\tiny{S}}}$. En~\cite{gambini2015} %articulo que publicamos en la revista \textit{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing} 
 presentamos mejoras con respecto a los resultados obtenidos en~\cite{APSAR2013ParameterEstimationStochasticDistances} ya que: 
 \begin{itemize}
 	\item Se evaluó el impacto de la contaminación en la estimación de $\alpha$.
 	\item Se emplearon núcleos asimétricos en lugar de histogramas para estimar $f_{\text{\tiny{S}}}$.
-	\item Se compararon los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con el MV estimador ($\widehat{\alpha}_{\text{\tiny{MV}}}$), Momentos Fraccionales ($\widehat{\alpha}_{\text{\tiny{Mom12}}}$) y Logcumulants ($\widehat{\alpha}_{\text{\tiny{LC}}}$). 
+	\item Se compararon los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con el MV estimador ($\widehat{\alpha}_{\text{\tiny{MV}}}$), Momentos Fraccionales ($\widehat{\alpha}_{\text{\tiny{Mom12}}}$) y Logcumulantes ($\widehat{\alpha}_{\text{\tiny{LC}}}$). 
 \end{itemize}
 
 Los estimadores por momentos fraccionales han sido usados por~\cite{Frery97,GambiniSC08} en el contexto de estimar el parámetro $\alpha$ para datos de amplitud. Para el caso de datos de intensidad, usando la relación $\gamma^*=-\alpha-1$ en~\ref{momento1medio} se tiene que, $\widehat{\alpha}_\text{Mom12}$ es el valor de $\alpha$ que resuelve la ecuación:
@@ -240,7 +239,7 @@ Respecto del estimador $\widehat{\alpha}_{{\text{\tiny{LC}}}}$ y $\widehat{\alph
 
 %Un problema que se presenta al momento de estimar el parámetro de textura es la falta de convergencia a una solución global, especialmente en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
 
-%Un problema que se presenta al momento de estimar el parámetro de textura utilizando las técnicas propuestas incluido ML y aquellos basados en momentos fraccionales~\cite{Frery97} y  Logcumulants~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} es la necesidad de contar con algoritmos iterativos para los cuales no hay garantía de convergencia a una solución global. Esta falta de convergencia sucede en general, en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
+%Un problema que se presenta al momento de estimar el parámetro de textura utilizando las técnicas propuestas incluido ML y aquellos basados en momentos fraccionales~\cite{Frery97} y  Logcumulantes~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} es la necesidad de contar con algoritmos iterativos para los cuales no hay garantía de convergencia a una solución global. Esta falta de convergencia sucede en general, en el caso de muestras de pequeño tamaño. Frery et al.~\cite{FreryCribariSouza:JASP:04} and Pianto and Cribari-Neto~\cite{DealingMonotoneLikelihood} propusieron técnicas que tienen como objetivo aliviar este problema, a expensas de un costo computacional alto.
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -254,7 +253,7 @@ En la figura~\ref{densidades} se muestra el gráfico de la densidad del modelo $
 \end{figure}
 
 
-Se realizó un experimento Montecarlo para evaluar la performance de cada uno de los estimadores propuestos. El espacio parmétrico consiste en una grilla formada por:
+Se realizó un experimento Monte Carlo para evaluar la performance de cada uno de los estimadores propuestos. El espacio parmétrico consiste en una grilla formada por:
 \begin{itemize}
 	\item tres valores de textura $\alpha=\{-1.5,-3,-5\}$. Los cuales representan áreas texturadas y extremadamente texturadas.
 	\item tres niveles de procesamiento señal-ruido $L=\{1,3,8\}$.
@@ -269,10 +268,9 @@ Se generaron $1000$ muestras para cada punto del espacio paramétrico, y se obtu
 	 \item el error cuadrático medio $\widehat{\operatorname{ECM}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$.
 \end{itemize}
   
-En las siguientes figuras ``MV'', ``DT'',``Mom12'' and ``LC'' denotarán al estimador basado en el método de Máxima Verosimilitud, distancia Triangular con núcleo IG, $\frac{1}{2}$-momento and Logcumulant, respectivamente. En el eje de las abscisas se grafica el tamaño muestral, el cual se presenta en escala semilogarítmica.
+En las siguientes figuras ``MV'', ``DT'',``Mom12'' and ``LC'' denotarán al estimador basado en el método de Máxima Verosimilitud, distancia Triangular con núcleo IG, $\frac{1}{2}$-momento y Logcumulante, respectivamente. En el eje de las abscisas se grafica el tamaño muestral, el cual se presenta en escala semilogarítmica.
 
-Las figuras~\ref{AlfasEstimadosJSTAR2013_L=1},~\ref{AlfasEstimadosJSTAR2013_L=3} y~\ref{AlfasEstimadosJSTAR2013_L=8} muestran el sesgo de $\widehat{\alpha}$ para datos sin contaminar y para diferentes valores de $n$ y $L$, la línea azul representa el eje $x$. Se puede observar que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{DT}}$ tienen un comportamiento similar y un sesgo medio cercano a cero en la mayoría de los casos estudiados. Es notable el sesgo que presentan  $\widehat{\alpha}_{\text{LC}}$ y $\widehat{\alpha}_{\text{Mom12}}$ para $\alpha=-5$. Se puede observar también que $\widehat\alpha_{\text{MV}}$ tiende a subestimar al verdadero valor de $\alpha$.
-Se puede observar que ningún método de estimación tiene el menor error cuadrático medio en todos los casos. El estimador $\widehat{\alpha}_{\text{Mom12}}$ es el que peor se comporta para zonas texturadas.
+Las figuras~\ref{AlfasEstimadosJSTAR2013_L=1},~\ref{AlfasEstimadosJSTAR2013_L=3} y~\ref{AlfasEstimadosJSTAR2013_L=8} muestran el sesgo de $\widehat{\alpha}$ para datos sin contaminar y para diferentes valores de $n$ y $L$, la línea azul representa el eje $x$. Se puede observar que $\widehat{\alpha}_{\text{MV}}$ y $\widehat{\alpha}_{\text{DT}}$ tienen un comportamiento similar y un sesgo medio cercano a cero en la mayoría de los casos estudiados. Es notable el sesgo que presentan  $\widehat{\alpha}_{\text{LC}}$ y $\widehat{\alpha}_{\text{Mom12}}$ para $\alpha=-5$. Se puede observar también que $\widehat\alpha_{\text{MV}}$ tiende a subestimar al verdadero valor de $\alpha$, y que ningún método de estimación tiene el menor error cuadrático medio en todos los casos. El estimador $\widehat{\alpha}_{\text{Mom12}}$ es el que peor se comporta para zonas texturadas.
 
 Todos los métodos presentan alta variabilidad para el caso de $L=1$, esta variabilidad disminuye a medida que aumenta el número de looks, incluso la longitud de los intervalos de confianza van disminuyendo a medida que aumenta el tamaño de muestra.
 %Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} computed a first order approximation of such bias for a closely related model, and our results are in agreement with those.
@@ -336,7 +334,7 @@ Una de las fuentes de contaminación en las imágenes SAR es el fenómeno de Dou
 Con el fin de evaluar la robustez de los estimadores, proponemos tres escenarios capaces de describir los desvíos del modelo teórico. Para cada uno de estos escenarios generamos muestras contaminadas donde $0<\epsilon \ll 1$ es la proporción de contaminación. 
 Sea  $B$ una variable aleatoria Bernoulli con probabilidad $p$ de ocurrencia de la contaminación. Sea $C \in \mathbb R_+$ un valor grande. Entonces
 \begin{itemize}
-	\item \label{Caso1}Caso~1:
+	\item \label{ContCaso1}Caso~1:
 	Sean $W$ y $U$ variables aleatorias tales que $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$, y $U \sim \mathcal{G}_I^0(\alpha_2,\gamma_2^*,L) $. Definimos $Z=BU+(1-B)W$, entonces generamos $\{z_1,\dots,z_n\}$ variables aleatorias independientes, idénticamente distribuidas con función de distribución acumulada dada por:
 	$$
 	(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha_2,\gamma_2^*,L)}(z),
@@ -346,7 +344,7 @@ Sea  $B$ una variable aleatoria Bernoulli con probabilidad $p$ de ocurrencia de 
 	\item \label{Caso2}Case~2: Consideramos $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ y el retorno definido como $Z=BC+(1-B)W$.
 	\item \label{Caso3}Case~3:
 	Consideramos $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ y $U\sim \mathcal{G}_I^0(\alpha,10^k\gamma^*,L) $ con $k \in \mathbb{N}$. 
-	El retorno $Z=BU+(1-B)W$, entonces $\{z_1,\dots,z_n\}$ son variables aleatorias idénticamente distribuidas con función de distribución acumulada dada por: 
+	El retorno $Z$ se define como el Caso 1 y la función de distribución acumulada está dada por: 
 	$$
 	(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha,\gamma^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha,10^k\gamma^*,L)}(z).
 	$$
@@ -358,9 +356,9 @@ Todos estos modelos consideran desvíos de la hipótesis del modelo teórico. El
 %%% CASE 1, alpha_2 = -15, epsilon = 0.005
 
 Las figuras~\ref{Caso1L1},~\ref{Caso1L3} y~\ref{Caso1L8} muestran el sesgo y el ECM estimado ($\widehat{\text{ECM}}$) para el Caso $1$ de contaminación con $\alpha_2=-15$, $\epsilon=0.01$, y variando $n$ y $L$.  
-Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observaciones casi sin textura en la muestra bajo análisis. Como se espera, la influencia de tal perturbación es más notable en aquella situaciones donde el modelo subyacente está más alejado de la contaminación. Es decir, para valores grandes de $\alpha$. Esto se ve con claridad en las figuras~\ref{ECMContJSTAR2013Caso1_L=1},\ref{ECMContJSTAR2013Caso1_L=3} y \ref{ECMContJSTAR2013Caso1_L=8} donde el $\widehat{\text{ECM}}$ de $\widehat\alpha_{\text{MV}}$, $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$ son mayores que el error cuadrático medio de $\widehat\alpha_{\text T}$ para $L=3,8$, pero esto no es tan claro para el caso de $L=1$. Lo que si se puede decir que $\widehat\alpha_{\text {DT}}$ es competitivo respecto de los otros estimadores para $\alpha=-3,-5$.
+Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observaciones casi sin textura en la muestra bajo análisis. Como se espera, la influencia de tal perturbación es más notable en aquella situaciones donde el modelo subyacente está más alejado de la contaminación. Es decir, para valores grandes de $\alpha$. Esto se ve con claridad en las figuras~\ref{ECMContJSTAR2013Caso1_L=1},\ref{ECMContJSTAR2013Caso1_L=3} y \ref{ECMContJSTAR2013Caso1_L=8} donde el $\widehat{\text{\tiny{ECM}}}$ de $\widehat\alpha_{\text{\tiny{MV}}}$, $\widehat\alpha_{\text{\tiny{Mom12}}}$ y $\widehat\alpha_{\text{\tiny{LC}}}$ son mayores que el error cuadrático medio de $\widehat\alpha_{\text{\tiny{DT}}}$ para $L=3,8$, pero esto no es tan claro para el caso de $L=1$. Lo que si se puede decir que $\widehat\alpha_{\text{\tiny{DT}}}$ es competitivo respecto de los otros estimadores para $\alpha=-3,-5$.
 
-\begin{figure}[H]
+\begin{figure}[htb]
 	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=1Caso1BarrasErrorypercentil.pdf}}
 	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1BarrasErrorypercentil.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
@@ -370,7 +368,7 @@ Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observa
 	\caption{\label{Caso1L1}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=1$.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
 	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=3Caso1BarrasErrorypercentil.pdf}}
@@ -380,7 +378,7 @@ Este tipo de contaminación introduce, con probabilidad $\epsilon=0.01$, observa
 	\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
 %	\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\alpha}$, L=3]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=3Caso1.pdf}}
@@ -458,9 +456,9 @@ Las figuras~\ref{Caso3L1},~\ref{Caso3L3} y~\ref{Caso3L8} muestran $\widehat{\alp
 	\caption{\label{Caso3L8}\small Datos contaminados: Caso $3$, $\epsilon=0.005$ y $ L=8$.}
 \end{figure}
 
-Como se mencionó anteriormente, los algoritmos implementados para los casos de los estimadores Mom12 y Logcumulant no convergen en algunos casos. En el experimento Montecarlo, si Mom12 o  Logcumulant no convergen, no consideramos esta iteración al momento de estimar, por lo que la cantidad de elementos para calcular $\overline{\widehat{\alpha}}$, el sesgo y el error cuadrático medio es un poco menor que $1000$.
+Como se mencionó anteriormente, los algoritmos implementados para los casos de los estimadores Mom12 y Logcumulante no convergen en algunos casos. En el experimento Monte Carlo, si Mom12 o  Logcumulante no convergen, no consideramos esta iteración al momento de estimar, por lo que la cantidad de elementos para calcular $\overline{\widehat{\alpha}}$, el sesgo y el error cuadrático medio es un poco menor que $1000$.
 
-La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de casos que fueron removidos para el Caso $1$ y $\alpha_2 = -15, \epsilon = 0.01$. Estos resultados son consistentes con los otras escenarios de contaminación, y sugieren que estos métodos son progresivamente más propensos a fallar en casos con mayor presencia de ruido speckle.
+La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de casos que fueron removidos para el Caso $1$ y $\alpha_2 = -15, \epsilon = 0.01$. Estos resultados son consistentes con los otros escenarios de contaminación, y sugieren que estos métodos son progresivamente más propensos a fallar en casos con mayor presencia de ruido speckle.
 
 \begin{table}[hbt]
 	\centering
@@ -473,7 +471,7 @@ La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de caso
 		$8$ & $5.81$ & $6.04$  \\
 		\bottomrule
 	\end{tabular}
-\caption{\label{tabla_removidos}Porcentaje de casos de no convergencia para los estimadores de Momentos y  Logcumulant en el Caso 1, $\alpha_2 = -15, \epsilon = 0.01$}
+\caption{\label{tabla_removidos}Porcentaje de casos de no convergencia para los estimadores de Momentos y  Logcumulante en el Caso 1, $\alpha_2 = -15, \epsilon = 0.01$}
 \end{table}
 
 
@@ -510,7 +508,7 @@ La tabla~\ref{tabla_removidos} informa, a modo de ejemplo, el porcentaje de caso
 %	\caption{\small Datos sin contaminar, L=8.}
 %\end{figure}
 
-Hemos aplicado estos métodos en una imagen real, la misma imagen utilizada en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances}, una imagen E-SAR~\cite{Horn1996} de un look de los alrededores de Munich, banda L, polarización HH en formato intensidad. La figura~\ref{reales2} muestra las regiones usadas para estimar el parámetro de textura. Esta imagen tiene $300\times250$ pixels y comprende principalmente dos áreas de cultivo diferentes.
+Hemos aplicado estos métodos a una imagen real, la misma imagen utilizada en Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances}, una imagen E-SAR~\cite{Horn1996} de un look de los alrededores de Munich, banda L, polarización HH en formato intensidad. La figura~\ref{reales2} muestra las regiones usadas para estimar el parámetro de textura. Esta imagen tiene $300\times250$ pixels y comprende principalmente dos áreas de cultivo diferentes.
 
 \begin{figure}[h!]
 	\centering
@@ -518,13 +516,13 @@ Hemos aplicado estos métodos en una imagen real, la misma imagen utilizada en C
 	\caption{\label{reales2}Image real E-SAR junto con la regiones usadas para estimar el parámetro $\alpha$.}
 \end{figure}
 
-La tabla~\ref{resultadosalfaEstim} muestra los resultados de las estimaciones del parámetro $\alpha$ para cada región rectangular junto con los tiempos de procesamiento, donde $NA$ significa que no fue posible estimar el correspondiente estimador ya que el algoritmo no convergió. El resto de las estimaciones arrojan valores compatibles con el mismo tipo de zona en cada una de las muestras analizadas.
+La tabla~\ref{resultadosalfaEstim} muestra los resultados de las estimaciones del parámetro $\alpha$ para cada región rectangular junto con los tiempos de procesamiento, donde $NA$ significa que el algoritmo correspondiente no convergió. El resto de las estimaciones arrojan valores compatibles con el mismo tipo de zona en cada una de las muestras analizadas.
 
-\begin{table}[h!]
+\begin{table}[htb]
 	\centering
 	\begin{tabular}{c*9{c}}
 		\toprule
-		\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat{\alpha}_{\text MV}$} & \multirow{2 }{*}{$\widehat\alpha_{\text T}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{Mom12}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{LC}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
+		\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat{\alpha}_{\text{\tiny{MV}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{DT}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{Mom12}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{LC}}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
 		&      &                        &                           &                                 &                                &  \small MV &  \small DT &   \small Mom12 &  LC \\
 		\midrule
 		Magenta   & $100$  & $-1.9$ & $-2.7$ & $-1.9$  & $-1.7$  & $0.03$ & $5.85$ & $0.03$  & $0.02$\\
@@ -560,15 +558,15 @@ La tabla~\ref{resultadosalfaEstim} muestra los resultados de las estimaciones de
 
 La figura~\ref{ImagenCornerReflector} muestra una imagen con la presencia de un corner reflector, mientras que la figura~\ref{MuestrasCorner} muestra las regiones usadas para estimar el parámetro de textura para esta situcación. La tabla~\ref{resultadosCorner} presenta los valores de  $\widehat{\alpha}$ para cada área rectangular en la imagen de la figura~\ref{MuestrasCorner}.
 
-Los estimadores MV, Mom12 y  Logcumulant son incapaces de producir una estimación en pequeñas muestras.  Se puede observar que tanto $\widehat\alpha_{\text{Mom12}}$ como $\widehat\alpha_{\text{LC}}$ requieren al menos un tamaño de muestra de $90$ observaciones para que se pueda dar una estimación para $\alpha$. El estimador basado en la distancia triangular produce valores plausibles bajo contaminación incluso con muestras muy pequeñas.
+Los estimadores MV, Mom12 y  Logcumulantes son incapaces de producir una estimación en pequeñas muestras.  Se puede observar que tanto $\widehat\alpha_{\text{\tiny{Mom12}}}$ como $\widehat\alpha_{\text{\tiny{LC}}}$ requieren al menos un tamaño de muestra de $90$ observaciones para que se pueda dar una estimación para $\alpha$. El estimador basado en la distancia triangular produce valores plausibles bajo contaminación incluso con muestras muy pequeñas.
 
-\begin{figure}[H]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[angle =90,width=.8\linewidth]{../../Figures/Tesis/Capitulo6/Corner.pdf}
 	\caption{\label{ImagenCornerReflector} Imagen real SAR de $1$-look con un corner reflector.}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
 	\centering
 	%\subfigure[Single-look E-SAR imagen con un corner reflector.]{\includegraphics[angle =90,width=.8\linewidth]{../../Figures/Tesis/Capitulo6/Corner.pdf}}
 	%\subfigure[\label{Cornerregiones} Regiones de interés.]{\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}}
@@ -581,7 +579,7 @@ Los estimadores MV, Mom12 y  Logcumulant son incapaces de producir una estimaci�
 	\caption{\label{resultadosCorner}$\widehat{\alpha}$ y tiempos de procesos para las muestras presentadas en la figura~\ref{MuestrasCorner}}
 	\begin{tabular}{c*9{c}}
 	\toprule
-	\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat\alpha_{\text{MV}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{T}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{Mom12}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{LC}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
+	\multirow{2 }{*} {Color} & \multirow{2 }{*}{n} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{MV}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{T}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{Mom12}}}$} & \multirow{2 }{*}{$\widehat\alpha_{\text{\tiny{LC}}}$} & \small Tiempo  &  \small Tiempo & \small Tiempo &  \small Tiempo  \\
 	&      &                        &                           &                                 &                                &  \small MV &  \small DT &   \small Mom12 &  LC \\
 	\midrule
 		Magenta     & $15$  & $-20.0$ & $-4.1$  & $NA $   & $NA $     &  $0.03$  &  $ 1.95 $    &  $ 0.03$   &  $0.03$ \\
@@ -593,25 +591,25 @@ Los estimadores MV, Mom12 y  Logcumulant son incapaces de producir una estimaci�
 	\end{tabular}
 \end{table}
 
-La tabla~\ref{pvaluesTrueNestedSamples} presenta los $p$-valores del KS test aplicado a las muestras señaladas en la figura~\ref{MuestrasCorner}. Como se mencionó anteriormente el $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$ no pudieron producir estimaciones en dos muestras y, por lo tanto, no fue posible aplicar el test. Cabe señalar que  se rechaza la hipótesis nula: las muestras provienen de la misma distribución, para la muestra azul y el MV estimador, y para la muestra roja que es la de mayor tamaño para los estimadores $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$. 
+%La tabla~\ref{pvaluesTrueNestedSamples} presenta los $p$-valores del KS test aplicado a las muestras señaladas en la figura~\ref{MuestrasCorner}. Como se mencionó anteriormente el $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$ no pudieron producir estimaciones en dos muestras y, por lo tanto, no fue posible aplicar el test. Cabe señalar que  se rechaza la hipótesis nula: las muestras provienen de la misma distribución, para la muestra azul y el MV estimador, y para la muestra roja que es la de mayor tamaño para los estimadores $\widehat\alpha_{\text{Mom12}}$ y $\widehat\alpha_{\text{LC}}$. 
 
-Estos resultados nos llevan a concluir que el modelo $\mathcal{G}_I^0$ es una buena opción para modelar adecuadamente datos provenientes de imágenes SAR con datos de intensidad ante la presencia de contaminación. Asimismo podemos concluir que el estimador propuesto es una buena elección para estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$, ya que es competitivo frente al MV estimador y mejora a los otros dos estimadores estudiados especialmente para el caso de muestras de pequeño tamaño.
+Estos resultados nos llevan a concluir que la distribución $\mathcal{G}_I^0$ es una buena opción para modelar adecuadamente datos provenientes de imágenes SAR con datos de intensidad ante la presencia de contaminación. Asimismo podemos concluir que el estimador propuesto es una buena elección para estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$, ya que es competitivo frente al MV estimador y mejora a los otros dos estimadores estudiados especialmente para el caso de muestras de pequeño tamaño.
 
-\begin{table*}[htb]
-	\centering
-	\caption{\label{pvaluesTrueNestedSamples} $p$-valores del KS test para la muestras indicadas en la figura~\ref{MuestrasCorner}.}
-	\begin{tabular}{c*4{r}}
-		\toprule
-		Color       &  TestMV    &  TestDT    &  TestMom12  &  TestLC\\
-		\midrule
-		Magenta     & $ 0.38$    & $ 0.93 $   & $ NA $     & $  NA$\\
-		Verde       & $ 0.11$    & $ 0.93$    & $ NA $     & $   NA$\\
-		Azul        & $ 0.01 $   & $0.11 $    & $ 0.40$    & $ 0.11$\\
-		Amarillo    & $0.19$     & $0.31$     & $ 0.46 $   & $0.15$\\
-		Rojo        & $0.23$     & $0.12$     & $ 0.008$   & $0.02$\\
-		\bottomrule
-	\end{tabular}
-\end{table*}
+%\begin{table*}[htb]
+%	\centering
+%	\caption{\label{pvaluesTrueNestedSamples} $p$-valores del KS test para la muestras indicadas en la figura~\ref{MuestrasCorner}.}
+%	\begin{tabular}{c*4{r}}
+%		\toprule
+%		Color       &  TestMV    &  TestDT    &  TestMom12  &  TestLC\\
+%		\midrule
+%		Magenta     & $ 0.38$    & $ 0.93 $   & $ NA $     & $  NA$\\
+%		Verde       & $ 0.11$    & $ 0.93$    & $ NA $     & $   NA$\\
+%		Azul        & $ 0.01 $   & $0.11 $    & $ 0.40$    & $ 0.11$\\
+%		Amarillo    & $0.19$     & $0.31$     & $ 0.46 $   & $0.15$\\
+%		Rojo        & $0.23$     & $0.12$     & $ 0.008$   & $0.02$\\
+%		\bottomrule
+%	\end{tabular}
+%\end{table*}
 %\begin{table}[hbt]
 %	\centering
 %	\caption{Número de casos de no convergencia para distancia triangular generalizada, L=$3$}
@@ -644,7 +642,7 @@ Estos resultados nos llevan a concluir que el modelo $\mathcal{G}_I^0$ es una bu
 %		\end{tabular}
 %\end{table}	
 
-\subsection{Mejorando la propuesta}
+\section{Mejorando la propuesta}
 \label{mejorando}
 
 Para el caso $L=1$ la distribución $\mathcal{G}_I^0(\alpha,\gamma)$ es una distribución de Pareto Generalizada de parámetros $\mathcal{PG}(\mu,\sigma,\beta)$, donde $\mu=0$, $\sigma=\gamma$ y $\beta=-\alpha$. El parámetro de textura de la distribución $\mathcal{G}$ está relacionado con el índice de la cola. En el trabajo que presentamos en~\cite{Chan2016} empleamos teoría de valores extremos para proponer un estimador para este parámetro. Por este motivo en esta tesis continuamos el análisis para el caso multilook.
@@ -660,7 +658,7 @@ En esta sección proponemos mejoras:
 	\item Contamos casos de no convergencia de los algoritmos numéricos empleados, entendiendo que un algoritmo no converge si devuelve como valor estimado del parámetro a alguno de los extremos del intervalo de búsqueda.
 \end{itemize}  
 
-La pregunta es ¿por qué el núcleo $IG$ y no otro? ¿Cómo elegir el mejor núcleo? Para responder a estas preguntas estudiamos otros núcleos. En~\ref{NucleosAsimetricos} se mencionó que, dentro de los núcleos más estudiados, se encuentran los núcleos IG, $\Gamma^1$, $\Gamma^2$ y LN. En~\cite{gambini2015} evaluamos la performance del núcleo IG, en esta subsección vamos a evaluar los otros dos núcleos y compararemos su performance con el núcleo IG. 
+La pregunta es ¿por qué el núcleo $IG$ y no otro? ¿Cómo elegir el mejor núcleo? Para responder a estas preguntas estudiamos otros núcleos. En~\ref{NucleosAsimetricos} se mencionó que, dentro de los núcleos más estudiados, se encuentran los núcleos IG, $\Gamma^1$, $\Gamma^2$ y LN. En~\cite{gambini2015} evaluamos la performance del núcleo IG, en esta sección vamos a evaluar los otros dos núcleos y compararemos su performance con el núcleo IG. 
 
 En una primera instancia estimamos el MISE~\eqref{MISE} ($\widehat{\text{MISE}}$) para cada núcleo estudiado, para distintas combinaciones de los parámetros, tamaños muestrales y número de looks. 
 
@@ -671,7 +669,7 @@ Realizamos $500$ replicaciones, en cada replicación generamos una muestra prove
 \end{align}
 donde $\widehat{f}_{b,\text{K}}^i(x)$ es el estimador de la función de densidad subyacente en la replicación $i$ para el núcleo $\text{K}$, que depende del ancho de banda $\text{b}$.
 
-En la tabla~\ref{MiseyCantCasosNoConvergenciaL=3} se muestran los valores de $\widehat{\text{MISE}}$ para $L=3$, $\alpha=\{-1.5,-3,-5,-8\}$, $\gamma^*=-\alpha-1$, $n=\{9,25,49,81,121\}$ y $\text{K}=\{\Gamma^1,\Gamma^2,\text{LN},\text{IG},\text{IGJstar\}}$, donde $\Gamma^1$, $\Gamma^2$, LN, IG, IGJstar corresponden a los núcleos $\Gamma^1$, $\Gamma^2$, Lognormal e Inverso Gaussiano respectivamente. La columna IGJstar corresponde al núcleo estudiado en~\cite{gambini2015} donde se consideró un ancho de banda fijo encontrado empíricamente. En esta oportunidad se aplicó el método LSCV para encontrar el ancho de banda en cada replicación y para cada combinación de los parámetros en el resto de los núcleos estudiados.
+En la tabla~\ref{MiseyCantCasosNoConvergenciaL=3} se muestran los valores de $\widehat{\text{MISE}}$ para $\alpha=\{-1.5,-3,-5,-8\}$, $L=3$, $\gamma^*=-\alpha-1$, $n=\{9,25,49,81,121\}$ y $\text{K}=\{\Gamma^1,\Gamma^2,\text{LN},\text{IG},\text{IGJstar\}}$, donde $\Gamma^1$, $\Gamma^2$, LN, IG, IGJstar corresponden a los núcleos $\Gamma^1$, $\Gamma^2$, Lognormal e Inverso Gaussiano respectivamente. La columna IGJstar corresponde al núcleo estudiado en~\cite{gambini2015} donde se consideró un ancho de banda fijo encontrado empíricamente. En esta oportunidad se aplicó el método LSCV para encontrar el ancho de banda en cada replicación y para cada combinación de los parámetros en el resto de los núcleos estudiados.
 
 Se puede observar que:
 \begin{itemize}
@@ -785,21 +783,21 @@ Entonces, priorizando la calidad del ajuste, el porcentaje de casos de convergen
 \end{table}										
 
 
-\subsection{Evaluación de la performance entre los distintos métodos de estimación}
+\section{Evaluación de la performance entre los distintos métodos de estimación}
 
-En esta sección presentamos los resultados empíricos que obtuvimos sobre la calidad de los estimadores para el parámetro de textura del modelo $\mathcal G_I^0$. Como dijimos en la subsección anterior elegimos los métodos MV (máxima verosimilitud), $\Gamma$ (núcleo Gamma), LN (núcleo Lognormal) y LC (Logcumulant). El primero y último estimador son los más usados en la literatura, los otros son los propuestos en esta tesis.
+En esta sección presentamos los resultados empíricos que obtuvimos sobre la calidad de los estimadores para el parámetro de textura del modelo $\mathcal G_I^0$. Como dijimos en la sección anterior elegimos los métodos MV (Máxima Verosimilitud), $\Gamma$ (núcleo Gamma), LN (núcleo Lognormal) y LC (Logcumulante). El primero y último estimador son los más usados en la literatura, los otros son los propuestos en esta tesis.
 
-A través de un experimento de Montecarlo evaluamos la calidad de los estimadores estudiando:
+A través de un experimento de Monte Carlo evaluamos la calidad de los estimadores estudiando:
 \begin{itemize}
 	\item el porcentaje de casos de no convergencia y el costo computacional.
 	\item el sesgo y el ECM para diferentes escenarios.
-	\item la robustez de estos estimadores por medio del Caso 1 de contaminación~\ref{Caso1} y de la función de influencia empírica que será definida en la subsección~\ref{FIES}.
+	\item la robustez de estos estimadores por medio del Caso 1 de contaminación y de la función de influencia empírica que será definida en la sección~\ref{FIES}.
 \end{itemize} 
 
-El experimento Montecarlo realizado es como el descripto en~\ref{ExperimentoMontecarlo}, en esta oportunidad se realizadon $500$ replicaciones independientes para cada uno de los valores de los parámetros: 
+El experimento Monte Carlo que se implementó es como el descripto en~\ref{ExperimentoMontecarlo}, en esta oportunidad se realizaron $500$ replicaciones independientes para cada uno de los valores de los parámetros: 
 $\alpha\in\{-1.5, -3, -5, -8\}$, $L\in\{1,3,8\}$, $n\in\{9, 25,49, 81,121,500\}$, valores similares a los estudiados en~\cite{gambini2015}. 
 
-\subsubsection{Cantidad de casos de no convergencia y tiempos de proceso}
+\subsubsection{Porcentaje de casos de no convergencia y tiempos de proceso}
 En la tabla~\ref{NoConvMLyNGyLNyLC_L=3} se muestra el porcentaje de casos de no convergencia para $L=3$, el caso $L=8$ arrojan valores similares. Se puede observar que los método MV y LC son los que mayor porcentaje de no convergencia presentan, seguidos por el método LN y por último el método $\Gamma$. 
 
 \begin{table}[hbt]
@@ -856,7 +854,7 @@ En la tabla~\ref{tablaDeTiemposmediosMVyGAyLNyLC} se muestran los tiempos medios
 
 \subsubsection{Evaluación de los métodos de estimación para datos sin contaminar}
 
-En la figura~\ref{SesgoyECMSinContL=3} se muestra el sesgo y el ECM estimados para datos sin contaminar y el caso L=3, junto con sus intervalos de confianza de nivel aproximado $0.95$. Las iteraciones consideradas son aquellas en donde todos los métodos convergen. Se puede observar que  a medida que el valor del $\alpha$ disminuye, tanto $\widehat{\text{Sesgo}}$ como $\widehat{\text{ECM}}$ van aumentando su valor en la mayoría de los métodos. Dado que por cuestiones de escala, no se puede evaluar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -3$ lo graficamos aparte, en la figura~\ref{SesgoyECMSinContL=3,-1.5y-3}. Se puede observar que el estimador MV y LC por un lado, y $\Gamma$ y LN por el otro tienen un comportamiento similar tanto en sesgo como en ECM en la mayoría de los casos. Este comportamiento similar también se puede observar en los intervalos de confianza, los métodos MV y LC producen intervalos de longitud mayor que los otros métodos, mostrando que son menos precisos respecto de los MDE estimadores.
+En la figura~\ref{SesgoyECMSinContL=3} se muestra el sesgo y el ECM estimados para datos sin contaminar y L=3. Las iteraciones consideradas son aquellas en donde todos los métodos convergen. Se puede observar que  a medida que el valor del $\alpha$ disminuye, tanto $\widehat{\text{Sesgo}}$ como $\widehat{\text{ECM}}$ van aumentando su valor en la mayoría de los métodos. Dado que por cuestiones de escala, no se puede evaluar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -3$ lo graficamos aparte, en la figura~\ref{SesgoyECMSinContL=3,-1.5y-3}. Se puede observar que el estimador MV y LC por un lado, y $\Gamma$ y LN por el otro tienen un comportamiento similar tanto en sesgo como en ECM en la mayoría de los casos. Este comportamiento similar también se puede observar en los intervalos de confianza, los métodos MV y LC producen intervalos de longitud mayor que los otros métodos, mostrando que son menos precisos respecto de los MDE estimadores.
 
  Para zonas extremadamente heterogéneas y heterogéneas los MDE estimadores presentan una mejor performance que el resto. En cambio para zonas moderadamente texturadas y homogéneas el comportamiento se revierte.
 
@@ -867,7 +865,7 @@ En la figura~\ref{SesgoyECMSinContL=3} se muestra el sesgo y el ECM estimados pa
 	\caption{\label{SesgoyECMSinContL=3}\small Sesgo y ECM estimados para datos sin contaminar y $ L=3$.}
 \end{figure}
 
-Dado que por cuestiones de escala, no se puede evaluar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -5$ hicimos un gráfico mostrando únicamente estos casos para su mejor visualización.
+Nuevamente, como no se puede visualizar adecuadamente el $\widehat{\text{Sesgo}}$ y el $\widehat{\text{ECM}}$ para $\alpha=-1.5, -5$ hicimos un gráfico mostrando únicamente estos casos.
 
 \begin{figure}[H]
 	\subfigure[\label{SesgoSinContL=3,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3yPercentil.pdf}}
@@ -894,23 +892,34 @@ De acuerdo al estudio para datos sin contaminación podemos concluir que el esti
 
 \subsubsection{Evaluación de los métodos de estimación para datos contaminados}
 
-En las figuras~\ref{SesgoyECMConContL=3} y ~\ref{SesgoyECMConContL=3} se muestran los gráficos correspondientes a datos contaminados. En esta instancia se analizó el caso 1 de contaminación, que se presentó en~\ref{Caso1}, con $\epsilon=0.05$. Se ve con mayor claridad cómo se agrupan los estimadores por desempeño. MV y LC por un lado y los MDE por otro lado. Es notable la diferencia, tanto en sesgo como en ECM, a favor de los MDE estimadores para valores grandes de $\alpha$. En la mayoría de los casos estudiados los MDE estimadores presentan intervalos de menor longitud respecto de los otros estimadores. En zonas moderadamente texturadas todos los métodos son comparables aunque los MDE estimadores presentan un menor ECM. Para zonas homogéneas MV y LC estimadores presentan menor sesgo aunque mayor variabilidad.
+En las figuras~\ref{SesgoyECMConContL=3} y~\ref{SesgoyECMConContL=3-1punto5y-3} se muestran los gráficos correspondientes a datos contaminados para el caso $L=3$, mientras que las figuras~\ref{SesgoyECMConContL=8} y~\ref{SesgoyECMConContL=8-1punto5y-3} lo muestran para el caso $L=8$. En esta instancia se analizó el caso 1 de contaminación, que se presentó en la sección~\ref{jstar}, con $\epsilon=0.05$. En ambos niveles de contaminación se ve con mayor claridad cómo se agrupan los estimadores por desempeño, MV y LC por un lado y los MDE por otro lado. Es notable la diferencia, tanto en sesgo como en ECM, a favor de los MDE estimadores para valores grandes de $\alpha$. En la mayoría de los casos estudiados los MDE estimadores presentan intervalos de menor longitud respecto de los otros estimadores. En zonas moderadamente texturadas todos los métodos son comparables aunque los MDE estimadores presentan un menor ECM. Para zonas homogéneas MV y LC estimadores presentan menor sesgo aunque mayor variabilidad.
 
 \begin{figure}[htb]
 	\subfigure[\label{SesgoConContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasErroryPercentil.pdf}}
 	\subfigure[\label{ECMConContL=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasErroryPercentil.pdf}}
-	\caption{\label{SesgoyECMConContL=3}\small Sesgo y ECM estimados para datos contaminados, Caso 1~\ref{Caso1}, $\epsilon=0.05$ y $ L=3$.}
+	\caption{\label{SesgoyECMConContL=3}\small Sesgo y ECM estimados para datos contaminados, Caso 1, $\epsilon=0.05$ y $ L=3$.}
 \end{figure}
 
 \begin{figure}[htb]
 	\subfigure[\label{SesgoConContL=3-1punto5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3yPercentil.pdf}}
 	\subfigure[\label{ECMConContL=3-1punto5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3yPercentil.pdf}}
-	\caption{\label{SesgoyECMConContL=3-1punto5y-3}\small Sesgo y ECM estimados para datos contaminados, Caso 1~\ref{Caso1}, $\epsilon=0.05$, $\alpha=-1.5, -3$ y $ L=3$.}
+	\caption{\label{SesgoyECMConContL=3-1punto5y-3}\small Sesgo y ECM estimados para datos contaminados, Caso 1, $\epsilon=0.05$, $\alpha=-1.5, -3$ y $ L=3$.}
 \end{figure}
 
+\begin{figure}[htb]
+	\subfigure[\label{SesgoConContL=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=8Cont_BarrasErroryPercentil.pdf}}
+	\subfigure[\label{ECMConContL=8}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=8Cont_BarrasErroryPercentil.pdf}}
+	\caption{\label{SesgoyECMConContL=8}\small Sesgo y ECM estimados para datos contaminados, Caso 1, $\epsilon=0.05$ y $ L=8$.}
+\end{figure}
+
+\begin{figure}[htb]
+	\subfigure[\label{SesgoConContL=8-1punto5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=8Cont_BarrasError-1punto5y-3yPercentil.pdf}}
+	\subfigure[\label{ECMConContL=8-1punto5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=8Cont_BarrasError-1punto5y-3yPercentil.pdf}}
+	\caption{\label{SesgoyECMConContL=8-1punto5y-3}\small Sesgo y ECM estimados para datos contaminados, Caso 1, $\epsilon=0.05$, $\alpha=-1.5, -3$ y $ L=8$.}
+\end{figure}
 De acuerdo a este análisis el LN estimador es el que mejor desempeño presenta, tanto para datos contaminados como sin contaminar, para zonas con textura.
 
-\subsection{Función de influencia empírica}
+\section{Función de influencia empírica}
 \label{FIES}
 
 Otra forma de evaluar cómo un estimador $T_n(z_1; \ldots ; z_n)$ se comporta bajo contaminación es fijar $n-1$ observaciones y permitir que una observación varíe. Esto se conoce como \textit{Función de influencia empírica}(FIE). El problema de esta metodología es que depende de una muestra en particular. Para evitar esto Andrews et al.~\cite{Andrews1972} propusieron generar una muestra formada por los \textit{i-ésimos} cuantiles de la distribución, F, que se asume como modelo teórico. Estos cuantiles se definen como $z_i=F^{-1}\big((i-1/3)/(n+1/3) \big)$, $1\leq i\leq n-1$.
@@ -956,7 +965,7 @@ Las figuras~\ref{InflL8alfa-1.5n25},~\ref{InflL8alfa-3n25}~\ref{InflL8alfa-5n25}
 	\caption{\label{InflL8n25}\small FIES para $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}
 \end{figure}
 
-\subsection{Aplicación a una imagen real}
+\section{Aplicación a una imagen real}
 \label{AplicacionImagenReal}
 
 En esta sección evaluaremos a los estimadores $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$, $\widehat{\alpha}_{\text{LC}}$ cuando estimamos en una imagen real. En este caso utilizamos la imagen~\ref{reales2}. Esta imagen es de un solo look. Para obtener una imagen multilook calculamos nuevos píxeles promediando los valores de intensidad en ventanas deslizantes, no superpuestas, de tamaño $2\times2$. Esta técnica se conoce como procesamiento piramidal~\cite{Adelson1984}, la imagen resultante es una imagen multilook. 
@@ -971,14 +980,14 @@ Para encontrar el $ENL$ elegimos manualmente $4$ muestras de zonas homogéneas y
 	\caption{\label{MuestraLooks}\small Muestras para estimación de ENL en una imagen Esar multilook.}
 \end{figure}
 
-En la figura~\ref{TresMuestras} están graficadas tres muestras: amarilla, roja y azul. Las dos primeras de tamaño $16$, la última de tamaño $12$. La muestra roja es un desplazamiento respecto de la muestra amarilla en una fila de la matriz de datos de la imagen, la muestra azul está contenida dentro de la muestra amarilla. La tabla~\ref{TablaTresMuestras} muestra los valores de las estimaciones obtenidas con cada método de estimación en cada una de las muestras. Se puede observar que  el valor de las estimaciones en la muestra amarilla difieren considerablemente entre los métodos. Tanto máxima verosimilitud como Logcumulants arrojan estimaciones de $\widehat{\alpha}$ compatibles con una zona homogénea, mientras que $\widehat{\alpha}_{\Gamma}$ indica que la zona es heterogénea y $\widehat{\alpha}_{\text{LN}}$ está en el límite de afirmar si la zona es heterogénea o extremadamente heterogénea.
+En la figura~\ref{TresMuestras} están graficadas tres muestras: amarilla, roja y azul. Las dos primeras de tamaño $16$, la última de tamaño $12$. La muestra roja es un desplazamiento respecto de la muestra amarilla en una fila de la matriz de datos de la imagen, la muestra azul está contenida dentro de la muestra amarilla. La tabla~\ref{TablaTresMuestras} muestra los valores de las estimaciones obtenidas con los diferentes métodos en cada una de las muestras. Se puede observar que el valor de las estimaciones para los diferentes métodos difieren considerablemente en el caso de la muestra amarilla. Tanto MV como LC arrojan estimaciones de $\widehat{\alpha}$ compatibles con una zona homogénea, mientras que $\widehat{\alpha}_{\Gamma}$ indica que la zona es heterogénea y $\widehat{\alpha}_{\text{LN}}$ está en el límite de afirmar si la zona es heterogénea o extremadamente heterogénea.
 \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.8\linewidth]{../../Figures/Tesis/ImagenReal/TresMuestras.pdf}
 	\caption{\label{TresMuestras}\small Tres muestras utilizadas para comparar  $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y  $\widehat{\alpha}_{\text{LC}}$.}
 \end{figure}
 
-¿Por qué sucede esto? es la pregunta inmediata. 
+¿Por qué sucede esto? es la pregunta inmediata. Para responder esta pregunta volvimos a estimar en una ventana desplazada (muestra roja) y en una ventana contenida (muestra azul). Las estimaciones se presentan en la tabla~\ref{TablaTresMuestras}.
 %\begin{table*}[htb]
 %	\centering
 %	\caption{\label{TablaTresMuestras} Valores de $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\text{LC}}$ para la muestra amarilla de la imagen~\ref{TablaMeustraAmarillaComparaEstima}.}
@@ -993,7 +1002,6 @@ En la figura~\ref{TresMuestras} están graficadas tres muestras: amarilla, roja 
 %	\end{tabular}
 %\end{table*}
 
-Entonces volvimos a estimar en una ventana desplazada (muestra roja) y en una ventana contenida (muestra azul). Las estimaciones se presentan en la tabla~\ref{TablaTresMuestras}.
 \begin{table*}[htb]
 	\centering
 	\caption{\label{TablaTresMuestras} Valores de $\widehat{\alpha}_{\text{MV}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{LN}}$ y $\widehat{\alpha}_{\text{LC}}$ para las tres muestras de la imagen~\ref{TresMuestras}.}
@@ -1070,11 +1078,11 @@ En este nuevo análisis se pone de manifiesto el comportamiento de los estimador
 
 Se puede observar también que los intervalos de confianza correspondientes a los métodos MV y LN son en general más anchos que los de los otros métodos. Todos los intervalos van disminuyendo su longitud a medida que aumenta el tamaño de muestra, es decir, van siendo más precisos. Es importante mencionar que el intervalo de confianza correspondiente al método LN es el que menor longitud presenta en la mayoría de los casos. Cabe señalar que, en el caso donde los métodos MV y LN no convergieron no se da ningún intervalo de confianza y solo se consideraron las muestras donde todos los métodos convergieron.
 
-\subsection{Conclusiones}
+\section{Conclusiones}
 
-En este capítulo se estudia el desempeño del estimador de mínima distancia propuesto en esta tesis mediante una simulación Montecarlo, especialmente para muestras de pequeño tamaño. Esta simulación se realizó con el fin de elegir una distancia estocástica entre las estudiadas, seleccionar el núcleo para estimar la función de densidad subyacente y la forma de elegir el ancho de banda.
+En este capítulo se estudia el desempeño del estimador de mínima distancia propuesto en esta tesis mediante una simulación Monte Carlo, especialmente para muestras de pequeño tamaño. Esta simulación se realizó con el fin de elegir una distancia estocástica entre las estudiadas, seleccionar el núcleo para estimar la función de densidad subyacente y la forma de elegir el ancho de banda.
 
-A través de este estudio se concluyó que la distancia triangular es una buena elección para estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$ utilizando estimadores de mínima distancia. Se evaluaron tres núcleos para estimar la función de densidad subyacente: IG, $\Gamma$ y LN en términos de , error cuadrático medio integrado, sesgo, ECM y robustez. Se mostró que el el MDE estimador junto con la distancia triangular, el núcleo IG con un ancho de banda elegido empíricamente es competitivo respecto del método de Momentos fraccionales, Máxima Verosimilitud y Logcumulants en situaciones sin contaminación y mejora el rendimiento de estas otras técnicas en presencia de bajos niveles de contaminación. Sin embargo posee un alto error cuadrático medio integrado comparado con el que presentan los núcleos $\Gamma$ y Logcumulant eligiendo el ancho de banda con el método LSCV. Estos últimos núcleos tienen un mejor desempeño en cantidad de casos de convergencia frente al MV y LC estimadores, compiten con los métodos MV y LC en términos de sesgo y ECM para datos sin contaminar, incluso mejorando su performance para algunos casos estudiados. Tienen la desventaja de tener un alto costo computacional frente a las otros métodos de estimación.
+A través de este estudio se concluyó que la distancia triangular es una buena elección para estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$ utilizando estimadores de mínima distancia. Se evaluaron tres núcleos para estimar la función de densidad subyacente: IG, $\Gamma$ y LN en términos de , error cuadrático medio integrado, sesgo, ECM y robustez. Se mostró que el el MDE estimador junto con la distancia triangular, el núcleo IG con un ancho de banda elegido empíricamente es competitivo respecto del método de Momentos fraccionales, Máxima Verosimilitud y Logcumulantes en situaciones sin contaminación y mejora el rendimiento de estas otras técnicas en presencia de bajos niveles de contaminación. Sin embargo posee un alto error cuadrático medio integrado comparado con el que presentan los núcleos $\Gamma$ y Lognormal eligiendo el ancho de banda con el método LSCV. Estos últimos núcleos tienen un mejor desempeño en cantidad de casos de convergencia frente al MV y LC estimadores, compiten con los métodos MV y LC en términos de sesgo y ECM para datos sin contaminar, incluso mejorando su performance para algunos casos estudiados. Tienen la desventaja de tener un alto costo computacional frente a las otros métodos de estimación.
 
 Respecto del análisis de robustez realizado mediante el estudio de la función de influencia emírica stilizada se mostró que el que mejor desempeño presenta es el núcleo LN. Este comportamiento también se observa cuando se aplican estas técnicas a una imagen real donde se puede observar que el que arrojó estimaciones más estables cuando se varía el tamaño de muestra es el método LN.
 
