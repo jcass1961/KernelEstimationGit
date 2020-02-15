@@ -1,0 +1,285 @@
+%\documentclass[a4paper,oneside,numbers,nobibtoc]{ezthesis}
+\documentclass[a4paper,oneside]{ezthesis}
+%\usepackage[a4paper]{geometry}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.5}
+\topmargin=-1cm
+\oddsidemargin=0.5cm
+
+
+\usepackage{tabularx}
+
+% Paquete  que permite  cambiar  el formato  en  el que  se ponen  los
+% títulos   de   capítulos,  secciones,   etc.    También  define   el
+% comando \chaptertitlename, que  equivale a \chaptername ("Capítulo")
+% cuando se está  dentro de un capítulo o  a \apendixname ("Apéndice")
+% cuando se  está en un apéndice.  Eso se utiliza en  la definición de
+% las cabeceras.
+\usepackage{titlesec}
+\usepackage{amsfonts,amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsthm}
+\usepackage{lipsum,multicol}
+%\usepackage{calligra}
+%\usepackage{calrsfs}
+\usepackage{mathrsfs}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+%\usepackage{dsfont}
+\usepackage{filecontents}
+%\usepackage{verbatim}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+%\usepackage[numbers]{natbib}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[small]{caption}
+\usepackage{bm,bbm}
+\spanishdecimal{.}
+\usepackage[normalem]{ulem} %%%% para tachar texto
+\usepackage{url} %%%% para citar páginas web
+\usepackage{setspace} %% setea el espacio entre filas en una tabla
+\usepackage{siunitx}
+\usepackage{float}
+%\usepackage{dcolumn}
+
+\usepackage{natbib}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes,arrows,trees}
+\usepackage[abs]{overpic}
+%\usepackage[active,pdftex,tightpage]{preview}
+%\usepackage{tikz-cd}
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter] % esto es para que lo numere como : capitulo. definicion
+
+
+\newcommand*{\id}{{\normalfont\hbox{1\kern-0.15em \vrule width .8pt depth-.5pt}}}
+\newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
+
+
+
+%\renewcommand{\spanishtablename}{Tabla}
+
+%%%%% EQUATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\numberwithin{equation}{section}
+
+%%%%% THEOREMS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{corollary}{Corolario}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposition}{Proposición}[section]
+\newtheorem{theorem}{Teorema}[section]
+
+%%%%% demS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% PROOFS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{dem}[1][Demostración]{\begin{proof}[{\bf #1}]}{\end{proof}}
+%%%%% DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\newtheorem{definition}{Definici\'{o}n}[section]
+\newtheorem{example}{Ejemplo}[section]
+\newtheorem{remark}{Observación}[section]
+
+%%%%% NUMEROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\renewcommand{\r}{\mathbf{r}}
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\al}{&\,}
+
+
+%%%%% CONJUNTOS NUMERICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\D}{\ensuremath{\mathrm{D}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\T}{\ensuremath{\mathbb{T}}} 
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
+%%%%% FUNCIONES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\Re}[1]{\ensuremath{\mathrm{Re}\pa{ #1 }}}
+\renewcommand{\Im}[1]{\ensuremath{\mathrm{Im}\pa{ #1 }}}
+\renewcommand{\ker}[1]{\ensuremath{\mathrm{Ker}\pa{ #1 }}}
+\newcommand{\lap}{\ensuremath{\nabla^{2}}}
+\newcommand{\ran}[1]{\ensuremath{\mathrm{Ran}\pa{ #1 }}}
+\newcommand{\inc}{\ensuremath{\iota}}
+\newcommand{\sig}[1]{\ensuremath{\mathrm{sgn}\pa{ #1 }}}
+\newcommand{\sop}[1]{\ensuremath{\mathrm{sop}\pa{ #1 }}}
+\newcommand{\tr}[1]{\ensuremath{\mathrm{tr}\pa{ #1 }}}
+\newcommand*{\bigtimes}{\mathop{\raisebox{-.5ex}{\hbox{\huge{$\times$}}}}}
+
+%%%%% LLAVES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\norm}[1]{\ensuremath{\left\| #1 \right\|}}
+\newcommand{\pa}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\pro}[2]{\ensuremath{\left( #1,#2 \right)}}
+\newcommand{\set}[1]{\ensuremath{\left\{ #1 \right\}}}
+
+%%%%% ESPACIOS VECTORIALES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rn}[1][n]{\ensuremath{\R^{#1}}}
+\newcommand{\Cn}[1][n]{\ensuremath{\C^{#1}}}
+
+%%%%% ESPACIOS FUNCIONALES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\sch}[1][n]{\ensuremath{\mathcal{S}\pa{\Rn[#1]}}}
+\newcommand{\lp}[2]{\ensuremath{L^{#1}\pa{\Rn[#2]}}}
+\newcommand{\lpw}[2]{\ensuremath{L^{#1,w}\pa{\Rn[#2]}}}
+\newcommand{\sob}[2]{\ensuremath{H^{#1}\pa{\Rn[#2]}}}
+\newcommand{\hil}{\ensuremath{\mathrm{H}}}
+
+
+
+\addto\captionsspanish{\renewcommand{\tablename}{Fig.}}
+
+% Definimos  los  nombres para  las  tablas  y  el índice  de  tablas,
+% sobreescribiendo los de babel, que los llama 'cuadros'.
+
+%% # Opciones disponibles para el documento #
+%%
+%% Las opciones con un (*) son las opciones predeterminadas.
+%%
+%% Modo de compilar:
+%%   draft            - borrador con marcas de fecha y sin im'agenes
+%%   draftmarks       - borrador con marcas de fecha y con im'agenes
+%%   final (*)        - version final de la tesis
+%%
+%% Tama'no de papel:
+%%   letterpaper (*)  - tama'no carta (Am'erica)
+%%   a4paper          - tama'no A4    (Europa)
+%%
+%% Formato de impresi'on:
+%%   oneside          - hojas impresas por un solo lado
+%%   twoside (*)      - hijas impresas por ambos lados
+%%
+%% Tama'no de letra:
+%%   10pt, 11pt, o 12pt (*)
+%%
+%% Espaciado entre renglones:
+%%   singlespace      - espacio sencillo
+%%   onehalfspace (*) - espacio de 1.5
+%%   doublespace      - a doble espacio
+%%
+%% Formato de las referencias bibliogr'aficas:
+%%   numbers          - numeradas, p.e. [1]
+%%   authoryear (*)   - por autor y a'no, p.e. (Newton, 1997)
+%%
+%% Opciones adicionales:
+%%   spanish         - tesis escrita en espa'nol
+%%
+%% Desactivar opciones especiales:
+%%   nobibtoc   - no incluir la bibiolgraf'ia en el 'Indice general
+%%   nofancyhdr - no incluir "fancyhdr" para producir los encabezados
+%%   nocolors   - no incluir "xcolor" para producir ligas con colores
+%%   nographicx - no incluir "graphicx" para insertar gr'aficos
+%%   nonatbib   - no incluir "natbib" para administrar la bibliograf'ia
+
+%% Paquetes adicionales requeridos se pueden agregar tambi'en aqu'i.
+%% Por ejemplo:
+%\usepackage{subfig}
+%\usepackage{multirow}
+
+%% # Datos del documento #
+%% Nota que los acentos se deben escribir: \'a, \'e, \'i, etc.
+%% La letra n con tilde es: \~n.
+
+
+%\department{Departamento de Sistemas Computacionales}
+
+%% # M'argenes del documento #
+%% 
+%% Quitar el comentario en la siguiente linea para austar los m'argenes del
+%% documento. Leer la documentaci'on de "geometry" para m'as informaci'on.
+
+%\geometry{top=40mm,bottom=33mm,inner=40mm,outer=25mm}
+
+%% El siguiente comando agrega ligas activas en el documento para las
+%% referencias cruzadas y citas bibliogr'aficas. Tiene que ser *la 'ultima*
+%% instrucci'on antes de \begin{document}.
+\hyperlinking
+
+\begin{document}
+	
+
+
+	%\faculty{Escuela de Ingenier\'ia y Ciencias}
+
+%% En esta secci'on se describe la estructura del documento de la tesis.
+%% Consulta los reglamentos de tu universidad para determinar el orden
+%% y la cantidad de secciones que debes de incluir.
+
+%% # Portada de la tesis #
+%% Mirar el archivo "titlepage.tex" para los detalles.
+
+
+\include{titlepage}
+
+%% # Prefacios #
+%% Por cada prefacio (p.e. agradecimientos, resumen, etc.) crear
+%% un nuevo archivo e incluirlo aqu'i.
+%% Para m'as detalles y un ejemplo mirar el archivo "gracias.tex".
+\include{formulario_E_Julia}
+\include{gracias}
+
+%% # 'Indices y listas de contenido #
+%% Quitar los comentarios en las lineas siguientes para obtener listas de
+%% figuras y cuadros/tablas.
+
+
+\renewcommand{\tablename}{Tabla} 
+\renewcommand{\listtablename}{Indice de tablas}
+\tableofcontents
+\listoffigures
+\listoftables
+
+%% # Cap'itulos #
+%% Por cada cap'itulo hay que crear un nuevo archivo e incluirlo aqu'i.
+%% Mirar el archivo "intro.tex" para un ejemplo y recomendaciones para
+%% escribir.
+\include{capitulo1}
+\include{capitulo2}
+\include{capitulo3}
+\include{capitulo4}
+\include{capitulo5}
+\include{capitulo6}
+%\include{capitulo6_v2}
+\include{capitulo7}
+\include{capitulo8}
+
+\appendix
+
+%% Cap'itulos incluidos despues del comando \appendix aparecen como ap'endices
+%% de la tesis.
+\include{apendiceA1}
+\include{apendiceB1}
+%\include{apendiceC}
+
+%% Incluir la bibliograf'ia. Mirar el archivo "biblio.bib" para m'as detales
+%% y un ejemplo.
+%\bibliographystyle{agsm}
+\addcontentsline{toc}{chapter}{Bibliografí­a}
+\bibliographystyle{agsm}
+\bibliography{../../Bibliography/bib_julia}
+\label{bibliografia}
+
+
+
+\end{document}

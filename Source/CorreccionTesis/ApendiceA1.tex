@@ -1,0 +1,37 @@
+\chapter{Algunas demostraciones}
+
+\subsection{Expresiones para $b_{\small{\text{LN}}}^*$ y $\textbf{Mise}_{\small{\text{LN}}}^*$~\eqref{MISEoptLN}.}
+\label{byMiseOptLN}
+\begin{dem}
+	De acuerdo a~\cite{Libnegue2013} expresiones para el sesgo, la varianza de $\widehat{f}_n$ para le caso de núcleo LN son:
+	\begin{align}
+	Sesgo(\widehat{f}_n)&=x(e^{3 b^2}-1) f'(x)+\dfrac{1}{2}\{x^2(e^{3 b^2}-1)+x^2 e^{3b^2}(e^{b^2}-1)\}f''(x)+o(b^2)\\
+	Var(\widehat{f}_n)&=\dfrac{1}{2 n x b \sqrt{\pi}} f(x)+o(n^{-1}b^{-1})
+	\end{align}
+	
+	Haciendo un desarrollo de Taylor de orden 4 del error cuadrático medio ECM\eqref{ErrorCuadraticoMedio} alrededor de $b=0$ obtenemos que
+	\begin{align}
+	ECM(\widehat{f}_n)=&\frac{f(x)}{x \sqrt{\pi}}\left[\frac{1}{2 n b}-\frac{3 b}{8 n}+\frac{9 b^3}{64 n}\right]+\\
+	&\frac{1}{4} b^4 x^2 \left(x^2 f''(x)^2+9 f'(x)^2+6 x f'(x) f''(x)\right)+o\left(b^4+n^{-1}b^{-1}\right)\\
+	\end{align}
+	
+	Si $n^{-1}b^{-1} \to 0$ cuando $n \to +\infty$ entonces $\dfrac{b}{n}$ y $\dfrac{b^3}{n}$ son $o(n^{-1}b^{-1})$.
+	Luego
+	\begin{align}
+	\label{MISE}
+	MISE(\widehat{f}_n)=&\dfrac{1}{2 n b \sqrt{\pi}} \int_{0}^{+\infty}\frac{f(x)}{x}+\frac{b^4}{4} \int_{0}^{+\infty} x^2\left(3f'(x)+xf''(x)\right)^2+o\left(b^4+n^{-1}b^{-1}\right).
+	\end{align}
+	
+	El ancho de banda $b$ que minimiza los términos principales en~\ref{MISE} es 
+	
+	\begin{align}
+	b_{\small{\text{LN}}}^*=\dfrac{\left[\dfrac{1}{2\sqrt{\pi}}\displaystyle{\int_0^{+\infty}}\frac{f(x)}{x}\right]^{1/5}}{\left[\displaystyle{\int_0^{+\infty}} x^2(3f'(x)+xf''(x))^2\right]^{1/5}}n^{-1/5}.
+	\end{align}
+	y el valor del MISE óptimo es
+	\begin{align}
+	\text{MISE}^*_{\text{\tiny{LN}}}=&\dfrac{5}{4}  \left[\dfrac{1}{2\sqrt{\pi}}\displaystyle{\int_{0}^{\infty}} \frac{f(x)}{x} \right]^{4/5} \\
+	&\times \left[\displaystyle{\int_{0}^{\infty}}  x^2 (3 f'(x) + x f''(x))^2 \right]^{1/5} n^{-4/5} 
+	\end{align}
+\end{dem}
+
+

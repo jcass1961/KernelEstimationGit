@@ -1,0 +1,11 @@
+
+\chapter{Resumen}
+
+Las imágenes obtenidas con dispositivos que poseen iluminación coherente como lo son el ultrasonido, laser o radar de apertura sintética, son afectadas por la presencia de un ruido que es inherente al proceso de captura de la imagen, llamado ruido speckle. Este ruido se aparta de las hipótesis clásicas ya que no es gaussiano, no es aditivo y es difícil de eliminar. 
+
+Durante la última década se ha dedicado especial atención al modelado de datos que provienen de imágenes de radares de apertura sintética (SAR). El uso de modelos estadísticos para modelar estos datos es una herramienta fundamental para explicar las características estadísticas de los mismos y, en este sentido, el modelo $\mathcal{G}^0$ es una buena elección porque bajo él se pueden caracterizar regiones con diferente grado de textura y brillo a través de sus parámetros. Luego, la estimación de parámetros cumple un rol fundamental en el análisis de imágenes SAR.  
+
+La familia de distribuciones $\mathcal{G}^0$  tienen soporte positivo y se indexan por tres parámetros: textura, escala y número de looks. % La estimación de la textura de la imagen es de suma importancia, ya que es capaz de caracterizar el tipo de objetivo bajo análisis. 
+Se han propuesto muchas estrategias para estimar el parámetro de textura, entre ellas, el método de Máxima Verosimilitud, Momento, métodos robustos y Logcumulantes.
+
+Esta tesis propone y analiza una nueva estrategia para la estimación del parámetro de textura del modelo $\mathcal G_0$ para datos de intensidad, por medio de la minimización de distancias estocásticas entre la función de densidad teórica $\mathcal{G}_I^0$ y una estimación no paramétrica de la función de densidad subyacente que proviene de los datos observados. La propuesta es estimar dicha función de densidad utilizando núcleos asimétricos ya que la distribución tiene soporte positivo. Se comparará el desempeño de estos estimadores, en términos de sesgo, error cuadrático medio, con los obtenidos por el métodos de Momentos, Máxima Verosimilitud y Logcumulantes. Además se estudiará el comportamiento de estos estimadores y sus propiedades, como así también la robustez de los mismos bajo diferentes escenarios de contaminación.

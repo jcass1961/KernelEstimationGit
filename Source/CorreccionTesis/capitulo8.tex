@@ -1,0 +1,48 @@
+%% Los cap'itulos inician con \chapter{T'itulo}, estos aparecen numerados y
+%% se incluyen en el 'indice general.
+%%
+%% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
+%% La letra n con tilde es: 'n.
+
+\chapter{Conclusiones}
+\label{Conclusiones}
+
+Esta tesis propone un nuevo estimador para el parámetro de textura de la distribución $\mathcal{G}_I^0$ basado en la minimización de una distancia estocástica entre el modelo (que depende de dicho parámetro) y una estimación de la función de densidad subyacente utilizando núcleos asimétricos $\widehat{f}$. El objetivo es obtener un estimador que tenga buen desempeño para muestras de pequeño tamaño, sea competitivo con los estimadores de Máxima Verosimilitud (MV) y Logcumulantes (LC) que son los utilizados en la literatura y que tenga una buena performance frente a la presencia de diferentes niveles de contaminación.
+
+
+En un primer momento se evaluaron diferentes distancias estocásticas eligiendo la distancia triangular porque fue la que mejor desempeño mostró al momento de estimar el parámetro de textura del modelo $\mathcal{G}_I^0$.
+
+Luego se consideró el núcleo inverso Gaussiano (IG) para estimar $\widehat{f}$ con un ancho de banda encontrado empíricamente, y se comparó su desempeño con los estimadores que provienen del método MV, LC y Momento Fraccionario de orden $1/2$ en términos de sesgo, error cuadrático medio (ECM), tiempo de procesamiento y bajo contaminación. En esta oportunidad se consideraron tres casos de contaminación y se observó que tanto Momentos Fraccionarios como LC presentaron problemas de convergencia. Además, Momentos Fraccionarios presentó mayor sesgo y ECM en la mayoría de los casos analizados.
+
+Definimos tres modelos de contaminación inspirados en situaciones reales para evaluar el impacto de los valores atípicos en el desempeño de los estimadores. Analizando estos escenarios se obsevó que
+
+\begin{itemize}
+	\item Caso 1: Independientemente de la intensidad de la contaminación, cuanto mayor es el número de looks menor es la cantidad de casos donde se presentan problemas de convergencia. 
+	\item  Casos 2 y 3: el porcentaje de situaciones para las cuales no hay convergencia aumenta con el nivel de contaminación y se reduce con el valor de $\alpha$.
+\end{itemize}
+
+Entonces, en este primer trabajo se observó que, en el caso de un solo look, el estimador propuesto no presenta resultados excelentes. En el caso multilook el nuevo estimador presenta buenas propiedades según lo medido
+por su sesgo y ECM. Es competitivo con MV y LC estimadores en situaciones sin contaminación, y supera el desempeño de estas métodos incluso en presencia de pequeños niveles de contaminación. Por este motivo se decidió mejorar la propuesta. 
+
+Además se investigaron más a fondo las dificultades de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$  y se justificaron a través de nuevos resultados teóricos que indican que esta distribución tiene colas pesadas.
+
+En un segundo estudio se comparó la performance del núcleo IG con el LN y el $\Gamma$ analizando el error cuadrático medio integrado (MISE). Se observó que el núcleo IG es el que mayor MISE presentó frente a los otros núcleos y mayor porcentaje de casos de no convergencia. Por este motivo no se lo consideró en el nuevo estudio que se llevó adelante.
+
+Se volvió a realizar un análisis similar respecto del primer trabajo considerando en esta oportunidad los estimadores que provienen del método MV, LC y el que resulta de la minimización de la distancia triangular utilizando los núcleos $\Gamma$ y LN para estimar $\widehat{f}$. Se fijó un nuevo criterio de convergencia para todos los métodos y se comparó la cantidad de casos de no convergencia. Se estudió el costo computacional y, en esta oportunidad, se incorporó la Función de Influencia Empírica Estilizada para evaluar la robustez de estos estimadores, como así también el caso 1 de contaminación. Asimismo se utilizó el método LSCV para elegir el ancho de banda que interviene en la estimación de $\widehat{f}$. 
+
+En los estudios por Monte Carlo se observó que:
+
+\begin{itemize}
+	\item Por un lado, los métodos MV y LC tienen comportamiento similar entre sí y, por el otro, los estimadores de mínima distancia utilizando núcleos LN y $\Gamma$ tanto para datos sin contaminar como para datos contaminados. Incluso este comportamiento se presenta al momento de analizar la Función de Influencia Empírica Estilizada.
+	\item Para datos sin contaminar y con textura, el estimador propuesto es competitivo respecto de los MV y LC estimadores en términos de sesgo y ECM. Sin embargo supera a los estimadores MV y LC en presencia de contaminación, ya sea utilizando núcleo $\Gamma$ o LN, aunque este último es el que presenta un comportamiento más estable.
+	\item El tiempo computacional de los estimadores de mínima distancia es sensiblemente mayor respecto de los MV y LC estimadores.
+	\item El porcentaje de casos de no convergencia que presenta nuestra propuesta es significativamente menor respecto de los MV y LC estimadores.
+\end{itemize}
+
+En la aplicación a una imagen real se observó que el estimador de mínima distancia utilizando núcleo LN es el que mejor desempeño mostró, superando a MV y LC estimadores.
+
+Además, se completó el análisis con la demostración de la consistencia fuerte del estimador de mínima distancia bajo la distancia triangular y $\widehat{f}$ estimada utilizando núcleos asimétricos como los trabajados en esta tesis.
+
+Por lo anteriormente expuesto, el nuevo estimador presenta buenas propiedades medidas por su sesgo, error cuadrático medio y cantidad de casos de no convergencia. Es competitivo con los MV estimadores y LC estimadores en situaciones sin contaminación, y supera a estos métodos en presencia de pequeños niveles de contaminación.
+
+Por esta razón nuestra conclusión es que es aconsejable usar $\widehat{\alpha}_{\text{\tiny{T}}} $ con núcleo LN, especialmente cuando se usan muestras pequeñas y/o cuando existe la posibilidad de tener datos contaminados. Si bien el costo computacional adicional incurrido al usar este estimador es mucho mayor que el requerido para calcular $\widehat{\alpha}_{\text{\tiny{ML}}}$, sus ventajas son más importantes que este aumento en el tiempo de procesamiento.
