@@ -7,16 +7,16 @@
 \chapter{Metodología}
 \label{metodologia}
 
-Es sabido que tener información sobre la función de densidad o distribución de una variable aleatoria permite tener una completa descripción de la misma. Por este motivo es un problema fundamental de la Estadística obtener, a partir de la información proporcionada por una muestra,  buenas estimaciones de las funciones de densidad de una variable o vector aleatorio. 
+Es sabido que tener información sobre la función de densidad de una variable aleatoria permite tener una completa descripción de la misma. Por este motivo es un problema fundamental de la Estadística obtener, a partir de la información proporcionada por una muestra,  buenas estimaciones de las funciones de densidad de una variable o vector aleatorio. 
 
 En este sentido existen dos enfoques para abordar este problema. 
 
 \begin{itemize}
-	\item Un enfoque paramétrico: donde se considera que la función de densidad teórica pertenece a una familia de funciones de densidad $f_X(\theta)$ conocida, indexada por el vector de parámetros $\theta$. Bajo esta suposición estimar la función de densidad teórica se reduce a estimar el valor de los parámetros del modelo a partir de la información proporcionada por la muestra. Los métodos clásicos de estimación paramétrica son: Método de los Momentos y Método de Máxima Verosimilitud. En los últimos años el Método de Logcumulantes, que se basa en la transformada de Mellin, ha ganado interés por su buena performance.
+	\item Un enfoque paramétrico: donde se considera que la función de densidad teórica pertenece a una familia de funciones de densidad $f_{X;\theta}$ conocida, indexada por el vector de parámetros $\theta$. Bajo esta suposición estimar la función de densidad teórica se reduce a estimar el valor de los parámetros del modelo a partir de la información proporcionada por la muestra. Los métodos clásicos de estimación paramétrica son: Método de los Momentos y Método de Máxima Verosimilitud. En los últimos años el Método de Logcumulantes, que se basa en la transformada de Mellin, ha ganado interés por su buena performance.
 	\item Un enfoque no paramétrico: donde no se hace ninguna suposición inicial sobre la familia de densidades a las que pertenece la función de densidad teórica, sino que trata de estimarla teniendo como única información los datos muestrales, imponiendo  solamente las condiciones necesarias para que dicha estimación sea una función de densidad.
 \end{itemize}
 
-El principal aporte de esta tesis es la propuesta de un nuevo método de estimación para los parámetros del modelo $\mathcal G_I^0$ con buenas propiedades que serán estudiadas a través del sesgo, del error cuadrático medio y de su capacidad para resistir presencia de datos atípicos, aún en el caso de muestras de pequeño y moderado tamaño. Este estimador surge de la minimización de distancias estocásticas entre la función de densidad teórica y una estimación no paramétrica de la función densidad subyacente utilizando núcleos asimétricos. 
+El principal aporte de esta tesis es la propuesta de un nuevo método de estimación para el parámetro de textura del modelo $\mathcal G_I^0$ con buenas propiedades que serán estudiadas a través del sesgo, del error cuadrático medio y de su capacidad para resistir presencia de datos atípicos, aún en el caso de muestras de pequeño y moderado tamaño. Este estimador surge de la minimización de distancias estocásticas entre la función de densidad teórica y una estimación no paramétrica de la función densidad subyacente utilizando núcleos asimétricos. 
 
 En este capítulo describimos dos metodologías de estimación de la función de densidad: paramétrica y no paramétrica. Presentamos los estimadores de momento, de Máxima Verosimilitud y Logcumulantes del parámetro de textura de la distribución $\mathcal{G}_I^0$, que son los estimadores que utilizaremos para evaluar la performance del propuesto en esta tesis. También presentamos los conceptos de estimación no paramétrica de la función de densidad, núcleos asimétricos, distancias estocásticas y estimadores de mínima distancia estocástica porque son el corazón del estimador planteado.  Asimismo hacemos una discusión de diferentes distancias estocásticas estudiadas y diferentes núcleos utilizados para estimar la función de densidad subyacente. Finalmente nuestra propuesta para estimar el parámetro de textura del modelo $\mathcal{G}_I^0$ que es el argumento que minimiza una distancia estocástica entre la función de densidad teórica del modelo teórico y una estimación no paramétrica de la función de densidad subyacente. 
 
@@ -27,6 +27,7 @@ En este capítulo describimos dos metodologías de estimación de la función de
 Esta metodología de estimación propone, a partir del conocimiento de la familia de densidades a la que pertenece la función de densidad teórica, estimar los parámetros que caracterizan dicha función de densidad a partir de datos muestrales. A continuación presentaremos métodos clásicos de estimación paramétrica.
 
 \subsection{Método de los Momentos}
+\label{MetodoMOM}
 El Método de los Momentos (MOM) fue introducido por Karl Pearson en el año 1894 y se basa en la idea intuitiva de pensar que, si los datos muestrales provienen de una determinada función de densidad entonces los momentos muestrales deberían dar buenas estimaciones de los correspondientes momentos poblacionales. 
 
 \begin{definition}
@@ -40,7 +41,7 @@ Obsevemos que si $g_s(x)=x^s$ la definición es consistente con la idea intuitiv
 %
 %Recordemos que el $k$-ésimo momento muestral de una variable aleatoria $X$, tomado alrededor del origen, es $M_k=E(X^k)$.
 
-El estimador por Momentos Fracionales ha sido estudiado en los últimos tiempos~\cite{Frery97,GambiniSC08,Khan2013}. En esta tesis se utilizarán los momentos de orden $1$ y de orden $\frac{1}{2}$ ya que estos momentos existen para valores de $\alpha<-1$.
+El estimador por Momentos Fracionales ha sido estudiado en los últimos tiempos. En~\citet{Frery97} se utilizó este método para estimar los parámetros de la distribución $\mathcal{G}_A^0(\alpha,\gamma,L)$ con $L$ conocido. ~\citet{GambiniSC08} aplicaron este método para el problema de detección de bordes en imágenes SAR. En esta tesis se utilizarán los momentos de orden $1$ y de orden $\frac{1}{2}$ ya que estos momentos existen para valores de $\alpha<-1$.
 
 Las ecuaciones de momento de orden $1$ y de orden $\frac{1}{2}$ para estimar los parámetros de la distribución $\mathcal G_I^0$ son:
 
@@ -53,9 +54,10 @@ Las ecuaciones de momento de orden $1$ y de orden $\frac{1}{2}$ para estimar los
 
 
 \subsection{Método de Máxima Verosimilitud}
+\label{MetodoMV}
 
 
- El Método de Máxima Verosimilitud fue popularizado por R. Fisher entre 1912 y 1922. Sin embargo este método había sido utilizado antes por Gauss, Laplace entre otros investigadores. La idea del método consiste en, dada una muestra, estimar los parámetros de la distribución que maximice la probabilidad de que haya salido esa muestra. Esto requiere mirar a la función de densidad conjunta como función de los parámetros, a esta función se llama función de verosimilitud.
+ El Método de Máxima Verosimilitud (MV) fue popularizado por R. Fisher entre 1912 y 1922. Sin embargo este método había sido utilizado antes por Gauss, Laplace entre otros investigadores. La idea del método consiste en, dada una muestra, estimar los parámetros de la distribución que maximice la probabilidad de que haya salido esa muestra. Esto requiere mirar a la función de densidad conjunta como función de los parámetros, a esta función se llama función de verosimilitud.
 \begin{definition}
 Si $X_1, \ldots, X_n$ es una muestra de variables aleatorias independientes e idénticamente distribuidas con función de densidad $f_{X;\theta}$  con $\theta \in \Theta \subset \mathbb{R}^k$, diremos que $\widehat{\theta}_{\text{MV}}$ es el estimador de Máxima Verosimilitud de $\theta$ si verifica que 
 \begin{align}
@@ -63,7 +65,7 @@ Si $X_1, \ldots, X_n$ es una muestra de variables aleatorias independientes e id
 \end{align}
 siendo $L(\theta \mid \vec{X}=\vec{x})$ la función de verosimilitud, que es la función de densidad conjunta del vector aleatorio $\vec{X}$ mirada como función del vector de parámetros $\theta$, sabiendo que salió la muestra $\vec{x}$.
 \end{definition}
-Este estimador tiene muy buenas propiedades asintóticas, además de ser consistente es asintóticamente normal y eficiente bajo condiciones generales.
+Este estimador tiene muy buenas propiedades asintóticas, como se presenta en~\citet{Casela2002}, además de ser consistente es asintóticamente normal y eficiente bajo ciertas condiciones de regularidad.
 
 
 El parámetro $\gamma$ en la distribución $\mathcal{G}_I^0$  es proporcional al brillo y es un parámetro de escala. Con el fin de reducir nuestro análisis a un solo parámetro, y con el propósito de hacer los resultados comparables, basamos nuestro análisis en la condición $E(Z)=1$ que vincula la textura con el brillo. Esta condición nos da una relación entre $\gamma$ y $\alpha$ que es la siguiente:
@@ -73,7 +75,7 @@ El parámetro $\gamma$ en la distribución $\mathcal{G}_I^0$  es proporcional al
 \end{align}
 A este valor de $\gamma$ lo llamaremos $\gamma^*$.
 
-Entonces, si $Z_1,\ldots Z_n$ una muestra de variables aleatorias independientes e idénticamente distribuidas donde $Z_i \sim f_{\mathcal G_I^0(\alpha,\gamma)}(z)$,  el logaritmo de la función de verosimilitud bajo la condición~\eqref{gama*} es:
+Entonces, si $Z_1,\ldots Z_n$ una muestra de variables aleatorias independientes e idénticamente distribuidas donde $Z_i \sim f_{\mathcal G_I^0(\alpha,-\alpha-1)}(z)$,  el logaritmo de la función de verosimilitud bajo la condición~\eqref{gama*} es:
 
 
 \begin{align}
@@ -87,7 +89,7 @@ Por lo tanto, el estimador de Máxima Verosimilitud (MV) del parámetro de textu
 \widehat{\alpha}_{{\text{\tiny{MV}}}}=\arg\max_{\alpha} \log(L(\alpha)/\vec{Z}=\vec{z}).
 \end{align}
 
-Algunos autores evaluaron la performance para el estimador de Máxima Verosimilitud del parámetro de textura del modelo  $\mathcal G_I^0$. Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantificaron el sesgo de este estimador y propusieron una corrección de segundo orden de acuerdo a~\cite{cox1968}. Cribari-Neto et al.~\cite{CribariFrerySilva:CSDA} desarrollaron una corrección del sesgo de $\widehat{\alpha}_{\text{{\text{\tiny{MV}}}}}$ del modelo $\mathcal G^0$ para datos de amplitud usando técnicas de remuestreo a expensas de un alto costo computacional.
+Algunos autores evaluaron la performance del estimador de Máxima Verosimilitud del parámetro de textura del modelo  $\mathcal G_I^0$.~\citet{VasconcellosFrerySilva:CompStat} cuantificaron el sesgo de este estimador y propusieron una corrección de segundo orden de acuerdo a~\citet{cox1968}.~\citet{CribariFrerySilva:CSDA} desarrollaron una corrección del sesgo de $\widehat{\alpha}_{\text{{\text{\tiny{MV}}}}}$ del modelo $\mathcal G^0$ para datos de amplitud usando técnicas de remuestreo a expensas de un alto costo computacional.
 
 En la figura~\ref{MV} se muestra el gráfico del logaritmo de la función de verosimilitud en función de $\alpha$, para distintos tamaños de muestra $n$ y para dos valores del parámetro de textura: $\alpha=-1.5$ y $\alpha=-5$ para el caso de $L=3$. Se puede observar que, para zonas extremadamente texturadas la función de verosimilitud muestra claramente un máximo. Sin embargo, para el caso de zonas texturadas esta función es bastante plana, incluso podría ser monótona dependiendo de la muestra. Esto puede originar problemas numéricos al momento de encontrar el máximo.  
 
@@ -111,6 +113,7 @@ También se podría encontrar $\widehat{\alpha}_{{\text{\tiny{MV}}}}$ como la so
 donde $\Psi^0(\cdot)$ es la función digamma. Este sistema no tiene una solución analítica cerrada, por lo tanto es necesario la utilización de rutinas numéricas para encontrar dicha solución que puede incluso no existir.
 
 \subsection{Logmomentos y Logcumulantes}
+\label{MetodoLC}
 
 Es conocida la relación que existe entre los momentos y la función característica de una variable aleatoria con la transformada de Fourier de su función de densidad. 
 
@@ -118,16 +121,16 @@ Es conocida la relación que existe entre los momentos y la función caracterís
 Si $X$ es una variable aleatoria continua con función de densidad $f_X(x)$, la función característica $\phi_X: \mathbb{R} \rightarrow \mathbb{C}$ se define como 
 \begin{align}
 \phi_X(t)=E(e^{itX})=\int_{-\infty}^{\infty} e^{itx} f_X(x) dx = \mathcal{F}\{f_X\}(t),
-\label{fi}
+\label{fi_caracteristica}
 \end{align}
 siendo $\mathcal{F}\{f_X\}$ la transformada de Fourier de $f_X$.
 \end{definition}
 
-Cuando los momentos de orden $n$ de una variable aleatoria existen, es decir, cuando $E(X^k)< \infty$, se puede apelar a la relación~\eqref{fi} para calcular dichos momentos. Entonces
+Cuando los momentos de orden $k$ de una variable aleatoria existen, es decir, cuando $E(X^k)< \infty$, se puede apelar a la relación~\eqref{fi_k} para calcular dichos momentos. Entonces
 
 \begin{align}
 \phi_X^{(k)}(0)=i^k E(X^k),
-\label{fi}
+\label{fi_k}
 \end{align}
 con $\phi_X^{(k)}$ la derivada de orden $k$ de $\phi_X$ evaluada en $t=0$. Luego, los momentos de orden $k$ se pueden definir como 
 
@@ -143,7 +146,7 @@ Si llamamos $\psi_X=\log(\phi_X)$, los cumulantes de orden $k$ se definen como
 \kappa_k=i^{-k} \psi_X^{(k)}\big\arrowvert _{t=0}\cdot
 \end{align}
 
-Nicolas et al.~\cite{nicolas2002} proponen utilizar la transformada de Mellin en lugar de la transformada de Fourier en~\eqref{fi}, para el caso donde la función de densidad $f_X$ de la variable aleatoria $X$ tiene soporte positivo. De esta manera surgen nuevas características para la variable aleatoria que son los Logmomentos (MomL) y los  Logcumulantes (LC). Los autores proponen llamar a esta metodología Estadísticas de Segundo Tipo. Entonces definen:
+~\citet{nicolas2002} proponen utilizar la transformada de Mellin en lugar de la transformada de Fourier en~\eqref{fi_caracteristica}, para el caso donde la función de densidad $f_X$ de la variable aleatoria $X$ tiene soporte positivo. De esta manera surgen nuevas características para la variable aleatoria que son los Logmomentos (MomL) y los  Logcumulantes (LC). Los autores proponen llamar a esta metodología Estadísticas de Segundo Tipo. Entonces definen:
 
 \begin{itemize}
 \item Primera función característica de segundo tipo.
@@ -170,7 +173,7 @@ Nicolas et al.~\cite{nicolas2002} proponen utilizar la transformada de Mellin en
 	
 \item Segunda función característica de segundo tipo.
 
-      Manteniendo la analogía con las estadísticas de primer tipo, Nicolas et al.~\cite{nicolas2002} definen la \textit{Segunda función característica de segundo tipo} como
+      Manteniendo la analogía con las estadísticas de primer tipo,~\citet{nicolas2002} definen la \textit{Segunda función característica de segundo tipo} como
       \begin{align}
       \label{Sgunda Psi}
       \Psi_X(s)=\log(\Phi)(s)\cdot
@@ -189,13 +192,13 @@ Como en el caso de MomL, los cumulantes de segundo tipo se llamarán Logcumulant
 
 Para el caso donde $f_X(u) = \mathcal{G}_I^0(u)$ se obtiene:
 	\begin{align}
-	\Phi_x(s) &= \dfrac{\left(\frac{L}{\gamma}\right)^{1-s}\Gamma(-1+L+s)\Gamma(1-s-\alpha)}{\Gamma(L)\Gamma(-\alpha)} \\
+	\Phi_X(s) &= \dfrac{\left(\frac{L}{\gamma}\right)^{1-s}\Gamma(-1+L+s)\Gamma(1-s-\alpha)}{\Gamma(L)\Gamma(-\alpha)} \\
 	\vspace{1cm}
-	\nonumber \widetilde{m}_1 &=  \frac{d \Phi_x(s)}{ds } \big\arrowvert _{s=1}\\
+	\nonumber \widetilde{m}_1 &=  \frac{d \Phi_X(s)}{ds } \big\arrowvert _{s=1}\\
 					& = -\log\left(\frac{L}{\gamma}\right) + \Psi^0(L) - \Psi^0(-\alpha).
 	\end{align}
 
-Usando los desarrollos presentados en Tison et al.~\cite{Tison2004} tenemos que $\widetilde{k}_1 = \widetilde{m_1}$. Por lo tanto 
+Usando los desarrollos presentados en~\citet{Tison2004} tenemos que $\widetilde{k}_1 = \widetilde{m_1}$. Por lo tanto 
 \begin{align}
 \label{MomLC}
 \widetilde{k}_1 =   -\log \left(\frac{L}{\gamma}\right) + \Psi^0(L) - \Psi^0(-\alpha).
@@ -225,22 +228,22 @@ Como mencionamos anteriormente, otra posibilidad para estimar los parámetros de
 \subsection{Núcleos}
 Estimar una función de densidad desconocida a partir de datos muestrales es un problema clásico en estadística. Si se conoce la familia de distribuciones de donde proviene la muestra, se puede dar una estimación de los parámetros de la función de densidad subyacente usando la metodología presentada en la sección~\ref{EstimacionParamétrica}. 
 
-Otra forma de abordar el problema de la estimación de la función de densidad subyacente $f$ es a través de una estimación no paramétrica de la misma. El más sencillo y más conocido de estos estimadores es el histograma~\cite{Scott1992}, que   está determinado por la muestra ${x_1, \ldots, x_k}$ y por la partición ${t_k, -\infty<j<+\infty}$ de la recta. Sea $B_k=[t_k,t_{k+1})$  el $k$ ésimo intervalo, y supongamos que $t_{k+1}-t_k=h$ para todo $k$. Entonces el estimador $\widehat{f}_\text{h}$ de $f$ se define como 
+Otra forma de abordar el problema de la estimación de la función de densidad subyacente $f$ es a través de una estimación no paramétrica de la misma. El más sencillo y más conocido de estos estimadores es el histograma. De acuerdo a~\citet{Scott1992} el histograma está determinado por la muestra ${x_1, \ldots, x_k}$ y por la partición ${t_k, -\infty<j<+\infty}$ de la recta. Sea $B_k=[t_k,t_{k+1})$  el $k$ ésimo intervalo, y supongamos que $t_{k+1}-t_k=h$ para todo $k$. Entonces el estimador $\widehat{f}_\text{h}$ de $f$ se define como 
 
 \begin{align}
 \widehat{f}_{\text{h}}(x)=\frac{1}{n h} \sum_{i=1}^n I_{\text{B}_i} (x_i)=\dfrac{N_i}{n h} \text{ para } x \in B_i,
 \end{align}
-donde $h$ es la longitud del intervalo $B_i$ que suponemos la misma, $N_i$ la cantidad de observaciones muestrales que caen dentro del intervalo $B_i$ e $I_{B_i}(x)$ es la función indicadora definida en $B_i$. En el caso donde los intervalos tienen distinta longitud se deberá dividir por la longitud de cada uno dentro de la sumatoria.
+donde $h$ es la longitud de los intervalos $B_i$ que suponemos la misma, $N_i$ la cantidad de observaciones muestrales que caen dentro del intervalo $B_i$ e $I_{B_i}(x)$ es la función indicadora definida en $B_i$. En el caso donde los intervalos tienen distinta longitud se deberá dividir por la longitud de cada uno dentro de la sumatoria.
 
 Este estimador es muy utilizado especialmente cuando se quiere hacer un estudio exploratorio de la distribución de los datos, pero provee una estimación de la función de densidad que no es continua y, por lo tanto, no derivable. Estas propiedades son deseables, principalmente cuando se trabaja con variables aleatorias continuas.
 
 \subsubsection{Núcleos simétricos}
-Rosenblatt~\cite{Rosenblatt56}  y Parzen~\cite{Parzen62} avanzaron en la búsqueda de un estimador para $f$ y propusieron los estimadores tipo núcleo, con núcleo simétrico (KS). Si consideramos $X_1,\ldots,X_n$ una muestra de variables aleatorias independientes e idénticamente distribuidas este estimador se define como
+\citet{Rosenblatt56} y~\citet{Parzen62} avanzaron en la búsqueda de un estimador para $f$ y propusieron los estimadores tipo núcleo, con núcleo simétrico. Si consideramos $X_1,\ldots,X_n$ una muestra de variables aleatorias independientes e idénticamente distribuidas este estimador se define como
 \begin{align}
 \label{KS}
 \widehat{f}_{\text{\tiny{S}}_n}(x)=\frac{1}{n b} \sum_{i=1}^n K \left(\dfrac{x-X_i}{b}\right),
 \end{align}
-donde $b$ es el parámetro de suavizamiento llamado también ancho de banda. $K(x)$ es una función llamada núcleo que satisface ciertas propiedades, entre ellas la simetría y $\int_{\infty}^{\infty} K(x)dx=1$ entre otras. Estos estimadores fueron muy estudiados por diversos autores, en Silverman~\cite{Silverman1986} y Scott~\cite{Scott1992} se puede ver un exhaustivo estudio de ellos y sus propiedades. En particular, se puede mostrar que estos estimadores son consistentes en cada x si se cumple que  
+donde $b$ es el parámetro de suavizamiento llamado también ancho de banda. $K(x)$ es una función llamada núcleo que generalmente es una función de densidad simétrica y satisface ciertas condiciones de regularidad. Estos estimadores fueron muy estudiados por diversos autores, en~\citet{Silverman1986} y en~\citet{Scott1992} se puede ver un exhaustivo estudio de ellos y sus propiedades. En particular, se puede mostrar que estos estimadores son consistentes en cada $x$ si se cumple que  
 \begin{align}
 \label{nh}
 b \to 0,  \quad nb \to +\infty \text{ cuando } n \to +\infty
@@ -251,9 +254,9 @@ Asimismo se pueden obtener expresiones para el sesgo y la varianza, estas vienen
 \begin{align}
 \label{SesgoVar}
 B(\widehat{f}_{\text{\tiny{S}}_n}(x))=\dfrac{b^2 f''(x) k_2}{2}+O(b^4)\\
-Var(\widehat{f}_{\text{\tiny{S}}_n}(x))\approx \dfrac{1}{nb} \int_{-\infty}^{\infty} K^2(t)dt\\
+Var(\widehat{f}_{\text{\tiny{S}}_n}(x))\approx \dfrac{1}{nb} \int_{-\infty}^{\infty} K^2(t)dt
 \end{align}	
-respectivamente, donde $k_2=\int_{-\infty}^{\infty} x^2 K(t)dt$. Esto muestra el compromiso que existe entre el sesgo y la varianza, una rápida convergencia a $0$ del parámetro $b$ genera una disminución del sesgo pero un aumento importante en la varianza. Por eso es necesaria la condición \eqref{nh}, el ancho de banda debe converger a cero a una velocidad más lenta que $n^{-1}.$ 
+respectivamente, donde $k_2=\displaystyle{\int_{-\infty}^{\infty}} x^2 K(x)dx$. Esto muestra el compromiso que existe entre el sesgo y la varianza, una rápida convergencia a $0$ del parámetro $b$ genera una disminución del sesgo pero un aumento importante en la varianza. Por eso es necesaria la condición \eqref{nh}, el ancho de banda debe converger a cero a una velocidad más lenta que $n^{-1}.$ 
 
 \subsubsection{Medidas de error}
 
@@ -281,7 +284,7 @@ donde $\widehat{f}(x)$ es un estimador de la función de densidad $f$.
 El ISE es una variable aleatoria que depende del núcleo utilizado, del tamaño muestral, de la verdadera función de densidad y del estimador. Pero también depende de una realización particular de la muestra. Por lo tanto, una medida que contemple un comportamiento promedio del estimador sobre diversas realizaciones muestrales es considerar un promedio del ISE sobre dichas realizaciones. Es decir, considerar
 \begin{align}
 \label{MISE}
-	\text{MISE}(\widehat{f})=&E[\int_\mathbb{R} (\widehat{f}_(x)-f(x))^2 dx ].
+	\text{MISE}(\widehat{f})=&E[\int_\mathbb{R} (\widehat{f}(x)-f(x))^2 dx ].
 \end{align}
 
 \subsubsection{Núcleos Asimétricos}
@@ -289,17 +292,17 @@ El ISE es una variable aleatoria que depende del núcleo utilizado, del tamaño 
 
 En general los estimadores $\widehat{f}_{\tiny \text {S}_n}$ tienen un buen comportamiento cuando la función de densidad está definida en toda la recta real. Pero cuando la función de densidad tiene soporte acotado o semiacotado inferiormente este estimador presenta sesgo especialmente cerca del borde del soporte. Esto se debe a que estos estimadores asignan probabilidad fuera del soporte de la distribución.
 
-Diferentes alternativas se han propuesto para resolver el problema del sesgo en el borde utilizando núcleos simétricos, alguna de ellas pueden dar estimaciones negativas de la función de densidad. Entre estas alternativas se encuentran los métodos de reflexión, de renormalización y los núcleos acotados entre otras. Una descripción de estos métodos se pueden encontrar en~\cite{Jones1993}.
+Diferentes alternativas se han propuesto para resolver el problema del sesgo en el borde utilizando núcleos simétricos, alguna de ellas pueden dar estimaciones negativas de la función de densidad. Entre estas alternativas se encuentran los métodos de reflexión, de renormalización y los núcleos acotados entre otras. Una descripción de estos métodos se pueden encontrar en~\citet{Jones1993}.
 
 
-Otra forma de encarar el problema del sesgo en el borde es la utilización de núcleos asimétricos. Brown and Chen~\cite{Brown1999,chen1999} propusieron los núcleos Beta, Chen~\cite{chensx2000} los núcleos Gamma ($\Gamma$), Scaillet~\cite{Scaillet2004} el Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG), Jin et. al.~\cite{Jin2003} el núcleo Lognormal (LN) y Birnbaum-Saunders. Todos estos núcleos tienen soporte en $[0,+\infty)$, no asignan peso fuera del soporte de la distribución y alcanzan una tasa de convergencia en el sentido del error cuadrático medio integrado de $n^{-4/5}.$ Además, de acuerdo a~\cite{Scaillet2004}  los núcleos $\Gamma$, IG y RIG son libres de sesgo en el borde en el sentido que el sesgo es un $O(b)$, mientras que el sesgo correspondiente al núcleo LN es un $O(b^2)$~\cite{Libnegue2013}.
+Otra forma de encarar el problema del sesgo en el borde es la utilización de núcleos asimétricos.~\citet{Brown1999} y~\citet{chen1999} propusieron los núcleos Beta,~\citet{chensx2000} los núcleos Gamma ($\Gamma$), ~\citet{Scaillet2004} el Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG),~\citet{Jin2003} el núcleo Lognormal (LN) y Birnbaum-Saunders. Todos estos núcleos tienen soporte en $[0,+\infty)$, no asignan peso fuera del soporte de la distribución y alcanzan una tasa de convergencia en el sentido del error cuadrático medio integrado de $n^{-4/5}.$ Además, de acuerdo a~\citet{Scaillet2004}  los núcleos $\Gamma$, IG y RIG son libres de sesgo en el borde en el sentido que el sesgo es un $O(b)$, mientras que, como se indica en~\citet{Libnegue2013} el sesgo correspondiente al núcleo LN es un $O(b^2)$.
 
 Observemos que la expresión~\ref{KS} correspondiente al estimador $\widehat{f}_{\text{\tiny S}_n}$ se puede escribir como
 \begin{align}
 \label{DefNucleosSim}
 \widehat{f}_{\text{\tiny S}_n}(x)=\dfrac{1}{n} \sum_{i=1}^n K_{(x,b)} (X_i),
 \end{align}
-donde $K_{(x,b)}(\cdot) =\dfrac{1}{b} K\{(\cdot-x)/b\}$. Como indica Hirukawa en~\cite{Hirukawa2018} esta expresión se puede generalizar considerando el caso donde el núcleo $K_{(x,b)}$ es una función asimétrica y su forma puede variar de acuerdo a la posición de $x$. Ya en 1986 Silverman mencionó en~\cite{Silverman1986} la posibilidad de utilizar las funciones de densidad $\Gamma$ y Lognormal como núcleos cuando la función de densidad a estimar es asimétrica a derecha y tiene soporte positivo. 
+donde $K_{(x,b)}(\cdot) =\dfrac{1}{b} K\left(\dfrac{x-\cdot}{b}\right)$. Como se indica en~\citet{Hirukawa2018} esta expresión se puede generalizar considerando el caso donde el núcleo $K_{(x,b)}$ es una función asimétrica y su forma puede variar de acuerdo a la posición de $x$. En~\citet{Silverman1986} se menciona la posibilidad de utilizar las funciones de densidad $\Gamma$ y Lognormal como núcleos cuando la función de densidad a estimar es asimétrica a derecha y tiene soporte positivo. 
 
 Entonces, los núcleos asimétricos se definen como:
 
@@ -315,18 +318,13 @@ Sea $X_1, \ldots, X_n$ una muestra aleatoria donde $X_i \sim f$ con $f$ la funci
 donde  $b=b_n>0$ es el ancho de banda  y el núcleo $K_{x,b}$ es una función de densidad continua en su soporte.
 \end{definition}
 
-En todos los casos considerados se verifica que:
-
-\begin{enumerate}[a)]
-	\item $K_{x,b}$ es una función de densidad con soporte en $[0,+\infty)$.
-	\item Los parámetros de posición y escala son funciones del punto $x$ donde se realiza la estimación y del ancho de banda $b$.
-\end{enumerate}
-Observemos que: a) garantiza que la densidad estimada sea siempre positiva y b) indica que estos núcleos son flexibles ya que cambian de forma de acuerdo al punto donde se realiza la estimación.
+Observemos que: a) Los parámetros del núcleo son funciones del punto $x$ donde se realiza la estimación y del ancho de banda $b$, esto indica que estos núcleos son flexibles ya que cambian de forma de acuerdo al punto donde se realiza la estimación.
+b) Como $K_{x,b}$ es una función de densidad esto garantiza que la densidad estimada sea siempre positiva. 
 %En la figura~\ref{EstimacionLN} se muestra como cambian los núcleos de acuerdo al valor de $x$.
 
-Como se indica en~\cite{Libnegue2013,Hirukawa2018} los núcleos asimétricos presentan el inconveniente que, $\int_{-\infty}^{\infty} \widehat{f}_n dx$ no siempre es igual a $1$. Una forma de resolver esto es normalizando por la constante adecuada.
+Como se indica en~\citet{Libnegue2013} y en~\citet{Hirukawa2018} los núcleos asimétricos presentan el inconveniente que $\int_{-\infty}^{\infty} \widehat{f}_n dx$ no siempre es igual a $1$. Una forma de resolver esto es normalizando por la constante adecuada.
 
-Dentro de los núcleos utilizados se encuentran los propuestos en~\cite{chensx2000},~\cite{bouezmarni2005} y en~\cite{Libnegue2013} donde $K_{x,b}$ es en cada caso: 
+Dentro de los núcleos utilizados se encuentran los propuestos en~\citet{chensx2000}, en~\citet{Libnegue2013} y en~\citet{bouezmarni2005} donde $K_{x,b}$ es en cada caso: 
 
 %\begin{align}
 %K_{\tiny \Gamma^1_{\left(\frac{z}{b}+1,b\right)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
@@ -365,22 +363,21 @@ Dentro de los núcleos utilizados se encuentran los propuestos en~\cite{chensx20
 	\end{array}
 	\right.
 	\label{gammakernel2}\\
-	K_{\text{\tiny IG}_{\left( x;\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b t^3}} 
+	K_{\text{\tiny IG}_{\left( x;\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b \, t^3}} 
 	\exp\Big\{-\frac{1}{2b x} \Big(\frac{t}{x}+\frac{x}{t}-2\Big)\Big\},
 	\label{IGkernel}\\
 %	K_{\text{\tiny RIG}_{\left(\frac{1}{x-b},\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b t}} 
 %	\exp\Big\{-\frac{x-b}{2b} \Big(\frac{t}{x-b}-2+\frac{x-b}{t}\Big)\Big\},
-	\label{RIGkernel}\\
-	K_{{\text{\tiny LN}}_{\left(log(x)+b^2,b \right)}}(t) & =\frac{1}{t \sqrt{2 \pi} b} \exp\Big\{-\frac{\left(\log t - \log x -b^2\right)^2}{2b^2}\Big\},
+	K_{{\text{\tiny LN}}_{\left(log(x)+b^2,b \right)}}(t) & =\frac{1}{t\,b \sqrt{2 \pi}} \exp\Big\{-\frac{\left(\log t - \log x -b^2\right)^2}{2b^2}\Big\},
 	\label{LNkernel}
 	\end{align}
 	para $t,x,b>0$.
 \end{subequations}
 
-Los núcleos $\Gamma^1$ y $\Gamma^2$ propuestos por Chen~\cite{chensx2000} consideran como núcleo $K$ a una distribución Gamma con dos juegos distintos de parámetros. El autor consideró que $X \sim \Gamma(k,\theta)$ si su función de densidad es $f(x)=\frac{1}{\Gamma(k) \theta^k} x^{k-1} e^{x/\theta}$ para $x \in (0,+\infty)$. 
-%Chen~\cite{chensx2000} muestra que el ECM para XXX ver 3.5 de chen
+Los núcleos $\Gamma^1$ y $\Gamma^2$ propuestos por~\citet{chensx2000} consideran como núcleo $K$ a una distribución Gamma con dos juegos distintos de parámetros. El autor consideró que $X \sim \Gamma(k,\theta)$ si su función de densidad es $f(x)=\frac{1}{\Gamma(k) \theta^k} x^{k-1} e^{x/\theta}$ para $x \in (0,+\infty)$. 
+%Chen~\citet{chensx2000} muestra que el ECM para XXX ver 3.5 de chen
 
-Se consideraron estos núcleos porque, para modelar a la retrodispersión, el modelo $\mathcal{G}_I^0$ propone a la distribución $\Gamma^{-1}$ y el modelo $\mathcal{G}^H$ considera la distribución $IG$. Además, de acuerdo a lo visto en el capítulo~\ref{Modelo Multiplicativo} la distribución Lognormal fue introducida en~\cite{oliverquegan98} y fue propuesta como modelo empírico para describir datos SAR.
+Se consideraron estos núcleos porque, para modelar a la retrodispersión, el modelo $\mathcal{G}_I^0$ propone a la distribución $\Gamma^{-1}$ y el modelo $\mathcal{G}^H$ considera la distribución $IG$. Además, de acuerdo a lo visto en el capítulo~\ref{Modelo Multiplicativo} la distribución Lognormal fue introducida en~\citet{oliverquegan98} y fue propuesta como modelo empírico para describir datos SAR.
 
 
 %\textcolor{red}{\sout{
@@ -393,7 +390,7 @@ Se consideraron estos núcleos porque, para modelar a la retrodispersión, el mo
 	\caption{\label{EstimacionLN}Estimación de $\mathcal{G}_I^0$ para $L=3$, $\alpha=-1.5$, $\gamma=0.5$ y $n=10$}
 \end{figure}
 
-En la figura~\ref{EstimacionLN} se muestra un ejemplo de estimación de la función de densidad $\mathcal{G}_I^0$ para el caso de $\alpha=-1.5$, $\gamma=0.5$, $L=3$ y $n=10$, utilizando núcleo LN donde se utilizó un ancho de banda que se obtiene de aplicar el método LSCV explicado en la subsección~\ref{AnchoBanda}. La línea sólida es la función de densidad teórica, la línea discontinua es la estimación $\widehat{f}_n$ obtenida, el resto son los distintos núcleos. Para cada $x$ el valor de $\widehat{f}_n(x)$ se obtiene como promedio de los distintos núcleos en ese $x$. Se eligió un tamaño de muestra chico para ejemplificar la metodología de estimación. Vale la pena observar que el parámetro de posición depende del valor de $x$ donde se realiza la estimación. Por eso estos núcleos cambian de forma dependiendo del valor $x$.
+En la figura~\ref{EstimacionLN} se muestra un ejemplo de estimación de la función de densidad $\mathcal{G}_I^0$ para el caso de $\alpha=-1.5$, $\gamma=0.5$, $L=3$ y $n=10$, mediante núcleo LN donde se utilizó un ancho de banda que se obtiene de aplicar el método LSCV explicado en la subsección~\ref{AnchoBanda}. La línea sólida es la función de densidad teórica, la línea discontinua es la estimación $\widehat{f}_n$ obtenida, el resto son los distintos núcleos. Para cada $x$ el valor de $\widehat{f}_n(x)$ se obtiene como promedio de los distintos núcleos en ese $x$. Se eligió un tamaño de muestra chico para ejemplificar la metodología de estimación. Vale la pena observar que el parámetro de posición depende del valor de $x$ donde se realiza la estimación. Por eso estos núcleos cambian de forma dependiendo del valor $x$.
 
 En la figura~\ref{EstimacionLNyGAyIG} se muestra cómo estiman los núcleos $K_{\Gamma}$, $K_{\text{\tiny{LN}}}$ y $K_{\text{\tiny{IG}}}$ al modelo $\mathcal{G}_I^0$ para un tamaño de muestra $n=25$, $L=8$ utilizando el método LSCV para elegir el ancho de banda. Se eligieron estos núcleos porque son los que finalmente evaluaremos, esta elección se justificará en el capítulo~\ref{ResultadosEmpiricos}. 
 La línea solida negra es la verdadera función de densidad, se puede observar que con un tamaño de muestra no muy grande, estos núcleos ajustan bien a la función de densidad teórica.
@@ -416,10 +413,11 @@ Para poder estudiar propiedades globales de estos estimadores como el MISE, se a
 	\item $\displaystyle{\int_0^{\infty}}  (x^3 f''(x))^2 dx$ es finita para el caso de los núcleos IG.
 	\item $\displaystyle{\int_0^{\infty}}  \dfrac{f(x)}{x} dx$ y que $\displaystyle{\int_0^{\infty}}  (3 x f'(x)+x^2 f''(x))^2 dx$ son finitas para el caso del núcleo LN.
 \end{enumerate}
+Para el caso donde $f=f_{\mathcal{G}_I^0}$ las condiciones anteriores se cumplen para valores de $L$ mayores a $3/2$.
 
-Llamaremos b* al valor del ancho de banda que minimiza el MISE, y MISE* al MISE cuando b=b*. Expresiones para b* y MISE* fueron desarrolladas por Chen~\cite{chensx2000} para el caso del núcleo $\Gamma$,~\cite{Scaillet2004} para el caso de núcleo IG  y se desarrollaron en el apéndice~\ref{byMiseOptLN} para el caso del núcleo LN. 
+Llamaremos b* al valor del ancho de banda que minimiza el MISE, y MISE* al MISE cuando b=b*. Expresiones para b* y MISE* fueron desarrolladas por~\citet{chensx2000} para el caso del núcleo $\Gamma$,~\citet{Scaillet2004} para el caso de núcleo IG  y se desarrollaron en el apéndice~\ref{byMiseOptLN} para el caso del núcleo LN. 
 
-Si $b \to 0$ cuando $n \to \infty$ y $n b^a \to +\infty$ cuando $n \to +\infty$ con $a=1/2$ para los núcleos $\Gamma$, IG y $a=1$ para núcleo LN, las expresiones para b* y MISE* son:
+Expresiones para b* y MISE* para los núcleos $\Gamma$, IG y LN  se dan a continuación. Se considera que $b \to 0$ cuando $n \to \infty$ y $n b^a \to +\infty$ cuando $n \to +\infty$ con $a=1/2$ para los núcleos $\Gamma$, IG y $a=1$ para núcleo LN.
 
 \begin{itemize}
 	\item Núcleo $\Gamma^1$
@@ -452,16 +450,14 @@ Si $b \to 0$ cuando $n \to \infty$ y $n b^a \to +\infty$ cuando $n \to +\infty$ 
 
 Por lo tanto, $\widehat{f}_{\Gamma^1}$, $\widehat{f}_{\tiny{\text{IG}}}$ y $\widehat{f}_{\tiny{\text{LN}}}$ alcanzan una tasa de convergencia en términos del MISE del orden de $n^{-4/5}$, comparable con la que alcanzan otros núcleos simétricos.
 
-Para el caso donde $f=f_{\mathcal{G}_I^0}$ las condiciones anteriores se cumplen para valores de $L$ mayores a $3/2$. 
-
-%%In~\cite{bouezmarni2005} the authors prove, among others results, that under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
-%In~\cite{bouezmarni2005} the authors prove several theoretical results for this estimator. 
+%%In~\citet{bouezmarni2005} the authors prove, among others results, that under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
+%In~\citet{bouezmarni2005} the authors prove several theoretical results for this estimator. 
 %One of them is that, under certain conditions for the bandwidth, $\widehat{f}_n$ converges to $f$  in probability, in $L_1$ sense.
 
 \subsection{Ancho de banda}
 \label{AnchoBanda}
 
-La elección del ancho de banda $b$ es un punto crucial en estimación no paramétrica de la función de densidad. Si $b$ es muy pequeño la función de densidad estimada puede ser muy ruidosa, presentando varios picos. Si en cambio, el valor de $b$ es demasiado grande, entonces la estimación puede pasar por alto características clave porque la variabilidad disminuye.
+La elección del ancho de banda $b$ es un punto crucial en estimación no paramétrica de la función de densidad. Si $b$ es muy pequeño la función de densidad estimada puede ser muy ruidosa. Si en cambio, el valor de $b$ es demasiado grande, entonces la estimación puede pasar por alto características clave porque la variabilidad disminuye.
 
 En esta tesis se estudiarán dos estrategias para determinar el ancho de banda $b$.
 
@@ -501,7 +497,7 @@ El valor de $b_{\tiny \text{LSCV}}$ óptimo que propone este método es aquel va
 \label{LSCV}
 \text{LSCV}(b)=\int_\mathbb{R} \widehat{f}_b^2(x)dx - \frac{2}{n}\sum_{i=1}^n \widehat{f}_{b,-i}(X_i).
 \end{align}
-Hall and Marron~\cite{HallMarron1991} muestran que, para el caso de núcleos simétricos, esta función puede tener mínimos locales. Entonces el  $b_{\tiny \text{LSCV}}$ será el más grande de los mínimos locales porque tiene un mejor comportamiento empírico que el mínimo global.
+~\citet{HallMarron1991} muestran que, para el caso de núcleos simétricos, esta función puede tener mínimos locales. Entonces el  $b_{\tiny \text{LSCV}}$ será el más grande de los mínimos locales porque tiene un mejor comportamiento empírico que el mínimo global.
 
 En la figura~\ref{LSCVgraf} se puede ver la función de cross validación LSCV en función del ancho de banda, usando núcleo $\Gamma$, para $L=3$, $\alpha=\{-3,-5\}$ y $n=\{9,25,49,81,121\}$. Se puede ver que, en todos los casos, esta función presenta un único mínimo.
 
@@ -520,7 +516,7 @@ En la figura~\ref{LSCVgraf} se puede ver la función de cross validación LSCV e
 %\end{figure}
 
 %\item It is possible to see that (\ref{LSCV}) in an unbiased estimator of (\ref{fi}).
-%\item In 1991, Hall and Marron ~\cite{HallMarron1991},  pointed out that the function (\ref*{LSCV}) has frequent local minima. For this reason, the largest local minimizer (which gives better empirical
+%\item In 1991, Hall and Marron ~\citet{HallMarron1991},  pointed out that the function (\ref*{LSCV}) has frequent local minima. For this reason, the largest local minimizer (which gives better empirical
 %performance than the global minimizer) is the $b_{LSCV}$.
 %SE PUEDE VER QUE \ref(LSCV) es un estimador insesgado de \ref{fi}
 
@@ -529,7 +525,7 @@ En la figura~\ref{LSCVgraf} se puede ver la función de cross validación LSCV e
 
 \subsubsection{Convergencia}
 
-Es interesante contar con resultados de convergencia de un estimador para medir la calidad del mismo. En~\cite{Libnegue2013} el autor presenta propiedades asintóticas del estimador $\widehat{f}_n$ de $f$, donde $\widehat{f}_n$ es el estimador de núcleos asimétricos dado en la definición~\ref{DefNucleo}. De acuerdo a~\cite{Libnegue2013,kokonendji2018} se consideran los núcleos que verifican las condiciones: 
+Es interesante contar con resultados de convergencia de un estimador para medir la calidad del mismo. En~\citet{Libnegue2013} el autor presenta propiedades asintóticas del estimador $\widehat{f}_n$ de $f$, donde $\widehat{f}_n$ es el estimador de núcleos asimétricos dado en la definición~\ref{DefNucleo}. De acuerdo a los trabajos de~\citet{Libnegue2013,kokonendji2018} se consideran los núcleos que verifican las condiciones: 
 \begin{align}
 \label{CondNucleos}
 \begin{split}
@@ -541,11 +537,11 @@ Var(Y_{x,b})=B(x,b)
 donde $Y_{x,b}$ es una variable aleatoria con densidad $K_{x,b}$ y $A(x,b),B(x,b) \to 0$ cuando $b \to 0$. Tanto el núcleo $\Gamma^1$ como los núcleos LN e IG verifican estas condiciones, pues:
 \begin{itemize}
 	\item para el núcleo $\Gamma^1$, $A(x,b)=b$ y $B(X,b)=b(x+b)$.
-	\item para el núcleo LN, $A(x,b)=x(e^{\frac{3}{2} b^2}-1)$ y $B(X,b)=x^2 e^{}3b^2 (e^{b^2}-1)$.
+	\item para el núcleo LN, $A(x,b)=x(e^{\frac{3}{2} b^2}-1)$ y $B(X,b)=x^2 e^{3b^2} (e^{b^2}-1)$.
 	\item para el núcleo IG, $A(x,b)=0$ y $B(X,b)=x^3 b$.
 \end{itemize}
 
-En~\cite{Libnegue2013,kokonendji2018} se demuestran resultados de consistencia y de normalidad asintótica, como así también se demuestran propiedades de convergencia globales. Algunos de estos resultados son necesarios para probar la consistencia del estimador del parámetro de textura de la distribución $\mathcal{G}_I^0$ que se propone en esta tesis y que presentaremos en la sección~\ref{MDE}.
+En estos mismos trabajos se demuestran resultados de consistencia y de normalidad asintótica, como así también se demuestran propiedades de convergencia globales. Algunos de estos resultados son necesarios para probar la consistencia del estimador del parámetro de textura de la distribución $\mathcal{G}_I^0$ que se propone en esta tesis y que presentaremos en la sección~\ref{MDE}.
 
 %En este capítulo, presentamos un estudio general de las propiedades asintóticas.
 %en la familia de los estimadores de núcleo asociados continuos bfn o efn, que dependen intrínsecamente de
@@ -568,7 +564,7 @@ En~\cite{Libnegue2013,kokonendji2018} se demuestran resultados de consistencia y
 %convergen en probabilidad a infinito en x = 0 cuando la densidad
 %no tiene límites en x = 0.
 
-%En esta sección daremos algunos resulados de convergencia de los núcleos presentados que fueron demostrados en Bouezmarni et al.~\cite{bouezmarni2005} y en XXXXXXXX para los núcleos asimétricos \text{A}_n, donde $\text{A}_n$ son los núcleos $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{RIG}}$. 
+%En esta sección daremos algunos resulados de convergencia de los núcleos presentados que fueron demostrados en Bouezmarni et al.~\citet{bouezmarni2005} y en XXXXXXXX para los núcleos asimétricos \text{A}_n, donde $\text{A}_n$ son los núcleos $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{RIG}}$. 
 \begin{itemize}
 	\item \textbf{Convergencia fuerte de $\widehat{f}_n$.} 
 
@@ -593,7 +589,7 @@ En~\cite{Libnegue2013,kokonendji2018} se demuestran resultados de consistencia y
 %\begin{itemize}
 %	\item \textbf{Convergencia uniforme del sesgo.} 
 %	\begin{theorem}
-%		Sea $f$ una función de densidad continua y acotada en su soporte, $\widehat{f}_{\tiny \text{A}_n}$ el estimador de $f$ utilizando núcleos definidos en~\cite{Libnegue2013} dentro de los cuales se encuentran $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{LN}}$. Para todo conjunto compacto $I \subset \mathrm{Sop}(f)$ se cumple que
+%		Sea $f$ una función de densidad continua y acotada en su soporte, $\widehat{f}_{\tiny \text{A}_n}$ el estimador de $f$ utilizando núcleos definidos en~\citet{Libnegue2013} dentro de los cuales se encuentran $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{LN}}$. Para todo conjunto compacto $I \subset \mathrm{Sop}(f)$ se cumple que
 %		\begin{align}
 %			\sup_{x \in I} |\mathbb{E}(\widehat{f}_n(x))-f(x)|\xrightarrow{\;\;  \;\; }0 \; \text{ cuando } \; n \rightarrow \infty.
 %			\label{convergenciaProb} 
@@ -604,7 +600,7 @@ En~\cite{Libnegue2013,kokonendji2018} se demuestran resultados de consistencia y
 %\begin{itemize}
 %	\item \textbf{Convergencia débil y fuerte de $\widehat{f}_n$.} 
 %\begin{theorem}
-%	Sea $f$ una función de densidad continua y acotada en en su soporte, $\widehat{f}_{\tiny \text{A}_n}$ el estimador de $f$ utilizando núcleos definidos en~\cite{Libnegue2013} dentro de los cuales se encuentran $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{LN}}$. Sea $I$ un conjunto compacto en $\mathrm{Sop}(f)$. Entonces si existe un número real $r_0=r_0(K)>0$ que depende del núcleo elegido, tal que para todo $x \in \mathrm{Sop}(f)$ 
+%	Sea $f$ una función de densidad continua y acotada en en su soporte, $\widehat{f}_{\tiny \text{A}_n}$ el estimador de $f$ utilizando núcleos definidos en~\citet{Libnegue2013} dentro de los cuales se encuentran $K_{\Gamma}$, $K_{\tiny \text{IG}}$ y $K_{\tiny \text{LN}}$. Sea $I$ un conjunto compacto en $\mathrm{Sop}(f)$. Entonces si existe un número real $r_0=r_0(K)>0$ que depende del núcleo elegido, tal que para todo $x \in \mathrm{Sop}(f)$ 
 %	\begin{align}
 %	b_n^{r_0} \displaystyle{\int_0^{\infty}} | dK_{x,b_n}(s) | \leq c_0(x),
 %	\end{align}
@@ -644,7 +640,7 @@ Si se considera un conjunto de condiciones más fuertes sobre el ancho de banda 
 \begin{theorem}
 	\label{ConvergenciaFuerte}
 	\bigskip
-	Sea $f$ una función de densidad continua y acotada en $\mathrm{Sop}(f)$, sea $\widehat{f}_{n}$ el estimador de $f$ utilizando núcleos dados en la definición~\ref{DefNucleo} y que verifican las condiciones~\ref{CondNucleos} dentro de los cuales se encuentran $\Gamma$, IG y LN. Supongamos que existe un número real $r_1=r_1(K)>0$ que depende del núcleo elegido tal que, para cada $x \in \mathrm{Sop}(f)$ 
+	Sea $f$ una función de densidad continua y acotada en $\mathrm{Sop}(f)$, sea $\widehat{f}_{n}$ el estimador de $f$ utilizando núcleos definidos en~\ref{DefNucleo} y que verifican las condiciones~\ref{CondNucleos}. Supongamos que existe un número real $r_1=r_1(K)>0$ que depende del núcleo elegido tal que, para cada $x \in \mathrm{Sop}(f)$ 
 	\begin{align}
 	\label{cond_c1}
 	b_n^{r_1} \displaystyle{\int_0^{\infty}} | dK_{x,b_n}(s) | \leq c_1(x),
@@ -666,7 +662,7 @@ Si se considera un conjunto de condiciones más fuertes sobre el ancho de banda 
 
 \end{itemize}
 
-En~\cite{Libnegue2013} se muestra que la condición~\ref{cond_c1} se cumple para $r_1=1$ en el caso del núcleo $\Gamma^1$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.
+En~\citet{Libnegue2013} se muestra que la condición~\ref{cond_c1} se cumple para $r_1=1$ en el caso del núcleo $\Gamma^1$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.
 
 El resultado~\ref{L1fuerte} es esencial para demostrar la consistencia fuerte del estimador de mínima distancia para el parámetro de textura $\alpha$ de la distribución $\mathcal{G}_I^0$ como veremos en sección~\ref{MDE}.
 
@@ -739,18 +735,18 @@ El resultado~\ref{L1fuerte} es esencial para demostrar la consistencia fuerte de
 
 Al momento de proponer un modelo estadístico es importante contar con una medida apropiada que indique la diferencia entre el modelo teórico y los datos muestrales. Si nos basamos en la información muestral existen medidas que vinculan la función de distribución empírica y el modelo teórico, y otras que miden la discrepancia entre una estimación no paramétrica de la función de densidad subyacente y la función de densidad que proviene del modelo utilizado. En esta tesis se trabajará con esta última propuesta.
 
-Es conocido el aporte que realizó Claude E. Shannon a la creaci\'on de lo que se conoce como \textit{Teoría de la Información}. En su trabajo~\cite{Shannon1948} propone una nueva manera de medir la transmisi\'on de informaci\'on a trav\'es de un canal, pensando a la informci\'on como un concepto estad\'istico. Propone como medida de informaci\'on o de desorden a lo que se conoce como entrop\'ia de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entrop\'ia de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log(p_i)$. Para el caso continuo se define $H(X)=\int_{-\infty}^{\infty} p_X(x) \log(p_X(x)).$
+Es conocido el aporte que realizó Claude E. Shannon a la creaci\'on de lo que se conoce como \textit{Teoría de la Información}. En~\citet{Shannon1948} el autor propone una nueva manera de medir la transmisi\'on de informaci\'on a trav\'es de un canal, pensando a la informci\'on como un concepto estad\'istico. Propone como medida de informaci\'on o de desorden a lo que se conoce como entrop\'ia de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entrop\'ia de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log(p_i)$. Para el caso continuo se define $H(X)=\int_{-\infty}^{\infty} f_X(x) \log(f_X(x))$ donde f es la función de densidad de la variable aleatoria $X$.
 
-Kullback y Leibler (KL)~\cite{KullbackLeibler1951} estaban interesados en proponer una medida que discrimine dos poblaciones, considerando una cantidad que involucre medidas de informaci\'on. Su inter\'es era definir una magnitud que indique la diferencia entre dos funciones de distribuci\'on pensando en una generalizaci\'on de la entrop\'ia de Shannon. Si $p(x)$ y $q(x)$ son dos funciones de probabilidad puntual con el mismo soporte $\Omega$, la KL divergencia se define como $d_{\text{\tiny{KL}}}(p \rVert q)=-\sum_{x \in \Omega} p(x) \log \dfrac{q(x)}{p(x)}=\sum_{x \in \Omega} p(x) \log\dfrac{p(x)}{q(x)}$. 
+~\citet{KullbackLeibler1951} (KL) estaban interesados en proponer una medida que discrimine dos poblaciones, considerando una cantidad que involucre medidas de informaci\'on. Su inter\'es era definir una magnitud que indique la diferencia entre dos funciones de distribuci\'on pensando en una generalizaci\'on de la entrop\'ia de Shannon. Si $p(x)$ y $q(x)$ son dos funciones de probabilidad puntual con el mismo soporte $\Omega$, la KL divergencia se define como $d_{\text{\tiny{KL}}}(p \rVert q)=-\sum_{x \in \Omega} p(x) \log \dfrac{q(x)}{p(x)}=\sum_{x \in \Omega} p(x) \log\dfrac{p(x)}{q(x)}$. 
 
-En el caso continuo si $P(x)$ y $Q(x)$ son funciones de distribuci\'on de una misma variable aleatoria $X$ continua, la divergencia KL se define como 
+En el caso continuo la divergencia KL se define como 
 \begin{align}
 \label{KL}
-d_{\text{\tiny{KL}}}(P \rVert Q)=\int_{-\infty}^{+\infty} p(x) \log\dfrac{p(x)}{q(x)} dx,
+d_{\text{\tiny{KL}}}(f \rVert g)=\int_{-\infty}^{+\infty} f(x) \log\dfrac{f(x)}{g(x)} dx,
 \end{align} 
-donde $p(x)$ y $q(x)$ representan las funciones de densidad de $P$ y $Q$ respectivamente. 
+donde $f(x)$ y $g(x)$ representan funciones de densidad. 
 
-Se puede pensar que si $p(x)$ es el modelo verdadero, la KL divergencia mide cu\'anto me alejo del modelo verdadero, si utilizo el modelo $q$ en vez del modelo $p$. Hay que notar que si $p(x)=q(x)$ la distancia $d_\text{\tiny{KL}}=0.$ Esta medida de ``distancia'' no es sim\'etrica ni cumple con la desigualdad triangular,  en cambio s\'i cumple que $d_{\text{\tiny{KL}}}(p \rVert q)\geq 0$ y $d_{\text{\tiny{KL}}}(p \rVert q)= 0 \Longleftrightarrow p=q.$ 
+Se puede pensar que si $f$ es el modelo verdadero, la KL divergencia mide cu\'anto me alejo del modelo verdadero, si utilizo el modelo $g$ en vez del modelo $f$. Hay que notar que si $f=g$ la distancia $d_\text{\tiny{KL}}=0.$ Esta medida de ``distancia'' no es sim\'etrica ni cumple con la desigualdad triangular,  en cambio s\'i cumple que $d_{\text{\tiny{KL}}}(f \rVert g)\geq 0$ y $d_{\text{\tiny{KL}}}(f \rVert g)= 0 \Longleftrightarrow f=g.$ 
 
 Muchas de las medidas utilizadas que se basan en determinar diferencias entre una estimación de la función de densidad subyacente y el modelo teórico no son métricas, donde por métrica entendemos a aquellas funciones $D:M \times M\rightarrow \mathbb{R}^+$ que cumplen:
 
@@ -764,14 +760,14 @@ Muchas de las medidas utilizadas que se basan en determinar diferencias entre un
 
 Es decir, son medidas que no cumplen la propiedad~\ref{simetrica} ni~\ref{DesigTriang} , pero sí cumplen las propiedades ~\ref{positiva} y~\ref{igual0}. Si la medida de discrepancia cumple solamente las propiedades~\ref{positiva} y~\ref{igual0} la llamaremos divergencia. Si además cumple la propiedad~\ref{simetrica} de simetría la llamaremos distancia estocástica. 
 
-Salicrú et al.~\cite{Salicru1994} propusieron una familia de medidas de divergencia, llamadas $(h,\phi) \text{-} divergencias$ que incluyen a la KL divergencia, a las $\phi \text{-} divergencias$ presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J \text{-} divergencias$ y $R \text{-} divergencias$ que fueron definidas por Taneja en~\cite{Taneja1989} entre otras. Algunas de las medidas que se trabajan en esta tesis son $\phi$ divergencias y otras  $(h,\phi) \text{-} divergencias$. Por eso daremos la definición de ambas.
+~\citet{Salicru1994} propusieron una familia de medidas de divergencia, llamadas $(h,\phi) \text{-} divergencias$ que incluyen a la KL divergencia, a las $\phi \text{-} divergencias$ presentadas por~\citet{Csiszar1967} y a las generalizaciones de las $J \text{-} divergencias$ y $R \text{-} divergencias$ que fueron definidas por~\citet{Taneja1989} entre otras. Algunas de las medidas que se trabajan en esta tesis son $\phi$ divergencias y otras  $(h,\phi) \text{-} divergencias$. Por eso daremos la definición de ambas.
 
 \begin{definition}[$\phi \text{-} divergencias$]
 	\label{fiDivergencia}
 	Sean $F(x)$ y $G(x)$ dos funciones de distribución definidas sobre el mismo conjunto $S \subset \mathbb{R}$, ambas absolutamente continuas con respecto a la medida Lebesgue, es decir existen $f(x)$ y $g(x)$ funciones de densidad correspondientes a $F$ y $G$ respectivamente. Además $F(x)$ absolutamente continua con respecto a $G(x)$, entonces para toda función convexa $\phi:[0,+\infty)\longrightarrow \mathbb{R}$ tal que $\phi(1)=0$ la $\phi \text{-} divergencia$ entre $f$ y $g$ se define como
 	
 	\begin{align}
-	d_{\phi}(f, g)=\int_{S}  \phi\left(\dfrac{f}{g}\right) g dx=E_{g}\left(\phi\left(\dfrac{f}{g}\right)\right).
+	d_{\phi}(f, g)=\int_{S}  \phi\left(\dfrac{f(x)}{g(x)}\right) g(x) dx=E_{g}\left(\phi\left(\dfrac{f}{g}\right)\right).
 	\end{align}
 	%donde $f_{\theta_1}$ y $f_{\theta_2}$ las funciones de densidad de $F_{\theta_1}$ y $F_{\theta_2}$ respectivamente.
 \end{definition}
@@ -787,7 +783,7 @@ Cabe realizar algunas observaciones:
 	\item La condición que $F(x)$ sea absolutamente continua con respecto a $G(x)$ es equivalente a pedir que, en casi todo punto, $\mathrm{Sop}(g) \subset \mathrm{Sop}(f).$ En general, en la literatura se pide que ambas funciones de densidad tengan un soporte común.
 \end{itemize}
 
-\begin{example} Ejemplos de $\phi-divergencias$. En estos ejemplos llamaremos $S=\mathrm{Sop}(f)=\mathrm{Sop}(g).$
+\begin{example} Ejemplos de $\phi-divergencias$. En estos ejemplos asumiremos que $f$ y $g$ tiene soporte común $S$.
 	\begin{itemize}
 		\item Kullback-Leibler definida en~\eqref{KL} donde $\phi(x)=x \log(x)$.
 		\item Hellinger
@@ -820,12 +816,12 @@ Cabe realizar algunas observaciones:
 		\item Bhattacharyya 
 		\begin{align}
 		\label{Bhattacharyya}
-		d_{\text{\tiny{B}}}=-\log \displaystyle \int_{S} \sqrt{f_\text{\tiny{V}}f_\text{\tiny{W}}},
+		d_{\text{\tiny{B}}}(f,g)=-\log \displaystyle \int_{S} \sqrt{f(x) g(x)} dx,
 		\end{align}
-		donde $\phi(x)=-\sqrt{x}+\dfrac{x+1}{d}$ y $h(y)=-\log(-y+1)$ con $0\leq y<1$.
-		\item R\'enyi de orden $\beta\in(0,1)$ 
+		donde $\phi(x)=-\sqrt{x}+\dfrac{x+1}{2}$ y $h(y)=-\log(-y+1)$ con $0\leq y<1$.
+		\item R\'enyi de orden $\beta\in(0,1)$ simetrizada.
 		\begin{align}
-		d_\text{\tiny{R}}^{\beta}(V,W)=\frac{1}{2(\beta-1)}\log\int_{-\infty}^{\infty}\big({f_\text{\tiny{V}}^{\beta}f_\text{\tiny{W}}^{1-\beta})+\log\int_{-\infty}^{\infty}\big(f_\text{\tiny{V}}^{1-\beta}f_\text{\tiny{W}}^{\beta}}\big),
+		d_\text{\tiny{R}}^{\beta}(f,g)=\frac{1}{2(\beta-1)}\left[\log\int_{S}{f(x)^{\beta}g(x)^{1-\beta} dx+\log\int_{S}f(x)^{1-\beta}g(x)^{\beta}} dx\right],
 		\end{align}
 		donde 
 		$$\phi(x)=\dfrac{x^{\beta}-\beta(x-1)-1}{\beta-1} \text{ con } 0 < \beta < 1, \text{ y }$$  
@@ -833,11 +829,11 @@ Cabe realizar algunas observaciones:
 	\end{itemize}
 \end{example}
 
-Se han encontrado muchas aplicaciones de estas medidas de divergencia en señales y procesamiento de imágenes~\cite{Aviyente2007}, en el análisis de imágenes médicas~\cite{5599869}, detección automática de regiones en imágenes SAR~\cite{ClassificationPolSARSegmentsMinimizationWishartDistances,EdgeDetectionDistancesEntropiesJSTARS,SARSegmentationLevelSetGA0}. 
+Se han encontrado muchas aplicaciones de estas medidas de divergencia, entre ellas se pueden citar los trabajos de~\citet{Aviyente2007} que aplican estas medidas al procesamiento de imágenes medicas, y los trabajos de~\citet{ClassificationPolSARSegmentsMinimizationWishartDistances} y ~\citet{EdgeDetectionDistancesEntropiesJSTARS} en detección automática de regiones en imágenes SAR. 
 
-Cabe señalar que muchos autores han encontrado cotas superiores e inferiores que vinculan la distancia triangular con otras medidas de divergencia que se encuentran en la clase de las $\phi \text{-} divergencias$, especialmente para el caso discreto. Particularmente esto es útil ya que contribuye a obtener resultados de convergencia entre distintas divergencias. En Dragomir~\cite{Dragomir2002} el autor encuentra cotas superiores e inferiores para las $\phi \text{-} divergencias$ en términos de la KL divergencia. Jain et. al.~\cite{JainSrivastava2007} también encuentra cotas que vinculan a la distancia triangular con las discrepancias Jensen – Shannon, Simétrica Chi-square, Aritmética entre otras. Taneja~\cite{Taneja2006} estudió nuevas cotas entre la discriminación triangular (distancia triangular para el caso discreto) y la media armónica y la simétrica Chi-square divergencia.
+Cabe señalar que muchos autores han encontrado cotas superiores e inferiores que vinculan la distancia triangular con otras medidas de divergencia que se encuentran en la clase de las $\phi \text{-} divergencias$, especialmente para el caso discreto. Particularmente esto es útil ya que contribuye a obtener resultados de convergencia entre distintas divergencias. En~\citet{Dragomir2002} el autor encuentra cotas superiores e inferiores para las $\phi \text{-} divergencias$ en términos de la KL divergencia.~\citet{JainSrivastava2007} también encuentran cotas que vinculan a la distancia triangular con las discrepancias Jensen – Shannon, Simétrica Chi-square, Aritmética entre otras.~\citet{Taneja2006} estudió nuevas cotas entre la discriminación triangular (distancia triangular para el caso discreto) y la media armónica y la simétrica Chi-square divergencia.
 
-En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} se estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de Máxima Verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
+En~\citet{APSAR2013ParameterEstimationStochasticDistances} se estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de Máxima Verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
 
 \subsection{Distancia triangular generalizada}
 
@@ -918,10 +914,10 @@ Sea $\delta_{s}:\R_{+}\times\R_{+}\to\R_{+}$ la función definida por
 	Dadas $f,g$ dos densidades de probabilidad, definimos
 	\begin{align}
 	%\label{DefDistTriang1sobre_s}
-	\nonumber \label{FiDT}d_{\text{\tiny{T},s}}\pa{f,g} &= \displaystyle \int_{\Lambda} \dfrac{\abs{f\pa{x} - g\pa{x}}^s}{\pa{f\pa{x} + g\pa{x}}^{s-1}} \\
-	&= \displaystyle \int_{\Lambda} \phi_s\left(\frac{f}{g}\right) g,
+	\nonumber \label{FiDT}d_{\text{\tiny{T},s}}\pa{f,g} &= \displaystyle \int_{S} \dfrac{\abs{f\pa{x} - g\pa{x}}^s}{\pa{f\pa{x} + g\pa{x}}^{s-1}} \\
+	&= \displaystyle \int_{S} \phi_s\left(\frac{f}{g}\right) g,
 	\end{align}
-	donde $\Lambda=\mathrm{Sop}(f) \cup \mathrm{Sop}(g)$ y $\phi_s(x)=\dfrac{\mid x-1\mid^s}{(x-1)^{s-1}}$,  lo que muestra que $d_{\text{\tiny{T},s}}\pa{f,g}$ es una $\phi-divergencia$.
+	donde $S$ es el soporte común y $\phi_s(x)=\dfrac{\mid x-1\mid^s}{(x+1)^{s-1}}$,  lo que muestra que $d_{\text{\tiny{T},s}}\pa{f,g}$ es una $\phi-divergencia$.
 \end{definition}
 
 Observemos que
@@ -983,19 +979,21 @@ lo que muestra que $d_{\text{\tiny{T},s}}\pa{f,g}$ está definido si $f-g$ es in
 
 La estimación por mínima distancia (MDE) constituye una metodología que permite encontrar nuevos estimadores de los parámetros de una distribución. Su propósito es encontrar los valores de los parámetros que hacen que el modelo teórico esté lo más cerca posible de la información que provee la muestra. En este sentido hay dos elementos involucrados: uno es la medida de distancia que permite cuantificar la proximidad, el otro es la información que proviene de la muestra. 
 
-Teniendo en cuenta ambos elementos, la forma habitual de definir el estimador MDE es 
-\begin{align}
-\label{DistDistribucion}
-\widehat{\theta}_n=\mathop{\rm argmin}\limits_{\theta\in\Omega} D(F_{\theta},F_n),
-\end{align}
-donde $F_n$ es la función de distribución empírica, $F_{\theta}$ es la función de distribución teórica, $\Omega$ es el espacio paramétrico y $D$ es una medida de distancia entre las funciones de distribución que, usualmente, es una métrica.
+%Teniendo en cuenta ambos elementos, la forma habitual de definir el estimador MDE es 
+%\begin{align}
+%\label{DistDistribucion}
+%\widehat{\theta}_n=\mathop{\rm argmin}\limits_{\theta\in\Omega} D(F_{\theta},F_n),
+%\end{align}
+%donde $F_n$ es la función de distribución empírica, $F_{\theta}$ es la función de distribución teórica, $\Omega$ es el espacio paramétrico y $D$ es una medida de distancia entre las funciones de distribución que, usualmente, es una métrica.
+%
+%Mucho se ha investigado respecto de estos estimadores. Ya en la década del $50$ Wolfowitz~\citet{wolfowitz1953, wolfowitz1957} estudió esta clase de estimadores y demostró que la sucesión de estimadores ${\widehat{\theta_n}}$ definida en~\eqref{DistDistribucion} es fuertemente consistente bajo ciertas condiciones generales, cuando la distancia $D$ es la distancia supremo entre la función de distribución empírica y la distribución teórica.
+%Boos en~\citet{Boos1981} estudió esta clase de estimadores donde utiliza una medida de distancia ponderada por ciertas funciones de peso. Para determinadas elecciones de estas funciones de peso se obtiene la distancia de Cramer-von Mises, de Anderson-Darling entre otras. El autor demostró que estos estimadores son consistentes y asintóticamente eficientes bajo ciertas condicones para las funciones de peso.
+%
+%Hettmansperger et al.~\citet{HettmanSperger1994} estudiaron los MDE estimadores utlizando la distancia de Cramer-von Mises. Los autores demostraron que estos estimadores son asintóticamente normales y tienen buenas propiedades de eficiencia y buenas propiedades de robustez. Parr and Schucany~\citet{Parr1980} probaron que, bajo ciertas condiciones el estimador de mínima distancia entre la función de distribución empírica y el modelo teórico es fuertemente consistente bajo una medida de discrepancia general poniendo algunas condiciones sobre esta medida. Muchas de estas medidas son utilizadas como estadísticos para test de bondad de ajuste basados en la función de distribución empírica. También mencionan que los MDE estimadores comparten la propiedad de invarianza que tienen los MV estimadores, en el sentido que $\widehat{g(\theta)}_{\tiny{\text{MDE}}}=g(\widehat{\theta_{\tiny{\text{MDE}}}})$. Posteriormente, Parr and Schucany~\citet{parr1982} generalizan el resultado de consistencia dando condiciones para asegurar la unicidad del mínimo del MDE estimador.
+%
+%Dado que, en general, $F_{\theta}$ es una distribución absolutamente continua, se pueden pensar a los estimadores MDE en términos de la función de densidad. 
 
-Mucho se ha investigado respecto de estos estimadores. Ya en la década del $50$ Wolfowitz~\cite{wolfowitz1953, wolfowitz1957} estudió esta clase de estimadores y demostró que la sucesión de estimadores ${\widehat{\theta_n}}$ definida en~\eqref{DistDistribucion} es fuertemente consistente bajo ciertas condiciones generales, cuando la distancia $D$ es la distancia supremo entre la función de distribución empírica y la distribución teórica.
-Boos en~\cite{Boos1981} estudió esta clase de estimadores donde utiliza una medida de distancia ponderada por ciertas funciones de peso. Para determinadas elecciones de estas funciones de peso se obtiene la distancia de Cramer-von Mises, de Anderson-Darling entre otras. El autor demostró que estos estimadores son consistentes y asintóticamente eficientes bajo ciertas condicones para las funciones de peso.
-
-Hettmansperger et al.~\cite{HettmanSperger1994} estudiaron los MDE estimadores utlizando la distancia de Cramer-von Mises. Los autores demostraron que estos estimadores son asintóticamente normales y tienen buenas propiedades de eficiencia y buenas propiedades de robustez. Parr and Schucany~\cite{Parr1980} probaron que, bajo ciertas condiciones el estimador de mínima distancia entre la función de distribución empírica y el modelo teórico es fuertemente consistente bajo una medida de discrepancia general poniendo algunas condiciones sobre esta medida. Muchas de estas medidas son utilizadas como estadísticos para test de bondad de ajuste basados en la función de distribución empírica. También mencionan que los MDE estimadores comparten la propiedad de invarianza que tienen los MV estimadores, en el sentido que $\widehat{g(\theta)}_{\tiny{\text{MDE}}}=g(\widehat{\theta_{\tiny{\text{MDE}}}})$. Posteriormente, Parr and Schucany~\cite{parr1982} generalizan el resultado de consistencia dando condiciones para asegurar la unicidad del mínimo del MDE estimador.
-
-Dado que, en general, $F_{\theta}$ es una distribución absolutamente continua, se pueden pensar a los estimadores MDE en términos de la función de densidad. Pensando en este sentido estos estimadores se pueden definir, de una forma más general, como 
+Teniendo en cuenta ambos elementos se puede definir el MDE estimador, de una forma más general, como 
 \begin{align}
 \widehat{\theta}_n=\mathop{\rm argmin} \limits_{\theta\in\Omega} d(f_{\theta}, \widehat{f}_n),
 \end{align}
@@ -1004,9 +1002,9 @@ donde $d$ es una medida de discrepancia, discimilaridad o distancia estocástica
 ¿Por qué proponer un nuevo estimador si se conocen las buenas propiedades asintóticas que tiene el MV estimador? Justamente, un buen estimador debe tener un buen comportamiento si los datos provienen del modelo asumido, pero además no debe sufrir grandes desvíos si los datos sufren perturbaciones que hacen que el verdadero modelo no sea completamente válido. 
 %Además, es necesario contar con estimadores que tengan un buen comportamiento para muestras de pequeño tamaño, ya que éstas son utilizadas por algunas técnicas de filtrado que recorren la imagen con ventanas deslizantes de tamaño chico.
 
-Beran~\cite{beran1977} señala que, en general y haciendo referencia al trabajo de Huber~\cite{Huber1972}, el MV estimador no es estable bajo pequeñas perturbaciones del modelo asumido. Por este motivo el autor propone el estimador MDE utilizando la distancia de Hellinger entre $\widehat{f}_n$ y la función de densidad teórica, estimando $\widehat{f}_n$ con un estimador de núcleos clásico. Estudió propiedades asintóticas y el desempeño de estos estimadores frente a pequeños desvíos del modelo asumido, mostrando que su propuesta es estable frente a estos desvíos. Eslinger et al.~\cite{Eslinger1990} implementó y realizó un estudio empírico del estimador propuesto por Beran para estudiar la performance de este estimador para pequeñas muestras en términos de eficiencia, distribución muestral y robustez. El autor compara este estimador con otros dentro de los cuales se encuentra el MV estimador.
+~\citet{beran1977} señala que, en general y haciendo referencia al trabajo de~\citet{Huber1972}, el MV estimador no es estable bajo pequeñas perturbaciones del modelo asumido. Por este motivo el autor propone el estimador MDE utilizando la distancia de Hellinger entre $\widehat{f}_n$ y la función de densidad teórica, estimando $\widehat{f}_n$ con un estimador de núcleos clásico. Estudió propiedades asintóticas y el desempeño de estos estimadores frente a pequeños desvíos del modelo asumido, mostrando que su propuesta es estable frente a estos desvíos.~\citet{Eslinger1990} implementaron y realizaron un estudio empírico del estimador propuesto por Beran para estudiar la performance de este estimador para pequeñas muestras en términos de eficiencia, distribución muestral y robustez. El autor compara este estimador con otros dentro de los cuales se encuentra el MV estimador. Cabe mencionar que un estimador se considera robusto si no se ve afectado por valores atípicos o por pequeñas desviaciones del modelo asumido. 
 
-Cabe señalar que uno de los puntos de interés en esta tesis es encontrar un estimador del parámetro de  textura de la distribución $\mathcal{G}_I^{0}$ que tenga un buen comportamiento para pequeños tamaños de muestra. Este aspecto es interesante de tener en cuenta porque mucho de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes para estimar parámetros, las cuales suelen ser de tamaño $3 \times 3$, $5 \times 5$, $7 \times 7$, $9 \times 9$ y $11 \times 11$. En este sentido es conocido que el MV estimador puede no presentar un buen comportamiento cuando el tamaño de muestra es pequeño. Por este motivo es necesario encontrar estimadores que tengan un comportamiento asintótico similar al MV, que mejore la performance del MV para pequeños tamaño de muestras y para desvíos del modelo teórico.
+Uno de los puntos de interés en esta tesis es encontrar un estimador del parámetro de  textura de la distribución $\mathcal{G}_I^{0}$ que tenga un buen comportamiento para pequeños tamaños de muestra. Este aspecto es interesante de tener en cuenta porque mucho de los métodos de filtrado de imágenes o detección de bordes utilizan máscaras deslizantes para estimar parámetros, las cuales suelen ser de tamaño $3 \times 3$, $5 \times 5$, $7 \times 7$, $9 \times 9$ y $11 \times 11$. En este sentido es conocido que el MV estimador puede no presentar un buen comportamiento cuando el tamaño de muestra es pequeño. Por este motivo es necesario encontrar estimadores que tengan un comportamiento asintótico similar al MV, que mejore la performance del MV para pequeños tamaño de muestras y para desvíos del modelo teórico.
 
 Por lo anteriormente expuesto en esta tesis se propone un estimador del tipo MDE para estimar el parámetro de textura de la distribución $\mathcal{G}_I^{0}$ donde se utilizan distancias estocásticas para medir la discrepancia entre el modelo teórico y  una estimación no paramétrica de la función de densidad subyacente. 
 %Dado que el soporte la distribución $\mathcal{G}_I^{0}$ es positivo se estimará $\widehat{f}_n$ utilizando núcleos asimétricos como los  definidos en~\eqref{fn}. 
@@ -1026,19 +1024,20 @@ Por lo anteriormente expuesto en esta tesis se propone un estimador del tipo MDE
 Las distancias estocásticas que serán estudiadas son:
 
 \begin{itemize}
-	\item Distancia de Hellinger $d_\text{\tiny H}(f_\text{\tiny V},f_\text{\tiny W})=1-\displaystyle{\int_{-\infty}^{\infty}\sqrt{f_\text{\tiny V} f_\text{\tiny W}}}$.
+	\item Distancia de Hellinger $d_\text{\tiny H}(f,g)=1-\displaystyle{\int_{S}\sqrt{fg}}$.
 	
-	\item Distancia de Bhattacharyya $d_\text{\tiny B}(f_\text{\tiny V},f_\text{\tiny W})=-\log\displaystyle{\int_{-\infty}^{\infty}\sqrt{f_\text{\tiny V} f_\text{\tiny W}}}$.
+	\item Distancia de Bhattacharyya $d_\text{\tiny B}(f,g)=-\log\displaystyle{\int_{S}\sqrt{fg }}$.
 	
-	\item Distancia Triangular $d_\text{\tiny T}(f_\text{\tiny V},f_\text{\tiny W}))=\displaystyle{\int_{-\infty}^{\infty}\frac{(f_\text{\tiny V}-f_\text{\tiny W})^2}{f_\text{\tiny V}+f_\text{\tiny W}}}$.
+	\item Distancia Triangular $d_\text{\tiny T}(f,g)=\displaystyle{\int_{S}\frac{(f-g)^2}{f+g}}$.
 	
-	Observar que, de acuerdo a la definición~\ref{TriangularGeneralizada}, $d_\text{\tiny T}(f_\text{\tiny V},f_\text{\tiny W})=d_{\text{\tiny{T,2}}}(f_\text{\tiny V},f_\text{\tiny W})$.
+	Observar que, de acuerdo a la definición~\ref{TriangularGeneralizada}, $d_\text{\tiny T}(f,g)=d_{\text{\tiny{T,2}}}(f,g)$.
 	
 	\item Distancia de R\'enyi con parámetro $\beta\in(0,1)$
 	$$
-	d_\text{\tiny R}^{\beta}(f_\text{\tiny V},f_\text{\tiny W}))=\frac{1}{2(\beta-1)}\log\displaystyle{\int_{-\infty}^{\infty}\big({f_\text{\tiny V}^{\beta}f_\text{\tiny W}^{1-\beta})}+\log\displaystyle{\int_{-\infty}^{\infty}\big(f_\text{\tiny V}^{1-\beta}f_\text{\tiny W}^{\beta}}}\big).
+	d_\text{\tiny R}^{\beta}(f,g)=\frac{1}{2(\beta-1)}\left[\log\displaystyle{\int_{S}{f^{\beta}g}^{1-\beta}}+\log\displaystyle{\int_{S}f^{1-\beta}g^{\beta}}\right].
 	$$
 \end{itemize}
+donde $S$ es el soporte común.
 
 Dado que las distancias de Hellinger y Bhattacharyya verifcan $d_\text{\tiny B}=-\log(1-d_\text{\tiny H})$, y la función logaritmo es creciente resulta que $\arg\min_\alpha d_\text{\tiny B}(\alpha )=\arg\min_ \alpha d_\text{\tiny H}(\alpha )$. Por lo tanto estas distancias poseen el mismo mínimo y por eso utilizaremos solamente la distancia de Hellinger que está más estudiada en la literatura.
 

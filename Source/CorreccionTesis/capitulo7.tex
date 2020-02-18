@@ -17,7 +17,7 @@
 %%
 %%Para responder a la primera pregunta apelamos a estimar la función de densidad subyacente con núcleos asimétricos. Para responder la segunda pregunta relajamos el concepto de métrica estudiando otras medidas como las distancias estocásticas, como forma de medir la discrepancia entre dos funciones de densidad. Elegimos la distancia triangular porque, de las medidas que evaluamos, ésta fue la que mejor performance mostró. En el capítulo~  \ref{ResultadosEmpiricos} hicimos un estudio Monte Carlo para evaluar la perfomance del estimador propuesto. Vimos que para datos sin contaminación la propuesta tiene un comportamiento similar al estimador MV, mientras que bajo contaminación la mejora en algunos casos estudiados.
 %
-%En general, los MDE estimadores se definen midiendo la discrepancia entre funciones de distribución. Wolfowitz~\cite{Wolfowitz1954}, Parr and Schucany~\cite{Parr1980} son algunas de las principales referencias. Como indican Cao et al.~\cite{cao1995minimum} en los casos más usuales las funciones de distribución son absolutamente continuas. Ellos aplican los resultados de Parr and Schucany~\cite{parr1982} al caso donde se miden distancias entre funciones de densidad. Consideran un estimador por núcleos simétricos para estimar la función de densidad subyacente en vez de utilizar la función de distribución empírica.
+%En general, los MDE estimadores se definen midiendo la discrepancia entre funciones de distribución. Wolfowitz~\citet{Wolfowitz1954}, Parr and Schucany~\citet{Parr1980} son algunas de las principales referencias. Como indican Cao et al.~\citet{cao1995minimum} en los casos más usuales las funciones de distribución son absolutamente continuas. Ellos aplican los resultados de Parr and Schucany~\citet{parr1982} al caso donde se miden distancias entre funciones de densidad. Consideran un estimador por núcleos simétricos para estimar la función de densidad subyacente en vez de utilizar la función de distribución empírica.
 
 En este capítulo probaremos la convergencia fuerte del estimador propuesto en esta tesis. Se usarán algunos resultados probados anteriormente, entre ellos la convergencia uniforme sobre conjuntos compactos de $f_{\mathcal{G}_I^0(\alpha,-\alpha-1,L)}$ cuando $\alpha \to -1$ y $\alpha \to -\infty$ visto en las proposiciones~\ref{conv1} y~\ref{conv2} respectivamente, y resultados sobre convergencia fuerte en norma $L^1$ mencionado en en el teorema~\ref{ConvFuerte_fn}. Primeramente daremos algunas definiciones.
 
@@ -47,7 +47,7 @@ d(f_{\widehat{\alpha}_{n}},\widehat{f}_n) \leq \inf\limits_{\alpha \in (-\infty,
 \end{align}
 donde $k_n$ es una sucesión que tiende a cero cuando $n$ tiende a infinito. 
 
-%basándonos en los resultados~\cite{cao1995minimum,parr1982}.
+%basándonos en los resultados~\citet{cao1995minimum,parr1982}.
 \vspace{1cm}
 
 En lo que sigue vamos a considerar:
@@ -63,7 +63,7 @@ En lo que sigue vamos a considerar:
 \vspace{0.5cm}
 
 %-------------------------------------------------------------------------------------------------------------------------\\
-Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRelajado} seguiremos las ideas de Parr et. al~\cite{parr1982}. Daremos primero algunos resultados previos.
+Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRelajado} seguiremos las ideas de~\citet{parr1982}. Daremos primero algunos resultados previos.
 %Por otro lado, la condición (ii) en~  \ref{TeoParr} se verifica, en el caso que la discrepancia considerada sea una distancia.
 
 \begin{proposition}
@@ -74,7 +74,7 @@ Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRe
 \begin{dem}
 	Por la continuidad de $f_{\alpha}(z)$ en $\alpha$, si $\alpha_{n} \to \alpha$, 
 	entonces $f_{\alpha_{n}}(z) \to f_{\alpha}(z)$ para todo $z>0$.
-	Siendo $f_{\alpha_{n}}$ y $f_{\alpha}$ densidades de probabilidad, por el Teorema de Scheffé~\cite{scheffe1947} obtenemos
+	Siendo $f_{\alpha_{n}}$ y $f_{\alpha}$ densidades de probabilidad, por el Teorema de Scheffé publicado en su trabajo~\citet{scheffe1947}, obtenemos
 	la convergencia en $L^{1}(0,\infty)$.
 \end{dem}
 
@@ -196,7 +196,7 @@ Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRe
 
 \begin{dem}
 	
-	Observemos que basta probar que $D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \stackrel{cs}{\longrightarrow} 0$ cuando $n \longrightarrow +\infty$, porque utilizando la proposición~\ref{CondivParr} probaremos que $\widehat{\alpha}_n \stackrel{cs}{\longrightarrow} \alpha_{*}.$
+	Observemos que basta probar que $D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \stackrel{cs}{\longrightarrow} 0$ cuando $n \longrightarrow +\infty$, porque utilizando la proposición~\ref{CondivParr} habremos probado que $\widehat{\alpha}_n \stackrel{cs}{\longrightarrow} \alpha_{*}.$
 	
     Por la desigualdad triangular se cumple que
 	\begin{align}
@@ -229,7 +229,7 @@ por lo tanto, $D(f_{\widehat{\alpha}_{n}},\widehat{f}_n) \stackrel{cs}{\longrigh
 %
 %\subsection{Demostración de las ecuaciones dadas en~\eqref{MISEoptLN}}
 %\begin{dem}
-%	De acuerdo a~\cite{Libnegue2013} expresiones para el sesgo, la varianza de $\widehat{f}_n$ para le caso de núcleo Lognormal son:
+%	De acuerdo a~\citet{Libnegue2013} expresiones para el sesgo, la varianza de $\widehat{f}_n$ para le caso de núcleo Lognormal son:
 %	\begin{align}
 %	Sesgo(\widehat{f}_n)&=x(e^{3 b^2}-1) f'(x)+\dfrac{1}{2}\{x^2(e^{3 b^2}-1)+x^2 e^{3b^2}(e^{b^2}-1)\}f''(x)+o(b^2)\\
 %	Var(\widehat{f}_n)&=\dfrac{1}{2 n x b \sqrt{\pi}} f(x)+o(n^{-1}b^{-1})

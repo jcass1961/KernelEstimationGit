@@ -15,7 +15,7 @@ apertura sintética (SAR: Synthetic Aperture Radar).
 
 ¿Por qué vista lateral? Porque los retornos porvenientes de distintos puntos del terreno llegarán en tiempos diferentes, ya que difieren en su distancia al radar. En cambio, en los radares de vista vertical, se pueden recibir señales provenientes de puntos equidistantes. Esto llevaría a ambigüedades ya que el tiempo de arribo de la señal sería el mismo para este tipo de sensores.
 
-¿Por qué SAR y no RAR? La resolución en la dirección del desplazamiento $(\Delta x)$ es la mínima distancia que tienen que tener dos puntos diferentes en el terreno para que el sensor sea capaz de distinguirlos. Los sensores RAR tienen un baja resolución espacial, ésta se define como  $\Delta x\approx\dfrac{\lambda \cdot r}{L}$ ~\cite{Sarmap2009}, donde $\lambda$ es la longitud de onda  de la señal emitida, $r$ la altura entre el sensor y el terreno y $L$ la longitud de la antena. Esto se muestra en la figura~\ref{Resolucion}.
+¿Por qué SAR y no RAR? La resolución en la dirección del desplazamiento $(\Delta x)$ es la mínima distancia que tienen que tener dos puntos diferentes en el terreno para que el sensor sea capaz de distinguirlos. Los sensores RAR tienen un baja resolución espacial, ésta se define como  $\Delta x\approx\dfrac{\lambda \cdot r}{l}$ como se indica en~\citet{Sarmap2009}, donde $\lambda$ es la longitud de onda  de la señal emitida, $r$ la altura entre el sensor y el terreno y $l$ la longitud de la antena. Esto se muestra en la figura~\ref{Resolucion}.
 
 \begin{figure}[hbt]
 	\centering    
@@ -39,7 +39,7 @@ Ventajas:
 
 Desventajas: 
 \begin{itemize}
-	\item Las imágenes SAR tienen la desventaja de poseer un ruido que es inherente al proceso de captura de la imagen, ya que el tipo de iliminación que se utiliza para formar la misma es de tipo coherente \cite{goodman85}. Este ruido, llamado speckle, es multiplicativo, no gaussiano y, por lo tanto, diferente al ruido que se observa en imágenes ópticas. La presencia de este ruido hace que en este tipo de imágenes se observen, en algunos casos, un granulado o falta de contraste.
+	\item Las imágenes SAR tienen la desventaja de poseer un ruido que es inherente al proceso de captura de la imagen, ya que el tipo de iliminación que se utiliza para formar la misma es de tipo coherente como se indica en~\citet{goodman85}. Este ruido, llamado speckle, es multiplicativo, no gaussiano y, por lo tanto, diferente al ruido que se observa en imágenes ópticas. La presencia de este ruido hace que en este tipo de imágenes se observen, en algunos casos, un granulado o falta de contraste.
 \end{itemize}
 %Entonces debido a la gran velocidad de desplazamiento de la plataforma que transporta al sensor, la antena del dispositivo SAR se convierte en una antena virtual mucho más grande que la que tiene en realidad, por eso se llaman de apertura sintética.
 
@@ -95,16 +95,16 @@ Dado que estos sistemas emiten puslos en el espectro de las microondas, ni las n
 
 %Como se indica en~\cite{Maitre2010} los primeros experimentos de detección de aeronaves datan de 1934. Esto explica por qué tanto los británicos como estadounidenses y alemanes  tales sistemas durante la 2ª Guerra Mundial. 
 
-De acuerdo a~\cite{Moreira2013}, durante los años $50$ y $60$ la investigación militar utilizó ampliamente los sistemas SAR con el propósito del reconocimiento del terreno. Sin embargo, a partir de los años $70$ y $80$ se desarrollaron varios sensores SAR aerotransportados  para aplicaciones civiles con el objetivo final de recuperar parámetros geo/biofísicos y detectar cambios en la superficie terrestre.
+De acuerdo a~\citet{Moreira2013}, durante los años $50$ y $60$ la investigación militar utilizó ampliamente los sistemas SAR con el propósito del reconocimiento del terreno. Sin embargo, a partir de los años $70$ y $80$ se desarrollaron varios sensores SAR aerotransportados  para aplicaciones civiles con el objetivo final de recuperar parámetros geo/biofísicos y detectar cambios en la superficie terrestre.
 
-De acuerdo a~\cite{Seasat} el primer satélite civil que tuvo a bordo un radar SAR fue lanzado en $1978$ a fines de junio por el Jet Propulsion Laboratory (JPL) de la NASA. Este satélite fue diseñado para teledetección de los océanos de la tierra, registrando información de los vientos de la superficie marina y la temperatura, altura de las olas, características hielo marino entre otros parámetros de interés. Debido a un problema eléctrico, este satélite finalizó sus operaciones a mediados de octubre del mismo año.
+De acuerdo a~\citet{Seasat} el primer satélite civil que tuvo a bordo un radar SAR fue lanzado en $1978$ a fines de junio por el Jet Propulsion Laboratory (JPL) de la NASA. Este satélite fue diseñado para teledetección de los océanos de la tierra, registrando información de los vientos de la superficie marina y la temperatura, altura de las olas, características hielo marino entre otros parámetros de interés. Debido a un problema eléctrico, este satélite finalizó sus operaciones a mediados de octubre del mismo año.
 
 
-La Comisión Nacional de Actividades Espaciales (CONAE) y el INVAP de Argentina, junto con la Agencia Espacial Italiana (ASI) integran el Sistema Ítalo Argentino de Satélites para la Gestión de Emergencias (SIASGE)~\cite{Invap}. De acuerdo a~\cite{Saocom} el objetivo de la misión SAOCOM es la puesta en órbita de dos constelaciones: SAOCOM1 y SAOCOM2. Cada constelación se compone de dos satélites llamados A y B. El satélite SAOCOM1A fue puesto en órbita el 7 de octubre de 2018 en Vanderberg, California. En~\cite{Saocom} se puede ver un video de su lanzamiento.
+La Comisión Nacional de Actividades Espaciales (CONAE) y el INVAP de Argentina, junto con la Agencia Espacial Italiana (ASI) integran el Sistema Ítalo Argentino de Satélites para la Gestión de Emergencias (SIASGE)~\citet{Invap}. De acuerdo a~\citet{Saocom} el objetivo de la misión SAOCOM es la puesta en órbita de dos constelaciones: SAOCOM1 y SAOCOM2. Cada constelación se compone de dos satélites llamados A y B. El satélite SAOCOM1A fue puesto en órbita el 7 de octubre de 2018 en Vanderberg, California. En~\citet{Saocom} se puede ver un video de su lanzamiento.
 
 Entre los objetivos de estos satélites se encuentra la medición de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. Están equipados con tecnología SAR polarimétrica y operan en banda L. La banda L permite penetrar a través de la superficie hasta $2$ m de profundidad dependiendo del tipo de suelo. 
 
-En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de~\cite{Moreira2013}, se muestran los principales sensores SAR junto con el período, banda y frecuencia de operación y las instituciones/países que lo desarrollaron. 
+En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de~\citet{Moreira2013}, se muestran los principales sensores SAR junto con el período, banda y frecuencia de operación y las instituciones/países que lo desarrollaron. 
 
 \begin{table}[H]
 	\centering
@@ -139,7 +139,7 @@ En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de~
 			\bottomrule
 		\end{tabular}
 	\end{spacing}
-	\caption{\label{tabla:SensoresSAR}Descripción de algunos sensores SAR junto con sus características. Adaptado de Moreira et al.~\cite{Moreira2013}.}
+	\caption{\label{tabla:SensoresSAR}Descripción de algunos sensores SAR junto con sus características. Adaptado de~\citet{Moreira2013}.}
 \end{table}
 
 \section{Sistema de iluminación coherente}
@@ -194,7 +194,7 @@ Las microondas, que son parte del espectro electromagnético, tienen longitudes 
 		P-band			&  0.999 a 0.2998 \si{\giga\hertz} 	&  30 a 100 \si{\centi\meter} \\
 		\bottomrule
 	\end{tabular}
-	\caption{\label{Bandas}Bandas SAR, datos adaptados de~\cite{Sarmap2009}}
+	\caption{\label{Bandas}Bandas SAR, datos adaptados de~\citet{Sarmap2009}}
 \end{table}
 
 Cada banda es utilizada en diferente tipos de aplicaciones:
@@ -276,12 +276,12 @@ A medida que el radar se desplaza emite pulsos de radiación electromagnética y
 
 La resolución de un radar es la capacidad que tiene para distinguir la posición entre objetos que están muy cercanos en rango o en azimut. Entonces, la resolución se divide en dos categorías: resolución en rango y resolución en azimut. 
 
-El grado de resolución en rango depende de la longitud temporal del pulso transmitido. Si el radar emite pulsos de longitud temporal $\tau$ la resolución en slant range queda determinada por $\Delta sl= \dfrac{c \tau}{2}$ donde $c$ es la velocidad de la luz~\cite{Sarmap2009,Moreira2013}. Entonces, señales con pulsos de longitud temporal pequeña mejoran la resolución en rango.
+De acuerdo a~\citet{Sarmap2009} y a~\citet{Moreira2013} el grado de resolución en rango depende de la longitud temporal del pulso transmitido. Si el radar emite pulsos de longitud temporal $\tau$ la resolución en slant range queda determinada por $\Delta sl= \dfrac{c \tau}{2}$ donde $c$ es la velocidad de la luz. Entonces, señales con pulsos de longitud temporal pequeña mejoran la resolución en rango.
 %, mientras que en ground range queda determinada por $\Delta gr= \dfrac{c \tau}{2 \sin \theta}$,
 
-En los radares de apertura real RAR la resolución en azimut se define como $\Delta x_{\tiny \text{rar}}= R \ \dfrac{\lambda}{L}$ donde $R$ es la distancia del objeto al radar, $L$ es la longitud de la antena y $\lambda$ es el ancho de banda del pulso emitido por el sensor. Esto tiene el inconveniente de que la resolución depende de la distancia al sensor. Cuanto mayor es esta distancia mayor es el valor de $\Delta x_{\tiny \text{rar}}$ y, por lo tanto, menor la resolución. Con el fin de mejorar dicha resolución se debería disminuir el ancho de banda $\lambda$ o aumentar la longitud de la antena $L$. Si se reduce $\lambda$ dejamos de estar en el espectro de las microondas. Por otro lado la antena no puede ser excesivamente grande por razones de ingeniería estructural.
+En los radares de apertura real RAR la resolución en azimut se define como $\Delta x_{\tiny \text{rar}}= R \ \dfrac{\lambda}{l}$ donde $R$ es la distancia del objeto al radar, $l$ es la longitud de la antena y $\lambda$ es el ancho de banda del pulso emitido por el sensor. Esto tiene el inconveniente de que la resolución depende de la distancia al sensor. Cuanto mayor es esta distancia mayor es el valor de $\Delta x_{\tiny \text{rar}}$ y, por lo tanto, menor la resolución. Con el fin de mejorar dicha resolución se debería disminuir el ancho de banda $\lambda$ o aumentar la longitud de la antena $L$. Si se reduce $\lambda$ dejamos de estar en el espectro de las microondas. Por otro lado la antena no puede ser excesivamente grande por razones de ingeniería estructural.
 
-De acuerdo a~\cite{Moreira2013} este problema se superó al usar un radar coherente junto con el efecto Doppler. Cuando un emisor de pulsos se mueve respecto de un objetivo en la tierra se observa lo que se conoce como efecto Doppler. Cuando dos puntos sobre el terreno están levemente separados en la dirección azimut, tienen ángulos ligeramente diferentes de la antena con respecto a la línea de vuelo. Debido a esto, las velocidades con la que los objetivos se aproximan al sensor son ligeramente diferentes. Por lo tanto la señal recibida de cada punto tendrá su frecuencia desplazada una cantidad diferente de la original. 
+De acuerdo a~\citet{Moreira2013} este problema se superó al usar un radar coherente junto con el efecto Doppler. Cuando un emisor de pulsos se mueve respecto de un objetivo en la tierra se observa lo que se conoce como efecto Doppler. Cuando dos puntos sobre el terreno están levemente separados en la dirección azimut, tienen ángulos ligeramente diferentes de la antena con respecto a la línea de vuelo. Debido a esto, las velocidades con la que los objetivos se aproximan al sensor son ligeramente diferentes. Por lo tanto la señal recibida de cada punto tendrá su frecuencia desplazada una cantidad diferente de la original. 
 
 La idea básica del SAR es iluminar a un punto de la tierra no sólo con un único pulso sino con una secuencia de pulsos. En la figura~\ref{Apertura} se esquematiza la forma de generar una apertura sintética. Cuando el objetivo $A$ es iluminado por el radar es cuando se comienza a generar dicha apertura. A medida que la plataforma continúa moviéndose hacia adelante, se registra la retrodispersión que generó cada pulso emitido por el radar, durante todo el tiempo que el objetivo estuvo iluminado. El punto en el que el objetivo deja de estar iluminado por el radar, determina la longitud $B$ de la antena simulada. 
 
@@ -318,7 +318,7 @@ Entre los parámetros que intervienen en la ecuación del radar se encuentra el 
 \section{Formación del ruido Speckle}
 \label{FormacionSpeckle}
 
-El láser HeNe es un tipo de fuente que utiliza como medio activo una mezcla gaseosa de helio y neón. De acuerdo a~\cite{Goodman1975,Quel1994} Ali Javan, un físico que trabajaba para Laboratorios Bell Telephone, fue el responsable del funcionamiento del primer láser HeNe en $1960$. Este láser  mostró un fenómeno inesperado: los objetos vistos en luz altamente coherente adquieren una apariencia granular peculiar que no tiene una relación obvia con las propiedades macroscópicas del objeto iluminado, sino que presentan un patrón irregular. 
+El láser HeNe es un tipo de fuente que utiliza como medio activo una mezcla gaseosa de helio y neón. De acuerdo a~\citet{Goodman1975,Quel1994} Ali Javan, un físico que trabajaba para Laboratorios Bell Telephone, fue el responsable del funcionamiento del primer láser HeNe en $1960$. Este láser  mostró un fenómeno inesperado: los objetos vistos en luz altamente coherente adquieren una apariencia granular peculiar que no tiene una relación obvia con las propiedades macroscópicas del objeto iluminado, sino que presentan un patrón irregular. 
 
 Esta apariencia granular se conoce como \textit{ruido speckle}. Las imágenes adquiridas por sistemas de iluminación coherente como son las imágenes SAR, las que utilizan laser o ultrasonido entre otros, se ven afectadas por la presencia del ruido speckle. Este tipo de ruido es inherente al proceso de captura de la imagen, no es aditivo ni gaussiano y suele dificultar el análisis e interpretación de las imágenes porque pueden degradarlas significativamente.
 
@@ -327,7 +327,7 @@ Esta apariencia granular se conoce como \textit{ruido speckle}. Las imágenes ad
 %alrededor de centímetros (banda X o C) o decenas de centímetros (banda S, L y P) mientras
 %la celda de resolución es de unos metros. Por esta razón, en la misma celda de resolución
 %varios dispersores elementales contribuyen al campo total retrodispersado. Todas las ondas electromagnéticas que provienen de la misma celda de resolución se suman de manera coherente y dan como resultado fuertes fluctuaciones en la retrodispersión
-%de una celda de resolución a otra~\cite{oliverquegan98}.
+%de una celda de resolución a otra~\citet{oliverquegan98}.
 
 En la teledetección por microondas la celda de resolución es de unos metros mientras que la longitud de onda es alrededor de centímetros (banda X o C) o decenas de centímetros (banda S, L y P). Dentro de una celda de resolución existen elementos que dispersan la señal que incide en la celda.
 
@@ -339,21 +339,21 @@ En la teledetección por microondas la celda de resolución es de unos metros mi
 
 Cuando el radar ilumina una superficie la señal que retorna está compuesta por la suma de los pulsos reflejados por cada uno de los dispersores elementales que se encuentran dentro de la celda, esto se muestra en la figura~\ref{Backscatter}. La forma en que esta señal se refleje indicará el tipo de terreno.
 
-Estos dispersores elementales se distribuyen en forma aleatoria y, por lo tanto, la distancia entre ellos y al radar también es aleatoria~\cite{Lee2009}. 
+Según~\citet{Lee2009} Estos dispersores elementales se distribuyen en forma aleatoria y, por lo tanto, la distancia entre ellos y al radar también es aleatoria. 
 En el momento de la reflexión, la señal que retorna ya no es coherentes en fase pero si lo es en frecuencia. Esto se debe principalmente a la textura de la superficie. La figura~\ref{Reflexion} muestra las señales incidentes y reflejadas en una superficie rugosa. La línea sólida negra corresponde a la primera y la línea punteada roja corresponde a la segunda. La distancia $d$ da información sobre la rugosidad del objeto, la figura~\ref{masrugosa} representa una superficie más rugosa que en la figura~\ref{menosrugosa}. Se puede observar que las ondas recibidas son coherentes en frecuencia, pero no necesariamente en fase. Cuanto mayor es el tamaño de $d$ mayor será la diferencia de fase de las ondas reflejadas por los dispersores.
 
 \begin{figure}[hbt]
 	\centering    
 	\subfigure[]{\label{menosrugosa}\includegraphics[scale=1]{../../Figures/Tesis/Capitulo3/reflexion_fina.pdf}}\hspace{10mm}
 	\subfigure[]{\label{masrugosa}\includegraphics[scale=1]{../../Figures/Tesis/Capitulo3/reflexion_gruesa.pdf}}
-	\caption{\label{Reflexion}Coherencia de la señal reflejada.} %Fuente Canada Centre for Remote Sensing~\cite{ccrs2001}.}
+	\caption{\label{Reflexion}Coherencia de la señal reflejada.} %Fuente Canada Centre for Remote Sensing~\citet{ccrs2001}.}
 \end{figure} 
 
-Entonces, las ondas electromagnéticas que provienen de la misma celda de resolución se suman de manera coherente y dan como resultado fuertes fluctuaciones en la retrodispersión de una celda de resolución a otra~\cite{oliverquegan98}. Por lo tanto el valor de gris en un pixel se obtiene como superposición coherente de las señales incidentes que, al estar desfasadas, pueden interferir de manera constructiva o destructiva, lo que produce que las señales recibidas sean más fuertes o más débiles~\cite{Shahrezaei2019}. Estas interferencias causan variaciones en la magnitud de la señal y cambios aleatorios de intensidad de píxel a píxel. Estos cambios en la intensidad se traducen en la imagen como diferentes niveles de gris. Esto explica el patrón granular que se observa en las imágenes SAR y que produce negros, correspondientes a interferencias destructivas, y puntos brillantes debido a las constructivas~\cite{Yahya2014}. Este patrón angular es lo que se conoce como \textit{Ruido Speckle}.
+Entonces, las ondas electromagnéticas que provienen de la misma celda de resolución se suman de manera coherente y dan como resultado fuertes fluctuaciones en la retrodispersión de una celda de resolución a otra, como se inica en~\citet{oliverquegan98}. De acuerdo a~\citet{Shahrezaei2019} el valor de gris en un pixel se obtiene como superposición coherente de las señales incidentes que, al estar desfasadas, pueden interferir de manera constructiva o destructiva, lo que produce que las señales recibidas sean más fuertes o más débiles. Estas interferencias causan variaciones en la magnitud de la señal y cambios aleatorios de intensidad de píxel a píxel. Estos cambios en la intensidad se traducen en la imagen como diferentes niveles de gris. Esto explica el patrón granular que se observa en las imágenes SAR y que produce negros, correspondientes a interferencias destructivas, y puntos brillantes debido a las constructivas, como se indica en~\citet{Yahya2014}. Este patrón granular es lo que se conoce como \textit{Ruido Speckle}.
 
 La presencia de este ruido dificulta la interpretación de las imágenes y puede conducir a interpretaciones y detecciones de bordes erróneas entre otros inconvenientes, debido a la degradación de la calidad de los píxeles. 
 
-Un enfoque común para la presencia de este ruido durante el procesamiento de la señal cruda captada por el radar es promediar varias estimaciones independientes de la señal reflejada. Dado que el radar SAR genera una apertura sintética la longitud de esta antena virtual se puede subdividir en $L$  segmentos independientes, conocidos también como \textit{looks}~\cite{Lee2009}. Cada uno de estos segmentos registra la energía retrodispersada por el mismo blanco y se procesa en forma independientemente para formar una imagen SAR. Estas $L$ imágenes se promedian entre sí para formar una sola imagen SAR de $L$ \textit{looks}. Este procesamiento reduce el efecto del ruido speckle pero, al reducir la longitud de la antena en segmentos, se pierde resolución en azimut. La utilidad de este procedimiento se manifiesta en la mejora de la relación señal-ruido. Cuantas más subdivisiones se hagan, es decir, cuanto más \textit{looks} formen la imagen menos resolución tendrá pero también será menos ruidosa.
+De acuerdo a~\citet{Lee2009}, un enfoque común para reducir la presencia de este ruido durante el procesamiento de la señal cruda captada por el radar es promediar varias estimaciones independientes de la señal reflejada. Dado que el radar SAR genera una apertura sintética la longitud de esta antena virtual se puede subdividir en $L$  segmentos independientes, conocidos también como \textit{looks}. Cada uno de estos segmentos registra la energía retrodispersada por el mismo blanco y se procesa en forma independientemente para formar una imagen SAR. Estas $L$ imágenes se promedian entre sí para formar una sola imagen SAR de $L$ \textit{looks}. Este procesamiento reduce el efecto del ruido speckle pero, al reducir la longitud de la antena en segmentos, se pierde resolución en azimut. La utilidad de este procedimiento se manifiesta en la mejora de la relación señal-ruido. Cuantas más subdivisiones se hagan, es decir, cuanto más \textit{looks} formen la imagen menos resolución tendrá pero también será menos ruidosa.
 
 \section{Doble Bounce o Doble Rebote}
 \label{SecDobleBounce}
@@ -372,15 +372,15 @@ Debido a la aleatoriedad y a la fuerte dispersión que puede tener la señal ret
 \section{Retorno Complejo}
 \label{RetornoComplejo}
 
-Supongamos que iluminamos un área a través de un haz de energía electromagnética con $n$ dispersores elementales como se mostró en la figura~\ref{SeñalDispersada}. Como presentan Frery y Wu~\cite{FreryLibro2019}, cada dispersor $j$ retornará una fracción de la energía incidente $A_i$ con fase $\phi_i$. El retorno total $S$ es una señal compleja definida por:
+Supongamos que iluminamos un área a través de un haz de energía electromagnética con $n$ dispersores elementales como se mostró en la figura~\ref{SeñalDispersada}. Como presentan~\citet{FreryLibro2019}, cada dispersor $j$ retornará una fracción de la energía incidente $A_j$ con fase $\phi_j$. El retorno total $S$ es una señal compleja definida por:
 \begin{align}
-S = \sum_{j=1}^{N} A_j \mathrm{e}^{\mathbf i \phi_j} = 
-\underbrace{{\sum_{j=1}^{N} A_j \cos \phi_j}}_{\Re{Z}} +\mathbf i \underbrace{ \sum_{j=1}^{N} A_j \sin \phi_j}_{\Im{Z}}, 
+S = \sum_{j=1}^{n} A_j \mathrm{e}^{\mathbf i \phi_j} = 
+\underbrace{{\sum_{j=1}^{n} A_j \cos \phi_j}}_{\Re{S}} +\mathbf i \underbrace{ \sum_{j=1}^{n} A_j \sin \phi_j}_{\Im{S}}, 
 \label{RetornoComplejo}
 \end{align}
 donde $i$ es la unidad imaginaria y $A_j \mathrm{e}^{\mathbf i \phi_j}$ representa el retorno del $j$-ésimo dispersor. La ecuación~\eqref{RetornoComplejo} describe la suma coherente de las contribuciones del retorno total de cada uno de los dispersores. En general, en vez de tratar directamente con el retorno complejo se trabajan con los datos dados en formato amplitud $A=\mid S \mid$ o  en formato intensidad $I=\mid S \mid^2$, donde $I=A^2$ En esta tesis se trabajará con este último formato.
 
-De acuerdo a~\cite{Quegan1994} si no hay un retrodispersor que domine, la forma de extraer información del retorno de los retrodispersores es aproximándose al problema desde un punto de vista estadístico. Este enfoque se verá en el capítulo~\ref{modeloG0}.
+De acuerdo a~\citet{Quegan1994} si no hay un retrodispersor que domine, la forma de extraer información del retorno de los retrodispersores es aproximándose al problema desde un punto de vista estadístico. Este enfoque se verá en el capítulo~\ref{modeloG0}.
 
 
 
