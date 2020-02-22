@@ -1,4 +1,5 @@
-\documentclass[a4paper,oneside,numbers,nobibtoc]{ezthesis}
+%\documentclass[a4paper,oneside,numbers,nobibtoc]{ezthesis}
+\documentclass[a4paper,oneside,spanish]{ezthesis}
 %\usepackage[a4paper]{geometry}
 %\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \renewcommand{\baselinestretch}{1.5}
@@ -33,7 +34,7 @@
 %\usepackage{verbatim}
 \usepackage{amssymb}
 \usepackage[T1]{fontenc}
-\usepackage[numbers]{natbib}
+%\usepackage[numbers]{natbib}
 \usepackage{color}
 \usepackage{multirow}
 \usepackage{booktabs}
@@ -45,7 +46,9 @@
 \usepackage{setspace} %% setea el espacio entre filas en una tabla
 \usepackage{siunitx}
 \usepackage{float}
+%\usepackage{dcolumn}
 
+%\usepackage{natbib}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,snakes,arrows,trees}
@@ -53,13 +56,16 @@
 %\usepackage[active,pdftex,tightpage]{preview}
 %\usepackage{tikz-cd}
 
-
+\usepackage{apalike}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter] % esto es para que lo numere como : capitulo. definicion
 
 
 \newcommand*{\id}{{\normalfont\hbox{1\kern-0.15em \vrule width .8pt depth-.5pt}}}
+\newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
+
+
 
 %\renewcommand{\spanishtablename}{Tabla}
 
@@ -85,7 +91,7 @@
 
 %\newtheorem{definition}{Definici\'{o}n}[section]
 \newtheorem{example}{Ejemplo}[section]
-\newtheorem{remark}{Remark}[section]
+\newtheorem{remark}{Observación}[section]
 
 %%%%% NUMEROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -262,12 +268,18 @@
 
 %% Cap'itulos incluidos despues del comando \appendix aparecen como ap'endices
 %% de la tesis.
-\include{apendiceA}
-%\include{apendiceB}
+\include{apendiceA1}
+\include{apendiceB1}
 %\include{apendiceC}
 
 %% Incluir la bibliograf'ia. Mirar el archivo "biblio.bib" para m'as detales
 %% y un ejemplo.
+%\bibliographystyle{agsm}
+\addcontentsline{toc}{chapter}{Bibliografí­a}
+%\bibliographystyle{agsm}
 \bibliography{../../Bibliography/bib_julia}
+\label{bibliografia}
+
+
 
 \end{document}
