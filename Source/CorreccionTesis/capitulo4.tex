@@ -76,7 +76,7 @@ SD(Z)&=C \cdot SD(Y)\label{desvio}
 %\end{align} 
 Despejando $C$ de~\eqref{esperanza} y reemplanzando en~\eqref{desvio} se obtiene que
 \begin{align}
-SD(Z)&= \dfrac{SD(Y)}{E(Y)} \, E(Z)\label{desvio}
+SD(Z)&= \dfrac{SD(Y)}{E(Y)} \, E(Z)
 \end{align} 
 En la figura~\ref{ModeloMultiplicativo} tomada de~\citet{Lee2009} se muestra el scatter plot basado en datos tomados por el radar SIR-B (Spaceborne Imaging Radar), un sensor SAR que opera en banda $C$ y $X$. Se tomaron $16$ y $25$ muestras de zonas homogéneas para el caso de $1$-look y $4$-looks respectivamente. En cada muestra se calculó $\overline{}$ la media muestral y $SD$ el desvío muestral y se grafica $SD$ vs. $\overline{Z}.$
 
@@ -274,7 +274,7 @@ Entonces, bajo el modelo multiplicativo, tenemos los siguientes modelos para el 
 
 Por otro lado y de acuerdo a la parametrización de la distribución Gaussiana Inversa dada en~\eqref{OtraIG}, si $X\sim IG(\omega,\eta)$ e $Y \sim \Gamma(L,L)$ el retorno $Z$ queda modelado por la distribución $ \mathcal{G}^H(\omega,\eta,L)$ con $\omega, \, \eta >0$ y $L \geq 1$, donde la función de densidad está dada por 
 \begin{align}
-\label{ModeloGI}
+\label{ModeloGH}
 f_{\text{Z}}( z) =\frac{L^L \sqrt{\frac{2 \omega  \eta }{\pi }} e^{\omega } \left(\frac{\omega }{\eta  (\omega  \eta +2 L
 		x)}\right)^{\frac{L}{2}+\frac{1}{4}} x^{L-1} K_{-\left(L+\frac{1}{2}\right)}\left(\sqrt{\frac{\omega 
 			(\omega  \eta +2 L x)}{\eta }}\right)}{\Gamma (L)}
