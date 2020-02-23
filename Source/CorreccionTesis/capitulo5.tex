@@ -41,7 +41,7 @@ Obsevemos que si $g_s(x)=x^s$ la definición es consistente con la idea intuitiv
 %
 %Recordemos que el $k$-ésimo momento muestral de una variable aleatoria $X$, tomado alrededor del origen, es $M_k=E(X^k)$.
 
-El estimador por Momentos Fracionales ha sido estudiado en los últimos tiempos. En \citet{Frery97} se utilizó este método para estimar los parámetros de la distribución $\mathcal{G}_A^0(\alpha,\gamma,L)$ con $L$ conocido.  \citet{GambiniSC08} aplicaron este método para el problema de detección de bordes en imágenes SAR. En esta tesis se utilizarán los momentos de orden $1$ y de orden $\frac{1}{2}$ ya que estos momentos existen para valores de $\alpha<-1$.
+El estimador por Momentos Fracionales ha sido estudiado en los últimos tiempos. \citet{Frery97} utilizaron este método para estimar los parámetros de la distribución $\mathcal{G}_A^0(\alpha,\gamma,L)$ con $L$ conocido,  \citet{GambiniSC08} aplicaron este método para el problema de detección de bordes en imágenes SAR. En esta tesis se utilizarán los momentos de orden $1$ y de orden $\frac{1}{2}$ ya que estos momentos existen para valores de $\alpha<-1$.
 
 Las ecuaciones de momento de orden $1$ y de orden $\frac{1}{2}$ para estimar los parámetros de la distribución $\mathcal G_I^0$ son:
 
@@ -61,11 +61,11 @@ Las ecuaciones de momento de orden $1$ y de orden $\frac{1}{2}$ para estimar los
 \begin{definition}
 Si $X_1, \ldots, X_n$ es una muestra de variables aleatorias independientes e idénticamente distribuidas con función de densidad $f_{X;\theta}$  con $\theta \in \Theta \subset \mathbb{R}^k$, diremos que $\widehat{\theta}_{\text{MV}}$ es el estimador de Máxima Verosimilitud de $\theta$ si verifica que 
 \begin{align}
-\widehat{\theta}_{{\text{\tiny{\text{MV}}}}}=\arg\max_{\vec{\theta \in \Theta}} L(\theta \mid \vec{X}=\vec{x}),
+\widehat{\theta}_{{\text{\tiny{\text{MV}}}}}=\arg\max_{\vec{\theta} \in \Theta} L(\theta \mid \vec{X}=\vec{x}),
 \end{align}
 siendo $L(\theta \mid \vec{X}=\vec{x})$ la función de verosimilitud, que es la función de densidad conjunta del vector aleatorio $\vec{X}$ mirada como función del vector de parámetros $\theta$, sabiendo que salió la muestra $\vec{x}$.
 \end{definition}
-Este estimador tiene muy buenas propiedades asintóticas, como se presenta en \citet{Casela2002}, además de ser consistente es asintóticamente normal y eficiente bajo ciertas condiciones de regularidad.
+Este estimador tiene muy buenas propiedades asintóticas, éstas se pueden encontrar en  \citet{Casela2002}. Además de ser consistente este estimador es asintóticamente normal y eficiente bajo ciertas condiciones de regularidad.
 
 
 El parámetro $\gamma$ en la distribución $\mathcal{G}_I^0$  es proporcional al brillo y es un parámetro de escala. Con el fin de reducir nuestro análisis a un solo parámetro, y con el propósito de hacer los resultados comparables, basamos nuestro análisis en la condición $E(Z)=1$ que vincula la textura con el brillo. Esta condición nos da una relación entre $\gamma$ y $\alpha$ que es la siguiente:
@@ -176,7 +176,7 @@ Si llamamos $\psi_X=\log(\phi_X)$, los cumulantes de orden $k$ se definen como
       Manteniendo la analogía con las estadísticas de primer tipo, \citet{nicolas2002} definen la \textit{Segunda función característica de segundo tipo} como
       \begin{align}
       \label{Sgunda Psi}
-      \Psi_X(s)=\log(\Phi)(s)\cdot
+      \Psi_X(s)=\log(\Phi_X)(s)\cdot
       \end{align}
       
 \item Cumulantes de segundo tipo.
@@ -292,7 +292,7 @@ El ISE es una variable aleatoria que depende del núcleo utilizado, del tamaño 
 
 En general los estimadores $\widehat{f}_{\tiny \text {S}_n}$ tienen un buen comportamiento cuando la función de densidad está definida en toda la recta real. Pero cuando la función de densidad tiene soporte acotado o semiacotado inferiormente este estimador presenta sesgo especialmente cerca del borde del soporte. Esto se debe a que estos estimadores asignan probabilidad fuera del soporte de la distribución.
 
-Diferentes alternativas se han propuesto para resolver el problema del sesgo en el borde utilizando núcleos simétricos, alguna de ellas pueden dar estimaciones negativas de la función de densidad. Entre estas alternativas se encuentran los métodos de reflexión, de renormalización y los núcleos acotados entre otras. Una descripción de estos métodos se pueden encontrar en \citet{Jones1993}.
+Diferentes alternativas se han propuesto para resolver el problema del sesgo en el borde utilizando núcleos simétricos, alguna de ellas pueden dar estimaciones negativas de la función de densidad. Entre estas alternativas se encuentran los métodos de reflexión, de renormalización y los núcleos acotados entre otras. Una descripción de estos métodos se puede encontrar en \citet{Jones1993}.
 
 
 Otra forma de encarar el problema del sesgo en el borde es la utilización de núcleos asimétricos. \citet{Brown1999} y \citet{chen1999} propusieron los núcleos Beta, \citet{chensx2000} los núcleos Gamma ($\Gamma$),  \citet{Scaillet2004} el Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG), \citet{Jin2003} el núcleo Lognormal (LN) y Birnbaum-Saunders. Todos estos núcleos tienen soporte en $[0,+\infty)$, no asignan peso fuera del soporte de la distribución y alcanzan una tasa de convergencia en el sentido del error cuadrático medio integrado de $n^{-4/5}.$ Además, de acuerdo a \citet{Scaillet2004}  los núcleos $\Gamma$, IG y RIG son libres de sesgo en el borde en el sentido que el sesgo es un $O(b)$, mientras que, como se indica en \citet{Libnegue2013} el sesgo correspondiente al núcleo LN es un $O(b^2)$.
@@ -302,7 +302,7 @@ Observemos que la expresión~\ref{KS} correspondiente al estimador $\widehat{f}_
 \label{DefNucleosSim}
 \widehat{f}_{\text{\tiny S}_n}(x)=\dfrac{1}{n} \sum_{i=1}^n K_{(x,b)} (X_i),
 \end{align}
-donde $K_{(x,b)}(\cdot) =\dfrac{1}{b} K\left(\dfrac{x-\cdot}{b}\right)$. Como se indica en \citet{Hirukawa2018} esta expresión se puede generalizar considerando el caso donde el núcleo $K_{(x,b)}$ es una función asimétrica y su forma puede variar de acuerdo a la posición de $x$. En \citet{Silverman1986} se menciona la posibilidad de utilizar las funciones de densidad $\Gamma$ y Lognormal como núcleos cuando la función de densidad a estimar es asimétrica a derecha y tiene soporte positivo. 
+donde $K_{(x,b)}(\cdot) =\dfrac{1}{b} K\left(\dfrac{x-\cdot}{b}\right)$. Como se indica en \citet{Hirukawa2018} esta expresión se puede generalizar considerando el caso donde el núcleo $K_{(x,b)}$ es una función asimétrica y su forma puede variar de acuerdo a la posición de $x$. \citet{Silverman1986} menciona la posibilidad de utilizar las funciones de densidad $\Gamma$ y Lognormal como núcleos cuando la función de densidad a estimar es asimétrica a derecha y tiene soporte positivo. 
 
 Entonces, los núcleos asimétricos se definen como:
 
@@ -525,7 +525,7 @@ En la figura~\ref{LSCVgraf} se puede ver la función de cross validación LSCV e
 
 \subsubsection{Convergencia}
 
-Es interesante contar con resultados de convergencia de un estimador para medir la calidad del mismo. En \citet{Libnegue2013} el autor presenta propiedades asintóticas del estimador $\widehat{f}_n$ de $f$, donde $\widehat{f}_n$ es el estimador de núcleos asimétricos dado en la definición~\ref{DefNucleo}. De acuerdo a los trabajos de \citet{Libnegue2013,kokonendji2018} se consideran los núcleos que verifican las condiciones: 
+Es interesante contar con resultados de convergencia de un estimador para medir la calidad del mismo. \citet{Libnegue2013} presenta propiedades asintóticas del estimador $\widehat{f}_n$ de $f$, donde $\widehat{f}_n$ es el estimador de núcleos asimétricos dado en la definición~\ref{DefNucleo}. De acuerdo a los trabajos de \citet{Libnegue2013,kokonendji2018} se consideran los núcleos que verifican las condiciones: 
 \begin{align}
 \label{CondNucleos}
 \begin{split}
@@ -662,7 +662,7 @@ Si se considera un conjunto de condiciones más fuertes sobre el ancho de banda 
 
 \end{itemize}
 
-En \citet{Libnegue2013} se muestra que la condición~\ref{cond_c1} se cumple para $r_1=1$ en el caso del núcleo $\Gamma^1$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.
+\citet{Libnegue2013} muestra que la condición~\ref{cond_c1} se cumple para $r_1=1$ en el caso del núcleo $\Gamma^1$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.
 
 El resultado~\ref{L1fuerte} es esencial para demostrar la consistencia fuerte del estimador de mínima distancia para el parámetro de textura $\alpha$ de la distribución $\mathcal{G}_I^0$ como veremos en sección~\ref{MDE}.
 
@@ -735,7 +735,7 @@ El resultado~\ref{L1fuerte} es esencial para demostrar la consistencia fuerte de
 
 Al momento de proponer un modelo estadístico es importante contar con una medida apropiada que indique la diferencia entre el modelo teórico y los datos muestrales. Si nos basamos en la información muestral existen medidas que vinculan la función de distribución empírica y el modelo teórico, y otras que miden la discrepancia entre una estimación no paramétrica de la función de densidad subyacente y la función de densidad que proviene del modelo utilizado. En esta tesis se trabajará con esta última propuesta.
 
-Es conocido el aporte que realizó Claude E. Shannon a la creaci\'on de lo que se conoce como \textit{Teoría de la Información}. En \citet{Shannon1948} el autor propone una nueva manera de medir la transmisi\'on de informaci\'on a trav\'es de un canal, pensando a la informci\'on como un concepto estad\'istico. Propone como medida de informaci\'on o de desorden a lo que se conoce como entrop\'ia de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entrop\'ia de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log(p_i)$. Para el caso continuo se define $H(X)=\int_{-\infty}^{\infty} f_X(x) \log(f_X(x))$ donde f es la función de densidad de la variable aleatoria $X$.
+Es conocido el aporte que realizó Claude E. Shannon a la creaci\'on de lo que se conoce como \textit{Teoría de la Información}. \citet{Shannon1948} propone una nueva manera de medir la transmisi\'on de informaci\'on a trav\'es de un canal, pensando a la informci\'on como un concepto estad\'istico. Propone como medida de informaci\'on o de desorden a lo que se conoce como entrop\'ia de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entrop\'ia de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log(p_i)$. Para el caso continuo se define $H(X)=-\int_{-\infty}^{\infty} f_X(x) \log(f_X(x))$ donde f es la función de densidad de la variable aleatoria $X$.
 
  \citet{KullbackLeibler1951} (KL) estaban interesados en proponer una medida que discrimine dos poblaciones, considerando una cantidad que involucre medidas de informaci\'on. Su inter\'es era definir una magnitud que indique la diferencia entre dos funciones de distribuci\'on pensando en una generalizaci\'on de la entrop\'ia de Shannon. Si $p(x)$ y $q(x)$ son dos funciones de probabilidad puntual con el mismo soporte $\Omega$, la KL divergencia se define como $d_{\text{\tiny{KL}}}(p \rVert q)=-\sum_{x \in \Omega} p(x) \log \dfrac{q(x)}{p(x)}=\sum_{x \in \Omega} p(x) \log\dfrac{p(x)}{q(x)}$. 
 
@@ -761,6 +761,8 @@ Muchas de las medidas utilizadas que se basan en determinar diferencias entre un
 Es decir, son medidas que no cumplen la propiedad~\ref{simetrica} ni~\ref{DesigTriang} , pero sí cumplen las propiedades ~\ref{positiva} y~\ref{igual0}. Si la medida de discrepancia cumple solamente las propiedades~\ref{positiva} y~\ref{igual0} la llamaremos divergencia. Si además cumple la propiedad~\ref{simetrica} de simetría la llamaremos distancia estocástica. 
 
  \citet{Salicru1994} propusieron una familia de medidas de divergencia, llamadas $(h,\phi) \text{-} divergencias$ que incluyen a la KL divergencia, a las $\phi \text{-} divergencias$ presentadas por \citet{Csiszar1967} y a las generalizaciones de las $J \text{-} divergencias$ y $R \text{-} divergencias$ que fueron definidas por \citet{Taneja1989} entre otras. Algunas de las medidas que se trabajan en esta tesis son $\phi$ divergencias y otras  $(h,\phi) \text{-} divergencias$. Por eso daremos la definición de ambas.
+
+En el análisis de imágenes SAR, \citet{Nascimento2009} estudiaron estas medidas en el contexto de abordar el problema de cuantificar cuán distinguibles son dos regiones de una imagen entre sí.
 
 \begin{definition}[$\phi \text{-} divergencias$]
 	\label{fiDivergencia}
@@ -831,9 +833,9 @@ Cabe realizar algunas observaciones:
 
 Se han encontrado muchas aplicaciones de estas medidas de divergencia, entre ellas se pueden citar los trabajos de \citet{Aviyente2007} que aplican estas medidas al procesamiento de imágenes medicas, y los trabajos de \citet{ClassificationPolSARSegmentsMinimizationWishartDistances} y \citet{EdgeDetectionDistancesEntropiesJSTARS} en detección automática de regiones en imágenes SAR. 
 
-Cabe señalar que muchos autores han encontrado cotas superiores e inferiores que vinculan la distancia triangular con otras medidas de divergencia que se encuentran en la clase de las $\phi \text{-} divergencias$, especialmente para el caso discreto. Particularmente esto es útil ya que contribuye a obtener resultados de convergencia entre distintas divergencias. En \citet{Dragomir2002} el autor encuentra cotas superiores e inferiores para las $\phi \text{-} divergencias$ en términos de la KL divergencia. \citet{JainSrivastava2007} también encuentran cotas que vinculan a la distancia triangular con las discrepancias Jensen – Shannon, Simétrica Chi-square, Aritmética entre otras. \citet{Taneja2006} estudió nuevas cotas entre la discriminación triangular (distancia triangular para el caso discreto) y la media armónica y la simétrica Chi-square divergencia.
+Cabe señalar que muchos autores han encontrado cotas superiores e inferiores que vinculan la distancia triangular con otras medidas de divergencia que se encuentran en la clase de las $\phi \text{-} divergencias$, especialmente para el caso discreto. Particularmente esto es útil ya que contribuye a obtener resultados de convergencia entre distintas divergencias. \citet{Dragomir2002} encuentra cotas superiores e inferiores para las $\phi \text{-} divergencias$ en términos de la KL divergencia. \citet{JainSrivastava2007} también encuentran cotas que vinculan a la distancia triangular con las discrepancias Jensen – Shannon, Simétrica Chi-square, Aritmética entre otras. \citet{Taneja2006} estudió nuevas cotas entre la discriminación triangular (distancia triangular para el caso discreto) y la media armónica y la simétrica Chi-square divergencia.
 
-En \citet{APSAR2013ParameterEstimationStochasticDistances} se estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de Máxima Verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
+\citet{APSAR2013ParameterEstimationStochasticDistances} estudiaron estas divergencias o distancias estocásticas en el contexto de proponer un nuevo estimador para $\alpha$, el parámetro de textura para el modelo $\mathcal{G}_I^0$, a través de la minimización de la distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente. En ese trabajo se analizaron las distancias estocásticas de Hellinger, Bhattacharyya, R\'enyi and Triangular y se compararon con el estimador de Máxima Verosimilitud de $\alpha$ mostrando evidencia que la distancia triangular era una buena elección para este problema. Por este motivo nos focalizaremos en estudiar la distancia triangular en particular. En lo siguiente definiremos la distancia triangular generalizada y veremos que es una métrica en el sentido que cumple con las condiciones~(\ref{metrica}). Probaremos algunos resultados que nos serán útiles al momento de estudiar la convergencia del estimador propuesto en esta tesis.
 
 \subsection{Distancia triangular generalizada}
 

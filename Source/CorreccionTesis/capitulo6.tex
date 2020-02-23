@@ -101,7 +101,7 @@ Las figuras~\ref{DistL1},~\ref{DistL3} y~\ref{DistL8} muestran los gráficos de 
 
 En estos gráficos se puede observar que, cuanto menor es el valor de $\alpha_0$ la curva se hace más plana. Por este motivo los métodos de optimización resultan más inestables y el mínimo es más difícil de encontrar en forma precisa. Se puede observar también que, a medida que aumenta el valor de $L$, esta situación se revierte y es posible encontrar el mínimo de una forma más eficiente. Recordemos que el número de looks representa la relación señal ruido, por lo tanto, cuanto mayor es el número de looks menor ruido presenta la imagen siendo $L=1$ el caso de mayor ruido. Se puede observar también que la distancia de Hellinger es la que resulta más plana en un entorno del mínimo, y que las distancias de Rényi y Triangular tienen un comportamiento similar.
 
-Siguiendo en la búsqueda de la mejor distancia se realizaron simulaciones Monte Carlo para elegir la distancia estocástica que mejor performance tiene a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$. En \citet{cassettiast2013} se evaluaron dichas distancias estimando el parámetro de textura y  comparando la calidad de estos estimadores con el MV estimador en términos del sesgo y del error cuadrático medio. 
+Siguiendo en la búsqueda de la mejor distancia se realizaron simulaciones Monte Carlo para elegir la distancia estocástica que mejor performance tiene a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}_I^0$. \citet{cassettiast2013} evaluaron dichas distancias estimando el parámetro de textura y  comparando la calidad de estos estimadores con el MV estimador en términos del sesgo y del error cuadrático medio. 
 
 Se realizaron $1000$ replicaciones del experimento que consiste en generar muestras $Z_1, Z_2,\ldots,Z_n$ de variables aleatorias independientes e idénticamente distribuidas donde $Z_i \sim f_{\mathcal{G}_I^0(\alpha,\gamma^*,L)}$ donde el espacio paramétrico está formado por:
 
@@ -164,7 +164,7 @@ Para el caso de $L=3$ y $L=8$ vemos que, en algunos casos el $\widehat{\alpha}_{
 	\caption{\small $\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$8$.}
 \end{figure}
 
-En \citet{APSAR2013ParameterEstimationStochasticDistances} se aplicó la metodología anterior a una imagen SAR real. En este caso se utilizó una imagen E-SAR ( \citet{Horn1996}) de un look de los alrededores de Munich, banda L, polarización HH, con $L=1$ en formato intensidad.
+\citet{APSAR2013ParameterEstimationStochasticDistances} aplicaron la metodología anterior a una imagen SAR real. En este caso se utilizó una imagen E-SAR (\citet{Horn1996}) de un look de los alrededores de Munich, banda L, polarización HH, con $L=1$ en formato intensidad.
 E-SAR es un sistema formado por sensores y algoritmos de procesamiento de señales desarrollado, entre otras instituciones, por el centro aeroespacial Deutsches Zentrum für Luft- und Raumfahrt German (DLR), un centro de investigación cuya área principal es la teledetección por microondas.  Este centro utiliza, mayoritariamente, sistemas de radar de apertura sintética (SAR) tanto en plataformas espaciales como aerotransportadas. El compromiso de la institución en los proyectos internacionales ERS-1 y SIR-100 / X-SAR dio origen a los conocidos sistemas aerotransportados SAR y E-SAR. 
 %E-SAR opera en las bandas de frecuencia 4, x, C-, L- y P-banda, por lo tanto, cubre un rango de longitudes de onda de 3 a 85 cm. La polarización de la señal de radar es seleccionable, horizontal así como vertical. El modo polarimétrico se conmuta de impulso a impulso en la polarización (HH-HV-W-VH) -secuencia.
 
@@ -218,7 +218,7 @@ Los estimadores por momentos fraccionales han sido usados por \citet{Frery97,Gam
 \end{equation}
 donde $Z_1,\ldots,Z_n$ es una muestra de variables aleatorias i.i.d proveniente del modelo $\mathcal{G}_I^0$.
 
-En el capítulo~\ref{metodologia} se indicó que $\widehat{\alpha}_\text{MV}$ y $\widehat{\alpha}_\text{LC}$ son soluciones de las ecuaciones~\eqref{rootML} y~\ref{eq:logm} respectivamente.
+En el capítulo~\ref{metodologia} se indicó que $\widehat{\alpha}_\text{MV}$ y $\widehat{\alpha}_\text{LC}$ son soluciones de las ecuaciones~\eqref{rootML} y~\eqref{eq:logm} respectivamente.
 
 %En el modelo modelo multiplicativo para el retorno $Z=X \cdot Y$ con datos monopolarizados presentado en la sección XXX, la variable $Y$ que modela el ruido speckle obedece a una distribución $\Gamma(L,L)$, donde $L$ es el número de looks. La retrodisperción $X$ está modelada por una distribución Inversa Gaussiana Generalizada $\mathcal{N}^{-1}( \alpha ,\lambda ,\gamma )$ \citet{Frery97} donde,  para valores particulares de sus parámetros, se obtienen las distribuciones $\Gamma ( \alpha ,\lambda ) $,  $\Gamma ^{-1}( \alpha ,\gamma ) $ e $IG( \gamma ,\lambda ) $ (Gaussiana Inversa) originando que $Z$ esté modelado por las distribuciones $\mathcal{K}$, $\mathcal{G}_I^{0}$ y $\mathcal{G}^{H}$ respectivamente. La distribución $\mathcal{G}^{H}$ fue propuesta en \citet{harmoniceusar2000} y describe datos  polarimétricos con bastante precisión, aunque
 %también se utiliza para imágenes monopolarizadas.
