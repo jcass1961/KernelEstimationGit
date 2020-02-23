@@ -4,7 +4,7 @@
 %% Recuerda que aqu'i ya puedes escribir acentos como: 'a, 'e, 'i, etc.
 %% La letra n con tilde es: 'n.
 
-\chapter{Modelo $\mathcal{G}^0$}
+\chapter{El Modelo $\mathcal{G}^0$}
 \label{modeloG0}
 
 Las imágenes adquiridas por radares de apertura sintética SAR han encontrado muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que este tipo de imágenes resulten cada vez más populares.
@@ -33,17 +33,21 @@ Este modelo considera que el valor observado en cada celda de la imagen es una v
 %\end{figure} 
 %En esta figura se puede observar que la naturaleza multiplicativa del ruido speckle se manifiesta en la recta que pasa por el origen producto del ajuste lineal que se realizó al conjunto de datos. De acuerdo a Lee y Pottier \citet{Lee2009} los valores de las pendiendes para $1$-look y $4$-look son $0.54$ y $0.26$ respectivamente, que son razonablemente cercanos a los valores teóricos $0.5227$ y $0.261$ respectivamente.
 
-Se han utilizado algunos distribuciones estadísticas para modelar los datos SAR, \citet{Lee2009} presentan la distribución Lognormal, la Weibull y la distribución $\mathcal{K}$. 
+Se han utilizado algunos distribuciones estadísticas para modelar los datos SAR.
+\citeauthor{Gao2010}, en su artículo de \textit{survey} de \citeyear{Gao2010}, afirma que
+\begin{quote}
+After 1997, papers on SAR statistical modeling have appeared in renowned journals almost every year. The most attractive achievement among them is the statistical modeling on extremely heterogeneous region of SAR images proposed by Frery, who works in Brazil and has introduced the original idea that for the purpose of statistical modeling, SAR images can be divided into homogeneous regions, heterogeneous regions and extremely heterogeneous regions, according to their contents.
+\end{quote}
 
 \citet{Frery97} indican que un modelo común para datos que provienen de zonas homogéneas y con mucha presencia de ruido speckle son la distribución exponencial y la Rayleigh. En cambio las distribuciones $\mathcal{K}$ que presentan \citet{Jakeman87} han sido muy utilizada en datos SAR especialmente cuando los datos provienen de áreas texturadas. 
 
- \citet{Frery97} y \citet{Frery99} presentan la familia de distribuciones $\mathcal{G}$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A$ y $\mathcal{G}_I$ respectivamente. Es un modelo más general porque distribuciones clásicas, como $\mathcal{K}$, son casos particulares de esta nueva familia de distribuciones.
+ \citet{Frery97,Frery99} presentan la familia de distribuciones $\mathcal{G}$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A$ y $\mathcal{G}_I$ respectivamente. Es un modelo más general porque distribuciones clásicas, como $\mathcal{K}$, son casos particulares de esta nueva familia de distribuciones.
 
 Como caso particular de esta clase de distribuciones está la familia $\mathcal{G}^0$ que tiene tantos parámetros como la distribución $\mathcal{K}$ y es capaz de modelar zonas extremadamente rugosas, como las zonas urbanas, mejor que esta útlima distribución como lo indica \citet{Mejail99}. 
 
 La familia de distribuciones $\mathcal{G}^0$ está indexadas por tres parámetros: $\alpha$ que está relacionado con la textura del terreno, el parámetro $\gamma$ considerado un parámetro de escala e informa sobre el brillo de la imagen y el parámetro $L$ que es el número de looks. Este último parámetro da información sobre la relación señal-ruido de la imagen, cuanto mayor es el número de looks menor presencia de ruido speckle se encuentra en la imagen, a expensas de una pérdida en la resolución. Esta familia también modela datos en formato amplitud como en intensidad generando la familia de distribuciones $\mathcal{G}_A^0$ como lo indican \citet{Frery97}, y la familia de distribuciones $\mathcal{G}_I^0$ de acuerdo a \citet{Frery97,Frery99} respectivamente. En esta tesis se trabajará con datos dados en formato intensidad.
 
-En este capítulo se presenta el modelo multiplicativo junto con la distribución $\mathcal{G}_I^0$ y la relación con otras distribuciones. Asimismo se presentan resultados teóricos producto de esta tesis, donde se muestra la capacidad que tiene esta distribución de generar valores atípicos, y resultados de convergencia uniforme de la distribución $\mathcal{G}_I^0$ cuando el parámetro de textura $\alpha \longrightarrow -1$ y cuando $\alpha \longrightarrow -\infty$.
+En este capítulo se presenta el modelo multiplicativo junto con la distribución $\mathcal{G}_I^0$ y la relación con otras distribuciones. Asimismo se presentan resultados teóricos producto de esta tesis, donde se muestra la capacidad que tiene esta distribución de generar valores atípicos, y resultados de convergencia uniforme de la distribución $\mathcal{G}_I^0$ cuando el parámetro de textura $\alpha \rightarrow -1$ y cuando $\alpha \rightarrow -\infty$.
 
 %\begin{figure}[hbt]
 %	\centering    
@@ -54,20 +58,21 @@ En este capítulo se presenta el modelo multiplicativo junto con la distribució
 \section{Modelo Multiplicativo}
 \label{ModeloMultiplicativo}
 
-Una aproximación para comprender la distribución de los datos SAR es proponer modelos que ajusten razonablemente bien a ellos. Algunas distribuciones conocidas como la Exponencial, Gamma, Lognormal, Rayleig, Weibull entre otras, fueron propuestas como "modelos empíricos"  para describir a los datos SAR. En \citet{FreryLibro2019}, \citet{oliverquegan98}, \citet{Yanasse93} y \citet{Lee2009} se pueden ver referencias a estos modelos. La pertinencia de estas distribuciones depende del formato de los datos (amplitud, intensidad, complejo, etc.), el número de looks y el grado de homogeneidad de la zona bajo estudio.
+Una aproximación para comprender la distribución de los datos SAR es proponer modelos que ajusten razonablemente bien a ellos. Algunas distribuciones conocidas como la Exponencial, Gamma, Lognormal, Rayleig, Weibull entre otras, fueron propuestas como ``modelos empíricos'' para describir a los datos SAR. 
+Se pueden ver detalles y referencias a estos modelos en los trabajos de \citet{FreryLibro2019}, \citet{oliverquegan98}, \citet{Yanasse93} y \citet{Lee2009}. 
+La pertinencia de estas distribuciones depende del formato de los datos (amplitud, intensidad, complejo, etc.), el número de looks y el grado de homogeneidad de la zona bajo estudio.
 
 %
 %Muchas distribuciones univariadas han sido propuestas para modelar el retorno $Z$ conocidas como "modelos empíricos". Dentro de estas distribuciones se encuentran la distribución Exponential, Gamma, Lognormal, Weibull entre otras \citet{FreryLibro2019,Gao2010}. La pertinencia de estas distribuciones depende del formato de los datos (amplitud, intensidad, complejo, etc.), el número de looks y el grado de homogeneidad de la zona bajo estudio.
 
 %Una aproximación para comprender la distribución de los datos SAR es proponer modelos que ajusten razonablemente bien a estos datos. Alguna distribuciones conocidas como la Lognormal \citet{oliverquegan98}, Rayleig, Weibull \citet{Lee2009} fueron propuestas como "modelos empíricos" para describir este tipo de datos. Todas estas distribuciones fueron estudiadas en \citet{Yanasse93,Lee2009} entre otros autores.
 
- \citet{Lee2009} explican la naturaleza multiplicativa del ruido speckle utilizando el modelo Rayleigh para $1$-look con datos en formato amplitud en zonas homogéneas. Ellos realizaron un scatter plot del desvío standard muestral respecto de la media muestral en muchas zonas homogéneas en una imagen SAR. Para el caso de $n$ muestras provenientes de una imagen de $1$-look utilizan en modelo Rayleigh. En el caso de muestras de $4$-looks modelan con la distribución $\chi$ con $2n$ grados de libertad.
+ \citet{Lee2009} explican la naturaleza multiplicativa del ruido speckle utilizando el modelo Rayleigh para $1$-look con datos en formato amplitud en zonas homogéneas. Ellos realizaron un scatter plot del desvío standard muestral respecto de la media muestral en muchas zonas homogéneas en una imagen SAR. Para el caso de $n$ muestras provenientes de una imagen de $1$-look utilizan en modelo Rayleigh. En el caso de muestras de $4$-looks modelan con la distribución $\chi^2$ con $2n$ grados de libertad.
 
 Si se supone una retrodispersión constante $C$ en zonas homogéneas, el retorno queda modelado por $Z=C \cdot Y$ bajo el modelo multiplicativo. Entonces, calculando la esperanza y el desvío de $Z$ se obtiene
-
 \begin{align}
-E(Z)&=C \, E(Y)\label{esperanza}\\
-SD(Z)&=C \cdot SD(Y)\label{desvio}
+E(Z)&=C \, E(Y),\label{esperanza}\\
+SD(Z)&=C \cdot SD(Y).\label{desvio}
 \end{align} 
 
 %\begin{align}
@@ -76,9 +81,9 @@ SD(Z)&=C \cdot SD(Y)\label{desvio}
 %\end{align} 
 Despejando $C$ de~\eqref{esperanza} y reemplanzando en~\eqref{desvio} se obtiene que
 \begin{align}
-SD(Z)&= \dfrac{SD(Y)}{E(Y)} \, E(Z)
+SD(Z)&= \dfrac{SD(Y)}{E(Y)} \, E(Z).
 \end{align} 
-En la figura~\ref{ModeloMultiplicativo} tomada de \citet{Lee2009} se muestra el \textit{scatter plot} basado en datos tomados por el radar SIR-B (Spaceborne Imaging Radar), un sensor SAR que opera en banda $C$ y $X$. Se tomaron $16$ y $25$ muestras de zonas homogéneas para el caso de $1$-look y $4$-looks respectivamente. En cada muestra se calculó $\overline{}$ la media muestral y $SD$ el desvío muestral y se grafica $SD$ vs. $\overline{Z}.$
+En la figura~\ref{ModeloMultiplicativo}, tomada de \citet{Lee2009}, se muestra el \textit{scatter plot} basado en datos tomados por el radar SIR-B (Spaceborne Imaging Radar), un sensor SAR que opera en banda $C$ y $X$. Se tomaron $16$ y $25$ muestras de zonas homogéneas para el caso de $1$-look y $4$-looks respectivamente. En cada muestra se calculó $\overline{}$ la media muestral y $SD$ el desvío muestral y se grafica $SD$ vs. $\overline{Z}.$
 
 \begin{figure}
 \centering
@@ -96,11 +101,15 @@ Por este motivo en este tesis se utilizará el modelo multiplicativo para modela
 
 El modelo multiplicativo considerado es el siguiente:
 \begin{equation*}
-Z=X \cdot Y  
+Z=X \cdot Y  ,
 \end{equation*}
-donde $X$ e $Y$ corresponden a la retrodispersión e $Y$ corresponde al ruido speckle, respectivamente.
+donde $X$ e $Y$ corresponden a la retrodispersión y al ruido speckle, respectivamente.
 
-En esta tesis se consideran imágenes monopolarimétricas, una banda y una polarización en formato intensidad. Daremos modelos para el speckle, la retrodispersión y finalmente para el retorno bajo el modelo multiplicativo.
+En esta tesis se consideran imágenes monopolarimétricas, una banda y una polarización en formato intensidad. 
+Daremos modelos para el speckle, la retrodispersión y finalmente para el retorno bajo el modelo multiplicativo.
+
+Sólo consideraremos el problema de analizar datos provenientes de variables aleatorias independientes.
+El trabajo de \citet{AGeneralizedGaussianCoherentScattererModelforCorrelatedSARTexture} presenta modelos para describir diferentes estructuras de correlación.
 
 
 \section{Modelo para el Ruido Speckle}
@@ -113,7 +122,7 @@ De acuerdo a la ecuación~\eqref{RetornoComplejo} el retorno $S$ es un número c
 	\item retrodispersores con tamaño menor que la longitud de onda,
 	\item amplitudes $A_j$ de los dispersores elementales independientes y positivas,
 	\item ningún retrodispersor dominante, 
-	\item fases $\phi_i$ independientes e igualmente distribuidas con distribución uniforme en $[-\pi,\pi]$,
+	\item fases $\phi_i$ independientes e igualmente distribuidas con distribución uniforme en $(-\pi,\pi]$,
 \end{itemize}   
 se puede probar que $S_{\text{R}} \sim N(0,\sigma^2/2)$ y $S_{\text{Im}} \sim N(0,\sigma^2/2)$. Entonces
 \begin{align}
@@ -124,8 +133,8 @@ donde $\sigma^2$ es la intensidad media del retorno.
 
 Cabe señalar que en esta tesis se van a considerar las siguientes parametrizaciones para las distribuciones $Exp(\lambda)$ y $\Gamma(\alpha,\beta)$. Sean $T \sim Exp(\lambda)$ y $W \sim \Gamma(\alpha,\beta)$ entonces las funciones de densidad $f_{\text{T}}$ y $f_{\text{W}}$ están dadas por
 \begin{align}
-f_{\text{T}}(t)&=\lambda e^{-\lambda t}\label{DistExponencial}\\
-f_{\text{w}}(t)&=\dfrac{\beta^{\alpha}}{\Gamma(\alpha)} t^{\alpha-1} e^{-\beta \, t}\label{DistGamma}
+f_{\text{T}}(t)&=\lambda e^{-\lambda t}, \text{ y}\label{DistExponencial}\\
+f_{\text{w}}(t)&=\dfrac{\beta^{\alpha}}{\Gamma(\alpha)} t^{\alpha-1} e^{-\beta \, t}.\label{DistGamma}
 \end{align}
 respectivamente.  
 
@@ -141,23 +150,26 @@ Entonces, por~\eqref{DistRetornoExp} y utilizando propiedades de la distribució
 Z=\sigma^2 \, Y \text{ con } Y \sim \Gamma(L,L).
 \end{align}
 
-La pregunta que nos podemos hacer es ¿tiene sentido considerar un retrodispersor constante? Y, obviamente, la respuesta es no. Dependiendo cómo se modele a $X$ surgen distintas familas de distribuciones para modelar el retorno.
+La pregunta que nos podemos hacer es ¿tiene sentido considerar un retrodispersor constante? Y, obviamente, la respuesta es ``no siempre''. 
+Dependiendo cómo se modele a $X$ surgen distintas familas de distribuciones para modelar el retorno.
 
 Si $X \sim \Gamma(\alpha,\lambda)$ entonces $Z \sim \mathcal{K}(\alpha,\lambda,L)$, donde la función de densidad está dada por
 \begin{align}
 f_{\text{Z}}(z)&=\frac{2 z^{\frac{1}{2} (L+\alpha-2 )} (L \lambda )^{\frac{L+\alpha }{2}} K_{\alpha -L}\left(2 \sqrt{L x
 		\lambda }\right)}{\Gamma (L) \Gamma (\alpha )}.
 \end{align}
- Esta familia de distribuciones fueron propuestas por \citet{Jakeman87} y ha sido un modelo ampliamente utilizado, pero no modela en forma adecuada datos que provienen de zonas extremadamente heterogéneas como son las áreas urbanas como lo indicaron en \citet{Frery97}.
+Esta familia de distribuciones fue propuesta por \citet{Jakeman87} y ha sido un modelo ampliamente utilizado, pero no modela en forma adecuada datos que provienen de zonas extremadamente heterogéneas como son las áreas urbanas como lo indicaron en \citet{Frery97}.
 
- \citet{Frery99} propusieron un nuevo modelo para la retrodispersión, dando origen a una nueva familia de distribuciones que modelan muy bien datos provenientes de zonas extremadamente heterogéneas mejor que la familia $\mathcal{K}$. Esta familia de distribuciones se llama $\mathcal{G}$ y fueron ampliamente aplicadas por  \citet{gambini2015} y \citet{Nascimento2009} en imágenes monopolarimétricas. \citet{Freitas2005} y \citet{Palacio2019} utilizaron esta familia de distribuciones en imágenes polarimétricas.
+\citet{Frery97} propusieron un nuevo modelo para la retrodispersión, dando origen a una nueva familia de distribuciones que modelan muy bien datos provenientes de zonas extremadamente heterogéneas, mejor que la familia $\mathcal{K}$. 
+Esta familia de distribuciones se denominó $\mathcal{G}$ y fue ampliamente aplicadas por \citet{gambini2015} y \citet{Nascimento2009} en imágenes monopolarimétricas. 
+\citet{Freitas2005} y \citet{Palacio2019} utilizaron esta familia de distribuciones en imágenes polarimétricas.
 
 \section{Modelo para la Retrodispersión}
 \label{ModeloBackscatter}
 
 El grado de homogeneidad de un área de la imagen está modelado por la retrodispersión. Por este motivo es importante encontrar un modelo que sea lo más general posible, para que pueda explicar los diferentes grados de textura que tiene una imagen.
 
- \citet{Frery99} consideraron un modelo general para la retrodispersión que tiene como casos especiales modelos más simples que permiten explicar las diferentes texturas que puede tener un determinado área. En general, estas texturas se indican como: áreas homogéneas (pastura), heterogéneas (bosque) y extremadamente heterogéneas (áreas urbanas). Estos modelos simples tienen la ventaja de tener menos parámetros para estimar.
+\citet{Frery97} consideraron un modelo general para la retrodispersión que tiene como casos especiales modelos más simples que permiten explicar las diferentes texturas que puede tener un determinado área. En general, estas texturas se indican como: áreas homogéneas (pastura), heterogéneas (bosque) y extremadamente heterogéneas (áreas urbanas). Estos modelos simples tienen la ventaja de tener menos parámetros para estimar.
 
 El modelo que proponen en \citet{Frery99} para la retrodispersión en el caso de datos de intensidad es una distribución Gaussiana Inversa Generalizada con parámetros $\alpha$, $\gamma$ y $\lambda$. En este caso decimos que  $X\sim N^{-1}(\alpha,\gamma,\lambda)$ cuya función de densidad viene dada por
 \begin{align}
@@ -236,9 +248,9 @@ Este comportamiento asintótico muestra que tanto retrodispersores homogéneos c
 \section{Modelo para el Retorno}
 \label{Retorno}
 
-De acuerdo a lo visto en las secciones~\ref{ModeloSpeckle} y~\ref{ModeloBackscatter} surge un modelo para la intensidad del retorno para datos multilook a partir del modelo multiplicativo definido en la sección~\ref{ModeloMultiplicativo}.
+De acuerdo a lo visto en las secciones~\ref{ModeloSpeckle} y~\ref{ModeloBackscatter} surge un modelo para la intensidad del retorno para datos multilook a partir del modelo multiplicativo definido en la sección~\ref{ModeloMultiplicativo}:
 \begin{equation*}
-Z=X \cdot Y  
+Z=X \cdot Y  ,
 \end{equation*}
 donde $X$ e $Y$ son variables aleatorias independientes que corresponden a la retrodispersión y al ruido speckle, respectivamente. 
 
@@ -247,11 +259,11 @@ donde $X$ e $Y$ son variables aleatorias independientes que corresponden a la re
 Entonces, el retorno $Z \sim \mathcal{G}_I$ si su función de densidad está dada por
 \begin{align}
 \label{ModeloGI}
-f_{\text{Z}}( z) =\frac{z^{L-1} L^L \sqrt{(\frac{\lambda}{\gamma})^{\alpha}}}{\Gamma(L)\text{K}_{\alpha}(2 \sqrt{\lambda \gamma})} \left(\dfrac{\gamma + Lz}{\lambda}\right)^{(\alpha-L)/2} \text{K}_{\alpha-L}(2\sqrt{\lambda(\gamma+Lz) })
+f_{\text{Z}}( z) =\frac{z^{L-1} L^L \sqrt{(\frac{\lambda}{\gamma})^{\alpha}}}{\Gamma(L)\text{K}_{\alpha}(2 \sqrt{\lambda \gamma})} \left(\dfrac{\gamma + Lz}{\lambda}\right)^{(\alpha-L)/2} \text{K}_{\alpha-L}\Big(2\sqrt{\lambda(\gamma+Lz) }\Big),
 \end{align}
 donde $L\geq 1$ es el número de looks y el espacio paramétrico para $\alpha$, $\gamma$ y $\lambda$ es el mismo que en~\eqref{EspacioParametros}.
 
-Cabe señalar que el número de looks $L$ debería ser, en principio, un número natural por la forma en que fué definido. En general este parámetro es considerado conocido porque viene con la información de la imagen, pero puede ser que no lo sea. En este caso se estima a partir de los datos de la imagen con muestras extraídas de zonas homogéneas y se llama número equivalente de looks (ENL). De acuerdo a \citet{anfinsen2009}, $\widehat{\text{ENL}}={1}/{\widehat{\text{CV}^2}(Z)}$ donde $\widehat{\text{CV}}(Z)={\widehat{\sigma}}/{\widehat\mu}$, con $\widehat{\sigma}$ es el desvío estandar muestral y $\widehat\mu$ la media muestral.
+Cabe señalar que el número de looks $L$ debería ser, en principio, un número natural por la forma en que fue definido. En general este parámetro es considerado conocido porque viene con la información de la imagen, pero puede ser que no lo sea. En este caso se estima a partir de los datos de la imagen con muestras extraídas de zonas homogéneas y se llama número equivalente de looks (ENL). De acuerdo a \citet{anfinsen2009}, $\widehat{\text{ENL}}={1}/{\widehat{\text{CV}^2}(Z)}$ donde $\widehat{\text{CV}}(Z)={\widehat{\sigma}}/{\widehat\mu}$, con $\widehat{\sigma}$ es el desvío estandar muestral y $\widehat\mu$ la media muestral.
 
 \citet{Frery99} obtienen casos particulares de la distribución $\mathcal{G}_I$ dependiendo del comportamiento asintótico de sus parámetros, esto se muestra en la figura~\ref{RelacionGI}.  
 \begin{figure}[hbt]
@@ -262,8 +274,8 @@ Cabe señalar que el número de looks $L$ debería ser, en principio, un número
 
 Se puede observar que, cuando 
 \begin{itemize}
-	\item $\gamma \longrightarrow 0$ y $\alpha,\lambda$ son positivos, $\mathcal{G}_I \stackrel{D}{\longrightarrow}\mathcal{K}(\alpha,\lambda,L)$.
-	\item $\lambda \longrightarrow 0$ y $-\alpha,\gamma$ son positivos, $\mathcal{G}_I\stackrel{D}{\longrightarrow}\mathcal{G}_I^0(\alpha,\gamma,L)$.
+	\item $\gamma \rightarrow 0$ y $\alpha,\lambda$ son positivos, $\mathcal{G}_I \stackrel{D}{\longrightarrow}\mathcal{K}(\alpha,\lambda,L)$.
+	\item $\lambda \rightarrow 0$ y $-\alpha,\gamma$ son positivos, $\mathcal{G}_I\stackrel{D}{\longrightarrow}\mathcal{G}_I^0(\alpha,\gamma,L)$.
 \end{itemize}
 
 Entonces, bajo el modelo multiplicativo, tenemos los siguientes modelos para el retorno que son casos particulares de la distribución $\mathcal{G}_I$. Si el ruido speckle $Y \sim \Gamma(L,L)$ y considerando diferentes modelos para $X$, tenemos las siguientes distribuciones para la intensidad del retorno $Z$.
@@ -287,7 +299,8 @@ Esta familia de distribuciones $\mathcal{G}^H(\gamma,\lambda,L)$ para el retorno
 \section{Modelo $\mathcal{G}_I^0$}
 \label{ModeloGI0}
 
-Diremos que si $Z=X \cdot Y$ con $X \sim \Gamma^{-1}(-\alpha,\gamma)$ e $Y \sim \Gamma(L,L)$ independiente, el retorno $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$. Su función de densidad está dada por 
+Diremos que si $Z=X \cdot Y$ con $X \sim \Gamma^{-1}(-\alpha,\gamma)$ e $Y \sim \Gamma(L,L)$ son independientes, el retorno $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$. 
+Su función de densidad está dada por 
 \begin{equation}
 f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
@@ -332,7 +345,7 @@ Bajo este modelo se pueden caracterizar regiones con diferentes grado de textura
 
 En esta sección se darán nuevos resultados teóricos presentados en \citet{gambini2015}, que muestran que la distribución $\mathcal{G}_I^0$ es una distribución de colas pesadas. Esto explica en parte los problemas que se enfrentan al buscar estimadores de los parámetros de esta distribución.  También se presentan nuevos resultados sobre el comportamiento asintótico de la distribución $\mathcal{G}_I^0$ respectos de sus parámetros, que se necesitarán para demostrar la consistencia del estimador del parámetro de textura $\alpha$ propuesto en esta tesis.
 
-\subsection{$\mathcal{G}_I^0$ distribución de colas pesadas}
+\subsection{La ley $\mathcal{G}_I^0$ es una distribución de colas pesadas}
 \label{colas}
 Siguiendo a \citet{Gre,Jorgensen,Rojo} daremos las siguientes definiciones.
 
@@ -365,7 +378,7 @@ Cuanto menor es el índice de la cola, más propensa es la distribución a produ
 \end{proof}
 Se puede ver que el índice de la cola es una función decreciente de $\alpha$, entonces la distribución $\mathcal G_I^0$ es más propensa a producir valores extremos cuando el parámetro de textura es más grande. Esto va de acuerdo a lo mostrado en la figura~\ref{DensidadGI0L03}.
 
-\subsection{Comportamiento asintótico de la distribución $\mathcal{G}_I^0$.}
+\subsection{Comportamiento asintótico de la distribución $\mathcal{G}_I^0$}
 Estos resultados se probarán considerando el caso $E(Z)=1$ que nos da una relación entre los parámetros de la distribución $\mathcal{G}_I^0$: $\gamma^*=-\alpha-1$. Como el parámetro $\gamma$ es considerado un parámetro de escala, con esta relación logramos que los resultados para diferentes áreas resulten comparables.
  
 En este caso se puede escribir a $f_{\mathcal{G}_I^0}\pa{z}$ en términos de $\gamma$. De esta forma, la función de distribución del modelo $\mathcal{G}_I^0$ bajo esta condición queda:
@@ -407,14 +420,13 @@ f_{\gamma}\pa{z} = \frac{a\pa{L+\gamma}}{a\pa{\gamma}\Gamma\pa{L}}\e^{-L}\pa{1+\
 %	\pa{1+\frac{Lz}{\gamma}}^{-2-\gamma},
 %\end{align*}
 
-De la fórmula de Stirling se obtiene
+De la fórmula de Stirling se obtiene que
 	\begin{align*}
 	% \lim_{\gamma\to+\infty} a\pa{L,\gamma} = 
 	% \al \lim_{\gamma\to+\infty}\frac{\Gamma\pa{L+\gamma+1}\e^{L+\gamma}}{\sqrt{2\pi}\pa{L+\gamma}^{L+\gamma+1/2}} = 1,\\
 	\lim_{\gamma\to+\infty} a\pa{\gamma} = 
 	\al \lim_{\gamma\to+\infty}\frac{\Gamma\pa{\gamma+1}\e^{\gamma}}{\sqrt{2\pi}\gamma^{\gamma+1/2}} = 1,
 	\end{align*}
-	
 entonces
 	\begin{align*}
 	1=\lim_{\gamma\to+\infty} \frac{a\pa{L+\gamma}}{a\pa{\gamma}} = 
@@ -422,12 +434,12 @@ entonces
 	\e^{L}\gamma^{-L}\pa{1+\frac{L}{\gamma}}^{-L-\gamma-1/2}.
 	\end{align*}
 
-	Por otro lado, se verifica 
+	Por otro lado, se verifica que
 	\begin{align}
 	\label{b}
 	\lim_{\gamma\to+\infty} \left(1+\dfrac{L}{\gamma}\right)^{L+\gamma +1/2}=e^L,\\
 	\label{c}
-	\lim_{\gamma\to+\infty} \left(1+\dfrac{L z}{\gamma}\right)^{-(L+\gamma +1)}=e^{-L z}
+	\lim_{\gamma\to+\infty} \left(1+\dfrac{L z}{\gamma}\right)^{-(L+\gamma +1)}=e^{-L z} ,
 %	\label{b}
 %	\nonumber \lim_{\gamma\to+\infty} b\pa{L,\gamma,z} =
 %	\al \lim_{\gamma\to+\infty}L\gamma^{L-1}\pa{\frac{\frac{Lz}{\gamma}}{1+\frac{Lz}{\gamma}}}^{L-1} \\
@@ -440,7 +452,7 @@ entonces
 	Entonces se obtiene que $\lim\limits_{\gamma\to+\infty}f_{\gamma}\pa{z} = L^{L}/\Gamma\pa{L}\,\e^{-Lz}z^{L-1}$ uniformemente en $[z_{1},z_{2}]$, donde $f_{\gamma}\pa{z}$ es la función de densidad dada en~\eqref{GIOfunciongamma}.
 \end{dem}
 
-La figura~\ref{ConvInfinito} muestra la convergencia uniforme de $f_{\mathcal{G}_I^0}\pa{z}$ a $\Gamma(3,3)$, cuando $\alpha \to -\infty$ y $L=3$. 
+La figura~\ref{ConvInfinito} ilustra la convergencia uniforme de $f_{\mathcal{G}_I^0}\pa{z}$ a $\Gamma(3,3)$, cuando $\alpha \to -\infty$ y $L=3$. 
 El área gris es una banda de ancho $\epsilon=0.1$ alrededor de la función de densidad $\Gamma(3,3)$ (línea sólida). 
 La línea punteada y la línea discontinua representan $f_{\mathcal{G}_I^0}\pa{z}$ para $\alpha=-20$ y $\alpha=-8$ respectivamente. 
 Se puede ver que, cuando $\alpha$ disminuye, $f_{\mathcal{G}_I^0}\pa{z}$ cae dentro del área gris. 
@@ -467,12 +479,12 @@ Mas aún, para este valor de $\epsilon$, $f_{\mathcal{G}_I^0}(-20)$ ya cae dentr
 	f_{\gamma}\pa{z} = &\frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
 	L^{L} \frac{z^{L-1}}{(\gamma+Lz)^{L+\gamma+1}} \gamma^{\gamma +1}  \\
 	\leq& \frac{\Gamma\pa{L+\gamma+1}}{\Gamma\pa{\gamma+1}\Gamma\pa{L}}
-	L^{L} \frac{z_2^{L-1}}{(\gamma+Lz_1)^{L+\gamma+1}} \gamma^{\gamma +1} 
+	L^{L} \frac{z_2^{L-1}}{(\gamma+Lz_1)^{L+\gamma+1}} \gamma^{\gamma +1} .
 	\end{align*}
 	Dado que $\Gamma$ es una función continua, para $z \in [z_{1},z_{2}]$, $\lim\limits_{\gamma\to0^+} f_{\gamma}\pa{z}=0$ uniformemente en $z$, con lo que se obtiene el resultado.
 \end{dem}
 
-La figura~\ref{ConvEnCero} muestra la convergencia uniforme de $f_{\mathcal{G}_I^0}\pa{z}$ cuando $\alpha \to -1$ y $L=3$. La banda gris es de ancho $\epsilon=0.2$ alrededor del eje $z$. 
+La figura~\ref{ConvEnCero} ilustra la convergencia uniforme de $f_{\mathcal{G}_I^0}\pa{z}$ cuando $\alpha \to -1$ y $L=3$. La banda gris es de ancho $\epsilon=0.2$ alrededor del eje $z$. 
 Se graficaron tres diferentes densidades con líneas punteada, discontinua y sólida, las cuales representan $f_{\mathcal{G}_I^0}\pa{z}$ para $\alpha=-1.01, \ -1.2$ y $-1.5$ respectivamente. 
 Se puede ver que cuando el valor de $\alpha$ se acerca a $-1$, $f_{\mathcal{G}_I^0}\pa{z}$ se aplana a $0$, excepto para $z=0$. 
 Para  $\epsilon=0.2$ y cualquier intervalo $[z_1,z_2]$ considerado, $f_{\mathcal{G}_I^0}\pa{z}$ cae dentro de esta banda para $\alpha$ suficientemente cercano a $-1$. 
