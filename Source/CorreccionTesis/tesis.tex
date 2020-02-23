@@ -44,11 +44,16 @@
 \usepackage[normalem]{ulem} %%%% para tachar texto
 \usepackage{url} %%%% para citar páginas web
 \usepackage{setspace} %% setea el espacio entre filas en una tabla
-\usepackage{siunitx}
+
+\usepackage{siunitx} % for tabular's columns aligned on decimal symbol
+\usepackage{etoolbox} % for siunitx with bold font
+\robustify\bfseries
+
 \usepackage{float}
+
 %\usepackage{dcolumn}
 
-\usepackage{rotating}
+%\usepackage{natbib}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,snakes,arrows,trees}
@@ -63,9 +68,9 @@
 
 
 \newcommand*{\id}{{\normalfont\hbox{1\kern-0.15em \vrule width .8pt depth-.5pt}}}
-\newcommand{\mc}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\mc}[1]{\multicolumn{1}{l}{#1}}
 
-
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
 
 %\renewcommand{\spanishtablename}{Tabla}
 
