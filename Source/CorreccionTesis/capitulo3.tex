@@ -11,7 +11,7 @@ Los sistemas de Radar (detección y medición de distancias por radio) son instr
 Estos instrumentos miden la respuesta del blanco a la radiación electromagnética emitida en forma de pulsos, el valor de esta respuesta es almacenado para su posterior procesamiento y se utiliza para formar una imagen de la zona de interés. 
 
 %%% ACF Usar las funciones de la librería "siunitx" para todo lo que sea unidades
-A diferencia de los sensores ópticos e infrarrojos que son inherentemente pasivos, el radar es un sensor activo, proporciona su propia iluminación en forma de microondas. Las microondas son ondas electromagnéticas (EM) que se encuentran en aproximadamente la zona de $1$ a $300$ GHz del EM, es decir, longitudes de onda entre $1$ centímetro a $1$ milímetro.
+A diferencia de los sensores ópticos e infrarrojos que son inherentemente pasivos, el radar es un sensor activo, proporciona su propia iluminación en forma de microondas. Las microondas son ondas electromagnéticas (EM) que se encuentran en aproximadamente la zona de $1$ a $\SI{300}{\giga\hertz}$ del EM, es decir, longitudes de onda entre $\SI{1}{\centi\meter}$ a $\SI{1}{\milli\meter}$.
 
 Muchos de los radares montados sobre plataformas móviles son de vista lateral (SLAR: \textit{Side Looking Airbone Radar}), dentro de éstos podemos encontrar los radares de apertura real (RAR: \textit{Real Aperture Radar}) y los radares de
 apertura sintética SAR. 
@@ -106,13 +106,13 @@ Dado que estos sistemas emiten pulsos en el espectro de las microondas, ni las n
 \citet{Seasat} indica que el primer satélite civil que tuvo a bordo un radar SAR fue lanzado en $1978$ a fines de junio por el Jet Propulsion Laboratory (JPL) de la NASA. Este satélite fue diseñado para teledetección de los océanos de la tierra, registrando información de los vientos de la superficie marina y la temperatura, altura de las olas, características hielo marino entre otros parámetros de interés. Debido a un problema eléctrico, este satélite finalizó sus operaciones a mediados de octubre del mismo año.
 
 %%% ACF Tenés que arreglar este párrafo. La idea no era cambiar todo por \citet, sino usar bien las opciones de cita que el estilo te da. Tal como está, no se entiende.
-La Comisión Nacional de Actividades Espaciales (CONAE) y el INVAP de Argentina, junto con la Agencia Espacial Italiana (ASI) integran el Sistema Ítalo Argentino de Satélites para la Gestión de Emergencias (SIASGE) \citet{Invap}. 
-De acuerdo a \citet{Saocom} el objetivo de la misión SAOCOM es la puesta en órbita de dos constelaciones: SAOCOM1 y SAOCOM2. Cada constelación se compone de dos satélites llamados A y B. El satélite SAOCOM1A fue puesto en órbita el 7 de octubre de 2018 en Vanderberg, California. En \citet{Saocom} se puede ver un video de su lanzamiento.
+La Comisión Nacional de Actividades Espaciales (CONAE) y el INVAP de Argentina, junto con la Agencia Espacial Italiana (ASI) integran el Sistema Ítalo Argentino de Satélites para la Gestión de Emergencias (SIASGE). 
+De acuerdo a \citet{Saocom} el objetivo de la misión SAOCOM es la puesta en órbita de dos constelaciones: SAOCOM1 y SAOCOM2. Cada constelación se compone de dos satélites llamados A y B. El satélite SAOCOM1A fue puesto en órbita el 7 de octubre de 2018 en Vanderberg, California. %En \citet{Saocom} se puede ver un video de su lanzamiento.
 
 %%% ACF Usar siunitx
-Entre los objetivos de estos satélites se encuentra la medición de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. Están equipados con tecnología SAR polarimétrica y operan en banda L. La banda L permite penetrar a través de la superficie hasta $2$ m de profundidad dependiendo del tipo de suelo. 
+Entre los objetivos de estos satélites se encuentra la medición de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. Están equipados con tecnología SAR polarimétrica y operan en banda L. La banda L permite penetrar a través de la superficie hasta $\SI{2}{\meter}$ de profundidad dependiendo del tipo de suelo. 
 
-En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de \citet{Moreira2013}, se muestran los principales sensores SAR junto con el período, banda y frecuencia de operación y las instituciones/países que lo desarrollaron. 
+En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de \citet{Moreira2013}, se muestran los principales sensores SAR junto con el período, banda y polarización (que será explicado en la sección~\ref{polarización}) y las instituciones/países que lo desarrollaron. 
 
 %%% ACF Poner los países en castellano
 %%% ACF Fijate bien si estás informando el sensor, o el sensor y la plataforma
@@ -127,25 +127,25 @@ En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de 
 			&                       				&   Polarización            		 &                     \\
 			\midrule
 			Seasat	                        &	1978	            				&	L (HH)	                		 &	NASA/JPL, USA \\
-			ERS -1/2	                    &	1991–2000/1995–2011					&	C (VV)	                		 &	ESA, Europe \\
-			J-ERS-1	                    &	1992–1998	        				&	L (HH)	                		 &	JAXA, Japan \\
-			Radarsat-1   	                &	1995-2013   	    				&	C (HH)	                 		 &	CSA, Canada \\
+			ERS -1/2	                    &	1991–2000/1995–2011					&	C (VV)	                		 &	ESA, Europa \\
+			J-ERS-1	                    &	1992–1998	        				&	L (HH)	                		 	&	JAXA, Japón \\
+			Radarsat-1   	                &	1995-2013   	    				&	C (HH)	                 		 &	CSA, Canadá \\
 			\multirow{2 }{*} {SRTM}	        &	\multirow{2 }{*} {Lanzado en 2000}  &	C (HH+VV) 				         &	NASA/JPL, USA, DLR,  \\
-			&                       				&   y X (VV)                   		 &   Germany, ASI, Italy\\
-			ENVISAT/ASAR	                &	2002–2012   	    				&	C (dual)	                		 &	ESA, Europe \\
-			ALOS/PalSAR	                &	2006–2011   	   					&	L (quad)	             		 &	JAXA, Japan \\
-			TerraSAR-X/	                &	Lanzado en 2007	  				    &	\multirow{2 }{*} {X (quad)}	     &	\multirow{2 }{*} {SDLR/Astrium, Germany} \\
+			&                       				&   y X (VV)                   		 &   Alemania, ASI, Italia\\
+			ENVISAT/ASAR	                &	2002–2012   	    				&	C (dual)	                	 &	ESA, Europa \\
+			ALOS/PalSAR	                &	2006–2011   	   					&	L (quad)	             		 	&	JAXA, Japón \\
+			TerraSAR-X/	                &	Lanzado en 2007	  				    &	\multirow{2 }{*} {X (quad)}	     	&	\multirow{2 }{*} {SDLR/Austria, Alemania} \\
 			TanDEM-X	                    &	Lanzado en 2010   				 	&	            			         &	             \\
-			Radarsat-2	                    &	Lanzado en 2007    					&	C (quad)            		     &  CSA, Canada	 \\
-			COSMO-SkyMed-1/4	            &	Lanzado en 2007	    				&	X (dual)          			     &	ASI/MiD, Italy \\
-			RISAT-1	                    &	Lanzado en 2012   				 	&	C (quad)            			 &	ISRO, India \\
+			Radarsat-2	                    &	Lanzado en 2007    					&	C (quad)            		     &  CSA, Canadá	 \\
+			COSMO-SkyMed-1/4	            &	Lanzado en 2007	    				&	X (dual)          			     &	ASI/MiD, Italia \\
+			RISAT-1	                    &	Lanzado en 2012   				 	&	C (quad)            			 	&	ISRO, India \\
 			\multirow{2 }{*} {HJ-1C	}       &	\multirow{2 }{*} {Lanzado en 2012} 	&	\multirow{2 }{*} {S (VV)}		 &	CRESDA/CAST / \\
 			&                       				&                             		 &  NRSCC, China                   \\
-			Kompsat-5	                    &	Lanzado en 2013	  				    &	X (dual)            			 &	KARI, Korea \\
-			PAZ	                            &	Lanzado en 2018   				 	&	X (quad)            		     &	CDTI, Spain \\
-			ALOS -2	                        &	Lanzado en 2014	 				    &	L (quad)            		     &	JAXA, Japan \\
-			Sentinel-1a/1b              	&	Lanzado en 2014    				    &	C (dual)            			 &	ESA, Europe \\
-			Radarsat 	                    &	\multirow{2 }{*} {Lanzado en 2019}  &	\multirow{2 }{*} {C (quad) }     &	\multirow{2 }{*} {CSA, Canada }\\
+			Kompsat-5	                    &	Lanzado en 2013	  				    &	X (dual)            			 &	KARI, Corea \\
+			PAZ	                            &	Lanzado en 2018   				 	&	X (quad)            		     &	CDTI, España \\
+			ALOS -2	                        &	Lanzado en 2014	 				    &	L (quad)            		     &	JAXA, Japón \\
+			Sentinel-1a/1b              	&	Lanzado en 2014    				    &	C (dual)            			 &	ESA, Europa \\
+			Radarsat 	                    &	\multirow{2 }{*} {Lanzado en 2019}  &	\multirow{2 }{*} {C (quad) }     &	\multirow{2 }{*} {CSA, Canadá }\\
 			Constellation-1/2/3             &                   			        &   			          			 &                     \\
 			SAOCOM-1/2	                    &	Lanzado en 2018  					&	L (quad)	           			 &	CONAE, Argentina \\
 			\bottomrule
@@ -158,7 +158,7 @@ En la tabla~\ref{tabla:SensoresSAR}, y de acuerdo a la información obtenida de 
 \label{coherente}
 
 %%% ACF Usar siunitx
-Un haz de luz esta formado por ondas electromagnéticas cuya longitud de onda está comeprendida entre $400$ y $800$ nanómetros.
+Un haz de luz esta formado por ondas electromagnéticas cuya longitud de onda está comeprendida entre $\SI{2}{\nano\meter}$ y $\SI{2}{\nano\meter}$.
 
 La superposición de dos o más ondas produce diferentes tipo de sistemas de iluminación, esto se muestra la figura~\ref{LuzCoherente}.
 
@@ -185,7 +185,7 @@ Las ondas electromagnéticas se modelan con una sinusoidal donde la longitud de 
 %\end{figure} 
 
 %%% ACF "Radar SAR" es redundante. Revisar todo, y dejar sólo SAR.
-Como dijimos anteriormente el radar SAR emite señales en la región de microondas del espectro electromagnético (EM) y en diferentes bandas. La figura~\ref{Espectro} muestra cómo está formado el EM de acuerdo a la longitud de onda de la señal.
+Como dijimos anteriormente el SAR emite señales en la región de microondas del espectro electromagnético (EM) y en diferentes bandas. La figura~\ref{Espectro} muestra cómo está formado el EM de acuerdo a la longitud de onda de la señal.
 
 \begin{figure}[hbt]
 	\centering    
@@ -199,14 +199,14 @@ Las microondas, que son parte del espectro electromagnético, tienen longitudes 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
-		\toprule
-		\textbf{Banda}	& \textbf{Frecuencia}		    	& \textbf{Longitud de onda} \\ \midrule
-		X			& 12.5 a 8 \si{\giga\hertz}         &  2.4 a 3.75 \si{\centi\meter} \\
-		C			&  8 a 4 \si{\giga\hertz} 			&  3.75 a 7.5 \si{\centi\meter}\\
-		S			&  4 a 2 \si{\giga\hertz} 	        &  7.5 a 15 \si{\centi\meter} \\
-		L			&  2 a 1 \si{\giga\hertz} 	        &  15 a 30 \si{\centi\meter} \\
-		P			&  0.999 a 0.2998 \si{\giga\hertz} 	&  30 a 100 \si{\centi\meter} \\
-		\bottomrule
+	\toprule
+	\textbf{Banda}	& \textbf{Frecuencia}									& \textbf{Longitud de onda} \\ \midrule
+		X			& \SIrange[range-units = single]{12.5}{8}{\GHz}			& \SIrange[range-units = single]{2.4}{3.75}{\cm} \\
+		C			& \SIrange[range-units = single]{8}{4}{\GHz} 			& \SIrange[range-units = single]{3.75}{7.5}{\cm}\\
+		S			& \SIrange[range-units = single]{4}{2}{\GHz}			& \SIrange[range-units = single]{7.5}{15}{\cm} \\
+		L			& \SIrange[range-units = single]{2}{1}{\GHz}			& \SIrange[range-units = single]{15}{30}{\cm} \\
+		P			& \SIrange[range-units = single]{0.999}{0.2998}{\GHz}	& \SIrange[range-units = single]{30}{100}{\cm} \\
+	\bottomrule
 	\end{tabular}
 	\caption{\label{Bandas}Bandas SAR, datos adaptados de \citet{Sarmap2009}}
 \end{table}
@@ -224,6 +224,7 @@ Cada banda es utilizada en diferente tipos de aplicaciones:
 %La energía en el espectro de las microondas es útil en teledetección porque es capaz de atravesar la atmósfera bajo prácticamente todas las condiciones climáticas (niebla, lluvia, nieve, nubes). 
 
 \section{Polarización}
+\label{polarización}
 
 Las ondas electromagnéticas son ondas transversales, es decir, la dirección del vector campo eléctrico $\vec{\mathbf{E}}$ es perpendicular a la dirección de propagación de la onda. 
 Un aspecto a tener en cuenta es la polarización de una onda electromagnética, que se define como la orientación del vector campo eléctrico $\vec{\mathbf{E}}$ de la radiación transmitida o recibida. 
@@ -265,22 +266,13 @@ En esta tesis trabajaremos con imágenes monopolarimétricas.
 
 \section{Geometría SAR}
 
-El radar de apertura sintética SAR es un sensor activo, de vista lateral, que emite energía en un período corto de tiempo y en el  intervalo  de  frecuencias  de  microondas recibiendo la señal reflejada por el blanco iluminado. 
+El radar de apertura sintética es un sensor activo, de vista lateral, que emite energía en un período corto de tiempo y en el  intervalo  de  frecuencias  de  microondas recibiendo la señal reflejada por el blanco iluminado. 
 %%% ACF Mencionar también el GBSAR
-%
-%@Article{AReviewofGroundBasedSARInterferometryforDeformationMeasurement,
-%	author    = {O. Monserrat and M. Crosetto and G. Luzi},
-%	journal   = {{ISPRS} Journal of Photogrammetry and Remote Sensing},
-%	title     = {A review of ground-based {SAR} interferometry for deformation measurement},
-%	year      = {2014},
-%	month     = {jul},
-%	pages     = {40--48},
-%	volume    = {93},
-%	doi       = {10.1016/j.isprsjprs.2014.04.001},
-%	publisher = {Elsevier {BV}},
-%}
+
 Está montado sobre una plataforma móvil (aeronave o satélite) que transmite y recibe las señales con la misma antena, la cual tiene su eje longitudinal paralelo a la trayectoria de vuelo. 
 Debido a la gran velocidad del desplazamiento de la plataforma y aprovechando el efecto Doppler que tiene lugar como consecuencia de dicho desplazamiento, la antena del dispositivo SAR  se convierte en una antena virtual de mayor tamaño. 
+
+No todos los radares son aerotransportados. \citet{Monserrat2014} presentan una revisión del SAR basado en tierra (GBSAR) que es un radar de monitoreo de deformación de la superficie terrestre. Es un radar altamente compacto que se mueve a lo largo de una vía férrea. Utiliza tecnología SAR para obtener información sobre la deformación y topografía del suelo.
 
 El radar se desplaza a una velocidad $\vec{v}$ y a una altura $h$ portando una antena que emite radiación electromagnética e ilumina la superficie del terreno. En la figura~\ref{GeometriaSAR} se muestra un esquema del movimiento del radar, la región sombreada es la zona iluminada por el radar. Esta zona permanece en el haz de la antena durante unos instantes y es observado por el radar desde numerosos puntos a lo largo de la trayectoria de la plataforma.
 %, lo que es equivalente a prolongar la longitud real de la antena.
@@ -299,7 +291,7 @@ Vamos a dar algunas definiciones sobre la geometría SAR:
 	%\label{Dispersion}
 	\centering    
 	\includegraphics[scale=1]{../../Figures/Tesis/Capitulo3/sar_3d.pdf}
-	\caption{\label{GeometriaSAR}Geometría del Radar de Apertura Sintética SAR.} %Fuente Canada Centre for Remote Sensing~\cite{ccrs2001}.}
+	\caption{\label{GeometriaSAR}Geometría SAR.} %Fuente Canada Centre for Remote Sensing~\cite{ccrs2001}.}
 \end{figure} 
 
 La antena del radar tiene su eje longitudinal paralelo a la trayectoria de vuelo y emite pulsos de energía electromagnética perpendicular a dicha trayectoria, como se ilustra en la figura~\ref{GeometriaSAR}. Los pulsos electromagnéticos iluminan un área en el terreno, la antena recibe la energía reflejada en diferentes momentos, dependiendo de la distancia que existe entre el objeto y la antena. Con  el procesamiento de la señal reflejada se genera la imagen. 
@@ -311,7 +303,7 @@ A medida que el radar se desplaza emite pulsos de radiación electromagnética y
 	\centering    
 	\subfigure[Superficie Plana]{\includegraphics[scale=0.7]{../../Figures/Tesis/Capitulo3/superficie_plana_2.pdf}}
 	\subfigure[Superficie Rugosa]{\includegraphics[scale=0.7]{../../Figures/Tesis/Capitulo3/superficie_rugosa.pdf}}
-	\caption{\label{SeñalDispersada}Dispersión de la señal emitida por un radar SAR.}
+	\caption{\label{SeñalDispersada}Dispersión de la señal emitida por un SAR.}
 \end{figure} 
 %
 \subsection{Resolución}
@@ -399,7 +391,7 @@ De acuerdo a \citet{Shahrezaei2019} el valor de gris en un pixel se obtiene como
 
 La presencia de este ruido dificulta la interpretación de las imágenes y puede conducir a interpretaciones y detecciones de bordes erróneas entre otros inconvenientes, debido a la degradación de la calidad de los píxeles. 
 
-De acuerdo a \citet{Lee2009}, un enfoque común para reducir la presencia de este ruido durante el procesamiento de la señal cruda captada por el radar es promediar varias estimaciones independientes de la señal reflejada. Dado que el radar SAR genera una apertura sintética la longitud de esta antena virtual se puede subdividir en $L$  segmentos independientes, conocidos también como \textit{looks}. Cada uno de estos segmentos registra la energía retrodispersada por el mismo blanco y se procesa en forma independientemente para formar una imagen SAR. Estas $L$ imágenes se promedian entre sí para formar una sola imagen SAR de $L$ \textit{looks}. Este procesamiento reduce el efecto del ruido speckle pero, al reducir la longitud de la antena en segmentos, se pierde resolución en azimut. La utilidad de este procedimiento se manifiesta en la mejora de la relación señal-ruido. Cuantas más subdivisiones se hagan, es decir, cuanto más \textit{looks} formen la imagen menos resolución tendrá pero también será menos ruidosa.
+De acuerdo a \citet{Lee2009}, un enfoque común para reducir la presencia de este ruido durante el procesamiento de la señal cruda captada por el radar es promediar varias estimaciones independientes de la señal reflejada. Dado que el SAR genera una apertura sintética la longitud de esta antena virtual se puede subdividir en $L$  segmentos independientes, conocidos también como \textit{looks}. Cada uno de estos segmentos registra la energía retrodispersada por el mismo blanco y se procesa en forma independientemente para formar una imagen SAR. Estas $L$ imágenes se promedian entre sí para formar una sola imagen SAR de $L$ \textit{looks}. Este procesamiento reduce el efecto del ruido speckle pero, al reducir la longitud de la antena en segmentos, se pierde resolución en azimut. La utilidad de este procedimiento se manifiesta en la mejora de la relación señal-ruido. Cuantas más subdivisiones se hagan, es decir, cuanto más \textit{looks} formen la imagen menos resolución tendrá pero también será menos ruidosa.
 
 \section{Doble Bounce o Doble Rebote}
 \label{SecDobleBounce}
@@ -422,16 +414,16 @@ Debido a la aleatoriedad y a la fuerte dispersión que puede tener la señal ret
 
 Supongamos que iluminamos un área a través de un haz de energía electromagnética con $n$ dispersores elementales como se mostró en la figura~\ref{SeñalDispersada}. Como presentan \citet{FreryLibro2019}, cada dispersor $j$ retornará una fracción de la energía incidente $A_j$ con fase $\phi_j$. El retorno total $S$ es una señal compleja definida por:
 \begin{align}
-S = \sum_{j=1}^{n} A_j \mathrm{e}^{\mathbf i \phi_j} = 
-\underbrace{{\sum_{j=1}^{n} A_j \cos \phi_j}}_{\Re{S}} +\mathbf i \underbrace{ \sum_{j=1}^{n} A_j \sin \phi_j}_{\Im{S}}, 
+S = \sum_{j=1}^{n} A_j \mathrm{e}^{ i \phi_j} = 
+\underbrace{{\sum_{j=1}^{n} A_j \cos \phi_j}}_{\Re{S}} + i \underbrace{ \sum_{j=1}^{n} A_j \sen \phi_j}_{\Im{S}}, 
 \label{eq:RetornoComplejo}
 \end{align}
 %%% ACF Denotaste la unidad imaginaria de otra forma. Corregir y revisar todo
 %%% ACF Aparece "sin", debería ser "sen"
-donde $i$ es la unidad imaginaria y $A_j \mathrm{e}^{\mathbf i \phi_j}$ representa el retorno del $j$-ésimo dispersor. La ecuación~\eqref{eq:RetornoComplejo} describe la suma coherente de las contribuciones del retorno total de cada uno de los dispersores. En general, en vez de tratar directamente con el retorno complejo se trabajan con los datos dados en formato amplitud 
+donde $i$ es la unidad imaginaria y $A_j \mathrm{e}^{i \phi_j}$ representa el retorno del $j$-ésimo dispersor. La ecuación~\eqref{eq:RetornoComplejo} describe la suma coherente de las contribuciones del retorno total de cada uno de los dispersores. En general, en vez de tratar directamente con el retorno complejo se trabajan con los datos dados en formato amplitud 
 %%% ACF \mid es para "dado" (probabilidad condicional). Usá los delimitadores que vienen en el paquete "physics".
-$A=\mid S \mid$ 
-o  en formato intensidad $I=\mid S \mid^2$, donde $I=A^2$ En esta tesis se trabajará con este último formato.
+$A=\abs{S}$ 
+o  en formato intensidad $I=\abs{S}^2$, donde $I=A^2$ En esta tesis se trabajará con este último formato.
 
 De acuerdo a \citet{Quegan1994} si no hay un retrodispersor que domine, la forma de extraer información del retorno de los retrodispersores es aproximándose al problema desde un punto de vista estadístico. Este enfoque se verá en el capítulo~\ref{modeloG0}.
 
@@ -443,7 +435,7 @@ De acuerdo a \citet{Quegan1994} si no hay un retrodispersor que domine, la forma
 
 En este capítulo presentamos los conceptos básicos de teledetección, iluminación coeherente y polarización. Estos conceptos son de utilidad porque son el pilar de la formación de imágenes SAR. Se muestran las ventajas y desventajas que poseen estos sistemas frente a aquellos que adquieren imágenes ópticas. Entre las ventajas se encuentran la capacidad que tienen los sensores SAR de adquirir imágenes independientemente de las condiciones climáticas y de la luz, ya que ellos poseen un sistema de iluminación propia. Entre las desventajas se encuentra el ruido speckle que está presente en este tipo de imágenes porque es propio a la forma de adquirir las mismas. 
 
-Asimismo se muestra que el aprovechamiento del efecto Doppler contribuye a generar la apertura sintética del radar SAR. Las bondades de esta apertura sintética se pone de manifiesto en la obtención de imágenes con  mejor resolución.
+Asimismo se muestra que el aprovechamiento del efecto Doppler contribuye a generar la apertura sintética del SAR. Las bondades de esta apertura sintética se pone de manifiesto en la obtención de imágenes con  mejor resolución.
 
 Finalmente se presenta la aleatoriedad de la formación del ruido speckle, lo que pone de manifiesto la necesidad de encontrar modelos estadísticos que permitan analizar e interpretar este tipo de imágenes.
 

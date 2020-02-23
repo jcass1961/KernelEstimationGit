@@ -35,7 +35,7 @@ Este modelo considera que el valor observado en cada celda de la imagen es una v
 
 Se han utilizado algunos distribuciones estadísticas para modelar los datos SAR, \citet{Lee2009} presentan la distribución Lognormal, la Weibull y la distribución $\mathcal{K}$. 
 
-En \citet{Frery97} indican que un modelo común para datos que provienen de zonas homogéneas y con mucha presencia de ruido speckle son la distribución exponencial y la Rayleigh. En cambio las distribuciones $\mathcal{K}$ que presentan \citet{Jakeman87} han sido muy utilizada en datos SAR especialmente cuando los datos provienen de áreas texturadas. 
+\citet{Frery97} indican que un modelo común para datos que provienen de zonas homogéneas y con mucha presencia de ruido speckle son la distribución exponencial y la Rayleigh. En cambio las distribuciones $\mathcal{K}$ que presentan \citet{Jakeman87} han sido muy utilizada en datos SAR especialmente cuando los datos provienen de áreas texturadas. 
 
  \citet{Frery97} y \citet{Frery99} presentan la familia de distribuciones $\mathcal{G}$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A$ y $\mathcal{G}_I$ respectivamente. Es un modelo más general porque distribuciones clásicas, como $\mathcal{K}$, son casos particulares de esta nueva familia de distribuciones.
 
@@ -78,7 +78,7 @@ Despejando $C$ de~\eqref{esperanza} y reemplanzando en~\eqref{desvio} se obtiene
 \begin{align}
 SD(Z)&= \dfrac{SD(Y)}{E(Y)} \, E(Z)
 \end{align} 
-En la figura~\ref{ModeloMultiplicativo} tomada de \citet{Lee2009} se muestra el scatter plot basado en datos tomados por el radar SIR-B (Spaceborne Imaging Radar), un sensor SAR que opera en banda $C$ y $X$. Se tomaron $16$ y $25$ muestras de zonas homogéneas para el caso de $1$-look y $4$-looks respectivamente. En cada muestra se calculó $\overline{}$ la media muestral y $SD$ el desvío muestral y se grafica $SD$ vs. $\overline{Z}.$
+En la figura~\ref{ModeloMultiplicativo} tomada de \citet{Lee2009} se muestra el \textit{scatter plot} basado en datos tomados por el radar SIR-B (Spaceborne Imaging Radar), un sensor SAR que opera en banda $C$ y $X$. Se tomaron $16$ y $25$ muestras de zonas homogéneas para el caso de $1$-look y $4$-looks respectivamente. En cada muestra se calculó $\overline{}$ la media muestral y $SD$ el desvío muestral y se grafica $SD$ vs. $\overline{Z}.$
 
 \begin{figure}
 \centering
@@ -392,14 +392,13 @@ Si consideramos $f_{\mathcal{G}_I^0}\pa{z}$ escrita como en~\eqref{fenfunciondeg
 Si llamamos:
 	\begin{align*}
 		a\pa{\gamma} &= \frac{\Gamma\pa{\gamma+1}\e^{\gamma}}{\sqrt{2\pi}\gamma^{\gamma+1/2}},\\
-		b\pa{L,\gamma,z} &=L\gamma^{L-1}\pa{\frac{\frac{Lz}{\gamma}}{1+\frac{Lz}{\gamma}}}^{L-1} \text{ y }\\
-		c\pa{L,\gamma,z} &= \pa{1+\frac{Lz}{\gamma}}^{-2-\gamma},
+%		b\pa{L,\gamma,z} &=L\gamma^{L-1}\pa{\frac{\frac{Lz}{\gamma}}{1+\frac{Lz}{\gamma}}}^{L-1} \text{ y }\\
+%		c\pa{L,\gamma,z} &= \pa{1+\frac{Lz}{\gamma}}^{-2-\gamma},
 	\end{align*}
 entonces 
 \begin{align}
 \label{GIOfunciongamma}
-f_{\gamma}\pa{z} = \frac{a\pa{L+\gamma}}{a\pa{\gamma}\Gamma\pa{L}}\e^{-L}\pa{1+\frac{L}{\gamma}}^{L+\gamma+1/2}
-b\pa{L,\gamma,z}c\pa{L,\gamma,z}.
+f_{\gamma}\pa{z} = \frac{a\pa{L+\gamma}}{a\pa{\gamma}\Gamma\pa{L}}\e^{-L}\pa{1+\frac{L}{\gamma}}^{L+\gamma+1/2} \dfrac{L^L z^{L-1}}{\left(1+\dfrac{L z}{\gamma}\right)^{L+\gamma +1}}.
 \end{align}
 
 %\begin{align*}
@@ -426,13 +425,17 @@ entonces
 	Por otro lado, se verifica 
 	\begin{align}
 	\label{b}
-	\nonumber \lim_{\gamma\to+\infty} b\pa{L,\gamma,z} =
-	\al \lim_{\gamma\to+\infty}L\gamma^{L-1}\pa{\frac{\frac{Lz}{\gamma}}{1+\frac{Lz}{\gamma}}}^{L-1} \\
-	= \al \lim_{\gamma\to+\infty} \frac{L^{L} z^{L-1}}{\pa{1+\frac{Lz}{\gamma}}^{L-1}} = L^{L} z^{L-1},\\
-	\lim_{\gamma\to+\infty} c\pa{L,\gamma,z} = \al \lim_{\gamma\to+\infty}\pa{1+\frac{Lz}{\gamma}}^{-2-\gamma} = \e^{-Lz},
+	\lim_{\gamma\to+\infty} \left(1+\dfrac{L}{\gamma}\right)^{L+\gamma +1/2}=e^L,\\
 	\label{c}
+	\lim_{\gamma\to+\infty} \left(1+\dfrac{L z}{\gamma}\right)^{-(L+\gamma +1)}=e^{-L z}
+%	\label{b}
+%	\nonumber \lim_{\gamma\to+\infty} b\pa{L,\gamma,z} =
+%	\al \lim_{\gamma\to+\infty}L\gamma^{L-1}\pa{\frac{\frac{Lz}{\gamma}}{1+\frac{Lz}{\gamma}}}^{L-1} \\
+%	= \al \lim_{\gamma\to+\infty} \frac{L^{L} z^{L-1}}{\pa{1+\frac{Lz}{\gamma}}^{L-1}} = L^{L} z^{L-1},\\
+%	\lim_{\gamma\to+\infty} c\pa{L,\gamma,z} = \al \lim_{\gamma\to+\infty}\pa{1+\frac{Lz}{\gamma}}^{-2-\gamma} = \e^{-Lz},
+%	\label{c}
 	\end{align}
-	donde la convergencia en~\eqref{b} y~\eqref{c} es uniforme en $[z_{1},z_{2}]$.
+	donde la convergencia en~\eqref{c} es uniforme en $[z_{1},z_{2}]$.
 	
 	Entonces se obtiene que $\lim\limits_{\gamma\to+\infty}f_{\gamma}\pa{z} = L^{L}/\Gamma\pa{L}\,\e^{-Lz}z^{L-1}$ uniformemente en $[z_{1},z_{2}]$, donde $f_{\gamma}\pa{z}$ es la función de densidad dada en~\eqref{GIOfunciongamma}.
 \end{dem}
