@@ -150,7 +150,7 @@ f_{\text{Z}}(z)&=\frac{2 z^{\frac{1}{2} (L+\alpha-2 )} (L \lambda )^{\frac{L+\al
 \end{align}
  Esta familia de distribuciones fueron propuestas por \citet{Jakeman87} y ha sido un modelo ampliamente utilizado, pero no modela en forma adecuada datos que provienen de zonas extremadamente heterogéneas como son las áreas urbanas como lo indicaron en \citet{Frery97}.
 
- \citet{Frery99} propusieron un nuevo modelo para la retrodispersión, dando origen a una nueva familia de distribuciones que modelan muy bien datos provenientes de zonas extremadamente heterogéneas mejor que la familia $\mathcal{K}$. Esta familia de distribuciones se llama $\mathcal{G}$ y fueron ampliamente aplicadas tanto para imágenes monopolarimétricas como se indica en \citet{gambini2015} y \citet{Nascimento2009}. En \citet{Freitas2005} y \citet{Palacio2019} utilizaron esta familia de distribuciones en imágenes polarimétricas.
+ \citet{Frery99} propusieron un nuevo modelo para la retrodispersión, dando origen a una nueva familia de distribuciones que modelan muy bien datos provenientes de zonas extremadamente heterogéneas mejor que la familia $\mathcal{K}$. Esta familia de distribuciones se llama $\mathcal{G}$ y fueron ampliamente aplicadas por  \citet{gambini2015} y \citet{Nascimento2009} en imágenes monopolarimétricas. \citet{Freitas2005} y \citet{Palacio2019} utilizaron esta familia de distribuciones en imágenes polarimétricas.
 
 \section{Modelo para la Retrodispersión}
 \label{ModeloBackscatter}
@@ -217,7 +217,7 @@ donde las distribuciones $\Gamma^{-1}$ e  $IG$ están definidas por:
 \end{remark}
 
 
-En la figura~\ref{RelacionInversaGaussiana} y de acuerdo a \citet{Frery99} se esquematiza el comportamiento asintótico de la distribución $N^{-1}(\alpha,\gamma,\lambda)$ en algunos casos límites, D indica convergencia en distribución y p convergencia en probabilidad.
+En la figura~\ref{RelacionInversaGaussiana} y, de acuerdo a \citet{Frery99}, se esquematiza el comportamiento asintótico de la distribución $N^{-1}(\alpha,\gamma,\lambda)$ en algunos casos límites, D indica convergencia en distribución y p convergencia en probabilidad.
 
 \begin{figure}[hbt]
 	\centering    
@@ -242,7 +242,7 @@ Z=X \cdot Y
 \end{equation*}
 donde $X$ e $Y$ son variables aleatorias que corresponden a la retrodispersión y al ruido speckle, respectivamente. 
 
- \citet{Frery99} proponen que $X \sim N^{-1}(\alpha,\lambda,\gamma )$, $Y \sim \Gamma(L,L)$, entonces $Z$ obedece una distribución $\mathcal G_I(\alpha,\lambda,\gamma,L )$, que es el modelo $\mathcal{G}$ para datos de intensidad. En \citet{Frery97} se presenta el modelo $\mathcal{G}$ para datos de amplitud a partir de un análisis similar.
+ \citet{Frery99} proponen que $X \sim N^{-1}(\alpha,\lambda,\gamma )$, $Y \sim \Gamma(L,L)$, entonces $Z$ obedece una distribución $\mathcal G_I(\alpha,\lambda,\gamma,L )$, que es el modelo $\mathcal{G}$ para datos de intensidad. \citet{Frery97} presentan el modelo $\mathcal{G}$ para datos de amplitud a partir de un análisis similar.
 
 Entonces, el retorno $Z \sim \mathcal{G}_I$ si su función de densidad está dada por
 \begin{align}
@@ -251,9 +251,9 @@ f_{\text{Z}}( z) =\frac{z^{L-1} L^L \sqrt{(\frac{\lambda}{\gamma})^{\alpha}}}{\G
 \end{align}
 donde $L\geq 1$ es el número de looks y el espacio paramétrico para $\alpha$, $\gamma$ y $\lambda$ es el mismo que en~\eqref{EspacioParametros}.
 
-Cabe señalar que el número de looks $L$ debería ser, en principio, un número natural por la forma en que fué definido. En general este parámetro es considerado conocido porque viene con la información de la imagen, pero puede ser que no lo sea. En este caso se estima a partir de los datos de la imagen con muestras extraídas de zonas homogéneas y se llama número equivalente de looks (ENL). De acuerdo a \citet{anfinsen2009}, $\text{ENL}={1}/{\widehat{\text{CV}^2}(Z)}$ donde $\widehat{\text{CV}}(Z)={\widehat{\sigma}}/{\widehat\mu}$, con $\widehat{\sigma}$ es el desvío estandar muestral y $\widehat\mu$ la media muestral.
+Cabe señalar que el número de looks $L$ debería ser, en principio, un número natural por la forma en que fué definido. En general este parámetro es considerado conocido porque viene con la información de la imagen, pero puede ser que no lo sea. En este caso se estima a partir de los datos de la imagen con muestras extraídas de zonas homogéneas y se llama número equivalente de looks (ENL). De acuerdo a \citet{anfinsen2009}, $\widehat{\text{ENL}}={1}/{\widehat{\text{CV}^2}(Z)}$ donde $\widehat{\text{CV}}(Z)={\widehat{\sigma}}/{\widehat\mu}$, con $\widehat{\sigma}$ es el desvío estandar muestral y $\widehat\mu$ la media muestral.
 
-Haciendo un análisis similiar al que se presentó en la figura~\ref{RelacionInversaGaussiana} y que se muestra en la figura~\ref{RelacionGI}, y de acuerdo a \citet{Frery99} se obtienen casos particulares de la distribución $\mathcal{G}_I$, dependiendo del comportamiento asintótico de sus parámetros.
+\citet{Frery99} obtienen casos particulares de la distribución $\mathcal{G}_I$ dependiendo del comportamiento asintótico de sus parámetros, esto se muestra en la figura~\ref{RelacionGI}.  
 \begin{figure}[hbt]
 	\centering    
 	\includegraphics[scale=1]{../../Figures/Tesis/Capitulo4/RelacionGI.pdf}
