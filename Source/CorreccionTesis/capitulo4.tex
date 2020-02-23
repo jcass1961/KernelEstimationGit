@@ -171,7 +171,7 @@ El grado de homogeneidad de un área de la imagen está modelado por la retrodis
 
 \citet{Frery97} consideraron un modelo general para la retrodispersión que tiene como casos especiales modelos más simples que permiten explicar las diferentes texturas que puede tener un determinado área. En general, estas texturas se indican como: áreas homogéneas (pastura), heterogéneas (bosque) y extremadamente heterogéneas (áreas urbanas). Estos modelos simples tienen la ventaja de tener menos parámetros para estimar.
 
-El modelo que proponen en \citet{Frery99} para la retrodispersión en el caso de datos de intensidad es una distribución Gaussiana Inversa Generalizada con parámetros $\alpha$, $\gamma$ y $\lambda$. En este caso decimos que  $X\sim N^{-1}(\alpha,\gamma,\lambda)$ cuya función de densidad viene dada por
+El modelo que proponen en \citet{Frery99} para la retrodispersión en el caso de datos de intensidad es una distribución gaussiana inversa generalizada con parámetros $\alpha$, $\gamma$ y $\lambda$. En este caso decimos que  $X\sim N^{-1}(\alpha,\gamma,\lambda)$ cuya función de densidad viene dada por
 \begin{align}
 f_X(x) = \dfrac{\left(\frac{\lambda}{\gamma}\right)^{\frac{\alpha}{2}}}{2 \text{K}_{\alpha} (2 \sqrt{\lambda \gamma})} x^{\alpha-1} e^{-\frac{\gamma}{x}-\lambda x} \text{ para } x>0,
 \label{GIG}
@@ -191,17 +191,17 @@ El espacio paramétrico está dado por
 Este modelo general presenta algunas ventajas porque tiene como casos particulares a algunas distribuciones que son muy utilizadas para modelar el retorno para datos en formato intensidad. Estos casos son:
 
 \begin{itemize}
-	\item Una constante $C$ que se utiliza para modelar áreas homogéneas dando lugar a un retorno que es puro speckle. Este caso lo vimos anteriormente y da lugar a un retorno modelado con una distribución Gamma.
-	\item La distribución Gamma, dando lugar a la familia de distribuciones $\mathcal{K}$. 
-	\item La distribución Gamma Inversa ($\Gamma^{-1}$) dando lugar a la familia de distribuciones $\mathcal{G}_I^0$ para el retorno, que se verán en la próxima sección.
-	\item La distribución Gaussiana Inversa ($IG$) dando lugar al modelo $\mathcal{G}^H$.
+	\item Una constante $C$ que se utiliza para modelar áreas homogéneas dando lugar a un retorno que es puro speckle. Este caso lo vimos anteriormente y da lugar a un retorno modelado con una distribución gamma.
+	\item La distribución gamma, dando lugar a la familia de distribuciones $\mathcal{K}$. 
+	\item La distribución gamma inversa ($\Gamma^{-1}$) dando lugar a la familia de distribuciones $\mathcal{G}_I^0$ para el retorno, que se verán en la próxima sección.
+	\item La distribución gaussiana inversa ($IG$) dando lugar al modelo $\mathcal{G}^H$.
 \end{itemize}
 
 donde las distribuciones $\Gamma^{-1}$ e  $IG$ están definidas por:
 
 \begin{definition}
 	\label{InversaGamma}
-	Una variable aleatoria $X$ tiene una distribución Gamma Inversa  de parámetros $\alpha, \beta >0$  y se indicará $\Gamma^{-1}(\alpha,\beta)$ si su función de densidad viene dada por
+	Una variable aleatoria $X$ tiene una distribución gamma inversa  de parámetros $\alpha, \beta >0$  y se indicará $\Gamma^{-1}(\alpha,\beta)$ si su función de densidad viene dada por
 	\begin{align}
 	f_{\text X}(x)=\dfrac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} \ \ e^{- \frac{\beta}{x}}, \text{ para } x>0.
 	\end{align}
@@ -209,7 +209,7 @@ donde las distribuciones $\Gamma^{-1}$ e  $IG$ están definidas por:
 
 \begin{definition}
 	\label{InversaGaussiana}
-	Una variable aleatoria $X$ tiene una distribución Gaussiana Inversa de parámetros $\mu, \lambda >0$  y se indicará $IG(\mu,\tau)$ si su función de densidad viene dada por
+	Una variable aleatoria $X$ tiene una distribución gaussiana inversa de parámetros $\mu, \lambda >0$  y se indicará $IG(\mu,\tau)$ si su función de densidad viene dada por
 	\begin{align}
 	\label{IG}
 	f_{\text X}(x)=\sqrt{\dfrac{\tau}{2 \pi x^3}} \ \ e^{- \dfrac{\tau (x-\mu)^2}{2 \mu^2 x}}, \text{ para } x>0.
@@ -218,7 +218,7 @@ donde las distribuciones $\Gamma^{-1}$ e  $IG$ están definidas por:
 
 \begin{remark} \ 
 	\begin{itemize}
-		\item La distribución $IG(\mu,\tau)$ es un caso particular de la distribución Gaussiana Inversa Generalizada $N^{-1}(\alpha,\gamma,\lambda)$. Si consideramos $\alpha=-\dfrac{1}{2}$, $\gamma=\sqrt{\dfrac{\tau}{2}}$ y $\lambda=\dfrac{\tau}{2\mu^2}$ en la ecuación~\eqref{GIG} se obtiene la ecuación~\eqref{IG}.
+		\item La distribución $IG(\mu,\tau)$ es un caso particular de la distribución gaussiana inversa generalizada $N^{-1}(\alpha,\gamma,\lambda)$. Si consideramos $\alpha=-\dfrac{1}{2}$, $\gamma=\sqrt{\dfrac{\tau}{2}}$ y $\lambda=\dfrac{\tau}{2\mu^2}$ en la ecuación~\eqref{GIG} se obtiene la ecuación~\eqref{IG}.
 		\item Si en la ecuación~\eqref{IG} consideramos $\mu=\eta$ y $\tau=\omega \eta$ se obtiene una reparametrización de la función de densidad de una $IG(\mu,\tau)$ en función de estos nuevos parámetros. Entonces diremos que una variable aleatoria $X \sim IG(\omega,\eta)$ si su función de densidad es 
 		\begin{align}
 		\label{OtraIG}
@@ -284,7 +284,7 @@ Entonces, bajo el modelo multiplicativo, tenemos los siguientes modelos para el 
 	\item Si $X \sim \Gamma^{-1}(-\alpha,\gamma)$, entonces $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ con $-\alpha, \, \gamma >0$ y $L \geq 1$.
 \end{itemize}
 
-Por otro lado y de acuerdo a la parametrización de la distribución Gaussiana Inversa dada en~\eqref{OtraIG}, si $X\sim IG(\omega,\eta)$ e $Y \sim \Gamma(L,L)$ el retorno $Z$ queda modelado por la distribución $ \mathcal{G}^H(\omega,\eta,L)$ con $\omega, \, \eta >0$ y $L \geq 1$, donde la función de densidad está dada por 
+Por otro lado y de acuerdo a la parametrización de la distribución gaussiana inversa dada en~\eqref{OtraIG}, si $X\sim IG(\omega,\eta)$ e $Y \sim \Gamma(L,L)$ el retorno $Z$ queda modelado por la distribución $ \mathcal{G}^H(\omega,\eta,L)$ con $\omega, \, \eta >0$ y $L \geq 1$, donde la función de densidad está dada por 
 \begin{align}
 \label{ModeloGH}
 f_{\text{Z}}( z) =\frac{L^L \sqrt{\frac{2 \omega  \eta }{\pi }} e^{\omega } \left(\frac{\omega }{\eta  (\omega  \eta +2 L
@@ -507,7 +507,7 @@ En este capítulo presentamos varias distribuciones que se utilizan para modelar
 	\item El modelo multiplicativo, que establece que el retorno $Z$ se modela como el producto de dos variables aleatorias: $X$ para la retrodispersión e $Y$ para el ruido speckle.
 \end{itemize} 
 
-Mostramos un abordaje donde se explica la naturaleza multiplicativa del ruido speckle. A partir de esto se propuso modelar al ruido speckle $Y$ con una distribución $\Gamma(L,L)$ en el caso de datos en formato intensidad y monopolarizados, donde $L$ es el número de looks. En cuanto a la retrodispersión $X$ se propone modelarla con una distribución Gaussiana Inversa Generalizada $N^{-1}(\alpha,\gamma,\lambda)$. Para valores particulares de los parámetros de la distribución $N^{-1}(\alpha,\gamma,\lambda)$, se obtienen las distribuciones $\Gamma(\alpha,\lambda)$, $\Gamma^{-1}(\alpha,\gamma)$ e $IG(\gamma, \lambda)$. Bajo el modelo multiplicativo estas distribuciones para la retrodispersión dan origen a las distribuciones $\mathcal{K}$, $\mathcal{G}_I^0$ y $\mathcal{G}^H$ para el retorno $Z$, respectivamente. 
+Mostramos un abordaje donde se explica la naturaleza multiplicativa del ruido speckle. A partir de esto se propuso modelar al ruido speckle $Y$ con una distribución $\Gamma(L,L)$ en el caso de datos en formato intensidad y monopolarizados, donde $L$ es el número de looks. En cuanto a la retrodispersión $X$ se propone modelarla con una distribución gaussiana inversa generalizada $N^{-1}(\alpha,\gamma,\lambda)$. Para valores particulares de los parámetros de la distribución $N^{-1}(\alpha,\gamma,\lambda)$, se obtienen las distribuciones $\Gamma(\alpha,\lambda)$, $\Gamma^{-1}(\alpha,\gamma)$ e $IG(\gamma, \lambda)$. Bajo el modelo multiplicativo estas distribuciones para la retrodispersión dan origen a las distribuciones $\mathcal{K}$, $\mathcal{G}_I^0$ y $\mathcal{G}^H$ para el retorno $Z$, respectivamente. 
 
 En esta tesis utilizamos el modelo $\mathcal{G}_I^0$ para datos de intensidad. Presentamos la función de distribución y demostramos que es una distribución que tiene colas pesadas.
 
@@ -551,4 +551,3 @@ Asimismo demostramos resultado sobre la convergencia uniforme de la distribució
 %\begin{dem}
 %	Es consecuencia de las proposiciones \ref{pr: convergencia} y \ref{pr: falpha>0}.
 %\end{dem}
-
