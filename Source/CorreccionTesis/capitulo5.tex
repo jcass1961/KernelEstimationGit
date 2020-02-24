@@ -80,7 +80,7 @@ A este valor de $\gamma$ lo llamaremos $\gamma^*$.
 
 Entonces, si $Z_1,\ldots Z_n$ una muestra de variables aleatorias independientes e idénticamente distribuidas donde 
 %%% ACF Mejor usá \gamma^*, y ¿no te olvidaste de L?
-$Z_i \sim f_{\mathcal G_I^0(\alpha,-\alpha-1)}(z)$,  el logaritmo de la función de verosimilitud bajo la condición~\eqref{gama*} es:
+$Z_i \sim f_{\mathcal G_I^0(\alpha,\gamma^*,L)}(z)$,  el logaritmo de la función de verosimilitud bajo la condición~\eqref{gama*} es:
 \begin{align}
 \nonumber \log (L(\alpha) \mid \vec{Z}=\vec{z})&=n(L \log L+\log \Gamma(L-\alpha)-\log \Gamma(-\alpha) -\alpha \log(-\alpha-1))\\
 & + (L-1) \sum_{i=1}^n \log(z_i)-(L-\alpha) \sum_{i=1}^n\log(-\alpha-1+z_i L).
@@ -90,7 +90,7 @@ $Z_i \sim f_{\mathcal G_I^0(\alpha,-\alpha-1)}(z)$,  el logaritmo de la función
 Por lo tanto, el estimador de Máxima Verosimilitud (MV) del parámetro de textura es:
 %%% ACF No sería bueno poner el espacio de búsqueda de \alpha?
 \begin{align}
-\widehat{\alpha}_{{\text{\tiny{MV}}}}=\arg\max_{\alpha} \log(L(\alpha)\mid \vec{Z}=\vec{z}).
+\widehat{\alpha}_{{\text{\tiny{MV}}}}=\arg\max_{\alpha \in (-\infty,-1)} \log(L(\alpha)\mid \vec{Z}=\vec{z}).
 \end{align}
 
 Algunos autores evaluaron la performance del estimador de Máxima Verosimilitud del parámetro de textura del modelo  $\mathcal G_I^0$. \citet{VasconcellosFrerySilva:CompStat} cuantificaron el sesgo de este estimador y propusieron una corrección de segundo orden de acuerdo a \citet{cox1968}. 
@@ -421,19 +421,19 @@ Para poder estudiar propiedades globales de estos estimadores como el MISE, se a
 Para el caso donde $f=f_{\mathcal{G}_I^0}$ las condiciones anteriores se cumplen para valores de $L$ mayores a $3/2$.
 
 %%% ACF ¿Acá no corresponde notación matemática?
-Llamaremos b* al valor del ancho de banda que minimiza el MISE, y MISE* al MISE cuando b=b*. Expresiones para b* y MISE* fueron desarrolladas por \citet{chensx2000} para el caso del núcleo $\Gamma$, y por \citet{Scaillet2004} para el caso de núcleo IG.
+Llamaremos $b*$ al valor del ancho de banda que minimiza el MISE, y MISE* al MISE cuando $b=b*$. Expresiones para $b*$ y MISE* fueron desarrolladas por \citet{chensx2000} para el caso del núcleo $\Gamma$, y por \citet{Scaillet2004} para el caso de núcleo IG.
 Se desarrollaron en el apéndice~\ref{byMiseOptLN} para el caso del núcleo LN. 
 
-Expresiones para b* y MISE* para los núcleos $\Gamma$, IG y LN  se dan a continuación. Se considera que $b \to 0$ cuando $n \to \infty$ y $n b^a \to +\infty$ cuando $n \to +\infty$ con $a=1/2$ para los núcleos $\Gamma$, IG y $a=1$ para núcleo LN.
+Expresiones para $b*$ y MISE* para los núcleos $\Gamma$, IG y LN  se dan a continuación. Se considera que $b \to 0$ cuando $n \to \infty$ y $n b^a \to +\infty$ cuando $n \to +\infty$ con $a=1/2$ para los núcleos $\Gamma$, IG y $a=1$ para núcleo LN.
 
 \begin{itemize}
 	\item Núcleo $\Gamma^1$
 	\begin{align}
 	\label{MISEoptGamma}
-	%\nonumber \text{MISE}(\widehat{f}_{\Gamma})=&b^2 \int_0^{\infty} (x f'(x)+\frac{1}{2} x f''(x))^2 dx + \frac{1}{2 \sqrt{\pi}} \frac{1}{n \sqrt{b}} \int_0^{\infty} x^{-1/2} f(x) dx \\
+	%\nonumber MISE(\widehat{f}_{\Gamma})=&b^2 \int_0^{\infty} (x f'(x)+\frac{1}{2} x f''(x))^2 dx + \frac{1}{2 \sqrt{\pi}} \frac{1}{n \sqrt{b}} \int_0^{\infty} x^{-1/2} f(x) dx \\
 	%\nonumber &+ o(\frac{1}{n \sqrt{b}}+b^2)\\
 	%\vspace{2cm}
-	\text{b}^*_{\Gamma^1}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}} \displaystyle{\int_{0}^{\infty}} x^{-1/2}f(x)dx \right]^{2/5}}
+	b^*_{\Gamma^1}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}} \displaystyle{\int_{0}^{\infty}} x^{-1/2}f(x)dx \right]^{2/5}}
 	{4^{2/5} \left[\displaystyle{\int_{0}^{\infty}} \left\{x f'(x) +\frac{1}{2} x f''(x)\right\}^2 dx \right]^{2/5}} n^{-2/5},\\
 	\nonumber \text{MISE}^*(\widehat{f}_{\Gamma^1})=&\dfrac{5}{4^{4/5}} \left[\frac{1}{2\sqrt{\pi}} \int_{0}^{\infty} x^{-1/2}f(x)dx \right]^{4/5} \\
 	&\times \left[\int_{0}^{\infty}  \left\{x f'(x) +\frac{1}{2} x f''(x)\right\}^2 dx \right]^{1/5} n^{-4/5}. 
@@ -441,7 +441,7 @@ Expresiones para b* y MISE* para los núcleos $\Gamma$, IG y LN  se dan a contin
 	\item Núcleo Inverso Gaussiano
 	\begin{align}
 	\label{MISEoptIG}
-	\text{b}^*_{\text{\tiny{IG}}}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}} \displaystyle{\int_{0}^{\infty}} x^{-3/2}f(x)dx \right]^{2/5}}
+	b^*_{\text{\tiny{IG}}}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}} \displaystyle{\int_{0}^{\infty}} x^{-3/2}f(x)dx \right]^{2/5}}
 	{ \left[\int_{0}^{\infty}(x^3 f''(x))^2 dx \right]^{2/5}} n^{-2/5},\\
 	\nonumber \text{MISE}^*_{\text{\tiny{IG}}}=&\dfrac{5}{4} \left[\frac{1}{2\sqrt{\pi}} \displaystyle{\int_{0}^{\infty}} x^{-3/2}f(x)dx \right]^{4/5} \\
 	&\times \left[\displaystyle{\int_{0}^{\infty}}  \left\{x^3 f''(x) \right\}^2 dx \right]^{1/5} n^{-4/5} .
@@ -449,7 +449,7 @@ Expresiones para b* y MISE* para los núcleos $\Gamma$, IG y LN  se dan a contin
 	\item Núcleo Lognormal
 	\begin{align}
 	\label{MISEoptLN}
-	\text{b}^*_{\text{\tiny{LN}}}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}}\displaystyle{\int_0^{+\infty}}\frac{f(x)}{x}\right]^{1/5}}{\left[\displaystyle{\int_0^{+\infty}} x^2(3f'(x)+xf''(x))^2\right]^{1/5}}n^{-1/5},\\
+	b^*_{\text{\tiny{LN}}}=&\dfrac{\left[\dfrac{1}{2\sqrt{\pi}}\displaystyle{\int_0^{+\infty}}\frac{f(x)}{x}\right]^{1/5}}{\left[\displaystyle{\int_0^{+\infty}} x^2(3f'(x)+xf''(x))^2\right]^{1/5}}n^{-1/5},\\
 	\nonumber \text{MISE}^*_{\text{\tiny{LN}}}=&\dfrac{5}{4}  \left[\dfrac{1}{2\sqrt{\pi}}\displaystyle{\int_{0}^{\infty}} \frac{f(x)}{x} \right]^{4/5} \\
 	&\times \left[\displaystyle{\int_{0}^{\infty}}  x^2 (3 f'(x) + x f''(x))^2 \right]^{1/5} n^{-4/5}.
 	\end{align}
@@ -478,13 +478,13 @@ En esta tesis se estudiarán dos estrategias para determinar el ancho de banda $
 El método LSCV consiste en encontrar el valor de $b$ que minimiza una aproximación del ISE. Observemos que, dada una muestra,
 \begin{align}
 \label{ISE}
-\text{ISE}(b)=&\int_\mathbb{R} (\widehat{f}_b-f)^2 dx \nonumber\\ 
+ISE(b)=&\int_\mathbb{R} (\widehat{f}_b-f)^2 dx \nonumber\\ 
 =& \int_\mathbb{R} \widehat{f}_b^2dx- 2 \int_\mathbb{R} \widehat{f}_b fdx +\int_\mathbb{R} f^2dx.
 \end{align}
 
 El último término de la ecuación~\eqref{ISE} no depende de $b$. Entonces
 \begin{align}
-\nonumber \min_b \text{ISE}(b)= \min_b \phi(\widehat{f}_b) \text{ donde } ,
+\nonumber \min_b ISE(b)= \min_b \phi(\widehat{f}_b) \text{ donde } ,
 \end{align}
 donde
 \begin{align}
@@ -1016,7 +1016,7 @@ Teniendo en cuenta ambos elementos se puede definir el MDE estimador, de una for
 \begin{align}
 \widehat{\theta}_n=\mathop{\rm argmin} \limits_{\theta\in\Omega} d(f_{\theta}, \widehat{f}_n),
 \end{align}
-donde $d$ es una medida de discrepancia, discimilaridad o distancia estocástica, entre la función de densidad teórica $f_{\theta}$ y un estimador no paramétrico $\widehat{f}_n$ de la densidad teórica.
+donde $d$ es una medida de discrepancia, disimilitud o distancia estocástica, entre la función de densidad teórica $f_{\theta}$ y un estimador no paramétrico $\widehat{f}_n$ de la densidad teórica.
 
 ¿Por qué proponer un nuevo estimador si se conocen las buenas propiedades asintóticas que tiene el MV estimador? Justamente, un buen estimador debe tener un buen comportamiento si los datos provienen del modelo asumido, pero además no debe sufrir grandes desvíos si los datos sufren perturbaciones que hacen que el verdadero modelo no sea completamente válido. 
 %Además, es necesario contar con estimadores que tengan un buen comportamiento para muestras de pequeño tamaño, ya que éstas son utilizadas por algunas técnicas de filtrado que recorren la imagen con ventanas deslizantes de tamaño chico.

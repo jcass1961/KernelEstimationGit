@@ -40,9 +40,10 @@
 \usepackage{url} %%%% para citar páginas web
 \usepackage{setspace} %% setea el espacio entre filas en una tabla
 
-\usepackage{siunitx} % for tabular's columns aligned on decimal symbol
+\usepackage[binary-units=true]{siunitx} % for tabular's columns aligned on decimal symbol
 \usepackage{etoolbox} % for siunitx with bold font
 \robustify\bfseries
+\DeclareSIUnit{\seg}{seg}
 
 \usepackage{float}
 
@@ -254,7 +255,6 @@
 \include{capitulo4}
 \include{capitulo5}
 \include{capitulo6}
-%\include{capitulo6_v2}
 \include{capitulo7}
 \include{capitulo8}
 
