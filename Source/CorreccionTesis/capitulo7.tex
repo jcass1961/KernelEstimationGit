@@ -52,7 +52,7 @@ donde $k_n$ es una sucesión que tiende a cero cuando $n$ tiende a infinito.
 
 En lo que sigue vamos a considerar:
 \begin{itemize}
-	\item $\mathcal{F}=\{f \in L^1(0,+\infty) \, / \, f \geq 0\}$.
+	\item $\mathcal{F}=\{f \in L^1(0,+\infty) : f \geq 0\}$.
 	\item $D(f,g)=d^{1/2}(f,g)$ y $f,g \in \mathcal{F} $ que, de acuerdo a la proposición~\ref{DTdistancia}, resulta una distancia en $\mathcal{F}$.
 	\item $\{\widehat{\alpha}_n\}_{n=1}^{\infty}$ los estimadores de mínima distancia dados en la definición~\eqref{EstMinDistRelajado}.
 	\item $\widehat{f}_n$ un estimador por núcleos asimétricos de la función de densidad subyacente dado en la definición~\ref{DefNucleo} y que cumple las condiciones del teorema~\ref{ConvergenciaFuerte}.
@@ -74,7 +74,7 @@ Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRe
 \begin{dem}
 	Por la continuidad de $f_{\alpha}(z)$ en $\alpha$, si $\alpha_{n} \to \alpha$, 
 	entonces $f_{\alpha_{n}}(z) \to f_{\alpha}(z)$ para todo $z>0$.
-	Siendo $f_{\alpha_{n}}$ y $f_{\alpha}$ densidades de probabilidad, por el Teorema de Scheffé publicado en su trabajo \citet{scheffe1947}, obtenemos
+	Siendo $f_{\alpha_{n}}$ y $f_{\alpha}$ densidades de probabilidad, por el Teorema de \citet{scheffe1947}, obtenemos
 	la convergencia en $L^{1}(0,\infty)$.
 \end{dem}
 
@@ -176,7 +176,7 @@ Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRe
 		\item Probemos que $\alpha_*$ es el único punto de acumulación de $\{\alpha_{n}\}_{n \ge 1}$.
 	\end{itemize}
 	
-	Como $\{\alpha_{n}\}_{n \ge 1}$ es una sucesión acotada tiene un punto de acumulación, digamos $\alpha_0$. Es decir, existe una subsucesión $\{\alpha_{n_{k}}\} \subset I$ tal que $\alpha_{n_{k}} \to \alpha_{0}$ cuando $k \to +\infty$. Entonces por proposición~\ref{continuidad} $\parallel f_{\alpha_{n_{k}}} - f_{\alpha_{0}}\parallel_{1} \to 0$ cuando $k \to +\infty$, luego por~\eqref{AcotacionDTporL1} $d(f_{\alpha_{n_k}},f_{\alpha_0}) \to 0$. Como por hipótesis $d(f_{\alpha_{n}},f_{\alpha_*}) \to 0$ resulta que $d(f_{\alpha_{n_k}},f_{\alpha_*}) \to 0$, por lo tanto, $f_{\alpha_0} = f_{\alpha_*}$. Entonces, por la identificabilidad del modelo, resulta que $\alpha_0=\alpha_*$.
+	Como $\{\alpha_{n}\}_{n \ge 1}$ es una sucesión acotada tiene un punto de acumulación, digamos $\alpha_0$. Es decir, existe una subsucesión $\{\alpha_{n_{k}}\} \subset I$ tal que $\alpha_{n_{k}} \to \alpha_{0}$ cuando $k \to +\infty$. Entonces por la proposición~\ref{continuidad} $\| f_{\alpha_{n_{k}}} - f_{\alpha_{0}}\|_{1} \to 0$ cuando $k \to +\infty$, luego por~\eqref{AcotacionDTporL1} $d(f_{\alpha_{n_k}},f_{\alpha_0}) \to 0$. Como por hipótesis $d(f_{\alpha_{n}},f_{\alpha_*}) \to 0$ resulta que $d(f_{\alpha_{n_k}},f_{\alpha_*}) \to 0$, por lo tanto, $f_{\alpha_0} = f_{\alpha_*}$. Entonces, por la identificabilidad del modelo, resulta que $\alpha_0=\alpha_*$.
 	
 	Si existiera otro punto de acumulación $\tilde{\alpha}_0$ aplicando el mismo razonamiento llegaríamos a que $\tilde{\alpha}_0=\alpha_*$.
 	
@@ -196,17 +196,17 @@ Para probar la convergencia fuerte del estimador definido en~\eqref{EstMinDistRe
 
 \begin{dem}
 	
-	Observemos que basta probar que $D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \stackrel{cs}{\longrightarrow} 0$ cuando $n \longrightarrow +\infty$, porque utilizando la proposición~\ref{CondivParr} habremos probado que $\widehat{\alpha}_n \stackrel{cs}{\longrightarrow} \alpha_{*}.$
+	Observemos que basta probar que $D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \stackrel{cs}{\longrightarrow} 0$ cuando $n \rightarrow +\infty$, porque utilizando la proposición~\ref{CondivParr} habremos probado que $\widehat{\alpha}_n \stackrel{cs}{\longrightarrow} \alpha_{*}.$
 	
     Por la desigualdad triangular se cumple que
 	\begin{align}
-	D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \leq D(f_{\alpha_{*}},\widehat{f}_n)+D(\widehat{f}_n,f_{\widehat{\alpha}_n})
+	D(f_{\alpha_{*}},f_{\widehat{\alpha}_n}) \leq D(f_{\alpha_{*}},\widehat{f}_n)+D(\widehat{f}_n,f_{\widehat{\alpha}_n}).
 	\end{align}
 \begin{itemize}
 	\item Probemos que $D(f_{\alpha_{*}},\widehat{f}_n) \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$.
 \end{itemize}
 	
-	Por hipótesis $\lim\limits_{n \to \infty} \dfrac{n b^{2r_1}}{\ln{n}}  = +\infty $, entonces de acuerdo al teorema~\ref{ConvergenciaFuerte} $\parallel f_{\alpha_{*}} -\widehat{f}_n\parallel_1 \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$. Recordando que por~\eqref{AcotacionDTporL1} $d(f_{\alpha_{*}},\widehat{f}_n) \leq \parallel f_{\alpha_{*}} -\widehat{f}_n\parallel_1$ entonces $D(f_{\alpha_{*}},\widehat{f}_n)=d^{1/2}(f_{\alpha_{*}},\widehat{f}_n) \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$. 
+	Por hipótesis $\lim\limits_{n \to \infty} \dfrac{n b^{2r_1}}{\ln{n}}  = +\infty $, entonces de acuerdo al teorema~\ref{ConvergenciaFuerte} $\| f_{\alpha_{*}} -\widehat{f}_n\|_1 \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$. Recordando que por~\eqref{AcotacionDTporL1} $d(f_{\alpha_{*}},\widehat{f}_n) \leq \| f_{\alpha_{*}} -\widehat{f}_n\|_1$ entonces $D(f_{\alpha_{*}},\widehat{f}_n)=d^{1/2}(f_{\alpha_{*}},\widehat{f}_n) \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$. 
 
 \begin{itemize}
 	\item Probemos que $D(\widehat{f}_n,f_{\widehat{\alpha}_n}) \stackrel{cs}{\longrightarrow} 0$ cuando $n \to +\infty$.
