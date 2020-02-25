@@ -49,7 +49,8 @@ Luego, para generar una muestra $Z_1, \ldots, Z_n$ de variables aleatorias indep
 	\item Generamos una muestra de tamaño $n$ de una variable aleatoria $Y \sim \Gamma(L,L)$.
 	\item Obtenemos $Z \sim \mathcal{G}_I^0(\alpha,\gamma,L)$ definiendo $Z=X \cdot Y$.
 \end{itemize}
-\citet{SamplingfromtheGI0Distribution2018} han estudiado diversas técnicas de simulación en varias plataformas computacionales.
+%\citet{SamplingfromtheGI0Distribution2018} han estudiado diversas técnicas de simulación en varias plataformas computacionales.
+\citet{Chan2017} han estudiado diversas técnicas de simulación en varias plataformas computacionales
 
 \section{Eligiendo distancias estocásticas}
 \label{EligiendoDistancias}
@@ -727,7 +728,7 @@ En la tabla~\ref{MiseyCantCasosNoConvergenciaL=3} se muestran los valores de $\w
 Se puede observar que:
 \begin{itemize}
 	\item Los valores del MISE son muy similares para los núcleos $\Gamma^1$ y $\Gamma^2$, por lo que se eligió el núcleo $\Gamma^1$ ya que presenta menor MISE en la mayoría de los casos planteados. A partir de ahora el núcleo $\Gamma^1$ se llamará $\Gamma$.
-	\item Los valores del $\widehat{MISE}$ correspondientes a los núcleos IG y con IGJstar son de varios órdenes de magnitud mayor a los otros núcleos.
+	\item Los valores del $\widehat{\text{MISE}}$ correspondientes a los núcleos IG y con IGJstar son de varios órdenes de magnitud mayor a los otros núcleos.
 \end{itemize} 
 
 Luego evaluamos la cantidad de casos de no convergencia de cada método. La tabla~\ref{MiseyCantCasosNoConvergenciaL=3} muestra el porcentaje de casos donde el valor de $\widehat{\alpha}=-20$, no se observaron situaciones donde $\widehat{\alpha}=-1.$ En negrita están marcados los casos donde se presentan el mayor porcentaje. Se puede observar que, en general, el núcleo IG es el que presenta mayor porcentaje de ocurrencias de no convergencia.
