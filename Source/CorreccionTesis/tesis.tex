@@ -1,5 +1,5 @@
 %\documentclass[a4paper,oneside,numbers,nobibtoc]{ezthesis}
-\documentclass[a4paper,oneside,spanish]{ezthesis}
+\documentclass[a4paper,twoside,spanish]{ezthesis}
 %\usepackage[a4paper]{geometry}
 %\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \renewcommand{\baselinestretch}{1.5}
@@ -52,6 +52,13 @@
 \usepackage[abs]{overpic}
 
 \usepackage{apalike}
+
+%-------Soluciona el problema de la página en blanco-----
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+	\clearpage
+	{\pagestyle{empty}\origdoublepage}%
+}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[chapter] % esto es para que lo numere como : capitulo. definicion
@@ -241,9 +248,19 @@
 
 \renewcommand{\tablename}{Tabla} 
 \renewcommand{\listtablename}{Indice de tablas}
-\tableofcontents
-\listoffigures
-\listoftables
+%\tableofcontents
+%\listoffigures
+%\listoftables
+
+\tableofcontents % indice de contenidos
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
+\listoffigures % indice de figuras
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
+\listoftables % indice de tabl
 
 %% # Cap'itulos #
 %% Por cada cap'itulo hay que crear un nuevo archivo e incluirlo aqu'i.
@@ -269,11 +286,11 @@
 %% Incluir la bibliograf'ia. Mirar el archivo "biblio.bib" para m'as detales
 %% y un ejemplo.
 %\bibliographystyle{agsm}
-\addcontentsline{toc}{chapter}{Bibliografí­a}
+%\addcontentsline{toc}{chapter}{Bibliografí­a}
 %\bibliographystyle{agsm}
-\bibliography{../../Bibliography/bib_julia}
-\label{bibliografia}
 
+\cleardoublepage
+\bibliography{../../Bibliography/bib_julia}
 
 
 \end{document}

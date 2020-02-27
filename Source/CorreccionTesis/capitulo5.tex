@@ -478,13 +478,13 @@ En esta tesis se estudiarán dos estrategias para determinar el ancho de banda $
 El método LSCV consiste en encontrar el valor de $b$ que minimiza una aproximación del ISE. Observemos que, dada una muestra,
 \begin{align}
 \label{ISE}
-ISE(b)=&\int_\mathbb{R} (\widehat{f}_b-f)^2 dx \nonumber\\ 
+\text{ISE}(b)=&\int_\mathbb{R} (\widehat{f}_b-f)^2 dx \nonumber\\ 
 =& \int_\mathbb{R} \widehat{f}_b^2dx- 2 \int_\mathbb{R} \widehat{f}_b fdx +\int_\mathbb{R} f^2dx.
 \end{align}
 
 El último término de la ecuación~\eqref{ISE} no depende de $b$. Entonces
 \begin{align}
-\nonumber \min_b ISE(b)= \min_b \phi(\widehat{f}_b) \text{ donde } ,
+\nonumber \min_b \text{ISE}(b)= \min_b \phi(\widehat{f}_b) \text{ donde } ,
 \end{align}
 donde
 \begin{align}
