@@ -124,7 +124,7 @@
 \begin{itemize}
 \item It is a non-Gaussian noise, and therefore, different from the noise present in optical images.
 \bigskip
-\item Is present in SAR images because it is inherent to the process of image capture.
+\item It is present in SAR images because it is inherent to the process of image capture.
 \bigskip
 \item A technique used to reduce this noise is to generate multiple views or looks of the image during its generation.
 %Una técnica utilizada para reducir este ruido es generan varias ¨vistas¨ o looks de la imgaen durante el proceso de generación de la misma.
@@ -190,7 +190,7 @@ The model is specified by the density
 f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 ) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
 L) }\cdot  
-\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }}%,
+\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},
 \label{ec_dens_gI0}
 \end{equation*}
 where $-\alpha,\gamma ,z>0$ and $L\geq 1$ are the texture, the scale and the number of looks.
@@ -198,7 +198,7 @@ where $-\alpha,\gamma ,z>0$ and $L\geq 1$ are the texture, the scale and the num
 The $r$th order moments are given by
 \begin{equation*}
 E(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }\cdot  
-\frac{\Gamma (L+r )}{\Gamma (L)} 
+\frac{\Gamma (L+r )}{\Gamma (L)} .
 \label{moments_gI0}
 \end{equation*}
 This moments are finite if $-\alpha > r$.
@@ -225,7 +225,7 @@ One of the most important features of the $\mathcal{G}_I^0$ distribution is the 
 %\end{block}
 
 \begin{block}{Purpose}
-	Make the results comparable, in the following we employ $\gamma^*$ such that $E(Z)=1$:  
+	In the following we employ $\gamma^*$ such that $E(Z)=1$, to make the results comparable:  
 	$$\gamma^* =-\alpha-1.$$ 
 \end{block}
 \end{frame}
@@ -238,9 +238,10 @@ One of the most important features of the $\mathcal{G}_I^0$ distribution is the 
 			\widehat{\alpha}_{{\text{\tiny{MV}}}}=\arg\max_{\alpha} \log(L(\alpha)/\vec{Z}=\vec{z}).
 		\end{align*}
 		\begin{align}
-			\nonumber \log(L(\alpha)/\vec{Z}=\vec{z})&=n(L \log(L)+log(\Gamma(L-\alpha))-\log(\Gamma(L))\\
+		%%% ACF Revisala, la segunda línea está rara
+			\nonumber \log(L(\alpha)/\vec{Z}=\vec{z})&=n(L \log(L)+\log[\Gamma(L-\alpha)]-\log(\Gamma(L))\\
 			\nonumber&-\log(\Gamma(-\alpha))-\alpha \log(-\alpha-1)) + (L-1) \sum_{i=1}^n \log(z_i))\\
-			\nonumber&-(L-\alpha) \sum_{i=1}^n(\log(-\alpha-1+z_i L))).
+			\nonumber&-(L-\alpha) \sum_{i=1}^n \log(-\alpha-1+z_i L).
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -311,7 +312,7 @@ One of the most important features of the $\mathcal{G}_I^0$ distribution is the 
 \begin{itemize}
 \item Stochastic Distances allow the comparison between two density functions. 
 \medskip
-\item We studied several distances and choose...
+\item We studied several distances and chose\dots
 \item Triangular Distance\\
 \medskip
 Let $V$ and $W$ be two random variables defined over the same probability space whose density functions are $f_V(x;\theta_1)$ and $f_W(x;\theta_2)$, respectively.
@@ -337,6 +338,7 @@ $$d_T(f_V,f_W)=\int_{-\infty}^{\infty}\frac{(f_V-f_W)^2}{f_V+f_W}dx.$$
 			\medskip
 			\item  $n\in\{9, 25,49, 81,121,500\}$
 			\item Initially estimate $\widehat{f}(z)$ with histograms.
+			%%% ACF Yo sacaría todo lo que se refiere a estimación con histograma
 			\item We evaluate the estimators through the bias and the mean squared error.
 		\end{itemize}
 	\end{block}
@@ -653,7 +655,7 @@ $$\widehat{\operatorname{mse}}(\widehat\alpha)=\frac{1}{500}{\sum_{i=1}^{500}{(\
 \begin{frame}
 	\frametitle{Stylized Samples}
 
-	Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed and one ranges over the support of the distribution. It depends on the particular sample so we use the $i^{th}$ quantile of the assumed distribution to characterize the typical observations.
+	The Empirical Influence Function shows the performance of the estimator $\widehat{\alpha}_{\text{\tiny{T}}}$ when $n-1$ observations are fixed, and one ranges over the support of the distribution. It depends on the particular sample so we use the $i^{th}$ quantile of the assumed distribution to characterize the typical observations.
 	
 	\begin{figure}
 		\centering
@@ -679,7 +681,7 @@ $$\widehat{\operatorname{mse}}(\widehat\alpha)=\frac{1}{500}{\sum_{i=1}^{500}{(\
 		\bigskip
 		\item 	For all compact interval $[z_{1},z_{2}]\subset{(0,\infty)}$, $f_{\mathcal{G}_I^0}$ converges uniformly to $0$ in $[z_{1},z_{2}]$ when $\alpha\to -1^{-}$.
 		\bigskip
-		\item Let $\widehat{\alpha}=\arg\min\limits_{\alpha\in [z_{1},z_{2}]} d_{\text{T}}(f_{\mathcal{G}_I^0},\widehat{f})$. Then $\widehat{\alpha}$ is a consistent estimator of $\alpha$, i.e. $\widehat{\alpha}_n \stackrel{p} {\longrightarrow} \alpha$ when $n \longrightarrow +\infty$.
+		\item Let $\widehat{\alpha}=\arg\min\limits_{\alpha\in [z_{1},z_{2}]} d_{\text{T}}(f_{\mathcal{G}_I^0},\widehat{f})$. Then $\widehat{\alpha}$ is a consistent estimator of $\alpha$, i.e. $\widehat{\alpha}_n \stackrel{p} {\longrightarrow} \alpha$ when $n \rightarrow +\infty$.
 	\end{itemize}
 \end{frame}
 
@@ -699,7 +701,7 @@ $$\widehat{\operatorname{mse}}(\widehat\alpha)=\frac{1}{500}{\sum_{i=1}^{500}{(\
 \begin{frame}
 \frametitle{Conclusions}
 \begin{itemize}
-	\item<1-> The $\widehat{\alpha}_{\text{\tiny{T}}}$ estimator perform very well for extreme textured and textured zones, as they outperform the $\widehat{\alpha}_{\text{\tiny{ML}}}$ estimator in almost all cases under study. %estimator in these cases in bias, and in all cases in mean squared error.
+	\item<1-> The $\widehat{\alpha}_{\text{\tiny{T}}}$ estimator performs very well for extreme textured and textured zones, as it outperforms the $\widehat{\alpha}_{\text{\tiny{ML}}}$ estimator in almost all cases under study. %estimator in these cases in bias, and in all cases in mean squared error.
 	\item<2-> The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using Stylized Empirical Influence Functions.
 %	\item<2-> The robustness of $\widehat\alpha_{\text{\tiny{T}}}$ with respect to $\widehat\alpha_{\text{\tiny{ML}}}$ was made evident by using stylized samples.
 	\bigskip
