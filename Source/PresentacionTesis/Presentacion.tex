@@ -1,0 +1,2506 @@
+\documentclass[11pt]{beamer}
+\usepackage{beamerthemesplit}
+
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc} 
+
+%\usetheme{CambridgeUS}
+%\usetheme{Warsaw}
+%\usefonttheme{structurebold}
+
+\definecolor{Gray}{gray}{0.9}
+%\definecolor{LightCyan}{rgb}{0.3,0.8,1}
+%\definecolor{LightCyan}{rgb}{1,.5,1}
+\definecolor{bluegreen}{RGB}{3, 166, 155}
+\definecolor{pitchblack}{RGB}{0, 0, 0}
+\definecolor{lightbeige}{RGB}{255, 251, 241}
+\definecolor{mediumgray}{RGB}{183, 183, 183}
+
+\usetheme{metropolis}
+\usepackage{appendixnumberbeamer}
+\setbeamercolor{frametitle}{bg=bluegreen,fg=white}
+\setbeamerfont{page number in head/foot}{size=\tiny}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{subfigure}
+\usepackage{rotating}
+\usepackage{color,url,natbib, colortbl}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{comment}
+
+\usepackage{multirow}
+\usepackage{booktabs} 
+\usepackage{stackengine}
+
+% Para lineación de números en una tabla
+\usepackage[binary-units=true]{siunitx} % for tabular's columns aligned on decimal symbol
+\usepackage{etoolbox} % for siunitx with bold font
+\robustify\bfseries
+\usepackage[]{xcolor}
+\sisetup{detect-weight=true, detect-family=true}
+
+
+%\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+\usepackage{bm}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage[active]{srcltx}
+\usepackage{color, colortbl}
+\setbeamercolor{structure}{fg=blue!70!black!}% to modify  immediately all palettes
+
+
+
+%------ caption
+\usepackage{caption}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\captionsetup{font=normalsize,labelfont={bf,sf}}
+
+
+
+\usepackage[first=0,last=9]{lcg}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+\newtheorem{definicion}{Definición}
+\newtheorem{Teorema}{Teorema}[section]
+
+\newcommand{\at}[2][]{#1|_{#2}}
+
+\newcolumntype{g}{>{\columncolor{LightCyan}}c}
+
+ %\usepackage[footnotesize]{caption} 
+\usepackage[font=scriptsize,labelfont=scriptsize]{caption}
+\setbeamercovered{dynamic}
+%\usepackage{bbding}
+\setbeamertemplate{navigation symbols}{} 
+
+\title[\hspace{2em}\insertframenumber/\inserttotalframenumber]{Estimación de parámetros en imágenes SAR Monopolarizadas usando distancias estocásticas y núcleos asimétricos}
+\author[\Tiny{Julia Cassetti}]{Julia Cassetti}
+%\institute{$^1$Universidad Nacional de General Sarmiento}
+\date{Marzo 2020}
+
+\AtBeginSection[]{\frame{\frametitle{Organización}\tableofcontents[current]}}
+
+\begin{document}
+	
+%\SI[parse-numbers = false]{\Gamma}{\Gamma}
+\frame{\titlepage}
+
+\section[Introducción]{Introducción}
+
+\begin{frame}
+	\frametitle{Radar de apertura sintética}
+	\begin{itemize}
+		\item Un radar de apertura sintética SAR es un sensor activo que ilumina la escena emitiendo señales en la región de microondas del espectro electromagnético.
+		\medskip
+		\item Está montado sobre plataformas móviles, lo que permite combinar la información de varios barridos de la antena recreando una antena más larga que la que en realidad tiene.
+%	\item A Synthetic Aperture Radar (SAR) is a system that processes, in software, the information captured by the radar antenna.
+%	\medskip
+%	\item This processing combines the information from several sweeps of the antenna to recreate a single ``virtual sweep''. 
+%	\medskip
+%	\item This processing provides the same performance as if it had a much larger antenna than the one it actually has.
+	\end{itemize}
+	\begin{figure} 
+	\includegraphics[scale=0.5]{../../Figures/Tesis/Capitulo3/AperturaSintetica.pdf}
+	\end{figure}
+
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Radares SAR en Argentina}
+%	\begin{itemize}
+%	\item En Argentina se est\'an desarrollando dos radares espaciales SAR para funcionar a bordo de los satélites SAOCOM.
+%	In Argentina two radars SAR are being developed to function  over the SAOCOM satelites
+%	\medskip
+%	\item This is a collaborating work between CONAE, CNEA, IAR e INVAP.
+%	\item Los satélites SAOCOM se encuentran en construcción y tienen fecha estimada de puesta en órbita para fines del año 2015 y fines de 2016. 
+%	\item Estos sat\'elites fueron diseñados específicamente para prevenir, monitorear, mitigar y evaluar catástrofes naturales.
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Ventajas y desventajas de los sensores SAR}
+	\begin{itemize}
+		\item Ventajas
+		\begin{itemize}
+		\item Tienen una fuente de iluminación propia que le permite adquirir imágenes tanto de día como de noche. %Esto Independence from sunlight: el radar de imágenes posee un sistema de iluminación propio que permite la adquisición tanto de día como de noche.
+		\medskip
+		\item Adquieren imágenes en forma independiente de las condiciones climáticas.%: la radiaci\'{o}n electromagn\'{e}tica a las frecuencias de ope\-raci\'{o}n de los sistemas SAR atraviesa las nubes sin atenuaci\'{o}n, por lo tanto el clima no es una limitación en el proceso de adquisición de imágenes.
+		%\item<3->\textbf{Operación en diferentes polarizaciones}%: la polarización del radar puede ser horizontal o vertical, esto permite obtener distintos tipos de información sobre una mismo objetivo.
+		\medskip
+		\item Proveen imágenes con alta resolución espacial.
+		\end{itemize}
+		\medskip
+		\item Desventajas
+		\begin{itemize}
+		\item Presencia de ruido speckle
+		\medskip
+		\item Bajo contraste
+		\medskip
+		\item Apariencia granulada.
+		\medskip
+		\item Difícil de analizar e interpretar.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{E-SAR, imagen de las afueras de la ciudad de Munich, Alemania}
+	\begin{figure}[ht]
+		\centering    
+		\subfigure[]{\includegraphics[width=.48\linewidth,height=5cm]{../../Images/test.png}}
+		\subfigure[]{\includegraphics[width=.48\linewidth,height=5cm]{../../Images/ImHorrible.pdf}}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ruido speckle}
+	\begin{itemize}
+		\item Es un ruido no Gaussiano y es inherente al proceso de captura de la imagen.
+		\bigskip
+		\begin{figure} 
+		\includegraphics[scale=0.65]{../../Figures/Tesis/Capitulo3/Backscatter2.pdf}
+		\end{figure}
+		\item La señal reflejada sufre un proceso de dispersión que depende de la textura del terreno.
+		\item Estas señales se suman de manera coherente en frecuencia causando variaciones en la intensidad de la señal que se traducen en la imagen como diferentes niveles de gris.
+		\item Esto explica el patrón granular que se observa en imágenes SAR.
+		%Se promedian estos looks generando una imagen multilook con menor ruido speckle pero perdiendo resolución.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Looks}
+	\begin{itemize}
+		\item Una técnica utilizada para reducir la presencia del ruido speckle es generar varias vistas o \textit{looks} durante el proceso de generación de la imagen.
+		%Una técnica utilizada para reducir este ruido es generan varias ¨vistas¨ o looks de la imgaen durante el proceso de generación de la misma.
+		\bigskip
+		\item Estos \textit{looks} se promedian generando una nueva imagen multilook con menor ruido pero con pérdida de resolución.
+		%Se promedian estos looks generando una imagen multilook con menor ruido speckle pero perdiendo resolución.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Polarización}
+	\begin{itemize}
+		\item La polarización de una onda electromagnética es la orientación del campo eléctrico de la señal transmitida o recibida.
+		\medskip
+		\item Los radares SAR emiten y reciben radiación horizontal o verticalmente polarizada.
+		\medskip
+		\item Si operan con una única polarización de emisión y detectan una sola componente en la radiación recibida, es un sistema SAR monopolarizado.
+	\end{itemize}
+	\begin{figure}[htb]
+	\setcounter{subfigure}{0}
+	\centering    
+	\subfigure[\small Horizontal]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Presentacion/polarizacion_horizontal.pdf}}
+	\subfigure[\small Vertical]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Presentacion/polarizacion_vertical.pdf}}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{En Argentina CONAE e INVAP}
+	\begin{itemize}
+		\item La misión SAOCOM (Satélite Argentino de Observación por Microondas), consiste en la puesta en órbita de dos constelaciones SAOCOM 1 y SAOCOM 2.
+		\bigskip
+		\item Cada constelación está formada por dos satélites. 
+		\begin{itemize}
+			\item SAOCOM 1A fue puesto en órbita en octubre de 2018.
+			\item SAOCOM 1B está programado para marzo de 2020.
+		\end{itemize}
+	\bigskip
+	\item Uno de los objetivos centrales es la medición de la humedad del suelo. Por eso operan en banda L que tiene la capacidad de penetrar a través de la superficie hasta $\SI{2}{\meter}$ de profundidad dependiendo del tipo de suelo.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Imagen obtenida con SAOCOM 1A}
+	\centering
+	\includegraphics[width=.6\linewidth]{../../Figures/Tesis/Presentacion/MuestraSaocomL1.pdf}
+\end{frame}
+
+%------------------------------------------------------------------
+\section{Modelo}
+
+\begin{frame}
+	\frametitle{Modelo Multiplicativo}
+%	\begin{flushleft}
+		\begin{itemize}
+			\item El retorno en imágenes SAR monopolarizadas puede modelarse como el producto de dos variables aleatorias independientes
+		\end{itemize}
+			\vspace{3mm}
+			\begin{block}{
+					\centering
+					$Z=X \cdot Y $}
+			\end{block}
+		\vspace{4mm}
+		
+			\begin{itemize}
+				\item X: retrodispersión
+				\item Y: ruido speckle
+				\item Z: retorno
+			\end{itemize}
+		
+%	\begin{minipage}{0.47\textwidth}
+%	\begin{itemize}
+%		\item X: retrodispersión
+%		\item Y: ruido speckle
+%		\item Z: retorno
+%	\end{itemize}
+%\end{minipage}
+%\begin{minipage}{0.5\textwidth}
+%	\begin{itemize}
+%		\item $X \sim \Gamma ^{-1}( \alpha ,\gamma ) $, 
+%		\vspace{1mm}
+%		\item $Y \sim \Gamma ( L,L) $
+%		\vspace{1mm}
+%		\item  $Z \sim \mathcal{G}_I^{0}( \alpha ,\gamma, L )$.
+%	\end{itemize}
+%\end{minipage}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Modelo estadístico}
+	\begin{itemize}
+		\item \citet{Frery97,Frery99} presentan la familia de distribuciones $\mathcal{G}^0$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A^0$ y $\mathcal{G}_I^0$ respectivamente.
+		\bigskip
+		\item Para el caso de datos de intensidad, si
+			\begin{itemize}
+			\item $X \sim \Gamma ^{-1}( \alpha ,\gamma ) $, 
+			\vspace{1mm}
+			\item $Y \sim \Gamma ( L,L) $, entonces
+			\vspace{1mm}
+			\item  $Z \sim \mathcal{G}_I^{0}( \alpha ,\gamma, L )$.
+		\end{itemize}
+		\bigskip
+			donde $-\alpha,\gamma ,z>0$ y $L\geq 1$ son el parámetro de textura, de brillo y el número de looks respectivamente.\\
+		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Densidad}
+	La función de densidad del retorno $Z$ esta dada por:
+	\begin{equation*}
+	f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
+		) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+		L) }\cdot  
+	\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }}%,
+	\label{ec_dens_gI0}
+	\end{equation*}
+
+	\bigskip
+	El momento de orden $r$  
+	\begin{equation*}
+	\label{momentos}
+	E(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }\cdot  
+	\frac{\Gamma (L+r )}{\Gamma (L)}, 
+	\end{equation*}
+	estos momentos son finitos si $-\alpha > r$.
+
+%	\bigskip
+%	\begin{itemize}
+%	\item Bajo este modelo se pueden caracterizar regiones con diferentes texturas a través de los parámetros de la distribución.
+%	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Densidad $\mathcal{G}_I^0(\alpha,-\alpha-1,3)$}
+\begin{figure}[hbt]
+	\setcounter{subfigure}{0}
+	\subfigure[Escala lineal]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo4/DensidadGI0L3.pdf}}
+	\subfigure[Escala semilogarítmica\label{EscalaSemiLog}]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo4/DensGI0_L3_Semilog.pdf}}
+	\end{figure} 
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Interpretación de parámetros}
+	
+	\begin{itemize}
+		\item Interpretación del parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ en términos de la textura de la zona observada.  
+	\vspace{3mm}	
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$\alpha$ & $(-1,-3]$ & $(-3,-6]$ & $(-6,-\infty)$\\
+			\hline
+			\small Textura & \small Extremadamente texturada &  \small Texturada & \small Sin textura\\
+			\hline
+		\end{tabular}
+	\end{table}%\pause
+	
+	\vspace{4mm}
+		
+		\item En lo siguiente vamos a emplear el valor $\gamma^*$ tal que $E(Z)=1$, 
+		\begin{tikzpicture}
+		\clip (-1,-1) rectangle (9,1);
+		\coordinate (a) at (0,0);
+		\coordinate (b) at (6.5,0);
+		\coordinate (c) at (1.5,0);
+		\coordinate (d) at (4,0);
+		\draw[->, >=latex, blue!20!white, line width=5pt]   (c) to node[black]{} (d) ;
+		\draw (a) node{$\gamma^* =-\alpha-1$  };
+		\draw (b) node{un parámetro para estimar};
+		\end{tikzpicture} 
+	\end{itemize}
+\begin{center}
+		   \fbox{\LARGE $
+		f_{\alpha,L}( z) =\frac{L^{L}\Gamma ( L-\alpha
+			) }{(-\alpha-1) ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+			L) }\cdot  \frac{z^{L-1}}{( -\alpha-1 +zL) ^{L-\alpha }}%,
+		$}
+\end{center}
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Objetivo}
+	
+	Proponer un nuevo método de estimación para el \textcolor{red}{parámetro de textura} de la distribución $\mathcal{G}_I^0(\alpha,-\alpha-1,L)$, que tenga
+	\bigskip
+	\begin{itemize}
+		\item  un buen comportamiento para \textcolor{red}{muestras de tamaño pequeño y moderado}.
+		\medskip
+		\item buenas propiedades midiéndolas en término del \textcolor{red}{ sesgo}, del \textcolor{red}{error cuadrático medio}, y de la capacidad para resistir \textcolor{red}{diferentes niveles de contaminación}.
+		\medskip
+		\item \textcolor{red}{bajo costo computacional}.
+	\end{itemize}	
+\end{frame}
+
+\section[MV]{Estimadores}
+
+\begin{frame}
+	\frametitle{Estimadores}
+	\begin{itemize}
+		\item Máxima Verosimilitud
+		\bigskip
+		\item Momentos
+		\bigskip
+		\item Logcumulantes
+		\bigskip
+		\item Mínima Distancia
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Máxima Verosimilitud}
+\begin{definicion}
+	\bigskip
+	Si $Z_1, \ldots, Z_n$ es una muestra de variables aleatorias i.i.d con función de densidad $f_{X;\theta}$  con $\theta \in \Theta \subset \mathbb{R}^k$, el estimador de Máxima Verosimilitud (MV) de $\theta$ es el valor que verifica que 
+	\begin{align*}
+	\widehat{\theta}_{{\text{\tiny{\text{MV}}}}}=\arg\max_{\vec{\theta} \in \Theta} L(\theta \mid \vec{Z}=\vec{z}),
+	\end{align*}
+	siendo $L(\theta \mid \vec{Z}=\vec{z})$ la función de verosimilitud.
+\end{definicion}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Máxima Verosimilitud}
+	Si $Z_i \sim f_{\alpha,L}$ con $L$ conocido,
+	\vspace{3mm}
+	\begin{itemize}
+		\item El MV estimador de $\alpha$, $\widehat\alpha_{\text{ML}}$,  es la solución de la siguiente ecuación no lineal
+		\begin{eqnarray*}
+			\small
+			&\psi^0(\widehat{\alpha}_{\text{ML}})-\psi^0(L-\widehat{\alpha}_{\text{ML}})-\log(1-\widehat{\alpha}_{\text{ML}})+
+			\dfrac{\widehat{\alpha}_{\text{ML}}}{1-\widehat{\alpha}_{\text{ML}}}+\\
+			&\dfrac{1}{n}\sum_{i=1}^n{\log(1-\widehat{\alpha}_{\text{ML}}+Lz_i)}- 
+			\dfrac{\widehat{\alpha}_{\text{ML}}-L}{n}\sum_{i	=1}^n \dfrac1{1-\widehat{\alpha}_{\text{ML}}+Lz_i}= 0 
+			\label{derloglikelihood_gI0}
+		\end{eqnarray*}
+		donde $\psi^0(\cdot)$ es la función digamma.
+
+		\bigskip
+		\item No hay solución explícita para esta ecuación.
+		\medskip
+		\item Por lo tanto rutinas numéricas son necesarias.  
+		%Se utilizó el algoritmo L-BFGS-B.
+	\end{itemize} 
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Momentos Fraccionales}
+	\begin{itemize}
+		\item Los estimadores por momentos fraccionales han sido usados por~\citet{Frery97}, entre otros autores, en el contexto de estimar el parámetro $\alpha$ para datos de amplitud.
+		\bigskip
+		\item Para el caso de datos de intensidad, usando la relación $\gamma^*=-\alpha-1$ se tiene que, $\widehat{\alpha}_\text{Mom12}$ es el valor de $\alpha$ que resuelve la ecuación:
+		\medskip
+		\begin{equation*}
+		\frac{1}{n} \sum_{i=1}^n \sqrt{Z_i} -\sqrt{\frac{-\widehat\alpha_{\text{Mom12}}-1}{L}}\frac{\Gamma ( -\widehat\alpha_{\text{Mom12}}-{\frac{1}{2}} )}{ \Gamma (-\widehat\alpha_{\text{Mom12}}) }
+		\frac{\Gamma (L+{\frac{1}{2}} )}{\Gamma (L)}=0.
+		\label{estim_moment1_2_gI0}
+		\end{equation*}
+		%donde $Z_1,\ldots,Z_n$ es una muestra de variables aleatorias i.i.d proveniente del modelo $\mathcal{G}_I^0$.
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Logcumulantes}
+%	\begin{itemize}
+%		\item Si $X \sim f_X$ donde $f_X$ tiene soporte positivo, ~\citet{nicolas2002} definen las funciones característica de segundo tipo a partir de de la transformada de Mellin de $f_X$.
+%		
+%		\bigskip
+%	\begin{minipage}{0.475\linewidth}
+%		\centering
+%		Primer función característica \\de $2º$ tipo
+%		\begin{align*}
+%		\Phi_{X}(s) = \mathbb{E}\left(X^{s-1}\right)
+%		\end{align*}
+%	\end{minipage}
+%		\begin{minipage}{0.5\linewidth}
+%			\centering
+%			Segunda función característica \\de $2º$ tipo
+%				\begin{align*}
+%				\eta_{X}(s) = {E}\left(\log\left(\Phi_{X}\right)\right)
+%				\end{align*}
+%						Cumulante de orden $n$
+%						\begin{align*}
+%						\kappa_{n} & = (-i)^{n} \, \left.\psi_{X}^{(n)}(t)\right|_{t = 0} \\ \vspace{12pt}
+%						\psi_{X}(t) & = \log(\phi_{X}(t))
+%						\end{align*}
+%						\begin{equation}
+%						\tilde{k}_r = \frac{d^r \log(\phi_x)(s)}{ds} \at[\Big]{s=1}. 
+%						\end{equation}
+%		\end{minipage}
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Logcumulantes}
+	\begin{itemize}
+		\item Si $X \sim f_X$ donde $f_X$ tiene soporte positivo, ~\citet{nicolas2002} definen las funciones característica de segundo tipo a partir de la transformada de Mellin de $f_X$.
+		
+		\bigskip
+		\begin{itemize}
+			\item Primer función característica \\de $2º$ tipo
+			\begin{align*}
+			\Phi_{X}(s) &= \displaystyle \int_{0}^{+\infty} x^{s-1} f_X(x)dx\\
+			            &=\mathbb{E}\left(X^{s-1}\right).
+			\end{align*}
+			\item Logcumulantes de orden $r$
+			\begin{align*}
+			\tilde{k}_r = \frac{d^r \log(\phi_x)(s)}{ds^r} \at[\Big]{s=1}. 
+			\end{align*}		
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Logcumulantes}
+%	\begin{itemize}
+%		\item Es conocida la relación que existe entre los momentos y la función característica de una variable aleatoria con la transformada de Fourier de su función de densidad.
+%		\bigskip
+%		\item ~\citet{nicolas2002} proponen utilizar la transformada de Mellin en lugar de la transformada de Fourier para el caso donde la función de densidad $f_X$ de la variable aleatoria $X$ tiene soporte positivo.
+%	\end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%	\frametitle{Logcumulantes}
+%	\begin{minipage}{0.475\linewidth}
+%		
+%		\centering
+%		
+%		Transformada de Fourier \vspace{4pt}
+%		
+%		Función características de $1º$ tipo
+%		\begin{align*}
+%		\phi_{X}(t) & = \mathbb{E}\left(e^{i t X}\right)
+%		\end{align*}
+%		
+%		Momento de orden $n$
+%		\begin{align*}
+%		m_{n} & = \mathbb{E}\left(X^{n}\right) \\
+%		      & = (-i)^{n} \, \left.\phi_{X}^{(n)}(t)\right|_{t = 0}
+%		\end{align*}
+%		
+%		Cumulante de orden $n$
+%		\begin{align*}
+%		\kappa_{n} & = (-i)^{n} \, \left.\psi_{X}^{(n)}(t)\right|_{t = 0} \\ \vspace{12pt}
+%		\psi_{X}(t) & = \log(\phi_{X}(t))
+%		\end{align*}
+%	\end{minipage}
+%	\begin{minipage}{0.475\linewidth}
+%		\centering
+%	
+%		Transformada de Mellin \vspace{4pt}
+%		
+%		Función características de $2º$ tipo
+%		\begin{align*}
+%		\Phi_{X}(s) = \mathbb{E}\left(X^{s-1}\right)
+%		\end{align*}
+%		
+%		Logmomento de orden $n$
+%		\begin{align*}
+%		\tilde{m}_{n} & = \mathbb{E}\left(log(X)^{n}\right) \\
+%		              & = (-i)^{n} \, \left.\Phi_{X}^{(n)}(s)\right|_{s = 0}
+%		\end{align*}
+%		
+%		
+%		Logcumulante de orden $n$
+%		\begin{align*}
+%		\tilde{\kappa}_{n} & = (-i)^{n} \, \left.\Psi_{X}^{(n)}(t)\right|_{s = 0} \\ \vspace{12pt}
+%		\Psi_{X}(s) & = \log(\Phi_{X}(s))
+%		\end{align*}
+%	\end{minipage}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Logcumulantes}
+	\begin{itemize}
+		\item Si $Z_1,\ldots,Z_n$ con $Z_i \sim f_{\alpha,L}$ es una muestra i.i.d., el estimador Logcumulantes del parámetro de textura $\alpha$, que lo llamaremos $\widehat\alpha_{\text{\tiny{LC}}}$, es la solución de la ecuación    
+%		\begin{align*}
+%		\widehat{\widetilde{k}}_1 =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) - \Psi^0(-\alpha),
+%		\end{align*}
+%		es decir, la solución de la ecuación
+		\begin{align*} \label{eq:logm}
+		\frac{1}{n} \sum_{i=1}^n\log (z_i) =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) + \Psi^0(-\alpha).
+		\end{align*}
+		donde $\Psi^0(\cdot)$ es la función digamma.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mínima Distancia}
+	\begin{itemize}
+		\item La estimación por mínima distancia (MDE) constituye una metodología que permite encontrar nuevos estimadores de los parámetros de una distribución. 
+		\bigskip
+		\item Su propósito es encontrar los valores de los parámetros que hacen que el modelo teórico esté lo más cerca posible de la información que provee la muestra. 
+		\bigskip
+		\item En este sentido hay dos elementos involucrados: 
+		\begin{itemize}
+			\item la medida de distancia que permite cuantificar la proximidad,
+			\medskip
+			\item es la información que proviene de la muestra.
+		\end{itemize}  
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mínima Distancia}
+	\begin{itemize}
+		\item Teniendo en cuenta ambos elementos,si $Z_1,\ldots,Z_n$ es una muestra i.i.d. donde $Z_i \sim f_{\alpha,L}$  se define al MDE del parámetro $\alpha$ como
+		\begin{align*}
+		\widehat{\alpha}_n=\mathop{\rm argmin} \limits_{\alpha < -1} d(f_{\alpha,L}, \widehat{f}_n),
+		\end{align*}
+		donde 
+		\item $d$ es una medida de distancia, divergencia o distancia estocástica,
+		\medskip
+		\item $f_{\alpha,L}$ la función de densidad del modelo $\mathcal{G}_I^0$ en función de $\alpha$,
+		\medskip
+		\item $\widehat{f}_n$ un estimador no paramétrico de la función de densidad subyacente.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mínima Distancia}
+	Entonces hay que definir:
+	\bigskip
+	\begin{itemize}
+		\item qué medida de distancia se va a utilizar.
+		\bigskip
+		\item qué estimador no paramétrico $\widehat{f}_n$ de la función de densidad subyacente.
+	\end{itemize}
+
+\end{frame}
+
+
+\section{Distancias Estocásticas}
+
+%\begin{frame}
+%	\frametitle{Medida de Información}
+%	\begin{itemize}
+%		\item Es conocido el aporte que realizó Claude E. Shannon a la creaci\'on de lo que se conoce como \textit{Teoría de la Información}. 
+%		\bigskip
+%		\item En~\citet{Shannon1948} el autor propone una nueva manera de medir la transmisi\'on de informaci\'on a trav\'es de un canal, pensando a la informci\'on como un concepto estad\'istico.
+%		\bigskip
+%		\item Define lo que se conoce como entropía de Shannon que, para el caso discreto y	considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entrop\'ia de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log(p_i)$.
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Medida de Información}
+%	\begin{itemize}
+%		\item~\citet{KullbackLeibler1951} estaban interesados en proponer una medida que discrimine dos poblaciones, su inter\'es era definir una magnitud que indique la diferencia entre dos funciones de densidad pensando en una generalizaci\'on de la entrop\'ia de Shannon. Entonces, en el caso continuo la divergencia KL se define como 
+%		\begin{align*}
+%		d_{\text{\tiny{KL}}}(f \rVert g)=\int_{S} f(x) \log\dfrac{f(x)}{g(x)} dx,
+%		\end{align*} 
+%		donde $f(x)$ y $g(x)$ representan funciones de densidad con soporte común $S$. 
+%	\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{Medida de Información}
+%
+%	\begin{definicion}[$h,\phi \text{-} divergencias$]
+%	\label{fiDivergencia}
+%	Sean $f(x)$ y $g(x)$ dos funciones de densidad con soporte común $S$. Entonces para toda función convexa $\phi:[0,+\infty)\longrightarrow \mathbb{R}$ tal que $\phi(1)=0$ la y $h: (0,+\infty)\longrightarrow [0,+\infty)$ es una función estrictamente creciente que verifica que $h(0)=0$ entonces se define la $\left(h,\phi\right) \text{-} divergencia$ como
+%	\begin{align*}
+%	d^h_{\phi}(f, g)=h\left(\int_{S} \phi\left(\dfrac{f(x)}{g(x)}\right) g(x) \ dx\right)=h\left(E_{g}\left(\phi\left(\dfrac{f}{g}\right)\right)\right).
+%	\end{align*}
+%	\end{definicion}
+%
+%	\begin{itemize}
+%	\item Estas medidas fueron propuestas por ~\citet{Salicru1994} e incluyen a las $\phi \text{-} divergencias$ presentadas por~\citet{Csiszar1967}  entre otras medidas. 
+%	\vspace{1mm}
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Medida de Información}
+	\begin{itemize}
+		\item La teoría de la información brinda una noción de discrepancia entre funciones de densidad.
+		\vspace{3mm}
+		\item Estas medidas no son métricas porque no cumplen la desigualdad triangular, pero son simétricas y cumplen que $d^h_{\phi}(f, g) \geq 0.$ Además, si $f=g$ entonces $d^h_{\phi}(f, f)= 0$.
+		\vspace{3mm}
+		\item Estas medidas fueron estudiadas en~\cite{Nascimento2009} para datos SAR modelados por la distriución $\mathcal{G}_I^0$, en el contexto de cuantificar cuán distinguibles son dos regiones de una imagen.
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Medida de Información}
+%	\begin{itemize}
+%		\item Las $(h,\phi) \text{-} divergencias$ fueron estudiadas en~\cite{Nascimento2009} para datos SAR modelados por la distriución $\mathcal{G}_I^0$, en el contexto de cuantificar cuán distinguibles son dos regiones de una imagen.
+%		\vspace{3mm}
+%		\item Estas medidas no son métricas porque no cumplen la desigualdad triangular, pero son simétricas y cumplen que $d^h_{\phi}(f, g) \geq 0.$ Además, si $f=g$ entonces $d^h_{\phi}(f, f)= 0$.
+%		\vspace{3mm}
+%		\item Algunas de estas medidas son:
+%	\end{itemize}
+%\end{frame}
+	
+\begin{frame}
+	\frametitle{Distancias estocásticas}
+	\begin{itemize}
+	\item \textcolor{red}{\textbf{Hellinger}}
+	\begin{align*} 
+	d_{\text{\tiny{H}}}(f,g)=\dfrac{1}{2} \displaystyle \int_{S} \left(\sqrt{f(x)}-\sqrt{g(x)}\right)^2 dx,
+	\end{align*}
+	%donde $\phi(x)=\left(\sqrt{x}-1\right)^2$ y $h(y)=y/2$ con $0\leq y <2$.
+	\vspace{3mm}
+	\item \textcolor{red}{\textbf{Bhattacharyya}}
+	\begin{align*}
+	%\label{Bhattacharyya}
+	d_{\text{\tiny{B}}}(f,g)=-\log \displaystyle \int_{S} \sqrt{f(x) g(x)} dx,
+	\end{align*}
+	\vspace{3mm}
+	%donde $\phi(x)=-\sqrt{x}+\dfrac{x+1}{2}$ y $h(y)=-\log(-y+1)$ con $0\leq y<1$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ Distancia entre $\mathcal{G}_I^0(\alpha,-\alpha-1,3)$ y $\mathcal{G}_I^0(-3,2,3)$}
+	\bigskip
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[width=.8\linewidth]{../../figures/tesis/Presentacion/TodaDistancia2.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Distancias estocásticas}
+	\begin{itemize}
+	\item \textcolor{red}{\textbf{Triangular}}
+	\begin{align*}
+	%\label{triangular}
+	d_{\text{\tiny{T}}}(f,g)=\displaystyle \int_{S} \dfrac{\left(f(x)-g(x)\right)^2}{f(x)+g(x)} \ dx,
+	\end{align*}
+	%donde $\phi(x)=\dfrac{\left(x-1 \right)^2}{x+1}$  y $h(y)=y$ con $0\leq y <2$.
+	\vspace{4mm}
+	\item \textcolor{red}{\textbf{R\'enyi de orden} $\boldsymbol{\beta\in(0,1)}$ \textbf{simetrizada}}
+	\begin{align*}
+	d_\text{\tiny{R}}^{\beta}(f,g)&=\frac{1}{2(\beta-1)}\left[\log\int_{S}f(x)^{\beta}g(x)^{1-\beta} dx+ \right.\\
+		&\left. \log\int_{S}f(x)^{1-\beta}g(x)^{\beta} dx\right],
+	\end{align*}
+%	%donde $\phi(x)=\dfrac{x^{\beta}-\beta(x-1)-1}{\beta-1} \text{ con } 0 < \beta < 1, \text{ y }$  
+%	%$$h(y)=\dfrac{1}{\beta-1}\log((\beta-1)y+1) \text{ con } 0\leq y<\dfrac{1}{1-\beta}.$$
+\end{itemize}
+\end{frame}
+
+
+
+
+\section{Núcleos Asimétricos}
+
+\begin{frame}
+	\frametitle{Núcleos Asimétricos}
+	\begin{block}{}
+		Cuando el soporte de la función de densidad a estimar no es acotado los núcleos simétricos tienen un buen desempeño y han sido muy estudiados.
+	\end{block}{}
+	\bigskip
+	Pero\ldots
+	\bigskip
+	\begin{alertblock}{}
+		Cuando el soporte de dicha función de densidad es acotado o semiacotado, los núcleos simétricos sufren de sesgo en el borde del soporte.
+	\end{alertblock}{}
+	\medskip
+	\begin{alertblock}{}
+		Porque asignan probabilidad positiva fuera del soporte de la densidad cuando la estimación se realiza cerca del borde.
+	\end{alertblock}{}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Núcleos Asimétricos}
+	Una forma de resolver el problema es utilizar núcleos simétricos.
+	\begin{definicion}
+	\label{DefNucleo}
+	Sea $Z_1, \ldots, Z_n$ una muestra aleatoria donde $Z_i \sim f$ con $f$ la función de densidad teórica, el estimador $\widehat{f}_n$ de $f$ utlizando núcleos asimétricos se define como 
+	%Asumiendo que $\int_0^{\infty} f'^2(x)dx$ y $\int_0^{\infty} (xf''(x))^2dx$ son finitas,  
+	\begin{equation*}
+	\widehat{f}_n(x)=\frac{1}{n}\sum_{i=1}^n K_{x,b}(Z_i), \quad x \in Sop(f)
+	\label{fn}
+	\end{equation*}
+	donde  $b=b_n>0$ es el ancho de banda  y el núcleo $K_{x,b}$ es una función de densidad continua en su soporte.
+	\end{definicion}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alguno de los núcleos estudiados}
+	\begin{itemize}
+	\item Los núcleos Gamma ($\Gamma$) que fueron propuestos por~\citet{chensx2000}.
+	\bigskip
+	\item El Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG) propuesto por~\citet{Scaillet2004} .
+	\bigskip
+	\item El núcleo Lognormal (LN) estudiado en~\citet{Libnegue2013} .
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Núcleos Asimétricos}
+	%	\begin{subequations}
+	%		\label{NucleosAsimetricosUsados}
+	\begin{align*}
+	K_{\tiny \Gamma_{\left(\frac{x}{b}+1,b\right)}}(t) & =\frac{1}{\Gamma(\frac{x}{b}+1)b^{\frac{x}{b}+1}} t^{-{x}/{b}} \exp\{-{t}/{b}\},\\
+	\\
+	%		K_{\tiny \Gamma^2_{({\rho}_b(x),b})}(t) \text{ donde }
+	%		\rho_b (x)&= \left\{
+	%		\begin{array}{c l}
+	%		x/b & 2 b \leq  x \\
+	%		\\
+	%		\frac{1}{4}(x/b)^2+1 & x \in [0,2 b),\\
+	%		\end{array}
+	%		\right.\\
+	%		\\
+	K_{\text{\tiny IG}_{\left( x;\frac{1}{b}\right)}}(t) & =\frac{1}{\sqrt{2\pi b \, t^3}} 
+	\exp\Big\{-\frac{1}{2b x} \Big(\frac{t}{x}+\frac{x}{t}-2\Big)\Big\},\\
+	\\
+	K_{{\text{\tiny LN}}_{\left(log(x)+b^2,b \right)}}(t) & =\frac{1}{t\,b \sqrt{2 \pi}} \exp\Big\{-\frac{\left(\log t - \log x -b^2\right)^2}{2b^2}\Big\},
+	\end{align*}
+	para $t,x,b>0$.
+	%	\end{subequations}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alguno de los núcleos estudiados}
+	\begin{itemize}
+		\item Todos estos núcleos tienen soporte en $[0,+\infty)$, no asignan peso fuera del soporte de la distribución.
+		\medskip
+		\item \citet{Scaillet2004} indica que el sesgo en el borde de los núcleos $\Gamma$, IG y RIG el sesgo en el borde es un $O(b)$.
+		\medskip
+		\item \citet{Libnegue2013} indica que el sesgo correspondiente al núcleo LN es un $O(b^2)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Estimación de $\mathcal{G}_I^0(-1.5,0.5,3)$ y $n=10$ con núcleo LN}
+	\begin{figure}[htb]
+		\captionsetup[subfigure]{labelformat=empty}
+		\includegraphics[width=.8\linewidth]{../../Figures/Tesis/Capitulo5/EstimacionDensidadconLN.pdf}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Estimación de $\mathcal{G}_I^0(-5,4,8)$ y $n=25$}
+	\begin{figure}[htb]
+		\captionsetup[subfigure]{labelformat=empty}
+		\includegraphics[width=.8\linewidth]{../../Figures/Tesis/Capitulo5/NucleosGALNyIG.pdf}
+	\end{figure}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Núcleos Asimétricos}
+%	Se consideraron estos núcleos porque, para modelar a la retrodispersión,
+%	\bigskip
+%	\begin{itemize}
+%		\item  el modelo $\mathcal{G}_I^0$ propone a la distribución $\Gamma^{-1}$.
+%		\medskip
+%		\item  el modelo $\mathcal{G}^H$ considera la distribución $IG$. 
+%		\medskip
+%		\item la distribución Lognormal fue propuesta como modelo empírico para describir datos SAR.
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}
+	\frametitle{Propuesta}
+	\begin{itemize}
+		\item Estimar el parámetro de textura $\alpha$ como
+		\begin{align*}
+		\label{PropuestaMDE}
+		\widehat{\alpha}=\mathop{\rm argmin} \limits_{\alpha<-1} d(f_{\alpha,L}, \widehat{f}_n)
+		\end{align*}
+		donde 
+	\item $d$ es una distancia estocástica 
+	\medskip
+	\item $\widehat{f}_n$ es un estimador no paramétrico de $f_{\alpha,L}$ utilizando núcleos asimétricos.
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Propuesta}
+%	\begin{itemize}
+%	\item A través de un estudio por simulación Monte Carlo, daremos argumentos que sugieren que:
+%	\bigskip
+%	\begin{itemize}
+%		\item Los núcleos asimétricos ofrecen una buena alternativa para estimar $\widehat{f}_n$ en forma no paramétrica. 
+%		\bigskip
+%		\item En particular los núcleos $\Gamma$ y LN son una buena elección.
+%		\bigskip
+%		\item La distancia triangular es una buena medida de discrepancia para este caso.
+%		\bigskip
+%	\end{itemize}
+%\end{itemize}
+% \end{frame}
+
+
+\section{Simulaciones}
+
+\begin{frame}
+	\frametitle{Primer trabajo}
+%	J. Cassetti, J. Gambini, A. Frery - Estimación de Parámetros utilizando
+%	Distancias Estocásticas para Datos con Ruido Speckle, Anales de la
+%	42 JAIIO - 2013 - ISSN 1850-2776.
+	\begin{itemize}
+		\item Elegimos la distancia: Hellinger, Triangular y Rényi de orden $\beta=0.8$.
+		\bigskip
+		\item Se realizaron $1000$ replicaciones generando muestras i.i.d de $Z_i \sim f_{\alpha,L}$ donde el espacio paramétrico está formado por:
+	\vspace{2mm}
+	\begin{itemize}
+		
+		\item Tamaño de muestra: $n=\{9, 25,49, 81,121,1000\}$. 
+		\medskip
+		\item Textura: $\alpha=\{-1.5, -3, -5, -8\}$ para modelar diferentes texturas.
+		\medskip
+		\item Looks: $L=\{1,3,8\}$, para modelar varios niveles de procesamiento.
+%		\item La elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan ventanas deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. 
+%		\item Se consideró también una muestra de tamaño $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+	
+%	\begin{frame}
+%		\frametitle{Diseñando el experimento}
+%		\begin{itemize}
+%			\item Textura: $\alpha=\{-1.5, -3, -5, -8\}$. Con estos valores se describen regiones:
+%			\begin{itemize}
+%				\item homogéneas $(\alpha=-8)$, superficies con poca textura como lagos, áreas de deforestación,
+%				plantaciones, desiertos y regiones nevadas.
+%				\vspace{1mm}
+%				\item texturadas $(\alpha=\{-3,-5\})$ poco más de textura como, por ejemplo, zona de bosques.
+%				\vspace{1mm}
+%				\item muy texturadas $(\alpha=-1.5)$ como las zonas urbanas.
+%			\end{itemize}
+%			\medskip
+%		\item Looks: $L=\{1,3,8\}$, para modelar varios niveles de procesamiento.
+%		\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Experimento}
+	En cada replicación \textit{i}:
+	\bigskip
+	\begin{itemize}
+		\item se estima $\widehat{f}$ utilizando histogramas.
+		\medskip
+		\item se utiliza el método de Freedman Diaconis para elegir el ancho de banda $b$ dado por $b=2 \ \text{IQR}(z_1,\ldots,z_n) n^{-1/3}$ donde $\text{IQR}$ es el rango intercuartil.
+		\medskip
+		\item se calcula $\widehat{\alpha_i}= \mathop{\text{argmin}}\limits_{-10 \leq \alpha <-1}d(f_{\mathcal{G}_I^0(\alpha,-\alpha-1,L)},\widehat{f})$ donde $d$ es alguna de las distancias estocásticas consideradas.
+		\medskip
+		\item el mínimo se encontró recorriendo un rango de valores de $\alpha \in [-10,-1)$.
+	\end{itemize} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Experimento}
+	Estimamos:
+	\bigskip
+	\begin{itemize}
+		\item $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$
+		\medskip
+		\item $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$
+		\medskip
+		\item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$
+	\end{itemize}
+\metroset{block=fill}
+\begin{alertblock}{Alert}
+	Block content.
+\end{alertblock}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$1$}
+%	\begin{figure}[htb]
+%		\centering    
+%		\setcounter{subfigure}{0}
+%		\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L1ypercentil.pdf}}
+%		\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L1ypercentil.pdf}}
+%	\end{figure}	
+%\end{frame}
+
+\begin{frame}
+	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$3$}
+	\begin{figure}[htb]
+		\setcounter{subfigure}{0}
+		\centering    
+		\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L3ypercentil.pdf}}
+		\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
+	\end{figure}	
+\end{frame}
+
+\setcounter{subfigure}{0}
+%\subfloat[S][]
+
+%\begin{frame}
+%	\frametitle{ Imagen E-SAR, L=$1$}
+%	Resultado de estimar el parámetro $\alpha$ para cada pixel, usando ventanas deslizantes de tamaño $7\times 7$.
+%	
+%		\begin{minipage}[b]{0.45\linewidth} %Una minipágina que cubre la mitad de la página
+%			\begin{figure}[htb]
+%				\footnotesize
+%			\begin{center}
+%			\includegraphics[width=.6\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible.pdf}\\
+%			\caption*{Imagen Real}
+%			\end{center}
+%		\vspace{0.8cm}
+%			\end{figure}
+%		\end{minipage}
+%	\begin{minipage}[b]{0.45\linewidth}
+%		\begin{figure}[htb]
+%			\captionsetup[subfigure]{labelformat=empty}
+%			\subfigure[\label{Real1DH} Hellinger.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DH7x7.pdf}}
+%			\subfigure[\label{Real1DR} R\'enyi, $\beta=0.8$.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DR7x7.pdf}}
+%			\subfigure[\label{Real1DT} Triangular.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DT7x7.pdf}}
+%			\subfigure[\label{Real1MV} MV.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_MV7x7.pdf}}
+%			%\caption{\small Resultado de estimar el parámetro $\alpha$ para cada pixel, usando ventanas deslizantes de tamaño $7\times 7$.}
+%		\end{figure}
+%		\end{minipage}
+%%		\begin{minipage}[b]{0.45\linewidth}
+%%		\begin{figure}[htb]
+%%			\subfigure[\label{Real1DH} Hellinger.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DH7x7.pdf}}
+%%			\subfigure[\label{Real1DR} R\'enyi, $\beta=0.8$.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DR7x7.pdf}}
+%%			\subfigure[\label{Real1DT} Triangular.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_DT7x7.pdf}}
+%%			\subfigure[\label{Real1MV} MV.]{\includegraphics[width=.44\linewidth]{../../Figures/Tesis/Capitulo6/ImHorrible_MV7x7.pdf}}
+%%			%\caption{\small Resultado de estimar el parámetro $\alpha$ para cada pixel, usando ventanas deslizantes de tamaño $7\times 7$.}
+%%		\end{figure}
+%%	\end{minipage}
+%\end{frame}
+
+
+\begin{frame}
+	\frametitle{Segundo trabajo}
+ %Presentamos mejoras ya que: 
+	
+	\begin{itemize}
+		\item Se emplearon núcleos asimétricos en lugar de histogramas para estimar la función de densidad subyacente.
+		\medskip
+		\item Se compararon los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con el MV estimador ($\widehat{\alpha}_{\text{\tiny{MV}}}$), Momentos Fraccionales ($\widehat{\alpha}_{\text{\tiny{Mom12}}}$) y Logcumulantes ($\widehat{\alpha}_{\text{\tiny{LC}}}$). 
+		\medskip
+		\item Se evaluó el impacto de la contaminación en la estimación de $\alpha$.
+		\medskip
+		\item Se tomó el ancho de banda $b=\dfrac{1}{2\sqrt{n}}$.
+		\medskip
+		\item Se consideró $\alpha \in [-20,-1)$ pues...
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Densidad de $\mathcal{G}_I^0(\alpha,\gamma^*,L)$}
+	\begin{figure}[H]
+		\centering
+		\setcounter{subfigure}{0}
+		\subfigure[L=3]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L3.pdf}}
+		\subfigure[L=8]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L8.pdf}}
+	\end{figure}
+\end{frame}
+%width=.45\linewidth
+%\begin{frame}
+%\begin{itemize}
+%	\item J. Cassetti, J. Gambini, A. Frery - Parameter Estimation in SAR Imagery
+%	using Stochastic Distances - The 4th Asia-Pacific Conference on
+%	Synthetic Aperture Radar, Tsukuba, Japón - pp. 573-576 - 2013- INSPEC
+%	Accession Number: 14026655.
+%	\bigskip
+%	\item M. Gambini, J. Cassetti, M. Lucini, A. Frery. Parameter Estimation
+%	in SAR Imagery Using Stochastic Distances and Asymmetric Kernels
+%	- IEEE Journal of Selected Topics in Applied Earth Observations and
+%	Remote Sensing, 2015.
+%\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Datos sin contaminar, L=$1$}
+	\begin{figure}
+		\setcounter{subfigure}{0}
+		\centering
+		\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013BarrasError_NoCont_L=1ypercentil.pdf}}
+		\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013BarrasError_NoCont_L=1ypercentil.pdf}}
+		%\caption{\label{SesgoECMSinContaminarL1}\small Sesgo y ECM para datos sin contaminar, $L=1$.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}	
+	\frametitle{Datos sin contaminar, L=$3$}
+	\begin{figure}
+		\setcounter{subfigure}{0}
+		\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSESGOJstar2013BarrasError_NoCont_L=3ypercentil.pdf}}
+		\subfigure[\label{ECMEstimadosJSTAR2013_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.47\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013BarrasError_NoCont_L=3ypercentil.pdf}}
+		%\caption{\label{SesgoECMSinContaminarL3}\small Sesgo y ECM para datos sin contaminar, $L=3$.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+		\frametitle{Evaluando Robustez}
+		\begin{itemize}
+			\item Robustez es la capacidad que tiene un estimador de producir buenas estimaciones incluso cuando una proporción de los datos no proviene del modelo supuesto como verdadero.
+			\medskip
+			\item El primer tipo de contaminación asume que, con probabilidad $\epsilon$, los datos pueden provenir de una distribución perteneciente a la familia de distribuciones $\mathcal{G}_I^0$ pero con otros parámetros.
+			\medskip
+			\item Una de las fuentes de contaminación en las imágenes SAR es el fenómeno de \textit{double bounce}, donde algunos píxeles tienen un alto valor de retorno. Por eso estudiamos el caso donde se contamina, con probabilidad $\epsilon$, con una constante con valor grande respecto de la media.
+		\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Contaminación}
+%	Sea  $B$ una variable aleatoria Bernoulli con probabilidad $\epsilon$ de ocurrencia de la contaminación.  Entonces
+%	\begin{itemize}
+%		\item \label{ContCaso1}Caso~1:
+%		Sean $W$ y $U$ variables aleatorias tales que $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$, y $U \sim \mathcal{G}_I^0(\alpha_2,\gamma_2^*,L) $. Definimos $Z=BU+(1-B)W$, entonces generamos $\{z_1,\dots,z_n\}$ variables aleatorias independientes, idénticamente distribuidas con función de distribución acumulada dada por:
+%		$$
+%		(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha_2,\gamma_2^*,L)}(z),
+%		$$
+%		donde $\mathcal{F}_{\mathcal{G}_I^0(\alpha,\gamma,L)}$ es la función de distribución acumulada bajo el modelo $\mathcal{G}_I^0(\alpha,\gamma,L)$.
+%		%
+%		\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{Contaminación}
+%		\begin{itemize}
+%		\item \label{Caso2}Caso~2: Consideramos $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$ y el retorno definido como $Z=BC+(1-B)W$, donde $C \in \mathbb R_+$ un valor grande.
+%		\bigskip
+%		\item \label{Caso3}Caso~3:
+%		Consideramos $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ y $U\sim \mathcal{G}_I^0(\alpha,10^k\gamma^*,L) $ con $k \in \mathbb{N}$. 
+%		El retorno $Z$ se define como el Caso 1 y la función de distribución acumulada está dada por: 
+%		$$
+%		(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha,\gamma^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha,10^k\gamma^*,L)}(z).
+%		$$
+%	\end{itemize}
+%\end{frame}
+
+%
+%\begin{frame}
+%	\frametitle{Datos contaminados Caso 1, L=1, $\epsilon=0.01$}
+%	\begin{figure}[htb]
+%		\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=1Caso1BarrasErrorypercentil.pdf}}
+%		\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1BarrasErrorypercentil.pdf}}
+%		\caption{\label{Caso1L1}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=1$.}
+%	\end{figure}
+%\end{frame}
+
+\begin{frame}
+		\frametitle{Datos contaminados Caso 1, L=3, $\epsilon=0.01$ y $\alpha_2=-15$}
+	\begin{figure}[H]
+		%	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
+		%	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
+		\setcounter{subfigure}{0}
+		\subfigure[\label{AlfasContJSTAR2013Caso1_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoJstar2013_Cont_L=3Caso1BarrasErrorypercentil.pdf}}
+		\subfigure[\label{ECMContJSTAR2013Caso1_L=3}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=3Caso1BarrasErrorypercentil.pdf}}
+		%	\subfigure[\label{AlfasContJSTAR2013Caso1_L=8}$\widehat{\alpha}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=8Caso1.pdf}}
+		%	\subfigure[\label{ECMContJSTAR2013Caso1_L=8}$\widehat{\text{ECM}}$, L=8]{\includegraphics[width=.50\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=8Caso1.pdf}}
+		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+	\end{figure}
+	
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Imagen real SAR con un corner reflector}
+	\begin{itemize}
+		\item Imagen E-SAR con $L=1$, banda \textit{L} polarización HH datos de intensidad.
+		format E-SAR
+	\end{itemize}
+	\begin{figure}[htb]
+		\centering
+		%\subfigure[Single-look E-SAR imagen con un corner reflector.]{\includegraphics[angle =90,width=.8\linewidth]{../../Figures/Tesis/Capitulo6/Corner.pdf}}
+		%\subfigure[\label{Cornerregiones} Regiones de interés.]{\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}}
+		\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}
+		%\caption{\label{MuestrasCorner} Muestras de varios tamaños en una .}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\small
+	\begin{table}
+	%	\frametitle{Estimaciones en muestras de imagen real SAR}
+	\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
+		%\begin{tabular}{c c c c c c}
+			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+			%\toprule
+			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+			\midrule
+			Magenta     & 15  & -20.0 & -4.1  & NA    & NA      \\
+			Verde       & 42  & -9.2  & -5.0  & NA    & NA    \\
+			Azul        & 90  & -3.5  & -2.7  & -4.7  & -14.2   \\
+			Amarillo    & 156 & -2.2  & -1.8  & -2.6  & -3.4    \\
+			Rojo        & 225 & -1.9  & -1.7  & -2.1  & -2.5    \\
+			%\bottomrule
+		\end{tabular}
+	\end{table}
+%\end{frame}
+%
+%\begin{frame}
+	\begin{table}
+		\caption*{\label{resultadosCorner}\large Tiempos de proceso}
+		%\begin{tabular}{c c c c c c}
+		\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+			%\toprule
+			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+			\midrule
+		Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
+		Verde       & 42  &  0.00 &  4.04     &  0.00  &  0.00\\
+		Azul        & 90  &  0.02 &  4.85     &  0.00  &  0.00\\
+		Amarillo    & 156 & 0.01  &  8.35     &  0.00   &  0.00\\
+		Rojo        & 225 & 0.02  &  10.97    &  0.00   &  0.00\\
+			%\bottomrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Tercer trabajo}
+	
+¿Por qué usar el núcleo IG y no otro?
+	
+	\begin{itemize}
+		\item Consideramos otros núcleos: $\Gamma$ y  LN. 
+		\bigskip
+		\item Estimamos $\widehat{\text{MISE}}=\dfrac{1}{500} \displaystyle\sum_{i=1}^{500}\displaystyle\int_0^{+\infty} (\widehat{f}_{b,\text{K}}^i(x)-f(x))^2 dx,$
+		\bigskip
+		\item Utilizamos el método LSCV para encontrar el ancho de banda que consiste en encontrar el valor de $b$ que minimiza una aproximación del error cuadrático integrado.
+
+	\end{itemize}  
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{¿Por qué usar el núcleo IG y no otro? }
+%	
+%	\begin{itemize}
+%		\item Utilizamos el algoritmo L-BFGS-B para encontrar el estimador $\widehat{\alpha}_{\text{\tiny{DT}}}$. Es un método de optimización tipo cuasi newton que admite restricciones de borde y no necesita calcular la matriz Hessiana sino que utiliza una apoximación de ella que se actualiza en cada iteración, usando solamente la función y su gradiente. 
+%		\bigskip
+%		\item Contamos casos de no convergencia de los algoritmos numéricos empleados, entendiendo que un algoritmo no converge si devuelve como valor estimado del parámetro a alguno de los extremos del intervalo de búsqueda.
+%	\end{itemize}  
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Casos analizados}
+	\begin{itemize}
+		\item $\alpha=\{-1.5,-3,-5,-8\}$,
+		\bigskip
+		\item $L=3,8$, 
+		\bigskip
+		%\item $\gamma^*=-\alpha-1$, 
+		%\bigskip
+		\item $n=\{9,25,49,81,121,500\}$ 
+		\bigskip
+		\item $K=\{\Gamma,\text{LN},\text{IG},\text{IGJstar\}}$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Error cuadrático medio integrado - MISE}
+\begin{table}[hbt]		
+%	\caption{\label{MiseyCantCasosNoConvergenciaL=3} MISE y porcentaje de casos de no convergencia $L=3$.}									
+	\centering	
+	%\sisetup{
+%		detect-all,
+%		table-number-alignment = center,
+%		table-figures-integer = 1,
+%		table-figures-decimal = 3,
+%		table-space-text-post = {\superscript{*}},
+%	}			
+	\small									
+	\begin{tabular}{cc|SSSSS}									
+    	&  & $\Gamma$  & LN & IG & IGJstar  \\
+		\midrule				
+%		\multirow{5 }{*}{$-1.5$} 
+%		&   9    	&  	  0.407  	&	  0.811  	&	  6.119   	&	  41.330  	\\
+%		&   25   	&  	  0.123  	&	  0.184  	&	  2.464   	&	  17.024  	\\
+%		&   49   	&  	  0.082  	&	  0.538  	&	  1.157   	&	  9.671  	\\
+%		&   81   	&  	  0.064  	&	  0.085  	&	  0.753   	&	  6.126  	\\
+%		&   121  	&  	  0.064  	&	  0.081  	&	  0.528   	&	  4.000  	\\
+%		\midrule
+		\multirow{5 }{*}{$-3$}	
+		&   9    	&  	  0.25  	&	  0.56  	&	  12.47  	&	  50.02  	\\
+		&   25   	&  	  0.08  	&	  0.10  	&	  3.22   	&	  25.40  	\\
+		&   49   	&  	  0.04  	&	  0.07  	&	  0.69   	&	  16.40  	\\
+		&   81   	&  	  0.03  	&	  0.03  	&	  0.25   	&	  11.58  	\\
+		&   121  	&  	  0.02  	&	  0.03  	&	  0.17   	&	  8.98  	\\
+		\midrule
+%		\multirow{5 }{*}{$-5$}	
+%		&   9    	&  	  0.238 	&	  0.432  	&	  15.315  	&	  63.384  	\\
+%		&   25   	&  	  0.066  	&	  0.087  	&	  4.647   	&	  32.939  	\\
+%		&   49   	&  	  0.042  	&	  0.064  	&	  0.677   	&	  24.405  	\\
+%		&   81   	&  	  0.027  	&	  0.033  	&	  0.285   	&	  18.906  	\\
+%		&   121  	&  	  0.019  	&	  0.025  	&	  0.179   	&	  15.920  	\\
+%		\midrule
+		\multirow{5 }{*}{$-8$}	
+		&   9    	&  	  0.24    	&	  0.38  	&	  18.11  	&	  73.08  	\\
+		&   25   	&  	  0.07  	&	  0.11  	&	  5.13   	&	  40.48  	\\
+		&   49   	&  	  0.04  	&	  0.05  	&	  0.93   	&	  30.23  	\\
+		&   81   	&  	  0.03  	&	  0.03  	&	  0.33   	&	  25.71  	\\
+		&   121  	&  	  0.02  	&	  0.02  	&	  0.21   	&	  21.19  	\\
+		%\bottomrule
+	\end{tabular}																		
+\end{table}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{¿Cuál elegimos?}
+	\begin{itemize}
+		\item Elegimos los núcleos $\Gamma$ y LN.
+		\bigskip
+		\item Comparamos el comportamiento de $\widehat{\alpha}$ usando núcleos $\Gamma$ y LN con los estimadores MV y LC.
+		\bigskip
+		\item En términos de sesgo, ECM y cantidad de casos de no convergencia.
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos sin contaminar $L=3$}
+%	\begin{minipage}{0.45\textwidth}
+%		\begin{figure}
+%			\subfigure{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{0}
+%			\subfigure[\label{SesgoSinContL=3,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3yPercentil.pdf}}
+%		\end{figure}
+%	\end{minipage}
+%	\begin{minipage}{0.45\textwidth}
+%		\begin{figure}
+%			\subfigure{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{1}
+%			\subfigure[\label{ECMSinContL=3,-1.5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3yPercentil.pdf}}
+%			%\caption{\label{SesgoyECMSinContL=3,-1.5y-3}\small Sesgo y ECM estimados para datos sin contaminar, $ L=3$ y $\alpha=-1.5, -3$.}
+%		\end{figure}
+%	\end{minipage}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos sin contaminar $L=3$}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\subfigure{\includegraphics[width=.99\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{0}
+			%\subfigure[\label{SesgoSinContL=3,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3yPercentil.pdf}}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\subfigure{\includegraphics[width=.99\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{1}
+			%\subfigure[\label{ECMSinContL=3,-1.5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasError-1punto5y-3yPercentil.pdf}}
+			%\caption{\label{SesgoyECMSinContL=3,-1.5y-3}\small Sesgo y ECM estimados para datos sin contaminar, $ L=3$ y $\alpha=-1.5, -3$.}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Distribución de $\widehat{\alpha}$, $L=3$ y $\alpha=-3$, datos sin contaminar}
+%	\begin{figure}[H]
+%		\includegraphics[width=1\linewidth]{../../Figures/Tesis/Presentacion/DensidadEstimadorNoCont.pdf}
+%		%\caption{\label{Caso1L3}\small Datos sin contaminar y $L=3$ y $\alpha=-3$.}
+%	\end{figure}	
+%\end{frame}
+
+\begin{frame}
+	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ para datos contaminados $L=3$ y $\epsilon=0.01$}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\subfigure{\includegraphics[width=.99\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{0}
+			%\subfigure[\label{SesgoContL=3,-1.5y-3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3yPercentil.pdf}}
+			%\caption{\label{SesgoyECMConContL=3}\small Sesgo y ECM estimados para datos contaminados, Caso $1$, $\epsilon=0.05$ y $ L=3$.}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\subfigure{\includegraphics[width=.99\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasErroryPercentil.pdf}}\setcounter{subfigure}{1}
+			%\subfigure[\label{ECMConContL=3-1punto5y-3}$\widehat{\text{ECM}}$]{\includegraphics[width=.70\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasError-1punto5y-3yPercentil.pdf}}
+			%\caption{\label{SesgoyECMConContL=3-1punto5y-3}\small Sesgo y ECM estimados para datos contaminados, Caso $1$, $\epsilon=0.05$, $\alpha=-1.5, -3$ y $ L=3$.}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Distribución de $\widehat{\alpha}$, $L=3$ y $\alpha=-3$, datos contaminados}
+	\begin{figure}[H]
+	\includegraphics[width=1\linewidth]{../../Figures/Tesis/Presentacion/DensidadEstimadorCont.pdf}
+	%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+	\end{figure}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Porcentaje de casos de no convergencia  $L=3$}
+	\begin{table}[hbt]
+		\scriptsize
+		\begin{tabular}{c*6{S}}
+			\toprule		
+			$\alpha$ & $n$ & MV & $\Gamma$ & LN &  LC\\
+			\midrule
+			\multirow{2 }{*}{$-1.5$} 
+			&   9 &  0  &  0  &  0.4  &   2.8 \\
+			&   25  &  0  &  0  &  0  &  0.2 \\
+			\midrule
+			\multirow{5 }{*}{$-3$} 
+			&    9  &  13     &  5.2   &  7.2   &   28.4 \\ 
+			&   25  &  1      &  0.2   &  1     &   11.4 \\
+			&   49  &  0.2    &  0     &  0.4   &  3.8 \\ 
+			&   81  &  0      &  0     &  0     &  2.4 \\ 
+			%&  121  &  0      &  0     &  0     &  0.2 \\ 
+			\midrule
+			\multirow{5 }{*}{$-5$} 
+			&    9  &  26.8   &  9.6   &  13.2  &   35.2 \\ 
+			&   25  &  10     &  3.4   &  5     &  28.6 \\ 
+			&   49  &  3.4    &  1.4   &  1.2   &  18.6 \\ 
+			&   81  &  0.2    &  0.4   &  0.8   &  15.8 \\ 
+			&  121  &  0.4    &  0     &  0.2   &  9.6 \\ 
+			&  500  &  0      &  0     &  0     &  0.6 \\ 
+			\midrule
+			\multirow{5 }{*}{$-8$} 
+			&    9   &  39.6  &  16.6  &  19    &  44.2 \\ 
+			&   25   &  28.6  &  9     &  11    &  36.4 \\ 
+			&   49   &  18.4  &  5     &  5.4   &  31.6 \\ 
+			&   81   &  12    &  4.4   &  4     &  27.2 \\ 
+			&  121   &  5.8   &  1.8   &  2     &  24.6 \\ 
+			&  500   &  0     &  0     &  0.2   &  9 \\
+			\bottomrule 	
+		\end{tabular}
+	\end{table}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Curva de influencia}
+	\begin{itemize}
+		\item Otra forma de evaluar cómo un estimador $T_n(z_1; \ldots ; z_n)$ se comporta bajo contaminación es fijar $n-1$ observaciones y permitir que una observación varíe en el soporte de la distribución.
+		\medskip
+		\item Esto se conoce como \textit{Función de influencia empírica} (FIE).
+		\medskip 
+		\item Pero este análisis depende de una muestra particular.
+		\medskip
+		\item Para evitar esto \citet{Andrews1972} propusieron considerar como muestra los \textit{i-ésimos} cuantiles de la distribución que se asume como modelo teórico.
+	\end{itemize}
+ \end{frame}
+
+\begin{frame}
+	\frametitle{FIES para $\widehat{\alpha}_{\text{\tiny{MV}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text\tiny{{LC}}}$, $L=3$ y $n=25$.}
+	\begin{minipage}{0.45\textwidth}
+		\setcounter{subfigure}{0}
+		\begin{figure}
+			\subfigure[\label{InflL3alfa-1.5n25}$\alpha=-1.5$]{\includegraphics[width=.90\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-1punto5L3n25.pdf}}
+			\setcounter{subfigure}{1}
+			\subfigure[\label{InflL3alfa-5n25}$\alpha=-5$]{\includegraphics[width=.90\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-5L3n25.pdf}}
+			%\caption{\label{InflL3n25:-1.5y-3}\small FIES para $\widehat{\alpha}_{\text{\tiny{MV}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text\tiny{{LC}}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\setcounter{subfigure}{0}
+			\subfigure[\label{InflL3alfa-3n25}$\alpha=-3$]{\includegraphics[width=.90\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-3L3n25.pdf}}
+			
+			\setcounter{subfigure}{1}
+			\subfigure[\label{InflL3alfa-8n25}$\alpha=-8$]{\includegraphics[width=.90\linewidth]{../../Figures/Tesis/Capitulo6/CurvaInfluenciaAlfa-8L3n25.pdf}}
+			%\caption{\label{InflL3n25:-5y-8}\small FIES para $\widehat{\alpha}_{\text{\tiny{MV}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text\tiny{{LC}}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Se puede observar que}
+%	\begin{itemize}
+%		\item $\widehat{\alpha}_{\text{\tiny{MV}}}$, $\widehat{\alpha}_{\text{\tiny{LC}}}$ por un lado y, por otro lado, $\widehat{\alpha}_{\Gamma}$ y $\widehat{\alpha}_{\text{\tiny{LN}}}$ tienen un comportamiento similar para $\alpha=-3, -5, -8$. 
+%		\medskip\item Para zonas extremandamente texturadas $\widehat{\alpha}_{\text{LN}}$ es el que mejor performance tiene.
+%		\medskip 
+%		\item Para el resto de las texturas tanto $\widehat{\alpha}_{\Gamma}$ como $\widehat{\alpha}_{\text{\tiny{LN}}}$ tienen una mejor performance respecto de los otros estimadores, para valores de $z$ menores que el último cuantil.
+%		\medskip 
+%		\item Mas aún, $\widehat{\alpha}_{\text{\tiny{MV}}}$ no converge para zonas moderadamente heterogéneas y homogéneas, mientras que $\widehat{\alpha}_{\text{\tiny{LC}}}$ no converge para zonas homogéneas. 
+%		\medskip 
+%		\item Todos los estimadores se comportan de manera similar para valores grandes de $z$. Este comportamiento muestra la sensibilidad y la pérdida de robustez de $\widehat{\alpha}_{\text{\tiny{MV}}}$ y $\widehat{\alpha}_{\text{\tiny{LC}}}$ frente a los otros estimadores. 
+%	\end{itemize}
+%\end{frame}
+
+\section{Aplicación a una imagen real}
+\begin{frame}
+	\frametitle{Imagen real, $ENL=3.21$}
+
+	\begin{figure}
+		\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestras2.pdf}
+		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+	\end{figure}
+
+\begin{table}
+	%\begin{tabular}{c c c c c c}
+	\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+		%\toprule
+		Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+		\midrule
+		Verde      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+		Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+		Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+		Magenta    & 54  &  -20    &  -20     &  -20    &  -20\\
+		Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74
+		%\bottomrule
+	\end{tabular}
+\end{table}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Imagen real}
+%		\begin{figure}
+%			\includegraphics[width=0.7\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestras.pdf}
+%			%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+%		\end{figure}
+%		\begin{table}
+%			%\begin{tabular}{c c c c c c}
+%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+%				%\toprule
+%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{G}}}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+%				\midrule
+%				Verde      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+%				Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+%				Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+%				Magenta    & 54  &  -20    &  -20     &  -20    &  -20\\
+%				Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74
+%				%\bottomrule
+%			\end{tabular}
+%		\end{table}
+%\end{frame}
+
+
+%\begin{frame}
+%
+%\begin{figure}
+%	\includegraphics[width=0.60\linewidth]{../../Figures/Tesis/Presentacion/TresMuestrasAgrandada.pdf}
+%	%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+%\end{figure}	
+%\end{frame}
+
+
+\begin{frame}
+	\frametitle{Imagen real}
+	\begin{itemize}
+		\item Matriz de datos.
+		
+		\begin{table}
+			\begin{tabular}{S[table-format=7.2] S[table-format=7.2] S[table-format=7.2] S[table-format=7.2]}
+				%\toprule
+				\midrule
+				763908.07  &	268849.19 							&	362179.47 &	388732.64\\
+				588919.09  &	806006.29 							& 	427186.11 &	362693.40\\
+				732546.74  &	296982.58 							&	132006.85 &	1315484.02\\
+				1313430.89 &	 \color{red} \textbf{76311.14}  &	212135.11 &	404060.49\\
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\vspace{0.8cm}
+	\item Estimaciones sin la observación más baja.
+	 
+		\begin{table}
+		\begin{tabular}{cccc}
+			$\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+			\midrule
+			-5.73  &	-3.97	&	-3.13 &	-4.80
+		\end{tabular}
+	\end{table}
+	\vspace{0.8cm}
+	\item Todas las estimaciones corresponden a una zona heterogénea.
+	\end{itemize}
+		
+\end{frame}
+
+\begin{frame}
+	\frametitle{Otro análisis}
+		\begin{minipage}{0.5\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.85\linewidth]{../../Figures/Tesis/ImagenReal/CincoMuestras.pdf}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\begin{figure}
+			\includegraphics[width=1.1\linewidth]{../../Figures/Tesis/ImagenReal/AlfaVsTamCincoMuestras_v2_0975.pdf}
+		\end{figure}
+	\end{minipage}
+	
+\end{frame}
+
+%--------------------------------------------------------------
+\section{Resultados Teóricos}
+
+%\begin{frame}
+%	\frametitle{Consideraciones previas}
+%	\citet{Libnegue2013,kokonendji2018} consideran los núcleos que verifican las condiciones: 
+%	\begin{align*}
+%	\begin{split}
+%	x \in \text{Soporte}(K_{x,b}),\\
+%	E(Y_{x,b})=x+A(x,b),\\
+%	Var(Y_{x,b})=B(x,b),
+%	\end{split}
+%	\end{align*}
+%	donde $Y_{x,b}$ es una variable aleatoria con densidad $K_{x,b}$ y $A(x,b),B(x,b) \to 0$ cuando $b \to 0$.
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Resultados previos} 
+	\footnotesize
+	\begin{Teorema}\citet{Libnegue2013,kokonendji2018}
+		
+			\vspace{0.1cm}
+			Sea $f$ una función de densidad continua y acotada con $\text{Sop}(f)$.
+			Sea $\widehat{f}_{n}$ el estimador de $f$ utilizando núcleos asimétricos y que verifica ciertas condiciones generales. Supongamos que existe un número real $r_1=r_1(K)>0$ que depende del núcleo elegido tal que, para cada $x \in \text{Sop}(f)$ 
+			\begin{align*}
+			b_n^{r_1} \displaystyle{\int_0^{\infty}} | dK_{x,b_n}(s) | \leq c_1(x),
+			\end{align*}
+			donde $c_1(x)$ es una función integrable en cualquier compacto que contenga a $x \in \text{Sop}(f)$. Entonces si $\lim\limits_{n \rightarrow \infty} b_n=0 $ y
+			 $\lim\limits_{n \to \infty} \dfrac{n b^{2r_1}}{\ln{n}}  = +\infty $, entonces 
+				\begin{align*}
+				\int_0^{+\infty} \vert \widehat{f}_n(x)-f(x)\vert dx \stackrel{c.s.} {\longrightarrow} 0 \text{ cuando } n \rightarrow \infty.
+				\end{align*}
+		\end{Teorema}
+	
+		$r_1=1$ en el caso del núcleo $\Gamma$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Consideraciones iniciales}
+	\begin{itemize}
+		\item En lo que sigue vamos a considerar:
+		\begin{itemize}
+		\item $\mathcal{F}=\{f \in L^1(0,+\infty) : f \geq 0\}$.
+		\medskip
+		\item $D(f,g)=d^{1/2}(f,g)$ y $f,g \in \mathcal{F} $ donde $d$ es la distancia triangular y $D$ es una métrica.
+		\medskip
+		\item $\widehat{f}_n$ un estimador por núcleos asimétricos de la función de densidad subyacente y que cumple las condiciones del teorema anterior.
+		\medskip
+		\item $\{\widehat{\alpha}_n\}_{n=1}^{\infty}$ los estimadores de mínima distancia definidos como cualquier valor que satisface.
+		\begin{align*}
+		%\label{EstMinDistRelajado}
+		d(f_{\widehat{\alpha}_{n}},\widehat{f}_n) \leq \inf\limits_{\alpha \in (-\infty,-1)}d(f_{{\alpha}},\widehat{f}_n) + k_n.
+		\end{align*}
+		donde $k_n$ es una sucesión que tiende a cero cuando $n$ tiende a infinito. 
+
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Convergencia fuerte de $\widehat{\alpha_n}$}
+	\begin{Teorema}
+		\medskip
+		\small
+		Sea $Z_1, \ldots, Z_n$ una sucesión de variables aleatorias iid donde $Z_i \sim f_{\alpha_{*}}$ con $f_{\alpha_{*}} \sim \mathcal{G}_I^0(\alpha^*,-\alpha^*-1,L)$  y sea $\widehat{f}_n$ un estimador por núcleos asimétricos de la función de densidad subyacente que cumple las condiciones del teorema anterior. Sea $\{\widehat{\alpha}_n\}$ una sucesión MDE estimadores,
+		
+		si $\lim\limits_{n \rightarrow \infty} b_n=0 $ y $\lim\limits_{n \to \infty} \dfrac{n b^{2r_1}}{\ln{n}}  = +\infty $ con $r_1$ el establecido en cada caso de acuerdo al núcleo elegido, entonces $\widehat{\alpha}_n \stackrel{cs}{\longrightarrow} \alpha_{*}$ cuando $n \longrightarrow +\infty.$
+	\end{Teorema}
+\bigskip
+	\citet{Libnegue2013} muestra que $r_1=1$ en el caso del núcleo $\Gamma$, $r_1=2$ para el núcleo LN y $r_1=5/2$ para el núcleo IG.	
+\end{frame}
+
+%-------------------------------------
+\section{Conclusiones}
+\begin{frame}
+	\frametitle{Conclusiones}
+	\begin{itemize}
+		\item Se propone un nuevo estimador para el parámetro de textura de la distribución $\mathcal{G}_I^0$.
+		\medskip 
+		\item Está basado en la minimización de una distancia estocástica entre el modelo y una estimación de la función de densidad subyacente $\widehat{f}$ utilizando núcleos asimétricos. 
+		\medskip
+		\item Se mostró que la distancia triangular es una buena elección para este problema.
+		\medskip
+		\item Para el caso multilook se mostró que los núcleos $\Gamma$ y LN presentan buenas propiedades medidas por su sesgo, ECM y por porcentaje de casos de no convergencia, especialmente para muestras de pequeño tamaño.
+		\medskip
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusiones}
+\begin{itemize}
+		\item  Es competitivo con MV y LC estimadores en situaciones sin contaminación, y supera el desempeño de estas métodos incluso en presencia de contaminación. 
+		\medskip
+		\item  Aunque tiene alto costo computacional. 
+		\medskip
+		\item En la aplicación a una imagen real el estimador MDE utilizando núcleo LN es el que mejor desempeño mostró, superando a MV y LC estimadores.
+		\medskip
+		\item El $\widehat{\alpha}$ basado en la distancia triangular converge fuertemente al parámetro $\alpha$ bajo ciertas condiciones sobre los núcleos.
+		\medskip
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusiones}
+	\begin{itemize}
+
+		\item  Por estas razones nuestra conclusión es que es aconsejable usar $\widehat{\alpha}_{\text{\tiny{T}}} $ con núcleo LN, especialmente cuando se usan muestras pequeñas y/o cuando existe la posibilidad de tener datos contaminados. 
+		\medskip
+		\item Si bien el costo computacional es alto sus ventajas son más importantes que este aumento en el tiempo de procesamiento.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fin}
+	Muchas gracias!!
+\end{frame}
+
+\section{Referencias}
+
+\begin{frame}[allowframebreaks]{Referencias}
+%\addcontentsline{toc}{chapter}{Bibliografí­a}
+\bibliographystyle{agsm}
+\bibliography{../../Bibliography/bib_julia2}
+\end{frame}
+%\label{bibliografia}
+\end{document}
+
+
+\begin{frame}
+\frametitle{Speckle noise}
+\begin{itemize}
+\item It is a non-Gaussian noise, and therefore, different from the noise present in optical images.
+\bigskip
+\item Is present in SAR images because it is inherent to the process of image capture.
+\bigskip
+\item A technique used to reduce this noise is to generate multiple views or looks of the image during its generation.
+%Una técnica utilizada para reducir este ruido es generan varias ¨vistas¨ o looks de la imgaen durante el proceso de generación de la misma.
+\bigskip
+\item These looks are averaged generating an image with less noise, but losing resolution.
+%Se promedian estos looks generando una imagen multilook con menor ruido speckle pero perdiendo resolución.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistical Model}
+\begin{itemize}
+\item Speckled data have been described under the multiplicative model using the $\mathcal{G}$ family of distributions: $\mathcal G_I^0$ for intensity data.
+\bigskip
+\item This model is able to describe textured and extremely textured areas better than the $\mathcal{K}$ distribution as well as data from textureless areas. 
+\bigskip
+\item Under the $\mathcal G_I^0$ model, regions with different levels of texture can be characterized by the parameters of the distribution.
+\bigskip
+\item Therefore, the accuracy of estimates is very important.
+\bigskip
+%\item Moments and maximum likelihood estimation methods are good for the case of large data samples.
+\bigskip
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The proposal}
+\begin{itemize}
+\item Information Theory (IT) provides us with a notion of distance between densities.
+\medskip
+\item We use these notion of distance to propose an estimator of the parameter distribution.
+\medskip
+\item In a previous work we assessed the Hellinger, Bhattacharyya, Rényi and Triangular distances. 
+\medskip
+\item We concluded that the latter outperforms the others in a variety of situations.
+\bigskip
+%\item Asymmetric kernel are good estimator for density functions with bounded support. Stochastic distance with asymmetric kernel estimator of the underlying density function, provides good estimator of the textured parameter of the $\mathcal G_I^0$ distribution. 
+\end{itemize}
+\end{frame}
+
+\section[The model]{The $\mathcal{G}_I^0$ Model}
+
+\begin{frame}
+\frametitle{The Multiplicative Model}
+The return in monopolarized SAR images can be modeled
+as the product of two independent random variables.
+\begin{equation*}
+Z=X \cdot Y  
+\end{equation*}
+where $Z$ represents the return in each pixel, $X$ corresponds to the backscatter, and $Y$ to the
+speckle noise. \\ 
+\bigskip
+For intensity data,  we assume that:\\
+$Y \sim \Gamma ( L,L) $, where $L$ is the number of looks, and that \\
+$X \sim \Gamma ^{-1}( \alpha ,\gamma ) $, \\
+then the return $Z \sim \mathcal{G}_I^{0}( \alpha ,\gamma, L )$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Density}
+The model is specified by the density
+\begin{equation*}
+f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
+) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+L) }\cdot  
+\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }}%,
+\label{ec_dens_gI0}
+\end{equation*}
+where $-\alpha,\gamma ,z>0$ and $L\geq 1$ are the texture, the scale and the number of looks.
+\bigskip
+The $r$th order moments are given by
+\begin{equation*}
+E(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }\cdot  
+\frac{\Gamma (L+r )}{\Gamma (L)} 
+\label{moments_gI0}
+\end{equation*}
+This moments are finite if $-\alpha > r$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameter Interpretation}
+\begin{block}{}
+One of the most important features of the $\mathcal{G}_I^0$ distribution is the interpretation of the $\alpha$  parameter, which is related to the texture of the target.  
+\end{block}\pause
+\begin{table}
+\centering
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+      $\alpha$ Value & $(-1,-3]$ & $(-3,-6]$ & $(-6,-\infty)$\\
+			\hline
+				Texture &Extremely Textured &  Textured & Non Textured\\
+				\hline
+		\end{tabular}
+\end{table}\pause
+
+%\begin{block}{}
+%	In the following we employ $\gamma^*$ such that $E(Z)=1$.  This condition gives a relation %between $\gamma \text{ and } \alpha: \, \gamma^* =-\alpha-1$
+%\end{block}
+
+\begin{block}{Double Purpose}
+	Simplifying the calculations and making the results comparable, in the following we employ $\gamma^*$ such that $E(Z)=1$:  
+	$$\gamma^* =-\alpha-1.$$ 
+\end{block}
+\end{frame}
+
+\section[MLE]{Maximum Likelihood Estimator}
+
+\begin{frame}
+\frametitle{Maximum Likelihood Estimator}
+Let $\textbf{z}=(z_1,\dots, z_n)$ be a random sample of size $n$, the likelihood function related to the $\mathcal{G}_I^0(\alpha,\gamma,L)$ distribution is given by 
+\begin{equation*}
+\mathcal{L}(\alpha,\gamma,L,\textbf{z}) =\Big(\frac{L^L\Gamma(L-\alpha)}{\gamma^\alpha\Gamma(-\alpha)\Gamma(L)}\Big)^n  
+\prod_{i=1}^n z_i^{L-1}(\gamma+Lz_i)^{\alpha-L}.
+\label{likelihood_gI0}
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\frametitle{ Using $\gamma^*=-\alpha-1$}
+\begin{itemize}
+	\item The ML estimator of $\alpha$, $\widehat\alpha_{\text{ML}}$, assuming $\gamma=-\alpha-1$ and $L$ known, based on $\textbf{z}$, is the solution of the following nonlinear equation
+	\begin{eqnarray*}
+	\small
+	&\psi^0(\widehat{\alpha}_{\text{ML}})-\psi^0(L-\widehat{\alpha}_{\text{ML}})-\log(1-\widehat{\alpha}_{\text{ML}})+
+	\dfrac{\widehat{\alpha}_{\text{ML}}}{1-\widehat{\alpha}_{\text{ML}}}+\\
+	&\dfrac{1}{n}\sum_{i=1}^n{\log(1-\widehat{\alpha}_{\text{ML}}+Lz_i)}- 
+	\dfrac{\widehat{\alpha}_{\text{ML}}-L}{n}\sum_{i	=1}^n \dfrac1{1-\widehat{\alpha}_{\text{ML}}+Lz_i}= 0 
+	\label{derloglikelihood_gI0}
+	\end{eqnarray*}
+	where $\psi^0(\cdot)$ is the digamma function.
+	\bigskip
+	\bigskip
+	\item No explicit solution for this system is available in general.
+	\medskip
+	\item Therefore, numerical routines are required.  We used the BFGS optimization algorithm.
+\end{itemize} 
+\end{frame}
+
+\section[Stochastic Distances]{Stochastic Distances}
+
+\begin{frame}
+\frametitle{Stochastic Distances}
+\begin{block}{}
+Stochastic Distances allow the comparison between two density functions. 
+\end{block}
+\bigskip
+\begin{block}{}
+In this work we compare the $\mathcal{G}_I^0$ density with an estimation of the underlying density function.
+\end{block}
+\bigskip
+\begin{block}{}
+We chose asymmetric kernels to estimate de underlying density function.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Stochastic Distances}
+Let $V$ and $W$ be two random variables defined over the same probability space whose density functions are $f_V(x;\theta_1)$ and $f_W(x;\theta_2)$, respectively.
+The Triangular distance is defined as:
+\medskip
+$$d_T(V,W)=\int_{-\infty}^{\infty}\frac{(f_V-f_W)^2}{f_V+f_W}dx.$$
+\end{frame}
+
+\section[AK]{Asymmetric Kernels}
+
+\begin{frame}
+\frametitle{Asymmetric Kernels}
+\begin{block}{}
+ When the support of the underlying density is unbounded, symmetric kernels have a good performance.
+\end{block}{}
+\medskip
+\begin{block}{}
+Their consistence is well documented.
+\end{block}{}
+\bigskip
+But\ldots
+\bigskip
+\begin{alertblock}{}
+ When the support of the underlying density is bounded, standard symmetric kernels lead to boundary bias.
+\end{alertblock}{}
+\medskip
+\begin{alertblock}{}
+Because the standard symmetric kernels assign weight outside the support, when smoothing is carried out near the boundary.
+\end{alertblock}{}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\begin{frame}
+\frametitle{Asimmetryc Kernels}
+%%% ACF Esta transparencia no hace diferencia. Introduce notación sin información
+\begin{itemize}
+\item Brown, (1999), proposed Beta kernel estimator.
+\medskip
+\item Song Chen, (2000), proposed a Gamma kernel estimator (NG).
+\medskip
+\item Scaillet, O., (2001), introduced the Inverse Gaussian (IG) and Reciprocal Inverse Gaussian (RIG) kernel estimators.
+\medskip
+\item Jin, X and Kawczak, J., (2003), extended the class of asymmetric kernel density estimators, introducing the Birnbaum-Saunders (BS) and LogNormal (LN) kernel density functions.
+\medskip
+\item Igarashi, G and Kakizawa, Y., (2015), proposed a bias correction modifying the parameters of some kernel density functions.
+%\item T. Bouezmarnio and O. Scaillet, in 2004, proved the consistency of asymmetric kernel density estimators and applied them to income data.
+\end{itemize}
+\end{frame}
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Asymmetric Kernels}
+	Let $\bm X = (X_1,\dots, X_n)$ be a random sample of size $n$, with an unknown density probability function $f$, the estimating density function using asymmetric kernels is given by 
+	$$
+	\widehat{f}_b(x)=\frac{1}{n}\sum_{i=1}^n K_{\vec{\theta}(b,x)}(X_i),
+	$$ 
+	where $b$ is the bandwith of the kernel $K$ and $\vec{\theta}(b)$ is the parameter vector.
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Asymmetric Kernels}
+	In this work we assess the following asymmetric kernels: 
+	\medskip
+	\begin{itemize}
+		\item Gamma kernel (NG)
+		\begin{align*}
+		K_{{\Gamma}_{\vec{\theta}(x,b)}}(t) & =\Gamma_{\left(\frac{x}{b}+1,b\right)}(t)
+		\end{align*}
+%		\item Reciprocal Inverse Gaussian kernel
+%		\begin{align*}
+%		K_{{RIG}_{\vec{\theta}(x,b)}}(t) & =RIG_{\left(\frac{1}{x-b},\frac{1}{b}\right)}(t)
+%		\end{align*}
+		\item Log Normal kernel
+		\begin{align*}
+		K_{{LN}_{\vec{\theta}(x,b)}}(t) & =LN_{\left(log(x)+b^2,b\right)}(t)
+		\end{align*}
+		for every $t>0$ respectively.
+		\item Inverse Gaussian kernel
+		\begin{align*}
+		K_{{IG}_{\vec{\theta}(x,b)}}(t) & =IG_{(x,\frac{1}{b})}(t)
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Errors Measurements}
+	%%% ACF Usar la notación sin la variable x. Todo queda más limpio, y consistente con lo anterior.
+	Measures of error made in the estimate of $f$ by $\hat{f}$
+	\begin{itemize}
+		\item Integrated Squared Error (ISE)
+		\begin{align}
+		ISE(\hat{f})=&\int_\mathbb{R} (\hat{f}-f)^2 dx 
+		\end{align}
+		\medskip
+		\item Integrated Mean Squared Error (MISE)
+		\begin{align}
+		MISE(\hat{f})=&E[\int_\mathbb{R} (\hat{f}-f)^2 dx]
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Properties of asymmetric kernels}
+	\begin{itemize}
+		\item All the asymmetric kernel estimator studied are free of boundary bias, always non-negative and have an optimal rate of convergence of $n^{-\frac{4}{5}}$ for the mean integrated squared error.
+		\medskip	
+		\item Assuming that $f$ has continuous second derivative and:
+			\begin{itemize}
+			\item $\int_0^{\infty} f'^2(x)dx \text{ and } \int_0^{\infty} (xf''(x))^2dx$ are finite for Gamma kernel estimator.
+			\medskip
+			\item $\int_0^{\infty} (x^3f''(x))^2dx$ is finite for IG and RIG kernel estimator.
+			\medskip
+			\item $\int_0^{\infty} x f'(x)dx \text{ and }\int_0^{\infty} (x^2f''(x))^2dx$ is finite for $LN$ kernel estimator.
+			\medskip
+			\end{itemize}
+		expression of optimal bandwidth $b$, one that mimimizes MISE, can be obtained.
+		\medskip
+	%	\item These expressions depends on these integrals.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% COMIENZO DE BLOQUE COMENTADO
+\begin{comment}
+\begin{frame}
+	\frametitle{MISE and bandwidth $b$ for Gamma kernel estimator}
+	\begin{align}
+	MISE(\hat{f}_1)=&b^2 \int_{0}^{\infty}{x f'(x)+\frac{1}{2}xf''(x)}^2 dx \nonumber\\
+	&+\frac{1}{2\sqrt{\pi}} n^{-1}b^{-1/2} \int_{0}^{\infty} x^{-1/2}f(x)dx+o(n^{-1}b^{-1/2}+b^2) \nonumber
+	\\
+	b_1^*=&\dfrac{\left[\frac{1}{2\sqrt{\pi}} \int_{0}^{\infty} x^{-1/2}f(x)dx \right]^{2/5}}
+	{4^{2/5} \left[\int_{0}^{\infty}  \left\{x f'(x) +\frac{1}{2} x f''(x)\right\}^2 dx \right]^{2/5}} n^{-2/5}\\
+	\label{bopt}
+	MISE^*(\hat{f}_1)=&\dfrac{5}{4^{4/5}} \left[\frac{1}{2\sqrt{\pi}} \int_{0}^{\infty} x^{-1/2}f(x)dx \right]^{4/5} 	\nonumber\\
+	&\times \left[\int_{0}^{\infty}  \left\{x f'(x) +\frac{1}{2} x f''(x)\right\}^2 dx \right]^{1/5} n^{-4/5} \nonumber
+	\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{Asimmetryc Kernels}
+Let $\bm X = (X_1,\dots, X_n)$ be a random sample of size $n$, with an unknown density probability function $f$, the estimating density function using asymmetric kernels is given by 
+$$
+\widehat{f}_b(x)=\frac{1}{n}\sum_{i=1}^n K_{(x,b)}(X_i),
+$$ 
+where $b$ is the bandwith of the kernel $K$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Asimmetryc Kernels}
+In this work we assess two asymmetric kernels: Gamma and Inverse Gaussian kernels.
+\medskip
+\begin{itemize}
+\item Gamma kernel
+\begin{align*}
+K_{\Gamma}( t; x,b) & =\frac{t^{{x}/{b}} \exp\{-{t}/{b}\}}{b^{{x}/{b}+1} \Gamma({x}/{b}+1)}
+\end{align*}
+\item Inverse Gaussian kernel
+\begin{align*}
+K_{\text{IG}}( t; x,b) & =\frac{1}{\sqrt{2\pi b t^3}} 
+\exp
+\Big\{-\frac{1}{2b x} \Big(\frac{t}{x}+\frac{x}{t}-2\Big)\Big\}
+\end{align*}
+for every $t>0$ respectively.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Fitting distribution $G_I^0$}
+\begin{figure}[hbt]
+ \begin{center}
+ \includegraphics[width=9cm,height=6cm]{grafico_ajuste_nucleos_hist_550} \\
+%\caption{Fitting the $\mathcal{G}_I^0$ density of five hundred ${\mathcal G_I^0}(-5,4,3)$ observations in different ways, along with the histogram.}
+\small{Fitting the $\mathcal{G}_I^0$ density of five hundred ${\mathcal G_I^0}(-5,4,3)$ observations in different ways, along with the histogram.}
+  \end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fitting distribution $G_I^0$}
+\begin{figure}[hbt]
+ \centering
+ \includegraphics[width=9cm,height=6cm]{grafico_ajuste_nucleos_hist_1000} 
+ \caption{:Fitting the $\mathcal{G}_I^0$ density of five hundred ${\mathcal G_I^0}(-5,4,3)$ observations in different ways, along with the histogram.}
+ \label{figure:AjustesVarios2}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of asymmetric kernels}
+\begin{itemize}
+\item For bounded probability density functions on $[0, \infty)$ there are two important results about the convergence of the $\widehat{f}_b$ estimator.
+\bigskip
+\item Uniform weak consistency of $\widehat{f}_b$
+\bigskip
+\item Uniform strong consistency of $\widehat{f}_b$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of asymmetric kernels}
+\begin{itemize}
+\item Uniform Weak Consistency of $\widehat{f}_b$.\\
+\bigskip
+Let $f$ be a continuous and bounded probability density function on $[0, \infty)$, $\widehat{f}_b$ the asymmetric kernel density estimator, and $I$ a compact set in $[0, \infty)$. Then 
+\begin{align*}
+\sup_{x \in I} |\widehat{f}_b(x)-f(x)|\xrightarrow{\;\; \Pr \;\; }0 \; as \; n \rightarrow \infty 
+\end{align*}
+if $\lim_{n \rightarrow \infty} b=0 \  \text{and} \ \lim_{n \rightarrow \infty} n \, b^{2a}=+\infty$, with $a=1$ for gamma kernel and $a=5/2$ for the inverse Gaussian and reciprocal inverse Gaussian kernels.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of asymmetric kernels}
+\begin{itemize}
+\item Uniform Strong Consistency of $\widehat{f}_b$.\\
+\bigskip
+Let $f$ be a continuous and bounded probability density function on $[0, \infty)$, $\widehat{f}_b$, the asymmetric kernel density estimator, and $I$ a compact set in $[0, \infty)$. 
+Under the two conditions:
+$$b \rightarrow 0 \ \ \text {and} \ \  \frac{n \, b^{2a}}{\ln(n)} \rightarrow +\infty$$
+we have
+\begin{align*}
+\sup_{x \in I} |\widehat{f}_b(x)-f(x)|\xrightarrow{\;\; a.s. \;\; }0 \; as \; n \rightarrow \infty 
+\end{align*}
+where $a=1$ for the gamma kernel and $a=5/2$ for the inverse Gaussian and reciprocal inverse Gaussian kernels.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Estimation of unbounded densities at $x=0$}
+\begin{itemize}
+\item Sufficient conditions needed to get weak convergence of the asymmetric kernel density estimator to infinity at $x=0$.\\
+\medskip
+Let $f$ be a probability density function on $[0, \infty)$, unbounded at $x=0$. Under the condition 
+$$\lim_{n \rightarrow \infty} b=0 \  \text{and} \ \lim_{n \rightarrow \infty} n \, b^{2a}=+\infty \, (a>0)$$
+we have
+$$\widehat{f}_b \xrightarrow{\;\; \Pr \;\; } +\infty \  \  as \  \  n \rightarrow \infty$$
+if 
+$$\forall \delta > 0, \, \int_0^\delta K(0,b)(t)dt \rightarrow 1 \ \ as \ \ b \rightarrow 0$$
+\item It shows thay the asymmetric kernel estimator gives almost all weight to the boundary point when de bandwidth converges to zero.
+\end{itemize}
+\end{frame}
+\end{comment}
+
+%%%% FIN DE BLOQUE COMENTADO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section[Bandwith]{Choice the bandwith $h$}
+
+\begin{frame}
+	\frametitle{Optimal bandwidth $b$}
+	\begin{itemize}
+		\item Three strategies were used to choose the bandwidth $b$.
+		\begin{itemize}
+		\item The optimal $b$ ($b_{opt}$).
+		\medskip
+		\item Two especific values of $b$.
+		\medskip
+		\item Least Squared Cross Validation (LSCV) method.
+		\end{itemize}
+	\bigskip
+	\item Explicit expression of $b_{opt}$ can be obtained for $L\geq \dfrac{3}{2}$.
+	\medskip
+	\item Because the integrals converge for $L\geq \dfrac{3}{2}$.
+	\medskip
+	\item $L=1$ case is studied with Extrem Theory Values.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Square Cross Validation}
+	\begin{itemize}
+		\item A way of measuring the error
+		in the estimation of $f$ by $\hat{f}$ is the Integrated Squared Error (ISE)
+		\begin{align}
+		ISE(b)=&\int_\mathbb{R} (\hat{f}-f)^2 dx \nonumber\\ 
+		      =& \int_\mathbb{R} \hat{f}^2dx- 2 \int_\mathbb{R} \hat{f} fdx +\int_\mathbb{R} f^2dx
+		%\label{ISE}
+		\end{align}
+		\item The last term in this equation does not depend on $b$. Then
+		$$\min_b ISE(b)= \min_b \phi(\hat{f}) $$
+		where
+		\begin{align}
+		\phi(\hat{f})=\int_\mathbb{R} \hat{f}^2 dx- 2 \int_\mathbb{R} \hat{f} fdx
+		\label{fi}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Square Cross Validation}
+	\begin{itemize}
+	%\item This idea was published by Rudemo  ~\cite{Rudemo1982}, (1982),  and Bowman ~\cite{Bowman1984}, (1984) .
+	\medskip
+	\item The second term of equation (\ref*{fi}) can be seen as $E_X(\hat{f}(x))$ with $X \sim f$ unknown.
+	\medskip
+	\item The propose is estimate $E_X(\hat{f}(x))$ by 
+		$$\hat{E}_X(\hat{f}(x))=\frac{1}{n}\sum_{i=1}^n \hat{f}_{-i}(X_i)$$
+		where $\hat{f}_{-i}(x)= \hat{f}_{i;b}(x)=\dfrac{1}{n} \displaystyle{\sum_{j=1,j\neq i}^n} K_{(x,b)}(X_i)$, is the leave-one out estimator, the kernel estimator without considering the $i^{th}$ observation.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Least Square Cross Validation}
+	\begin{itemize}
+		\item This way ensures  that the observations used for calculating $\hat{f}_{-i}(\cdot)$ are independent of $X_i$, the observation at which we estimate $\hat{f}_{-i}(x)$.
+		\item The optimal parameter $b_{LSCV}$ is the one which minimizes the cross-validation function defined
+		by:
+		\begin{align}
+		LSCV(b)=\int_\mathbb{R} \hat{f}^2(x)dx - \frac{2}{n}\sum_{i=1}^n \hat{f}_{-i}(X_i)
+		\label{LSCV}
+		\end{align}
+		\item This function minimized has fairly frequent local minima.%, Hall and Marron ~\cite{HallMarron1991}.
+		\item The largest local minimizer (which gives better empirical
+		performance than the global minimizer) is the $b_{LSCV}$.
+		\item It is possible to see that (\ref{LSCV}) in an unbiased estimator of (\ref{fi}).
+		%\item In 1991, Hall and Marron ~\cite{HallMarron1991},  pointed out that the function (\ref*{LSCV}) has frequent local minima. For this reason, the largest local minimizer (which gives better empirical
+		%performance than the global minimizer) is the $b_{LSCV}$.
+		%SE PUEDE VER QUE \ref(LSCV) es un estimador insesgado de \ref{fi}
+	\end{itemize}
+\end{frame}		
+		
+
+\section[Methodology]{Methodology}
+
+\begin{comment}
+\begin{frame}
+\frametitle{Methodology}
+Let $\textbf{z}=(z_1,\dots, z_n)$ be an independent sample of size $n$ from the $\mathcal{G}_I^{0}(\alpha, \gamma^*, L)$ distribution and denoted $\widehat{f_k}$
+an estimation, using asymmetric kernel $K$, of the underlying density .
+\medskip
+The estimator we propose is given by
+\begin{equation*}
+\widehat\alpha= \arg\min_{-20\leq\alpha \leq -1} d_T\big(f_{\mathcal{G}_I^{0}}(\alpha,\gamma^*, L ), \widehat{f_k}(\textbf{z})\big), \text{ where }
+\label{minimization}
+\end{equation*}
+\begin{itemize}
+	\item $d_T$  represents the Triangular distance.
+	\item $\widehat{f_k}$ indicates the estimation of the underlying density function, using each of the kernels assessed. 
+	\item Let $X_1 \text{ and } X_2$ be random variable, $X_i \sim  \mathcal{G}_I^{0}(\alpha_i,\gamma_i,L)$,  such as $E(X_1)=E(X_2)$ and $\alpha_2=\alpha_1-\Delta, \ \Delta>0$
+\end{itemize} 
+\end{frame}
+\end{comment}
+
+\begin{frame}
+	\frametitle{Methodology}
+	\begin{itemize}
+		\item $\textbf{z}=(z_1,\dots, z_n)$ be an independent sample of size $n$ from the $\mathcal{G}_I^{0}(\alpha, \gamma^*, L)$ distribution .
+		\item $\widehat{f_k}$ an estimation, using asymmetric kernel $K$, of the underlying density .
+		\medskip
+		\item The estimator we assess is given by
+		\begin{equation*}
+		\widehat\alpha= \arg\min_{-20\leq\alpha \leq -1} d_T\big(f_{\mathcal{G}_I^{0}}(\alpha,\gamma^*, L ), \widehat{f_k}(\textbf{z})\big), \text{ where }
+		\label{minimization}
+		\end{equation*}
+		\item[] $d_T$  represents the Triangular distance.
+		%\item $\widehat{f_k}$ indicates the estimation of the underlying density function, using each of the kernels assessed. 
+		\item Let $X_1 \text{ and } X_2$ be random variables, $X_i \sim  \mathcal{G}_I^{0}(\alpha_i,\gamma_i,L)$,  such as $E(X_1)=E(X_2)$ and $\alpha_2=\alpha_1-\Delta, \ \Delta>0, \ d_T(f_{X_1},f_{X_2}) 
+		\mathop{\longrightarrow }\limits_{\alpha\to -\infty} 0$
+	\end{itemize} 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Methodology}
+\begin{itemize}
+\item In this case we evaluated different asymmetric kernels such as:
+	\begin{enumerate}[a)]
+	\item Inverse Gaussian
+	\medskip
+	\item Reciprocal Inverse Gaussian
+	\medskip
+	\item First kind of Gamma kernel
+	\medskip
+	\item Log Normal kernel
+	\end{enumerate}
+\medskip
+\item We also evaluated differents bandwidth
+	\begin{enumerate}[i)]
+		\item From $a) \text{ to } c)$ we use the $b_{opt}$ bandwidth.
+		\medskip
+		\item For $\Gamma$ kernel we use:
+		\begin{itemize}
+		 \item $b_{1}=\frac{1}{5 \sqrt{n}}$
+		 \medskip
+		 \item $b_{2}=b_{RIG}$ optimum.
+		 \end{itemize}
+		\medskip
+		\item For $c) \text{ and } d)$ we use the $b_{LSCV}$ bandwidth.
+	\end{enumerate}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% COMIENZO BLOQUE COMENTADO
+\begin{comment}
+\section[Robustness]{Robustness}
+
+\begin{frame}
+\frametitle{Robustness}
+\begin{itemize}
+\item A central feature we seek in estimators that can be used in a variety of contexts is the robustness.
+\bigskip
+\item It is the ability to perform well when the data obey the assumed model, and do not provide completely useless results when the observations do not follow it exactly.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Contamination model}
+\begin{itemize}
+\item In order to assess the robustness of the estimators, we propose three contamination models able to describe realistic departures from the hypothetical ``independent identically distributed sample'' assumption.
+\bigskip
+\item For this purpose we generate contaminated random samples using three types (cases) of contamination, with $0<\epsilon \ll 1$ the proportion of contamination. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Contamination model}
+Let $B$ a Bernoulli random variable with probability of success $\epsilon$ and let $C \in \mathbb R_+$ be a large value.
+\begin{itemize}
+\bigskip
+\item Case~1:
+Let $W$   and $U$ be such that $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$,  and $U \sim \mathcal{G}_I^0(\alpha_2,\gamma_2^*,L) $. Define $Z=BU+(1-B)W$, then we generate $\{z_1,\dots,z_n\}$ identically distributed random variables with cumulative distribution function 
+$$
+(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha_2,\gamma_2^*,L)}(z),
+$$
+where $\mathcal{F}_{\mathcal{G}_I	^0(\alpha,\gamma,L)}$ is the cumulative distribution function of a $\mathcal{G}_I^0(\alpha,\gamma,L)$ random variable.
+\end{itemize}
+ \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% COMIENZO BLOQUE COMENTADO
+\begin{comment}
+\begin{frame}
+\frametitle{Contamination model}
+\begin{itemize}
+\item Case~2: Consider $W \sim \mathcal{G}_I^0(\alpha_1,\gamma_1^*,L)$; return $Z=BC+(1-B)W$.
+\bigskip
+\item Case~3:
+Consider $W \sim \mathcal{G}_I^0(\alpha,\gamma^*,L)$ and $U\sim \mathcal{G}_I^0(\alpha,10^k\gamma^*,L) $ with $k \in \mathbb{N}$. 
+Return $Z=BU+(1-B)W$, then $\{z_1,\dots,z_n\}$ are identically distributed random variables with cumulative distribution function 
+$$
+(1-\epsilon) \mathcal{F}_{\mathcal{G}_I^0(\alpha,\gamma^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}_I^0(\alpha,10^k\gamma^*,L)}(z).
+$$
+\end{itemize}
+\end{frame}
+\end{comment}
+%%%%%% FIN BLOQUE COMENTADO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results}
+
+\begin{frame}
+\frametitle{Experimental Results}
+\begin{block}{}
+	We conducted a Monte Carlo experiment with 500 replications for several parameter values; for each case $\{\widehat{\alpha}_1, \dots, \widehat{\alpha}_{500}\}$ are obtained by simulation.
+\end{block}
+
+\begin{block}{}
+\begin{itemize}
+	\item $\alpha\in\{-1.5, -3, -5, -8\}$
+	%\medskip
+	\item Two levels of $L\in\{3,8\}$
+	%\medskip
+	\item  $n\in\{9, 25,49, 81,121,500\}$
+	\end{itemize}
+\end{block}
+
+\begin{block}{}
+In order to assess the proposed estimation method, we evaluate
+\begin{itemize}
+	\item the number of cases of convergence
+	%\medskip
+	\item computational cost
+	%\medskip
+	\item bias
+	%\medskip
+	\item mean square error
+\end{itemize} 
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\begin{frame}
+\frametitle{Estimators}
+\begin{block}{The mean}
+ $$
+\widehat{E}(\widehat{\alpha}) = \overline{\widehat{\alpha}}=\frac{1}{500}{\sum_{i=1}^{500}{\widehat{\alpha}_i}}
+ $$
+\end{block}\pause
+\begin{block}{The Bias}
+  $$\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$$
+\end{block}\pause
+\begin{block}{The Mean Square Error}
+$$\widehat{\operatorname{mse}}(\widehat\alpha)=\frac{1}{500}{\sum_{i=1}^{500}{(\widehat{\alpha}_i-\alpha)^2}}$$
+\end{block}
+\end{frame}
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{frame}
+%\begin{block}{}
+%\begin{center}
+%Without contamination
+%\end{center}
+%\end{block}
+%\end{frame}
+
+\begin{frame}
+\frametitle{No Convergence}
+\begin{table}[ht]
+	\footnotesize 
+	\centering
+		\begin{tabular}{cccccgcggggc}
+		\hline
+		\hline	
+		\small	
+		alfa & n & IG & IG & NG1 & MV & RIG & NG1 & LN & NG1 & NG1 \\
+		 &  & {\tiny jstar} & {\tiny opt} &  &  &  & {\tiny LSCV} & {\tiny LSCV} & {\tiny $b_1$} & {\tiny $b_2$} \\ 
+		\hline
+		\hline
+		 -1.50 &   9 &  &   2 &   2 &  &  &   2 &   2 &  &  \\ 
+		 \hline
+		 -3.00 &   9 &  87 & 103 &  84 &  57 & 120 &  25 &  37 &  47 &  47 \\ 
+		 -3.00 &  25 &  19 &  21 &  19 &   6 &  26 &   2 &   3 &   8 &   8 \\ 
+		 -3.00 &  49 &   1 &   3 &   5 &   1 &   7 &   1 &  &  & \\ 
+		 \hline
+		 -5.00 &   9 & 155 & 160 & 153 & 120 & 216 &  51 &  56 & 116 & 116 \\ 
+		 -5.00 &  25 &  86 &  92 &  86 &  58 & 138 &  19 &  23 &  45 &  45 \\ 
+		 -5.00 &  49 &  39 &  42 &  36 &  21 &  62 &   6 &   5 &  19 &  19 \\ 
+		 -5.00 &  81 &  21 &  23 &  16 &   7 &  33 &   2 &   3 &   9 &   9 \\ 
+		 -5.00 & 121 &  10 &  10 &   5 &   2 &  13 &  &  &   4 &   4 \\ 
+		 \hline
+		 -8.00 &   9 & 199 & 200 & 234 & 200 & 286 &  79 &  87 & 179 & 179 \\ 
+		 -8.00 &  25 & 173 & 174 & 168 & 128 & 237 &  48 &  56 & 127 & 127 \\ 
+		 -8.00 &  49 & 130 & 139 & 127 &  86 & 187 &  27 &  39 &  89 &  89 \\ 
+		 -8.00 &  81 &  69 &  82 &  73 &  42 & 115 &  19 &  17 &  45 &  45 \\ 
+		 -8.00 & 121 &  64 &  78 &  52 &  33 & 105 &   9 &   9 &  34 &  34 \\ 
+		 -8.00 & 1000 &   1 &   1 &  &  &   1 &  &  &  & \\ 
+		\hline
+	\end{tabular}
+\end{table}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mean $\widehat{\alpha}$, $L=3$, Kernels: $LN$ and $NG$, $b_{LSCV}$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/alfa_500_sinmenos20_L3_MV_LN_NG1.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ECM $\widehat{\alpha}$, $L=3$, Kernels: $LN$ and $NG$, $b_{LSCV}$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/ECM_500_sinmenos20_L3_MV_LN_NG1.pdf}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mean $\widehat{\alpha}$, $L=3$, Kernel $NG$, $b_1$ and $b_2$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/alfa_500_NoCont_L3NG1_conb_IGyRIG.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ECM $\widehat{\alpha}$, $L=3$, Kernel $NG$, $b_1$ and $b_2$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/ECM_500_NoCont_L3NG1_conb_IGyRIG.pdf}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mean $\widehat{\alpha}$, $L=8$, Kernels: $LN$ and $NG$, $b_{LSCV}$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/alfa_500_sinmenos20_L8_MV_LN_NG1.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ECM $\widehat{\alpha}$, $L=8$, Kernels: $LN$ and $NG$, $b_{LSCV}$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/ECM_500_sinmenos20_L8_MV_LN_NG1.pdf}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Mean $\widehat{\alpha}$, $L=8$, Kernel $NG$, $b_1$ and $b_2$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/alfa_500_sinmenos20_L8NG1_con_bIGyRIG.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{ECM $\widehat{\alpha}$, $L=8$, Kernel $NG$, $b_1$ and $b_2$}
+	\begin{figure}[ht]
+		\centering    
+		\includegraphics[scale=0.6]{../../../Figures/jiaais_2015/ECM_500_sinmenos20_L8NG1_con_bIGyRIG.pdf}
+	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+\item<1->We proposed a new estimator for the texture parameter of the $\mathcal{G}_I^0$ distribution.
+\bigskip
+\item<2->It is based on the minimization of a stochastic distance between the model and an estimator of the probability density function built with asymmetric kernels.
+\bigskip 
+\item<3-> We consider different strategies to choose bandwidth $b$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+\item<1-> LSCV and NG1 kernel with two suitable bandwidth perform very well for extreme textured and textured zones.
+\bigskip 
+\item<2-> Outperforms Maximum Likelihood Estimator in these cases in bias, and in all cases in MSE and convergence.
+\bigskip 
+\item<3-> They have more cost computational than Maximum Likelihood Estimator
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Future work}
+\begin{itemize}
+	\item<1-> We will experiment with symmetric kernels.
+	\bigskip
+	\item<2-> With another techniques to choose de bandwith $b$.
+	\bigskip
+	 \item<3-> And with the estimation of $\gamma$ and $\alpha$ parameters.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contacto}
+		\begin{block}{}
+			Muchas Gracias!!
+		\end{block}
+		\bigskip
+		\bigskip
+		\begin{block}{}
+		julia.cassetti@gmail.com
+	\end{block}
+\end{frame}
+\end{document}
+
+
+
