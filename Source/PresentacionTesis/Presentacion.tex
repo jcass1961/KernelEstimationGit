@@ -188,7 +188,7 @@
 	\begin{itemize}
 		\item La polarización de una onda electromagnética es la orientación del campo eléctrico de la señal transmitida o recibida.
 		\medskip
-		\item Los radares SAR emiten y reciben radiación horizontal o verticalmente polarizada.
+		\item Los sensores SAR emiten y reciben radiación horizontal o verticalmente polarizada.
 		\medskip
 		\item Si operan con una única polarización de emisión y detectan una sola componente en la radiación recibida, es un sistema SAR monopolarizado.
 	\end{itemize}
@@ -211,7 +211,7 @@
 			\item SAOCOM 1B está programado para marzo de 2020.
 		\end{itemize}
 	\bigskip
-	\item Uno de los objetivos centrales es la medición de la humedad del suelo. Por eso operan en banda L que tiene la capacidad de penetrar a través de la superficie hasta $\SI{2}{\meter}$ de profundidad dependiendo del tipo de suelo.
+	\item Uno de los objetivos centrales es la medición de la humedad del suelo. Por eso operan en banda L (longitud de onda entre \SI{15}{\centi\meter} y \SI{30}{\centi\meter}) que tiene la capacidad de penetrar a través de la superficie hasta $\SI{2}{\meter}$ de profundidad dependiendo del tipo de suelo.
 	\end{itemize}
 \end{frame}
 
@@ -264,30 +264,29 @@
 \begin{frame}
 	\frametitle{Modelo estadístico}
 	\begin{itemize}
-		\item \citet{Frery97,Frery99} presentan la familia de distribuciones $\mathcal{G}^0$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A^0$ y $\mathcal{G}_I^0$ respectivamente.
+		\item \citet{Frery97} presentan la familia de distribuciones $\mathcal{G}^0$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A^0$ y $\mathcal{G}_I^0$ respectivamente.
 		\bigskip
 		\item Para el caso de datos de intensidad, si
 			\begin{itemize}
-			\item $X \sim \Gamma ^{-1}( \alpha ,\gamma ) $, 
+			\item[] $X \sim \Gamma ^{-1}( \alpha ,\gamma ) $, 
 			\vspace{1mm}
-			\item $Y \sim \Gamma ( L,L) $, entonces
+			\item[] $Y \sim \Gamma ( L,L) $, entonces
 			\vspace{1mm}
-			\item  $Z \sim \mathcal{G}_I^{0}( \alpha ,\gamma, L )$.
+			\item[]  $Z \sim \mathcal{G}_I^{0}( \alpha ,\gamma, L )$.
 		\end{itemize}
 		\bigskip
-			donde $-\alpha,\gamma ,z>0$ y $L\geq 1$ son el parámetro de textura, de brillo y el número de looks respectivamente.\\
-		
+			donde $-\alpha,\gamma ,z>0$ y $L\geq 1$ son los parámetros de textura, de brillo y el número de looks respectivamente.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Densidad}
-	La función de densidad del retorno $Z$ esta dada por:
+	La función de densidad del retorno $Z$ está dada por:
 	\begin{equation*}
 	f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 		) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
 		L) }\cdot  
-	\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }}%,
+	\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }}.
 	\label{ec_dens_gI0}
 	\end{equation*}
 
@@ -296,7 +295,7 @@
 	\begin{equation*}
 	\label{momentos}
 	E(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }\cdot  
-	\frac{\Gamma (L+r )}{\Gamma (L)}, 
+	\frac{\Gamma (L+r )}{\Gamma (L)}; 
 	\end{equation*}
 	estos momentos son finitos si $-\alpha > r$.
 
@@ -478,7 +477,7 @@
 		
 		\bigskip
 		\begin{itemize}
-			\item Primer función característica \\de $2º$ tipo
+			\item Primera función característica \\de $2º$ tipo
 			\begin{align*}
 			\Phi_{X}(s) &= \displaystyle \int_{0}^{+\infty} x^{s-1} f_X(x)dx\\
 			            &=\mathbb{E}\left(X^{s-1}\right).
@@ -554,13 +553,13 @@
 \begin{frame}
 	\frametitle{Logcumulantes}
 	\begin{itemize}
-		\item Si $Z_1,\ldots,Z_n$ con $Z_i \sim f_{\alpha,L}$ es una muestra i.i.d., el estimador Logcumulantes del parámetro de textura $\alpha$, que lo llamaremos $\widehat\alpha_{\text{\tiny{LC}}}$, es la solución de la ecuación    
+		\item Si $Z_1,\ldots,Z_n$ con $Z_i \sim f_{\alpha,L}$ es una muestra i.i.d., el estimador Logcumulantes del parámetro de textura $\alpha$, que  llamaremos $\widehat\alpha_{\text{\tiny{LC}}}$, es la solución de la ecuación    
 %		\begin{align*}
 %		\widehat{\widetilde{k}}_1 =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) - \Psi^0(-\alpha),
 %		\end{align*}
 %		es decir, la solución de la ecuación
 		\begin{align*} \label{eq:logm}
-		\frac{1}{n} \sum_{i=1}^n\log (z_i) =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) + \Psi^0(-\alpha).
+		\frac{1}{n} \sum_{i=1}^n\log (z_i) =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) + \Psi^0(-\alpha),
 		\end{align*}
 		donde $\Psi^0(\cdot)$ es la función digamma.
 	\end{itemize}
@@ -575,9 +574,9 @@
 		\bigskip
 		\item En este sentido hay dos elementos involucrados: 
 		\begin{itemize}
-			\item la medida de distancia que permite cuantificar la proximidad,
+			\item la medida de distancia que permite cuantificar la proximidad, y
 			\medskip
-			\item es la información que proviene de la muestra.
+			\item la información que proviene de la muestra.
 		\end{itemize}  
 	\end{itemize}
 \end{frame}
@@ -587,7 +586,7 @@
 	\begin{itemize}
 		\item Teniendo en cuenta ambos elementos,si $Z_1,\ldots,Z_n$ es una muestra i.i.d. donde $Z_i \sim f_{\alpha,L}$  se define al MDE del parámetro $\alpha$ como
 		\begin{align*}
-		\widehat{\alpha}_n=\mathop{\rm argmin} \limits_{\alpha < -1} d(f_{\alpha,L}, \widehat{f}_n),
+		\widehat{\alpha}_n=\mathop{\text{arg min}} \limits_{\alpha < -1} d(f_{\alpha,L}, \widehat{f}_n),
 		\end{align*}
 		donde 
 		\item $d$ es una medida de distancia, divergencia o distancia estocástica,
@@ -604,7 +603,7 @@
 	Entonces hay que definir:
 	\bigskip
 	\begin{itemize}
-		\item qué medida de distancia se va a utilizar.
+		\item qué medida de distancia se va a utilizar, y
 		\bigskip
 		\item qué estimador no paramétrico $\widehat{f}_n$ de la función de densidad subyacente.
 	\end{itemize}
@@ -658,7 +657,7 @@
 	\begin{itemize}
 		\item La teoría de la información brinda una noción de discrepancia entre funciones de densidad.
 		\vspace{3mm}
-		\item Estas medidas no son métricas porque no cumplen la desigualdad triangular, pero son simétricas y cumplen que $d^h_{\phi}(f, g) \geq 0.$ Además, si $f=g$ entonces $d^h_{\phi}(f, f)= 0$.
+		\item Estas medidas no son siempre métricas porque no necesariamente cumplen la desigualdad triangular, pero son simétricas y cumplen que $d^h_{\phi}(f, g) \geq 0.$ Además, si $f=g$ entonces $d^h_{\phi}(f, f)= 0$.
 		\vspace{3mm}
 		\item Estas medidas fueron estudiadas en~\cite{Nascimento2009} para datos SAR modelados por la distriución $\mathcal{G}_I^0$, en el contexto de cuantificar cuán distinguibles son dos regiones de una imagen.
 	\end{itemize}
@@ -692,6 +691,7 @@
 	\vspace{3mm}
 	%donde $\phi(x)=-\sqrt{x}+\dfrac{x+1}{2}$ y $h(y)=-\log(-y+1)$ con $0\leq y<1$.
 \end{itemize}
+%%% ACF Decir que tienen una relación funcional
 \end{frame}
 
 \begin{frame}
@@ -701,6 +701,7 @@
 		\centering    
 		\includegraphics[width=.8\linewidth]{../../figures/tesis/Presentacion/TodaDistancia2.pdf}
 	\end{figure}
+%%% ACF Primero las definiciones, después la ilustración
 \end{frame}
 
 \begin{frame}
@@ -731,13 +732,13 @@
 \begin{frame}
 	\frametitle{Núcleos Asimétricos}
 	\begin{block}{}
-		Cuando el soporte de la función de densidad a estimar no es acotado los núcleos simétricos tienen un buen desempeño y han sido muy estudiados.
+		Cuando el soporte de la función de densidad a estimar no es acotado los núcleos \alert{simétricos} tienen un buen desempeño y han sido muy estudiados.
 	\end{block}{}
 	\bigskip
 	Pero\ldots
 	\bigskip
 	\begin{alertblock}{}
-		Cuando el soporte de dicha función de densidad es acotado o semiacotado, los núcleos simétricos sufren de sesgo en el borde del soporte.
+		Cuando el \alert{soporte} de dicha función de densidad es \alert{acotado} o semiacotado, los núcleos simétricos sufren de \alert{sesgo} en el borde del soporte.
 	\end{alertblock}{}
 	\medskip
 	\begin{alertblock}{}
@@ -747,10 +748,10 @@
 
 \begin{frame}
 	\frametitle{Núcleos Asimétricos}
-	Una forma de resolver el problema es utilizar núcleos simétricos.
+	Una forma de resolver el problema es utilizar núcleos \alert{asimétricos}.
 	\begin{definicion}
 	\label{DefNucleo}
-	Sea $Z_1, \ldots, Z_n$ una muestra aleatoria donde $Z_i \sim f$ con $f$ la función de densidad teórica, el estimador $\widehat{f}_n$ de $f$ utlizando núcleos asimétricos se define como 
+	Sea $Z_1, \ldots, Z_n$ una muestra aleatoria donde $Z_i \sim f$ con $f$ la función de densidad teórica, el estimador $\widehat{f}_n$ de $f$ utilizando núcleos asimétricos se define como 
 	%Asumiendo que $\int_0^{\infty} f'^2(x)dx$ y $\int_0^{\infty} (xf''(x))^2dx$ son finitas,  
 	\begin{equation*}
 	\widehat{f}_n(x)=\frac{1}{n}\sum_{i=1}^n K_{x,b}(Z_i), \quad x \in Sop(f)
@@ -765,9 +766,9 @@
 	\begin{itemize}
 	\item Los núcleos Gamma ($\Gamma$) que fueron propuestos por~\citet{chensx2000}.
 	\bigskip
-	\item El Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG) propuesto por~\citet{Scaillet2004} .
+	\item El Inverso Gaussiano (IG) y Recíproco Inverso Gaussiano (RIG) propuestos por~\citet{Scaillet2004} .
 	\bigskip
-	\item El núcleo Lognormal (LN) estudiado en~\citet{Libnegue2013} .
+	\item El núcleo Lognormal (LN) estudiado en~\citet{Libnegue2013}.
 	\end{itemize}
 \end{frame}
 
@@ -799,11 +800,11 @@
 \begin{frame}
 	\frametitle{Alguno de los núcleos estudiados}
 	\begin{itemize}
-		\item Todos estos núcleos tienen soporte en $[0,+\infty)$, no asignan peso fuera del soporte de la distribución.
+		\item Todos estos núcleos tienen soporte en $[0,+\infty)$, por lo que no asignan peso fuera del soporte de la distribución.
 		\medskip
-		\item \citet{Scaillet2004} indica que el sesgo en el borde de los núcleos $\Gamma$, IG y RIG el sesgo en el borde es un $O(b)$.
+		\item \citet{Scaillet2004} indica que el sesgo en el borde de los núcleos $\Gamma$, IG y RIG el sesgo en el borde es $O(b)$.
 		\medskip
-		\item \citet{Libnegue2013} indica que el sesgo correspondiente al núcleo LN es un $O(b^2)$.
+		\item \citet{Libnegue2013} indica que el sesgo correspondiente al núcleo LN es $O(b^2)$.
 	\end{itemize}
 \end{frame}
 
@@ -845,7 +846,7 @@
 		\item Estimar el parámetro de textura $\alpha$ como
 		\begin{align*}
 		\label{PropuestaMDE}
-		\widehat{\alpha}=\mathop{\rm argmin} \limits_{\alpha<-1} d(f_{\alpha,L}, \widehat{f}_n)
+		\widehat{\alpha}=\mathop{\text{arg min}} \limits_{\alpha<-1} d(f_{\alpha,L}, \widehat{f}_n),
 		\end{align*}
 		donde 
 	\item $d$ es una distancia estocástica 
@@ -913,16 +914,20 @@
 %		\end{itemize}
 %\end{frame}
 
+%%% ACF Insisto, no presentaría nada de histograma; como máximo, una frase
+
 \begin{frame}
 	\frametitle{Experimento}
 	En cada replicación \textit{i}:
 	\bigskip
 	\begin{itemize}
-		\item se estima $\widehat{f}$ utilizando histogramas.
+		\item se genera una muesta
 		\medskip
-		\item se utiliza el método de Freedman Diaconis para elegir el ancho de banda $b$ dado por $b=2 \ \text{IQR}(z_1,\ldots,z_n) n^{-1/3}$ donde $\text{IQR}$ es el rango intercuartil.
+		\item se estima $\widehat{f}$ utilizando histogramas
 		\medskip
-		\item se calcula $\widehat{\alpha_i}= \mathop{\text{argmin}}\limits_{-10 \leq \alpha <-1}d(f_{\mathcal{G}_I^0(\alpha,-\alpha-1,L)},\widehat{f})$ donde $d$ es alguna de las distancias estocásticas consideradas.
+		\item se utiliza el método de Freedman Diaconis para elegir el ancho de banda $b$ dado por $b=2 \ \text{IQR}(z_1,\ldots,z_n) n^{-1/3}$ donde $\text{IQR}$ es el rango intercuartil
+		\medskip
+		\item se calcula $\widehat{\alpha_i}= \mathop{\text{arg min}}\limits_{-10 \leq \alpha <-1}d(f_{\mathcal{G}_I^0(\alpha,-\alpha-1,L)},\widehat{f})$ donde $d$ es alguna de las distancias estocásticas consideradas.
 		\medskip
 		\item el mínimo se encontró recorriendo un rango de valores de $\alpha \in [-10,-1)$.
 	\end{itemize} 
@@ -939,10 +944,6 @@
 		\medskip
 		\item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$
 	\end{itemize}
-\metroset{block=fill}
-\begin{alertblock}{Alert}
-	Block content.
-\end{alertblock}
 \end{frame}
 
 %\begin{frame}
@@ -1137,7 +1138,6 @@
 	\frametitle{Imagen real SAR con un corner reflector}
 	\begin{itemize}
 		\item Imagen E-SAR con $L=1$, banda \textit{L} polarización HH datos de intensidad.
-		format E-SAR
 	\end{itemize}
 	\begin{figure}[htb]
 		\centering
