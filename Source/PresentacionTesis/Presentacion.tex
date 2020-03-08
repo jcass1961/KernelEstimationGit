@@ -365,7 +365,7 @@
 		\begin{itemize}
 			\item  un buen comportamiento para \alert{muestras de tamaño pequeño y moderado}.
 			\medskip
-			\item buenas propiedades midiéndolas en término del \alert{ sesgo}, del \\alert{error cuadrático medio}, y de la capacidad para resistir \alert{diferentes niveles de contaminación}.
+			\item buenas propiedades midiéndolas en término del \alert{ sesgo}, del \alert{error cuadrático medio}, y de la capacidad para resistir \alert{diferentes niveles de contaminación}.
 			\medskip
 			\item \alert{bajo costo computacional}.
 		\end{itemize}	
@@ -679,7 +679,7 @@
 		\begin{itemize}
 			\item \textcolor{red}{\textbf{Hellinger}}
 			\begin{align*} 
-			d_{\text{\tiny{H}}}(f,g)=\dfrac{1}{2} \displaystyle \int_{S} \left(\sqrt{f(x)}-\sqrt{g(x)}\right)^2 dx,
+			d_{\text{\tiny{H}}}(f,g)=1- \displaystyle \int_{S} \sqrt{f(x) g(x)} dx,
 			\end{align*}
 			%donde $\phi(x)=\left(\sqrt{x}-1\right)^2$ y $h(y)=y/2$ con $0\leq y <2$.
 			\vspace{3mm}
@@ -690,7 +690,11 @@
 			\end{align*}
 			\vspace{3mm}
 			%donde $\phi(x)=-\sqrt{x}+\dfrac{x+1}{2}$ y $h(y)=-\log(-y+1)$ con $0\leq y<1$.
+			\vspace{3mm}
+			\item \textcolor{red}{\textbf{Relación funcional}}
+			$$d_{B}=-\log{(1-d_{H})}$$
 		\end{itemize}
+	
 		%%% ACF Decir que tienen una relación funcional
 	\end{frame}
 	
@@ -957,7 +961,7 @@
 %	\end{frame}
 	
 	\begin{frame}
-		\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$3$}
+		\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, $L=3$}
 		\begin{figure}[htb]
 			\setcounter{subfigure}{0}
 			\centering    
@@ -1044,8 +1048,8 @@
 		\begin{figure}[H]
 			\centering
 			\setcounter{subfigure}{0}
-			\subfigure[L=3]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L3.pdf}}
-			\subfigure[L=8]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L8.pdf}}
+			\subfigure[$L=3$]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L3.pdf}}
+			\subfigure[$L=8$]{\includegraphics[scale=0.2]{../../Figures/Tesis/Capitulo6/DensidadGI0L8.pdf}}
 		\end{figure}
 	\end{frame}
 	%width=.45\linewidth
@@ -1063,19 +1067,19 @@
 	%\end{itemize}
 	%\end{frame}
 	
-	\begin{frame}
-		\frametitle{Datos sin contaminar, L=$1$}
-		\begin{figure}
-			\setcounter{subfigure}{0}
-			\centering
-			\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoSESGOJstar2013_NoCont_SinBarras_L=1.pdf}}
-			\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoECMJstar2013BarrasError_NoCont_L=1.pdf}}
-			%\caption{\label{SesgoECMSinContaminarL1}\small Sesgo y ECM para datos sin contaminar, $L=1$.}
-		\end{figure}
-	\end{frame}
+%	\begin{frame}
+%		\frametitle{Datos sin contaminar, $L=1$}
+%		\begin{figure}
+%			\setcounter{subfigure}{0}
+%			\centering
+%			\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoSESGOJstar2013_NoCont_SinBarras_L=1.pdf}}
+%			\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoECMJstar2013BarrasError_NoCont_L=1.pdf}}
+%			%\caption{\label{SesgoECMSinContaminarL1}\small Sesgo y ECM para datos sin contaminar, $L=1$.}
+%		\end{figure}
+%	\end{frame}
 	
 	\begin{frame}	
-		\frametitle{Datos sin contaminar, L=$3$}
+		\frametitle{Datos sin contaminar, $L=3$}
 		\begin{figure}
 			\setcounter{subfigure}{0}
 			\subfigure[\label{AlfasEstimadosJSTAR2013_L=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.49\linewidth]{../../Figures/Tesis/Presentacion/GraficoSESGOJstar2013_SinBarrasL=3.pdf}}
@@ -1134,7 +1138,7 @@
 	%\end{frame}
 	
 	\begin{frame}
-		\frametitle{Datos contaminados Caso 1, L=3, $\epsilon=0.01$ y $\alpha_2=-15$}
+		\frametitle{Datos contaminados Caso 1, $L=3$, $\epsilon=0.01$ y $\alpha_2=-15$}
 		\begin{figure}[H]
 			%	\subfigure[\label{AlfasContJSTAR2013Caso1_L=1}$\widehat{\alpha}$, L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoAlfaJstar2013_Cont_L=1Caso1.pdf}}
 			%	\subfigure[\label{ECMContJSTAR2013Caso1_L=1}$\widehat{\text{ECM}}$ ,L=1]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Capitulo6/GraficoECMJstar2013_Cont_L=1Caso1.pdf}}
@@ -1150,58 +1154,47 @@
 	
 	
 	
-	\begin{frame}
-		\frametitle{Imagen real SAR con un corner reflector}
-		\begin{itemize}
-			\item Imagen E-SAR con $L=1$, banda \textit{L} polarización HH datos de intensidad.
-		\end{itemize}
-		\begin{figure}[htb]
-			\centering
-			%\subfigure[Single-look E-SAR imagen con un corner reflector.]{\includegraphics[angle =90,width=.8\linewidth]{../../Figures/Tesis/Capitulo6/Corner.pdf}}
-			%\subfigure[\label{Cornerregiones} Regiones de interés.]{\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}}
-			\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}
-			%\caption{\label{MuestrasCorner} Muestras de varios tamaños en una .}
-		\end{figure}
-	\end{frame}
+
+
 	
-	\begin{frame}
-		\small
-		\begin{table}
-			%	\frametitle{Estimaciones en muestras de imagen real SAR}
-			\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
-			%\begin{tabular}{c c c c c c}
-			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-				%\toprule
-				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-				\midrule
-				Magenta     & 15  & -20.0 & -4.1  & NA    & NA      \\
-				Verde       & 42  & -9.2  & -5.0  & NA    & NA    \\
-				Azul        & 90  & -3.5  & -2.7  & -4.7  & -14.2   \\
-				Amarillo    & 156 & -2.2  & -1.8  & -2.6  & -3.4    \\
-				Rojo        & 225 & -1.9  & -1.7  & -2.1  & -2.5    \\
-				%\bottomrule
-			\end{tabular}
-		\end{table}
-		%\end{frame}
-		%
-		%\begin{frame}
-		\begin{table}
-			\caption*{\label{resultadosCorner}\large Tiempos de proceso}
-			%\begin{tabular}{c c c c c c}
-			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-				%\toprule
-				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-				\midrule
-				Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
-				Verde       & 42  &  0.00 &  4.04     &  0.00  &  0.00\\
-				Azul        & 90  &  0.02 &  4.85     &  0.00  &  0.00\\
-				Amarillo    & 156 & 0.01  &  8.35     &  0.00   &  0.00\\
-				Rojo        & 225 & 0.02  &  10.97    &  0.00   &  0.00\\
-				%\bottomrule
-			\end{tabular}
-		\end{table}
-	\end{frame}
-	
+%	\begin{frame}
+%		\small
+%		\begin{table}
+%			%	\frametitle{Estimaciones en muestras de imagen real SAR}
+%			\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
+%			%\begin{tabular}{c c c c c c}
+%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+%				%\toprule
+%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+%				\midrule
+%				Magenta     & 15  & -20.0 & -4.1  & NA    & NA      \\
+%				Verde       & 42  & -9.2  & -5.0  & NA    & NA    \\
+%				Azul        & 90  & -3.5  & -2.7  & -4.7  & -14.2   \\
+%				Amarillo    & 156 & -2.2  & -1.8  & -2.6  & -3.4    \\
+%				Rojo        & 225 & -1.9  & -1.7  & -2.1  & -2.5    \\
+%				%\bottomrule
+%			\end{tabular}
+%		\end{table}
+%		%\end{frame}
+%		%
+%		%\begin{frame}
+%		\begin{table}
+%			\caption*{\label{resultadosCorner}\large Tiempos de proceso}
+%			%\begin{tabular}{c c c c c c}
+%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+%				%\toprule
+%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+%				\midrule
+%				Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
+%				Verde       & 42  &  0.00 &  4.04     &  0.00  &  0.00\\
+%				Azul        & 90  &  0.02 &  4.85     &  0.00  &  0.00\\
+%				Amarillo    & 156 & 0.01  &  8.35     &  0.00   &  0.00\\
+%				Rojo        & 225 & 0.02  &  10.97    &  0.00   &  0.00\\
+%				%\bottomrule
+%			\end{tabular}
+%		\end{table}
+%	\end{frame}
+%	
 	
 	\begin{frame}
 		\frametitle{Tercer trabajo}
@@ -1516,7 +1509,7 @@
 				%\toprule
 				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
 				\midrule
-				Magenta      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+				Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
 					       &   &    &     &    &  \\
 					       &   &    &     &    &  \\
 				   		   &   &    &     &    &  \\
@@ -1537,7 +1530,7 @@
 			%\toprule
 			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
 			\midrule
-			Magenta      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
 			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
 			    	   &   &    &     &    &  \\
 			   		   &   &    &     &    &  \\
@@ -1558,7 +1551,7 @@
 			%\toprule
 			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
 			\midrule
-			Magenta      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
 			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
 			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
 			&   &    &     &    &  \\
@@ -1579,7 +1572,7 @@
 			%\toprule
 			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
 			\midrule
-			Magenta      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
 			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
 			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
 			Verde    & 54  &  -20    &  -20     &  -20    &  -20\\
@@ -1600,10 +1593,10 @@
 			%\toprule
 			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
 			\midrule
-		    Magenta     & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+		    Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
 			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
 			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
-			Verde    & 54  &  -20    &  -20     &  -20    &  -20\\
+			Verde      & 54  &  \color{gray} -20    &  \color{gray} -20     &  \color{gray} -20    &  \color{gray} -20\\
 			Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74  
 			%\bottomrule
 		\end{tabular}
@@ -1656,7 +1649,7 @@
 					763908.07  &	268849.19 							&	362179.47 &	388732.64\\
 					588919.09  &	806006.29 							& 	427186.11 &	362693.40\\
 					732546.74  &	296982.58 							&	132006.85 &	1315484.02\\
-					1313430.89 &	 \color{red} \textbf{76311.14}  &	212135.11 &	404060.49\\
+					1313430.89 &	 \color{red} 76311.14  &	212135.11 &	404060.49\\
 					\bottomrule
 				\end{tabular}
 			\end{table}
@@ -1700,6 +1693,64 @@
 %		\end{itemize}
 	\end{frame}
 	
+		\begin{frame}
+		\frametitle{Imagen real SAR con un corner reflector}
+		\begin{itemize}
+			\item Imagen E-SAR, banda \textit{L} polarización HH datos de intensidad.
+		\end{itemize}
+		\begin{figure}[htb]
+			\centering
+			%	\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Capitulo6/CornerReg}
+			\only<1>{
+				\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Presentacion/CornerJulia_Magenta}
+			}
+			\only<2>{
+				\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Presentacion/CornerJulia_Verde}
+			}	
+			\only<3>{
+				\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Presentacion/CornerJulia_Amarilla}
+			}
+			\only<4>{
+				\includegraphics[angle =90,width=.8\linewidth,]{../../Figures/Tesis/Presentacion/CornerJulia_Roja}
+			}
+		\end{figure}
+	\end{frame}
+	
+	\begin{frame}
+		\small
+		\begin{table}
+			%	\frametitle{Estimaciones en muestras de imagen real SAR}
+			\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
+			%\begin{tabular}{c c c c c c}
+			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+				%\toprule
+				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat{\alpha_{\Gamma}}$ &$\widehat\alpha_{\text{\tiny{LN}}}$  &$\widehat\alpha_{\text{\tiny{LC}}}$ \\
+				\midrule
+				Magenta     & 9   & \color {gray}-20.0   & \color {gray}-20.0  & \color {gray}-20.0   & \color {gray}-20.0    \\
+				Verde       & 30  & -13.04  & -6.82  & \color {red}-7.76   &  -20.0  \\
+				Amarilla    & 72  & -4.72  & -5.09  & \color {red}-7.99    &  -4.29    \\
+				Roja        & 132 & -6.94  & -8.42  & \color {red}8.53     &   -6.79\\
+				%\bottomrule
+			\end{tabular}
+		\end{table}
+		%\end{frame}
+		%
+		%\begin{frame}
+		\begin{table}
+			\caption*{\label{resultadosCorner}\large Tiempos de proceso}
+			%\begin{tabular}{c c c c c c}
+			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+				%\toprule
+				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+				\midrule
+				Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
+				Verde       & 30  &  0.00 &  4.04     &  0.00  &  0.00\\
+				Amarilla    & 72  &  0.02 &  4.85     &  0.00  &  0.00\\
+				Roja        & 132 & 0.01  &  8.35     &  0.00   &  0.00\\
+				%\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{frame}
 	%--------------------------------------------------------------
 	\section{Resultados Teóricos}
 	
