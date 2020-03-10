@@ -79,9 +79,11 @@
 \setbeamertemplate{navigation symbols}{} 
 
 \title[\hspace{2em}\insertframenumber/\inserttotalframenumber]{Estimación de parámetros en imágenes SAR Monopolarizadas usando distancias estocásticas y núcleos asimétricos}
-\author[\Tiny{Julia Cassetti}]{Julia Cassetti}
+\author[\Tiny{Julia Cassetti}]{Julia Cassetti\\
+ Director: Alejandro Frery}
+\vspace{1cm}
 %\institute{$^1$Universidad Nacional de General Sarmiento}
-\date{Marzo 2020}
+\date{\small Marzo 2020}
 
 \AtBeginSection[]{\frame{\frametitle{Organización}\tableofcontents[current]}}
 
@@ -264,7 +266,7 @@
 	\begin{frame}
 		\frametitle{Modelo estadístico}
 		\begin{itemize}
-			\item \citet{Frery97} presentan la familia de distribuciones $\mathcal{G}^0$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A^0$ y $\mathcal{G}_I^0$ respectivamente.
+			\item \citet{Frery97} presentaron la familia de distribuciones $\mathcal{G}^0$ para datos dados tanto en formato amplitud como en intensidad, generando la familia de distribuciones $\mathcal{G}_A^0$ y $\mathcal{G}_I^0$ respectivamente.
 			\bigskip
 			\item Para el caso de datos de intensidad, si
 			\begin{itemize}
@@ -319,7 +321,7 @@
 		\frametitle{Interpretación de parámetros}
 		
 		\begin{itemize}
-			\item Interpretación del parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ en términos de la textura de la zona observada.  
+		\item Interpretación del parámetro $\alpha$ de la distribución $\mathcal{G}_I^0$ en términos de la textura de la zona observada.  
 			\vspace{3mm}	
 			\begin{table}
 				\centering
@@ -334,7 +336,7 @@
 			
 			\vspace{4mm}
 			
-			\item En lo siguiente vamos a emplear el valor $\gamma^*$ tal que $E(Z)=1$, 
+			\pause \item En lo siguiente vamos a emplear el valor $\gamma^*$ tal que $E(Z)=1$, 
 			\begin{tikzpicture}
 			\clip (-1,-1) rectangle (9,1);
 			\coordinate (a) at (0,0);
@@ -559,7 +561,7 @@
 			%		\end{align*}
 			%		es decir, la solución de la ecuación
 			\begin{align*} \label{eq:logm}
-			\frac{1}{n} \sum_{i=1}^n\log (z_i) =   -\log \left(\frac{L}{-\alpha-1}\right) + \Psi^0(L) + \Psi^0(-\alpha),
+			\frac{1}{n} \sum_{i=1}^n\log (z_i) =   -\log \left(\frac{L}{-\widehat{\alpha}_{\text{\tiny{LC}}}-1}\right) + \Psi^0(L) + \Psi^0(-\alpha),
 			\end{align*}
 			donde $\Psi^0(\cdot)$ es la función digamma.
 		\end{itemize}
@@ -694,7 +696,7 @@
 			\item \textcolor{red}{\textbf{Relación funcional}}
 			$$d_{B}=-\log{(1-d_{H})}$$
 		\end{itemize}
-	
+		
 		%%% ACF Decir que tienen una relación funcional
 	\end{frame}
 	
@@ -719,7 +721,7 @@
 		\end{itemize}
 	\end{frame}
 	
-		\begin{frame}
+	\begin{frame}
 		\frametitle{ Distancia entre $\mathcal{G}_I^0(\alpha,-\alpha-1,3)$ y $\mathcal{G}_I^0(-3,2,3)$}
 		\bigskip
 		\begin{figure}[ht]
@@ -805,9 +807,9 @@
 		\begin{itemize}
 			\item Todos estos núcleos tienen soporte en $[0,+\infty)$, por lo que no asignan peso fuera del soporte de la distribución.
 			\medskip
-			\item \citet{Scaillet2004} indica que el sesgo en el borde de los núcleos $\Gamma$, IG y RIG el sesgo en el borde es $O(b)$.
+			\item \citet{Scaillet2004} indica que el \alert{sesgo} en el borde de los núcleos $\Gamma$, IG y RIG el sesgo en el borde es \alert{$O(b)$}.
 			\medskip
-			\item \citet{Libnegue2013} indica que el sesgo correspondiente al núcleo LN es $O(b^2)$.
+			\item \citet{Libnegue2013} indica que el \alert{sesgo} correspondiente al núcleo LN es \alert{$O(b^2)$}.
 		\end{itemize}
 	\end{frame}
 	
@@ -852,7 +854,7 @@
 			\widehat{\alpha}=\mathop{\text{arg min}} \limits_{\alpha<-1} d(f_{\alpha,L}, \widehat{f}_n),
 			\end{align*}
 			donde 
-			\item $d$ es una \alert{distancia estocástica}
+			\item $d$ es una \alert{distancia estocástica}.
 			\medskip
 			\item $\widehat{f}_n$ es un estimador no paramétrico de $f_{\alpha,L}$ utilizando \alert{núcleos asimétricos}.
 		\end{itemize}
@@ -878,22 +880,22 @@
 	\section{Simulaciones}
 	
 	\begin{frame}
-		\frametitle{Primer trabajo}
+		\frametitle{Selección de distancia}
 		%	J. Cassetti, J. Gambini, A. Frery - Estimación de Parámetros utilizando
 		%	Distancias Estocásticas para Datos con Ruido Speckle, Anales de la
 		%	42 JAIIO - 2013 - ISSN 1850-2776.
 		\begin{itemize}
 			\item Elegimos la distancia: Hellinger, Triangular y Rényi de orden $\beta=0.8$.
 			\medskip
-			\item Tamaño de muestra: $n=\{9, 25,49, 81,121,1000\}$. 
+			\pause \item Tamaño de muestra: $n=\{9, 25,49, 81,121,1000\}$. 
 			\medskip
-			\item Textura: $\alpha=\{-1.5, -3, -5, -8\}$ para modelar diferentes texturas.
+			\pause \item Textura: $\alpha=\{-1.5, -3, -5, -8\}$ para modelar diferentes texturas.
 			\medskip
-			\item Looks: $L=\{1,3,8\}$, para modelar varios niveles de procesamiento.
-				%		\item La elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan ventanas deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. 
-				%		\item Se consideró también una muestra de tamaño $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande.
+			\pause \item Looks: $L=\{3,8\}$, para modelar varios niveles de procesamiento.
+			%		\item La elección de estos tamaños de muestra se basa en que muchos de los métodos de filtrado de imágenes o detección de bordes utilizan ventanas deslizantes para estimar los parámetros, las cuales suelen ser de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ y  $11 \times 11$. 
+			%		\item Se consideró también una muestra de tamaño $n=1000$ para poder estudiar el comportamiento del estimador cuando el tamaño de muestra es grande.
 			\medskip
-			\item Estimamos $\widehat{f}$ utilizando histogramas.
+			\pause \item Estimamos $\widehat{f}$ utilizando histogramas.
 		\end{itemize}
 	\end{frame}
 	
@@ -923,42 +925,42 @@
 		\begin{itemize}
 			\item Encontramos $\widehat{\alpha_i}= \mathop{\text{arg min}}\limits_{-10 \leq \alpha <-1}d(f_{\alpha,L},\widehat{f})$ donde $d$ es alguna de las distancias estocásticas consideradas.
 			\medskip
-			\item el mínimo se encontró recorriendo un rango de valores de $\alpha \in [-10,-1)$.
+			\pause \item el mínimo se encontró recorriendo un rango de valores de $\alpha \in [-10,-1)$.
 			\medskip
-			\item Estimamos
+			\pause \item Estimamos
 			\medskip
 			\begin{itemize}
-				\item $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$.
+				\pause \item $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$.
 				\medskip
-				\item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$,
-				\end{itemize}
+				\pause \item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$,
+			\end{itemize}
 			\medskip
 			donde $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$.
 		\end{itemize} 
 	\end{frame}
-%	
-%	\begin{frame}
-%		\frametitle{Experimento}
-%		
-%		\bigskip
-%		\begin{itemize}
-%			\item $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$
-%			\medskip
-%			\item $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$
-%			\medskip
-%			\item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$
-%		\end{itemize}
-%	\end{frame}
+	%	
+	%	\begin{frame}
+	%		\frametitle{Experimento}
+	%		
+	%		\bigskip
+	%		\begin{itemize}
+	%			\item $\overline{\widehat{\alpha}}=(1000)^{-1}{\sum_{i=1}^{1000}{\widehat{\alpha}_i}}$
+	%			\medskip
+	%			\item $\widehat{B}(\widehat\alpha) = \overline{\widehat\alpha}- \alpha$
+	%			\medskip
+	%			\item $\widehat{\operatorname{\text{ECM}}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{\alpha}_i-\alpha)^2}}$
+	%		\end{itemize}
+	%	\end{frame}
 	
-%	\begin{frame}
-%		\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$1$}
-%		\begin{figure}[htb]
-%			\centering    
-%			\setcounter{subfigure}{0}
-%			\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L1ypercentil.pdf}}
-%			\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L1ypercentil.pdf}}
-%		\end{figure}	
-%	\end{frame}
+	%	\begin{frame}
+	%		\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$1$}
+	%		\begin{figure}[htb]
+	%			\centering    
+	%			\setcounter{subfigure}{0}
+	%			\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L1ypercentil.pdf}}
+	%			\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.40\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L1ypercentil.pdf}}
+	%		\end{figure}	
+	%	\end{frame}
 	
 	\begin{frame}
 		\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, $L=3$}
@@ -969,22 +971,22 @@
 			\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.37\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
 		\end{figure}	
 	\end{frame}
-
-%\begin{frame}
-%	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$3$}
-%	\begin{figure}[htb]
-%		\setcounter{subfigure}{0}
-%		\centering   
-%		\only<1>{ 
-%		\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.61\linewidth]{../../Figures/Tesis/Capitulo6/AlfaAST_L3.pdf}}
-%		\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.37\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
-%	}
-%		\only<2>{ 
-%	\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.61\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L3ypercentil.pdf}}
-%	\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.37\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
-%}
-%	\end{figure}	
-%\end{frame}
+	
+	%\begin{frame}
+	%	\frametitle{$\widehat{\text{Sesgo}}$ y $\widehat{\text{ECM}}$ de $\widehat{\alpha}$, L=$3$}
+	%	\begin{figure}[htb]
+	%		\setcounter{subfigure}{0}
+	%		\centering   
+	%		\only<1>{ 
+	%		\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.61\linewidth]{../../Figures/Tesis/Capitulo6/AlfaAST_L3.pdf}}
+	%		\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.37\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
+	%	}
+	%		\only<2>{ 
+	%	\subfigure[\small $\widehat{\text{Sesgo}}$]{\includegraphics[width=.61\linewidth]{../../Figures/Tesis/Capitulo6/SesgoASTBarrasError_L3ypercentil.pdf}}
+	%	\subfigure[\small $\widehat{\text{ECM}}$]{\includegraphics[width=.37\linewidth]{../../Figures/Tesis/Capitulo6/ECMASTBarrasError_L3ypercentil.pdf}}
+	%}
+	%	\end{figure}	
+	%\end{frame}
 	
 	\setcounter{subfigure}{0}
 	%\subfloat[S][]
@@ -1026,19 +1028,19 @@
 	
 	
 	\begin{frame}
-		\frametitle{Segundo trabajo}
+		\frametitle{Incorporamos núcleos}
 		%Presentamos mejoras ya que: 
 		
 		\begin{itemize}
 			\item Utilizamos núcleos asimétricos en lugar de histogramas para estimar la función de densidad subyacente.
 			\medskip
-			\item Comparamos los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con el MV estimador ($\widehat{\alpha}_{\text{\tiny{MV}}}$), Momentos Fraccionales ($\widehat{\alpha}_{\text{\tiny{Mom12}}}$) y Logcumulantes ($\widehat{\alpha}_{\text{\tiny{LC}}}$). 
+			\pause \item Comparamos los estimadores basados en la distancia Triangular ($\widehat{\alpha}_{\text{\tiny{DT}}}$) con: $\widehat{\alpha}_{\text{\tiny{MV}}}$, $\widehat{\alpha}_{\text{\tiny{Mom12}}}$, $\widehat{\alpha}_{\text{\tiny{LC}}}$.
 			\medskip
-			\item Evaluamos el impacto de la contaminación en la estimación de $\alpha$.
+			\pause \item Evaluamos el impacto de la contaminación en la estimación de $\alpha$.
 			\medskip
-			\item Tomamos el ancho de banda $b=\dfrac{1}{2\sqrt{n}}$.
+			\pause \item Tomamos el ancho de banda $b=\dfrac{1}{2\sqrt{n}}$.
 			\medskip
-			\item Consideramos $\alpha \in [-20,-1)$ pues...
+			\pause \item Consideramos $\alpha \in [-20,-1)$ pues...
 		\end{itemize}
 		
 	\end{frame}
@@ -1067,16 +1069,16 @@
 	%\end{itemize}
 	%\end{frame}
 	
-%	\begin{frame}
-%		\frametitle{Datos sin contaminar, $L=1$}
-%		\begin{figure}
-%			\setcounter{subfigure}{0}
-%			\centering
-%			\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoSESGOJstar2013_NoCont_SinBarras_L=1.pdf}}
-%			\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoECMJstar2013BarrasError_NoCont_L=1.pdf}}
-%			%\caption{\label{SesgoECMSinContaminarL1}\small Sesgo y ECM para datos sin contaminar, $L=1$.}
-%		\end{figure}
-%	\end{frame}
+	%	\begin{frame}
+	%		\frametitle{Datos sin contaminar, $L=1$}
+	%		\begin{figure}
+	%			\setcounter{subfigure}{0}
+	%			\centering
+	%			\subfigure[\label{AlfasEstimadosJSTAR2013_L=1}$\widehat{\text{Sesgo}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoSESGOJstar2013_NoCont_SinBarras_L=1.pdf}}
+	%			\subfigure[\label{ECMEstimadosJSTAR2013_L=1}$\widehat{\text{ECM}}$]{\includegraphics[width=.48\linewidth]{../../Figures/Tesis/Presentacion/GraficoECMJstar2013BarrasError_NoCont_L=1.pdf}}
+	%			%\caption{\label{SesgoECMSinContaminarL1}\small Sesgo y ECM para datos sin contaminar, $L=1$.}
+	%		\end{figure}
+	%	\end{frame}
 	
 	\begin{frame}	
 		\frametitle{Datos sin contaminar, $L=3$}
@@ -1096,7 +1098,7 @@
 			\item Caso1: asumimos que, con probabilidad $\epsilon$, los datos pueden provenir de una distribución perteneciente a la familia de distribuciones $\mathcal{G}_I^0$ pero con otros parámetros.
 			\medskip
 			\item Caso 2: contaminamos, con probabilidad $\epsilon$, con una constante con valor grande respecto de la media. Es para estudiar el fenómeno de \textit{double bounce}, donde algunos píxeles tienen un alto valor de retorno. 
-			\end{itemize}
+		\end{itemize}
 	\end{frame}
 	
 	%\begin{frame}
@@ -1154,50 +1156,50 @@
 	
 	
 	
-
-
 	
-%	\begin{frame}
-%		\small
-%		\begin{table}
-%			%	\frametitle{Estimaciones en muestras de imagen real SAR}
-%			\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
-%			%\begin{tabular}{c c c c c c}
-%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-%				%\toprule
-%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-%				\midrule
-%				Magenta     & 15  & -20.0 & -4.1  & NA    & NA      \\
-%				Verde       & 42  & -9.2  & -5.0  & NA    & NA    \\
-%				Azul        & 90  & -3.5  & -2.7  & -4.7  & -14.2   \\
-%				Amarillo    & 156 & -2.2  & -1.8  & -2.6  & -3.4    \\
-%				Rojo        & 225 & -1.9  & -1.7  & -2.1  & -2.5    \\
-%				%\bottomrule
-%			\end{tabular}
-%		\end{table}
-%		%\end{frame}
-%		%
-%		%\begin{frame}
-%		\begin{table}
-%			\caption*{\label{resultadosCorner}\large Tiempos de proceso}
-%			%\begin{tabular}{c c c c c c}
-%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-%				%\toprule
-%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-%				\midrule
-%				Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
-%				Verde       & 42  &  0.00 &  4.04     &  0.00  &  0.00\\
-%				Azul        & 90  &  0.02 &  4.85     &  0.00  &  0.00\\
-%				Amarillo    & 156 & 0.01  &  8.35     &  0.00   &  0.00\\
-%				Rojo        & 225 & 0.02  &  10.97    &  0.00   &  0.00\\
-%				%\bottomrule
-%			\end{tabular}
-%		\end{table}
-%	\end{frame}
-%	
+	
+	
+	%	\begin{frame}
+	%		\small
+	%		\begin{table}
+	%			%	\frametitle{Estimaciones en muestras de imagen real SAR}
+	%			\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$ estimados}
+	%			%\begin{tabular}{c c c c c c}
+	%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+	%				%\toprule
+	%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+	%				\midrule
+	%				Magenta     & 15  & -20.0 & -4.1  & NA    & NA      \\
+	%				Verde       & 42  & -9.2  & -5.0  & NA    & NA    \\
+	%				Azul        & 90  & -3.5  & -2.7  & -4.7  & -14.2   \\
+	%				Amarillo    & 156 & -2.2  & -1.8  & -2.6  & -3.4    \\
+	%				Rojo        & 225 & -1.9  & -1.7  & -2.1  & -2.5    \\
+	%				%\bottomrule
+	%			\end{tabular}
+	%		\end{table}
+	%		%\end{frame}
+	%		%
+	%		%\begin{frame}
+	%		\begin{table}
+	%			\caption*{\label{resultadosCorner}\large Tiempos de proceso}
+	%			%\begin{tabular}{c c c c c c}
+	%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+	%				%\toprule
+	%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\text{\tiny{DT}}}$ &$\widehat\alpha_{\text{\tiny{Mom12}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+	%				\midrule
+	%				Magenta     & 15  &  0.03 &  1.95     &  0.03  &  0.03 \\
+	%				Verde       & 42  &  0.00 &  4.04     &  0.00  &  0.00\\
+	%				Azul        & 90  &  0.02 &  4.85     &  0.00  &  0.00\\
+	%				Amarillo    & 156 & 0.01  &  8.35     &  0.00   &  0.00\\
+	%				Rojo        & 225 & 0.02  &  10.97    &  0.00   &  0.00\\
+	%				%\bottomrule
+	%			\end{tabular}
+	%		\end{table}
+	%	\end{frame}
+	%	
 	
 	\begin{frame}
-		\frametitle{Tercer trabajo}
+		\frametitle{Otros núcleos}
 		
 		¿Por qué usar el núcleo IG y no otro?
 		
@@ -1226,7 +1228,7 @@
 		\begin{itemize}
 			\item $\alpha=\{-1.5,-3,-5,-8\}$,
 			\bigskip
-			\item $L=3,8$, 
+			\item $L=\{3,8$\}, 
 			\bigskip
 			%\item $\gamma^*=-\alpha-1$, 
 			%\bigskip
@@ -1361,24 +1363,24 @@
 			\includegraphics[width=1\linewidth]{../../Figures/Tesis/Presentacion/DensidadEstimadorCont.pdf}
 			%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
 		\end{figure}	
-	
-			\begin{table}
-	%	\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$}
-		%\begin{tabular}{c c c c c }
-			\small
-		\begin{tabular}{c| c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-			%\toprule
 		
-			& n &  MV & $\Gamma$ & LN & LC\\
-			\midrule
-			\multirow{3 }{*}{$\widehat{\alpha}$}
-			&9    & -4.44  &  -3.35 &  \color{red} -2.99   &  -4.54  \\
-			&25   & -4.29  & -3.42  &  \color{red} 3.17    &  -4.35  \\
-			&49   & -3.84  &  -3.23 &  \color{red} 3.12    &  -3.88  \\
-			
-			%\bottomrule
-		\end{tabular}
-	\end{table}
+		\begin{table}
+			%	\caption*{\label{resultadosCorner}\large $\widehat{\alpha}$}
+			%\begin{tabular}{c c c c c }
+			\small
+			\begin{tabular}{c| c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+				%\toprule
+				
+				& n &  MV & $\Gamma$ & \color{red} LN & LC\\
+				\midrule
+				\multirow{3 }{*}{$\widehat{\alpha}$}
+				&9    & -4.44  &  -3.35 &  \color{red} -2.99   &  -4.54  \\
+				&25   & -4.29  & -3.42  &  \color{red} 3.17    &  -4.35  \\
+				&49   & -3.84  &  -3.23 &  \color{red} 3.12    &  -3.88  \\
+				
+				%\bottomrule
+			\end{tabular}
+		\end{table}
 	\end{frame}
 	
 	\begin{frame}
@@ -1471,140 +1473,144 @@
 	%\end{frame}
 	
 	\section{Aplicación a una imagen real}
-%	\begin{frame}
-%		\frametitle{Imagen real, $ENL=3.21$}
-%		
-%		\begin{figure}
-%			\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestras2.pdf}
-%			%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-%		\end{figure}
-%		
-%		\begin{table}
-%			%\begin{tabular}{c c c c c c}
-%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-%				%\toprule
-%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-%				\midrule
-%				Verde      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
-%				Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
-%				Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
-%				Magenta    & 54  &  -20    &  -20     &  -20    &  -20\\
-%				Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74
-%				%\bottomrule
-%			\end{tabular}
-%		\end{table}
-%	\end{frame}
+	%	\begin{frame}
+	%		\frametitle{Imagen real, $ENL=3.21$}
+	%		
+	%		\begin{figure}
+	%			\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestras2.pdf}
+	%			%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+	%		\end{figure}
+	%		
+	%		\begin{table}
+	%			%\begin{tabular}{c c c c c c}
+	%			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+	%				%\toprule
+	%				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+	%				\midrule
+	%				Verde      & 72  &  -20    &  -18.63  &  -18.34 &  -20 \\
+	%				Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+	%				Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+	%				Magenta    & 54  &  -20    &  -20     &  -20    &  -20\\
+	%				Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74
+	%				%\bottomrule
+	%			\end{tabular}
+	%		\end{table}
+	%	\end{frame}
 	
 	\begin{frame}
 		\frametitle{Imagen real, $ENL=3.21$}
-\only<1>{
-		\begin{figure}
-			\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasMagenta.pdf}
-			%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-		\end{figure}
+		\only<1>{
+			\begin{figure}
+				\includegraphics[width=0.40\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasMagenta.pdf}
+				%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+			\end{figure}
+			
+			\begin{table}
+				\small
+				%\begin{tabular}{c c c c c c}
+				\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+					%\toprule
+					Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+					\midrule
+					Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
+					&   &    &     &    &  \\
+					&   &    &     &    &  \\
+					&   &    &     &    &  \\
+					&   &    &     &    &  
+					%\bottomrule
+				\end{tabular}
+			\end{table}
+		}
+		\only<2>{
+			\begin{figure}
+				\includegraphics[width=0.40\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasRoja.pdf}
+				%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+			\end{figure}
+			
+			\begin{table}
+				\small
+				%\begin{tabular}{c c c c c c}
+				\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+					%\toprule
+					Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+					\midrule
+					Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
+					Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+					&   &    &     &    &  \\
+					&   &    &     &    &  \\
+					&   &    &     &    &  
+					%\bottomrule
+				\end{tabular}
+			\end{table}
+		}
+		\only<3>{
+			\begin{figure}
+				\includegraphics[width=0.40\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasAzul.pdf}
+				%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+			\end{figure}
+			
+			\begin{table}
+				\small
+				%\begin{tabular}{c c c c c c}
+				\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+					%\toprule
+					Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+					\midrule
+					Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
+					Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+					Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+					&   &    &     &    &  \\
+					&   &    &     &    &  
+					%\bottomrule
+				\end{tabular}
+			\end{table}
+		}
+		\only<4>{
+			\begin{figure}
+				\includegraphics[width=0.40\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasVerde.pdf}
+				%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+			\end{figure}
+			
+			\begin{table}
+				\small
+				%\begin{tabular}{c c c c c c}
+				\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+					%\toprule
+					Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+					\midrule
+					Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
+					Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+					Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+					Verde    & 54  &  -20    &  -20     &  -20    &  -20\\
+					&   &    &     &    &  
+					%\bottomrule
+				\end{tabular}
+			\end{table}
+		}
+		\only<5>{
+			\begin{figure}
+				\includegraphics[width=0.40\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasAmarilla.pdf}
+				%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
+			\end{figure}
+			\begin{table}
+				%\begin{tabular}{c c c c c c}
+				\small
+				\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
+					%\toprule
+					Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
+					\midrule
+					Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
+					Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
+					Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
+					Verde      & 54  &  \color{gray} -20    &  \color{gray} -20     &  \color{gray} -20    &  \color{gray} -20\\
+					Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74  
+					%\bottomrule
+				\end{tabular}
+			\end{table}
+		}
 		
-		\begin{table}
-			%\begin{tabular}{c c c c c c}
-			\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-				%\toprule
-				Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-				\midrule
-				Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
-					       &   &    &     &    &  \\
-					       &   &    &     &    &  \\
-				   		   &   &    &     &    &  \\
-				           &   &    &     &    &  
-				%\bottomrule
-			\end{tabular}
-		\end{table}
-	}
-\only<2>{
-	\begin{figure}
-		\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasRoja.pdf}
-		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-	\end{figure}
-	
-	\begin{table}
-		%\begin{tabular}{c c c c c c}
-		\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-			%\toprule
-			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-			\midrule
-			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
-			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
-			    	   &   &    &     &    &  \\
-			   		   &   &    &     &    &  \\
-			   		   &   &    &     &    &  
-			%\bottomrule
-		\end{tabular}
-	\end{table}
-}
-\only<3>{
-	\begin{figure}
-		\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasAzul.pdf}
-		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-	\end{figure}
-	
-	\begin{table}
-		%\begin{tabular}{c c c c c c}
-		\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-			%\toprule
-			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-			\midrule
-			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
-			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
-			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
-			&   &    &     &    &  \\
-			&   &    &     &    &  
-			%\bottomrule
-		\end{tabular}
-	\end{table}
-}
-\only<4>{
-	\begin{figure}
-		\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasVerde.pdf}
-		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-	\end{figure}
-	
-	\begin{table}
-		%\begin{tabular}{c c c c c c}
-		\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-			%\toprule
-			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-			\midrule
-			Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
-			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
-			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
-			Verde    & 54  &  -20    &  -20     &  -20    &  -20\\
-			&   &    &     &    &  
-			%\bottomrule
-		\end{tabular}
-	\end{table}
-}
-\only<5>{
-	\begin{figure}
-		\includegraphics[width=0.35\linewidth]{../../Figures/Tesis/Presentacion/VariasMuestrasAmarilla.pdf}
-		%\caption{\label{Caso1L3}\small Datos contaminados: Caso $1$, $\epsilon=0.01$ y $L=3$.}
-	\end{figure}
-	
-	\begin{table}
-		%\begin{tabular}{c c c c c c}
-		\begin{tabular}{c c S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center] S[table-number-alignment = center]}
-			%\toprule
-			Color & n &  $\widehat\alpha_{\text{\tiny{MV}}}$ & $\widehat\alpha_{\Gamma}$ &$\widehat\alpha_{\text{\tiny{LN}}}$ & $\widehat\alpha_{\text{\tiny{LC}}}$\\
-			\midrule
-		    Magenta    & 72  &  \color{gray}-20    &  -18.63  &  -18.34 &  \color{gray} -20 \\
-			Roja       & 30  &  -5.33  &  -3.93   &  -3.08  &  -5.47\\
-			Azul       & 36  &  -1.24  &  -1.27   &  -1.21  &  -1.39\\
-			Verde      & 54  &  \color{gray} -20    &  \color{gray} -20     &  \color{gray} -20    &  \color{gray} -20\\
-			Amarillo   & 16  &  -7.21  &  -4.34   & -3.23   &  -6.74  
-			%\bottomrule
-		\end{tabular}
-	\end{table}
-}
-
 	\end{frame}
-
+	
 	%\begin{frame}
 	%	\frametitle{Imagen real}
 	%		\begin{figure}
@@ -1653,7 +1659,7 @@
 					\bottomrule
 				\end{tabular}
 			\end{table}
-		\pause
+			\pause
 			\vspace{0.8cm}
 			\item Estimaciones sin la observación más baja.
 			
@@ -1665,7 +1671,7 @@
 				\end{tabular}
 			\end{table}
 			\vspace{0.8cm}
-		\pause \item Todas las estimaciones corresponden a una zona heterogénea.
+			\pause \item Todas las estimaciones corresponden a una zona heterogénea.
 		\end{itemize}
 		
 	\end{frame}
@@ -1682,18 +1688,18 @@
 				\includegraphics[width=1.1\linewidth]{../../Figures/Tesis/ImagenReal/AlfaVsTamCincoMuestras_v2_0975.pdf}
 			\end{figure}
 		\end{minipage}
-%		\medskip
-%		\begin{itemize}
-%			\small
-%			\item El método LN es el que da estimaciones más estables.
-%			\medskip
-%			\item Los métodos MV y LC dan malas estimaciones para muestras de pequeño tamaño.
-%			\medskip
-%			\item La longitud de los intervalos de confianza van disminuyendo a medida que el tamaño de muestra aumenta, siendo el correspondiente a LN los más precisos.
-%		\end{itemize}
+		%		\medskip
+		%		\begin{itemize}
+		%			\small
+		%			\item El método LN es el que da estimaciones más estables.
+		%			\medskip
+		%			\item Los métodos MV y LC dan malas estimaciones para muestras de pequeño tamaño.
+		%			\medskip
+		%			\item La longitud de los intervalos de confianza van disminuyendo a medida que el tamaño de muestra aumenta, siendo el correspondiente a LN los más precisos.
+		%		\end{itemize}
 	\end{frame}
 	
-		\begin{frame}
+	\begin{frame}
 		\frametitle{Imagen real SAR con un corner reflector}
 		\begin{itemize}
 			\item Imagen E-SAR, banda \textit{L} polarización HH datos de intensidad.
@@ -1832,9 +1838,9 @@
 			\medskip 
 			\item Basado en la minimización de la distancia estocástica entre el modelo y una estimación de la función de densidad subyacente $\widehat{f}$ utilizando núcleos asimétricos. 
 			\medskip
-			\item Se mostró que la distancia triangular es una buena elección para este problema.
+			\item Se mostró que la distancia \alert{triangular} es una buena elección para este problema.
 			\medskip
-			\item Para el caso multilook se mostró que los núcleos $\Gamma$ y LN presentan buenas propiedades medidas por su sesgo, ECM y por porcentaje de casos de no convergencia, especialmente para muestras de pequeño tamaño.
+			\item Para el caso \alert{multilook} se mostró que los núcleos \alert{$\Gamma$} y \alert{LN} presentan buenas propiedades medidas por su sesgo, ECM y por porcentaje de casos de no convergencia, especialmente para muestras de pequeño tamaño.
 			\medskip
 			
 		\end{itemize}
@@ -2705,6 +2711,4 @@ $$\widehat{\operatorname{mse}}(\widehat\alpha)=\frac{1}{500}{\sum_{i=1}^{500}{(\
 	\end{block}
 \end{frame}
 \end{document}
-
-
 
