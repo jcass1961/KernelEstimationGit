@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\usepackage{fourier}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{bbm}
+\usepackage{physics}
+
+\title{Nonparametric Estimation of the Entropy under the $\mathcal G_I^0$ Model}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Ref.~\cite{NonparametricEntropyEstimationanOverview} discusses the nonparametric estimation of the (Shannon) entropy $H$ of the random variable $X\colon\Omega\rightarrow S\subset \mathbbm R^d$.
+This quantity is given by
+\begin{equation}
+H(X) = -\int_S f(x) \log f(x) \dd{x},
+\end{equation}
+where $f\colon S\rightarrow \mathbbm R_+$ is the probability density function that characterizes the distribution of $X$, and $S$ is its support.
+
+This research proposal consists in
+\begin{enumerate}
+	\item making an updated, complete, and qualified review of the literature about nonparametric estimation of $H$,
+	\item analyzing the finite-size sample properties of such estimators under the $\mathcal G_I^0$ model (including contamination, and estimation techniques other than maximum likelihood), and
+	\item generalizing the study for $h$-$\phi$ entropies, as defined in Refs.~\cite{h-phiEntropyDifferentialMetric1997,salicruetal1993} 
+\end{enumerate}
+
+The relevance of this study is twofold, namely:
+\begin{itemize}
+	\item advancing the knowledge and understanding of the use of nonparametric technique for entropy estimation in a particular model of interest in Synthetic Aperture Radar data analysis, and
+	\item obtaining robust tools that may be used in the design of contamination-resistant procedures, such as Nonlocal Means filters.
+\end{itemize}
+
+\bibliographystyle{plain}
+\bibliography{../../../Bibliography/bib_julia2}
+
+\end{document}
