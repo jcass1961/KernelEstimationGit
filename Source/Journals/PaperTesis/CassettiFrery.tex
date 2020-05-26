@@ -96,7 +96,9 @@ It  has  several  advantages  compared  to  optical  and  infrared systems due t
 For this reason, these images have a wide range of practical applications: environmental monitoring~\cite{White1991,Brisco2013}, and
 earthquake study to map the surface deformation~\cite{Yinghui2017}, among others.  
 %quality-assessment methods of multisensor SAR data fusion is investigated in~\cite{Abdikan2014}. 
-But SAR imagses have the disadvantage of having speckle noise, which makes the analysis and interpretation of these kind of images a challenging task.
+\textcolor{blue}{But SAR images have the disadvantage of having speckle noise which appears from the use of coherent illumination. This kind of noise is a characteristic of technologies that
+	employ microwaves, sonar, laser and ultrasound. The presence of the speckle noise makes the analysis and interpretation of these kind of images a challenging task.}
+%But SAR images have the disadvantage of having speckle noise, which makes the analysis and interpretation of these kind of images a challenging task.
 
 The multiplicative model has been successfully used in modeling SAR images.
 It describes the observed data as the product of two statistically independent random variables which represent, respectively, the target information and the speckle noise. 
@@ -111,13 +113,10 @@ In particular, it can be related to the number of elementary backscatterers~\cit
 
 %%% ACF Acá comentar técnicas de estimación de la G0, y sus aplicaciones. Su2016 no tiene nada que ver
 Several works have been devoted to the subject of parameter estimation under the $\mathcal{G}^0$ model. 
-In~\cite{Su2016} the authors estimate the tree height of forests of the Sierra Nevada integrating the step-wise regression, multiple linear regression, and regression tree methods, refs.~\cite{Lu2016} provides a survey of current biomass estimation methods using remote sensing data. In~\cite{AlvarezLopez2017} soil permittivity estimation is presented in SAR imagery.
-
 %%% ACF Lo mismo acá, concentrate en la G0
 Among the estimation techniques available, moments (or analogy) and maximum likelihood estimators are among the most popular. 
-Bian~\cite{Bian2013} proposes a method based on fractional lower-order statistics to estimate a polarimetric SAR covariance matrix in an alpha-stable distribution.
-In~\cite{VasconcellosFrerySilva:CompStat,CribariFrerySilva:CSDA} describe attempts to improve the performance of these estimators concerning bias and mean squared error using either resampling or analytic procedures. 
-More recently, using a connection between the Mellin's transform, several estimators based on logcumulants and logmoments have been proposed in~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014}. 
+%Bian~\cite{Bian2013} proposes a method based on fractional lower-order statistics to estimate a polarimetric SAR covariance matrix in an alpha-stable distribution.
+In~\cite{VasconcellosFrerySilva:CompStat,CribariFrerySilva:CSDA} describe attempts to improve the performance of these estimators concerning bias and mean squared error using either resampling or analytic procedures. More recently, using a connection between the Mellin's transform, several estimators based on logcumulants and logmoments have been proposed in~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014}. 
 
 Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and
 Allende et al.~\cite{AllendeFreryetal:JSCS:05} studied the performance of maximum likelihood estimators under the $\mathcal{G}^{0}$ model for amplitude data, showing that they critically loose robustness for moderated outliers in extremely textured areas, whereas in textureless areas this occurs for severe outliers.
@@ -150,7 +149,7 @@ Scaillet~\cite{Scaillet2004} introduced the inverse Gaussian (IG) and reciprocal
 Bouezmarni and Scaillet~\cite{bouezmarni2005} proved the consistency under the $\Gamma$, IG an RIG kernels. 
 Jin and Kawczak~\cite{Jin2003} proposed the Birnbaum-Saunders (BS) and Lognormal (LN) kernels. 
 Ref.~\cite{libengue2013} also treats these kernels. 
-These estimators vary their shape according to the observation, a feature that allows obtaining different degrees of smoothing without incurring in the problems mentioned above~\cite{Scaillet2004}.
+These estimators vary their shape according to the observation, a feature that allows obtaining different degrees of smoothing~\cite{Scaillet2004}, \textcolor{blue}{does not assign weight outside the density function support when the estimation is made near the boundary and are free of boundary bias~\cite{chensx2000}.}
 %%% ACF Reforzar cuáles son esos problemas
 
 In the last decade, concepts related to information theory have gained interest in image processing. 
@@ -351,7 +350,8 @@ Figure~\ref{EstimacionLNyGAyIG} shows an estimation example of the $\mathcal{G}^
 true density function. It can be seen that these kernels fit well to the theoretical density function even for not very large sample sizes.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.35]{../../../Figures/PaperTesis/NucleosGALNyIG}
+	\centering
+	\includegraphics[scale=0.35]{../../../Figures/PaperTesis/NucleosGALNyIG.eps}
 	\caption{\label{EstimacionLNyGAyIG} $\widehat{f}_{\mathcal{G}^0}$ for $L=8$, $\alpha=-5$, $\gamma=4$ y $n=25$} using $\Gamma$, LN. IG kernels and LSCV method for bandwidth selection.
 \end{figure}
 
@@ -516,9 +516,9 @@ This section presents empirical results about the quality of estimators for the 
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[$L=3$]{\includegraphics[width=.75\linewidth]{../../../Figures/PaperTesis/DensidadGI0L3}}
-	\subfigure[$L=8$]{\includegraphics[width=.75\linewidth]{../../../Figures/PaperTesis/DensidadGI0L8}}
-	\caption{\label{densidades} $\mathcal{G}^0(\alpha,\gamma^*,L)$ densities}
+	\subfigure[$L=3$]{\includegraphics[width=.75\linewidth]{../../../Figures/PaperTesis/DensidadGI0L3.eps}}
+	\subfigure[$L=8$]{\includegraphics[width=.75\linewidth]{../../../Figures/PaperTesis/DensidadGI0L8.eps}}
+	\caption{\label{densidades} $\mathcal{G}^0(\alpha,\gamma^*,L)$ densities.}
 \end{figure}
 
 It should be noted that many methods of image filtering or edge detection use sliding masks to estimate parameters. These mask are usually of size $3 \times 3$, $5 \times 5$, $7 \times 7$, $9 \times 9$ and $11 \times 11$. For this reason we chose $n=9,25,49,81,121$ as sample size to perform the empirical analysis.
@@ -529,7 +529,8 @@ First of all, we evaluate the performance of the $\Gamma$, LN, and IG kernels st
 
 Table~\ref{pp} shows the values of $\widehat{\text{MISE}}$ and non-convergence percent. It can be seen that IG and $\text{IG}_{\text{\tiny{E}}}$ present MISE values of several orders of magnitude greater than the other kernels. The same happens for non-convergence cases. IG kernel has the highest percentage of these cases compared to the $\Gamma$ and LN kernel.
 
-\begin{table}[hbt]        
+\begin{table}[hbt]  
+	\caption{\label{pp} MISE and percentage of non-convergence cases $L=3$.}        
 	\centering                                    
 	\begin{tabular}{cc S[table-format=0.1]S[table-format=0.1]S[table-format=0.1] S[table-format=0.1] @{\hskip 8mm} S[table-format=0.2]S[table-format=0.1]S[table-format=0.1]S[table-format=0.1]}                                    
 		\toprule                                    
@@ -572,8 +573,7 @@ Table~\ref{pp} shows the values of $\widehat{\text{MISE}}$ and non-convergence p
 		&  81      &       0.03     &     0.03     &     0.33      &     25.71     &    4.4     &    4      &    2         &    0.2 \\    
 		&  121     &       0.02     &     0.02     &     0.21      &     21.19     &    1.8     &    2      &    0.8       &    0.4 \\
 		\bottomrule
-	\end{tabular}            
-	\caption{\label{pp} MISE and percentage of non-convergence cases $L=3$.}                                    
+	\end{tabular}                                              
 \end{table}    
 
 Therefore we choose $\Gamma$ and LN kernels to estimate the underlying density function.
@@ -670,8 +670,8 @@ For extremely heterogeneous and heterogeneous areas, the MDE estimators have a b
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{SesgoSinContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil}}
-	\subfigure[\label{ECMSinContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=\linewidth3]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil}}
+	\subfigure[\label{SesgoSinContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
+	\subfigure[\label{ECMSinContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
 	\caption{\label{SesgoyECMSinContL=3}\small Sample Bias and MSE with uncontaminated data and $L=3$.}
 \end{figure}    
 
@@ -679,8 +679,8 @@ A similar analysis was done for the case $L=8$. Figs.~\ref{SesgoSinContL=8} and~
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{SesgoSinContL=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil}}
-	\subfigure[\label{ECMSinContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil}}
+	\subfigure[\label{SesgoSinContL=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
+	\subfigure[\label{ECMSinContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
 	\caption{\label{SesgoyECMSinContL=8}\small Bias and MSE estimates for uncontaminated data and $L=8$.}
 \end{figure}
 
@@ -695,29 +695,29 @@ The horizontal line is the true value.
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L3n25}}
-	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L3n25}}
+	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L3n25.eps}}
+	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L3n25.eps}}
 	\caption{\label{SEIFL3a}\small SEIF for $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L3n25}}
-	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L3n25}}
+	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L3n25.eps}}
+	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L3n25.eps}}
 	\caption{\label{SEIFL3b}\small SEIF for $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L8n25}}
-	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L8n25}}
+	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L8n25.eps}}
+	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L8n25.eps}}
 	\caption{\label{SEIFL8a}\small SEIF for $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L8n25}}
-	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L8n25}}
+	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L8n25.eps}}
+	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L8n25.eps}}
 	\caption{\label{SEIFL8b}\small SEIF for $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$, $\widehat{\alpha}_{\text{\tiny{LC}}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}
 \end{figure}
 
@@ -752,15 +752,15 @@ Figures~\ref{SesgoyECMConContL=3} and~\ref{SesgoyECMConContL=8} present contamin
 %%%%%%%%%%%%%%%%%% EPSILON 0.05
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{SesgoConContL=3}$\widehat{\text{Bias}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasErrorypercentil}}
-	\subfigure[\label{ECMConContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasErrorypercentil}}
+	\subfigure[\label{SesgoConContL=3}$\widehat{\text{Bias}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3Cont_BarrasErrorypercentil.eps}}
+	\subfigure[\label{ECMConContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasErrorypercentil.eps}}
 	\caption{\label{SesgoyECMConContL=3}\small Bias and MSE for contaminated data,  $\epsilon=0.05$ and $ L=3$.}
 \end{figure}
 
 \begin{figure}[htb]
 	\centering
-	\subfigure[\label{SesgoConContL=8}$\widehat{\text{Bias}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8Cont_BarrasErrorypercentil}}
-	\subfigure[\label{ECMConContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8Cont_BarrasErrorypercentil}}
+	\subfigure[\label{SesgoConContL=8}$\widehat{\text{Bias}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8Cont_BarrasErrorypercentil.eps}}
+	\subfigure[\label{ECMConContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=.8\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8Cont_BarrasErrorypercentil.eps}}
 	\caption{\label{SesgoyECMConContL=8}\small Bias and MSE for contaminated data,  $\epsilon=0.05$ and $ L=8$.}
 \end{figure}
 
@@ -788,7 +788,7 @@ We then set $\widehat L=3.21$ in the analysis of the multilook image.
 \begin{figure}[htb]
 	\centering
 	%\subfigure[\label{MuestraLooks}Samples used to estimate ENL]{\includegraphics[width=0.48\linewidth]{../../../Figures/PaperTesis/MuestrasEstimNumLooks}}
-	\includegraphics[width=0.8\linewidth]{../../../Figures/PaperTesis/TresMuestrasAgrandada}
+	\includegraphics[width=0.8\linewidth]{../../../Figures/PaperTesis/TresMuestrasAgrandada.eps}
 	\caption{\label{TresMuestras}\small Samples used to estimate $\widehat{\alpha}$.}
 \end{figure}
 
@@ -839,12 +839,12 @@ Table~\ref{TablaCincoMuestras} shows the estimated values. It can be seen that $
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/CincoMuestras}
+	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/CincoMuestras.eps}
 	\caption{\label{CincoMuestras}\small Five sample used to compare $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$ and  $\widehat{\alpha}_{\text{\tiny{LC}}}$.}
 \end{figure}
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestras_v2}
+	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestras_v2.eps}
 	\caption{\label{AlfaVsTamCincoMuestras}\small $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$ and $\widehat{\alpha}_{\text{\tiny{LC}}}$ for corresponding samples to image~\ref{CincoMuestras}.}
 \end{figure}
 
@@ -871,7 +871,7 @@ Figure~\ref{CornerReflector} shows the same ESAR image with a corner reflector. 
 
 \begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/CornerJulia_Roja}
+	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/CornerJulia_Roja.eps}
 	\caption{\label{CornerReflector}\small $\widehat{\alpha}_{\text{\tiny{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{\tiny{LN}}}$ and $\widehat{\alpha}_{\text{\tiny{LC}}}$ with a corner reflector.}
 \end{figure}
 
