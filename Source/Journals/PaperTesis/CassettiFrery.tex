@@ -169,18 +169,6 @@ they found the estimator by minimizing Eq.~\eqref{MDEGeneral} by inspecting a gr
 The authors concluded that the triangular distance is the best suited for this problem, and showed that their proposal outperforms the Logcumulant estimator in terms of mean squared error, bias, convergence, and robustness. 
 So, the results were promising, with venues for improvement which are explored in this work.
 
-%Kernels have been successfully used in remote sensing applications: radiometric calibration~\cite{Caccetta2016}, support vector machine models~\cite{CaihongMa2014}, classification~\cite{BiaoDeng2013}. The same happens with dissimilar measurement, some examples of its application are: decision trees applied to machine learning methods~\cite{Galiano2014}, spacial dissimilarity measurement~\cite{MingLi2017}, extracting textures from remote sensing images~\cite{Lu2016}. In~\cite{Liu2015} the authors propose a maximum likelihood distance measure applied to supervised polarimetric synthetic aperture radar (PolSAR) change    detection method. 
-%
-%This work presents an improvement of the estimators based on the minimum distance idea for the multilook case. Two elements need definition in this approach: 
-%the kernel, including its scale or bandwidth (as is denominated in the specialized  literature, and should not be confused with the parameter of the imaging system) and the dissimilarity measure.
-%
-%
-%
-%
-%Tison et al.~\cite{Tison2004} showed that estimators based on logcumulants outperform the ML estimator for the parameters of the amplitude $\mathcal G^0$ distribution. Gambini et al.~\cite{gambini2015}, following Nicolas and Anfinsen~\cite{nicolas2002}, obtained logcumulant estimators for the $\mathcal{G}^0$ texture parameter for intensity data, $\mathcal{G}^0$ model. 
-%The authors compared its performance with the one obtained by minimizing an stochastic distance between the $\mathcal{G}^0$ density function and an estimation for the underlying density function using IG kernel. 
-%It was shown that the later outperforms the former in terms of mean squared error, bias, convergence and robustness.
-
 In this paper, we improve the Gambini et al.~\cite{gambini2015} proposal. 
 We use $\Gamma$ and LN kernels instead of the IG kernel, showing that the latter presents a larger integrated mean square error and a higher percentage of non-convergence cases than the others.
 Regarding the choice of bandwidth, we use Least Squared Cross-Validation (LSCV)~\cite{Rudemo1982} for bandwidth selection in place of the empirical selection. 
@@ -188,11 +176,6 @@ Furthermore, we use a search algorithm to find the minimum of the MDE estimator,
 
 We compare the performance of the proposed estimator for the texture parameter of the $\mathcal{G}^0$ model for intensity data with Maximum Likelihood (ML) and Logcumulants (LC) methods in terms of convergence, bias and mean squared error and sensitivity to contamination. 
 We obtain excellent results, especially for small samples sizes.
-
-%We compare the performance \textcolor{blue}{of the proposed estimator with the one proposed in~\ref{gambini2015}} several estimation procedures based on nonparametric (asymmetric kernels) and parametric (tail index estimators) 
-%techniques for the texture parameter of the $\mathcal{G}^0$ model in terms of 
-%convergence, bias, and mean squared error,
-%and sensitivity to contamination. 
 
 The rest of the paper unfolds as follows: 
 Section~\ref{sec_SAR} recalls the main features of the $\mathcal{G}^0$ model for intensity data.
@@ -238,7 +221,7 @@ for every $z>0$, where $\Upsilon_{2L, -2\alpha}$ is the cumulative distribution 
 This relationship is useful for obtaining the quantiles and entropy, among other features of this distribution.
 
 It is essential to achieve accurate and robust estimates of $\alpha$ because it is related to the texture of the target. 
-Values close to zero ($\alpha \in (0,-3)$) suggest extreme texture, as in urban areas. 
+Values close to zero \textcolor{blue}{($\alpha \in (1,-3)$)} suggest extreme texture, as in urban areas. 
 As the value decreases, the texture is also reduced going, usually, from $\alpha \in (-6,-3]$ in forest zones up to $\alpha\in(-\infty,-6)$ in textureless targets, e.g. pasture or crops. So, its estimation deserves special attention
 
 Maximum likelihood estimation is a classical approach for parametric estimation of a density function because it has optimal asymptotic properties in terms of bias and variance, and well-known asymptotic distributional properties.
@@ -247,16 +230,6 @@ To reduce our discussion to a single parameter, we based the forthcoming analysi
 \label{RelationAlphaGamma}
 \gamma^* =-\alpha-1.
 \end{align}
-%	To the best of the authors' knowledge, there is no explicit solution for the roots of the score equation,
-%	\begin{align}
-%	\label{rootML}
-%	\Psi^0(-\widehat{\alpha}_{\text{{ML}}})-\Psi^0(L-\widehat{\alpha}_{\text{{ML}}})-\log(-1-\widehat{\alpha}_{\text{{ML}}})+{} \nonumber\\
-%	\frac{\widehat{\alpha}_{\text{{ML}}}}{-1-\widehat{\alpha}_{\text{{ML}}}}+
-%	\frac{1}{n}\sum_{i=1}^n{\log(-1-\widehat{\alpha}_{\text{{ML}}}+Lz_i)}-{}
-%	\nonumber
-%	\\ \frac{\widehat{\alpha}_{\text{{ML}}}-L}{n}\sum_{i=1}^n \frac1{-1-\widehat{\alpha}_{\text{{ML}}}+Lz_i}= 0, 
-%	\end{align}
-%	so we estimate by finding a maximum of the reduced loglikelihood function.
 
 Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma^*,L)$ distribution.
 A maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{{ML}}}$, is any value in $(-\infty,-1)$ that maximizes the loglikelihood function:
@@ -316,7 +289,7 @@ In this work, we use $\Gamma$ and LN kernels because they outperform the IG kern
 \label{asymmetrickernel}
 
 %%% ACF Decir cuál es el "standard kernel estimator"
-The standard kernel estimator is extensively used to estimate the underlying density function, but when this function has bounded support, this estimator presents boundary bias.
+\textcolor{blue}{The classical kernel estimator, which uses symmetric kernels, is extensively used to estimate the underlying density function. But when this function has bounded support, this estimator presents boundary bias. This bias appears because the symmetric kernel estimator assigns weight outside the support when the estimation take place near the boundary.}
 %%% ACF Qué es "boundary bias"?
 
 The asymmetric kernel estimator is an alternative to solve this problem. Several authors investigated such kernels: 
@@ -378,74 +351,13 @@ It is defined as
 
 It is important to note that these kernel estimators are free of boundary bias and achieve the convergence rate $n^{-4/5}$ for the MISE.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{comment}
-
-%	As known, a measure of the error in the estimation of $f$ by $\widehat{f}$ by the Integrated Squared Error (ISE)
-%	\begin{align}
-%	\text{ISE}(b)=&\int_\mathbb{R} (\widehat{f}-f)^2 dx = \int_\mathbb{R} \widehat{f}^2dx- 2 \int_\mathbb{R} \widehat{f} fdx +\int_\mathbb{R} f^2dx
-%	\label{ISE}
-%	\end{align}
-%	The last term in this equation does not depend on $b$. 
-%	Then
-%	\begin{align}
-%	\min_b \text{ISE}(b)= \min_b \int_\mathbb{R} \widehat{f}^2 dx- 2 \int_\mathbb{R} \widehat{f} fdx 
-%	\label{fi0}
-%	\end{align}
-%	
-%	The second term of equation (~\ref{fi0}) can be seen as $E_X(\widehat{f}(x))$ with $X \sim f$ unknown. The propose is estimate $E_X(\widehat{f}(x))$ by 
-%	$$\widehat{E}_{\text{\tiny{X}}}(\widehat{f}(x))=\frac{1}{n}\sum_{i=1}^n \widehat{f}_{-i}(X_i)$$
-%	where $\widehat{f}_{-i}(x)= \widehat{f}_{i;b}(x)=\dfrac{1}{n} \displaystyle{\sum_{j=1,j\neq i}^n} K_{(x,b)}(X_i)$, is the leave-one out estimator, the kernel estimator without considering the $i^{th}$ observation.
-%	So, the LSCV bandwidth $(b_{\text{LSCV}})$ 
-%	%\end{comment}
-%	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	It is defined as:
-%	\begin{align}
-%	b_{\text{\tiny{LSCV}}}= \arg\min_b \int_\mathbbm{R} \widehat{f}^2 - \frac{2}{n} \sum_{i=1}^n \widehat{f}_{-i}(Z_i)  ,
-%	\label{fi}
-%	\end{align}
-%	where 
-%	$$
-%	\widehat{f}_{-i}(x)= \widehat{f}_{i;b}(x)=\frac{1}{n} \displaystyle{\sum_{j=1,j\neq i}^n} K_{(x,b)}(Z_i)$$ 
-%	is the leave-one out estimator, i.e., the kernel estimator without considering the $i$th observation.
-%	If the function to be minimized has more than one minimum, $b_{\text{\tiny{LSCV}}}$ is the largest~\cite{Jones1996}.
-%	
-%	\subsection{Stochastic Distances Minimization}
-%	\label{distance_minimization}
-%	
-%	It should be noted that one of the points of interest in this work is to find a texture parameter estimator of the $\mathcal{G}^0$ distribution, which behaves well for small sample sizes. 
-%	This aspect is interesting because many methods of image filtering or edge detection use sliding masks to estimate parameters. 
-%	These mask are usually of size $3 \times 3$, $5 \times 5$, $7 \times 7$, $9 \times 9$ and $11 \times 11$. In this sense, it is known that the MLE estimator dose not present a good behavior when sample size
-%	is small. For this reason, it is necessary to find estimators that
-%	have asymptotic behavior similar to MLE and outperform the latter for small sample sizes and deviations from the theoretical model.
-%	It should be noted that the $\gamma$ parameter of the $\mathcal{G}I^0$ distribution is a scale one. So, to make the results comparable, in the following, we choose the scale parameter such that $E(Z) = 1$, which is given by
-%	$\gamma^*= -\alpha-1$.
-%	
-%	With these tools an using the proposal in~\cite{gambini2015}, we define the estimator of the $\alpha$ parameter of the $\mathcal{G}^0$ distribution based on the minimization of the Triangular stochastic distance using kernel $K$ as :
-%	\begin{align}
-%	\widehat{\alpha}_{\text{\tiny{K}}}= \arg\min_{\alpha} d_{\text{\tiny{T}}}\big(f_{\mathcal{G}^{0}}(\alpha,\gamma^*, L ), \widehat f_{\text{\tiny{K}}}(z)\big),
-%	\label{minimization}
-%	\end{align}
-%	where $d_{\text{T}}$ is the triangular distance defined in~\eqref{DT}, $\gamma^*$ and $L$ are known, and $\widehat f_{\text{\tiny{K}}}(z)$ is a nonparametric estimation of the underlying density function using kernel $K$. 
-%	
-%	Figure~\ref{densidades} shows the graph of the $\mathcal{G}^0$ density function for  $\alpha=\{-20,-25\}$, $\gamma=\gamma^*$, $L=\{3,8\}$. It can be seen that these densities are very similar since the $\mathcal{G}^0$ converges in distribution to a $\Gamma(L,L)$~\cite{Frery99} when  $\alpha \longrightarrow -\infty$ and $\gamma=\gamma^*$. For this reason it is proposed that $\alpha$ take values in the range $[-20,-1]$. 
-%	
-%	\begin{figure}[hbt]
-%		\centering
-%		\subfigure[L=3]{\includegraphics[width=.45\linewidth]{../../../Figures/PaperTesis/DensidadGI0L3}}
-%		\subfigure[L=8]{\includegraphics[width=.45\linewidth]{../../../Figures/PaperTesis/DensidadGI0L8}}
-%		\caption{\label{densidades} $\mathcal{G}^0(\alpha,\gamma^*,L)$ densities}
-%	\end{figure}
-
-
-%This minimization was performed searching values in $[-20,-1]$ and returning as $\widehat{\alpha}_{\text{\tiny{K}}}$ the value that minimizes~\eqref{minimization}.
-%As it is mentioned in section~\ref{sec_SAR}, the parameter $\gamma_0$ is chosen such that the expected value of the return $Z$ is one. This condition leads to the following relation: $\gamma_0^*=-\alpha-1$.
+ $\gamma_0$ is chosen such that the expected value of the return $Z$ is one. This condition leads to the following relation: $\gamma_0^*=-\alpha-1$.
 
 \subsection{Logcumulant estimator}\label{lc}
 
 %%% ACF This paragraph is not clear
-It is known the relationship between the random variable moments and its characteristic function, defines as the Fourier transform of its probability density function (pdf). 
-Using this approach, we define moment estimators. 
+\textcolor{blue}{It is known the relationship between the random variable moments and its characteristic function, defines as the Fourier transform of its probability density function (pdf). 
+When the moments of order $k$ exist they can be calculated through the derivatives of order $k$ of the characteristic function. }
 
 In the same sense, Nicolas et al.~\cite{nicolas2002} defined the first characteristic function of the second kind as the Mellin transform of its pdf function for the case where the density function has positive support. 
 
@@ -459,46 +371,6 @@ Refs~\cite{MellinAnalysisPolSAR,BujorTrouveValetNicolas2004,khan2014} applied th
 More recently, Nogueira et al.~\cite{Nogueira2019} used the LC estimator applied in an unsupervised algorithm for SAR image segmentation.
 
 We compare our proposal with LC and ML estimators because these are widely used in the literature.
-
-%	 From this, if $X \sim f_{\text{\tiny{X}}}(u)$ it can be defined:
-%	\begin{itemize}
-%		\item First characteristic function of second kind:  
-%		\begin{align*}
-%		\phi_{\text{\tiny{X}}}(s) = \int_0^{\infty} u^{s-1}f_{\text{\tiny{X}}} (u)du.
-%		\end{align*}
-%		\item Second characteristic function of second kind: 
-%		\begin{align*}
-%		\psi_{\text{\tiny{X}}}(s) = \log\phi_{\text{\tiny{X}}}(s).
-%		\end{align*}
-%		\item Second kind characteristic moment:
-%		\begin{align*}
-%		\tilde{m}_r = \frac{d \phi_{\text{\tiny{X}}}(s)}{ds } \at[\Big]{s=1}. \label{eq:fcm}
-%		\end{align*}
-%		\item Second kind characteristic cumulant (Logcumulant)
-%		\begin{equation}
-%		\tilde{k}_r = \frac{d \psi_{\text{\tiny{X}}}(s)}{ds} \at[\Big]{s=1}. \label{eq:scm}
-%		\end{equation}
-%	\end{itemize}
-
-
-%	If $f_x(u) = \mathcal{G}^0(u)$ then we have:
-%		\begin{align*}
-%		\phi_x(s) = \frac{\left(\frac{L}{\gamma}\right)^{1-s}\Gamma(-1+L+s)\Gamma(1-s-\alpha)}{\Gamma(L)\Gamma(-\alpha)}
-%		\end{align*}
-%		\begin{align}
-%		\widetilde{m}_1 =  \frac{d \phi_x(s)}{ds } \at[\big]{s=1} = -\log(\frac{L}{\gamma}) + \Psi^0(L) - \Psi^0(-\alpha).
-%		\end{align}
-%	
-%	According to~\cite{Tison2004}, we have that $\widetilde{k}_1 = \widetilde{m_1}$, then
-%	\begin{align}
-%	\widetilde{k}_1 =   -\log \frac{L}{\gamma} + \Psi^0(L) - \Psi^0(-\alpha). \label{eq:scGi}
-%	\end{align}
-%	
-%	 and the empirical expression for the first logcumulant for a sample $Z_1,\ldots,Z_n$ is $\widehat{\widetilde{k}}_1 ={n}^{-1} \sum_{i=1}^n\log Z_i$. Therefore this relationship can be used to estimate the parameters of the distribution. 
-
-%	
-%	As was mentioned in section \ref{sec_SAR} we assume that $\gamma^*=-\alpha-1$, then the Log-cumulant estimator of $\alpha$, denoted by $\widehat\alpha_{\text{{LC}}}$ is then the solution of 
-%	$\widehat{\widetilde{k}}_1 =   -\log \frac{L}{-\widehat\alpha_{\text{{LC}}}-1} + \Psi^0(L) - \Psi^0(-\widehat\alpha_{\text{{LC}}})$, that is, 
 
 \subsection{Robustness analysis -- Stylized Samples}
 \label{robustez}
@@ -522,7 +394,7 @@ This schema considers that, in average, a small proportion $\epsilon$ of the dat
 %%% ACF Was this contamination model used in this work?
 Sometimes certain pixels present an extremely high return value. 
 This phenomenon is produced by double bounce or by a corner reflector, and is one of the sources of contamination in SAR imagery. 
-The presence of such outliers may provoke big errors in the estimation as we show in an application to a real image. 
+The presence of such outliers may provoke big errors in the estimation as we show in an application to a real image. \textcolor{blue}{This situation can be modeled considering the return $Z=BC+(1-B)W$ where $C$ is a large value of the return and $B$ and $W$ are defined as before.}
 
 A way of assessing how the estimator $T_n(z_1,\dots,z_n)$ behaves under contamination is by fixing $n-1$ observations and allowing one to vary.
 This is the EIF -- Empirical Influence Function, but it depends on the particular sample.
@@ -717,7 +589,7 @@ and $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ on the othe
 This similar behavior can also be observed in the confidence intervals: $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ produce wider intervals than the other estimators, showing that they are less accurate than MDE.
 
 %%% ACF Add in parentheses the values of \alpha you are referring to for each kind of area
-For extremely heterogeneous and heterogeneous areas, the MDE estimators have a better performance than the rest. 
+For extremely heterogeneous $(\alpha \in (-\infty,-6])$ and heterogeneous areas $(\alpha \in (-6,-3])$, the MDE estimators have a better performance than the rest. 
 For moderately heterogeneous areas, all methods have similar behavior; however, MDE has lower MSE. 
 For homogeneous areas $\widehat{\alpha}_{\text{{ML}}}$ is the one with the smalles bias, although the MSE is comparable to the MDE estimators except for moderate size samples where the MSE is larger.
 
@@ -730,7 +602,7 @@ For homogeneous areas $\widehat{\alpha}_{\text{{ML}}}$ is the one with the small
 
 A similar analysis was done for the case $L=8$. Figs.~\ref{SesgoSinContL=8} and~\ref{ECMSinContL=8} show that $\widehat{\alpha}_{\text{{ML}}}$ has the best performance for homogeneous
 %%% ACF "exceeds"? 
-areas in terms of bias, while $\widehat{\alpha}_{\text{{LN}}}$ exceeds the rest in extremely textured areas with moderate texture.
+areas in terms of bias, while $\widehat{\alpha}_{\text{{LN}}}$ \textcolor{blue}{outperform} the rest in extremely textured areas and with moderate texture.
 
 \begin{figure}[htb]
 	\centering
@@ -790,22 +662,6 @@ It should be mentioned that all methods converge for this case where there is le
 \subsection{Simulation Results -- Contamination Data}
 \label{CasesCont}
 
-%A property that is desirable for an estimator is to be resistant to the presence of outliers. 
-%
-%It is very important to have estimators that are resistant to the presence of contaminated data, that is, that are capable of producing good estimation even when a proportion of the data does not come from the assumed model. This situation is of particular importance when filters are used because they range the image through sliding windows of size $3\times 3$, $5 \times 5$ or, for example, $7 \times 7 $. These samples may have data from areas with different degrees of texture, for example, at the border between different regions. 
-%
-%Bustos et al.~\cite{BustosFreryLucini:Mestimators:2001} and Allende et al.~\cite{AllendeFreryetal:JSCS:05} studied the performance of the ML estimator under the $\mathcal{G}^{0}$ model for amplitude data, showing that there is a loss of robustness in the presence of moderate outliers in extremely textured areas, while for textured areas these lost occurs in the presence of severe outliers. This lack of robustness is also more pronounced in the case of small samples. They proposed as an alternative the M and AM estimators that have good behavior under contamination but present numerical problems especially for small sample sizes.
-%
-%One of contamination sources in SAR images is the Double Bounce phenomenon, where some pixels have a high return value. The presence of such outliers can cause large errors in the estimate. The description of this phenomenon can be seen in~\cite{DobleBounce}.
-%
-%We propose two ways to evaluate the robustness of the estimators, one is generate contaminated samples where $0 <\epsilon \ll 1$ is the proportion of contamination. The other is studying the SEIF.
-%
-%Let $B$ be a Bernoulli random variable with a $p$ probability of contamination occurrence. Let $W$   and $U$ be such that $W \sim \mathcal{G}^0(\alpha_1,\gamma_1^*,L)$,  and $U \sim \mathcal{G}^0(\alpha_2,\gamma_2^*,L) $. Define $Z=BU+(1-B)W$, then we generate $\{z_1,\dots,z_n\}$ identically distributed random variables with cumulative distribution function 
-%$$
-%(1-\epsilon) \mathcal{F}_{\mathcal{G}^0(\alpha_1,\gamma_1^*,L)}(z)+\epsilon\mathcal{F}_{\mathcal{G}^0(\alpha_2,\gamma_2^*,L)}(z),
-%$$
-%where $\mathcal{F}_{\mathcal{G}^0(\alpha,\gamma,L)}$ is the cumulative distribution function of a $\mathcal{G}^0(\alpha,\gamma,L)$ random variable.
-%
 In the following, we show the performance, throughout the bias and mean square error, of the estimators under contamination. 
 Figures~\ref{SesgoyECMConContL=3} and~\ref{SesgoyECMConContL=8} present these quantities under contaminated data for $L=3$ and $L=8$ respectively. In this case we considered $\epsilon=0.05$
 
@@ -831,8 +687,6 @@ In the majority of the cases studied, the MDE estimators have shorter intervals 
 In moderately textured areas, all methods are comparable although the MDE estimators have lower MSE. 
 For homogeneous areas $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have lower bias although greater variability.
 
-%According to this analysis and to the study of the SEIF, the $\widehat{\alpha}_{\text{{LN}}}$ estimator is the one that presents the best performance for both contaminated and uncontaminated data, for textured areas.
-
 \section{Application to actual data}
 \label{application}
 
@@ -848,8 +702,6 @@ In order to find the $\text{ENL}$ we selected manually four textureless areas an
 The final $\text{ENL}$ is their average weighted by the size of the areas. 
 We then set $\widehat L=3.21$ in the analysis of the multilook image.
 
-%	Figure~\ref{MuestraLooks} shows the ESAR multilook image together with the samples used to obtain $\text{ENL}$. 
-%	
 \begin{figure}[htb]
 	\centering
 	%\subfigure[\label{MuestraLooks}Samples used to estimate ENL]{\includegraphics[width=0.48\linewidth]{../../../Figures/PaperTesis/MuestrasEstimNumLooks}}
@@ -882,7 +734,7 @@ both $\widehat{\alpha}_{\text{{ML}}}=-7.21$ and $\widehat{\alpha}_{\text{{LC}}}=
 
 %%% 28 May 2020, 6:50 AM
 %%% ACF When does this change happen?
-It can be seen that both $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have substantially changed the estimations value, now these values are compatible with a heterogeneous zone in the red and blue sample. While $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ changed their values, the type of zone they describe was not modified.
+It can be seen that both $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have substantially changed the estimations value \textcolor{blue}{between the yellow and the red samples, indicating different kind of textures.} While $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ changed their values but the type of zone they describe was not modified.
 
 Then, based on the results of the simulations obtained for the SEIF corresponding to figures~\ref{InflL3alfa-3n25} and~\ref{InflL3alfa-3n25} showing the lack of robustness of $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ before a contamination with a value low, we re-estimate removing the first observation that corresponds to a value \SI{86}{\percent} lower than the average. 
 Table~\ref{SinPrimero} shows the estimates.
