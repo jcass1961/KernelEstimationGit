@@ -5,16 +5,16 @@
 \usepackage[utf8]{inputenc} 
 \usepackage{amsmath}
 \usepackage[pctex32]{graphicx}
-\usepackage{algorithmic}
-\usepackage{algorithm}
 \usepackage{amsfonts}
-\usepackage{subfigure}
 \usepackage{enumerate}
 \usepackage{color}
 \usepackage[normalem]{ulem} %%%% para tachar texto
 \usepackage{setspace} %% interlineado
 \usepackage{float}
 \onehalfspacing
+
+\usepackage{fouriernc} %%% Fuente más legible
+\usepackage{merriweather} %%% Fuente más legible
 
 \usepackage{geometry}
 \geometry{
@@ -33,21 +33,25 @@
 	\maketitle
 
 %------------- Teoría de la información
-En los últimos tiempos conceptos que provienen de la teoría de la información han sido utilizados para medir la discimilaridad entre funciones de densidad. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales e imágenes~\cite {Aviyente2007}, detección automática de regiones~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics, Nascimento2009}, clasificación de imágenes~\cite{Puig2003} entre otras aplicaciones. 
+En los últimos tiempos conceptos que provienen de la teoría de la información han sido utilizados para medir la desemejanza entre funciones de densidad. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales e imágenes~\cite {Aviyente2007}, detección automática de regiones~\cite{Nascimento2009,SilvaCribariFrery:ImprovedLikelihood:Environmetrics}, clasificación de imágenes~\cite{Puig2003} entre otras aplicaciones. 
 En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de medidas de divergencia, llamadas $(h,\phi)$-divergencias que incluyen a la Kulback Leibler (KL) divergencia, a las $\phi$-divergencias presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J$- divergencias y $R$-divergencias que fueron definidas por Taneja~\cite{Taneja1989} entre otras medidas. 
 
 En la última década estas medidas han sido utilizadas en el procesamiento de imágenes adquiridas con radares de apertura sintética SAR. Estos sensores, que operan en el rango de microondas, tienen muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. Dentro de las principales ventajas se encuentran la capacidad de proveer imágenes de alta resolución, y pueden operar en forma independiente de las condiciones climáticas y de la iluminación. Sin embargo, las imágenes SAR tienen la desventaja de ser difíciles de interpretar y analizar debido a la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por
-muchos dispersores. Esto causa una variación en la intensidad pixel a pixel que se manifiesta en la imagen como un patrón granular, por este motivo la utilización de modelos estadísticos es una herramienta escencial para describir este tipo de datos.
+muchos dispersores. Esto causa una variación en la intensidad pixel a pixel que se manifiesta en la imagen como un patrón granular, por este motivo la utilización de modelos estadísticos es una herramienta esencial para describir este tipo de datos.
 
 El modelo multiplicativo se ha utilizado con éxito para describir datos SAR. Se basa en la suposición de que el retorno $Z$ se puede describir como el producto de dos variables aleatorias independientes, $X\cdot Y$. La primera corresponde a la retrodispersión (la verdad no observada) y la segunda al ruido speckle~\cite{oliverquegan98}.
 
 Frery et al.~\cite{Frery97} propusieron la familia de distribuciones $\mathcal{G}^0$ para modelar el retorno de imágenes SAR, este modelo es ampliamente utilizado porque tiene la capacidad de discriminar áreas con diferente grado de textura mejor que la familia de distribuciones $K$ como se indica en Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS}.
-Esta familia se describe por tres parámetros, el parámetro $\alpha$ que modela la textura, el parámetro $\gamma$ que informa sobre el brillo de la imagen y el número de looks $L$ que está relacionado con la relación señal/ruido. Debido a esta interpretación, la estimación de parámetros de calidad es de crucial importancia.
+Esta familia se describe por tres parámetros, el parámetro $\alpha$ que modela la textura, el parámetro $\gamma$ que informa sobre el brillo de la imagen y el número de looks $L$ que es proporcional a la relación señal/ruido. 
+Debido a esta interpretación, la estimación de parámetros de calidad es de crucial importancia.
 
+%%% ACF Esto parece repetido; si querés agregar algo, tendría que ir al principio
+En los últimos tiempos se han utilizado medidas que provienen de la teoría de la información para extraer características en el procesamiento de imágenes SAR. 
+Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales e imágenes~\cite {Aviyente2007}, detección automática de región en imágenes SAR~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics, Nascimento2009} entre otras aplicaciones.
 
-En los últimos tiempos se han utilizado medidas que provienen de la teoría de la información para extraer características en el procesamiento de imágenes SAR. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales e imágenes~\cite {Aviyente2007}, detección automática de región en imágenes SAR~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics, Nascimento2009} entre otras aplicaciones.
-
-En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} los autores proponen un estimador mínima distancia para el parámetro de textura del modelo $\mathcal{G}^0$ minimizando una distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En Gambini et al.~\cite{gambini2015} se estimó la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. En Cassetti et al.~\cite{Cassetti2020} artículo enviado para su publicación, se mejoró la propuesta mostrando que los núcleos asimétricos Lognormal (LN) y Gamma ($\Gamma$) tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y se utilizó el método de validación cruzada de mínimos cuadrados (LSCV)~\cite{Rudemo1982} para la selección del ancho de banda en lugar de la selección empírica. Además se utilizó un algoritmo de búsqueda para encontrar el mínimo del estimador propuesto y se mostró que esta propuesta supera al estimador de máxima verosimilitud en cuanto a su robustez y tasa de convergencia.
+En Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} los autores proponen un estimador mínima distancia para el parámetro de textura del modelo $\mathcal{G}^0$ minimizando una distancia estocástica entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En Gambini et al.~\cite{gambini2015} se estimó la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. 
+%%% ACF Sólo definir siglas y símbolos que se usan más de una vez
+En Cassetti et al.~\cite{Cassetti2020} (artículo enviado para su publicación) se mejoró la propuesta mostrando que los núcleos asimétricos Lognormal (LN) y Gamma ($\Gamma$) tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y se utilizó el método de validación cruzada de mínimos cuadrados (LSCV)~\cite{Rudemo1982} para la selección del ancho de banda en lugar de la selección empírica. Además se utilizó un algoritmo de búsqueda para encontrar el mínimo del estimador propuesto y se mostró que esta propuesta supera al estimador de máxima verosimilitud en cuanto a su robustez y tasa de convergencia.
 
 Asimismo, Shannon~\cite{Shannon1948} propone una nueva manera de medir la transmisión de información a través de un canal, pensando a la información como un concepto estadístico. Propone como medida de información o de desorden a lo que se conoce como entropía de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entropía de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log p_i$. Para el caso continuo se define $H(X)=-\int_{-\infty}^{\infty} f_X(x) \log f_X(x)$ donde $f$ es la función de densidad de probabilidad de la variable aleatoria $X$. Esta medida es un caso particular de las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}.
 
