@@ -1,6 +1,6 @@
 %\documentclass[12pt,thmsa]{article}
 
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage[spanish]{babel}  
 \usepackage[utf8]{inputenc} 
 \usepackage{amsmath}
@@ -16,7 +16,7 @@
 \usepackage{siunitx}
 
 \usepackage{fouriernc} %%% Fuente más legible
-\usepackage{merriweather} %%% Fuente más legible
+\usepackage{fourier} %%% Fuente más legible
 
 \usepackage{geometry}
 \geometry{
@@ -41,6 +41,7 @@ Se define como las técnicas que permiten adquirir imágenes (y otras formas de
 organizar datos: señales, series de tiempo, etc.) de la superficie terrestre desde
 sensores instalados en plataformas espaciales o aereotransportadas.
 
+%%% ACF La importancia de la textura es muy específica de SAR. 
 El problema de clasificación de un área de una superficie terrestre en clases con diferentes grado de textura es uno de los objetivos fundamentales en teledetección debido a que esto posibilita detectar zonas de inundación, de incendios, de derrame de petróleo tan importantes en el monitoreo ambiental. Por este motivo el desarrollo de algoritmos de clasificación y de interpretación automática de imágenes cobra vital importancia  porque permite determinar áreas en la imagen con características comunes  y producir un mapa temático de la región. 
 
 Los algoritmos de clasificación pueden dividirse en no supervisados y supervisados. En los primeros no se necesita que el algoritmo interactúe con el usuario ya que éste realiza una búsqueda automática de grupos con características semejantes dentro de la imagen. Los segundos requieren de muestras de entrenamiento definidas por el usuario donde se conoce la clase a la cual pertenecen. Estas muestras serán utilizadas para asignar píxeles con clasificación desconocida. En ambos algoritmos la extracción de características que permitan una clasificación precisa juega un rol de suma importancia.
@@ -66,7 +67,7 @@ Esta familia se describe por tres parámetros, el parámetro $\alpha$ que modela
 Debido a esta interpretación, obtener buenas estimaciones de los parámetros es de crucial importancia especialmente en el caso de muestras de pequeño y moderado tamaño, ya que muchos métodos de filtrado, clasificación y detección de bordes utilizan ventanas deslizantes de tamaño $5 \times 5$, $7 \times 7$ y $9 \times 9$.
 
 En este escenario conceptos que provienen de la teoría de la información han sido utilizados para extraer características en la imágenes SAR. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales e imágenes~\cite {Aviyente2007}, detección automática de regiones~\cite{Nascimento2009,SilvaCribariFrery:ImprovedLikelihood:Environmetrics}, clasificación de imágenes~\cite{Puig2003} entre otras. 
-En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de medidas de divergencia, llamadas $(h,\phi)$-divergencias que incluyen a la Kulback Leibler divergencia, a las $\phi$-divergencias presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J$- divergencias y $R$-divergencias que fueron definidas por Taneja~\cite{Taneja1989} entre otras medidas. 
+En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de medidas de divergencia, llamadas $(h,\phi)$-divergencias que incluyen a la divergencia de Kulback-Leibler, a las $\phi$-divergencias presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J$- divergencias y $R$-divergencias que fueron definidas por Taneja~\cite{Taneja1989} entre otras medidas. 
 
 
 %
@@ -88,18 +89,22 @@ En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de med
 
 %%% ACF Sólo definir siglas y símbolos que se usan más de una vez
 
-En el contexto de estimación de parámetros Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} proponen un estimador mínima distancia (MDE) para el parámetro de textura del modelo $\mathcal{G}^0$ minimizando una $(h,\phi)$-divergencia entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En ese trabajo los autores encontraron que la distancia triangular es la que mejor desempeño presentó a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}^0$. En Gambini et al.~\cite{gambini2015} se profundizó el estudio los MDE estimadores, en esta oportunidad se estimó la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. Se estudió que este estimador mejora al estimador de Máxima Verosimilitud y Logcumulantes (LC)~\cite{Tison2004} en términos de sesgo, error cuadrático medio y robustez en la mayoría de los casos que estudiaron. En Cassetti et al.~\cite{Cassetti2020} se mejoró la propuesta mostrando que los núcleos asimétricos Lognormal y Gamma tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y se utilizó el método de validación cruzada de mínimos cuadrados~\cite{Rudemo1982} para la selección del ancho de banda en lugar de la selección empírica. Además se utilizó un algoritmo de búsqueda para encontrar el mínimo del estimador propuesto y se mostró que esta propuesta supera al estimador de máxima verosimilitud en cuanto a su robustez en imágenes reales.
+En el contexto de estimación de parámetros Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} proponen un estimador mínima distancia (MDE -- \textit{Minimum Distance Estimator}) para el parámetro de textura del modelo $\mathcal{G}^0$ minimizando una $(h,\phi)$-divergencia entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En ese trabajo los autores encontraron que la distancia triangular es la que mejor desempeño presentó a la hora de estimar el parámetro de textura de la distribución $\mathcal{G}^0$. En Gambini et al.~\cite{gambini2015} se profundizó el estudio los MDE estimadores, en esta oportunidad se estimó la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. Se estudió que este estimador es mejor que los estimadores de Máxima Verosimilitud y de Logcumulantes (LC)~\cite{Tison2004} en términos de sesgo, error cuadrático medio y robustez en la mayoría de los casos que estudiaron. En Cassetti et al.~\cite{Cassetti2020} se mejoró la propuesta mostrando que los núcleos asimétricos Lognormal y Gamma tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y se utilizó el método de validación cruzada de mínimos cuadrados~\cite{Rudemo1982} para la selección del ancho de banda en lugar de la selección empírica. Además se utilizó un algoritmo de búsqueda para encontrar el mínimo del estimador propuesto y se mostró que esta propuesta supera al estimador de máxima verosimilitud en cuanto a su robustez en imágenes reales.
   
-En el contexto de clasificación y segmentación de imágenes SAR Rodriguez et al~\cite{Rodrigues2016} emplearon un mapa de rugosidad (mapa de alfa) del modelo $\mathcal{G}^0$, estimando el parámetro de textura con el método LC y utilizando este mapa como entrada para métodos de segmentación de una imagen SAR monopolarimétrica modelada con la familia de distribuciones $\mathcal{G}^0$. 
+En el contexto de clasificación y segmentación de imágenes SAR, Rodriguez et al~\cite{Rodrigues2016} emplearon un mapa de rugosidad (mapa de alfa) del modelo $\mathcal{G}^0$, estimando el parámetro de textura con el método LC y utilizando este mapa como entrada para métodos de segmentación de una imagen SAR monopolarimétrica modelada con la familia de distribuciones $\mathcal{G}^0$. 
 %Asimismo, Shannon~\cite{Shannon1948} propone como medida de información o de desorden a lo que se conoce como entropía de Shannon. En el caso discreto y considerando $X$ una variable aleatoria que toma $n$ valores con probabilidades $p_1,\ldots,p_n$, entonces la entropía de Shannon se define como $H(X)=-\sum_{i=1}^n p_i \log p_i$. Para el caso continuo se define $H(X)=-\int_{-\infty}^{\infty} f_X(x) \log f_X(x)$ donde $f$ es la función de densidad de probabilidad de la variable aleatoria $X$. Esta medida es un caso particular de las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}.
-En Ferreira et al.~\cite{Ferreira2020} se propone un nuevo método de segmentación para imágenes SAR polarimétricas basado en la entropía de Shannon~\cite{Shannon1948}. Esta medida es un caso particular de las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}. En Frery et al.~\cite{Frery2012} los autores encontraron expresiones explícitas para la entropía de Shannon y de Rényi para imágenes polarimétricas, y proponen medidas de contrastes basados en estas entropías. 
+En Ferreira et al.~\cite{Ferreira2020} se propone un nuevo método de segmentación para imágenes SAR polarimétricas basado en la entropía de Shannon~\cite{Shannon1948}. Esta medida es un caso particular de las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}. 
+En Frery et al.~\cite{Frery2012} los autores encontraron expresiones explícitas para la entropía de Shannon y de Rényi para imágenes polarimétricas, y proponen medidas de contraste basadas en estas entropías. 
 %En~\cite{Rodrigues2016} los autores utilizaron un mapa de $\alpha$ estimado con el método Logcumulante propuesto por Nicolas et al. en~\cite{Nicolas2010}, como input para segmentar una imagen SAR monopolarimétrica modelada con la familia de distribuciones $\mathcal{G}^0$.
 
-Diferentes estrategias de clasificación, no supervisadas como supervisadas, se aplicaron a imágenes SAR. Carvalho et al.~\cite{Carvalho2019} implementaron algoritmos utilizando el conocido K-means junto con distancias estocásticas como medida de disimilaridad en imágenes PolSar. En~\cite{Fernandez2017} los autores aplicaron este tipo de clasificación basado en el algoritmo EM también en imágenes polarimétricas. 
+Diferentes estrategias de clasificación, no supervisadas como supervisadas, se aplicaron a imágenes SAR. Carvalho et al.~\cite{Carvalho2019} implementaron algoritmos utilizando el conocido K-means junto con distancias estocásticas como medida de disimilaridad en imágenes PolSAR. 
+En~\cite{Fernandez2017} los autores aplicaron este tipo de clasificación basado en el algoritmo EM también en imágenes polarimétricas. 
 
-En cuanto a algoritmos de clasificación supervisada aplicados a imágenes SAR se encuentra el trabajo de Akbarizadeh~\cite{Akbarizadeh2012} donde se aplicó el algoritmo Support Vector Machine (SVM) para clasificar una imagen SAR utilizando una nueva función de energía utilizando transformada wavelets. En Palacio et al.~\cite{Palacio2019} los autores combinaron la utilización de filtros con el algoritmo SVM en imágenes SAR polarimétricas para cuantificar el contenido de información basado en la precisión de la clasificación.  Un review sobre métodos de clasificación para imágenes SAR se puede encontrar en~\cite{Parikh2020}. 
+En cuanto a algoritmos de clasificación supervisada aplicados a imágenes SAR se encuentra el trabajo de Akbarizadeh~\cite{Akbarizadeh2012} donde se aplicó el algoritmo Support Vector Machine (SVM) para clasificar una imagen SAR utilizando una nueva función de energía utilizando transformada wavelets. 
+Palacio et al.~\cite{Palacio2019} combinaron la utilización de filtros con el algoritmo SVM en imágenes SAR polarimétricas para cuantificar el contenido de información basado en la precisión de la clasificación.  Un review sobre métodos de clasificación para imágenes SAR se puede encontrar en~\cite{Parikh2020}. 
 
-Varios autores propusieron estimadores para la entropía de Shannon, una revisión de estos métodos se puede encontrar en Beirlant et al.~\cite{Beirlant1997}. Recientemente Al-Omari~\cite{AlOmari2013} presentó nuevos estimadores para la entropía y Behmardi et.al~\cite{Behmardi2011} proponen un estimador paramétrico utilizando el principio de máxima entropía. 
+Varios autores propusieron estimadores para la entropía de Shannon, una revisión de estos métodos se puede encontrar en Beirlant et al.~\cite{Beirlant1997}. 
+Recientemente Al-Omari~\cite{AlOmari2013} presentó nuevos estimadores para la entropía y Behmardi et. al~\cite{Behmardi2011} proponen un estimador paramétrico utilizando el principio de máxima entropía. 
 
 
 %En la última década, los conceptos relacionados con la teoría de la información han ganado interés en el procesamiento de imágenes. Shannon~\cite{Shannon1948} definió la información $I(X,Y)$ entre las variables aleatorias $X$ e $Y$ como una divergencia calculada entre sus densidades de probabilidad.
@@ -131,7 +136,9 @@ Varios autores propusieron estimadores para la entropía de Shannon, una revisi�
 
 
 %--------------- RUIDO
-La formulación de nuevos métodos de filtrado de imágenes es un tema que está en continuo crecimiento, en particular para el caso donde el ruido no es gaussiano ni aditivo como es el ruido speckle. Los algoritmos NonLocalMeans (NLM), que inicialmente fueron propuestos por Buades et al.~\cite{Buades2005} en el contexto de modelos con ruido gaussiano aditivo, utilizan la información que proveen los píxeles vecinos para estimar el valor del píxel en la imagen filtrada. El valor del píxel estimado se obtiene como un promedio ponderado donde el peso de cada píxel en la imagen original es proporcional a una medida de similitud entre los píxeles que se encuentran
+La formulación de nuevos métodos de filtrado de imágenes es un tema que está en continuo crecimiento, en particular para el caso donde el ruido no es gaussiano ni aditivo como es el ruido speckle. 
+Los algoritmos NonLocal Means (NLM), que inicialmente fueron propuestos por Buades et al.~\cite{Buades2005} en el contexto de modelos con ruido gaussiano aditivo, utilizan la información que proveen los píxeles vecinos para estimar el valor del píxel en la imagen filtrada. 
+El valor del píxel estimado se obtiene como un promedio ponderado donde el peso de cada píxel en la imagen original es proporcional a una medida de similitud entre los píxeles que se encuentran
 un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes un entorno ($E_2$) de los alrededores de $E_1$. La figura~\ref{NLM} tomada de Penna et al.~\cite{Penna2013} muestra un esquema del funcionamiento de este algoritmo. 
 
 \begin{figure}[hbt]
@@ -141,7 +148,7 @@ un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes un ent
 	\caption{Funcionamiento del algoritmo NLM}
 \end{figure}
 
-Estos algoritmos proporcionan un marco general para el problema de reducción del ruido speckle dado que permiten proponer diferentes medidas de disimilaridad y diferentes pesos. En Penna et al.~\cite{Penna2013} los autores utilizaron la distancia de Kullback Leibler en imágenes SAR monopolarimétricas para datos de intensidad, en reemplazo de la distancia euclídea que se utiliza en el algoritmo NLM original. Esta idea fue tomada por Santos et al.~\cite{Santos2017} y los autores la aplicaron en imágenes de ultrasonido que también están afectadas por ruido speckle. En Xue et al.~\cite{Xue2013} los autores reemplazan a la función de peso en el algoritmo NLM original por una combinación lineal de funciones cosenos obteniendo un algoritmo más rápido. Un nuevo filtro basado en distancias estocásticas y test entre funciones de distribución fue propuesto por Torres et al.~\cite{Torres2012} para datos SAR de intensidad.
+Estos algoritmos proporcionan un marco general para el problema de reducción del ruido speckle dado que permiten proponer diferentes medidas de disimilaridad y diferentes pesos. En Penna et al.~\cite{Penna2013} los autores utilizaron la distancia de Kullback-Leibler en imágenes SAR monopolarimétricas para datos de intensidad, en reemplazo de la distancia euclídea que se utiliza en el algoritmo NLM original. Esta idea fue tomada por Santos et al.~\cite{Santos2017} y los autores la aplicaron en imágenes de ultrasonido que también están afectadas por ruido speckle. En Xue et al.~\cite{Xue2013} los autores reemplazan a la función de peso en el algoritmo NLM original por una combinación lineal de funciones cosenos obteniendo un algoritmo más rápido. Un nuevo filtro basado en distancias estocásticas y test entre funciones de distribución fue propuesto por Torres et al.~\cite{Torres2012} para datos SAR de intensidad.
 
 Antes de proponer un método de clasificación hay que ser muy cuidadosos en elegir el modelo estadístico más apropiado y las características de la imagen que servirán de input para los algoritmos. Este proyecto se estudiará la capacidad que tienen las medidas que provienen de la teoría de la información como atributos de una imagen SAR en el contexto del diseño de nuevos métodos de filtrado y de clasificación de imágenes SAR.
 
@@ -172,10 +179,12 @@ Esta propuesta de investigación tiene por objetivos específicos:
 	\item Evaluar la performance de algoritmos de clasificación tanto supervisada como no supervisada, considerando a la entropía como atributo de la imagen.
 	\item Obtener herramientas robustas que puedan ser implementadas en el diseño de procedimientos resistentes bajo contaminación tales como algoritmos de clasificación y filtros de la clase Nonlocal Means.
 	\item Extender estos procedimientos diseñados para imágenes SAR para otras disciplinas como la Astroestadística.
-	\item Fortalecer el vínculo generado entre la Universidad de Valparaíso, Chile; University at Wellington, Nueva Zelanda y Universidad de Buenos Aires.
+	\item Fortalecer el vínculo generado entre la Universidad de Valparaíso, Chile, la Victoria University at Wellington, Nueva Zelanda, y Universidad de Buenos Aires.
 \end{itemize}
 
 \section{Metodologías y fuentes}
+
+%%% ACF Sacar lo que ya hayas mencionado en la introducción
 
 Las imágenes SAR tienen muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que este tipo de imágenes resulten cada vez más populares.
 
@@ -204,7 +213,9 @@ f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 \end{equation*}
 donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
 
-Bajo este modelo se pueden caracterizar regiones con diferente grado de textura a través de los parámetros de la distribución $\mathcal{G}_I^{0}$. Para valores de $\alpha$ cercanos a cero (típicamente en el intervalo $(-3,0)$), la zona de la imagen corresponde a una región muy texturada, como es el caso de las zonas urbanas en las imágenes SAR. A medida que el valor del parámetro $\alpha$ disminuye, corresponde a zonas con cada vez menos textura, como son las regiones de forestación (usualmente $(-6,-3]$) y pastura (en $(-\infty,-6)$). Por otro lado, el parámetro $\gamma$ (llamado parámetro de escala) posee una interpretación en términos del brillo. Cuanto mayor es su valor, mayor intensidad posee la imagen en esa región. Por estas razones, la estimación precisa de los parámetros, en particular el parámetro de textura, es de suma importancia en el análisis de imágenes con ruido speckle. 
+Bajo este modelo se pueden caracterizar regiones con diferente grado de textura a través de los parámetros de la distribución $\mathcal{G}_I^{0}$. 
+%%% Si es "bajo este modelo", es la distribución GI0.
+Para valores de $\alpha$ cercanos a cero (típicamente en el intervalo $(-3,0)$), la zona de la imagen corresponde a una región muy texturada, como es el caso de las zonas urbanas en las imágenes SAR. A medida que el valor del parámetro $\alpha$ disminuye, corresponde a zonas con cada vez menos textura, como son las regiones de forestación (usualmente $(-6,-3]$) y pastura (en $(-\infty,-6)$). Por otro lado, el parámetro $\gamma$ (llamado parámetro de escala) posee una interpretación en términos del brillo. Cuanto mayor es su valor, mayor intensidad posee la imagen en esa región. Por estas razones, la estimación precisa de los parámetros, en particular el parámetro de textura, es de suma importancia en el análisis de imágenes con ruido speckle. 
 
 %En los últimos años se han propuesto varios métodos de estimación de parámetros, Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantifican el error en la estimación del parámetro de textura para la distribución $\mathcal G_A^0$ y proponen una técnica analítica para mejorar la estimación.
 %Silva et al.~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics} proponen otro método analítico para mejorar la estimación del parámetro de textura que reduce el error cuadrático medio.
@@ -215,9 +226,12 @@ Bajo este modelo se pueden caracterizar regiones con diferente grado de textura 
 
 %Como se dijo anteriormente es importante obtener estimadores que tengan un comportamiento adecuado para muestras de pequeño y moderado tamaño tanto en sesgo, error cuadrático medio como en robustez. Tanto de los parámetros de la distribución como de los atributos de las imágenes. Esto es importante en el procesamiento de imágenes ya que muchos de los métodos de filtrado de imágenes, detección de bordes y clasificación utilizan máscaras deslizantes de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ o $11 \times 11$. 
 
+%%% ¿Otras? Hasta este punto, en esta sección, no has mencionado ninguna medida de 
 Este proyecto se basa en la hipótesis general que consiste en considerar a otras medidas de disimilaridad, como son las $(h,\phi)$ entropías que, combinadas con la aplicación de filtros y métodos de clasificación permitan formular nuevas metodologías para la comprensión de imágenes SAR.
 
-Este problema se abordará primeramente haciendo un relevamiento de los distintos estimadores de la entropía de Shannon como los propuestos en~\cite{Beirlant1997,AlOmari2013,Behmardi2011}. Teniendo en cuenta la expresión explícita de esta medida dada en Ferrerira et al.~\cite{Ferreira2020} para el caso de la función de densidad $\mathcal{G}_I^0$ y, combinando con los resultados obtenidos en Cassetti et al.~\cite{Cassetti2020} en cuanto a la estimación del parámetro de textura, se implementarán estos estimadores y se estudiará la performance de los mismos a través de simulaciones Montecarlo donde se:
+Este problema se abordará primeramente haciendo un relevamiento de los distintos estimadores de la entropía de Shannon como los propuestos en~\cite{AlOmari2013,Behmardi2011,Beirlant1997}. 
+%%% ACF Corregir "Ferrerira" en el texto y en el BibTeX
+Teniendo en cuenta la expresión explícita de esta medida dada en Ferrerira et al.~\cite{Ferreira2020} para el caso de la función de densidad $\mathcal{G}_I^0$ y, combinando con los resultados obtenidos en Cassetti et al.~\cite{Cassetti2020} en cuanto a la estimación del parámetro de textura, se implementarán estos estimadores y se estudiará la performance de los mismos a través de simulaciones Montecarlo donde se:
 \begin{itemize}
 	\item Considerará un espacio paramétrico que contemple distintas texturas, distintos números de looks y tamaño de muestra.
 	\item Estudiará el sesgo, error cuadrático medio de los mismos.
