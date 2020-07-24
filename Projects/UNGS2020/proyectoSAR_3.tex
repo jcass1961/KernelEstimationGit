@@ -54,6 +54,7 @@ Esta propuesta se abordará  estudiando la eficacia que tienen las medidas de di
 %organizar datos: señales, series de tiempo, etc.) de la superficie terrestre desde
 %sensores instalados en plataformas espaciales o aerotransportadas.
 
+%%% ACF Acá asociás clasificación a textura, en general. La clasificación, en general, trata de discriminar áreas con atributos diferentes. La textura entra después que presentes SAR, y digas que es sensible a la textura.
 El problema de clasificación de un área de una superficie terrestre en clases con diferentes grado de textura es uno de los objetivos fundamentales en teledetección debido a que esto posibilita detectar zonas de inundación, de incendios, de derrame de petróleo tan importantes en el monitoreo ambiental. Por este motivo el desarrollo de algoritmos de clasificación y de interpretación automática de imágenes cobra vital importancia  porque permite determinar áreas en la imagen con características comunes  y producir un mapa temático de la región. 
 
 %Los algoritmos de clasificación pueden dividirse en no supervisados y supervisados. En los primeros no se necesita que el algoritmo interactúe con el usuario ya que éste realiza una búsqueda automática de grupos con características semejantes dentro de la imagen. Los segundos requieren de muestras de entrenamiento definidas por el usuario donde se conoce la clase a la cual pertenecen. Estas muestras serán utilizadas para asignar píxeles con clasificación desconocida. En ambos algoritmos la extracción de características que permitan una clasificación precisa juega un rol de suma importancia.
@@ -196,10 +197,13 @@ Esta propuesta de investigación tiene por objetivos específicos:
 
 \section{Metodologías y fuentes}
 
+%%% ACF Esto no es metodología, es Introducción -> Relevancia
 Las imágenes SAR tienen muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que este tipo de imágenes resulten cada vez más populares.
 
+%%% ACF Esto no es metodología, es Introducción -> Justificativa
 Sin embargo, las imágenes SAR tienen la desventaja de ser difíciles de interpretar y procesar debido a la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta en la imagen como un patrón granular. 
 
+%%% ACF Esto no es metodología, es Metodología
 Debido a la aleatoriedad y a la fuerte dispersión que puede tener la señal retrodispersada, es necesario contar con modelos estadísticos que contribuyan a una mejor extracción de información a través del desarrollo de filtros, detección de bordes, clasificación de áreas entre otras metodologías. 
 
 %El modelo multiplicativo es muy apropiado para explicar las características estadísticas de la imagen de un objeto cuando es iluminado por radiación coherente, como lo son las imágenes SAR.
