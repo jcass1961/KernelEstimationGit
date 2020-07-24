@@ -11,6 +11,8 @@
 \usepackage[normalem]{ulem} %%%% para tachar texto
 \usepackage{setspace} %% interlineado
 \usepackage{float}
+\usepackage{booktabs}
+
 \onehalfspacing
 
 \usepackage{siunitx}
@@ -55,30 +57,27 @@ Esta propuesta se abordará  estudiando la eficacia que tienen las medidas de di
 %sensores instalados en plataformas espaciales o aerotransportadas.
 
 %%% ACF Acá asociás clasificación a textura, en general. La clasificación, en general, trata de discriminar áreas con atributos diferentes. La textura entra después que presentes SAR, y digas que es sensible a la textura.
-El problema de clasificación de un área de una superficie terrestre en clases con diferentes grado de textura es uno de los objetivos fundamentales en teledetección debido a que esto posibilita detectar zonas de inundación, de incendios, de derrame de petróleo tan importantes en el monitoreo ambiental. Por este motivo el desarrollo de algoritmos de clasificación y de interpretación automática de imágenes cobra vital importancia  porque permite determinar áreas en la imagen con características comunes  y producir un mapa temático de la región. 
+El problema de clasificación de una zona de una superficie terrestre en clases con \textcolor{red}{diferentes atributos} es uno de los objetivos fundamentales en teledetección debido a que esto posibilita detectar zonas de inundación, de incendios, de derrame de petróleo tan importantes en el monitoreo ambiental. Por este motivo el desarrollo de algoritmos de clasificación y de interpretación automática de imágenes cobra vital importancia  ya que permite determinar áreas en la imagen con características comunes  y producir un mapa temático de la región. 
 
 %Los algoritmos de clasificación pueden dividirse en no supervisados y supervisados. En los primeros no se necesita que el algoritmo interactúe con el usuario ya que éste realiza una búsqueda automática de grupos con características semejantes dentro de la imagen. Los segundos requieren de muestras de entrenamiento definidas por el usuario donde se conoce la clase a la cual pertenecen. Estas muestras serán utilizadas para asignar píxeles con clasificación desconocida. En ambos algoritmos la extracción de características que permitan una clasificación precisa juega un rol de suma importancia.
+\textcolor{red}{Las imágenes adquiridas con radares de apertura sintética (SAR) juegan un papel preponderante en el sensado remoto debido a sus ventajas respecto de las adquiridas por sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que resulten cada vez más populares. }
+\textcolor{red}{
+En particular, en Argentina la Comisión Nacional de Actividades Espaciales y el INVAP junto con otras agencias internacionales, forman parte de la misión SAOCOM. Esta misión consiste en la puesta en órbita de satélites equipados con tecnología para adquirir imágenes SAR con el objetivo de medir de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. }
 
-
-Las imágenes adquiridas con radares de apertura sintética (SAR) juegan un papel preponderante en el sensado remoto debido a que se puede obtener imágenes de alta resolución y se puede operar en forma independiente de las condiciones climáticas y de la iluminación. En particular en Argentina el estudio de las imágenes SAR es de importancia debido a que la Comisión Nacional de Actividades Espaciales y el INVAP junto con otras agencias internacionales, forman parte de la misión SAOCOM. Esta misión consiste en la puesta en órbita de satélites equipados con tecnología para adquirir imágenes SAR con el objetivo de medir de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. 
-
-Sin embargo, las imágenes SAR tienen la desventaja de poseer un tipo de ruido
-denominado speckle que corrompe la información del terreno degradando la calidad de la misma.
-% ser difíciles de interpretar y analizar debido a la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y 
-Se hace presente debido a la superposición coherente de las ondas reflejadas por
-muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta como un patrón granular dificultando el análisis y la interpretación de este tipo de imágenes. Por este motivo la utilización de modelos estadísticos y el desarrollo de nuevos métodos de clasificación, de filtrado y de interpretación automática de imágenes SAR se convierte en una herramienta esencial para describir este tipo de datos con precisión.
+\textcolor{red}{
+Sin embargo, este tipo de imágenes tienen la desventaja de ser difíciles de interpretar y procesar por la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta en la imagen como un patrón granular dificultando su análisis e interpretación. Por este motivo la utilización de modelos estadísticos y el desarrollo de nuevos métodos de clasificación, de filtrado y de interpretación automática de imágenes SAR se convierte en una herramienta esencial para describir este tipo de datos con precisión.}
 
 Entre los modelos inicialmente considerados para describir datos SAR están los llamados ``modelos empíricos'' que proponen distribuciones conocidas tales como Exponencial, Gamma, Lognormal, Rayleig, Weibull entre otras. Se pueden ver detalles y referencias de estos modelos en los trabajos de Frery y Wu \cite{FreryLibro2019}, Oliver y Quegan~\cite{oliverquegan98}, Yanasse et al.~\cite{Yanasse93} y Lee y Pottier~\cite{Lee2009}. 
 Sin embargo, ninguno de estos tiene la capacidad de modelar adecuadamente regiones con diferente grado de textura.
 %
 
-En cambio el modelo multiplicativo que propone describir al retorno $Z$ como el producto de dos variables aleatorias independientes, junto con la familia de distribuciones $\mathcal{G}^0$ propopuestas por Frery et al.~\cite{Frery97}, es ampliamente utilizado porque discrimina áreas con diferente grado de textura a través de la interpretación de sus parámetros, mejor que la familia de distribuciones $K$ como se indica en Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS}.
+En cambio el modelo multiplicativo, que propone describir al retorno $Z$ como el producto de dos variables aleatorias independientes, junto con la familia de distribuciones $\mathcal{G}^0$ presentadas por Frery et al.~\cite{Frery97}, es ampliamente utilizado porque discrimina áreas con diferente grado de textura a través de la interpretación de sus parámetros, mejor que la familia de distribuciones $K$ como se indica en Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS}.
 
 %El modelo multiplicativo se ha utilizado con éxito para describir datos SAR. Se basa en la suposición de que el retorno $Z$ se puede describir como el producto de dos variables aleatorias independientes, $X\cdot Y$. La primera corresponde a la retrodispersión (la verdad no observada) y la segunda al ruido speckle~\cite{oliverquegan98}. Bajo este modelo Frery et al.~\cite{Frery97} proponen la familia de distribuciones $\mathcal{G}^0$ para describir el retorno. Esta familia es ampliamente utilizada porque discriminan áreas con diferente grado de textura a través de sus parámetros, mejor que la familia de distribuciones $K$ como se indica en Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS}.
 %Esta familia se describe por tres parámetros, el parámetro $\alpha$ que modela la textura, el parámetro $\gamma$ que informa sobre el brillo de la imagen y el número de looks $L$ que es proporcional a la relación señal/ruido. 
 %Debido a esta interpretación, obtener buenas estimaciones de los parámetros es de crucial importancia especialmente en el caso de muestras de pequeño y moderado tamaño, ya que muchos métodos de filtrado, clasificación y detección de bordes utilizan ventanas deslizantes de tamaño $5 \times 5$, $7 \times 7$ y $9 \times 9$.
 
-En este escenario conceptos que provienen de la teoría de la información han sido utilizados para extraer características de las imágenes SAR. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales~\cite {Aviyente2007}, detección automática de regiones~\cite{Nascimento2009,SilvaCribariFrery:ImprovedLikelihood:Environmetrics}, clasificación~\cite{Puig2003} entre otras. 
+En este escenario, conceptos que provienen de la teoría de la información han sido utilizados para extraer características de las imágenes SAR. Especialmente el concepto de divergencia estocástica ha encontrado aplicaciones en áreas tan diversas como el procesamiento de señales~\cite {Aviyente2007}, detección automática de regiones~\cite{Nascimento2009,SilvaCribariFrery:ImprovedLikelihood:Environmetrics} y clasificación~\cite{Puig2003} entre otras. 
 En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de medidas de divergencia, llamadas $(h,\phi)$-divergencias que incluyen a la Kulback Leibler divergencia, a las $\phi$-divergencias presentadas por Csiszar~\cite{Csiszar1967} y a las generalizaciones de las $J$- divergencias y $R$-divergencias que fueron definidas por Taneja~\cite{Taneja1989} entre otras medidas. 
 
 
@@ -101,11 +100,11 @@ En Salicrú et al.~\cite{Salicru1994} los autores propusieron una familia de med
 
 %%% ACF Sólo definir siglas y símbolos que se usan más de una vez
 
-Estas medidas también se emplearon en el contexto de estimación de parámetros. Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} presentan un estimador mínima distancia (MDE) para el parámetro de textura del modelo $\mathcal{G}^0$ para datos SAR de intensidad minimizando una $(h,\phi)$-divergencia entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En Gambini et al.~\cite{gambini2015} los autores estimaron la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. En Cassetti et al.~\cite{Cassetti2020} mejoran esta propuesta mostrando que los núcleos asimétricos Lognormal y Gamma tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y utilizan el método de validación cruzada de mínimos cuadrados~\cite{Rudemo1982} para la selección del ancho de banda en lugar de la selección empírica.
+Estas medidas también se emplearon en el contexto de estimación de parámetros. Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} presentan un estimador mínima distancia para el parámetro de textura del modelo $\mathcal{G}^0$ para datos SAR de intensidad minimizando una $(h,\phi)$-divergencia entre el modelo teórico y una estimación no paramétrica de la función de densidad subyacente utilizando histogramas. En Gambini et al.~\cite{gambini2015} los autores estimaron la función de densidad teórica del modelo $\mathcal{G}^0$  usando el kernel asimétrico Inverso Gaussiano (IG) con un ancho de banda elegido empíricamente. En Cassetti et al.~\cite{Cassetti2020} mejoran esta propuesta mostrando que los núcleos asimétricos Lognormal y Gamma tienen un mejor comportamiento que el IG en términos de error cuadrático medio integrado y utilizan el método de validación cruzada de mínimos cuadrados para la selección del ancho de banda en lugar de la selección empírica.
 
-De forma análoga a las $(h,\phi)$ divergencias se definen las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}. Estas medidas también han sido ampliamente utilizadas en el análisis de imágenes SAR. En Frery et al.~\cite{Frery2012} los autores encontraron expresiones explícitas para la entropía de Shannon y de Rényi para imágenes polarimétricas y proponen medidas de contrastes basados en estas entropías. 
+De forma análoga a las $(h,\phi)$ divergencias se definen las $(h,\phi)$ entropías propuestas por Salicrú et al.~\cite{salicruetal1993}. Estas medidas generalizan el concepto de entropía definido por Shannon~\cite{Shannon1948}, han sido estudiadas en Menéndez et al. ~\cite{Menendez1997} y en Pardo~\cite{pardo2005statistical} entre otros autores y  ampliamente utilizadas en el análisis de imágenes SAR. En Frery et al.~\cite{Frery2012} los autores encontraron expresiones explícitas para la entropía de Shannon y de Rényi para imágenes polarimétricas y proponen medidas de contrastes basados en estas entropías. 
 %Diferentes autores han estudiado estas medidas, en Pardo~\cite{pardo2005statistical} y en Basu et al.~\cite{Basu2011} se puede encontrar un exhaustivo estudio de las mismas. 
-  
+
 Los algoritmos de clasificación y segmentación pueden ser muy sensibles al ruido de la imagen, en particular, para el caso de imágenes con ruido speckle como son las imágenes SAR. Por este motivo se han empleado diferentes estrategias de clasificación y segmentación para tratar con este ruido. En particular tanto las $(h,\phi)$ divergencias como las $(h,\phi)$ entropías han sido utilizadas con este fin. Carvalho et al.~\cite{Carvalho2019} implementaron algoritmos utilizando el conocido K-means junto con distancias estocásticas como medida de disimilaridad en imágenes PolSar. En~\cite{Fernandez2017} los autores aplicaron este tipo de clasificación basado en el algoritmo EM también en imágenes polarimétricas. En Nobre et al.~\cite{Nobre2016} los autores emplearon la matriz de entroía de Rényi para datos SAR en formato amplitud, como variable de entrada en métodos de segmentación. En Ferreira et al.~\cite{Ferreira2020} se propone un nuevo método de segmentación para imágenes SAR polarimétricas basado en la entropía de Shannon~\cite{Shannon1948}.   
 
 
@@ -186,6 +185,7 @@ Este proyecto tiene como objetivo general profundizar en la utilización de medi
 
 Esta propuesta de investigación tiene por objetivos específicos:
 \begin{itemize}
+	\item \textcolor{red}{Obtener expresiones explícitas de las $(h,\phi)$ entropías para el caso de la distibución $\mathcal{G}^0$}.
 	\item Implementar distintos estimadores de la entropía para el modelo $\mathcal{G}^0$ para datos de intensidad.
 	\item Evaluar la performance de estos estimadores para muestras de tamaño pequeño y moderado incluyendo el análisis bajo contaminación.
 	\item Generalizar este estudio para entropías $(h,\phi)$ como las definidas en~\cite{Menendez1997} y~\cite{Salicru1994}. 
@@ -197,37 +197,46 @@ Esta propuesta de investigación tiene por objetivos específicos:
 
 \section{Metodologías y fuentes}
 
-%%% ACF Esto no es metodología, es Introducción -> Relevancia
-Las imágenes SAR tienen muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que este tipo de imágenes resulten cada vez más populares.
+\textcolor{red}{Para alcanzar los objetivos planteados en este proyecto se propone iniciar esta investigación realizando un relevamiento de los distintos estimadores de la entropía de Shannon, un caso particular de las $(h,\phi)$ entropías, como los propuestos en~\cite{Beirlant1997,AlOmari2013,Behmardi2011} para el caso de la distribución $\mathcal{G}^0$ bajo el modelo multiplicativo.}
 
-%%% ACF Esto no es metodología, es Introducción -> Justificativa
-Sin embargo, las imágenes SAR tienen la desventaja de ser difíciles de interpretar y procesar debido a la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta en la imagen como un patrón granular. 
 
-%%% ACF Esto no es metodología, es Metodología
-Debido a la aleatoriedad y a la fuerte dispersión que puede tener la señal retrodispersada, es necesario contar con modelos estadísticos que contribuyan a una mejor extracción de información a través del desarrollo de filtros, detección de bordes, clasificación de áreas entre otras metodologías. 
+%Este proyecto se basa en la hipótesis general que consiste en considerar a las $(h,\phi)$ entropías que, combinadas con la aplicación de filtros y métodos de clasificación permitan formular nuevas metodologías para la comprensión de imágenes SAR modelados con la distribución $\mathcal{G}^0$ bajo el modelo multiplicativo.
+
+
+%Las imágenes SAR tienen muchas aplicaciones debido a sus ventajas respecto de las imágenes que provienen de sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que este tipo de imágenes resulten cada vez más populares.
+%
+%\textcolor{red}{\sout{Sin embargo, las imágenes SAR tienen la desventaja de ser difíciles de interpretar y procesar debido a la presencia del ruido speckle. Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta en la imagen como un patrón granular. }}
+%
+%Debido a la aleatoriedad y a la fuerte dispersión que puede tener la señal retrodispersada, es necesario contar con modelos estadísticos que contribuyan a una mejor extracción de información a través del desarrollo de filtros, detección de bordes, clasificación de áreas entre otras metodologías. 
 
 %El modelo multiplicativo es muy apropiado para explicar las características estadísticas de la imagen de un objeto cuando es iluminado por radiación coherente, como lo son las imágenes SAR.
 %Este modelo considera que el valor observado en cada celda de la imagen es una variable aleatoria $Z$ que resulta del producto de dos variables aleatorias independientes: una correspondiente a la retrodispersión $X$ (que es lo que observaríamos sin la presencia del ruido speckle) y la otra correspondiente al ruido speckle $Y$ (que es inherente a todo sistema de captura de imágenes con iluminación coherente).
 
-El modelo propuesto para datos provenientes de un sistema de iluminación por radiación coherente, como son los datos SAR, es un modelo multiplicativo que considera que el valor observado en cada celda de la imagen es una variable aleatoria $Z$ que resulta del producto de dos variables aleatorias independientes: una correspondiente al backscatter o retrodispersión $X$ y la otra correspondiente al ruido speckle $Y$. En los últimos años, se ha utilizado exitosamente la familia de distribuciones $\mathcal{G}^0$: $\mathcal{G}_A^0$ para datos de amplitud y $\mathcal G_I^0$ para datos de intensidad. Este modelo fue propuesto por Frery et al.~\cite{Frery97} y permite describir las áreas muy rugosas o extremadamente rugosas mejor que la distribución $\mathcal{K}$ como es presentado en \cite{Jakeman87}.
+\textcolor{red}{
+La clase de las $(h,\phi)$-entropías de una variable aleatoria $Z$ con función de densidad dada por $f_{Z}(z ; \boldsymbol{\theta})$ se definen como
+\begin{align*}
+H_{\phi}^{h}(\boldsymbol{\theta})=h\left(\int_{\mathcal{A}} \phi\left(f_{Z}(z ; \boldsymbol{\theta})\right) \mathrm{d} z\right)
+\end{align*}
+donde o bien se considera $\phi:[0, \infty) \rightarrow \mathbb{R}$ una función cóncava y $h: \mathbb{R} \rightarrow \mathbb{R}$ creciente, o $\phi$ convexa y $h$ decreciente. El cuadro~\ref{entropia} muestra algunas entropías presentadas en~\cite{Frery2019}.}
 
-El modelo multiplicativo considerado es el siguiente:
-\begin{equation*}
-Z=X \cdot Y  
-\end{equation*}
-donde $X$ e $Y$ corresponden al backscatter y al ruido speckle, respectivamente. La variable aleatoria $Y$ se modela con la distribución $\Gamma ( L,L) $, donde $L\geq 1$ es el número de looks, mientras que $X$ sigue una distribución Gamma Inversa, denotada por  $\Gamma^{-1}(-\alpha ,\gamma) $. De esta forma tenemos que $Z$, para el caso de datos de intensidad, obedece una distribución $\mathcal G_I^0$.
+\begin{table}[htb]
+	\caption{\label{entropia} $(h,\phi)$ entropías}
+	\centering
+	\renewcommand*{\arraystretch}{2}
+	\begin{tabular}{ccc} 
+		\toprule
+		$(h, \phi)$ -entropía & $h(y)$ & $\phi(x)$ \\
+		\midrule 
+		Shannon  & $y$ & $-x \ln x$ \\
+		Rényi (orden $\left.\beta \in \mathbb{R}_{+}: \beta \neq 1\right)$ & $\dfrac{\ln y}{1-\beta}$ & $x^{\beta}$ \\
+		Restricted Tsallis (orden $\left.\beta \in \mathbb{R}_{+}: \beta \neq 1\right)$ & $y$ & $\frac{x^{\beta}-x}{1-\beta}$ \\ 
+		Arimoto de orden $\beta$ & $\dfrac{\beta-1}{y^{\beta}-1}$ & $x^{1 / \beta}$ \\ \addlinespace
+		Sharma-Mittal de orden $\beta$ & $\dfrac{e^{(\beta-1) y}}{\beta-1}$ & $x \ln x$ \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
-Su función de densidad está dada por
-\begin{equation*}
-f_{\mathcal{G}_I^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
-	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
-	L) }\cdot  
-\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
-\label{ec_dens_gI0}
-\end{equation*}
-donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
-
-Bajo este modelo se pueden caracterizar regiones con diferente grado de textura a través de los parámetros de la distribución $\mathcal{G}_I^{0}$. Para valores de $\alpha$ cercanos a cero (típicamente en el intervalo $(-3,0)$), la zona de la imagen corresponde a una región muy texturada, como es el caso de las zonas urbanas en las imágenes SAR. A medida que el valor del parámetro $\alpha$ disminuye, corresponde a zonas con cada vez menos textura, como son las regiones de forestación (usualmente $(-6,-3]$) y pastura (en $(-\infty,-6)$). Por otro lado, el parámetro $\gamma$ (llamado parámetro de escala) posee una interpretación en términos del brillo. Cuanto mayor es su valor, mayor intensidad posee la imagen en esa región. Por estas razones, la estimación precisa de los parámetros, en particular el parámetro de textura, es de suma importancia en el análisis de imágenes con ruido speckle. 
+%Bajo este modelo se pueden caracterizar regiones con diferente grado de textura a través de los parámetros de esta distribución. Para valores de $\alpha$ cercanos a cero (típicamente en el intervalo $(-3,0)$), la zona de la imagen corresponde a una región muy texturada, como es el caso de las zonas urbanas en las imágenes SAR. A medida que el valor del parámetro $\alpha$ disminuye, corresponde a zonas con cada vez menos textura, como son las regiones de forestación (usualmente $(-6,-3]$) y pastura (en $(-\infty,-6)$). Por otro lado, el parámetro $\gamma$ (llamado parámetro de escala) posee una interpretación en términos del brillo. Cuanto mayor es su valor, mayor intensidad posee la imagen en esa región. Por estas razones, la estimación precisa de los parámetros, en particular el parámetro de textura, es de suma importancia en el análisis de imágenes con ruido speckle. 
 
 %En los últimos años se han propuesto varios métodos de estimación de parámetros, Vasconcellos et al.~\cite{VasconcellosFrerySilva:CompStat} cuantifican el error en la estimación del parámetro de textura para la distribución $\mathcal G_A^0$ y proponen una técnica analítica para mejorar la estimación.
 %Silva et al.~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics} proponen otro método analítico para mejorar la estimación del parámetro de textura que reduce el error cuadrático medio.
@@ -238,9 +247,27 @@ Bajo este modelo se pueden caracterizar regiones con diferente grado de textura 
 
 %Como se dijo anteriormente es importante obtener estimadores que tengan un comportamiento adecuado para muestras de pequeño y moderado tamaño tanto en sesgo, error cuadrático medio como en robustez. Tanto de los parámetros de la distribución como de los atributos de las imágenes. Esto es importante en el procesamiento de imágenes ya que muchos de los métodos de filtrado de imágenes, detección de bordes y clasificación utilizan máscaras deslizantes de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ o $11 \times 11$. 
 
-Este proyecto se basa en la hipótesis general que consiste en considerar a las $(h,\phi)$ entropías que, combinadas con la aplicación de filtros y métodos de clasificación permitan formular nuevas metodologías para la comprensión de imágenes SAR modelados con la distribución $\mathcal{G}_I^0$.
+\textcolor{red}{En  relación con el modelo multiplicativo se plantea que el retorno se modela como el producto de dos variables aleatorias independientes $X$ e $Y$, la primera corresponde al backscatter o retrodispersión y la segunda al ruido speckle. De esta forma $Z=X\cdot Y$ representa el retorno en cada pixel bajo el modelo multiplicativo.
+El ruido speckle $Y$, en formato intesidad, se modela por la distribución Gamma de parámetros $(L,L)$, donde con $L\geq 1$ es el número de looks que indica la realción señal/ruido de la imagen. El backscatter $X$ se describe por una distribución Gamma Inversa de parámetros $(-\alpha ,\gamma)$. De esta forma tenemos que $Z$ obedece una distribución $\mathcal G^0$ donde su función de densidad está dada por
+\begin{equation*}
+f_{\mathcal{G}^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
+	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+	L) }\cdot  
+\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
+\label{ec_dens_gI0}
+\end{equation*}
+donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
+}
 
-Este problema se abordará primeramente haciendo un relevamiento de los distintos estimadores de la entropía de Shannon como los propuestos en~\cite{Beirlant1997,AlOmari2013,Behmardi2011}. Teniendo en cuenta la expresión explícita de esta medida dada en Ferrerira et al.~\cite{Ferreira2020} para el caso de la función de densidad $\mathcal{G}_I^0$ y, combinando con los resultados obtenidos en Cassetti et al.~\cite{Cassetti2020} en cuanto a la estimación del parámetro de textura, se implementarán estos estimadores y se estudiará la performance de los mismos a través de simulaciones Montecarlo donde se:
+\textcolor{red}{
+Los momentos de orden $r$ están expresados por
+\begin{equation*}
+E\left(Z^{r}\right)=\left(\frac{\gamma}{L}\right)^{r} \frac{\Gamma(-\alpha-r)}{\Gamma(-\alpha)} \frac{\Gamma(L+r)}{\Gamma(L)}
+\end{equation*}
+y son finitos si $\alpha<-r$. Condición que se tiene en cuenta al momento de hacer el estudio.
+}
+
+ Teniendo en cuenta la expresión explícita de la entropía de Shannon dada en Ferrerira et al.~\cite{Ferreira2020} para el caso de la función de densidad $\mathcal{G}^0$ y, combinando con los resultados obtenidos en Cassetti et al.~\cite{Cassetti2020} en cuanto a la estimación del parámetro de textura, se implementarán estos estimadores y se estudiará la performance de los mismos a través de simulaciones Montecarlo donde se:
 \begin{itemize}
 	\item Considerará un espacio paramétrico que contemple distintas texturas, distintos números de looks y tamaño de muestra.
 	\item Estudiará el sesgo, error cuadrático medio de los mismos.
@@ -248,23 +275,7 @@ Este problema se abordará primeramente haciendo un relevamiento de los distinto
 	\item Evaluará su costo computacional.
 \end{itemize} 
 
-Se extenderá este estudio a otras entropías definidas dentro de la familia $(h,\phi)$ como las que se presentan en~\cite{Frery2019} dadas en el cuadro~\ref{entropia}.
-
-
-\begin{table}[htb]
-	\caption{\label{entropia} $(h-\phi)$ entropías}
-	\begin{center}
-		\begin{tabular}{ccc} 
-			\hline$(h, \phi)$ -entropía & $h(y)$ & $\phi(x)$ \\
-			\hline Shannon  & $y$ & $-x \ln x$ \\
-			Restricted Tsallis (orden $\left.\beta \in \mathbb{R}_{+}: \beta \neq 1\right)$ & $y$ & $\frac{x^{\beta}-x}{1-\beta}$ \\
-			Rényi (orden $\left.\beta \in \mathbb{R}_{+}: \beta \neq 1\right)$ & $\frac{\ln y}{1-\beta}$ & $x^{\beta}$ \\
-			Arimoto de orden $\beta$ & $\frac{\beta-1}{y^{\beta}-1}$ & $x^{1 / \beta}$ \\
-			Sharma-Mittal de orden $\beta$ & $\frac{\exp \{(\beta-1) y\}}{\beta-1}$ & $x \ln x$ \\
-			\hline
-		\end{tabular}
-	\end{center}
-\end{table}
+%Se extenderá este estudio a otras entropías definidas dentro de la familia $(h,\phi)$ como las que se presentan en dadas en el cuadro~\ref{entropia}.
 
 Un segundo paso es el diseño e implementación de nuevos procedimientos robustos para reducir la presencia del ruido speckle como, por ejemplo, los filtros NLM. En esta clase de filtros el valor del píxel estimado se obtiene como un promedio ponderado donde el peso de cada píxel en la imagen original es proporcional a una medida de similitud entre los píxeles que se encuentran en
 un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes a un entorno ($E_2$) de los alrededores de $E_1$. La figura~\ref{NLM} tomada de Penna et al.~\cite{Penna2013} muestra un esquema del funcionamiento de este algoritmo. 
@@ -278,14 +289,14 @@ un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes a un e
 
 Se utilizarán los resultados obtenidos del estudio y análisis de los diferentes estimadores de la entropía para proponer una medida de similitud entre píxeles. Se comparará el desempeño de esta propuesta con las que existen en la literatura a través de diferentes medidas como las que se indican en~\cite{Frery2019}.
 
-Asimismo, algoritmos de clasificación serán estudiados para generar mapas temáticos de imágenes SAR utilizando medidas de disimilaridad en combinación con métodos de filtrado. Estos algoritmos serán comparados con los existentes en la literatura a través de diferentes indicadores como los son el índice Kappa y la matriz de confusión.
+Asimismo, algoritmos de clasificación tanto supervisados como no supervisados, serán estudiados para generar mapas temáticos de imágenes SAR utilizando medidas de disimilaridad en combinación con métodos de filtrado. Estos algoritmos serán comparados con los existentes en la literatura a través de diferentes indicadores como los son el índice Kappa y la matriz de confusión.
 
 La efectividad de todos estos procedimientos será evaluada aplicándolos a imágenes reales.
 
 Como resultado de esta investigación se espera:
 \begin{enumerate}
-	\item Proponer métodos de estimación de entropías para la distribución $\mathcal{G}_I^0$ que sean robustos ante desvíos del modelo teórico.
-	\item Implementar rutinas de estimación de entropías para la distribución $\mathcal{G}_I^0$.
+	\item Proponer métodos de estimación de entropías para la distribución $\mathcal{G}^0$ que sean robustos ante desvíos del modelo teórico.
+	\item Implementar rutinas de estimación de entropías para la distribución $\mathcal{G}^0$.
 	\item Proponer métodos de filtrado de la clase NLM utilizando medidas de entropía en imágenes SAR con datos de intensidad.
 	\item Implementar y generar rutinas para la aplicación de los métodos de filtrado propuestos.
 	\item Desarrollar métodos de clasificación de imágenes SAR utilizando medidas de entropía como atributo para clasificar.
@@ -301,7 +312,7 @@ Como resultado de esta investigación se espera:
 %los par´ametros que sean robustos, implementaci´on computacional de los mismos
 %y aplicaci´on a im´agenes sint´eticas y reales. Luego, medir el error que se comete
 %al aplicarlos y comparar con diferentes m´etodos ya existentes en la literatura.
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{../../Bibliography/bib_julia2}
 
 
