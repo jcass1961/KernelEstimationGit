@@ -11,6 +11,7 @@
 \usepackage[normalem]{ulem} %%%% para tachar texto
 \usepackage{setspace} %% interlineado
 \usepackage{float}
+\usepackage{multirow}
 \usepackage{booktabs}
 
 \onehalfspacing
@@ -40,13 +41,19 @@
 \section{Resumen}
 La utilización de conceptos relacionados con la teoría de la información combinados con técnicas estadísticas, aplicados al procesamiento de imágenes y señales ha ganado mucho espacio en los últimos tiempos. Medidas de discriminación estocástica como son las $(h,\phi)$ divergencias y las $(h,\phi)$ entropías han sido aplicadas al problema de estimación de parámetros, detección automática de bordes y medidas de contraste entre otras aplicaciones. 
 
-En particular las imágenes adquiridas con radares de apertura sintética (SAR) se han visto beneficiadas con la utilización de estas medidas en su análisis e interpretación. Estas imágenes han cobrado mucha importancia porque pueden operar en forma independiente de las condiciones climáticas y de la luz solar. Sin embargo son muy ruidosas debido a la presencia del ruido speckle que es característico de tecnologías que emplean sistemas de iluminación coherente como el laser, microondas, ultrasonido entre otras. Este ruido causa un patrón granular que dificulta el análisis e interpretación de estas imágenes, y puede conducir a una reducción en la precisión de los algoritmos de clasificación y de segmentación. 
+\textcolor{red}{Este proyecto se propone estudiar la eficacia que tienen las medidas de divergencia propuestas asociadas tanto a imágenes provenientes de radares de apertura sintética (SAR) en el contexto del diseño de nuevos métodos de filtrado y de clasificación, como al análisis estadístico de características estelares estudiando la distribución de la velocidad de rotación de ciertos grupos de estrellas. }
 
-En este contexto la elección de un modelo adecuado para describir datos SAR juega un papel importante al momento de implementar algoritmos de clasificación y segmentación. En los últimos años se ha utilizado exitosamente la familia de distribuciones $\mathcal{G}^0$ debido a su flexibilidad para describir zonas con diferente grado de textura.  
- 
-Este proyecto tiene como objetivo el desarrollo de nuevos métodos de clasificación y de filtrado de imágenes basados en el modelo $\mathcal{G}_0$ y en medidas que provienen de la teoría de la información como son las $(h,\phi)$ entropías. Asimismo se desarrollarán nuevos métodos de filtrado que permitan la reducción del ruido presente en este tipo de imágenes, con el fin de mejorar los procedimientos de clasificación y segmentación de imágenes.
 
-Esta propuesta se abordará  estudiando la eficacia que tienen las medidas de divergencia propuestas asociadas a una imagen SAR en el contexto del diseño de nuevos métodos de filtrado y de clasificación.
+\textcolor{red}{Las imágenes SAR son muy ruidosas debido a la presencia del ruido speckle que es característico de tecnologías que emplean sistemas de iluminación coherente como el laser, microondas, ultrasonido entre otras. Este ruido causa un patrón granular que dificulta el análisis e interpretación de estas imágenes, y puede conducir a una reducción en la precisión de los algoritmos de clasificación y de segmentación. }
+\textcolor{red}{
+En este contexto se analizarán y llevarán adelante estrategias que incluyan la aplicación de estas medidas en el diseño e implementación de nuevos algoritmos de clasificación y de filtrado de este tipo de imágenes. Como resultado de este estudio se implementarán rutinas computacionales que puedan ser utilizadas en la aplicación a imágenes reales.}
+\textcolor{red}{
+Asimismo, este proyecto estudiará la factibilidad de utilizar estas medidas en astroestadística,  dado que la estimación de funciones de distribución de características estelares como la clasificación de espectrogramas es un problema de interés en la actualidad. }
+
+
+
+%Esta propuesta se abordará  estudiando la eficacia que tienen las medidas de divergencia propuestas asociadas a una imagen SAR en el contexto del diseño de nuevos métodos de filtrado y de clasificación. 
+
 
 
 \section{Estado del arte}
@@ -61,14 +68,14 @@ El problema de clasificación de una zona de una superficie terrestre en clases 
 Por este motivo el desarrollo de algoritmos de clasificación y de interpretación automática de imágenes cobra vital importancia  ya que permite determinar áreas en la imagen con características comunes  y producir un mapa temático de la región. 
 
 %Los algoritmos de clasificación pueden dividirse en no supervisados y supervisados. En los primeros no se necesita que el algoritmo interactúe con el usuario ya que éste realiza una búsqueda automática de grupos con características semejantes dentro de la imagen. Los segundos requieren de muestras de entrenamiento definidas por el usuario donde se conoce la clase a la cual pertenecen. Estas muestras serán utilizadas para asignar píxeles con clasificación desconocida. En ambos algoritmos la extracción de características que permitan una clasificación precisa juega un rol de suma importancia.
-\textcolor{red}{Las imágenes adquiridas con radares de apertura sintética (SAR) juegan un papel preponderante en el sensado remoto debido a sus ventajas respecto de las adquiridas por sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que resulten cada vez más populares. }
-\textcolor{red}{
-En particular, en Argentina la Comisión Nacional de Actividades Espaciales y el INVAP junto con otras agencias internacionales, forman parte de la misión SAOCOM. Esta misión consiste en la puesta en órbita de satélites equipados con tecnología para adquirir imágenes SAR con el objetivo de medir de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. }
+Las imágenes adquiridas con radares de apertura sintética (SAR) juegan un papel preponderante en el sensado remoto debido a sus ventajas respecto de las adquiridas por sensores ópticos. La independencia de las condiciones climáticas y de la iluminación junto con la capacidad de penetrar la nubes, las copas de los árboles e incluso el suelo, han contribuido para que resulten cada vez más populares. 
 
-\textcolor{red}{
+En particular, en Argentina la Comisión Nacional de Actividades Espaciales y el INVAP junto con otras agencias internacionales, forman parte de la misión SAOCOM. Esta misión consiste en la puesta en órbita de satélites equipados con tecnología para adquirir imágenes SAR con el objetivo de medir de la humedad del suelo, detectar derrames de hidrocarburos en el mar y el seguimiento de la cobertura de agua en las inundaciones. 
+
+
 Sin embargo, este tipo de imágenes tiene la desventaja de ser difícil de interpretar y procesar por la presencia del ruido speckle. 
 Este ruido es inherente al proceso de captura de la imagen y se hace presente debido a la superposición coherente de las ondas reflejadas por muchos dispersores. Esto causa una variación en la intensidad píxel a píxel que se manifiesta en la imagen como un patrón granular que dificulta su análisis e interpretación. 
-Por este motivo la utilización de modelos estadísticos y el desarrollo de nuevos métodos de clasificación, de filtrado y de interpretación automática de imágenes SAR se convierte en una herramienta esencial para describir y analizar este tipo de datos.}
+Por este motivo la utilización de modelos estadísticos y el desarrollo de nuevos métodos de clasificación, de filtrado y de interpretación automática de imágenes SAR se convierte en una herramienta esencial para describir y analizar este tipo de datos.
 
 En particular, destacamos que las imágenes SAR son sensibles a las características dieléctricas y a la textura del blanco.
 
@@ -176,10 +183,21 @@ Esta idea fue tomada por Santos et al.~\cite{Santos2017} y los autores la aplica
 Xue et al.~\cite{Xue2013} reemplazan a la función de peso en el algoritmo NLM original por una combinación lineal de funciones cosenos obteniendo un algoritmo más rápido. 
 Un nuevo filtro basado en distancias estocásticas y test entre funciones de distribución fue propuesto por Torres et al.~\cite{Torres2012} para datos SAR de intensidad.
 
-El escenario planteado deja abierta la posibilidad de proponer distintas características de la imagen que sirvan de input para los algoritmos. En este proyecto se estudiará la capacidad que tienen las medidas que provienen de la teoría de la información como atributos de una imagen SAR en el contexto del diseño de nuevos métodos de filtrado y de clasificación de imágenes SAR.
+El escenario planteado deja abierta la posibilidad de proponer distintas características de la imagen que sirvan de input para los algoritmos. Este proyecto propone estudiar la capacidad que tienen las medidas que provienen de la teoría de la información en la construcción de metodologías que puedan ser aplicadas tanto en la segmentación y clasificación de imágenes SAR, como en el diseño de nuevos métodos de filtrado.
 
 
-%Este proyecto propone estudiar la capacidad que tienen las medidas que provienen de la teoría de la información en la construcción de metodologías que puedan ser aplicadas tanto en la segmentación y clasificación de imágenes SAR como en el diseño de nuevos métodos de filtrado.
+%
+%En este proyecto se estudiará la capacidad que tienen las medidas que provienen de la teoría de la información como atributos de una imagen SAR en el contexto del diseño de nuevos métodos de filtrado y de clasificación de imágenes SAR.
+
+%\textcolor{red}{En algunos problemas de astroestadística se intenta hallar la función de densidad de una variable aleatoria $V$ desconocida a partir de una variable observada $Y$. Como ejemplo de esto se puede considerar a $V$ como la velocidad de rotación de las estrellas e $Y$ la proyección de la velocidad de rotación respecto  del eje de visión. Estas variables se relacionan a través de un modelo multiplicativo donde se plantea que $Y = V\cdot S$, siendo la distribución de $S$ perteneciente a una familia paramétrica conocida. Encontrar la función de densidad de $V$ se enmarca dentro de una importante clase importante de problemas denominados problemas de inversos, que tienen mucha aplicación en la astronomía como se presenta en el trabajo de Lucy~\cite{Lucy1994}. En Jorissen et al.~\cite{Jorissen2001} se presenta el modelo multiplicativo para la distribución de la masa en exoplanetas. En Curé et al.~\cite{Cure2014,Cure2015} los autores presentan un método para obtener la función de distribución acumulada de la velocidad de rotación de las estrellas y la del cociente de masas de estrellas binarias respectivamente, bajo el modelo multiplicativo. }
+%
+%\textcolor{red}{
+%En la gran mayoría de los trabajos de la distribución de velocidades de rotación estelar se supone distribución uniforme de los ejes de rotación de las estrellas (similar suposición para sistemas binarios). Si bien esta hipótesis es ampliamente aceptada, algunos autores~\cite{Silva_2013, Rees2013} han puesto en duda este supuesto, como por ejemplo, cuando los ángulos de inclinación corresponden a estrellas en un cúmulo, debido a que los torques gravitacionales entre los miembros del cúmulo modifican la dirección de los ejes de rotación. Por lo tanto, es de interés estimar la función de densidad de la velocidad de rotación estelar bajo la suposición de una distribución de ejes de rotación no uniforme sobre la esfera.}
+%
+%\textcolor{red}{
+%Tanto en el problema del modelo multiplicativo como en el análisis de espectrogramas, la variable de interés aparece en una ecuación de convolución. En esta propuesta se propondrán métodos basados en la minimización de distancias estocásticas como los utilizados en Cassetti et al.~\cite{Cassetti2020} con el objetivo de resolver el problema inverso para encontrar la función de densidad de la velocidad de rotación estelar.}
+
+
 
 \section{Objetivos generales}
 
@@ -192,14 +210,17 @@ El escenario planteado deja abierta la posibilidad de proponer distintas caracte
 %contornos de regiones muy bien definidos, lo que mejorar´ıa en gran medida la
 %interpretaci´on autom´atica de la misma.
 
+%Este proyecto tiene como objetivo general profundizar en la utilización de medidas de \textcolor{red}{discriminación estocástica} que provienen de la teoría de la información que permitan tanto el desarrollo de nuevos métodos de clasificación basados en propiedades estadísticas del modelo considerado, como la implementación de nuevos métodos de filtrado  de imágenes para la reducción del ruido speckle.
 
-Este proyecto tiene como objetivo general profundizar en la utilización de medidas de disimilaridad que provienen de la teoría de la información que permitan tanto el desarrollo de nuevos métodos de clasificación basados en propiedades estadísticas del modelo considerado, como la implementación de nuevos métodos de filtrado de imágenes para la reducción del ruido speckle.
+
+\textcolor{red}{Este proyecto tiene como objetivo general profundizar en la utilización de medidas de discriminación estocástica que provienen de la teoría de la información en el procesamiento de imágenes y señales, con el fin de proponer modelos y técnicas estadísticas que describan los datos adecuadamente. Estas medidas junto con métodos de clasificación, de filtrado y de estimación de parámetros contribuirían a mejorar la interpretación de las imágenes y señales estudiadas.}
+
 
 \section{Objetivos específicos}
 
 Esta propuesta de investigación tiene por objetivos específicos:
 \begin{itemize}
-	\item \textcolor{red}{Obtener expresiones explícitas de las $(h,\phi)$ entropías para el caso de la distibución $\mathcal{G}^0$}.
+	\item Obtener expresiones explícitas de las $(h,\phi)$ entropías para el caso de la distibución $\mathcal{G}^0$.
 	\item Implementar distintos estimadores de la entropía para el modelo $\mathcal{G}^0$ para datos de intensidad.
 	\item Evaluar la performance de estos estimadores para muestras de tamaño pequeño y moderado incluyendo el análisis bajo contaminación.
 	\item Generalizar este estudio para entropías $(h,\phi)$ como las definidas en~\cite{Menendez1997} y~\cite{Salicru1994}. 
@@ -211,7 +232,7 @@ Esta propuesta de investigación tiene por objetivos específicos:
 
 \section{Metodologías y fuentes}
 
-\textcolor{red}{Para alcanzar los objetivos planteados en este proyecto se propone iniciar esta investigación realizando un relevamiento de los distintos estimadores de la entropía de Shannon, un caso particular de las $(h,\phi)$ entropías, como los propuestos en~\cite{Beirlant1997,AlOmari2013,Behmardi2011} para el caso de la distribución $\mathcal{G}^0$ bajo el modelo multiplicativo.}
+Para alcanzar los objetivos planteados en este proyecto se propone iniciar esta investigación realizando un relevamiento de los distintos estimadores de la entropía de Shannon, un caso particular de las $(h,\phi)$ entropías, como los propuestos en~\cite{Beirlant1997,AlOmari2013,Behmardi2011} para el caso de la distribución $\mathcal{G}^0$ bajo el modelo multiplicativo.
 
 
 %Este proyecto se basa en la hipótesis general que consiste en considerar a las $(h,\phi)$ entropías que, combinadas con la aplicación de filtros y métodos de clasificación permitan formular nuevas metodologías para la comprensión de imágenes SAR modelados con la distribución $\mathcal{G}^0$ bajo el modelo multiplicativo.
@@ -226,13 +247,12 @@ Esta propuesta de investigación tiene por objetivos específicos:
 %El modelo multiplicativo es muy apropiado para explicar las características estadísticas de la imagen de un objeto cuando es iluminado por radiación coherente, como lo son las imágenes SAR.
 %Este modelo considera que el valor observado en cada celda de la imagen es una variable aleatoria $Z$ que resulta del producto de dos variables aleatorias independientes: una correspondiente a la retrodispersión $X$ (que es lo que observaríamos sin la presencia del ruido speckle) y la otra correspondiente al ruido speckle $Y$ (que es inherente a todo sistema de captura de imágenes con iluminación coherente).
 
-\textcolor{red}{
 La clase de las $(h,\phi)$-entropías de una variable aleatoria $Z$ con función de densidad dada por $f_{Z}(z ; \boldsymbol{\theta})$ se definen como
 \begin{align*}
 H_{\phi}^{h}(\boldsymbol{\theta})=h\left(\int_{\mathcal{A}} \phi\left(f_{Z}(z ; \boldsymbol{\theta})\right) \mathrm{d} z\right),
 \end{align*}
 donde o bien se considera $\phi\colon [0, \infty) \rightarrow \mathbb{R}$ una función cóncava y $h\colon \mathbb{R} \rightarrow \mathbb{R}$ creciente, o $\phi$ convexa y $h$ decreciente. 
-El cuadro~\ref{entropia} muestra algunas entropías presentadas en~\cite{Frery2019}.}
+El cuadro~\ref{entropia} muestra algunas entropías presentadas en~\cite{Frery2019}.
 
 \begin{table}[htb]
 	\caption{\label{entropia} $(h,\phi)$ entropías}
@@ -262,11 +282,11 @@ El cuadro~\ref{entropia} muestra algunas entropías presentadas en~\cite{Frery20
 
 %Como se dijo anteriormente es importante obtener estimadores que tengan un comportamiento adecuado para muestras de pequeño y moderado tamaño tanto en sesgo, error cuadrático medio como en robustez. Tanto de los parámetros de la distribución como de los atributos de las imágenes. Esto es importante en el procesamiento de imágenes ya que muchos de los métodos de filtrado de imágenes, detección de bordes y clasificación utilizan máscaras deslizantes de tamaño $3 \times 3$,  $5 \times 5$, $7 \times 7$, $9 \times 9$ o $11 \times 11$. 
 
-\textcolor{red}{En  relación con el modelo multiplicativo se plantea que el retorno se modela como el producto de dos variables aleatorias independientes $X$ e $Y$, la primera corresponde al backscatter o retrodispersión y la segunda al ruido speckle. 
+En  relación con el modelo multiplicativo se plantea que el retorno se modela como el producto de dos variables aleatorias independientes $X$ e $Y$, la primera corresponde al backscatter o retrodispersión y la segunda al ruido speckle. 
 De esta forma $Z=X\cdot Y$ representa el retorno en cada pixel bajo el modelo multiplicativo.
 El ruido speckle $Y$, en formato intesidad, se modela por la distribución gama de media unitaria y parámetros $(L,L)$, donde con $L\geq 1$ es el número de looks que indica la relación señal/ruido de la imagen. 
 El backscatter $X$ se describe por una distribución gama Inversa de parámetros $(-\alpha ,\gamma)$. 
-De esta forma tenemos que $Z$ obedece una distribución $\mathcal G^0$ con función de densidad 	dada por
+De esta forma tenemos que $Z$ obedece a una distribución $\mathcal G^0$ con función de densidad 	dada por
 \begin{equation*}
 f_{\mathcal{G}^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 	) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
@@ -275,15 +295,13 @@ f_{\mathcal{G}^{0}}( z) =\frac{L^{L}\Gamma ( L-\alpha
 \label{ec_dens_gI0}
 \end{equation*}
 donde $-\alpha,\gamma ,z>0$ y $L\geq 1$.
-}
 
-\textcolor{red}{
 Los momentos de orden $r$ están expresados por
 \begin{equation*}
 E\left(Z^{r}\right)=\left(\frac{\gamma}{L}\right)^{r} \frac{\Gamma(-\alpha-r)}{\Gamma(-\alpha)} \frac{\Gamma(L+r)}{\Gamma(L)}
 \end{equation*}
 y son finitos si $\alpha<-r$. Condición que se tiene en cuenta al momento de hacer el estudio.
-}
+
 
  Teniendo en cuenta la expresión explícita de la entropía de Shannon dada en Ferrerira et al.~\cite{Ferreira2020} para el caso de la función de densidad $\mathcal{G}^0$ y, combinando con los resultados obtenidos en Cassetti et al.~\cite{Cassetti2020} en cuanto a la estimación del parámetro de textura, se implementarán estos estimadores y se estudiará la performance de los mismos a través de simulaciones Montecarlo donde se:
 \begin{itemize}
@@ -295,7 +313,7 @@ y son finitos si $\alpha<-r$. Condición que se tiene en cuenta al momento de ha
 
 %Se extenderá este estudio a otras entropías definidas dentro de la familia $(h,\phi)$ como las que se presentan en dadas en el cuadro~\ref{entropia}.
 
-Un segundo paso es el diseño e implementación de nuevos procedimientos robustos para reducir la presencia del ruido speckle como, por ejemplo, los filtros NLM. En esta clase de filtros el valor del píxel estimado se obtiene como un promedio ponderado donde el peso de cada píxel en la imagen original es proporcional a una medida de similitud entre los píxeles que se encuentran en
+Un segundo paso es el diseño e implementación de nuevos procedimientos robustos para reducir la presencia del ruido speckle como, por ejemplo, los filtros NLM. En esta clase de filtros el valor del píxel estimado se obtiene como un promedio ponderado donde el peso de cada píxel en la imagen original es proporcional a una medida de similaridad entre los píxeles que se encuentran en
 un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes a un entorno ($E_2$) de los alrededores de $E_1$. La figura~\ref{NLM} tomada de Penna et al.~\cite{Penna2013} muestra un esquema del funcionamiento de este algoritmo. 
 
 \begin{figure}[hbt]
@@ -305,23 +323,167 @@ un entorno ($E_1$) del píxel de referencia y los píxeles pertenecientes a un e
 	\caption{Funcionamiento del algoritmo NLM}
 \end{figure}
 
-Se utilizarán los resultados obtenidos del estudio y análisis de los diferentes estimadores de la entropía para proponer una medida de similitud entre píxeles. Se comparará el desempeño de esta propuesta con las que existen en la literatura a través de diferentes medidas como las que se indican en~\cite{Frery2019}.
+Se utilizarán los resultados obtenidos del estudio y análisis de los diferentes estimadores de la entropía para proponer una medida de similaridad entre píxeles. Se comparará el desempeño de esta propuesta con las que existen en la literatura a través de diferentes medidas como las que se indican en~\cite{Frery2019}.
 
-Asimismo, serán estudiados algoritmos de clasificación tanto supervisados como no supervisados, para generar mapas temáticos de imágenes SAR utilizando medidas de \textcolor{red}{disimilaridad} en combinación con métodos de filtrado. 
+Asimismo, serán estudiados algoritmos de clasificación tanto supervisados como no supervisados, para generar mapas temáticos de imágenes SAR utilizando medidas de disimilaridad en combinación con métodos de filtrado. 
 Estos algoritmos serán comparados con los existentes en la literatura a través de diferentes indicadores como los son el índice Kappa y la matriz de confusión.
 
 La efectividad de todos estos procedimientos será evaluada aplicándolos a imágenes reales.
 
+%\textcolor{red}{
+%En cuanto a la aplicación de estas medidas a problemas de deconvolución en astroestadística, el problema que se quiere abordar puede ser formulado de la siguiente forma:
+%Sea $V$ una variable aleatoria continua con función de densidad dada por $f_{V}$ desconocida. Sea $Y=V . S$ donde $S$ es una variable aleatoria con distribución conocida. Se quiere conocer la distribución de la variable aleatoria $V$ a partir de una muestra de la variable aleatoria $Y$. A partir del teorema del cambio de variables y de la suposición de independencia entre $\mathrm{V}$ y $\mathrm{S}$, se obtiene una expresión que relaciona las densidades de las variables involucradas:
+%}
+%\begin{align}
+%\label{Fredholm}
+%f_{Y}(y)=\int_{y}^{\infty} \dfrac{1}{v} f_{S}(y \vert v) f_{V}(v) d v
+%\end{align}
+%
+%Si llamamos $p(y \vert v)=\dfrac{1}{v} f_{S}(y \vert v)$ se obtiene una ecuación integral de Fredholm de primera especie siendo $p(y \vert v)$ el kernel de la integral.
+%Si se supone que $V$ es la velocidad de rotación estelar y $S=\sin i$ donde $i$ es el ángulo de inclinación respecto a la línea de visión, por~\eqref{Fredholm} se obtiene una ecuación que relaciona la distribución de las velocidades proyectadas con la distribución de las velocidades verdaderas.
+%
+%En los últimos tiempos la suposición de que los ejes no se distribuyen uniformemente sobre la esfera está en discusión como es el caso de los cúmulos estelares.
+%En estas situaciones es razonable considerar la suposición de correlación entre los ejes de rotación, es decir suponer que los ejes de rotación se distribuyen con una dirección preferencial.
+%
+%En este sentido la propuesta de este proyecto es generalizar la integral de Fredholm de la ecuación~\eqref{Fredholm}, asumiendo que los ejes de rotación estelar distribuyen con una función $\mathrm{H}$. De esta forma~\eqref{Fredholm} queda expresado como
+%\begin{align}
+%f_{Y}(y)=\int_{y}^{\infty}\dfrac{1}{x} H\left(\sqrt{1-y^{2} / x^{2}}\right) \frac{y}{\sqrt{x^{2}-y^{2}}} f_{X}(x) d y.
+%\end{align}
+%La función de distribución $\mathrm{H}$ modela la distribución de los ejes de rotación, que tiene como caso particular a~\eqref{Fredholm} cuando $\mathrm{H}=1$, correspondiendo a la distribución uniforme de ejes. 
+%
+%En esta generalización se aboradará el problema desde un punto de vista paramétrico considerando conocido el modelo para las velocidades de rotación estelar y se analizarán varias situaciones:
+%\begin{itemize}
+%	\item En una primera aproximación se asumirá que las velocidades de rotación estelar están descritas por una distribución Maxwelliana de parámetro $\lambda$, modelo ampliamente utilizado en la literatura.
+%	\item En una segunda instancia se considerará a las distribuciones de Kaniadakis$(k)$ y Tsallis$(q)$~\cite{Carvalho2009}, ya que éstas ajustan bien a la distribución de velocidades bajo el supuesto de uniformidad.
+%\end{itemize} 
+%
+%Por otro lado se propone modelar a la distribución de los ejes de rotación como una distribución $Beta(\alpha,\beta)$ porque incluye tanto el caso uniforme como el de pequeñas perturbaciones respecto de una dirección privilegiada y tiene como caso particular al caso uniforme. 
+%
+%Con estas consideraciones los parámetros estimados del modelo se obtendrían a través de la minimización de una distancia estocástica entre lo derivado de la convolución y un estimador por núcleos de la función de densidad de las velocidades proyectadas observadas.
+\textcolor{red}{
+En muchos problemas de astrofísica se intenta hallar la distribución de una variable aleatoria $X$ a partir de una variable observada $Y$ relacionada de la forma $Y = S\,X$, donde la distribución de $S$ pertenece
+a una familia paramétrica conocida. Esta clase de problemas, conocida como problemas inversos, son ampliamente utilizados en astroestadística como se indica en el trabajo de Lucy~\cite{Lucy1994}. La distribución de la masa en exoplanetas~\cite{Jorissen2001},  de la velocidad de rotación de las estrellas y del cociente de masas de estrellas binarias~\cite{Cure2014,Cure2015} son ejemplos de aplicación de este modelo.
+}
+
+\textcolor{red}{
+En lineas generales, los métodos utilizados para abordar este problema se basan en la minimización de la distancia entre una estimación de la función de densidad $f_{Y}$ observada y la $f_{Y}$ derivada del modelo. 
+En este proyecto se propone analizar la eficiencia de estas distancias estocásticas a través de simulaciones MonteCarlo. En una segunda instancia se aplicarán estos métodos a problemas con datos reales.
+}
+%se propone minimizar la distancia de la $Y$ observada y la obtenida por el algoritmo.
+%Se propone analizar la eficiencia de distancias estocásticas en comparación a los métodos usuales y proponer métodos óptimos
+%\begin{itemize}
+%	\item Simular distribuciones de $X$ aplicar los algoritmos de minimización y comparar los resultados.
+%	\item Aplicar dichos métodos a problemas reales y comparar con los métodos estándar.
+%\end{itemize}
+% 
+
+
+%Cabe señalar que la ecuación~\eqref{Fredholm} se puede llevar (vía discretización) a una forma matricial del tipo:
+%\begin{align}
+%Z=A . T
+%\end{align}
+%
+%en donde $Z$ representa a la función de densidad de los datos observados $f_{Y},$ mientras que $A$ representa al término $p(y \vert v)$ y T representa a la función de densidad de las velocidades de rotación estelar $f_{V}$. Matemáticamente la ecuación (1) representa un problema mal planteado (ill-possed problem), en donde pequeños errores de medición pueden producir grandes variaciones en los datos recuperados entregando resultados inestables .
+%
+%En lineas generales, los métodos buscan la distribución $F_{X}$ tal que la distancia de $F_{y}$ a la distribución observada
+%sea mínima. Las distancias consideradas en general son variaciones de mínimos cuadrados.
+%En los métodos propuestos se busca minimizar la distancia de la $Y$ observada y la obtenida por el algoritmo.
+%Se propone analizar la eficiencia de distancias estocásticas en comparación a los métodos usuales y proponer métodos óptimos
+%\begin{itemize}
+%	\item Simular distribuciones de $X$ aplicar los algoritmos de minimización y comparar los resultados.
+%	\item Aplicar dichos métodos a problemas reales y comparar con los métodos estándar.
+%\end{itemize}
+
+
+\section{Actividades y cronograma}
+
+\subsection{Actividades}
+
+Para alcanzar los objetivos planteados se proponen las siguientes actividades:
+\begin{enumerate}
+	\item Realizar un relevamiento de trabajos de investigación de estimadores de la entropía de Shannon, en particular aplicados a imágenes SAR.
+	\item Implementar diferentes estimadores de la entropía de Shannon de la distribución $\mathcal{G}^{0}$ de acuerdo al relevamiento realizado en el item anterior. Producción de rutinas.
+	\item Evaluar, a través de simulaciones MonteCarlo y estudiando el sesgo y error cuadrático medio, el desempeño de estos estimadores para diferentes combinaciones de los parámetros de la distribución $\mathcal{G}^{0}$, consideraránerando distintos tamaños de muestra y su robustez.
+	%\item Evaluar la resistencia a la contaminación por corner reflector de los estimadores 	propuestos utilizando técnicas de MonteCarlo.
+	\item \textcolor{red}{Estudiar el desempeño que tienen diferentes distancias estocásticas en la estimación de parámetros de la distribución de la velocidad de rotación de estrellas bajo el modelo multiplicativo.}
+	\item Encontrar expresiones explícitas de diferentes entropías de la distribución $\mathcal{G}^{0}$.
+	\item Extender el estudio realizado en los ítems 1) a 4) para diferentes entropías.
+	\item Realizar un relevamiento de trabajos de investigación que traten del diseño, implementación y aplicaciones de filtros del tipo NLM en imágenes SAR.
+	\item Proponer e implementar nuevos métodos de filtrado de imágene SAR del tipo NLM considerando a las diferentes entropías  como medida de distancia. Producción de rutinas.
+	%\item Implementar estos filtros NLM considerando a las diferentes entropías  como medida de distancia. Producción de rutinas.
+	\item Evaluar el desempeño de estos filtros tanto en imágenes simuladas como en reales  y compararlos con otros filtros existentes en la literatura.
+	\item Realizar un relevamiento de trabajos de investigación que contemple el diseño e implementación de algoritmos de clasificación utilizando distintos atributos de las imágenes SAR.
+	\item Proponer e implementar nuevos métodos de clasificación, con y sin la utilización de filtros, en imágenes sintéticas y reales. Evaluación de la performance de estos métodos y producción de rutinas.
+	\item Documentación y publicación de resultados.
+	
+\end{enumerate}
+
+\subsection{Cronograma}
+El cronograma de trabajo se muestra en los siguientes cuadros:
+
+\begin{table}[htb]
+	\caption{\label{entropia} Cronograma de actividades del Año 2021}
+	\centering
+	\renewcommand*{\arraystretch}{2}
+\begin{tabular}{ccccccccccccc}
+	\toprule
+	\multirow{2}{*} {Actividades} & \multicolumn{12}{c} { Meses  } \\
+	\cmidrule(){2-13}
+	& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+	\midrule
+	  1-4 & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & & & & & & & \\
+	\hline 
+	5, 6  & & & & $\mathrm{x}$& $\mathrm{x}$ & $\mathrm{x}$  & $\mathrm{x}$ & $\mathrm{x}$ &  & & & \\
+	\hline 12 & & & & & & & & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ \\
+	\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[htb]
+	\caption{\label{entropia} Cronograma de actividades del Año 2022}
+	\centering
+	\renewcommand*{\arraystretch}{2}
+	\begin{tabular}{ccccccccccccc}
+		\toprule
+		\multirow{2}{*} {Actividades} & \multicolumn{12}{c} { Meses  } \\
+		\cmidrule(){2-13}
+		& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+		\midrule
+		7, 8 y 9 & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ &  &  & & & & & & & \\
+		\hline 
+		10 y 11  & & & & $\mathrm{x}$& $\mathrm{x}$ & $\mathrm{x}$  & $\mathrm{x}$ &  &  & & & \\
+		\hline 12 & & & & & & & & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ & $\mathrm{x}$ \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Contribuciones}
+
 Como resultado de esta investigación se espera:
+
 \begin{enumerate}
 	\item Proponer métodos de estimación de entropías para la distribución $\mathcal{G}^0$ que sean robustos ante desvíos del modelo teórico.
 	\item Implementar rutinas de estimación de entropías para la distribución $\mathcal{G}^0$.
+	\item Proponer algoritmos que permitan estimar la distribución de velocidades de rotación de las estrellas.
 	\item Proponer métodos de filtrado de la clase NLM utilizando medidas de entropía en imágenes SAR con datos de intensidad.
 	\item Implementar y generar rutinas para la aplicación de los métodos de filtrado propuestos.
 	\item Desarrollar métodos de clasificación de imágenes SAR utilizando medidas de entropía como atributo para clasificar.
 	\item Implementar y generar rutinas para la aplicación de métodos de clasificación en imágenes SAR. Estos métodos pueden estar combinados con los métodos NLM para la reducción del ruido speckle.
-	\item Producción de artículos científico que serán enviados a revistas internacionales de alto impacto. 
+	\item Proponer métodos de estimación de la velocidad de rotación de ciertos grupos de estrellas.
+	\item Producción de artículos científicos que serán enviados a revistas internacionales de alto impacto. 
 \end{enumerate}
+
+\section{Relación con la docencia}
+
+Este proyecto se articula con la materia Estadística del
+Profesorado Universitario de Educación Superior en Matemática. Temas centrales como los son métodos de estimación y propiedades de los estimadores forman parte del programa. Asimismo el uso del software R project, con el que se trabajará en este proyecto, es de uso permanente en esta materia.
+La directora del proyecto junto con Gustavo Paccosi participan regularmente del dictado de Estadística. Daiana Delgadino tuvo beca de docencia y de docencia e investigación en la materia Estadística bajo la dirección de la directora del proyecto y actualmente participa regularmente en el dictado de la materia Lógica y Teoría de Números. Melina Sarni tuvo beca de docencia en la materia Estádistica también bajo la dirección de la directora del proyecto. Actualmente participa regularmente del dictado de los Talleres Iniciales Orientados en Ciencias Exactas. También participó del dictado de la materia Estadística durante el segundo semestre del 2019.   
+
+Cabe señalar que las ediciones de la Escuela de Matemática de Invierno - Sabrina Victoria Vieiro (EMASUNGS) de los años $2017$, $2018$ y $2019$ contó  con el dictado de un curso de simulación utilizando el software R project de uso en la materia Estadística. Este curso fue diseñado y dictado por la directora del proyecto en colaboración con los integrantes Gustavo Paccosi, Daiana Delgadino y Melina Sarni en los dos primeros años. 
+
+Durante el año $2019$ Alejandro Frery, integrante del proyecto, visitó la universidad en el marco de la \textit{Movilidad de Investigadores Invitados en la UNGS – MOVIUNGS 2018/2019} y dictó un curso para alumnos del Doctorado en Ciencia y Tecnología de la Universidad en procesamiento de imágenes SAR, y dió una charla orientada a los alumnos de grado del  Profesorado Universitario de Educación Superior en Matemática en algunos tópicos de Estadística.  
+
 
 %La implementación de los algoritmos propuestos serán desarrollados en 
 %comparaci´on de los m´etodos de segmentaci´on basados en contornos combinados
@@ -332,7 +494,8 @@ Como resultado de esta investigación se espera:
 %y aplicaci´on a im´agenes sint´eticas y reales. Luego, medir el error que se comete
 %al aplicarlos y comparar con diferentes m´etodos ya existentes en la literatura.
 \bibliographystyle{unsrt}
-\bibliography{../../Bibliography/bib_julia2}
+\bibliography{../../Bibliography/bib_julia2,../../Bibliography/bib_julia_Astro}
+
 
 
 \end{document}
