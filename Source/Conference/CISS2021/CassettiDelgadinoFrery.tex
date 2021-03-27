@@ -28,54 +28,70 @@
 
 \thanks{Julia Cassetti and Daiana Delgadino \texttt{julia.cassetti@gmail.com} are with the  Instituto de Desarrollo Humano, Universidad Nacional de General Sarmiento, Pcia. de Buenos Aires, Argentina.}
 
-\thanks{Alejandro C.\ Frery \texttt{acfrery@gmail.com} is with the Instituto de Computa\c c\~ao, Universidade Federal de Alagoas, 
-Av. Lourival Melo Mota, s/n, 57072-900 Macei\'o -- AL, Brazil.} 
+\thanks{Alejandro C.\ Frery \texttt{alejandro.frery@vuw.ac.nz} is with the School of Mathematics and Statistics, Victoria University of Wellington, New Zealand} 
 }
 
 \maketitle
 
 \begin{abstract}
 	
-Remote sensing tools are successfully used for information extraction of the studied terrain. In particular SAR imagery, which suffer the presence of speckle noise, needs special techniques to process them and draw out their features. In this sense the $\mathcal G^0$ family of distributions is a suitable model for SAR intensity because they possess the ability to characterize areas with different degrees of texture. 
+Remotely sensed data are successfully used for information extraction. 
+In particular SAR imagery, which suffer the presence of speckle noise, needs special models and techniques. 
+In this sense, the $\mathcal G^0$ family of distributions is a suitable model for SAR intensity because it can characterize areas with different degrees of texture. 
 Information theory has gained a place in signal and image processing for parameter estimation and feature extraction.
-In this paper we evaluate the performance of different parametric and non parametric Shannon entropy estimators as attribute in supervised and unsupervised algorithm for classification SAR images.
-These estimators were analyzed through Kappa, overall reliability and accuracy indexes. Finally we
-apply these estimators to actual data.
+Among its tools, the entropy stands out as one of the most expressive features.
+In this paper, we evaluate the performance of several parametric and non parametric Shannon entropy estimators as input for supervised and unsupervised classification algorithms for SAR images.
+These estimators were analyzed through Kappa, overall reliability and accuracy indexes. 
+Finally we apply these estimators to actual data.
 
 \end{abstract}
 
 \begin{keywords}
-Feature extraction, synthetic aperture radar image, Shannon entropy, classification.
+Feature extraction, synthetic aperture radar, Shannon entropy, classification.
 \end{keywords}
 
 \IEEEpeerreviewmaketitle
 
 \section{Introduction}
 \label{intro}
-\PARstart{i}{mages} that come from coherent illumination systems, such as those acquired by synthetic aperture radar (SAR) are contaminated by speckle noise. This kind of noise corrupts the image making it difficult to analyze and interpret. 
+\PARstart{i}{mages} that come from coherent illumination systems, such as those acquired by synthetic aperture radar (SAR) are contaminated by speckle noise. 
+This kind of noise corrupts the image making it difficult to analyze and interpret. 
 
-Under this perspective statistical procedures has become an important tool for processing SAR data. The choice of a suitable model and appropriate measures to describe this sort of images is a fundamental point to obtain characteristics that allow a good analysis of them.
+Under this perspective, statistical procedures are important tools for processing SAR data. 
+The choice of a suitable model and appropriate measures to describe this sort of images is a fundamental point to obtain features that promote a good analysis.
 
-In this sense the family of distributions $\mathcal{G}^0$~\cite{Frery97} has been extensively used to model SAR data because of its capability of describe textured and extremely textured zones. 
+In this sense, the family of distributions $\mathcal{G}^0$~\cite{Frery97} has been extensively used to model SAR data because of its ability to a wide variety of roughness targets. 
 
-Several approaches have been developed in order to obtain image characteristics. In particular, information and entropy measures have been widely used for this purpose. Estimation parameter~\cite{gambini2015}, classification images~\cite{Carvalho2019}, methodologies for constructing
-confidence interval and contrast measures~\cite{Frery2012,Nascimento2009}, edge detections problems~\cite{Nascimento2014} are some examples of its application.
+Several approaches have been developed in order to obtain expressive and tractable features. 
+In particular, entropy measures have been widely used for this purpose. 
+Estimation parameter~\cite{gambini2015}, classification~\cite{Carvalho2019}, methodologies for constructing
+confidence interval and contrast measures~\cite{Frery2012,Nascimento2009}, and edge detection~\cite{Nascimento2014} are some examples of its application.
 
-Sundry authors have tackled the segmentation and classification SAR images problem using information theory measures. Nobre et al.~\cite{Nobre2016} used Rényi's entropy for monopolarized SAR image segmentation, Ferreira et al.~\cite{Ferreira2020} derive a closed-form expression for the Shannon entropy based on $\mathcal{G}^0$ for intensity data and proposed a new entropy-based segmentation method. Carvalho et al.~\cite{Carvalho2019} employed stochastic distance to approach unsupervised classification methodology applied to Polarimetric Synthetic Aperture Radar (PolSAR) images.
+Sundry authors have tackled the segmentation and classification SAR images problem using information theory measures. 
+Nobre et al.~\cite{Nobre2016} used Rényi's entropy for monopolarized SAR image segmentation.
+Ferreira et al.~\cite{Ferreira2020} derived a closed-form expression for the Shannon entropy based on the $\mathcal{G}^0$ law for intensity data, and proposed a new entropy-based segmentation method. 
+Carvalho et al.~\cite{Carvalho2019} employed stochastic distances to approach unsupervised classification methodology applied to Polarimetric Synthetic Aperture Radar (PolSAR) images.
 
-Shannon entropy has been applied to analyzed SAR imagery in several approach, since inference problem~\cite{Frery2012} to classification problem~\cite{Ferreira2020}. So its estimation deserves attention. Different authors have addressed the problem of estimating Shannon entropy. Vasicek~\cite{Vasicek76} replaced the distribution function $F$ by the empirical distribution function $F_n$ and used a difference operator in place of the differential operator in the Shannon's entropy expression. Van Es~\cite{VanEs92} studied an entropy estimator of entropy based on difference between order statistics. Correa~\cite{Correa95} proposed a new entropy estimator based on local linear regression,  Al-Omari~\cite{AlOmari2013} and Noughabi and Noughabi~\cite{Noughabi13} presented modified versions of the Ebrahimi et al.~\cite{Ebrahimi94} estimator.
+The Shannon entropy has been applied to analyzed SAR imagery in several approaches, from inference~\cite{Frery2012} to classification~\cite{Ferreira2020}. 
+Therefore, its estimation deserves attention. 
+Vasicek~\cite{Vasicek76} replaced the distribution function $F$ by the empirical distribution function $F_n$ and used a difference operator in place of the differential operator in the Shannon's entropy expression. 
+Van Es~\cite{VanEs92} studied an entropy estimator based on differences between order statistics. 
+Correa~\cite{Correa95} proposed a new entropy estimator based on local linear regression.
+Al-Omari~\cite{AlOmari2013} and Noughabi and Noughabi~\cite{Noughabi13} presented modified versions of the Ebrahimi et al.~\cite{Ebrahimi94} estimator.
 
-In this paper we address the classification problem through supervised and unsupervised strategies such as support vector machine (SVM) and Kmeans (KM) methodologies. We will consider entropy as one of the attributes of classification. For this reason we will evaluate different estimators of entropy, both parametric and non-parametric. In the parametric case we used the relationship between the $\mathcal{G}^0$ and Fisher distributions to obtain an expression of the entropy. In the non parametric case we will evaluate these estimators in terms of bias, mean square error, computational time and accuracy when classifying a monopolarimetric SAR image. 
+In this paper, we address the classification problem through supervised and unsupervised strategies whose input is the local estimate of the entropy. 
+To this aim, we will evaluate estimators of the entropy, both parametric and non-parametric. 
+In the parametric case we used the relationship between the $\mathcal{G}^0$ and Fisher distributions to obtain an expression of the entropy. 
+In the non parametric case, we will evaluate these estimators in terms of bias, mean square error, computational time and accuracy when classifying a monopolarimetric SAR image. 
 
 \section{The $\mathcal{G}^0$ Model}
 \label{sec_SAR}
 
-The multiplicative model considers the return $Z$ in monopolarized SAR image, as the product of two independent random variables, one corresponding to the backscatter $X$ and other to the speckle noise $Y$.
-In this manner $Z=X Y$ represents the return $Z$ in each pixel under the multiplicative model.
+The multiplicative model defines the return $Z$ in a monopolarized SAR image as the product of two independent random variables: one corresponding to the backscatter $X$, and the other to the speckle noise $Y$.
+In this manner $Z=X Y$ represents the return $Z$ in each pixel under.
 
-The $\mathcal{G}^{0}$ family of distributions represents an attractive choice  because of its flexibility to model adequately homogeneous, heterogeneous, and extremely heterogeneous areas\cite{MejailJacoboFreryBustos:IJRS,mejailfreryjacobobustos2001}. 
-For intensity SAR data modeling this family arises from considering the speckle noise $Y$ modeled as a $\Gamma$ distributed random variable with unitary mean and shape parameter $L\geq1$, the number of looks, while the backscatter $X$ is considered to obey a Reciprocal of Gamma law. 
-
+The $\mathcal{G}^{0}$ family of distributions is attractive because of its flexibility to model adequately areas with all types of roughness~\cite{MejailJacoboFreryBustos:IJRS,mejailfreryjacobobustos2001}. 
+For intensity SAR data, this family arises from considering the speckle noise $Y$ modeled as a $\Gamma$ distributed random variable with unitary mean and shape parameter $L\geq1$, the number of looks, while the backscatter $X$ is considered to obey a Reciprocal of Gamma law.  
 The density function for intensity data is given by
 \begin{equation}
 f(z) =\frac{L^{L}\Gamma ( L-\alpha
@@ -93,8 +109,8 @@ The $r$-order moments are
 \end{equation}
 provided $\alpha<-r$, and infinite otherwise.
 
-Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS} proved a relationship between $\mathcal G^0$ distributions and the Fisher-Snedekor $F$ law.
-With this result the cumulative distribution function $F_{\alpha,\gamma,L}$ for the return $Z$   can be obtained as
+Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS} proved a relationship between $\mathcal G^0$ distributions and the Fisher-Snedekor $F$ law:
+the cumulative distribution function $F_{\alpha,\gamma,L}$ for the return $Z$ is
 \begin{equation}
 F_{\alpha,\gamma,L}(z) = \Upsilon_{2L, -2\alpha}(-\alpha  z / \gamma),
 	\label{eq:CDFG0}
@@ -102,15 +118,17 @@ F_{\alpha,\gamma,L}(z) = \Upsilon_{2L, -2\alpha}(-\alpha  z / \gamma),
 for every $z>0$, where $\Upsilon_{2L, -2\alpha}$ is the cumulative distribution function of a Fisher-Snedekor random variable with $2L$ and $-2\alpha$ degrees of freedom.
 This relationship is useful for obtaining an entropy expression. 
 
+\section{Shannon entropy}
 
-\section{$\mathcal{G}^0$ Shannon entropy}
-It is well known Shannon's contribution to the creation of what is known Information Theory. Shannon~\cite{Shannon1948} proposed a new way of
-measuring the transmission of information through a channel, thinking of information as a statistical concept. In this regard Shanon's entropy (SE) is defined as
-
+%%% ACF Usar la notación usual para entropía: H
+It is well known Shannon's contribution to the creation of what is known Information Theory. 
+Shannon~\cite{Shannon1948} proposed a new way of
+measuring the transmission of information through a channel, thinking of information as a statistical concept. 
+In this regard Shanon's entropy (SE) is defined as
 \begin{align}
 	\label{SE}
-	H[f(x)]&=-E[\log f(x)]=-\int_{-\infty}^{\infty} f(x) \log [f(x)] d x\\
-	       &= \int_{0}^{1} \log \left(\frac{d F^{-1}(x)}{d x}\right) d x
+	H[f(x)]&=-E[\log f(x)]=-\int_{-\infty}^{\infty} f(x) \log f(x) d x\\
+	       &= \int_{0}^{1} \log \frac{d F^{-1}(x)}{d x} d x,
 \end{align}
 where $X$ is a continuous random variable with probability density function (pdf) $f(x)$ and
 cumulative distribution function (cdf) $F(x)$. 
@@ -118,42 +136,48 @@ cumulative distribution function (cdf) $F(x)$.
 Using~\eqref{eq:CDFG0} it can be obtained an expression of the~$\mathcal{G}^0$ distribution. By calling ($\text{E}_{\text{F}}$) to the Fisher entropy then the $\mathcal{G}^0$ entropy for intensity data ($\text{E}_{\text{G0}}$) is given by
 \begin{align}
 	\label{EntropiaFisherGi0}
-	\text{E}_{\text{G0}}(\alpha,\gamma,L)=\text{E}_{\text{F}}(2 L, - 2 \alpha) -\log(-\dfrac{\alpha}{\gamma})
+	\text{E}_{\text{G0}}(\alpha,\gamma,L)=\text{E}_{\text{F}}(2 L, - 2 \alpha) -\log(-\dfrac{\alpha}{\gamma}).
 \end{align}
-
-So, using~\eqref{EntropiaFisherGi0}, an expression of $\text{E}_{\text{G0}}$ is
+Using~\eqref{EntropiaFisherGi0}, an 
+%%% Por qué "an"? Hay otras? Revisar todo.
+expression of $\text{E}_{\text{G0}}$ is
 \begin{align}
 	\label{EG0}
-	\text{E}_{\text{G0}}(\alpha,\gamma,L)&=-\log \left(-\frac{\alpha }{\gamma }\right)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ \nonumber
-	&+\log \left(-\frac{\alpha }{L}\right)+\frac{1}{2} (2 L-2 \alpha ) \psi ^{(0)}\left(\frac{1}{2} (2 L-2 \alpha )\right)\\ \nonumber
-	&+\log (B(L,-\alpha ))+(1-L) \psi^{(0)}(L)
+	\text{E}_{\text{G0}}(\alpha,\gamma,L)&=-\log \Big(-\frac{\alpha }{\gamma }\Big)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ \nonumber
+	&+\log \Big(-\frac{\alpha }{L}\Big)+\frac{1}{2} (2 L-2 \alpha ) \psi ^{(0)}\Big(\frac{1}{2} (2 L-2 \alpha )\Big)\\ \nonumber
+	&+\log \big(B(L,-\alpha )\big)+(1-L) \psi^{(0)}(L),
 \end{align}
-where $\psi^{(0)}(z)$ is the digamma function and $B(L,-\alpha )$ is the beta function in this parameters.
+where $\psi^{(0)}$ and $B$ are the digamma and beta functions, respectively.
+%%% ACF Sería interesante graficar la entropía para a y g variando, con L fijo
 
-\section{Entropy Shannon estimator}
-Several authors proposed different entropy estimator according to expression~\eqref{SE}, most of these are based on order statistics of the distribution sample. 
+\section{Shannon Entropy Estimators}
 
-Al-Omari~\cite{AlOmari2013} presented an overview of these estimators an also proposed a new one. On the other hand and from a parametric point of view, is natural to consider the maximum likelihood estimator (MV) of the entropy (HMV).
+Several authors have proposed entropy estimators according to~\eqref{SE}.
+Most of them are based on order statistics of the sample. 
+
+Al-Omari~\cite{AlOmari2013} presented an overview of these estimators an also proposed a new one. 
+From a parametric point of view, is natural to consider the maximum likelihood estimator (MV) of the entropy (HMV).
 
 In this paper we study the following entropy estimators.
 
 \subsection{Maximum likelihood entropy estimator}
 
-It is known the optimal asymptotic properties which has the MV estimator. If $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma,L)$ distribution for intensity data.
-A maximum likelihood estimator of $\alpha$ and $\gamma$ for $L$ known, denoted $\widehat\alpha_{\text{ML}}$ and $\widehat\gamma_{\text{ML}}$ respectively, is the value, in the parametric space, that maximizes the loglikelihood function:
+
+The optimal asymptotic properties of the MV estimator are well-known. 
+Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma,L)$ distribution.
+Assume $L$ known.
+A maximum likelihood estimator of $\alpha$ and $\gamma$ for $L$ known, denoted $\widehat\alpha_{\text{ML}}$ and $\widehat\gamma_{\text{ML}}$ respectively, is the value (in the parametric space $\mathbbm R_-\times\mathbbm R_+$), that maximizes the loglikelihood function:
 \begin{align}
 	\log \Gamma(L-\widehat\alpha_{\text{ML}})-
-	\widehat\alpha_{\text{ML}}\log(\widehat\gamma_{\text{ML}})-\log\Gamma(-\widehat\alpha_{\text{ML}}) \nonumber \\
-	\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log(\widehat\gamma_{\text{ML}}+L Z_i).
+	\widehat\alpha_{\text{ML}}\log \widehat\gamma_{\text{ML}} -\log\Gamma(-\widehat\alpha_{\text{ML}}) \nonumber \\
+	\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log\big(\widehat\gamma_{\text{ML}}+L Z_i\big).
 	\label{ML}
 \end{align}
-
-So, the MV entropy estimator (HMV)~\cite{CaseBerg01} is 
+The MV entropy estimator (HMV)~\cite{CaseBerg01} is, thus,
 \begin{align}
-	\text{HMV}=\text{E}_{\text{G0}}(\hat{\alpha}_{\text{MV}},\hat{\gamma}_{\text{MV}},L)
+	\text{HMV}=\text{E}_{\text{G0}}(\hat{\alpha}_{\text{MV}},\hat{\gamma}_{\text{MV}},L).
 \end{align}
-because $L$ is suposed known. Its calculation demands numerical maximization routines
-We employed the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} that allows box constraints.
+Its calculation demands numerical maximization routines; we used the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} that allows box constraints.
 This algorithm belongs to the family of quasi-Newton methods. 
 The characteristic of these methods is that they do not require the Hessian matrix, only the gradient.
 %; the left-hand-side of~\eqref{rootML} is the gradient of~\eqref{ML}. 
@@ -168,103 +192,84 @@ The characteristic of these methods is that they do not require the Hessian matr
 In these subsection we present the non parametric entropy estimator studies which were presented in~\cite{AlOmari2013}. In all of them we consider that $X_1,\ldots,X_n$ be a random sample from the distribution function $F(x)$ and $X_{(i)}$ the order statistics. We also studied the HMV estimator.
 In the following we present the expression of the studied estimators. 
 %It should be noted that most of the estimators studied in this work 
-\vspace{3mm}
+%%% ACF m y n van en modo matemático
+%%% ACF citar los artículos originales
 \begin{itemize}
-	\item Vasicek
+	\item Vasicek:
 	 \begin{align}
 	 	\label{HV}
-		\text{HV}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \left\{\frac{n}{2 m}\left(X_{(i+m)}-X_{(i-m)}\right)\right\},
+		\text{HV}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big].
 	\end{align}
-
-\vspace{3mm}
-	\item Van Es
+%%% ACF Qué es m?
+	\item Van Es:
 	\begin{align}
 		\label{HVE}
-		\text{HVE}_\text{{mn}}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\left\{\frac{n+1}{m}\left(X_{(i+m)}-X_{(i)}\right)\right\} \nonumber\\
-		        &+\sum_{k=m}^{n} \frac{1}{k}+\log \left(\frac{m}{n+1}\right)
+		\text{HVE}_\text{{mn}}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\Big[\frac{n+1}{m}\left(X_{(i+m)}-X_{(i)}\right)\Big] \nonumber\\
+		        &+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
 	\end{align}
-
-%\vspace{3mm}
-%	\item Noughabi and Noughabi
-%	\begin{align}
-%		\label{HNN}
-%		\text{HNN}_\text{{mn}}=-\frac{1}{n} \sum_{i=1}^{n} \log \left\{s_{i}(n, m)\right\}
-%	\end{align}
-%	where
-%	\begin{align}
-%	s_{i}(n,m)=\left\{\begin{array}{lc}
-%		\hat{f}\left(X_{(i)}\right), & 1 \leq i \leq m \\
-%		\frac{2 m / n}{X_{(i+m)}-X_{(i-m)}}, & m+1 \leq i \leq n-m \\
-%		\hat{f}\left(X_{(i)}\right), & n-m+1 \leq i \leq n
-%	\end{array}\right.
-%	\end{align}
-%with $\hat{f}\left(X_{i}\right)$ is the classic kernel estimator of the density function defined as $\hat{f}\left(X_{i}\right)=\frac{1}{n h} \sum_{j=1}^{n} k\left(\frac{X_{i}-X_{j}}{h}\right)$ where the kernel function is selected as the standard normal density function. The authors chose the bandwidth $h=1.06 \mathrm{~s} \ n^{-1 / 5},$ where $\mathrm{s}$ is the sample standard as the normal optimal smoothing constant, 
-
-\vspace{3mm}
-	\item Correa
+	\item Correa:
 	\begin{align}
 		\label{HC}
-		\text{HC}_\text{{mn}}=-\frac{1}{n} \sum_{i=1}^{n} \log \left(\frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\bar{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\left(X_{(j)}-\bar{X}_{(i)}\right)^{2}}\right)
+		\text{HC}_\text{{mn}}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\bar{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\left(X_{(j)}-\bar{X}_{(i)}\right)^{2}},
 	\end{align}
 where $\bar{X}_{(i)}=\frac{1}{2 m+1} \sum_{j=i-m}^{i+m} X_{(j)}$.
-
-\vspace{3mm}
-	\item Al-Omari
-	\label{AHE}
+	\item Al-Omari:
 	\begin{align}
-	\text{AHE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \left\{\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\right\}, 
+	\text{AHE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
+		\label{AHE}
 	\end{align}
 	where
-	\begin{align}
-	\omega_{i}=\left\{\begin{array}{lc}
-		1+\frac{1}{2}, & 1 \leq i \leq m \\
-		2, & m+1 \leq i \leq n-m \\
-		1+\frac{1}{2}, & n-m+1 \leq i \leq n
-	\end{array}\right.
-	\end{align}
-	$X_{(i-m)}=X_{(1)}$ for $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$
-
-\vspace{3mm}	
+	\begin{equation*}
+	\omega_{i}= \begin{cases}
+		1+\frac{1}{2} & \text{ if }1 \leq i \leq m, \\
+		2 & \text{ if } m+1 \leq i \leq n-m, \\
+		1+\frac{1}{2} & \text{ if } n-m+1 \leq i \leq n,
+				\end{cases}
+	\end{equation*}
+	in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
 	\item Ebrahimi
-	\label{HE}
 	\begin{align}
-	\text{HE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \left\{\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\right\}
+	\text{HE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+		\label{HE}
 	\end{align}
 	where
-	\begin{align}
-	\tau_{i}=\left\{\begin{array}{ll}
-		1+\frac{i-1}{m}, & 1 \leq i \leq m \\
-		2, & m+1 \leq i \leq n-m \\
-		1+\frac{n-i}{m}, & n-m+1 \leq i \leq n
-	\end{array}\right.
-	\end{align}
-
-\vspace{3mm}
-	\item Al-Omari other proposal 
+	\begin{equation*}
+	\tau_{i}=\begin{cases}
+		1+\frac{i-1}{m} & \text{ if }1 \leq i \leq m, \\
+		2 & \text{ if } m+1 \leq i \leq n-m, \\
+		1+\frac{n-i}{m} & \text{ if } n-m+1 \leq i \leq n.
+			\end{cases}
+	\end{equation*}
+	\item Al-Omari alternative proposal:
 	\label{MH}
 	\begin{align}
-	\text{MH}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \left\{\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\right\}
+	\text{MH}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
 	\end{align}
 where
-	\begin{align}
-	v_{i}=\left\{\begin{array}{ll}
-	1+\frac{i-1}{m}, & 1 \leq i \leq m \\
-	2, & m+1 \leq i \leq n-m \\
-	1+\frac{n-i}{2 m}, & n-m+1 \leq i \leq n
-	\end{array}\right.
-	\end{align}
-where $X_{(i-m)}=X_{(1)}$ for $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
-
+	\begin{equation*}
+	v_{i}=\begin{cases}
+	1+\frac{i-1}{m} & \text{ if }1 \leq i \leq m, \\
+	2 & \text{ if } m+1 \leq i \leq n-m, \\
+	1+\frac{n-i}{2 m} & \text{ if } n-m+1 \leq i \leq n,
+		\end{cases}
+	\end{equation*}
+in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
 \end{itemize}
 
 \section{Simulation study}\label{simulation}
 
-Since most of the estimator assessed depend on the spacing $m$, we first conducted a Monte Carlo study  to choose the best $m$ value that yields a lower bias and lower mean squared error (MSE) in the entropy estimation. %We also evaluate the performance of these estimator by accounting for the number of anomalous entropy estimates.
+Since most of the estimators depend on the spacing $m$, we first conducted a Monte Carlo study  to choose the value that yields smallest bias and mean squared error (MSE). %We also evaluate the performance of these estimator by accounting for the number of anomalous entropy estimates.
 
-For this study we generated $500$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81\right\rbrace $ for each texture value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $, each non parametric estimator presented in subsection~\eqref{nonpar}, $m \leq \frac{n}{2}$ and also HMV. The chosen sample size represent different scenarios of window sizes. We then analyzed bias and MSE to select the $m$ value according to the established criteria. 
+For this study we generated $500$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81\right\rbrace $ for each roughness value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $, each non parametric estimator presented in Section~\ref{nonpar}, $m \leq \frac{n}{2}$ and also HMV. 
+The sample sizes represent different scenarios of window sizes. 
 
-Then we assessed these estimators in the frame of supervised classification by applying SVM method, and no supervising one by Kmeans method. We generated a simulated image for different $\alpha$ and $\gamma$ value and used sliding windows of different size to generate an entropy map. The classification was performed using these entropy map as a classification variable. The classification methods are evaluated by differents index such Kappa and the accuracy value. The proposed parameter estimation method was tested in an
-actual SAR image. The results are promising.
+We then assessed these estimators in the frame of supervised classification by applying SVM, and of unsupervised classification using k-means. 
+We generated simulated images for several values of $\alpha$ and $\gamma$, and used sliding windows of different sizes to generate an entropy map. 
+The classification was performed using these maps as features. 
+The classification methods are evaluated using Kappa and overall accuracy. 
+The parameter estimation methods were tested in an actual SAR image. 
+
+The details and results will be presented in the final paper.
 
 
 
