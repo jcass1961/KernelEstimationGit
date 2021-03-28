@@ -22,7 +22,7 @@
 \begin{document}
 
 %\title{SAR image classification using non parametric estimators of Shannon entropy}
-\title{A new classification proposal based on Shannon entropy for monopolarimetric SAR images}
+\title{Estimators of the Entropy for SAR Image Classification}
 \author{ Julia~Cassetti, Daiana Delgadino, and Alejandro~C.~Frery,~\IEEEmembership{Senior Member}
 
 %\thanks{This work was supported by Secretar\'ia de Pol\'iticas Universitarias (SPU), CNPq, and Fapeal.}
@@ -134,17 +134,18 @@ In this regard Shanon's entropy (SE) is defined as
 where $X$ is a continuous random variable with probability density function (pdf) $f(x)$ and
 cumulative distribution function (cdf) $F(x)$. 
 
-Using~\eqref{eq:CDFG0} it can be obtained an expression of the~$\mathcal{G}^0$ distribution. By calling ($\text{H}_{\text{F}}$) to the Fisher entropy then the $\mathcal{G}^0$ entropy for intensity data ($\text{H}_{\text{G0}}$) is given by
+The entropy of the~$\mathcal{G}^0$ distribution is obtained using~\eqref{eq:CDFG0}.
+Denote $H_{F}$ to entropy under the $F$ model, then the $\mathcal{G}^0$ entropy for intensity data $H_{\mathcal G^0}$ is 
 \begin{align}
 	\label{EntropiaFisherGi0}
-	\text{H}_{\text{G0}}(\alpha,\gamma,L)=\text{H}_{\text{F}}(2 L, - 2 \alpha) -\log(-\dfrac{\alpha}{\gamma}).
+	H_{\mathcal G^0}(\alpha,\gamma,L)=H_{F}(2 L, - 2 \alpha) -\log\Big(-\dfrac{\alpha}{\gamma}\Big).
 \end{align}
 Using~\eqref{EntropiaFisherGi0}, the
 %%% Por qué "an"? Hay otras? Revisar todo.
-expression of $\text{H}_{\text{G0}}$ is
+expression of $H_{\mathcal G^0}$ is
 \begin{align}
 	\label{EG0}
-	\text{H}_{\text{G0}}(\alpha,\gamma,L)&=-\log \Big(-\frac{\alpha }{\gamma }\Big)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ \nonumber
+	H_{\mathcal G^0}(\alpha,\gamma,L)&=-\log \Big(-\frac{\alpha }{\gamma }\Big)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ \nonumber
 	&+\log \Big(-\frac{\alpha }{L}\Big)+\frac{1}{2} (2 L-2 \alpha ) \psi ^{(0)}\Big(\frac{1}{2} (2 L-2 \alpha )\Big)\\ \nonumber
 	&+\log \big(B(L,-\alpha )\big)+(1-L) \psi^{(0)}(L),
 \end{align}
@@ -174,24 +175,27 @@ A maximum likelihood estimator of $\alpha$ and $\gamma$ for $L$ known, denoted $
 	\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log\big(\widehat\gamma_{\text{ML}}+L Z_i\big).
 	\label{ML}
 \end{align}
-The MV entropy estimator (HMV)~\cite{CaseBerg01} is, thus,
-\begin{align}
-	\text{HMV}=\text{H}_{\text{G0}}(\hat{\alpha}_{\text{MV}},\hat{\gamma}_{\text{MV}},L).
-\end{align}
 Its calculation demands numerical maximization routines; we used the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} that allows box constraints.
 This algorithm belongs to the family of quasi-Newton methods. 
 The characteristic of these methods is that they do not require the Hessian matrix, only the gradient.
+
+The ML entropy estimator ($H_{\text{ML}}$)~\cite{CaseBerg01} is, thus,
+\begin{align}
+	H_{\text{ML}}=H_{\mathcal G^0}(\widehat{\alpha}_{\text{MV}},\widehat{\gamma}_{\text{MV}},L).
+\end{align}
+
 %; the left-hand-side of~\eqref{rootML} is the gradient of~\eqref{ML}. 
 
 %Function~\eqref{ML} is, in general, unimodal but, depending on the sample, it may be monotonically decreasing. 
 %This behavior is the responsible for the algorithm failing to converge.
 
 
-\subsection{Non parametric entropy estimator}
+\subsection{Non parametric entropy estimators}
 \label{nonpar}
 
-In these subsection we present the non parametric entropy estimator studies which were presented in~\cite{AlOmari2016}. In all of them we consider that $X_1,\ldots,X_n$ be a random sample from the distribution function $F(x)$ and $X_{(i)}$ the order statistics. We also studied the HMV estimator.
-In the following we present the expression of the studied estimators. 
+We recall the nonparametric entropy estimators studied in~\cite{AlOmari2016}. 
+In all of them we consider that $X_1,\ldots,X_n$ is a random sample from the distribution function $F(x)$, and that $X_{(i)}$ its order statistics, $1\leq i\leq n$. 
+%In the following we present the expression of the studied estimators. 
 %It should be noted that most of the estimators studied in this work 
 %%% ACF m y n van en modo matemático
 %%% ACF citar los artículos originales
@@ -199,24 +203,24 @@ In the following we present the expression of the studied estimators.
 	\item Vasicek~\cite{Vasicek76}:
 	 \begin{align}
 	 	\label{HV}
-		\text{HV}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big].
+		H_{\text{V}(m,n)}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big].
 	\end{align}
 %%% ACF Qué es m?
 	\item Van Es~\cite{VanEs92}:
 	\begin{align}
 		\label{HVE}
-		\text{HVE}_\text{{mn}}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\Big[\frac{n+1}{m}\left(X_{(i+m)}-X_{(i)}\right)\Big] \nonumber\\
+		H_{\text{VE}(m,n)}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\Big[\frac{n+1}{m}\left(X_{(i+m)}-X_{(i)}\right)\Big] \nonumber\\
 		        &+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
 	\end{align}
 	\item Correa~\cite{Correa95}:
 	\begin{align}
 		\label{HC}
-		\text{HC}_\text{{mn}}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\bar{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\left(X_{(j)}-\bar{X}_{(i)}\right)^{2}},
+		H_{\text{C}(m,n)}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\left(X_{(j)}-\overline{X}_{(i)}\right)^{2}},
 	\end{align}
-where $\bar{X}_{(i)}=\frac{1}{2 m+1} \sum_{j=i-m}^{i+m} X_{(j)}$.
+where $\overline{X}_{(i)}=(2 m+1)^{-1} \sum_{j=i-m}^{i+m} X_{(j)}$.
 	\item Al-Omari~\cite{AlOmari2014}:
 	\begin{align}
-	\text{AHE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
+	H_{\text{AO}_1(m,n)}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
 		\label{AHE}
 	\end{align}
 	where
@@ -228,9 +232,23 @@ where $\bar{X}_{(i)}=\frac{1}{2 m+1} \sum_{j=i-m}^{i+m} X_{(j)}$.
 				\end{cases}
 	\end{equation*}
 	in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
+	\item Al-Omari alternative proposal~\cite{AlOmari2016}:
+	\label{MH}
+	\begin{align}
+		H_{\text{AO}_2(m,n)}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+	\end{align}
+	where
+	\begin{equation*}
+		v_{i}=\begin{cases}
+			1+\frac{i-1}{m} & \text{ if }1 \leq i \leq m, \\
+			2 & \text{ if } m+1 \leq i \leq n-m, \\
+			1+\frac{n-i}{2 m} & \text{ if } n-m+1 \leq i \leq n,
+		\end{cases}
+	\end{equation*}
+	in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
 	\item Ebrahimi~\cite{Ebrahimi94}
 	\begin{align}
-	\text{HE}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+	H_{\text{E}(m,n)}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
 		\label{HE}
 	\end{align}
 	where
@@ -241,27 +259,13 @@ where $\bar{X}_{(i)}=\frac{1}{2 m+1} \sum_{j=i-m}^{i+m} X_{(j)}$.
 		1+\frac{n-i}{m} & \text{ if } n-m+1 \leq i \leq n.
 			\end{cases}
 	\end{equation*}
-	\item Al-Omari alternative proposal~\cite{AlOmari2016}:
-	\label{MH}
-	\begin{align}
-	\text{MH}_\text{{mn}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
-	\end{align}
-where
-	\begin{equation*}
-	v_{i}=\begin{cases}
-	1+\frac{i-1}{m} & \text{ if }1 \leq i \leq m, \\
-	2 & \text{ if } m+1 \leq i \leq n-m, \\
-	1+\frac{n-i}{2 m} & \text{ if } n-m+1 \leq i \leq n,
-		\end{cases}
-	\end{equation*}
-in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
 \end{itemize}
 
 \section{Simulation study}\label{simulation}
 
 Since most of the estimators depend on the spacing $m$, we first conducted a Monte Carlo study  to choose the value that yields smallest bias and mean squared error (MSE). %We also evaluate the performance of these estimator by accounting for the number of anomalous entropy estimates.
 
-For this study we generated $500$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81\right\rbrace $ for each roughness value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $, each non parametric estimator presented in Section~\ref{nonpar}, $m \leq \frac{n}{2}$ and also HMV. 
+For this study we generated $500$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81\right\rbrace $ for each roughness value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $, each non parametric estimator presented in Section~\ref{nonpar}, $m \leq {n}/{2}$ and also $H_{\text{ML}}$. 
 The sample sizes represent different scenarios of window sizes. 
 
 We then assessed these estimators in the frame of supervised classification by applying SVM, and of unsupervised classification using k-means. 
