@@ -1,10 +1,11 @@
 \documentclass[journal]{IEEEtran}
+
 \usepackage{times}
 \usepackage{bm,bbm}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,subfigure}
 \usepackage{url}
-\usepackage{units}
+\usepackage{siunitx}
 \usepackage{cite,balance}
 \usepackage{comment}
 \usepackage{multirow}
@@ -204,10 +205,11 @@
 	considering the change of variables $x=F^{-1}(p).$
 	He proposed to estimate the cdf $F(X)$ with the empirical distribution function $F_n(x)$ and used the difference operator instead of the differential operator in order to approximate the $\frac{d F^{-1}(p)}{d p}$ by a function of the order statistics.
 	
-	Suppose that $X_1,\cdots,X_n$ be a random sample from the distribution function $F(x)$ whose order statistics are $X_{(1)}, \ldots, X_{(n)}$. Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
+	Suppose that $X_1,\dots,X_n$ be a random sample from the distribution function $F(x)$ whose order statistics are $X_{(1)}, \ldots, X_{(n)}$. 
+	Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
 	\begin{align}
 	\label{HV}
-		H_{V}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
+		H_{V}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big], 
 	\end{align}
 	with $m<n/2$ a positive integer number, $X_{(i+m)}-X_{(i-m)}$ the spacing of order $m$, or $m$-spacing, $X_{(i)}=X_{(i)}$ if $1<i$ and $X_{(i)}=X_{(n)}$ if $i>n$.
 	The author proves that $HV$ estimator is weakly consistency of $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
@@ -222,19 +224,19 @@
 		\item Van Es~\cite{VanEs92}:
 		\begin{align}
 			\label{HVE}
-			H_{VE}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\left(X_{(i+m)}-X_{(i)}\right)\Big]} \nonumber\\
-			&+\sum_{k=m}^{n} \frac{1}{k}+\log \left(\frac{m}{n+1}\right).
+			H_{VE}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\big(X_{(i+m)}-X_{(i)}\big)\Big]} \nonumber\\
+			&+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
 		\end{align}
 		\item Correa~\cite{Correa95}:
 		\begin{align}
 			\label{HC}
-			H_{C}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\left(X_{(j)}-\overline{X}_{(i)}\right)^{2}},
+			H_{C}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\big(X_{(j)}-\overline{X}_{(i)}\big)^{2}},
 		\end{align}
 		where $\overline{X}_{(i)}=(2 m+1)^{-1} \sum_{j=i-m}^{i+m} X_{(j)}$.
 		\item Noughabiet et al.~\cite{Noughabi2010} 
 		\label{HNA}
 		\begin{align}
-        H_{NA}=\frac{1}{n} \sum_{i=1}^{n} \log \left\{\frac{n}{c_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\right\}
+        H_{NA}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{c_{i} m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big]
         \end{align}
         where 
         \begin{equation*}
@@ -289,7 +291,8 @@ and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$
 		\end{equation*}
 	\end{itemize}
 
-Van Es~\cite{VanEs92} showed that, under general conditions, this estimator converge almost surely to $H[f(x)]$ when $m, n \to \infty \text{, } m/log(n) \to \infty \text{ and } m/n \to 0$, and also showed the asymptotic normality when $m, n \to \infty \text{ and }m = o(n^{1/2})$. Correa~\cite{Correa95}, through a simulated study, showed that his proposal has a smaller mean squared error than the Vasiciek proposal~\eqref{HV}. Al-Omari\cite{AlOmari2014} presented three estimator based on different sampling method. In this paper we studied the simple random sampling one (\textit{SRS})~\eqref{AHE} and second proposal suggested
+Van Es~\cite{VanEs92} showed that, under general conditions, this estimator converge almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$, and also showed the asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
+Correa~\cite{Correa95}, through a simulated study, showed that his proposal has a smaller mean squared error than the Vasiciek proposal~\eqref{HV}. Al-Omari\cite{AlOmari2014} presented three estimator based on different sampling method. In this paper we studied the simple random sampling one (\textit{SRS})~\eqref{AHE} and second proposal suggested
 in \cite{AlOmari2016}. The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $HE\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
 
 \section{Simulation study}\label{sec:simulation}
@@ -299,7 +302,7 @@ The choice of the spacing parameter $m$ in this kind of estimators is an importa
 We generated $1000$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81,121\right\rbrace $ for each textured value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $ and $L=2$. For each non-parametric study we use the $m$ value chosen with the Wieczorkowski et al. proposal.
 The sample sizes chosen represents different scenarios of window sizes. Since the parameter $\gamma$ is proportional to the brightness, meaning it is a scale parameter, we based the forthcoming analysis on the condition $E(Z)=1$ which links texture and brightness parameter by $\gamma^* =-\alpha-1$. 
 
-Each replication produces a vector  of estimators $(\widehat{H}_1, \cdots, \widehat{H}_{1000})$ from which we compute sample mean $\overline{\widehat{H}}$, 
+Each replication produces a vector  of estimators $(\widehat{H}_1, \dots, \widehat{H}_{1000})$ from which we compute sample mean $\overline{\widehat{H}}$, 
 sample bias $\widehat{B}=B_{\widehat{H}} = \overline{\widehat{H}}- H$ where $H$ is the true entropy value, and sample mean squared error (MSE) $\widehat{\textrm{MSE}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{H}_i-H)^2}}$.
 
 Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion, $L=2$ case and for all of the estimators analyzed, except for Al-Omari~\eqref{AO2} and Ebrahimi~\eqref{HE} estimators due to the large bias they presented in the simulation study.  
@@ -350,7 +353,7 @@ Table~\ref{tab:Mejor_m} shows the best $m$ chosen according to the methodology u
 \label{tab:Mejor_m}
   \centering
   \caption{Best $m$ chosen for each $n$ and entropy estimator.}
-    \begin{tabular}{ccccccc}
+    \begin{tabular}{crcccrc}
     \toprule
     \boldmath{$L$}     & \multicolumn{1}{l}{\boldmath{$n$}} & \multicolumn{1}{l}{\boldmath{$H_{{AO}_1}$}} & \multicolumn{1}{l}{\boldmath{$H_C$}} & \multicolumn{1}{l}{\boldmath{$H_{NA}$}} & \multicolumn{1}{l}{\boldmath{$H_V$}} & \multicolumn{1}{l}{\boldmath{$H_{VE}$}} \\
     \midrule
@@ -394,7 +397,11 @@ We continue studying the quality of these estimators in the SAR image classifica
 \label{Classification}
 
 With the aim to study the performance of the selected entropy estimators in terms of  SAR image classification, we divided the analysis into synthetic and actual images. 
-We used unsupervised and supervised techniques to choose the three best estimators that present the best values of classification quality. For the former we carried out a $k$-means algorithm which groups data into $k$ classes setting $k$ centroids and minimizing the  variance  within  each group. This nonhierarchical clustering technique is applied in many studies in SAR image processing. Niharika et.al~\cite{Niharika2017} put forward a segmentation algorithm for SAR images based on $k$-means classification and thresholding  techniques. Liu et al.~\cite{Liu2019} propose a $k$-means clustering technique for SAR image change detection.
+We used unsupervised and supervised techniques to choose the three best estimators that present the best values of classification quality. 
+For the former we carried out a $k$-means algorithm which groups data into $k$ classes setting $k$ centroids and minimizing the  variance  within  each group. 
+This nonhierarchical clustering technique is applied in many studies in SAR image processing. 
+Niharika et al.~\cite{Niharika2017} put forward a segmentation algorithm for SAR images based on $k$-means classification and thresholding  techniques. 
+Liu et al.~\cite{Liu2019} propose a $k$-means clustering technique for SAR image change detection.
 
 For the latter approach we implemented a support vector machine (SVM) algorithm, which is a supervised machine learning technique based on the statistical learning theory~\cite{Vapnik1995} whose objective is to define, given a set of features,  the best possible separation between classes by finding a hyperplane that maximizes the margin of separation between these classes. It is common to sacrifice some misclassification to get a better overall performance, introducing a penalizing parameter $c$. When data cannot be separated by a hyperplane, they are transformed to a higher dimensional feature space through a suitable nonlinear transformation called kernel function. Given $\textrm{\textbf{x}}, \textrm{\textbf{x'}} \in \mathbb{R}^n$, linear and radial kernels are respectively defined by $K_L(\textrm{\textbf{x}}, \textrm{\textbf{x'}})=\langle \textrm{\textbf{x}}, \textrm{\textbf{x'}} \rangle$ and $K_R(\textrm{\textbf{x}}, \textrm{\textbf{x'}})=\exp(-g\lVert \textrm{\textbf{x}}-\textrm{\textbf{x'}} \rVert^2)$, for $g>0$.
 
@@ -517,8 +524,11 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
 We also applied supported vector machine (SVM) algorithm using each entropy estimator as the contributor feature, to the synthetic image under the same conditions as for the $k$-means algorithm. We also analyzed the $H_{ML}$ estimator.
 
 To find the best kernel and hyperparameters we took at random $1000$ pixels in each of the four regions, far away enough from the boundaries. 
-This reference sample was divided into $80-20\%$ for training-validation and testing sets. 
-We considered linear and radial types for the kernel, cost of restrain violation $c=0.001, 0.01, 0.1, 1, 5, 10$ and $g=0.01, 0.1, 1, 1.5, 2$. With the $80\%$ of the training-validation set we made $k$-cross fold validation, with $k=5$, and computed the mean and the standard deviation of the F1-scores. Recall that for True Positive Rate (TPR) and Positive Predictive Value (PPV), it is defined $\textrm{F1}=2 \cdot \textrm{TPR} \cdot \textrm{PPV} / (\textrm{TPR} + \textrm{PPV})$.
+This reference sample was divided into two sets:
+training and validation (\SI{80}{\percent} of the sample), and
+testing (\SI{20}{\percent}). 
+We considered linear and radial types for the kernel, cost of restrain violation $c=0.001, 0.01, 0.1, 1, 5, 10$ and $g=0.01, 0.1, 1, 1.5, 2$. 
+With the \SI{80}{\percent} of the training-validation set we made $k$-cross fold validation, with $k=5$, and computed the mean and the standard deviation of the F1-scores. Recall that for True Positive Rate (TPR) and Positive Predictive Value (PPV), it is defined $\textrm{F1}=2 \cdot \textrm{TPR} \cdot \textrm{PPV} / (\textrm{TPR} + \textrm{PPV})$.
 Table~\ref{tab:hyperparameters} shows the selected kernels and hyperparameters that maximize F1 mean and minimize F1 variance. 
 In presence of matching, we decided to opt for the fastest or simplest choice.
 
@@ -547,7 +557,7 @@ In presence of matching, we decided to opt for the fastest or simplest choice.
     \end{tabular}
 \end{table*}
 
-Once we found the best models, we computed the accuracy and the $\kappa$ coefficient using the remaining $20\%$ of the reference samples. The results are exhibited in Figure~\ref{fig:acc_sample_synt}.
+Once we found the best models, we computed the accuracy and the $\kappa$ coefficient using the remaining \SI{20}{\percent} of the reference samples. The results are exhibited in Figure~\ref{fig:acc_sample_synt}.
 Finally, models were trained using the whole reference sample and applied to classify the complete image. 
 The same measures were computed and the results are shown in Figure~\ref{fig:acc_synt}.
 
@@ -618,10 +628,11 @@ We can observe that the classification is improved when we consider CV coefficie
   \centering
   \caption{Accuracy and Kappa coefficient values in the testing set for the image of San Francisco.}
     \begin{tabular}{lrrrr}
+    	\toprule
           & \multicolumn{2}{c}{\multirow{2}[-2]{*}{Training with entropy}} & \multicolumn{2}{c}{\multirow{2}[-2]{*}{Training with entropy}} \\
-          & \multicolumn{2}{c}{estimators} & \multicolumn{2}{c}{estimators and cv} \\
-\cmidrule{2-5}          & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} \\
-    \midrule
+          & \multicolumn{2}{c}{estimators} & \multicolumn{2}{c}{estimators and cv} \\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}          
+& \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} \\
+    \cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}
     $H_C$    & 0.9681 & 0.9596 & 0.9917 & 0.9895 \\
     $H_{NA}$   & 0.9669 & 0.9581 & 0.9929 & 0.9910 \\
     $H_{VE}$   & 0.9705 & 0.9626 & 0.9906 & 0.9880 \\
@@ -655,10 +666,10 @@ The advantage of using these non-parametric estimators is that they are very sim
 
 With these $m$ values we implemented an unsupervised ($k$-means) and supervised (SVM) classification  algorithm in synthetic and actual images and compared their performance with the ML entropy estimator $H_{ML}$. We displayed that $H_{C}$, $H_{NA}$ and $H_{VE}$ show the best performance on most of the classification measures used. 
 
-For these estimators we study their performance applying a supervised classification to a real image. We concluded that $H_{VE}$ presents the best accuracy an Kappa values, $97\%$ and $96\%$ respectively. 
+For these estimators we study their performance applying a supervised classification to a real image. We concluded that $H_{VE}$ presents the best accuracy an Kappa values, \SI{97}{\percent} and \SI{96}{\percent} respectively. 
 % value that present the least bias in the entropy estimation for all the textured values studied and all $n$ value analyzed
 
-In addition, we also considered a new feature, the CV coefficient and found that both,  accuracy and Kappa index showed an improvement  of $2\%$ in the classification performance and that the $H_{NA}$ estimator presented the best behaviour for the studied measures.
+In addition, we also considered a new feature, the CV coefficient and found that both,  accuracy and Kappa index showed an improvement  of \SI{2}{\percent} in the classification performance and that the $H_{NA}$ estimator presented the best behaviour for the studied measures.
 
 \section{Computational information}
 \label{conclusion}
@@ -666,7 +677,7 @@ In addition, we also considered a new feature, the CV coefficient and found that
 All studies were made in the \texttt R platform and language for statistical computing~\cite{RLanguage} (version~4.0.4).
 	
 	
-\bibliography{bib_julia2.bib}{}
+\bibliography{../../../Bibliography/bib_julia2.bib}
 \bibliographystyle{IEEEtran}
 	
 \end{document}
