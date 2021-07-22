@@ -81,7 +81,7 @@
 	Vasicek~\cite{Vasicek76} replaced the distribution function $F$ by the empirical distribution function $F_n$ and used a difference operator in place of the differential operator in the Shannon entropy expression. 
 	Van Es~\cite{VanEs92} studied an entropy estimator based on differences between order statistics. 
 	Correa~\cite{Correa95} proposed a new entropy estimator determined from local linear regression.
-	Al-Omari~\cite{AlOmari2016} and Noughabi and Noughabi~\cite{Noughabi13} presented modified versions of the estimator introduced by Ebrahimi \emph{et al.}~\cite{Ebrahimi94} .
+	Al-Omari~\cite{AlOmari2016} and Noughabi and Noughabi~\cite{Noughabi13} presented modified versions of the estimator introduced by Ebrahimi \emph{et al.}~\cite{Ebrahimi94}.
 	
 	In this paper, we address the classification problem through supervised and unsupervised strategies whose input is entropy local estimation. 
 	To this aim, we evaluate entropy estimators in both cases, parametric and non-parametric. 
@@ -157,6 +157,12 @@
 		\caption{$H_{\mathcal G^0}(\alpha,\gamma,L)$ as a function of alpha and gamma for $L=3$.\label{figure:HG0}}
 	\end{figure}
 	
+%	\begin{figure}[hbt]
+%		\centering    
+%		\includegraphics[width=1.2\linewidth]{../../../Figures/CISS2021/3dplot.pdf}
+%		\caption{$H_{\mathcal G^0}(\alpha,\gamma,L)$ as a function of alpha and gamma for $L=2$.\label{figure:HG0}}
+%	\end{figure}
+
 	Figure~\ref{figure:HG0} shows the $H_{\mathcal G^0}(\alpha,\gamma,L)$ theoretical entropy as a function of $\alpha$ and $\gamma$ with $L=3$. 
 	It can be shown that, for each fixed $\gamma$ value, $H_{\mathcal G^0}$ is an injective function. The same behavior repeats if we consider $\alpha$ as a constant.
 	
@@ -165,7 +171,7 @@
 	Several authors have proposed entropy estimators according to~\eqref{SE}.
 	Most of them are based on order statistics of the sample. 
 	Al-Omari~\cite{AlOmari2016} presented an overview of these estimators and also proposed a new one. 
-	From a parametric point of view, is natural to consider the maximum likelihood estimator (MV) of the entropy (HMV).
+	From a parametric point of view, is natural to consider the maximum likelihood estimator (ML) of the entropy ($H_{\text{ML}}$).
 	
 	In what follows, the entropy estimators studied in this paper are described.
 	
@@ -180,13 +186,13 @@
 		\mbox{}+\frac{\widehat\alpha_{\text{ML}}-L}{n} \sum_{i=1}^n\log\big(\widehat\gamma_{\text{ML}}+L Z_i\big).
 		\label{ML}
 	\end{align}
-	Optimal asymptotic properties of the MV estimator are well-known and its calculation demands numerical maximization routines.
+	Optimal asymptotic properties of the ML estimator are well-known and its calculation demands numerical maximization routines.
 	We use the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} that allows box constraints.
 	This algorithm belongs to the family of quasi-Newton methods, that do not require the Hessian matrix, but only the gradient.
 	
 	The ML entropy estimator~\cite{CaseBerg01} is
 	\begin{align}
-		H_{ML}=H_{\mathcal G^0}(\widehat{\alpha}_{\text{MV}},\widehat{\gamma}_{\text{MV}},L).
+		H_\text{ML}=H_{\mathcal G^0}(\widehat{\alpha}_{\text{ML}},\widehat{\gamma}_{\text{ML}},L).
 	\end{align}
 	
 	%; the left-hand-side of~\eqref{rootML} is the gradient of~\eqref{ML}. 
@@ -209,7 +215,7 @@
 	Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
 	\begin{align}
 	\label{HV}
-		H_{V}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big], 
+		H_{\text{V}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big], 
 	\end{align}
 	with $m<n/2$ a positive integer number, $X_{(i+m)}-X_{(i-m)}$ the spacing of order $m$, or $m$-spacing, $X_{(i)}=X_{(i)}$ if $1<i$ and $X_{(i)}=X_{(n)}$ if $i>n$.
 	The author proves that $HV$ estimator is weakly consistency of $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
@@ -224,19 +230,19 @@
 		\item Van Es~\cite{VanEs92}:
 		\begin{align}
 			\label{HVE}
-			H_{VE}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\big(X_{(i+m)}-X_{(i)}\big)\Big]} \nonumber\\
+			H_\text{VE}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\big(X_{(i+m)}-X_{(i)}\big)\Big]} \nonumber\\
 			&+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
 		\end{align}
 		\item Correa~\cite{Correa95}:
 		\begin{align}
 			\label{HC}
-			H_{C}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\big(X_{(j)}-\overline{X}_{(i)}\big)^{2}},
+			H_\text{C}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\big(X_{(j)}-\overline{X}_{(i)}\big)^{2}},
 		\end{align}
 		where $\overline{X}_{(i)}=(2 m+1)^{-1} \sum_{j=i-m}^{i+m} X_{(j)}$.
 		\item Noughabiet et al.~\cite{Noughabi2010} 
 		\label{HNA}
 		\begin{align}
-        H_{NA}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{c_{i} m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big]
+        H_\text{NA}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{c_{i} m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big]
         \end{align}
         where 
         \begin{equation*}
@@ -249,7 +255,7 @@
 and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$ 
 		\item Al-Omari~\cite{AlOmari2014}:
 		\begin{align}
-			H_{{AO}_1}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
+			H_{{\text{AO}}_1}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
 			\label{AHE}
 		\end{align}
 		where
@@ -265,7 +271,7 @@ and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$
 		\item Al-Omari alternative proposal~\cite{AlOmari2016}:
 		\label{AO2}
 		\begin{align}
-			H_{{AO}_2}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+			H_{{\text{AO}}_2}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
 		\end{align}
 		where
 		\begin{equation*}
@@ -278,7 +284,7 @@ and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$
 		in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
 		\item Ebrahimi~\cite{Ebrahimi94}
 		\begin{align}
-			H_{E}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+			H_\text{E}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
 			\label{HE}
 		\end{align}
 		where
@@ -293,7 +299,7 @@ and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$
 
 Van Es~\cite{VanEs92} showed that, under general conditions, this estimator converge almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$, and also showed the asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
 Correa~\cite{Correa95}, through a simulated study, showed that his proposal has a smaller mean squared error than the Vasiciek proposal~\eqref{HV}. Al-Omari\cite{AlOmari2014} presented three estimator based on different sampling method. In this paper we studied the simple random sampling one (\textit{SRS})~\eqref{AHE} and second proposal suggested
-in \cite{AlOmari2016}. The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $HE\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
+in \cite{AlOmari2016}. The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $H_{\text{E}}\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
 
 \section{Simulation study}\label{sec:simulation}
 
@@ -312,7 +318,7 @@ Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for
 	\subfigure[\label{ECM_W_L=2}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_mW_L=2ConNeg}}
 	\caption{Bias and MSE for Wieczorkowski criterion, $L=2$.}
 	\end{figure}    
-It can be seen that there is no single estimator that performs well for all $\alpha$ value. $H_C$ and $H_{A0_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. The others estimators show bad behavior for all the cases studied.	
+It can be seen that there is no single estimator that performs well for all $\alpha$ value. $H_\text{C}$ and $H_{\text{AO}_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. The others estimators show bad behavior for all the cases studied.	
 
 In order to improve the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion we implement another strategy to choose, for each sample size $n$, the best $m$ value to be used for all $\alpha$ values.
 
@@ -326,9 +332,9 @@ For each estimator and each fixed $m$ value we calculate the average bias ($\ove
 	\centering
 	\begin{tabular}{c c c c c c}
 		\toprule
-		\boldmath{$m$}	& \boldmath{$\alpha_{1}$} & \boldmath{$\alpha_{2}$}
-		& \boldmath{$\alpha_{3}$}
-		& \boldmath{$\alpha_{4}$} & \boldmath{$\overline{\widehat{B}}$} \\
+		$m$	& $\alpha_{1}$ & $\alpha_{2}$
+		& $\alpha_{3}$
+		& $\alpha_{4}$ & $\overline{\widehat{B}}$ \\
 		
 		\midrule
 		$1$	& $\widehat{B}_{11}$ & $\widehat{B}_{12}$ & $\widehat{B}_{13}$ & $\widehat{B}_{14}$ & $\overline{\widehat{B}}_{1.}$\\
@@ -355,7 +361,7 @@ Table~\ref{tab:Mejor_m} shows the best $m$ chosen according to the methodology u
   \caption{Best $m$ chosen for each $n$ and entropy estimator.}
     \begin{tabular}{crcccrc}
     \toprule
-    \boldmath{$L$}     & \multicolumn{1}{l}{\boldmath{$n$}} & \multicolumn{1}{l}{\boldmath{$H_{{AO}_1}$}} & \multicolumn{1}{l}{\boldmath{$H_C$}} & \multicolumn{1}{l}{\boldmath{$H_{NA}$}} & \multicolumn{1}{l}{\boldmath{$H_V$}} & \multicolumn{1}{l}{\boldmath{$H_{VE}$}} \\
+    $L$     & \multicolumn{1}{l}{$n$} & \multicolumn{1}{l}{$H_{{\text{AO}}_1}$} & \multicolumn{1}{l}{$H_\text{C}$} & \multicolumn{1}{l}{$H_{\text{NA}}$} & \multicolumn{1}{l}{$H_\text{V}$} & \multicolumn{1}{l}{$H_{\text{VE}}$} \\
     \midrule
     \multirow{5}[1]{*}{1} 
           & $9$     & $4$     & $4$     & $3$     & $4$     & $4$ \\
@@ -375,7 +381,7 @@ Table~\ref{tab:Mejor_m} shows the best $m$ chosen according to the methodology u
 \end{table}
 
 
-Figures~\ref{Sesgo_HL=2ConNeg} and~\ref{ECM_HL=2ConNeg} show the behavior of the estimators studied for the $m$ value chosen in terms of bias and MSE respectively for $L=2$ case. We also plot the $H_{MV}$ estimator. It can be observed the improvement in entropy estimation in terms of bias and MSE with our methodology, compared with the Wieczorkowski's et al. empirical formula for all of the estimators studied.
+Figures~\ref{Sesgo_HL=2ConNeg} and~\ref{ECM_HL=2ConNeg} show the behavior of the estimators studied for the $m$ value chosen in terms of bias and MSE respectively for $L=2$ case. We also plot the $H_{\text{ML}}$ estimator. It can be observed the improvement in entropy estimation in terms of bias and MSE with our methodology, compared with the Wieczorkowski's et al. empirical formula for all of the estimators studied.
 
 \begin{figure}[hbt]
     \centering
@@ -432,14 +438,14 @@ In the following, we present empirical results classifying a synthetic image SAR
 \begin{figure}[hbt]
     \centering
 	\subfigure[\label{fig:syntheticL2} Synthetic]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/SinteticaL2.pdf}}
-	\subfigure[\label{fig:kmeansHCL2}$K$-means $H_C$ estimator]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/kmeansHC_SyntheticL2.pdf}}
-	\subfigure[\label{fig:AccuracyL2}Accuracy]{\includegraphics[width=0.5\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
+	\subfigure[\label{fig:kmeansHCL2}$K$-means $H_\text{C}$ estimator]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/kmeansHC_SyntheticL2.pdf}}
+	\subfigure[\label{fig:AccuracyL2}Accuracy]{\includegraphics[width=0.6\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
 	\caption{$K$-means applied to a synthetic image with $L=2$, $\gamma=0.1$ and  sliding windows size $9 \times 9$.} 
 \end{figure}  
 
 For each estimator we perform a map of estimated entropies ($\hat{H}$) by sweeping the image with sliding windows of sizes $s\times s$, for $s=3,5,7,9,11$, corresponding to the sample sizes studied in section~\ref{sec:simulation}. $\hat{H}$ is then used as a feature to classify in both, unsupervised and supervised technique.
 
-For each windows size we applied $k$-means algorithm to the synthetic image. Figure~\ref{fig:AccuracyL2} shows the accuracy according to the chosen sample size. It can be observed that a $9 \times 9$ window presents the best value of accuracy. It can also be seen that the $H_{ML}$ estimator presents the worth performance whereas $H_C$, $H_{NA}$ and $H_{VE}$ show the best performance, as is indicated in Table~\ref{tab:accuracy} with bold letter. Figure~\ref{fig:kmeansHCL2} shows the result of applied a $k$-means classification for $H_C$ estimator. Table~\ref{tab:CHyDB_synt} presents the value of CH and DB indexes for $n=81$ sample size. It can be observe that for the former case, $H_C$, $H_{NA}$ and $H_{VE}$ estimators have the best performance, and for the latter $H_C$, $H_{NA}$ and $H_{V}$ were the best.
+For each windows size we applied $k$-means algorithm to the synthetic image. Figure~\ref{fig:AccuracyL2} shows the accuracy according to the chosen sample size. It can be observed that a $9 \times 9$ window presents the best value of accuracy. It can also be seen that the $H_{\text{ML}}$ estimator presents the worth performance whereas $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ show the best performance, as is indicated in Table~\ref{tab:accuracy} with bold letter. Figure~\ref{fig:kmeansHCL2} shows the result of applied a $k$-means classification for $H_\text{C}$ estimator. Table~\ref{tab:CHyDB_synt} presents the value of CH and DB indexes for $n=81$ sample size. It can be observe that for the former case, $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ estimators have the best performance, and for the latter $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{V}}$ were the best.
 
 \begin{table}[htbp]
   \centering
@@ -449,7 +455,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
     \begin{tabular}{crrrrrr}
      %\multicolumn{7}{c}{Accuracy} \\
     \midrule
-    \boldmath{$n$}     & \multicolumn{1}{c}{\boldmath{$H_{{AO}_1}$}} & \multicolumn{1}{c}{\boldmath{$H_C$}} & \multicolumn{1}{c}{\boldmath{$H_{NA}$}} & \multicolumn{1}{c}{\boldmath{$H_V$}} & \multicolumn{1}{c}{\boldmath{$H_{VE}$}} & \multicolumn{1}{c}{\boldmath{$H_{ML}$}}\\
+    $n$     & \multicolumn{1}{c}{$H_{{\text{AO}}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$}\\
     \midrule
     9 & 0.664 & 0.659 & 0.665 & 0.665 & 0.640 & 0.682 \\
     25  & 0.839 & 0.855 & 0.859 & 0.837 & 0.846 & 0.796 \\
@@ -468,7 +474,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
     \begin{tabular}{crrrrrr}
      %\multicolumn{8}{c}{Indexes} \\
     \midrule
-    Index   & \boldmath{$H_{{AO}_1}$} & \multicolumn{1}{c}{\boldmath{$H_C$}} & \multicolumn{1}{c}{\boldmath{$H_{NA}$}} & \multicolumn{1}{c}{\boldmath{$H_V$}} & \multicolumn{1}{c}{\boldmath{$H_{VE}$}} & \multicolumn{1}{c}{\boldmath{$H_{ML}$}} \\
+    Index   & $H_{{\text{AO}}_1}$ & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$} \\
     \midrule
     CH	&	852914	&	\textbf{898079}	&	\textbf{902719}	&	852914	&	\textbf{867746}	&	703774	\\
      DB	&	0.441	&	\textbf{0.434}	&	\textbf{0.433}	&	\textbf{0.441}	&	0.442	&	0.467	\\
@@ -486,7 +492,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
 %    \begin{tabular}{crrrrrr}
 %     \multicolumn{7}{c}{Accuracy} \\
 %    \midrule
-%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_C$} & %\multicolumn{1}{c}{$H_{NA}$} & \multicolumn{1}{c}{$H_V$} & \multicolumn{1}{c}{$H_{VE}$} & %\multicolumn{1}{c}{$H_{ML}$} \\
+%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & %\multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & %\multicolumn{1}{c}{$H_{\text{ML}}$} \\
 %    \midrule
 %    $9$ & $0.664$ & $0.659$ & $0.665$ & $0.665$ & $0.640$ & $0.682$ \\
 %    $25$  & $0.839$ & $0.855$ & $0.859$ & $0.837$ & $0.846$ & $0.796$ \\
@@ -498,7 +504,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
 %
 %    \multicolumn{7}{c}{Calinski-Harabasz} \\
 %    \midrule
-%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_C$} & %\multicolumn{1}{c}{$H_{NA}$} & \multicolumn{1}{c}{$H_V$} & \multicolumn{1}{c}{$H_{VE}$} & %\multicolumn{1}{c}{$H_{ML}$} \\
+%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & %\multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & %\multicolumn{1}{c}{$H_{\text{ML}}$} \\
 %    \midrule
 %    $9$ & $290623$ & $287858$ & $298642$ & $298642$ & $302352$ & $352001$ \\
 %    $25$ & $419655$ & $455500$ & $462399$ & $408602$ & $456211$ & $476309$ \\
@@ -509,7 +515,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
 %          &       &       &       &       &       &  \\
 %    \multicolumn{7}{c}{Davies-Bouldin} \\
 %    \midrule
-%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_C$} & %\multicolumn{1}{c}{$H_{NA}$} & \multicolumn{1}{c}{$H_V$} & \multicolumn{1}{c}{$H_{VE}$} & %\multicolumn{1}{c}{$H_{ML}$} \\
+%    $n$     & \multicolumn{1}{c}{$H_{{AO}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & %\multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & %\multicolumn{1}{c}{$H_{\text{ML}}$} \\
 %    \midrule
 %    9     & 0.682 & 0.682 & 0.677 & 0.677 & 0.671 & 0.658 \\
 %    25    & 0.598 & 0.586 & 0.584 & 0.601 & 0.593 & 0.604 \\
@@ -521,7 +527,7 @@ For each windows size we applied $k$-means algorithm to the synthetic image. Fig
 %  \label{tab:addlabel}%
 %\end{table}%
 
-We also applied supported vector machine (SVM) algorithm using each entropy estimator as the contributor feature, to the synthetic image under the same conditions as for the $k$-means algorithm. We also analyzed the $H_{ML}$ estimator.
+We also applied supported vector machine (SVM) algorithm using each entropy estimator as the contributor feature, to the synthetic image under the same conditions as for the $k$-means algorithm. We also analyzed the $H_{\text{ML}}$ estimator.
 
 To find the best kernel and hyperparameters we took at random $1000$ pixels in each of the four regions, far away enough from the boundaries. 
 This reference sample was divided into two sets:
@@ -546,7 +552,7 @@ In presence of matching, we decided to opt for the fastest or simplest choice.
   \label{tab:hyperparameters}
    \begin{tabular}{cllllll}
     \toprule
-    \boldmath{$n$} & \multicolumn{1}{c}{\boldmath{$H_{AO_1}$}} & \multicolumn{1}{c}{\boldmath{$H_C$}} & \multicolumn{1}{c}{\boldmath{$H_{NA}$}} & \multicolumn{1}{c}{\boldmath{$H_V$}} & \multicolumn{1}{c}{\boldmath{$H_{VE}$}} & \multicolumn{1}{c}{\boldmath{$H_{ML}$}} \\
+    $n$ & \multicolumn{1}{c}{$H_{\text{AO}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$} \\
     \midrule
       9     & R, $c=5$, $g=1$ & R, $c=1$, $g=0.1$ & R, $c=5$, $g=2$ & R, $c=5$, $g=2$ & L, $c=0.1$ & R, $c=10$, $g=0.01$ \\
            25    & R, $c=5$, $g=2$ & L, $c=10$ & L, $c=10$ & R, $c=10$, $g=1$ & R, $c=1$, $g=1.5$ & L, $c=0.1$ \\
@@ -574,7 +580,7 @@ The same measures were computed and the results are shown in Figure~\ref{fig:acc
 %    \label{tab:acc_kappa_synt}
 %    \begin{tabular}{cccccccc}
 %    \toprule
-%    Index & n     & $H_{{AO}_1}$   & $H_C$    & $H_{NA}$  % & $H_V$    & $H_{VE}$   & $H_{ML}$ \\
+%    Index & n     & $H_{{AO}_1}$   & $H_\text{C}$    & $H_{\text{NA}}$  % & $H_\text{V}$    & $H_{\text{VE}}$   & $H_{\text{ML}}$ \\
 %    \midrule
 %    \multirow{2}[2]{*}{Accuracy} & 81    & 0.912 & \textcolor{red}{0.914} & \textcolor{red}{0.914} & 0.912 & \textcolor{red}{0.915} & 0.900 \\
 %          & 121   & 0.904 & 0.904 & 0.904 & 0.904 & 0.907 & 0.896 \\
@@ -585,7 +591,7 @@ The same measures were computed and the results are shown in Figure~\ref{fig:acc
 %    \end{tabular}
 %\end{table}
 
-It can be seen that the best performance is achieved for sliding windows of size $9 \times 9$ and $H_C$, $H_{NA}$ and $H_{VE}$ estimators with $0.914, \ 0.914 \text{ and } 0.915$ respectively for accuracy values,  and  $0.876, \ 0.877 \text{ and } 0.878$ for Kappa index, when the classifier is applied to the whole image.
+It can be seen that the best performance is achieved for sliding windows of size $9 \times 9$ and $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ estimators with $0.914, \ 0.914 \text{ and } 0.915$ respectively for accuracy values,  and  $0.876, \ 0.877 \text{ and } 0.878$ for Kappa index, when the classifier is applied to the whole image.
 
 Since these estimators and window size are the ones that performed the best in the synthetic image, we apply them in the classification of an actual image.
 
@@ -614,15 +620,15 @@ Figure~\ref{TrainingSamples} shows the training samples selected to perform the 
 
 We studied lineal and radial kernels, but the latter produced the best results with the following hyperparameters:
 \begin{itemize}
-    \item $c=10$ and $g=1.5$ for $H_C$,
-    \item $c=5$ and $g=2$ for $H_{NA}$,
-    \item $c=10$ and $g=2$ for $H_{VE}$.
+    \item $c=10$ and $g=1.5$ for $H_\text{C}$,
+    \item $c=5$ and $g=2$ for $H_{\text{NA}}$,
+    \item $c=10$ and $g=2$ for $H_{\text{VE}}$.
 \end{itemize}
 
 Moreover, in a second stage we included the CV as a feature in the classification process, which showed an improvement in the quality measures. In this case, the best performance is achieved for linear kernel with cost equals to $10$.
 
 Table~\ref{tab:acc_SF} presents the accuracy and Kappa index. 
-We can observe that the classification is improved when we consider CV coefficient. In terms of entropy estimators, $H_{NA}$ seems to be the best classifier including the CV as a feature.
+We can observe that the classification is improved when we consider CV coefficient. In terms of entropy estimators, $H_{\text{NA}}$ seems to be the best classifier including the CV as a feature.
 
 \begin{table}[htbp]
   \centering
@@ -633,9 +639,9 @@ We can observe that the classification is improved when we consider CV coefficie
           & \multicolumn{2}{c}{estimators} & \multicolumn{2}{c}{estimators and cv} \\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}          
 & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} \\
     \cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}
-    $H_C$    & 0.9681 & 0.9596 & 0.9917 & 0.9895 \\
-    $H_{NA}$   & 0.9669 & 0.9581 & 0.9929 & 0.9910 \\
-    $H_{VE}$   & 0.9705 & 0.9626 & 0.9906 & 0.9880 \\
+    $H_\text{C}$    & 0.9681 & 0.9596 & 0.9917 & 0.9895 \\
+    $H_{\text{NA}}$   & 0.9669 & 0.9581 & 0.9929 & 0.9910 \\
+    $H_{\text{VE}}$   & 0.9705 & 0.9626 & 0.9906 & 0.9880 \\
     \bottomrule
     \end{tabular}%
   \label{tab:acc_SF}%
@@ -645,14 +651,14 @@ Figure~\ref{fig:class_SF} exhibits the classification of the whole image of San 
 
 \begin{figure}[hbt]
     \centering
-	\subfigure[\label{SF_HC} Using $H_C$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HC.pdf}}
-	\subfigure[\label{SF_HC_cv} Using $H_C$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HC_cv.pdf}}
+	\subfigure[\label{SF_HC} Using $H_\text{C}$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HC.pdf}}
+	\subfigure[\label{SF_HC_cv} Using $H_{\text{C}}$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HC_cv.pdf}}
 	
-	\subfigure[\label{SF_HNA} Using $H_{NA}$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HNA.pdf}}
-	\subfigure[\label{SF_HNA_cv} Using $H_{NA}$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HNA_cv.pdf}}
+	\subfigure[\label{SF_HNA} Using $H_{\text{NA}}$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HNA.pdf}}
+	\subfigure[\label{SF_HNA_cv} Using $H_{\text{NA}}$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HNA_cv.pdf}}
 	
-	\subfigure[\label{SF_HVE} Using $H_{VE}$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HVE.pdf}}
-	\subfigure[\label{SF_HVE_cv} Using $H_{VE}$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HVE_cv.pdf}}
+	\subfigure[\label{SF_HVE} Using $H_{\text{VE}}$.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HVE.pdf}}
+	\subfigure[\label{SF_HVE_cv} Using $H_{\text{VE}}$ and cv.]{\includegraphics[width=0.45\linewidth]{../../../Figures/CISS2021/SF_HVE_cv.pdf}}
 	\caption{San Francisco classification.}
 	\label{fig:class_SF}
 	\end{figure}    
@@ -664,19 +670,20 @@ We assess the performance of six non parametric entropy estimators in conjunctio
 
 The advantage of using these non-parametric estimators is that they are very simple to implement, they do not assume any model and they do not need to use any optimization algorithm. The disadvantage is that they depend on a spaced parameter $m$. We solved these point by defining a criterion to choose the best $m$ value that present the least bias in the entropy estimation for all the textured values studied and all sample sizes analyzed. This criterion presents a better performance than that of Wieczorkowski et al.~\cite{Wieczorkowski1999}.
 
-With these $m$ values we implemented an unsupervised ($k$-means) and supervised (SVM) classification  algorithm in synthetic and actual images and compared their performance with the ML entropy estimator $H_{ML}$. We displayed that $H_{C}$, $H_{NA}$ and $H_{VE}$ show the best performance on most of the classification measures used. 
+With these $m$ values we implemented an unsupervised ($k$-means) and supervised (SVM) classification  algorithm in synthetic and actual images and compared their performance with the ML entropy estimator $H_{\text{ML}}$. We displayed that $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ show the best performance on most of the classification measures used. 
 
-For these estimators we study their performance applying a supervised classification to a real image. We concluded that $H_{VE}$ presents the best accuracy an Kappa values, \SI{97}{\percent} and \SI{96}{\percent} respectively. 
+For these estimators we study their performance applying a supervised classification to a real image. We concluded that $H_{\text{VE}}$ presents the best accuracy an Kappa values, \SI{97}{\percent} and \SI{96}{\percent} respectively. 
 % value that present the least bias in the entropy estimation for all the textured values studied and all $n$ value analyzed
 
-In addition, we also considered a new feature, the CV coefficient and found that both,  accuracy and Kappa index showed an improvement  of \SI{2}{\percent} in the classification performance and that the $H_{NA}$ estimator presented the best behaviour for the studied measures.
+In addition, we also considered a new feature, the CV coefficient and found that both,  accuracy and Kappa index showed an improvement  of \SI{2}{\percent} in the classification performance and that the $H_{\text{NA}}$ estimator presented the best behaviour for the studied measures.
 
 \section{Computational information}
 \label{conclusion}
 	
 All studies were made in the \texttt R platform and language for statistical computing~\cite{RLanguage} (version~4.0.4).
 	
-	
+
+
 \bibliography{../../../Bibliography/bib_julia2.bib}
 \bibliographystyle{IEEEtran}
 	
