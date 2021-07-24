@@ -1,0 +1,201 @@
+---
+title: "Eleccion de m por menor sesgo promedio"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(data.table)
+require(ggthemes)
+library(extrafont) 
+
+setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/Daiana/")
+#source("../../Code/Entropia/EntropiaFisherGI0_2par.R")
+
+#setwd("G:/Mi unidad/Daiana")
+source("./Code/Entropia/EntropiaFisherGI0_2par.R")
+getwd()
+```
+```{r}
+L=2
+```
+
+```{r}
+base0<-fread("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/Daiana/Data/NuevoAnalisisFinal/Mle_L2_sinCont_GamaEst_TodoEst_FINAL.csv")
+nrow(base0)
+```
+
+```{r}
+names(base0)
+```
+
+```{r}
+base<- base0 %>% select(L,alfa,n,m,HMV.mle,HMV.opt,HV.est,HVE.est,HNA.est,HC.est,AHE.est,HE.est,MH.est)%>%
+  rename(
+    HV = HV.est,
+    HVE = HVE.est,
+    HNA = HNA.est,
+    HC=HC.est,
+    AHE=AHE.est,
+    HE=HE.est,
+    MH=MH.est
+    )
+
+
+
+```
+
+```{r}
+names(base)
+```
+
+```{r}
+base_h<-base %>% gather(.,key=estimador,value=H,5:13) %>% arrange(L,desc(alfa),n,estimador,m)
+base_h
+```
+
+#Construyo ECM
+
+```{r echo=TRUE,message=FALSE}
+ecm<-base_h %>% mutate(dif2=(EntropiaGI0.2P(alfa,-alfa-1,L)-H)^2) %>% group_by(L,alfa,n,m,estimador) %>% summarise(ecm=mean(dif2)) %>% ungroup()%>% arrange(L,estimador,desc(alfa),n,m)
+ecm
+```
+
+
+#Construyo SESGO
+
+```{r}
+sesgo<-base_h %>% group_by(L,alfa,n,m,estimador) %>% summarise(H.mean=mean(H)) %>% mutate(sesgo=H.mean-EntropiaGI0.2P(alfa,-alfa-1,L)) %>% ungroup()
+sesgo<-sesgo %>% select(-H.mean) %>% arrange(L,estimador,desc(alfa),n,m)
+sesgo
+```
+
+
+# Base con sesgo y ECM
+```{r}
+ecm_sesgo<-inner_join(ecm,sesgo,by=c("L","alfa","n","m","estimador"))
+ecm_sesgo<-ecm_sesgo %>% arrange(L,estimador,desc(alfa),n,m)
+ecm_sesgo
+```
+#Para cada m,calculo el promedio del valores absolutos de los sesgo de cada alfa 
+
+```{r}
+ecm_sesgo <- ecm_sesgo %>% group_by(L,n,estimador,m) %>%
+mutate(mean_sesgo=mean(abs(sesgo))) %>% ungroup()%>%
+arrange(L,estimador,n,m,desc(alfa))
+ecm_sesgo
+```
+
+
+
+#Elijo m_W 
+
+```{r}
+#m_W <- ecm_sesgo %>% group_by(L,n,estimador,m) %>%mutate(mW=sqrt(n))%>%filter(m==mW)
+m_W <- ecm_sesgo %>%filter(m==sqrt(n))%>%rename(mW=m)
+m_W
+```
+
+### Grabo archivo menor sesgo
+### Mejor m
+```{r}
+setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/Daiana/Data/NuevoAnalisis")
+mejor_m_w<-m_W%>%filter(alfa==-1.5)%>%select(L,alfa,n,mW,estimador,sesgo)
+nombre<-paste("mejor_m_ConNeg_mW_L",L,sep="")
+write.csv(mejor_m_w,nombre)
+```
+
+## Renombro columnas
+
+
+```{r}
+m_por_sesgoW<-m_W %>% 
+  rename(
+    Estimator = estimador,
+    Bias = sesgo,
+    MSE=ecm
+    )
+
+names(m_por_sesgoW)
+m_por_sesgoW
+write.csv(m_por_sesgoW,"Figura2.csv")
+```
+# Grafico
+# L=2
+
+```{r}
+g1<- m_por_sesgoW %>% filter(L==L,Estimator!="MH",Estimator!="HE",Estimator!="HMV.opt")
+g1%>%filter(Estimator=="HVE")
+#g1<- m_por_sesgoW
+
+g1$alfa <- factor(g1$alfa, levels = c("-1.5","-3","-5","-8"),
+                         ordered = TRUE, labels=c(expression(paste(alpha,"=-1.5")),
+                                                  expression(paste(alpha,"=-3")),
+                                                  expression(paste(alpha,"=-5")),
+                                                  expression(paste(alpha,"=-8"))))
+legenda <- c(expression(H[A0[1]]),expression(H[C]),
+             expression(H[ML]),expression(H["NA"]),
+             expression(H[V]),expression(H["VE"]))
+
+plt1<-ggplot(g1,aes(n,Bias,col=Estimator))+
+scale_x_continuous(breaks=c(9,25,49,81,121))+
+geom_hline(yintercept=0, linetype="solid", color = "blue",size=1)+
+geom_point()+
+geom_line()+
+labs(x = "sample size",y=expression(paste(widehat(Bias))))+
+scale_color_discrete(name="Estimator",labels = legenda)+
+theme(text=element_text(size=15,  family="serif"),
+      legend.position = "bottom",
+      strip.background =element_rect(fill="white"),
+      strip.placement = "outside",
+      strip.text = element_text(size=15),
+      legend.title = element_text(size = 15),
+      legend.text = element_text(size = 15),
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill=NA)) +
+      guides(colour = guide_legend(nrow = 1))+
+facet_wrap(~alfa, labeller = label_parsed)
+plt1
+
+plt2<-ggplot(g1,aes(n,MSE,col=Estimator))+
+scale_x_continuous(breaks=c(9,25,49,81,121))+
+geom_hline(yintercept=0, linetype="solid", color = "blue",size=1)+
+geom_point()+
+geom_line()+
+labs(x = "sample size",y=expression(paste(widehat(MSE))))+
+scale_color_discrete(name="Estimator",labels = legenda)+
+theme(text=element_text(size=15,  family="serif"),
+      legend.position = "bottom",
+      strip.background =element_rect(fill="white"),
+      strip.placement = "outside",
+      strip.text = element_text(size=15),
+      legend.title = element_text(size = 15),
+      legend.text = element_text(size = 15),
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill=NA)) +
+      guides(colour = guide_legend(nrow = 1))+
+facet_wrap(~alfa, labeller = label_parsed)
+plt2
+```
+
+
+```{r}
+setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Figures/CISS2021")
+
+graf.alfa<-paste("Grafico_Hest_Sesgo_mW_L=",L,"ConNeg.pdf",sep = "")
+graf.ecm<-paste("Grafico_Hest_ECM_mW_L=",L,"ConNeg.pdf",sep = "")
+
+
+
+ggsave(graf.alfa, plot = plt1, device = "pdf",scale=1.2)
+ggsave(graf.ecm, plot = plt2, device = "pdf",scale=1.2)
+```
+
+
+
+
+

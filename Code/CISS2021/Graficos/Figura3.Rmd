@@ -1,0 +1,105 @@
+---
+title: "Eleccion de m por menor sesgo promedio"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(data.table)
+require(ggthemes)
+library(extrafont) 
+
+```
+
+```{r}
+L= 2
+m_por_sesgo<-fread("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Data/CISS2021/figura3.csv")
+
+names(m_por_sesgo)
+
+```
+C:\Users\Usuario\Google Drive (jacassetti@docentes.unm.edu.ar)\AndreDaiJulia\Data\CISS2021
+
+
+# Grafico
+
+## FUENTES
+
+```{r}
+
+
+g1<- m_por_sesgo %>% filter(L==L,Estimator!="MH",Estimator!="HE",Estimator!="HMV.mle")
+
+g1$alfa <- factor(g1$alfa, levels = c("-1.5","-3","-5","-8"),
+                         ordered = TRUE, labels=c(expression(paste(alpha,"=-1.5")),
+                                                  expression(paste(alpha,"=-3")),
+                                                  expression(paste(alpha,"=-5")),
+                                                  expression(paste(alpha,"=-8"))))
+legenda <- c(expression(H[A0[1]]),expression(H[C]),
+             expression(H[ML]),expression(H["NA"]),
+             expression(H[V]),expression(H[VE]))
+
+plt1<-ggplot(g1,aes(n,Bias,col=Estimator))+
+scale_x_continuous(breaks=c(9,25,49,81,121))+
+geom_hline(yintercept=0, linetype="solid", color = "blue",size=1)+
+geom_point()+
+geom_line()+
+labs(x = "sample size",y=expression(paste(widehat(Bias))))+
+scale_color_discrete(name="Estimator",labels = legenda)+
+theme(text=element_text(size=15,  family="serif"),
+      legend.position = "bottom",
+      strip.background =element_rect(fill="white"),
+      strip.placement = "outside",
+      strip.text = element_text(size=15),
+      legend.title = element_text(size = 15),
+      legend.text = element_text(size = 15),
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill=NA)) +
+      guides(colour = guide_legend(nrow = 1))+
+facet_wrap(~alfa, labeller = label_parsed)
+plt1
+
+```
+
+```{r}
+plt2<-ggplot(g1,aes(n,MSE,col=Estimator))+
+scale_x_continuous(breaks=c(9,25,49,81,121))+
+geom_hline(yintercept=0, linetype="solid", color = "blue",size=1)+
+geom_point()+
+geom_line()+
+labs(x = "sample size",y=expression(paste(widehat(MSE))))+
+scale_color_discrete(name="Estimator",labels = legenda)+
+theme(text=element_text(size=15,  family="serif"),
+      legend.position = "bottom",
+      strip.background =element_rect(fill="white"),
+      strip.placement = "outside",
+      strip.text = element_text(size=15),
+      legend.title = element_text(size = 15),
+      legend.text = element_text(size = 15),
+      panel.background = element_blank(),
+      panel.border = element_rect(colour = "black", fill=NA)) +
+      guides(colour = guide_legend(nrow = 1))+
+facet_wrap(~alfa, labeller = label_parsed)
+plt2
+```
+
+
+```{r}
+
+graf.alfa<-paste("Grafico_Hest_Sesgo_L=",L,"ConNeg.pdf",sep = "")
+graf.ecm<-paste("Grafico_Hest_ECM_L=",L,"ConNeg.pdf",sep = "")
+
+
+
+ggsave(graf.alfa, plot = plt1, device = "pdf",scale=1.2)
+ggsave(graf.ecm, plot = plt2, device = "pdf",scale=1.2)
+```
+
+
+
+
+
+
