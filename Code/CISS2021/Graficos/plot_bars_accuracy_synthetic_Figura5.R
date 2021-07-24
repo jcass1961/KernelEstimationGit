@@ -4,8 +4,10 @@ library(readxl)
 library(ggplot2)
 
 getwd()
-accuracy_samples_synt <- as.data.frame(read_excel("./Data/CISS2021/Sintetica/accuracy_samples_synt.xlsx"))
-accuracy_synt <- as.data.frame(read_excel("./Data/CISS2021/Sintetica/accuracy_synt.xlsx"))
+
+
+accuracy_samples_synt <- as.data.frame(read_excel("./Data/CISS2021/accuracy_samples_synt.xlsx"))
+accuracy_synt <- as.data.frame(read_excel("./Data/CISS2021/accuracy_synt.xlsx"))
 
 # S?lo para L=2
 

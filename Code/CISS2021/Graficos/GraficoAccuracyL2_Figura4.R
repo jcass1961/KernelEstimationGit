@@ -6,26 +6,20 @@ library(e1071)
 library(extrafont) 
 #loadfonts(device = "win")
 
-getwd()
-setwd("./Data/NuevoAnalisisFinal/medidas")
+
+setwd("./Data/CISS2021")
 
 acc0 <- fread("Accuracy_L2.csv")
-sse0 <- fread("sse_L2.csv")
-head(acc0)
-head(sse0)
 
+head(acc0)
 
 acc<-as.data.frame(acc0)
 head(acc)
 acc.graf<-acc%>% gather(.,key=Estimator,value=acc,3:8) 
 acc.graf
 
-sse<-as.data.frame(sse0)
-sse.graf<-sse%>% gather(.,key=Estimator,value=sse,2:7) %>% arrange(n)
-sse.graf
 
-
-setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Figures/CISS2021")
+#setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Figures/CISS2021")
 
 legenda <- c(expression(H[A0[1]]),expression(H[C]),
              expression(H[ML]),expression(H["NA"]),
