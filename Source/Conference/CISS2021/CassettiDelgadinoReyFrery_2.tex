@@ -151,6 +151,8 @@
 	\end{align}
 	where $\psi^{(0)}$ and $B$ are the digamma and beta functions, respectively.
 	%%% ACF Sería interesante graficar la entropía para a y g variando, con L fijo
+
+	
 %	\begin{figure}[hbt]
 %		\centering    
 %		\includegraphics[width=0.6\linewidth]{../../../Figures/CISS2021/HG0L=3_2_2.pdf}
@@ -159,9 +161,11 @@
 	
 	\begin{figure}[hbt]
 		\centering    
-		\includegraphics[width=0.8\linewidth]{../../../Figures/CISS2021/entropia2.pdf}
+		\includegraphics[width=0.8\linewidth]{../../../Figures/CISS2021/entropiaL2.png}
 		\caption{$H_{\mathcal G^0}(\alpha,\gamma,L)$ as a function of alpha and gamma for $L=2$.\label{figure:HG0}}
 	\end{figure}
+
+	%%% JC Hay dos programas GraficoEntropiaGI0_Figura1.R y Plot 3d H_Figura1.R
 
 	Figure~\ref{figure:HG0} shows the $H_{\mathcal G^0}(\alpha,\gamma,L)$ theoretical entropy as a function of $\alpha$ and $\gamma$ with $L=2$. 
 	It can be shown that, for each fixed $\gamma$ value, $H_{\mathcal G^0}$ is an injective function. The same behavior repeats if we consider $\alpha$ as a constant.
@@ -318,6 +322,9 @@ Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for
 	\subfigure[\label{ECM_W_L=2}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_mW_L=2ConNeg}}
 	\caption{Bias and MSE for Wieczorkowski criterion, $L=2$.}
 	\end{figure}    
+
+	%%% JC Figura2.Rmd
+	
 It can be seen that there is no single estimator that performs well for all $\alpha$ value. $H_\text{C}$ and $H_{\text{AO}_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. The others estimators show bad behavior for all the cases studied.	
 
 In order to improve the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion we implement another strategy to choose, for each sample size $n$, the best $m$ value to be used for all $\alpha$ values.
@@ -390,6 +397,8 @@ Figures~\ref{Sesgo_HL=2ConNeg} and~\ref{ECM_HL=2ConNeg} show the behavior of the
 	\caption{Bias and MSE for authors proposal $m$ choice, $L=2$.} 
 \end{figure}     
 	
+	%%% JC Figura3.Rmd
+	
 We continue studying the quality of these estimators in the SAR image classification framework.
 %	We then assessed the performance of these estimators in the frame of supervised classification by applying supported vector machine (SVM) technique, and of unsupervised classification using $k$-means. 
 %	With this purpose, we generated synthetic images varying the values of $\alpha$ and $\gamma$, and used sliding windows of different sizes to obtain the entropy map. 
@@ -442,6 +451,8 @@ In the following, we present empirical results classifying a synthetic image SAR
 	\subfigure[\label{fig:AccuracyL2}Accuracy]{\includegraphics[width=0.6\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
 	\caption{$K$-means applied to a synthetic image with $L=2$, $\gamma=0.1$ and  sliding windows size $9 \times 9$.} 
 \end{figure}  
+
+%%% JC GraficoAccuracyL2_Figura4.R
 
 For each estimator we perform a map of estimated entropies ($\hat{H}$) by sweeping the image with sliding windows of sizes $s\times s$, for $s=3,5,7,9,11$, corresponding to the sample sizes studied in section~\ref{sec:simulation}. $\hat{H}$ is then used as a feature to classify in both, unsupervised and supervised technique.
 
@@ -573,6 +584,8 @@ The same measures were computed and the results are shown in Figure~\ref{fig:acc
 	\subfigure[\label{fig:acc_synt} Using the whole image.]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/measures_synt2.pdf}}
 	\caption{Accuracy and Kappa coefficient for SVM.}
 \end{figure}    
+
+%%% JC plot_bars_accuracy_synthetic_Figura5.R
 
 %\begin{table}[htbp]
 %  \centering
