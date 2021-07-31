@@ -318,14 +318,17 @@ sample bias $\widehat{B}=B_{\widehat{H}} = \overline{\widehat{H}}- H$ where $H$ 
 Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion, $L=2$ case and for all of the estimators analyzed, except for Al-Omari~\eqref{AO2} and Ebrahimi~\eqref{HE} estimators due to the large bias they presented in the simulation study.  
 \begin{figure}[hbt]
     \centering
-	\subfigure[\label{Sesgo_W_L=2}$\widehat{\text{Bias}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_Sesgo_mW_L=2ConNeg}}
-	\subfigure[\label{ECM_W_L=2}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_mW_L=2ConNeg}}
+	\subfigure[\label{Sesgo_W_L=2}Bias]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/Grafico_Hest_Sesgo_mW_L=2ConNeg}}
+	\subfigure[\label{ECM_W_L=2}Mean Square Error]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_mW_L=2ConNeg}}
 	\caption{Bias and MSE for Wieczorkowski criterion, $L=2$.}
 	\end{figure}    
 
 	%%% JC Figura2.Rmd
+	%%% ACF Editada
 	
-It can be seen that there is no single estimator that performs well for all $\alpha$ value. $H_\text{C}$ and $H_{\text{AO}_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. The others estimators show bad behavior for all the cases studied.	
+It can be seen that there is no single estimator that performs well for all $\alpha$ value. 
+$H_\text{C}$ and $H_{\text{AO}_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. 
+The others estimators show bad behavior for all the cases studied.	
 
 In order to improve the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion we implement another strategy to choose, for each sample size $n$, the best $m$ value to be used for all $\alpha$ values.
 
@@ -392,12 +395,13 @@ Figures~\ref{Sesgo_HL=2ConNeg} and~\ref{ECM_HL=2ConNeg} show the behavior of the
 
 \begin{figure}[hbt]
     \centering
-	\subfigure[\label{Sesgo_HL=2ConNeg}$\widehat{\text{Bias}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_Sesgo_L=2ConNeg.pdf}}
-	\subfigure[\label{ECM_HL=2ConNeg}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_L=2ConNeg.pdf}}
+	\subfigure[\label{Sesgo_HL=2ConNeg}$\widehat{\text{Bias}}$]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/Grafico_Hest_Sesgo_L=2ConNeg.pdf}}
+	\subfigure[\label{ECM_HL=2ConNeg}$\widehat{\text{MSE}}$]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/Grafico_Hest_ECM_L=2ConNeg.pdf}}
 	\caption{Bias and MSE for authors proposal $m$ choice, $L=2$.} 
 \end{figure}     
 	
 	%%% JC Figura3.Rmd
+	%%% ACF Editada
 	
 We continue studying the quality of these estimators in the SAR image classification framework.
 %	We then assessed the performance of these estimators in the frame of supervised classification by applying supported vector machine (SVM) technique, and of unsupervised classification using $k$-means. 
@@ -446,13 +450,14 @@ In the following, we present empirical results classifying a synthetic image SAR
 
 \begin{figure}[hbt]
     \centering
-	\subfigure[\label{fig:syntheticL2} Synthetic]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/SinteticaL2.pdf}}
+	\subfigure[\label{fig:syntheticL2} Simulated image]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/SinteticaL2.pdf}}
 	\subfigure[\label{fig:kmeansHCL2}$K$-means $H_\text{C}$ estimator]{\includegraphics[width=0.4\linewidth]{../../../Figures/CISS2021/kmeansHC_SyntheticL2.pdf}}
 	\subfigure[\label{fig:AccuracyL2}Accuracy]{\includegraphics[width=0.6\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
 	\caption{$K$-means applied to a synthetic image with $L=2$, $\gamma=0.1$ and  sliding windows size $9 \times 9$.} 
 \end{figure}  
 
 %%% JC GraficoAccuracyL2_Figura4.R
+%%% ACF Editada
 
 For each estimator we perform a map of estimated entropies ($\hat{H}$) by sweeping the image with sliding windows of sizes $s\times s$, for $s=3,5,7,9,11$, corresponding to the sample sizes studied in section~\ref{sec:simulation}. $\hat{H}$ is then used as a feature to classify in both, unsupervised and supervised technique.
 
