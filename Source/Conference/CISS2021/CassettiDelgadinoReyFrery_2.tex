@@ -459,7 +459,7 @@ Figure~\ref{fig:syntheticL2} shows a $300 \times 300$ image generated with a $\m
 %%% JC GraficoAccuracyL2_Figura4.R
 %%% ACF Editada
 
-For each estimator we perform a map of estimated entropies ($\hat{H}$) by sweeping the image with sliding windows of sizes $s\times s$, for $s=3,5,7,9,11$, corresponding to the sample sizes studied in section~\ref{sec:simulation}. $\hat{H}$ is then used as a feature to classify in both, unsupervised and supervised technique.
+For each estimator we perform a map of estimated entropies ($\widehat{H}$) by sweeping the image with sliding windows of sizes $s\times s$, for $s=3,5,7,9,11$, corresponding to the sample sizes studied in section~\ref{sec:simulation}. Then, we use $\widehat{H}$ as a feature to classify by both the unsupervised and supervised techniques.
 
 For each windows size we applied $k$-means algorithm to the simulated image. Figure~\ref{fig:AccuracyL2} shows the accuracy according to the chosen sample size. It can be observed that a $9 \times 9$ window presents the best value of accuracy. It can also be seen that the $H_{\text{ML}}$ estimator presents the worth performance whereas $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ show the best performance, as is indicated in Table~\ref{tab:accuracy} with bold letter. Figure~\ref{fig:kmeansHCL2} shows the result of applied a $k$-means classification for $H_\text{C}$ estimator. Table~\ref{tab:CHyDB_synt} presents the value of CH and DB indexes for $n=81$ sample size. It can be observe that for the former case, $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ estimators have the best performance, and for the latter $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{V}}$ were the best.
 
@@ -586,8 +586,8 @@ The same measures were computed and the results are shown in Figure~\ref{fig:acc
 
 \begin{figure}[hbt]
 \centering
-\subfigure[\label{fig:acc_sample_synt} Using testing set.]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/measures_samples_synt2.pdf}}
-\subfigure[\label{fig:acc_synt} Using the whole image.]{\includegraphics[width=0.9\linewidth]{../../../Figures/CISS2021/measures_synt2.pdf}}
+\subfigure[\label{fig:acc_sample_synt} Using testing set.]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/measures_samples_synt2.pdf}}
+\subfigure[\label{fig:acc_synt} Using the whole image.]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/measures_synt2.pdf}}
 \caption{Accuracy and Kappa coefficient for SVM.}
 \end{figure}    
 
@@ -701,9 +701,14 @@ In addition, we also considered a new feature, the CV coefficient and found that
 
 All studies were made in the \texttt R platform and language for statistical computing~\cite{RLanguage} (version~4.0.4).
 
-
-
 \bibliography{../../../Bibliography/bib_julia2.bib}
 \bibliographystyle{IEEEtran}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{../../../Figures/Common/ACFreryVUW.jpg}}]{Alejandro C.\ Frery}(S'92--SM'03)
+	received a B.Sc. degree in Electronic and Electrical Engineering from the Universidad de Mendoza, Mendoza, Argentina.
+	His M.Sc. degree was in Applied Mathematics (Statistics) from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Rio de Janeiro) and his Ph.D. degree was in Applied Computing from the Instituto Nacional de Pesquisas Espaciais (INPE, S\~ao Jos\'e dos Campos, Brazil).
+	He is Professor with the School of Mathematics and Statistics, Victoria University of Wellington, New Zealand.
+	His research interests are statistical computing and stochastic modeling.
+\end{IEEEbiography}
 
 \end{document}
