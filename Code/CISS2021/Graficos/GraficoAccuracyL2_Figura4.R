@@ -39,12 +39,12 @@ ggplot(acc.graf) +
   xlab("sample size") +
   scale_x_continuous(breaks = c(9,25,49,81,121)) +
   scale_color_discrete(name="Estimator",labels = legenda)+
-  theme(text=element_text(size=12,  family="serif"),
+  theme(text=element_text(size=15,  family="serif"),
         legend.position = "bottom",
-        axis.title.x = element_text(size = 10),
-        axis.text.x = element_text(size = 10),
-        axis.title.y = element_text(size = 10),
-        axis.text.y = element_text(size = 10),
+        axis.title.x = element_text(size = 12.5),
+        axis.text.x = element_text(size = 12.5),
+        axis.title.y = element_text(size = 12.5),
+        axis.text.y = element_text(size = 12.5),
         strip.background =element_rect(fill="white"),
         strip.placement = "outside",
         strip.text = element_text(size=10),
