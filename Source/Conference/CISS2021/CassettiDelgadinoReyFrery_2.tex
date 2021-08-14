@@ -133,7 +133,7 @@ In this regard, Shanon entropy (SE) is defined as
 	H[f(x)]&=-E[\log f(x)]=-\int_{-\infty}^{\infty} f(x) \log f(x) d x,
 \end{align}
 where $X$ is a continuous random variable with probability density function (pdf) $f(x)$ and
-cumulative distribution function (cdf) $F(x)$. 
+cumulative distribution function $F(x)$. 
 The entropy of the~$\mathcal{G}^0$ distribution can be obtained using~\eqref{eq:CDFG0}.
 Denote $H_{F}$ the entropy under the $F$ model, then the $\mathcal{G}^0$ entropy for intensity data $H_{\mathcal G^0}$ is 
 \begin{align}
@@ -213,18 +213,18 @@ The problem of estimating entropy has attracted the interest of several authors.
 	H[f(x)]=\int_{0}^{1} \log \frac{d F^{-1}(p)}{d p} d p,
 \end{align}
 considering the change of variables $x=F^{-1}(p).$
-He proposed to estimate the cdf $F(X)$ with the empirical distribution function $F_n(x)$ and used the difference operator instead of the differential operator in order to approximate the $\frac{d F^{-1}(p)}{d p}$ by a function of the order statistics.
+He proposed to estimate the cumulative distribution function  $F(X)$ with the empirical cumulative distribution function $F_n(x)$ and used the difference operator instead of the differential operator in order to approximate ${d F^{-1}(p)}/{d p}$ by a function of the order statistics.
 
-Suppose that $X_1,\dots,X_n$ be a random sample from the distribution function $F(x)$ whose order statistics are $X_{(1)}, \ldots, X_{(n)}$. 
+Assume $X_1,\dots,X_n$ is a random sample from the distribution function $F(x)$ whose order statistics are $X_{(1)}, \ldots, X_{(n)}$. 
 Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
 \begin{align}
 	\label{HV}
 	H_{\text{V}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big], 
 \end{align}
 with $m<n/2$ a positive integer number, $X_{(i+m)}-X_{(i-m)}$ the spacing of order $m$, or $m$-spacing, $X_{(i)}=X_{(i)}$ if $1<i$ and $X_{(i)}=X_{(n)}$ if $i>n$.
-The author proves that $HV$ estimator is weakly consistency of $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
+The author proves that this estimator is weakly consistent for $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
 
-Several authors introduced modifications to the Vasicek estimator. In this work we consider, furthermore HV$~\eqref{HV}$,  the following entropy estimators which were presented in Al-Omari~\cite{AlOmari2016}. 
+Several authors introduced modifications to the Vasicek estimator. In this work we also consider the following entropy estimators which were presented by Al-Omari~\cite{AlOmari2016}. 
 %In the following we present the expression of the studied estimators. 
 %It should be noted that most of the estimators studied in this work 
 %%% ACF m y n van en modo matemático
@@ -251,12 +251,12 @@ Several authors introduced modifications to the Vasicek estimator. In this work 
 	where 
 	\begin{equation*}
 		c_{i}=\left\{\begin{array}{ll}
-			1, & 1 \leq i \leq m \\
-			2, & m+1 \leq i \leq n-m \\
-			1, & n-m+1 \leq i \leq n
+			1 & \text{ if }1 \leq i \leq m, \\
+			2 & \text{ if }m+1 \leq i \leq n-m, \\
+			1 & \text{ if }n-m+1 \leq i \leq n,
 		\end{array}\right.
 	\end{equation*}
-	and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m .$ 
+	and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m $. 
 	\item Al-Omari~\cite{AlOmari2014}:
 	\begin{align}
 		H_{{\text{AO}}_1}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
@@ -301,9 +301,17 @@ Several authors introduced modifications to the Vasicek estimator. In this work 
 	\end{equation*}
 \end{itemize}
 
-Van Es~\cite{VanEs92} showed that, under general conditions, this estimator converge almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$, and also showed the asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
-Correa~\cite{Correa95}, through a simulated study, showed that his proposal has a smaller mean squared error than the Vasiciek proposal~\eqref{HV}. Al-Omari\cite{AlOmari2014} presented three estimator based on different sampling method. In this paper we studied the simple random sampling one (\textit{SRS})~\eqref{AHE} and second proposal suggested
-in \cite{AlOmari2016}. The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $H_{\text{E}}\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
+Van Es~\cite{VanEs92} showed that, under general conditions, \eqref{HVE} converges almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$.
+The author also proved the estimator's asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
+Correa~\cite{Correa95}, through a simulated study, showed that his estimator has a smaller mean squared error than Vasiciek's  proposal~\eqref{HV}. 
+
+Al-Omari\cite{AlOmari2014} presented three estimators based on different sampling methods.
+In this paper we studied the simple random sampling one (\textit{SRS})~\eqref{AHE} and second proposal suggested
+in \cite{AlOmari2016}. 
+The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
+Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. 
+Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $H_{\text{E}}\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
+The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
 
 \section{Simulation study}\label{sec:simulation}
 
