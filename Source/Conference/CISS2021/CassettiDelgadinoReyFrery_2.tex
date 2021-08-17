@@ -198,17 +198,15 @@ The ML entropy estimator~\cite{CaseBerg01} is
 \begin{align}
 	H_\text{ML}=H_{\mathcal G^0}(\widehat{\alpha}_{\text{ML}},\widehat{\gamma}_{\text{ML}},L).
 \end{align}
-
-%; the left-hand-side of~\eqref{rootML} is the gradient of~\eqref{ML}. 
-
-%Function~\eqref{ML} is, in general, unimodal but, depending on the sample, it may be monotonically decreasing. 
-%This behavior is the responsible for the algorithm failing to converge.
-
+This estimator inherits all the good properties of ML estimators (consistency and asymptotic normality), but also their pitfalls: sensitivity to the initial value, lack of convergence due to flatness of~\eqref{ML}, and lack of robustness.
+Convergence problems, which are more prevalent with small samples and with data from textureless areas, were identified by Frery et al.~\cite{FreryCribariSouza:JASP:04} and mitigated with a line-search algorithm.
+Refs.~\cite{BustosFreryLucini:Mestimators:2001,AllendeFreryetal:JSCS:05,gambini2015} study robust alternatives to~\eqref{ML}.
 
 \subsection{Non-parametric entropy estimators}
 \label{Hest}
 
-The problem of estimating entropy has attracted the interest of several authors. For continuous random variables Vasicek~\cite{Vasicek76} showed that the functional defined in~\eqref{SE} can be written as
+The problem of estimating entropy has attracted the interest of several authors. 
+For continuous random variables Vasicek~\cite{Vasicek76} showed that the functional~\eqref{SE} can be written as
 \begin{align}
 	H[f(x)]=\int_{0}^{1} \log \frac{d F^{-1}(p)}{d p} d p,
 \end{align}
@@ -224,13 +222,13 @@ Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
 with $m<n/2$ a positive integer number, $X_{(i+m)}-X_{(i-m)}$ the spacing of order $m$, or $m$-spacing, $X_{(i)}=X_{(i)}$ if $1<i$ and $X_{(i)}=X_{(n)}$ if $i>n$.
 The author proves that this estimator is weakly consistent for $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
 
-Several authors introduced modifications to the Vasicek estimator. In this work we also consider the following entropy estimators which were presented by Al-Omari~\cite{AlOmari2016}. 
-%In the following we present the expression of the studied estimators. 
-%It should be noted that most of the estimators studied in this work 
-%%% ACF m y n van en modo matemático
-%%% ACF citar los artículos originales
+The only possible numerical problem with this estimator and its variants is having zero as the argument of the logarithm, a situation that can be easily checked and solved.
+Their computational complexity reduces to adding differences of order statistics.
+These estimators are robust by nature, since they do not depend on any particular model.
+
+Several authors introduced modifications to Vasicek's estimator. 
+In this work we also consider the following entropy estimators which were presented by Al-Omari~\cite{AlOmari2016}. 
 \begin{itemize}
-	%%% ACF Qué es m?
 	\item Van Es~\cite{VanEs92}:
 	\begin{align}
 		\label{HVE}
@@ -276,6 +274,7 @@ Several authors introduced modifications to the Vasicek estimator. In this work 
 	\label{AO2}
 	\begin{align}
 		H_{{\text{AO}}_2}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+		\label{eq:AO2}
 	\end{align}
 	where
 	\begin{equation*}
@@ -303,10 +302,9 @@ Several authors introduced modifications to the Vasicek estimator. In this work 
 
 Van Es~\cite{VanEs92} showed that, under general conditions, \eqref{HVE} converges almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$.
 The author also proved the estimator's asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
-Correa~\cite{Correa95}, through a simulated study, showed that his estimator has a smaller mean squared error than Vasiciek's  proposal~\eqref{HV}. 
+Correa~\cite{Correa95}, through a simulation study, showed that his estimator has a smaller mean squared error than Vasiciek's  proposal~\eqref{HV}. 
 
-Al-Omari studied two estimators, the first one is presented in \cite{AlOmari2014} and the second proposal suggested in \cite{AlOmari2016}. The difference between them are the factors $w_i$ and $\nu_i$ corresponding to the first and second estimators respectively.
-The author proved that these estimators converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
+Al-Omari's estimators, cf.~\eqref{AHE} and~\eqref{eq:AO2}, converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
 Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. 
 Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $H_{\text{E}}\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
 The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
