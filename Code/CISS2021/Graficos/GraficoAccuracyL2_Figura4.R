@@ -21,12 +21,12 @@ acc.graf
 
 #setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Figures/CISS2021")
 
-legenda <- c(expression(italic(H)[A0[1]]),
-             expression(italic(H)[C]),
-             expression(italic(H)[ML]),
-             expression(italic(H)["NA"]),
-             expression(italic(H)[V]),
-             expression(italic(H)[VE]))
+legenda <- c(expression(widehat(italic(H))[A0[1]]),
+             expression(widehat(italic(H))[C]),
+             expression(widehat(italic(H))[ML]),
+             expression(widehat(italic(H))["NA"]),
+             expression(widehat(italic(H))[V]),
+             expression(widehat(italic(H))[VE]))
 ### acc
 #setwd("C:/Users/Usuario/Google Drive (jacassetti@docentes.unm.edu.ar)/AndreDaiJulia/Figures/CISS2021")
 
@@ -34,8 +34,8 @@ par(mgp=c(2.2,0.45,0), tcl=-0.4, mar=c(0,0,0,0))
 
 ggplot(acc.graf) +
   geom_line(aes(x=n, y=acc, colour = Estimator), size=1) +
-  geom_point(aes(x=n, y=acc, colour = Estimator)) +
-  ylab("") +
+  geom_point(aes(x=n, y=acc, colour = Estimator), size=2) +
+  ylab("Accuracy") +
   xlab("sample size") +
   scale_x_continuous(breaks = c(9,25,49,81,121)) +
   scale_color_discrete(name="Estimator",labels = legenda)+

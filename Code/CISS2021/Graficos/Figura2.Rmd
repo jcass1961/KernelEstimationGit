@@ -42,12 +42,12 @@ g1$alfa <- factor(g1$alfa, levels = c("-1.5","-3","-5","-8"),
                   expression(alpha==-5),
                   expression(alpha==-8))
                   )
-legenda <- c(expression(italic(H)[A0[1]]),
-             expression(italic(H)[C]),
-             expression(italic(H)[ML]),
-             expression(italic(H)["NA"]),
-             expression(italic(H)[V]),
-             expression(italic(H)["VE"]))
+legenda <- c(expression(widehat(italic(H))[A0[1]]),
+             expression(widehat(italic(H))[C]),
+             expression(widehat(italic(H))[ML]),
+             expression(widehat(italic(H))["NA"]),
+             expression(widehat(italic(H))[V]),
+             expression(widehat(italic(H))["VE"]))
 
 plt1<-ggplot(g1,aes(n,Bias,col=Estimator))+
 scale_x_continuous(breaks=c(9,25,49,81,121))+

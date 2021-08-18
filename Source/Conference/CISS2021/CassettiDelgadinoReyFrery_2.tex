@@ -128,27 +128,27 @@ It is well known Shannon's contribution to the creation of what is known as Info
 Shannon~\cite{Shannon1948} proposed a new way of
 measuring the transmission of information through a channel, thinking information as a statistical concept. 
 In this regard, Shanon entropy (SE) is defined as
-\begin{align}
+\begin{equation}
+	H(Z)=-E[\log f(z)]=-\int_{-\infty}^{\infty} f(z) \log f(z) d z,
 	\label{SE}
-	H[f(x)]&=-E[\log f(x)]=-\int_{-\infty}^{\infty} f(x) \log f(x) d x,
-\end{align}
-where $X$ is a continuous random variable with probability density function (pdf) $f(x)$ and
-cumulative distribution function $F(x)$. 
+\end{equation}
+where $Z$ is a continuous random variable with probability density function (pdf) $f(z)$ and
+cumulative distribution function $F(z)$. 
 The entropy of the~$\mathcal{G}^0$ distribution can be obtained using~\eqref{eq:CDFG0}.
-Denote $H_{F}$ the entropy under the $F$ model, then the $\mathcal{G}^0$ entropy for intensity data $H_{\mathcal G^0}$ is 
-\begin{align}
+Denote $H_{F}$ the entropy under the Fisher-Snedekor model, then the $\mathcal{G}^0$ entropy for intensity data $H_{\mathcal G^0}$ is 
+\begin{equation}
 	\label{EntropiaFisherGi0}
 	H_{\mathcal G^0}(\alpha,\gamma,L)=H_{F}(2 L, - 2 \alpha) -\log(-\alpha / \gamma).
-\end{align}
+\end{equation}
 Using~\eqref{EntropiaFisherGi0}, the
 %%% Por qué "an"? Hay otras? Revisar todo.
 expression of $H_{\mathcal G^0}$ is
-\begin{align}
+\begin{multline}
 	\label{EG0}
-	H_{\mathcal G^0}(\alpha,\gamma,L)&=-\log (-\alpha / \gamma)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ \nonumber
-	&+\log (-\alpha / L)+ ( L- \alpha ) \psi ^{(0)} ( L- \alpha )\\ \nonumber
-	&+\log \big(B(L,-\alpha )\big)+(1-L) \psi^{(0)}(L),
-\end{align}
+	H_{\mathcal G^0}(\alpha,\gamma,L)=-\log (-\alpha / \gamma)-(1-\alpha ) \psi^{(0)}(-\alpha )\\ 
+	\mbox{}+\log (-\alpha / L)+ ( L- \alpha ) \psi ^{(0)} ( L- \alpha )\\ 
+	\mbox{}+\log \big(B(L,-\alpha )\big)+(1-L) \psi^{(0)}(L),
+\end{multline}
 where $\psi^{(0)}$ and $B$ are the digamma and beta functions, respectively.
 %%% ACF Sería interesante graficar la entropía para a y g variando, con L fijo
 
@@ -162,7 +162,7 @@ where $\psi^{(0)}$ and $B$ are the digamma and beta functions, respectively.
 \begin{figure}[hbt]
 	\centering    
 	\includegraphics[width=0.8\linewidth]{../../../Figures/CISS2021/entropiaL2.png}
-	\caption{$H_{\mathcal G^0}(\alpha,\gamma,L)$ as a function of alpha and gamma for $L=2$.\label{figure:HG0}}
+	\caption{$H_{\mathcal G^0}(\alpha,\gamma,L)$ as a function of $\alpha$ and $\gamma$ for $L=2$.\label{figure:HG0}}
 \end{figure}
 
 %%% JC Hay dos programas GraficoEntropiaGI0_Figura1.R y Plot 3d H_Figura1.R
@@ -181,7 +181,7 @@ In what follows, we describe the entropy estimators studied in this paper.
 
 \subsection{Maximum likelihood entropy estimator}
 
-Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma,L)$ distribution.
+Let $\bm Z = (Z_1,\dots, Z_n)$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma,L)$ distribution.
 Assume $L$ is known.
 The maximum likelihood estimator of $\alpha$ and $\gamma$ for $L$ known, denoted $\widehat\alpha_{\text{ML}}$ and $\widehat\gamma_{\text{ML}}$ respectively, consists of the values in the parametric space $\mathbbm R_-\times\mathbbm R_+$, that maximize the loglikelihood function:
 \begin{multline}
@@ -196,7 +196,7 @@ This algorithm belongs to the quasi-Newton methods family, not requiring the Hes
 
 The ML entropy estimator~\cite{CaseBerg01} is
 \begin{align}
-	H_\text{ML}=H_{\mathcal G^0}(\widehat{\alpha}_{\text{ML}},\widehat{\gamma}_{\text{ML}},L).
+	\widehat{H}_\text{ML}(\bm Z)=H_{\mathcal G^0}(\widehat{\alpha}_{\text{ML}},\widehat{\gamma}_{\text{ML}},L).
 \end{align}
 This estimator inherits all the good properties of ML estimators (consistency and asymptotic normality), but also their pitfalls: sensitivity to the initial value, lack of convergence due to flatness of~\eqref{ML}, and lack of robustness.
 Convergence problems, which are more prevalent with small samples and with data from textureless areas, were identified by Frery et al.~\cite{FreryCribariSouza:JASP:04} and mitigated with a line-search algorithm.
@@ -208,44 +208,47 @@ Refs.~\cite{BustosFreryLucini:Mestimators:2001,AllendeFreryetal:JSCS:05,gambini2
 The problem of estimating entropy has attracted the interest of several authors. 
 For continuous random variables Vasicek~\cite{Vasicek76} showed that the functional~\eqref{SE} can be written as
 \begin{align}
-	H[f(x)]=\int_{0}^{1} \log \frac{d F^{-1}(p)}{d p} d p,
+	H[Z]=\int_{0}^{1} \log \frac{d F^{-1}(p)}{d p} d p,
 \end{align}
-considering the change of variables $x=F^{-1}(p).$
-He proposed to estimate the cumulative distribution function  $F(X)$ with the empirical cumulative distribution function $F_n(x)$ and used the difference operator instead of the differential operator in order to approximate ${d F^{-1}(p)}/{d p}$ by a function of the order statistics.
+considering the change of variables $z=F^{-1}(p).$
+He proposed to estimate the cumulative distribution function  $F(Z)$ with the empirical cumulative distribution function $F_n(z)$ and used the difference operator instead of the differential operator in order to approximate ${d F^{-1}(p)}/{d p}$ by a function of the order statistics.
 
-Assume $X_1,\dots,X_n$ is a random sample from the distribution function $F(x)$ whose order statistics are $X_{(1)}, \ldots, X_{(n)}$. 
+Assume $\bm Z =(Z_1,\dots,Z_n)$ is a random sample from the law characterized by the distribution function $F(z)$ whose order statistics are $Z_{(1)}, \ldots, Z_{(n)}$. 
 Vasicek~\cite{Vasicek76} proposed the following entropy estimator,
 \begin{align}
 	\label{HV}
-	H_{\text{V}}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big], 
+	\widehat{H}_{\text{V}}(\bm Z)=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{2 m}\big(Z_{(i+m)}-Z_{(i-m)}\big)\Big], 
 \end{align}
-with $m<n/2$ a positive integer number, $X_{(i+m)}-X_{(i-m)}$ the spacing of order $m$, or $m$-spacing, $X_{(i)}=X_{(i)}$ if $1<i$ and $X_{(i)}=X_{(n)}$ if $i>n$.
-The author proves that this estimator is weakly consistent for $H(f)$ when $m/n \to 0$ and $n,m \to \infty$.
+with $m<n/2$ a positive integer number, 
+$Z_{(i+m)}-Z_{(i-m)}$ the spacing of order $m$, or $m$-spacing, 
+$Z_{(i)}=Z_{(i)}$ if $1<i$ and $Z_{(i)}=Z_{(n)}$ if $i>n$.
+The author proves that this estimator is weakly consistent for $H(Z)$ when $m/n \to 0$ and $n,m \to \infty$.
 
 The only possible numerical problem with this estimator and its variants is having zero as the argument of the logarithm, a situation that can be easily checked and solved.
 Their computational complexity reduces to adding differences of order statistics.
 These estimators are robust by nature, since they do not depend on any particular model.
+Differently from the approaches discussed in Refs.~\cite{BustosFreryLucini:Mestimators:2001,AllendeFreryetal:JSCS:05,gambini2015}, achieving such a robustness does not impose a heavy computational burden.
 
 Several authors introduced modifications to Vasicek's estimator. 
-In this work we also consider the following entropy estimators which were presented by Al-Omari~\cite{AlOmari2016}. 
+In this work we consider the following entropy estimators variants, surveyed by Al-Omari~\cite{AlOmari2016}. 
 \begin{itemize}
 	\item Van Es~\cite{VanEs92}:
-	\begin{align}
+	\begin{multline}
 		\label{HVE}
-		H_\text{VE}&=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\big(X_{(i+m)}-X_{(i)}\big)\Big]} \nonumber\\
-		&+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
-	\end{align}
+		\widehat{H}_\text{VE}(\bm Z)=\frac{1}{n-m} \sum_{i=1}^{n-m}\log{\Big[\frac{n+1}{m}\big(Z_{(i+m)}-Z_{(i)}\big)\Big]} \\
+		\mbox{}+\sum_{k=m}^{n} \frac{1}{k}+\log \frac{m}{n+1}.
+	\end{multline}
 	\item Correa~\cite{Correa95}:
-	\begin{align}
+	\begin{equation}
+		\widehat{H}_\text{C}(\bm Z)=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(Z_{(j)}-\overline{Z}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\big(Z_{(j)}-\overline{Z}_{(i)}\big)^{2}},		
 		\label{HC}
-		H_\text{C}=-\frac{1}{n} \sum_{i=1}^{n} \log \frac{\sum_{j=i-m}^{i+m}(j-i)\left(X_{(j)}-\overline{X}_{(i)}\right)}{n \sum_{j=i-m}^{i+m}\big(X_{(j)}-\overline{X}_{(i)}\big)^{2}},
-	\end{align}
-	where $\overline{X}_{(i)}=(2 m+1)^{-1} \sum_{j=i-m}^{i+m} X_{(j)}$.
-	\item Noughabiet et al.~\cite{Noughabi2010} 
+	\end{equation}
+	where $\overline{Z}_{(i)}=(2 m+1)^{-1} \sum_{j=i-m}^{i+m} Z_{(j)}$.
+	\item Noughabi et al.~\cite{Noughabi2010} 
 	\label{HNA}
-	\begin{align}
-		H_\text{NA}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{c_{i} m}\big(X_{(i+m)}-X_{(i-m)}\big)\Big]
-	\end{align}
+	\begin{equation}
+		\widehat{H}_\text{NA}(\bm Z)=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{c_{i} m}\big(Z_{(i+m)}-Z_{(i-m)}\big)\Big]
+	\end{equation}
 	where 
 	\begin{equation*}
 		c_{i}=\left\{\begin{array}{ll}
@@ -254,12 +257,12 @@ In this work we also consider the following entropy estimators which were presen
 			1 & \text{ if }n-m+1 \leq i \leq n,
 		\end{array}\right.
 	\end{equation*}
-	and $X_{(i-m)}=X_{(1)}$ if $i \leq m$ and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m $. 
+	and $Z_{(i-m)}=Z_{(1)}$ if $i \leq m$ and $Z_{(i+m)}=Z_{(n)}$ for $i \geq n-m $. 
 	\item Al-Omari~\cite{AlOmari2014}:
-	\begin{align}
-		H_{{\text{AO}}_1}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big], 
+	\begin{equation}
+		\widehat{H}_{{\text{AO}}_1}(\bm Z)=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\omega_{i} m}\left(Z_{(i+m)}-Z_{(i-m)}\right)\Big], 
 		\label{AHE}
-	\end{align}
+	\end{equation}
 	where
 	\begin{equation*}
 		\omega_{i}= \begin{cases}
@@ -268,14 +271,14 @@ In this work we also consider the following entropy estimators which were presen
 			3/2 & \text{ if } n-m+1 \leq i \leq n,
 		\end{cases}
 	\end{equation*}
-	in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$. 
+	in which $Z_{(i-m)}=Z_{(1)}$ for $i \leq m$, and $Z_{(i+m)}=Z_{(n)}$ for $i \geq n-m$. 
 	
 	\item Al-Omari alternative proposal~\cite{AlOmari2016}:
 	\label{AO2}
-	\begin{align}
-		H_{{\text{AO}}_2}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+	\begin{equation}
+		\widehat{H}_{{\text{AO}}_2}(\bm Z)=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{v_{i} m}\left(Z_{(i+m)}-Z_{(i-m)}\right)\Big],
 		\label{eq:AO2}
-	\end{align}
+	\end{equation}
 	where
 	\begin{equation*}
 		v_{i}=\begin{cases}
@@ -284,10 +287,10 @@ In this work we also consider the following entropy estimators which were presen
 			1+(n-i)/2m & \text{ if } n-m+1 \leq i \leq n,
 		\end{cases}
 	\end{equation*}
-	in which $X_{(i-m)}=X_{(1)}$ for $i \leq m$, and $X_{(i+m)}=X_{(n)}$ for $i \geq n-m$.
+	in which $Z_{(i-m)}=Z_{(1)}$ for $i \leq m$, and $Z_{(i+m)}=Z_{(n)}$ for $i \geq n-m$.
 	\item Ebrahimi~\cite{Ebrahimi94}
 	\begin{align}
-		H_\text{E}=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(X_{(i+m)}-X_{(i-m)}\right)\Big],
+		\widehat{H}_\text{E}(\bm Z)=\frac{1}{n} \sum_{i=1}^{n} \log \Big[\frac{n}{\tau_{i} m}\left(Z_{(i+m)}-Z_{(i-m)}\right)\Big],
 		\label{HE}
 	\end{align}
 	where
@@ -300,26 +303,33 @@ In this work we also consider the following entropy estimators which were presen
 	\end{equation*}
 \end{itemize}
 
-Van Es~\cite{VanEs92} showed that, under general conditions, \eqref{HVE} converges almost surely to $H[f(x)]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$.
+Van Es~\cite{VanEs92} showed that, under general conditions, \eqref{HVE} converges almost surely to $H[Z]$ when $m, n \to \infty$, $m/\log(n) \to \infty$, and $m/n \to 0$.
 The author also proved the estimator's asymptotic normality when $m, n \to \infty$ and $m = o(n^{1/2})$. 
 Correa~\cite{Correa95}, through a simulation study, showed that his estimator has a smaller mean squared error than Vasiciek's  proposal~\eqref{HV}. 
 
-Al-Omari's estimators, cf.~\eqref{AHE} and~\eqref{eq:AO2}, converge in probability to $ H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
+Al-Omari's estimators, cf.~\eqref{AHE} and~\eqref{eq:AO2}, converge in probability to $ H[Z]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
 Ebrahimi et al~\cite{Ebrahimi94} presented an estimator adjusting the Vasicek's\cite{Vasicek76} weight. 
-Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $H_{\text{E}}\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[f(x)]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
+Under the same conditions than Al-Omari\cite{AlOmari2014} the authors proved that $\widehat{H}_{\text{E}}(\bm Z)\underset{n \to \infty}{\overset{p}{\longrightarrow}} H[Z]$ when $m, n \to \infty  \text{ and } m/n \to 0$. 
 The same applies to Noughabi et al. estimator~\cite{Noughabi2010}.
 
-\section{Simulation study}\label{sec:simulation}
+\section{Estimator Tuning}\label{sec:simulation}
 
-The choice of the spacing parameter $m$ in this kind of estimator is an important task that is still open. Wieczorkowski et al.~\cite{Wieczorkowski1999} proposed a heuristic formula $m=[\sqrt{n}+0.5]$. To assess the performance of this criterion, we conducted a Monte Carlo study for the entropy estimators presented in section~\ref{Hest} under the $\mathcal{G}^0$ model.
+The choice of the spacing parameter $m$ in this kind of estimator is an important task that is still open. 
+Wieczorkowski et al.~\cite{Wieczorkowski1999} proposed a heuristic formula $m=[\sqrt{n}+0.5]$. 
+We conducted a Monte Carlo study for the entropy estimators presented in section~\ref{Hest} under the $\mathcal{G}^0$ model to assess the performance of this criterion.
 
-We generated $1000$ samples from a $\mathcal{G}^0$ distribution of size $n \in\left\lbrace 9,25,49,81,121\right\rbrace $ for each textured value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $ and $L=2$. For each non-parametric study we use the $m$ value chosen with the Wieczorkowski et al. proposal.
-The sample sizes chosen represent different scenarios of window sizes. Since the parameter $\gamma$ is proportional to the brightness, meaning it is a scale parameter, we based the forthcoming analysis on the condition $E(Z)=1$, which links texture and brightness parameter by $\gamma^* =-\alpha-1$. 
+We generated $1000$ independent samples
+of size $n \in\left\lbrace 9,25,49,81,121\right\rbrace $ for each texture value $\alpha \in\left\lbrace -8,-5-3,-1.5\right\rbrace $ and $L=2$ from the $\mathcal{G}^0$ distribution. 
+The sample sizes chosen represent different scenarios of window sizes. 
+All non-parametric estimators used $m$ as suggested in Ref.~\cite{Wieczorkowski1999}.
+The parameter $\gamma$ is a scale parameter; we, thus, based the forthcoming analysis on the condition $E(Z)=1$, which links texture and brightness parameter by $\gamma^* =-\alpha-1$. 
 
-Each replication produces a vector  of estimators $(\widehat{H}_1, \dots, \widehat{H}_{1000})$ from which we compute sample mean $\overline{\widehat{H}}$, 
-sample bias $\widehat{B}=B_{\widehat{H}} = \overline{\widehat{H}}- H$ where $H$ is the true entropy value, and sample mean squared error (MSE) $\widehat{\textrm{MSE}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{H}_i-H)^2}}$.
+Each replication produces a vector  of estimates $(\widehat{H}_1, \dots, \widehat{H}_{1000})$ from which we compute sample mean $\overline{\widehat{H}}$, 
+sample bias $\widehat{B}_{\widehat{H}} = \overline{\widehat{H}}- H$ where $H$ is the true entropy value, and sample mean squared error (MSE) $\widehat{\textrm{MSE}}=({1000})^{-1}{\sum_{i=1}^{1000}{(\widehat{H}_i-H)^2}}$.
 
-Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion, $L=2$ case and for all of the estimators analyzed, except for Al-Omari~\eqref{AO2} and Ebrahimi~\eqref{HE} estimators due to the large bias they presented in the simulation study.  
+Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} present the bias and the MSE for the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion, $L=2$ case and for all of the estimators analyzed, except for Al-Omari~\eqref{AO2} and Ebrahimi~\eqref{HE} estimators.
+These two estimators presented large bias and, thus, were discarded for further analysis.  
+
 \begin{figure}[hbt]
 	\centering
 	\subfigure[\label{Sesgo_W_L=2}Bias]{\includegraphics[width=\linewidth]{../../../Figures/CISS2021/Grafico_Hest_Sesgo_mW_L=2ConNeg}}
@@ -330,14 +340,14 @@ Figures~\ref{Sesgo_W_L=2} and~\ref{ECM_W_L=2} presented the bias and the MSE for
 %%% JC Figura2.Rmd
 %%% ACF Editada
 
-It can be seen that there is no single estimator that performs well for all $\alpha$ values. 
+It can be seen that there is no single estimator that performs best for all $\alpha$ values. 
 $H_\text{C}$ and $H_{\text{AO}_1}$ present low bias and low MSE for all the cases study except for $\alpha=-1.5$. 
 The others estimators show bad behavior for all the cases studied.	
 
 In order to improve the Wieczorkowski et al.~\cite{Wieczorkowski1999} criterion, we implement another strategy to choose, for each sample size $n$, the best $m$ value to be used for all $\alpha$ values.
 
 Table~\ref{tab:eleccion_mejor_m} shows the schema of the methodology employed, for fixed $n$ value and entropy estimator. 
-Each table entry, $\widehat{B}_{ij}$, represents the bias for $m=i$ and $\alpha \text{=} \alpha_j$. 
+Each table entry, $\widehat{B}_{ij}$, represents the bias for $m=i$ and $\alpha= \alpha_j$. 
 For each estimator and each fixed $m$ value we calculate the average bias ($\overline{\widehat{B}}$) between different $\alpha$ values. Finally, the chosen $m$ is the argument that minimizes the average bias.
 
 \begin{table}[hbt]
@@ -375,7 +385,7 @@ Table~\ref{tab:Mejor_m} shows the best $m$ chosen according to the methodology u
 	\caption{Best $m$ chosen for each $n$ and entropy estimator.}
 	\begin{tabular}{crcccrc}
 		\toprule
-		$L$     & \multicolumn{1}{l}{$n$} & \multicolumn{1}{l}{$H_{{\text{AO}}_1}$} & \multicolumn{1}{l}{$H_\text{C}$} & \multicolumn{1}{l}{$H_{\text{NA}}$} & \multicolumn{1}{l}{$H_\text{V}$} & \multicolumn{1}{l}{$H_{\text{VE}}$} \\
+		$L$     & \multicolumn{1}{l}{$n$} & \multicolumn{1}{l}{$\widehat{H}_{{\text{AO}}_1}$} & \multicolumn{1}{l}{$\widehat{H}_\text{C}$} & \multicolumn{1}{l}{$\widehat{H}_{\text{NA}}$} & \multicolumn{1}{l}{$\widehat{H}_\text{V}$} & \multicolumn{1}{l}{$\widehat{H}_{\text{VE}}$} \\
 		\midrule
 		\multirow{5}[1]{*}{1} 
 		& $9$     & $4$     & $4$     & $3$     & $4$     & $4$ \\
@@ -455,8 +465,8 @@ Figure~\ref{fig:syntheticL2} shows a $300 \times 300$ image generated with a $\m
 \begin{figure}[hbt]
 	\centering
 	\subfigure[\label{fig:syntheticL2} Simulated image]{\includegraphics[width=0.49\linewidth]{../../../Figures/CISS2021/SinteticaL2.pdf}}
-	\subfigure[\label{fig:kmeansHCL2}$K$-means $H_\text{C}$ estimator]{\includegraphics[width=0.49\linewidth]{../../../Figures/CISS2021/kmeansHC_SyntheticL2.pdf}}
-	\subfigure[\label{fig:AccuracyL2}Accuracy]{\includegraphics[width=.8\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
+	\subfigure[\label{fig:kmeansHCL2}$K$-means $\widehat{H}_\text{C}$ estimator]{\includegraphics[width=0.49\linewidth]{../../../Figures/CISS2021/kmeansHC_SyntheticL2.pdf}}
+	\subfigure[\label{fig:AccuracyL2}Performance]{\includegraphics[width=.8\linewidth]{../../../Figures/CISS2021/Accuracy_L2.pdf}}
 	\caption{$K$-means applied to a simulated image with $L=2$, $\gamma=0.1$ and  sliding windows size $9 \times 9$.} 
 \end{figure}  
 
@@ -475,7 +485,7 @@ For each windows size we applied $k$-means algorithm to the simulated image. Fig
 	\begin{tabular}{crrrrrr}
 		%\multicolumn{7}{c}{Accuracy} \\
 		\midrule
-		$n$     & \multicolumn{1}{c}{$H_{{\text{AO}}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$}\\
+		$n$     & \multicolumn{1}{c}{$H_{{\text{AO}}_1}$} & \multicolumn{1}{c}{$\widehat{H}_\text{C}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{NA}}$} & \multicolumn{1}{c}{$\widehat{H}_\text{V}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{VE}}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{ML}}$}\\
 		\midrule
 		9 & 0.664 & 0.659 & 0.665 & 0.665 & 0.640 & 0.682 \\
 		25  & 0.839 & 0.855 & 0.859 & 0.837 & 0.846 & 0.796 \\
@@ -494,7 +504,7 @@ For each windows size we applied $k$-means algorithm to the simulated image. Fig
 	\begin{tabular}{crrrrrr}
 		%\multicolumn{8}{c}{Indexes} \\
 		\midrule
-		Index   & $H_{{\text{AO}}_1}$ & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$} \\
+		Index   & $H_{{\text{AO}}_1}$ & \multicolumn{1}{c}{$\widehat{H}_\text{C}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{NA}}$} & \multicolumn{1}{c}{$\widehat{H}_\text{V}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{VE}}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{ML}}$} \\
 		\midrule
 		CH	&	852914	&	\textbf{898079}	&	\textbf{902719}	&	852914	&	\textbf{867746}	&	703774	\\
 		DB	&	0.441	&	\textbf{0.434}	&	\textbf{0.433}	&	\textbf{0.441}	&	0.442	&	0.467	\\
@@ -573,7 +583,7 @@ In the presence of matching, we decided to opt for the fastest or simplest choic
 	\label{tab:hyperparameters}
 	\begin{tabular}{cllllll}
 		\toprule
-		$n$ & \multicolumn{1}{c}{$H_{\text{AO}_1}$} & \multicolumn{1}{c}{$H_\text{C}$} & \multicolumn{1}{c}{$H_{\text{NA}}$} & \multicolumn{1}{c}{$H_\text{V}$} & \multicolumn{1}{c}{$H_{\text{VE}}$} & \multicolumn{1}{c}{$H_{\text{ML}}$} \\
+		$n$ & \multicolumn{1}{c}{$\widehat{H}_{\text{AO}_1}$} & \multicolumn{1}{c}{$\widehat{H}_\text{C}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{NA}}$} & \multicolumn{1}{c}{$\widehat{H}_\text{V}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{VE}}$} & \multicolumn{1}{c}{$\widehat{H}_{\text{ML}}$} \\
 		\midrule
 		9     & R, $c=5$, $g=1$ & R, $c=1$, $g=0.1$ & R, $c=5$, $g=2$ & R, $c=5$, $g=2$ & L, $c=0.1$ & R, $c=10$, $g=0.01$ \\
 		25    & R, $c=5$, $g=2$ & L, $c=10$ & L, $c=10$ & R, $c=10$, $g=1$ & R, $c=1$, $g=1.5$ & L, $c=0.1$ \\
@@ -614,7 +624,7 @@ The same measures were computed, and the results are shown in Figure~\ref{fig:ac
 %    \end{tabular}
 %\end{table}
 
-It can be seen that the best performance is achieved for sliding windows of size $9 \times 9$ and $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ estimators with $0.914, \ 0.914 \text{ and } 0.915$ respectively for accuracy values,  and  $0.876, \ 0.877 \text{ and } 0.878$ for Kappa index, when the classifier is applied to the whole image.
+It can be seen that the best performance is achieved for sliding windows of size $9 \times 9$ and $\widehat{H}_\text{C}$, $\widehat{H}_{\text{NA}}$, and $\widehat{H}_{\text{VE}}$ estimators with $0.914$, $0.914$ and $0.915$ of accuracy, respectively, and  $0.876$, $0.877$, and $0.878$ of Kappa index, when the classifier is applied to the whole image.
 
 Since these estimators and window size are the ones that performed the best in the simulated image, we apply them in the classification of an actual image.
 
@@ -643,15 +653,15 @@ Figure~\ref{TrainingSamples} shows the training samples selected to perform the 
 
 We studied lineal and radial kernels, but the latter produced the best results with the following hyperparameters:
 \begin{itemize}
-	\item $c=10$ and $g=1.5$ for $H_\text{C}$,
-	\item $c=5$ and $g=2$ for $H_{\text{NA}}$,
-	\item $c=10$ and $g=2$ for $H_{\text{VE}}$.
+	\item $c=10$ and $g=1.5$ for $\widehat{H}_\text{C}$,
+	\item $c=5$ and $g=2$ for $\widehat{H}_{\text{NA}}$,
+	\item $c=10$ and $g=2$ for $\widehat{H}_{\text{VE}}$.
 \end{itemize}
 
 We subsequently included the CV as a feature in the classification process, which improved the quality measures. In this case, the best performance is achieved for the linear kernel with a cost of $10$.
 
 Table~\ref{tab:acc_SF} presents the accuracy and Kappa index. 
-We can observe that the classification is improved when we consider CV coefficient. In terms of entropy estimators, $H_{\text{NA}}$ seems to be the best classifier, including the CV as a feature.
+We can observe that the classification is improved when we consider CV coefficient. In terms of entropy estimators, $\widehat{H}_{\text{NA}}$ seems to be the best classifier, including the CV as a feature.
 
 \begin{table}[htbp]
 	\centering
@@ -662,9 +672,9 @@ We can observe that the classification is improved when we consider CV coefficie
 		& \multicolumn{2}{c}{estimators} & \multicolumn{2}{c}{estimators and cv} \\ \cmidrule(lr){2-3}\cmidrule(lr){4-5}          
 		& \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} & \multicolumn{1}{c}{\textbf{Accuracy}} & \multicolumn{1}{c}{\textbf{Kappa}} \\
 		\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}
-		$H_\text{C}$    & 0.9681 & 0.9596 & 0.9917 & 0.9895 \\
-		$H_{\text{NA}}$   & 0.9669 & 0.9581 & 0.9929 & 0.9910 \\
-		$H_{\text{VE}}$   & 0.9705 & 0.9626 & 0.9906 & 0.9880 \\
+		$\widehat{H}_\text{C}$    & 0.9681 & 0.9596 & 0.9917 & 0.9895 \\
+		$\widehat{H}_{\text{NA}}$   & 0.9669 & 0.9581 & 0.9929 & 0.9910 \\
+		$\widehat{H}_{\text{VE}}$   & 0.9705 & 0.9626 & 0.9906 & 0.9880 \\
 		\bottomrule
 	\end{tabular}%
 	\label{tab:acc_SF}%
@@ -693,12 +703,14 @@ We assess the performance of six nonparametric entropy estimators in conjunction
 
 The advantage of using these nonparametric estimators is that they are very simple to implement. They do not assume any model and do not need to use an optimization algorithm. The disadvantage is that they depend on a spaced parameter $m$. We solved this issue by defining a criterion for choosing the best $m$ that presents the slightest bias in the entropy estimation for all the textured values studied and all sample sizes analyzed. This criterion presents better performance than that of Wieczorkowski et al.~\cite{Wieczorkowski1999}.
 
-With these $m$ values we implemented an unsupervised ($k$-means) and supervised (SVM) classification  algorithm in simulated and actual images and compared their performance with the ML entropy estimator $H_{\text{ML}}$. We displayed that $H_\text{C}$, $H_{\text{NA}}$ and $H_{\text{VE}}$ show the best performance on most of the classification measures used. 
+With these $m$ values we implemented an unsupervised ($k$-means) and supervised (SVM) classification  algorithm in simulated and actual images and compared their performance with the ML entropy estimator $\widehat{H}_{\text{ML}}$. 
+We showed evidence that $\widehat{H}_\text{C}$, $\widehat{H}_{\text{NA}}$ and $\widehat{H}_{\text{VE}}$ have the best performance on most of the classification measures used. 
 
-For these estimators, we study their performance applying a supervised classification to a real image. We concluded that $H_{\text{VE}}$ presents the best accuracy an Kappa values, \SI{97}{\percent} and \SI{96}{\percent} respectively. 
+For these estimators, we study their performance applying a supervised classification to a real image. 
+We concluded that $\widehat{H}_{\text{VE}}$ presents the best accuracy an Kappa values, \SI{97}{\percent} and \SI{96}{\percent} respectively. 
 % value that present the least bias in the entropy estimation for all the textured values studied and all $n$ value analyzed
 
-In addition, we also considered a new feature, the CV coefficient. We found that both accuracy and Kappa index improved by \SI{2}{\percent}, and that the $H_{\text{NA}}$ estimator presented the best behavior for the studied measures.
+In addition, we also considered a new feature, the CV coefficient. We found that both accuracy and Kappa index improved by \SI{2}{\percent}, and that the $\widehat{H}_{\text{NA}}$ estimator presented the best behavior for the studied measures.
 
 \section{Computational information}
 \label{conclusion}
