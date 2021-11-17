@@ -95,7 +95,7 @@
 	For this reason, these images have a wide range of practical applications: environmental monitoring~\cite{White1991,Brisco2013}, and
 	earthquake study to map the surface deformation~\cite{Yinghui2017}, among others.  
 	%quality-assessment methods of multisensor SAR data fusion is investigated in~\cite{Abdikan2014}. 
-	Nevertheless, SAR images have the disadvantage of having speckle noise, which appears from the use of coherent illumination. 
+	Nevertheless, SAR images have the disadvantage of having speckle noise, which appears from the use of coherent illumination~\cite{SARImageStatisticalModelingPartISinglePixelStatisticalModels}. 
 	This kind of noise is a characteristic of technologies that
 	employ coherent illumination, such as microwaves, sonar, laser, and ultrasound. 
 	Speckle noise makes the analysis and interpretation of this kind of image a challenging task.
@@ -136,7 +136,9 @@
 	%\mathop{\rm argmin} \limits_{\theta\in\Omega} 
 	d(f_{\theta}, \widehat{f}),
 	\end{align}
-	where $\theta\in\Omega$ is the parameter to be estimated. In this oncoming, two elements are needed: a measure of distance and $\widehat{f}$.
+	where $\theta\in\Omega$ is the parameter to be estimated,
+	and $\Omega$ is the parameter space. 
+	In this oncoming, two elements are needed: a measure of distance and $\widehat{f}$.
 	
 	Wolfowitz~\cite{wolfowitz1953, wolfowitz1957} studied this class of estimators and showed that, under general conditions, they are strongly consistent. 
 	Beran~\cite{beran1977} proposed an MDE estimator using Hellinger's distance between a theoretical model and a nonparametric density estimator using symmetric kernels. 
@@ -155,7 +157,7 @@
 	These estimators vary their shape according to the observation. This feature allows obtaining different degrees of smoothing~\cite{Scaillet2004}, and, as they do not assign weight outside the density function support, they are free of boundary bias~\cite{chensx2000}.
 	
 	In the last decade, concepts related to information theory have gained interest in image processing. 
-	In particular, several measures have been proposed to reflect the closeness between two distribution functions. 
+	In particular, several measures have been proposed to reflect the closeness between the models that describe samples. 
 	Especially the concept of stochastic divergence has found applications in areas as diverse as signal and image processing~\cite{Aviyente2007}, automatic region detection in SAR imagery~\cite{SilvaCribariFrery:ImprovedLikelihood:Environmetrics,Nascimento2009}, 
 	speckle filters~\cite{Penna2019}, as contrast measures. 
 	Unsupervised classification strategies were applied to Polarimetric Synthetic Aperture Radar (PolSAR) images in~\cite{Carvalho2019}.
@@ -218,7 +220,7 @@
 	This relationship is useful for obtaining the quantiles and entropy, among other features of this distribution.
 	
 	It is essential to achieve accurate and robust estimates of $\alpha$ because it is related to the target's texture. 
-	Values close to zero \textcolor{blue}{($\alpha \in (1,-3)$)} suggest extreme texture, as in urban areas. 
+	Values close to zero ($\alpha \in (-1,-3)$) suggest extreme texture, as in urban areas. 
 	As the value decreases, the texture is also reduced going, usually, from $\alpha \in (-6,-3]$ in forest zones up to $\alpha\in(-\infty,-6)$ in textureless targets, e.g., pasture or crops. So, its estimation deserves special attention.
 	
 	Maximum likelihood estimation is the classical approach for parametric estimation of a density function because it has optimal asymptotic properties in terms of bias and variance, and well-known asymptotic distributional properties.
@@ -338,7 +340,7 @@
 		\caption{$\widehat{f}_{\mathcal{G}^0}$ for $L=8$, $\alpha=-5$, $\gamma=4$ and $n=25$ using $\Gamma$, LN, and IG kernels, and LSCV for bandwidth selection.}\label{EstimacionLNyGAyIG}
 	\end{figure}
 	
-	It is essential to have measures that quality the quality of the estimation. 
+	It is essential to have measures that quantify the quality of the estimation. 
 	We used the Integrated Mean Square Error (MISE) because it measures the average behavior of the estimator on different samples. 
 	It is defined as
 	\begin{align}
@@ -684,7 +686,7 @@
 	\section{Application to actual data}
 	\label{application}
 	
-	We applied the four estimation techniques methods to an actual image from the surroundings of Munich, Germany, obtained by the E-SAR system~\cite{Horn1996} in L~band, HH~polarization, and intensity format. 
+	We applied the four estimation methods to an actual image from the surroundings of Munich, Germany, obtained by the E-SAR system~\cite{Horn1996} in L~band, HH~polarization, and intensity format. 
 	This image has $300\times250$ pixels and mainly comprises two different growth areas.
 	
 	The original image is single-look.
