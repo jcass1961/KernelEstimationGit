@@ -230,7 +230,7 @@
 	\gamma^* =-\alpha-1.
 	\end{align}
 	
-	Let $Z_1,\dots, Z_n$ be an independent random sample of size $n$ from the $\mathcal G^0(\alpha,\gamma^*,L)$ distribution.
+	Let $Z_1,\dots, Z_n$ be an independent random sample of finite size $n$ from the $\mathcal G^0(\alpha,\gamma^*,L)$ distribution.
 	A maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{{ML}}}$, is any value in $(-\infty,-1)$ that maximizes the loglikelihood function:
 	\begin{align}
 	\hat{\alpha}_{\text{{ML}}}=&\argmin_{\alpha \in (-\infty,-1)}\log \Gamma(L-\alpha)-
@@ -238,6 +238,8 @@
 	&\mbox{}+\frac{\alpha-L}{n} \sum_{i=1}^n\log(-1-\alpha+L Z_i).
 	\label{ML}
 	\end{align}
+Notice that we are interested in finite sample size cases, for which we do not have to take into account the possibility of infinite distributional variance.
+We limit the search space to cases with finite distributional mean by avoiding the region $[-1,0)$.
 	
 	%We employed the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008}, which does not require the derivative of~\eqref{ML}.
 	We employed the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} to find the optimum of this function. This algorithm is a quasi-Newton type optimization method that allows box constraints and is widely used in Computer Graphics and Scientific Computing~\cite{FEI2014}. 
