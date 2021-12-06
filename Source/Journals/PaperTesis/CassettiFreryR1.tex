@@ -130,11 +130,11 @@
 	In general, the approach is to find the parameters that minimize dissimilarity measures ($d$) between the actual density function $f_{\theta}$, which depends on the $\theta$ parameter, and an estimation of the underlying density function $\widehat{f}$. 
 	These are the minimum distance estimators (MDE), defined as:
 	\begin{align}
-	\label{MDEGeneral}
-	\widehat{\theta}=
-	\argmin_{\theta\in\Omega}
-	%\mathop{\rm argmin} \limits_{\theta\in\Omega} 
-	d(f_{\theta}, \widehat{f}),
+		\label{MDEGeneral}
+		\widehat{\theta}=
+		\argmin_{\theta\in\Omega}
+		%\mathop{\rm argmin} \limits_{\theta\in\Omega} 
+		d(f_{\theta}, \widehat{f}),
 	\end{align}
 	where $\theta\in\Omega$ is the parameter to be estimated,
 	and $\Omega$ is the parameter space. 
@@ -195,26 +195,26 @@
 	
 	The density function for intensity data is given by
 	\begin{equation}
-	f_{\mathcal{G}^{0}(z)} =\frac{L^{L}\Gamma ( L-\alpha
-		) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
-		L) }\cdot  
-	\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
-	\label{ec_dens_gI0}
+		f_{\mathcal{G}^{0}(z)} =\frac{L^{L}\Gamma ( L-\alpha
+			) }{\gamma ^{\alpha }\Gamma ( -\alpha ) \Gamma (
+			L) }\cdot  
+		\frac{z^{L-1}}{( \gamma +zL) ^{L-\alpha }},%
+		\label{ec_dens_gI0}
 	\end{equation}
 	where $-\alpha,\gamma ,z>0$ and $L\geq 1$. 
 	The $r$-order moments are
 	\begin{equation}
-	\text{E}(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }
-	\frac{\Gamma (L+r )}{\Gamma (L)},
-	\label{moments_gI0}
+		\text{E}(Z^r) =\Big(\frac{\gamma}{L}\Big)^r\frac{\Gamma ( -\alpha-r )}{ \Gamma (-\alpha) }
+		\frac{\Gamma (L+r )}{\Gamma (L)},
+		\label{moments_gI0}
 	\end{equation}
 	provided $\alpha<-r$, and infinite otherwise.
 	
 	Mejail et al.~\cite{MejailJacoboFreryBustos:IJRS} proved a relationship between $\mathcal G^0$ distributions and the Fisher-Snedekor $F$ law.
 	With this result, using standard functions available in most computational statistics environment as, for instance, the \texttt R programming language and environment~\cite{RLanguage}, the cumulative distribution function of a $\mathcal G^0(\alpha,\gamma,L)$ distributed random variable $F_{\alpha,\gamma,L}$ can be obtained as
 	\begin{equation}
-	F_{\alpha,\gamma,L}(z) = \Upsilon_{2L, -2\alpha}(-\alpha  z / \gamma),
-	\label{eq:CDFG0}
+		F_{\alpha,\gamma,L}(z) = \Upsilon_{2L, -2\alpha}(-\alpha  z / \gamma),
+		\label{eq:CDFG0}
 	\end{equation}
 	for every $z>0$, where $\Upsilon_{2L, -2\alpha}$ is the cumulative distribution function of a Fisher-Snedekor random variable with $2L$ and $-2\alpha$ degrees of freedom.
 	This relationship is useful for obtaining the quantiles and entropy, among other features of this distribution.
@@ -226,20 +226,20 @@
 	Maximum likelihood estimation is the classical approach for parametric estimation of a density function because it has optimal asymptotic properties in terms of bias and variance, and well-known asymptotic distributional properties.
 	To reduce our discussion to a single parameter, we based the forthcoming analysis on the condition of unitary mean, i.e., $E(Z)=1$, which links the texture and the brightness parameters:
 	\begin{align}
-	\label{RelationAlphaGamma}
-	\gamma^* =-\alpha-1.
+		\label{RelationAlphaGamma}
+		\gamma^* =-\alpha-1.
 	\end{align}
 	
 	Let $Z_1,\dots, Z_n$ be an independent random sample of finite size $n$ from the $\mathcal G^0(\alpha,\gamma^*,L)$ distribution.
 	A maximum likelihood estimator of $\alpha$ for $L$ known, denoted $\widehat\alpha_{\text{{ML}}}$, is any value in $(-\infty,-1)$ that maximizes the loglikelihood function:
 	\begin{align}
-	\hat{\alpha}_{\text{{ML}}}=&\argmin_{\alpha \in (-\infty,-1)}\log \Gamma(L-\alpha)-
-	\alpha\log(-1-\alpha)-\log\Gamma(-\alpha) \nonumber \\
-	&\mbox{}+\frac{\alpha-L}{n} \sum_{i=1}^n\log(-1-\alpha+L Z_i).
-	\label{ML}
+		\hat{\alpha}_{\text{{ML}}}=&\argmin_{\alpha \in (-\infty,-1)}\log \Gamma(L-\alpha)-
+		\alpha\log(-1-\alpha)-\log\Gamma(-\alpha) \nonumber \\
+		&\mbox{}+\frac{\alpha-L}{n} \sum_{i=1}^n\log(-1-\alpha+L Z_i).
+		\label{ML}
 	\end{align}
-Notice that we are interested in finite sample size cases, for which we do not have to take into account the possibility of infinite distributional variance.
-We limit the search space to cases with finite distributional mean by avoiding the region $[-1,0)$.
+	Notice that we are interested in finite sample size cases, for which we do not have to take into account the possibility of infinite distributional variance.
+	We limit the search space to cases with finite distributional mean by avoiding the region $[-1,0)$.
 	
 	%We employed the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008}, which does not require the derivative of~\eqref{ML}.
 	We employed the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} to find the optimum of this function. This algorithm is a quasi-Newton type optimization method that allows box constraints and is widely used in Computer Graphics and Scientific Computing~\cite{FEI2014}. 
@@ -267,8 +267,8 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	Cassetti et al.~\cite{APSAR2013ParameterEstimationStochasticDistances} used the notion of minimizing a stochastic distance to propose a new estimator for the $\alpha$ parameter in the $\mathcal{G}^0$ model. 
 	This estimator is defined as
 	\begin{equation}
-	\widehat{\alpha}_n=\argmin_{\alpha\in\Omega} d(f_{\mathcal{G}^0}, \widehat{f}_n),
-	\label{MDE}
+		\widehat{\alpha}_n=\argmin_{\alpha\in\Omega} d(f_{\mathcal{G}^0}, \widehat{f}_n),
+		\label{MDE}
 	\end{equation}
 	where $d$ is a dissimilarity measure or stochastic distance between the theoretical density function $f_{\mathcal{G}^0}$ and a nonparametric estimator $\widehat{f}_n$ of the underlying density function.
 	The authors used histograms to compute $\widehat{f}_n$, and assessed the Hellinger, Bhattacharyya, R\'enyi, and Triangular distances. 
@@ -276,8 +276,8 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	
 	The Triangular distance is defined as:
 	\begin{equation}
-	d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{(f_{\text{\tiny{V}}}-f_{\text{\tiny{W}}})^2}{f_{\text{\tiny{V}}}+f_{\text{\tiny{W}}}},
-	\label{DT}
+		d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{(f_{\text{\tiny{V}}}-f_{\text{\tiny{W}}})^2}{f_{\text{\tiny{V}}}+f_{\text{\tiny{W}}}},
+		\label{DT}
 	\end{equation}
 	where $f_{\text{\tiny{V}}}$ and $f_{\text{\tiny{W}}}$ are two densities functions with common support $S$.
 	
@@ -307,19 +307,19 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	
 	Among the many available asymmetric kernels, we used the $\Gamma$ and LN kernels defined, for every $t>0$, as:
 	\begin{align}
-	K_{{\Gamma}_{{\theta}(z,b)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
-	\label{gammakernel}
+		K_{{\Gamma}_{{\theta}(z,b)}}(t) & =\frac{1}{\Gamma(\frac{z}{b}+1)b^{\frac{z}{b}+1}} t^{-{z}/{b}} \exp\{-{t}/{b}\},
+		\label{gammakernel}
 	\end{align}
 	\begin{align}
-	K_{{\text{{LN}}}_{{\theta}(z,b)}}(t) & =\frac{1}{t \sqrt{2 \pi} b} \exp\Big\{-\frac{\left(\log t - \log z -b^2\right)^2}{2b^2}\Big\},
-	\label{LNkernel}
+		K_{{\text{{LN}}}_{{\theta}(z,b)}}(t) & =\frac{1}{t \sqrt{2 \pi} b} \exp\Big\{-\frac{\left(\log t - \log z -b^2\right)^2}{2b^2}\Big\},
+		\label{LNkernel}
 	\end{align}
 	respectively for $t,z,b>0$.
 	
 	As mentioned in Section~\ref{distancekernel}, Gambini et al.~\cite{gambini2015} used the Inverse Gaussian kernel defined as
 	\begin{align}
-	K_{\text{IG}}( t; z_i,b) & =\frac{1}{\sqrt{2\pi b t^3}} 
-	\exp\Big\{-\frac{1}{2b z_i} \Big(\frac{t}{z_i}+\frac{z_i}{t}-2\Big)\Big\}.
+		K_{\text{IG}}( t; z_i,b) & =\frac{1}{\sqrt{2\pi b t^3}} 
+		\exp\Big\{-\frac{1}{2b z_i} \Big(\frac{t}{z_i}+\frac{z_i}{t}-2\Big)\Big\}.
 	\end{align}
 	
 	The rationale for using these kernels is the following:
@@ -346,8 +346,8 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	We used the Integrated Mean Square Error (MISE) because it measures the average behavior of the estimator on different samples. 
 	It is defined as
 	\begin{align}
-	\label{Mise}
-	\text{MISE}(\widehat{f}_b(Z_1,\ldots,Z_n))=&E\left[\int_\mathbb{R} (\widehat{f}_b(z,Z_1,\ldots,Z_n)-f(z))^2 \right].
+		\label{Mise}
+		\text{MISE}(\widehat{f}_b(Z_1,\ldots,Z_n))=&E\left[\int_\mathbb{R} (\widehat{f}_b(z,Z_1,\ldots,Z_n)-f(z))^2 \right].
 	\end{align}
 	
 	It is important to note that these kernel estimators are free of boundary bias and achieve the convergence rate $n^{-4/5}$ for the MISE.
@@ -364,7 +364,7 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	
 	Gambini et al.~\cite{gambini2015} show that the LC estimator for the $\alpha$ parameter of the $\mathcal{G}^0$ distribution, under the relationship~\eqref{RelationAlphaGamma}, is the solution of 
 	\begin{equation} \label{eq:logm}
-	\frac{1}{n} \sum_{i=1}^n\log z_i =   -\log \frac{L}{-\widehat\alpha_{\text{{LC}}}-1} + \Psi^0(L) - \Psi^0(-\widehat\alpha_{\text{{LC}}}).
+		\frac{1}{n} \sum_{i=1}^n\log z_i =   -\log \frac{L}{-\widehat\alpha_{\text{{LC}}}-1} + \Psi^0(L) - \Psi^0(-\widehat\alpha_{\text{{LC}}}).
 	\end{equation}
 	The right term of the equation~\eqref{eq:logm} is a monotone decreasing function of $\alpha$. Therefore, this equation has a single root or none. 
 	This estimator is widely used in SAR image processing. 
@@ -437,11 +437,12 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	The IG kernel has the highest percentage of these cases compared to the $\Gamma$ and LN kernel.
 	
 	\begin{table}[hbt]  
+		\addtolength{\tabcolsep}{-1pt}
 		\caption{Estimated MISE and percentage of non-convergence cases for $L=3$.}\label{pp} 
 		\centering                                    
-		\begin{tabular}{cc S[table-format=0.1]S[table-format=0.1]S[table-format=0.1] S[table-format=0.1] @{\hskip 8mm} S[table-format=0.2]S[table-format=0.1]S[table-format=0.1]S[table-format=0.1]}                                    
+		\begin{tabular}{c c S[table-format=2.2]S[table-format=2.2]S[table-format=2.2] S[table-format=2.2] @{\hskip 8mm} S[table-format=2.2]S[table-format=2.2]S[table-format=2.2]S[table-format=2.2]}                                    
 			\toprule                                    
-			\multirow{4 }{3mm}{$\alpha$} &\multirow{4 }{*}{ $n$  } & \multicolumn{4}{c}{\multirow{2 }{*}{$\widehat{\text{MISE}}$}} & \multicolumn{4}{c}{\centering \% }\\
+			\multirow{4 }{5mm}{$\alpha$} &\multirow{4 }{*}{ $n$  } & \multicolumn{4}{c}{\multirow{2 }{*}{$\widehat{\text{MISE}}$}} & \multicolumn{4}{c}{\centering \% }\\
 			&                          &                &               &         &     &   \multicolumn{4}{c}{non convergence cases}\\
 			
 			\cmidrule(r){3-6}
@@ -450,14 +451,14 @@ We limit the search space to cases with finite distributional mean by avoiding t
 			
 			&           & \mc{$\Gamma$} & \mc{LN}       & \mc{IG}     & \mc{$\text{IG}_{\text{E}}$}    & \mc{$\widehat{\alpha}_{\Gamma}$} & \mc{$\widehat{\alpha}_{\text{{LN}}}$}    & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}}$} & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}_{\text{E}}}$}\\
 			\midrule                
-			\multirow{5 }{3mm}{$-1.5$} 
+			\multirow{5 }{5mm}{$-1.5$} 
 			&  9       &       0.41     &     0.81     &     6.12      &     41.33     &    0     &    0.4      &    0.4       &    0 \\        
 			&  25      &       0.12     &     0.18     &     2.46      &     17.02     &    0     &    0        &    0        &    0 \\
 			&  49      &       0.08     &     0.54     &     1.16      &      9.67     &    0     &    0        &    0        &    0 \\
 			&  81      &       0.06     &     0.08     &     0.75      &     6.13      &    0     &    0        &    0        &    0 \\
 			&  121     &       0.06     &     0.08     &     0.53      &     4.00      &    0     &    0        &    0        &    0 \\
 			\midrule                                    
-			\multirow{5 }{3mm}{$-3$}    
+			\multirow{5 }{5mm}{$-3$}    
 			&  9       &       0.25     &     0.56     &     12.48     &     50.02     &    5.2    &    7.2     &   8         & 6.8 \\                    
 			&  25      &       0.08     &     0.11     &     3.22      &     25.40     &    0.2    &    1       &    0.6      & 0.6 \\        
 			&  49      &       0.04     &     0.07     &     0.69      &     16.40     &    0      &    0.4     &    0        &    0 \\
@@ -465,7 +466,7 @@ We limit the search space to cases with finite distributional mean by avoiding t
 			&  121     &       0.02     &     0.03     &     0.17      &     8.98      &    0      &    0       &    0        &    0 \\    
 			
 			\midrule                                        
-			\multirow{5 }{3mm}{$-5$}    
+			\multirow{5 }{5mm}{$-5$}    
 			&  9       &       0.24     &     0.43     &     15.32     &     63.38     &    9.6    &    13.2    &   17         &    13.2 \\                    
 			&  25      &       0.07     &     0.09     &     4.65      &     32.94     &    3.4    &   5        &    2         &    1.6 \\                    
 			&  49      &       0.04     &     0.06     &     0.68      &     24.41     &    1.4    &    1.2     &    1         &    0.4 \\
@@ -473,7 +474,7 @@ We limit the search space to cases with finite distributional mean by avoiding t
 			&  121     &       0.02     &     0.02     &     0.18      &     15.92     &    0      &    0.2     &    0         &    0 \\
 			
 			\midrule                                        
-			\multirow{5 }{3mm}{$-8$}    
+			\multirow{5 }{5mm}{$-8$}    
 			&  9       &       0.24     &     0.38     &     18.11     &     73.08     &    16.6    &    19     & 26.2         &    18 \\                
 			&  25      &       0.07     &     0.11     &     5.13      &     40.48     &    81.8    &   11      &    8.8       &    4.2 \\            
 			&  49      &       0.04     &     0.05     &     0.93      &     30.23     &    5       &    5.4    &    4.2       &    1.2 \\    
@@ -594,7 +595,7 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	
 	\begin{figure}[hbt]
 		\centering
-		\subfigure[\label{SesgoSinContL=3}$\widehat{\text{Sesgo}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
+		\subfigure[\label{SesgoSinContL=3}$\widehat{\text{Bias}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
 		\subfigure[\label{ECMSinContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
 		\caption{Sample Bias and MSE with uncontaminated data and $L=3$.}\label{SesgoyECMSinContL=3} 
 	\end{figure}    
@@ -604,12 +605,144 @@ We limit the search space to cases with finite distributional mean by avoiding t
 	
 	\begin{figure}[hbt]
 		\centering
-		\subfigure[\label{SesgoSinContL=8}$\widehat{\text{Sesgo}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
+		\subfigure[\label{SesgoSinContL=8}$\widehat{\text{Bias}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoSesgoMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
 		\subfigure[\label{ECMSinContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=0.9\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
 		\caption{Bias and MSE estimates for uncontaminated data and $L=8$.}\label{SesgoyECMSinContL=8} 
 	\end{figure}
 	
-	According to the study for data without contamination, we conclude that $\widehat{\alpha}_{\text{{LN}}}$ is competitive against the other estimators for uncontaminated data and that it has better performance than the rest of the methods in some of the cases evaluated.
+\textcolor{blue}{
+Fig.~\ref{Fig:DistributionL=3_alfa=-3} show the the distribution of these estimators for $\alpha=-3$ and $L=3$. It can be seen that, as the sample size increase, the mean of these distribution approaches to the true value of the texture parameter and become more symmetric. Moreover, from $n=49$ onwards the shape of the $\widehat{\alpha}_{\text{{LN}}}$ distribution is very similar to that of $\widehat{\alpha}_{\text{{ML}}}$.}
+
+\textcolor{blue}{
+In order to investigate the asymptotic behavior of these estimators we studied the density function for each of them in the case of $n=500$, for all the texture parameters considered. The result of this analysis is shown in Fig.\ref{Fig:Densities_n500}. Each facet graphics presents the density function for each one of the parameter analyzed. The vertical blue line indicates the true value of the parameter. Different scales were chosen for the $y$-axis in order to appreciate the differences between these density functions. It can be noted the heavytailnedess of these densities. For $\alpha=-1.5$ all of them are quite concentrated around the true parameter value. As the textured parameter becomes lower the density function presents a bias, being less pronounced in the $\widehat{\alpha}_{\text{{ML}}}$ case, this is due to the good asymptotic properties of this estimator.      
+}
+
+\textcolor{blue}{
+	Table~\ref{tab:SkewKurt} presents the skewness and kurtosis values for simulated data in the $L=3$ case. It can be seen the negative skewness in all the cases, except for $\alpha=-1.5$ and $n=121,500$ for the $\widehat{\alpha}_{\text{{LN}}}$ estimator where the skwesness is positive. As the sample size increase the skewness decreases in absolute value. For textured and homogeneous areas $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ present the same type of asymmetry. For extreamly areas $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ are more symmetric than the other estimators.
+}
+\textcolor{blue}{
+	As for kurtosis, all the estimators present large values in most of the cases studied, showing a distribution of heavy tails and a concentration of the data around the mean, especially for extremely and moderately textured zones.
+}
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/DensidadEstimadorNoCont.eps}
+	\caption{\label{Fig:DistributionL=3_alfa=-3} Distribution of estimators for $\alpha=-3$ and  $L=3$ }\label{Fig:DistEstimator}
+\end{figure}
+%Prog:DensityPropuestaNoCont.R	
+
+\begin{table}[htbp]
+	\addtolength{\tabcolsep}{-4pt}
+	\centering
+	\caption{Skeweness and Kurtosis for simulated data, $L=3$}
+	\begin{tabular}{cc c*3{S[table-format=3.2]}  c*3{S[table-format=3.2]} c*3{S[table-format=3.2]}}
+		\toprule
+		\multirow{2}{5mm}{$\alpha$} & \multirow{2}{5mm}{$n$} & \multicolumn{4}{c}{Skewness} & \multicolumn{4}{c}{Kurtosis} \\
+		\cmidrule(r){3-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
+		&     & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{ML}}}$} & \multicolumn{1}{c}{\centering $\widehat{\alpha}_{\Gamma}$} & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LN}}}$}  & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LC}}}$}  &  
+			\multicolumn{1}{c}{$\widehat{\alpha}_{\text{{ML}}}$} & \multicolumn{1}{c}{$\widehat{\alpha}_{\Gamma}$} & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LN}}}$}  & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LC}}}$}  \\
+		\cmidrule(r){1-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
+		\multirow{6}[2]{*}{-1.5} 
+		&9     & -4.86 & -3.75 & -6.95 & -8.67 & 42.51 & 26.45 & 70.19 & 98.31 \\
+		&5     & -1.49 & -1.91 & -2.73 & -5.03 & 6.27  & 8.58  & 20.79 & 47.22 \\
+		&49    & -0.89 & -1.91 & -1.07 & -2.42 & 3.80  & 9.58  & 5.25  & 14.47 \\
+		&81    & -0.70 & -2.23 & -0.38 & -1.55 & 3.42  & 12.21 & 4.16  & 7.76 \\
+		&121   & -0.64 & -3.02 & 0.31  & -1.12 & 3.60  & 16.93 & 6.42  & 5.55 \\
+		&500   & -0.38 & -2.21 & 2.82  & -0.51 & 3.16  & 8.41  & 11.47 & 3.54 \\		
+		\cmidrule(r){1-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
+		\multirow{6}[2]{*}{-3} 
+		&9     & -2.39 & -2.36 & -3.42 & -3.38 & 10.28 & 11.25 & 17.03 & 15.95 \\
+		&25    & -3.07 & -4.64 & -4.12 & -2.99 & 15.68 & 37.20 & 26.88 & 13.94 \\
+		&49    & -3.87 & -4.54 & -4.34 & -3.70 & 30.93 & 43.69 & 31.26 & 22.17 \\
+		&81    & -1.52 & -1.84 & -1.86 & -3.09 & 6.52  & 9.81  & 9.28  & 15.13 \\
+		&121   & -2.33 & -1.36 & -2.17 & -4.09 & 15.12 & 6.88  & 15.10 & 33.19 \\
+		&500   & -0.46 & -0.53 & -0.53 & -1.29 & 3.29  & 3.31  & 3.33  & 6.21 \\
+		
+		\cmidrule(r){1-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
+		\multirow{6}[2]{*}{-5} 
+		&9     & -1.94 & -3.45 & -2.64 & -2.59 & 7.15  & 20.84 & 12.69 & 9.93 \\
+		&25    & -1.69 & -3.05 & -2.68 & -1.93 & 6.04  & 18.47 & 14.18 & 6.41 \\
+		&49    & -1.82 & -1.30 & -2.99 & -1.91 & 6.56  & 5.02  & 18.13 & 6.51 \\
+		&81    & -2.17 & -2.51 & -2.07 & -1.69 & 10.59 & 15.00 & 9.22  & 5.68 \\
+		&121   & -2.21 & -2.04 & -2.01 & -1.93 & 11.46 & 10.77 & 8.57  & 7.07 \\
+		&500   & -0.93 & -0.85 & -1.10 & -2.13 & 4.69  & 4.62  & 5.11  & 10.37 \\		
+		\cmidrule(r){1-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
+		\multirow{6}[2]{*}{-8} 
+		&9     & -1.55 & -2.68 & -2.69 & -2.20 & 4.83  & 14.01 & 11.81 & 8.00 \\
+		&25    & -0.96 & -2.50 & -2.11 & -1.67 & 3.29  & 13.58 & 8.68  & 5.12 \\
+		&49    & -1.12 & -2.17 & -1.92 & -1.50 & 3.63  & 9.71  & 7.90  & 4.65 \\
+		&81    & -1.09 & -1.82 & -1.69 & -1.35 & 3.52  & 8.34  & 7.35  & 4.21 \\
+		&121   & -1.17 & -1.35 & -1.71 & -1.26 & 4.15  & 5.38  & 7.07  & 4.27 \\
+		&500   & -1.33 & -1.26 & -1.52 & -1.35 & 6.21  & 6.11  & 7.39  & 4.50 \\
+		\bottomrule
+	\end{tabular}%
+	\label{tab:SkewKurt}%
+\end{table}%
+%Prog:SkewnessKurtosisVariance.R
+
+
+\textcolor{blue}{
+Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be seen the decrease in variance as the sample size increases. For textured and homogeneous areas the MDE estimators present lower variance than the others for all of the sample size. For $n=500$ all variance values are comparable except for $\widehat{\alpha}_{\text{{LC}}}$ which has a higher value. This gives indications that the asymptotic variance of the MDE estimators accompanies that of $\widehat{\alpha}_{\text{{ML}}}$.
+}
+
+\begin{table}[htbp]
+	\addtolength{\tabcolsep}{-4pt}
+	\centering
+	\caption{Variance for simulated data, $L=3$.}
+	\begin{tabular}{cc c*3{S[table-format=3.2]}}
+		\toprule
+		\multirow{2}{5mm}{$\alpha$} & \multirow{2}{5mm}{$n$} & \multicolumn{4}{c}{Variance} \\
+		\cmidrule(r){3-6}  
+		&     & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{ML}}}$} & \multicolumn{1}{c}{\centering $\widehat{\alpha}_{\Gamma}$} & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LN}}}$}  & \multicolumn{1}{c}{$\widehat{\alpha}_{\text{{LC}}}$}  \\
+		\cmidrule(r){1-6} 
+		\multirow{6}[2]{*}{-1.5} 
+		& 9     & 0.28  & 0.34  & 0.39  & 1.90 \\
+		& 25    & 0.05  & 0.07  & 0.05  & 0.20 \\
+		& 49    & 0.02  & 0.03  & 0.02  & 0.04 \\
+		& 81    & 0.01  & 0.02  & 0.01  & 0.02 \\
+		& 121   & 0.01  & 0.02  & 0.01  & 0.01 \\
+		& 500   & 0.00  & 0.05  & 0.01  & 0.00 \\				
+		\cmidrule(r){1-6} 
+		\multirow{6}[2]{*}{-3} 
+		& 9     & 5.58  & 2.21  & 5.30  & 8.03 \\
+		& 25    & 5.03  & 2.46  & 2.40  & 5.90 \\
+		& 49    & 1.62  & 0.85  & 1.31  & 3.93 \\
+		& 81    & 0.54  & 0.39  & 0.44  & 3.28 \\
+		& 121   & 0.36  & 0.23  & 0.27  & 1.67 \\
+		& 500   & 0.06  & 0.05  & 0.07  & 0.19 \\
+		\cmidrule(r){1-6} 
+		\multirow{6}[2]{*}{-5} 
+		& 9     & 10.75 & 3.78  & 5.39  & 12.55 \\
+		& 25    & 10.98 & 3.47  & 3.83  & 11.75 \\
+		& 49    & 9.49  & 2.31  & 3.87  & 10.65 \\
+		& 81    & 5.11  & 2.32  & 2.33  & 10.78 \\
+		& 121   & 2.86  & 1.55  & 1.86  & 8.03 \\
+		& 500   & 0.54  & 0.41  & 0.58  & 3.38 \\				
+		\cmidrule(r){1-6} 
+		\multirow{6}[2]{*}{-8} 
+		& 9     & 16.17 & 3.65  & 6.92  & 11.56 \\
+		& 25    & 13.94 & 4.50  & 6.28  & 15.44 \\
+		& 49    & 15.18 & 5.05  & 5.75  & 13.45 \\
+		& 81    & 13.25 & 5.32  & 5.09  & 15.29 \\
+		& 121   & 10.02 & 4.50  & 5.25  & 12.02 \\
+		& 500   & 3.27  & 1.95  & 2.72  & 10.24 \\		
+		\bottomrule
+	\end{tabular}%
+	\label{tab:Variance}%
+\end{table}%
+%Prog:SkewnessKurtosisVariance.R
+
+\textcolor{blue}{
+	With the purpose of analyzing the asymptotic behavior of these estimators we studied the density function for $n=500$. Fig~\ref{Fig:Densities_n500} show that the MDE estimators have similar density function than the $\widehat{\alpha}_{\text{{ML}}}$ except for homogeneous zone where the $\widehat{\alpha}_{\text{{ML}}}$ denisty exhibit lower bias but greater variance, while $\widehat{\alpha}_{\text{{LC}}}$ density presents important differences with the other estimators in this type of zones. 
+}
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps}
+	\caption{\label{Fig:Densities_n500} Density function of the estimators for $n=500$. }\label{Fig:DistEstimator}
+\end{figure}
+%Prog:AsymptoticDensityNoCont_n500.R	
+
+	According to the study for data without contamination, we conclude that \textcolor{blue}{MDE estimators are competitive} against the other estimators for uncontaminated data and that \textcolor{blue}{they have} better performance than the rest of the methods in some of the cases evaluated, \textcolor{blue}{especially for $\widehat{\alpha}_{\text{{LN}}}$ estimator}.
 	
 	\subsection{Simulation Results -- Stylized Samples}
 	\label{StylizedSamples}
@@ -646,7 +779,7 @@ We limit the search space to cases with finite distributional mean by avoiding t
 		\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{{LC}}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}\label{SEIFL8b} 
 	\end{figure}
 	
-	Again a similar behavior can be seen between $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\text{{LC}}}$ on the one side, and $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ on the other for $\alpha=-3, -5, -8$. 
+\textcolor{blue}{Again, for $\alpha=-3, -5, -8$, it can be seen a similar behavior between $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\text{{LC}}}$ on the one side, and $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ on the other. }
 	In extremely textured areas $\widehat{\alpha}_{\text{{LN}}}$ has the best performance, while for $z$ values lower than the last quantile and for the rest of the textures, both $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ have a better performance compared to the other estimators. 
 	Moreover, $\widehat{\alpha}_{\text{{ML}}}$ does not converge for moderately heterogeneous and homogeneous zones, while $\widehat{\alpha}_{\text{{LC}}}$ does not converge for homogeneous zones. All estimators behave similarly for large values of $z$. 
 	This behavior shows the sensitivity and loss of robustness for $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ versus MDEs.
