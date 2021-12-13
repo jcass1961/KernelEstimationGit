@@ -919,39 +919,41 @@ These results suggest that this last method is the most dependable in term of al
 Then, based on the results of the simulations obtained for the SEIF corresponding to Figures~\ref{InflL3alfa-3n25} and~\ref{InflL3alfa-3n25}, that show the lack of robustness of $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ when contaminated with a small value, we re-estimate this parameter removing the smallest observation that corresponds to a value \SI{86}{\percent} lower than the average. 
 Table~\ref{SinPrimero} shows the estimates after this censoring.
 
-\begin{table}[hbt]
+\begin{table*}[hbt]
 	\centering
-	\caption{$\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ y $\widehat{\alpha}_{\text{{LC}}}$ values for the yellow sample without the first element.}\label{SinPrimero} 
+	\caption{Estimates of $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ y $\widehat{\alpha}_{\text{{LC}}}$ in the yellow sample without the smallest observation, along with their bootstrap confidence intervals and effective bootstrap sample sizes ($n_b$).}\label{SinPrimero} 
 	\begin{tabular}{c*4{c}}
 		\toprule
-		$n$    &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
-		\cmidrule(lr){1-5}
-		$15$  & $-5.73$   & $-3.97$    & $-3.13$    & $-4.81$\\
+		    &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+		\cmidrule(lr){2-5}
+		& $-5.73$   & $-3.97$    & $-3.13$    & $-4.81$\\
+			& $[-16.9;-2.21]$ & $[-12.0;-1.80]$ & $[-10.2;-1.644]$ & $[-15.0;-1.70]$\\
+$n_{b}$	& 1538          & 1913           & 1940          &  1371 \\
 		\bottomrule
 	\end{tabular}
-\end{table}
+\end{table*}
 
 Again, it can be observed a significant change in the estimated values of the $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$, giving now estimates compatible with a homogeneous zone. This shows the robustness of the stochastic distance estimator against the $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ estimators.
+The table also presents the bootstrap confidence intervals and the effective sample sizes $n_b$. 
+We observe the same behaviour as before: $\widehat{\alpha}_{\text{{LN}}}$ has the largest $n_b$ and the shortest confidence interval.
 
-\textcolor{blue}{
-Table~\ref{ICYellowSinOutlier} presents the bootstrap confidence interval corresponding to Table~\ref{SinPrimero} estimations, together with the effective sample sizes $n_b$. We have again the same behaviour, $\widehat{\alpha}_{\text{{LN}}}$ reports the higher $n_b$ and the shorter length of the confidence interval. 
-\begin{table}[hbt]
-	\addtolength{\tabcolsep}{-4pt}
-	\centering
-	\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ confidence interval of table~\ref{SinPrimero} estimations.}\label{ICYellowSinOutlier}
-	\textcolor{blue}{
-		\begin{tabular}{c*4{c}}
-			\toprule
-			& $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
-			\cmidrule(lr){1-5}
-			&[-16.9;-2.21] & [-12.0;-1.80] & [-10.2;-1.644] & [-15.0;-1.70]\\
-			$n_{b}$       & 1538          & 1913           & 1940          &  1371 \\
-			\bottomrule
-		\end{tabular}
-	}
-\end{table} 
-}
+%\begin{table}[hbt]
+%	\addtolength{\tabcolsep}{-4pt}
+%	\centering
+%	\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ confidence interval of table~\ref{SinPrimero} estimations.}\label{ICYellowSinOutlier}
+%	\textcolor{blue}{
+%		\begin{tabular}{c*4{c}}
+%			\toprule
+%			& $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+%			\cmidrule(lr){1-5}
+%			&[-16.9;-2.21] & [-12.0;-1.80] & [-10.2;-1.644] & [-15.0;-1.70]\\
+%			$n_{b}$       & 1538          & 1913           & 1940          &  1371 \\
+%			\bottomrule
+%		\end{tabular}
+%	}
+%\end{table} 
 
+%%% ACF Hasta acá
 Figure~\ref{CincoMuestras} shows five samples selected to perform another analysis of the performance of the estimation methods. 
 We chose nested sample of size $n=9,25,49,81,121$ corresponding to square windows. 
 Figure~\ref{AlfaVsTamCincoMuestras} shows the estimates $\widehat{\alpha}$ for each method and each sample as functions of the sample size $n$. 
