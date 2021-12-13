@@ -220,7 +220,7 @@
 	This relationship is useful for obtaining the quantiles and entropy, among other features of this distribution.
 	
 	It is essential to achieve accurate and robust estimates of $\alpha$ because it is related to the target's texture. 
-	Values close to zero ($\alpha \in (-1,-3)$) suggest extreme texture, as in urban areas. 
+	Values close to zero ($\alpha \in (-3,-1)$) suggest extreme texture, as in urban areas. 
 	As the value decreases, the texture is also reduced going, usually, from $\alpha \in (-6,-3]$ in forest zones up to $\alpha\in(-\infty,-6)$ in textureless targets, e.g., pasture or crops. So, its estimation deserves special attention.
 	
 	Maximum likelihood estimation is the classical approach for parametric estimation of a density function because it has optimal asymptotic properties in terms of bias and variance, and well-known asymptotic distributional properties.
@@ -242,8 +242,8 @@
 	We limit the search space to cases with finite distributional mean by avoiding the region $[-1,0)$.
 	
 	%We employed the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008}, which does not require the derivative of~\eqref{ML}.
-	We employed the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} to find the optimum of this function. This algorithm is a quasi-Newton type optimization method that allows box constraints and is widely used in Computer Graphics and Scientific Computing~\cite{FEI2014}. 
-	These methods do not need the Hessian matrix but use an approximation that is updated in each iteration and, thus, they only require the function and its gradient.
+	We employed the L-BFGS-B version of the Broyden-Fletcher-Goldfarb-Shanno (BFGS) method~\cite{Luenberger2008} to find the optimum of this function \textcolor{blue}{taking as a starting point $\alpha_0$ the alpha moment estimator when it exists. Otherwise we consider $\alpha_0=-1.5$}. This algorithm is a quasi-Newton type optimization method that allows box constraints and is widely used in Computer Graphics and Scientific Computing~\cite{FEI2014}. 
+	These methods do not need the Hessian matrix but use an approximation that is updated in each iteration and, thus, they only require the function and its gradient. 
 	
 	Function~\eqref{ML} is, in general, unimodal, but, depending on the sample, it may be monotonically decreasing or flat~\cite{FreryCribariSouza:JASP:04}. 
 	This behavior is responsible for the failure of algorithms to converge to a global maximum.
@@ -274,9 +274,9 @@
 	The authors used histograms to compute $\widehat{f}_n$, and assessed the Hellinger, Bhattacharyya, R\'enyi, and Triangular distances. 
 	They chose the Triangular distance because it presented the best performance.
 	
-	The Triangular distance is defined as:
+	\textcolor{blue}{The Triangular distance is defined as:}
 	\begin{equation}
-		d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{(f_{\text{\tiny{V}}}-f_{\text{\tiny{W}}})^2}{f_{\text{\tiny{V}}}+f_{\text{\tiny{W}}}},
+		d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{(f_{\text{\tiny{V}}}(x)-f_{\text{\tiny{W}}}(x))^2}{f_{\text{\tiny{V}}}(x)+f_{\text{\tiny{W}}}(x)}dx,
 		\label{DT}
 	\end{equation}
 	where $f_{\text{\tiny{V}}}$ and $f_{\text{\tiny{W}}}$ are two densities functions with common support $S$.
@@ -293,11 +293,11 @@
 	However, when the density has bounded support, such estimators present boundary bias. 
 	This bias appears because the symmetric kernels assign weight outside the support when the estimation takes place near the boundary.
 	
-	The asymmetric kernel estimator is an alternative to solve this problem. Several authors investigated such kernels: 
-	$\Gamma$ and Beta kernels were studied by Chen in~\cite{chensx2000} and in~\cite{chen1999}, respectively; 
-	Scaillet et al.~\cite{Scaillet2004} proposed the IG and the Reciprocal Inverse Gaussian (RIG) kernels; 
-	Jin et al~\cite{Jin2003} suggested Birnbaum-Saunders (BS) and LN kernels, among others. 
-	Convergence properties were studied in~\cite{bouezmarni2005,libengue2013}. In this section, we present the asymmetric kernels used in this work.
+%	The asymmetric kernel estimator is an alternative to solve this problem. Several authors investigated such kernels: 
+%	$\Gamma$ and Beta kernels were studied by Chen in~\cite{chensx2000} and in~\cite{chen1999}, respectively; 
+%	Scaillet et al.~\cite{Scaillet2004} proposed the IG and the Reciprocal Inverse Gaussian (RIG) kernels; 
+%	Jin et al~\cite{Jin2003} suggested Birnbaum-Saunders (BS) and LN kernels, among others. 
+%	Convergence properties were studied in~\cite{bouezmarni2005,libengue2013}. In this section, we present the asymmetric kernels used in this work.
 	
 	Let $ Z = Z_1,\dots, Z_n$ be a random sample of size $n$, from an unknown density probability function $f$ with positive support, an estimate of the underlying density function is:
 	$$
@@ -334,7 +334,7 @@
 	Figure~\ref{EstimacionLNyGAyIG} shows an estimation example of the $\mathcal{G}^0$ model. 
 	We generated a sample from a $\mathcal{G}^0$ distribution of size $n=25$, $L = 8$, $\alpha=-5$ and $\gamma=4$. 
 	The solid black line is the actual density function. 
-	It can be seen that these kernels fit well the theoretical density function even for a small sample size.
+	\textcolor{blue}{It can be seen that these kernels fit reasonably well the theoretical density function even for a small sample size. The IG kernel presents a good approximation to the true density function at the center of the function although heavier tails are observed. The $\Gamma$ and LN kernels show a better fit, with the latter kernel having a higher kurtosis than the other kernels.}
 	
 	\begin{figure}[hbt]
 		\centering
@@ -437,10 +437,10 @@
 	The IG kernel has the highest percentage of these cases compared to the $\Gamma$ and LN kernel.
 	
 	\begin{table}[hbt]  
-		\addtolength{\tabcolsep}{-1pt}
+		\addtolength{\tabcolsep}{-3pt}
 		\caption{Estimated MISE and percentage of non-convergence cases for $L=3$.}\label{pp} 
 		\centering                                    
-		\begin{tabular}{c c S[table-format=2.2]S[table-format=2.2]S[table-format=2.2] S[table-format=2.2] @{\hskip 8mm} S[table-format=2.2]S[table-format=2.2]S[table-format=2.2]S[table-format=2.2]}                                    
+		\begin{tabular}{c c S[table-format=2.2]S[table-format=2.2]S[table-format=2.2] S[table-format=2.2] @{\hskip 4mm} S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}                                    
 			\toprule                                    
 			\multirow{4 }{5mm}{$\alpha$} &\multirow{4 }{*}{ $n$  } & \multicolumn{4}{c}{\multirow{2 }{*}{$\widehat{\text{MISE}}$}} & \multicolumn{4}{c}{\centering \% }\\
 			&                          &                &               &         &     &   \multicolumn{4}{c}{non convergence cases}\\
@@ -450,14 +450,16 @@
 			%\midrule
 			
 			&           & \mc{$\Gamma$} & \mc{LN}       & \mc{IG}     & \mc{$\text{IG}_{\text{E}}$}    & \mc{$\widehat{\alpha}_{\Gamma}$} & \mc{$\widehat{\alpha}_{\text{{LN}}}$}    & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}}$} & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}_{\text{E}}}$}\\
-			\midrule                
+			\cmidrule(r){3-6}
+			\cmidrule(r){7-10}                
 			\multirow{5 }{5mm}{$-1.5$} 
 			&  9       &       0.41     &     0.81     &     6.12      &     41.33     &    0     &    0.4      &    0.4       &    0 \\        
 			&  25      &       0.12     &     0.18     &     2.46      &     17.02     &    0     &    0        &    0        &    0 \\
 			&  49      &       0.08     &     0.54     &     1.16      &      9.67     &    0     &    0        &    0        &    0 \\
 			&  81      &       0.06     &     0.08     &     0.75      &     6.13      &    0     &    0        &    0        &    0 \\
 			&  121     &       0.06     &     0.08     &     0.53      &     4.00      &    0     &    0        &    0        &    0 \\
-			\midrule                                    
+			\cmidrule(r){3-6}
+			\cmidrule(r){7-10}                                    
 			\multirow{5 }{5mm}{$-3$}    
 			&  9       &       0.25     &     0.56     &     12.48     &     50.02     &    5.2    &    7.2     &   8         & 6.8 \\                    
 			&  25      &       0.08     &     0.11     &     3.22      &     25.40     &    0.2    &    1       &    0.6      & 0.6 \\        
@@ -465,7 +467,8 @@
 			&  81      &       0.03     &     0.03     &     0.25      &     11.58     &    0      &    0       &    0        &    0 \\
 			&  121     &       0.02     &     0.03     &     0.17      &     8.98      &    0      &    0       &    0        &    0 \\    
 			
-			\midrule                                        
+			\cmidrule(r){3-6}
+			\cmidrule(r){7-10}                                       
 			\multirow{5 }{5mm}{$-5$}    
 			&  9       &       0.24     &     0.43     &     15.32     &     63.38     &    9.6    &    13.2    &   17         &    13.2 \\                    
 			&  25      &       0.07     &     0.09     &     4.65      &     32.94     &    3.4    &   5        &    2         &    1.6 \\                    
@@ -473,7 +476,8 @@
 			&  81      &       0.03     &     0.03     &     0.29      &     18.91     &    0.4    &    0.8     &    0.2       &    0 \\
 			&  121     &       0.02     &     0.02     &     0.18      &     15.92     &    0      &    0.2     &    0         &    0 \\
 			
-			\midrule                                        
+			\cmidrule(r){3-6}
+			\cmidrule(r){7-10}                                        
 			\multirow{5 }{5mm}{$-8$}    
 			&  9       &       0.24     &     0.38     &     18.11     &     73.08     &    16.6    &    19     & 26.2         &    18 \\                
 			&  25      &       0.07     &     0.11     &     5.13      &     40.48     &    81.8    &   11      &    8.8       &    4.2 \\            
@@ -634,7 +638,7 @@ In order to investigate the asymptotic behavior of these estimators we studied t
 	\addtolength{\tabcolsep}{-4pt}
 	\centering
 	\caption{Skeweness and Kurtosis for simulated data, $L=3$}
-	\begin{tabular}{cc c*3{S[table-format=3.2]}  c*3{S[table-format=3.2]} c*3{S[table-format=3.2]}}
+	\begin{tabular}{cc c*3{S[table-format=3.2]}  c*3{S[table-format=3.2]} @{\hskip 6mm} c*3{S[table-format=2.2]}}
 		\toprule
 		\multirow{2}{5mm}{$\alpha$} & \multirow{2}{5mm}{$n$} & \multicolumn{4}{c}{Skewness} & \multicolumn{4}{c}{Kurtosis} \\
 		\cmidrule(r){3-6} \cmidrule(r){7-10} \cmidrule(r){11-14}
@@ -833,6 +837,13 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 	The final $\text{ENL}$ is their average weighted by the size of the areas. 
 	We then set $\widehat L=3.21$ in the analysis of the multilook image.
 	
+	\textcolor{blue}{
+	It is important to mention that, in order to achieve an error measure we performed a parametric bootstrap by the percentile method~\cite{Davison1997} of $2000$ replications to find confidence intervals of \SI{95}{\percent} level for each method and each value of $n$.     
+	This method uses the percentiles $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ of the distribution of $\widehat{\theta} $ generated by the samples bootstrap, where $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ are the sample percentiles of the distribution of $\widehat{\theta} $. 
+	According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to the standard normal interval when there is evidence of non-normality.
+}
+	
+	
 	\begin{figure}[hbt]
 		\centering
 		%\subfigure[\label{MuestraLooks}Samples used to estimate ENL]{\includegraphics[width=0.48\linewidth]{../../../Figures/PaperTesis/MuestrasEstimNumLooks}}
@@ -848,6 +859,15 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 	It can be seen that the estimates differ considerably in the yellow sample: 
 	both $\widehat{\alpha}_{\text{{ML}}}=-7.21$ and $\widehat{\alpha}_{\text{{LC}}}=-6.74$ are compatible with a homogeneous zone, while $\widehat{\alpha}_{\Gamma}=-4.34$ indicates that it is a heterogeneous one, and $\widehat{\alpha}_{\text{{LN}}}=-3.23$ is on the limit of affirming whether the area is heterogeneous or extremely heterogeneous.
 	
+		On the one hand, both $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have substantially changed the estimations value between the yellow and the red samples, indicating a different kind of textures. 
+	On the other hand, $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ changed their values, but the type of zone they describe was not modified.
+	
+	
+	\textcolor{blue}{ 
+	Table~\ref{ICTresMuestras} exhibited the bootstrap confidence intervals for each one of the cases studied. 
+		It is important to mention that we only consider the cases where the algorithm for the search of the texture parameter estimate converges. The final bootstrap sample size is indicated with the variable $n_b$ and it is mentioned as effective sample size.  It can be observed that the smallest effective sample size were performed with $\widehat{\alpha}_{\text{{LC}}}$ and $\widehat{\alpha}_{\text{{ML}}}$ methods, and the most accurate confidence intervals were achieved by $\widehat{\alpha}_{\text{{LN}}}$ for the three samples analyzed, evidencing that, this method achieves a higher number of convergence samples. 
+	}
+	
 	\begin{table}[hbt]
 		\centering
 		\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ values for three samples from the ESAR image.}\label{TablaTresMuestras}
@@ -861,9 +881,29 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 			\bottomrule
 		\end{tabular}
 	\end{table} 
-	
-	On the one hand, both $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have substantially changed the estimations value between the yellow and the red samples, indicating a different kind of textures. 
-	On the other hand, $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$ changed their values, but the type of zone they describe was not modified.
+
+
+	\begin{table}[hbt]
+		\addtolength{\tabcolsep}{-4pt}
+		\centering
+		\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ confidence interval of Table~\ref{TablaTresMuestras} estimations.}\label{ICTresMuestras}
+		\textcolor{blue}{
+		\begin{tabular}{c*4{c}}
+			\toprule
+			Color       &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+			\cmidrule(lr){1-5}
+			Yellow      & [-17.4;-2.47] & [-11.5;-1.88] & [-9.40;-1.64] & [-14.5;-1.86]\\
+			$n_{b}$    & 1392          & 1894          & 1926          &  1250        \\
+			\cmidrule(lr){1-5}
+			Red         & [-12.4;-1.72] & [-10.3;-1.74] & [-4.88;-1.43] & [-12.0;-1.60]\\
+			$n_{b}$    & 1924          & 1948          & 1988          & 1586         \\
+			\cmidrule(lr){1-5}
+			Blue        & [-15.5;-1.88] & [-11.9;-1.68] & [-7.46;-1.44] & [-14.4;-1.59]\\
+			$n_{b}$    & 1615          & 1879          & 1968          & 1376         \\
+			\bottomrule
+		\end{tabular}
+	}
+	\end{table} 
 	
 	Then, based on the results of the simulations obtained for the SEIF corresponding to figures~\ref{InflL3alfa-3n25} and~\ref{InflL3alfa-3n25} showing the lack of robustness of $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ before a contamination with a value low, we re-estimate removing the first observation that corresponds to a value \SI{86}{\percent} lower than the average. 
 	Table~\ref{SinPrimero} shows the estimates.
@@ -882,12 +922,31 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 	
 	Again, it can be observed a significant change in the estimated values of the $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$, giving now estimates compatible with a homogeneous zone. This shows the robustness of the stochastic distance estimator against the $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ estimators.
 	
+	\textcolor{blue}{
+	Table~\ref{ICYellowSinOutlier} presents the bootstrap confidence interval corresponding to Table~\ref{SinPrimero} estimations, together with the effective sample sizes $n_b$. We have again the same behaviour, $\widehat{\alpha}_{\text{{LN}}}$ reports the higher $n_b$ and the shorter length of the confidence interval. 
+	\begin{table}[hbt]
+		\addtolength{\tabcolsep}{-4pt}
+		\centering
+		\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ confidence interval of table~\ref{SinPrimero} estimations.}\label{ICYellowSinOutlier}
+		\textcolor{blue}{
+			\begin{tabular}{c*4{c}}
+				\toprule
+				& $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+				\cmidrule(lr){1-5}
+				&[-16.9;-2.21] & [-12.0;-1.80] & [-10.2;-1.644] & [-15.0;-1.70]\\
+				$n_{b}$       & 1538          & 1913           & 1940          &  1371 \\
+				\bottomrule
+			\end{tabular}
+		}
+	\end{table} 
+}
+
 	Figure~\ref{CincoMuestras} shows five samples selected to perform another analysis of the performance of the estimation methods. 
 	We chose nested sample of size $n=9,25,49,81,121$ corresponding to square windows. 
 	Figure~\ref{AlfaVsTamCincoMuestras} shows the estimates $\widehat{\alpha}$ for each method and each sample as functions of the sample size $n$. 
-	We performed a parametric bootstrap by the percentile method~\cite{Davison1997} of $2000$ replications to find confidence intervals of \SI{95}{\percent} level for each method and each value of $n$.     
+	\textcolor{red}{We performed a parametric bootstrap by the percentile method~\cite{Davison1997} of $2000$ replications to find confidence intervals of \SI{95}{\percent} level for each method and each value of $n$.     
 	This method uses the percentiles $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ of the distribution of $\widehat{\theta} $ generated by the samples bootstrap, where $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ are the sample percentiles of the distribution of $\widehat{\theta} $. 
-	According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to the standard normal interval when there is evidence of non-normality. 
+	According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to the standard normal interval when there is evidence of non-normality. }
 	
 	\begin{figure}[hbt]
 		\centering
@@ -900,16 +959,12 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 	For $n= 9$ none of the ML and LC methods converge, thus the value $-20$. 
 	As the sample size increases, the estimates stabilize, showing that the LN method is the most stable while $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ are the most unstable, giving poor estimates for small sample sizes.
 	
+	\textcolor{blue}{Gráfico corregido}
 	\begin{figure}[hbt]
 		\centering
-		\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestras_v2.eps}
+		\includegraphics[width=0.8\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.eps}
 		\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ for corresponding samples to image~\ref{CincoMuestras}.}\label{AlfaVsTamCincoMuestras}
 	\end{figure}
-	
-	The confidence intervals corresponding to the ML and LC methods are, in general, wider than those of the other methods. 
-	All intervals widths decrease as the sample size increases; that is, estimates become progressively more precise. 
-	It is noteworthy that the shortest confidence interval corresponds to the LN method in most cases. 
-	It should be noted that there is no confidence interval for the cases where ML and LC methods did not converge.
 	
 	\begin{table}[hbt]
 		\centering
@@ -926,6 +981,49 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 			\bottomrule
 		\end{tabular}
 	\end{table}
+
+	\textcolor{blue}{
+	Table~\ref{tab:LongIC} presents the length of the confidence intervals corresponding to Fig.~\ref{AlfaVsTamCincoMuestras}. It can be seen that the corresponding lengths of ML and LC methods are, in general, wider than those of the other ones. All intervals widths decrease as the sample size increases; that is, estimates become progressively more precise. 
+	It is noteworthy that the shortest confidence interval corresponds to the LN method in most cases. 
+	It should be noted that there is no confidence interval for the cases where ML and LC methods did not converge.
+	It is important to clarify that this analysis is performed for small sample sizes, which correspond to the chosen windows sizes. 
+}
+	
+	\begin{table}[htbp]
+		\centering
+		\caption{\label{tab:LongIC}Length of bootstrap confidence intervals showed in Fig.\ref{AlfaVsTamCincoMuestras}}
+		\textcolor{blue}{
+		\begin{tabular}{ccccc}
+			\toprule 
+			n     &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$ \\
+			\midrule
+			9     &    -  & 11.86 & 12.12 & - \\
+			25    & 14.74 & 10.94 & 10.20 & 14.14 \\
+			49    & 3.94  & 3.25  & 2.28  & 9.65 \\
+			81    & 1.38  & 1.09  & 1.03  & 2.75 \\
+			121   & 0.85  & 0.77  & 0.83  & 1.31 \\
+			\bottomrule
+		\end{tabular}
+	}
+	\end{table}%
+	
+	
+	
+%	\begin{table}[hbt]
+%		\centering
+%		\caption{Estimates of ${\alpha}$ for the five nested samples shown in Fig.~\ref{CincoMuestras}.}\label{TablaCincoMuestras} 
+%		\begin{tabular}{c*5{r}}
+%			\toprule
+%			Color       &  $n$    &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+%			\cmidrule(lr){1-6}
+%			Yellow      & $9$     & $-20.00$      & $-7.97$ & $-4.73$ & $-20.00$\\
+%			Red         & $25$    & $-10.31$  & $-5.42$ & $-4.30$ & $-9.81$\\
+%			Blue        & $49$    & $-3.07$   & $-3.12$ & $-2.44$ & $-3.28$\\
+%			Green       & $81$    & $-2.24$   & $-2.15$ & $-2.03$ & $-2.45$\\
+%			Magenta     & $121$   & $-2.04$   & $-1.99$ & $-2.05$ & $-2.13$\\
+%			\bottomrule
+%		\end{tabular}
+%	\end{table}
 	
 	Figure~\ref{CornerReflector} shows the same ESAR image with a corner reflector in a dark background. 
 	We selected nested samples to estimate $\alpha$, some of them include the corner reflector.
@@ -952,12 +1050,34 @@ Table~\ref{tab:Variance} shows the variance of the estimators studied. It can be
 			\cmidrule(lr){1-6}
 			Magenta     & 9   & -20.00   & -20.00  & -20.00   & -20.00    \\
 			Green       & 30  & -13.04  & -6.82  & -7.76     &  -20.00  \\
-			Yellow     & 72   & -4.72  & -5.09   & -7.99     &  -4.29    \\
-			Red        & 132  & -6.94  & -8.42   & -8.53     &   -6.79\\
+			Yellow     & \textcolor{red}{72} - \textcolor{blue}{81}   & -4.72  & -5.09   & -7.99     &  -4.29    \\
+			Red        & \textcolor{red}{132} - \textcolor{blue}{144}  & -6.94  & -8.42   & -8.53     &   -6.79\\
 			\bottomrule
 		\end{tabular}
 	\end{table}
 	
+		\begin{table}[hbt]
+		\addtolength{\tabcolsep}{-4pt}
+		\centering
+		\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ confidence interval of Table~\ref{TablaTresMuestras} estimations.}\label{ICTresMuestras}
+		\textcolor{blue}{
+			\begin{tabular}{c*4{c}}
+				\toprule
+				Color       &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$\\
+				\cmidrule(lr){1-5}
+				Green      & - & - & - & -\\
+				$n_{b}$    &           &           &           &    -      \\
+				\cmidrule(lr){1-5}
+				Yellow         & [] & [] & [] & []\\
+				$n_{b}$    &           &           &           &          \\
+				\cmidrule(lr){1-5}
+				Red        & [] & [] & [] & []\\
+				$n_{b}$    &           &           &           &          \\
+				\bottomrule
+			\end{tabular}
+		}
+	\end{table} 	
+
 	\section{Conclusions}
 	\label{conclusion}
 	
