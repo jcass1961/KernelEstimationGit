@@ -343,6 +343,7 @@ The $\Gamma$ and LN kernels show a better fit, the latter with higher kurtosis t
 	\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/NucleosGALNyIG.eps}
 	\caption{$\widehat{f}_{\mathcal{G}^0}$ for $L=8$, $\alpha=-5$, $\gamma=4$ and $n=25$ using $\Gamma$, LN, and IG kernels, and LSCV for bandwidth selection.}\label{EstimacionLNyGAyIG}
 \end{figure}
+%JC Programa: GraficoEstimacionDensidadConNucleos.R
 
 It is essential to have measures that quantify the quality of the estimation. 
 We used the Integrated Mean Square Error (MISE) because it measures the average behavior of the estimator on different samples. 
@@ -626,7 +627,7 @@ Moreover, from $n=49$ onwards the shape of the $\widehat{\alpha}_{\text{{LN}}}$ 
 	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/DensidadEstimadorNoCont.eps}
 	\caption{\label{Fig:DistributionL=3_alfa=-3} Distribution of estimators for $\alpha=-3$ and  $L=3$ }\label{Fig:DistEstimator}
 \end{figure}
-%Prog:DensityPropuestaNoCont.R	
+%JC Programa:DensityPropuestaNoCont.R	
 
 In order to investigate the asymptotic behavior of these estimators, we studied estimates of their density functions for $n=500$ and all the texture parameters. 
 The result of this analysis is shown in Fig.~\ref{Fig:Densities_n500}, where
@@ -643,7 +644,7 @@ The estimator which suffers the least with the texture reduction is $\widehat{\a
 	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps}
 	\caption{\label{Fig:Densities_n500} Density function of the estimators for $n=500$. }\label{Fig:DistEstimator}
 \end{figure}
-%Prog:AsymptoticDensityNoCont_n500.R	
+%JC Programa:AsymptoticDensityNoCont_n500.R	
 
 Table~\ref{tab:SkewKurt} presents the skewness and kurtosis values for simulated data and $L=3$. 
 The skewness is negative in all the cases, except for $\alpha=-1.5$ and $n=121,500$ for the $\widehat{\alpha}_{\text{{LN}}}$ estimator. 
@@ -978,6 +979,7 @@ As the sample size increases, the estimates stabilize, showing that the LN metho
 	\includegraphics[width=0.8\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.eps}
 	\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ for corresponding samples to image~\ref{CincoMuestras}.}\label{AlfaVsTamCincoMuestras}
 \end{figure}
+%JC programa: GraficoAlfaEstvs_n_ImagenReal_Corregido.R
 
 \begin{table}[hbt]
 	\centering

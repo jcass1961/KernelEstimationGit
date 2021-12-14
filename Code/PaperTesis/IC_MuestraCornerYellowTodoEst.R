@@ -15,35 +15,36 @@ nucleo3<-"LN"
 nucleo4<-"LC"
 
 ####################################################
-color<-"blue"
-
-nombre1<-paste("BootTresMuestras",color,nucleo1,"2000",sep="")
-nombre2<-paste("BootTresMuestras",color,nucleo2,"2000",sep="")
-nombre3<-paste("BootTresMuestras",color,nucleo3,"2000",sep="")
-nombre4<-paste("BootTresMuestras",color,nucleo4,"2000",sep="")
-
-muestra1.blue<-read_delim(nombre1)[,-1]
-muestra2.blue<-read_delim(nombre2)[,-1]
-muestra3.blue<-read_delim(nombre3)[,-1]
-muestra4.blue<-read_delim(nombre4)[,-1]
+color<-"Yellow"
 
 
-muestra.MV.blue<-muestra1.blue%>%mutate(color=color,metodo=nucleo1,alfa.est=x)%>%select(metodo,color,alfa.est)
-muestra.GA.blue<-muestra2.blue%>%mutate(color=color,metodo=nucleo2,alfa.est=x)%>%select(metodo,color,alfa.est)
-muestra.LN.blue<-muestra3.blue%>%mutate(color=color,metodo=nucleo3,alfa.est=x)%>%select(metodo,color,alfa.est)
-muestra.LC.blue<-muestra4.blue%>%mutate(color=color,metodo=nucleo4,alfa.est=x)%>%select(metodo,color,alfa.est)
+nombre1<-paste("BootMuestra_Corner",color,nucleo1,"2000",sep="")
+nombre2<-paste("BootMuestra_Corner",color,nucleo2,"2000",sep="")
+nombre3<-paste("BootMuestra_Corner",color,nucleo3,"2000",sep="")
+nombre4<-paste("BootMuestra_Corner",color,nucleo4,"2000",sep="")
 
-muestra.blue<-rbind(muestra.MV.blue,muestra.GA.blue,muestra.LN.blue,muestra.LC.blue)
+muestra1.yellow<-read_delim(nombre1)[,-1]
+muestra2.yellow<-read_delim(nombre2)[,-1]
+muestra3.yellow<-read_delim(nombre3)[,-1]
+muestra4.yellow<-read_delim(nombre4)[,-1]
 
-View(muestra.blue)
+
+muestra.MV.yellow<-muestra1.yellow%>%mutate(color=color,metodo=nucleo1,alfa.est=x)%>%select(metodo,color,alfa.est)
+muestra.GA.yellow<-muestra2.yellow%>%mutate(color=color,metodo=nucleo2,alfa.est=x)%>%select(metodo,color,alfa.est)
+muestra.LN.yellow<-muestra3.yellow%>%mutate(color=color,metodo=nucleo3,alfa.est=x)%>%select(metodo,color,alfa.est)
+muestra.LC.yellow<-muestra4.yellow%>%mutate(color=color,metodo=nucleo4,alfa.est=x)%>%select(metodo,color,alfa.est)
+
+muestra.yellow<-rbind(muestra.MV.yellow,muestra.GA.yellow,muestra.LN.yellow,muestra.LC.yellow)
+
+View(muestra.yellow)
 
 ####################################################
 color<-"yellow"
 
-nombre1<-paste("BootTresMuestras",color,nucleo1,"2000",sep="")
-nombre2<-paste("BootTresMuestras",color,nucleo2,"2000",sep="")
-nombre3<-paste("BootTresMuestras",color,nucleo3,"2000",sep="")
-nombre4<-paste("BootTresMuestras",color,nucleo4,"2000",sep="")
+nombre1<-paste("BootMuestra_Corner",color,nucleo1,"2000",sep="")
+nombre2<-paste("BootMuestra_Corner",color,nucleo2,"2000",sep="")
+nombre3<-paste("BootMuestra_Corner",color,nucleo3,"2000",sep="")
+nombre4<-paste("BootMuestra_Corner",color,nucleo4,"2000",sep="")
 
 muestra1.yellow<-read_delim(nombre1)[,-1]
 muestra2.yellow<-read_delim(nombre2)[,-1]
@@ -63,10 +64,10 @@ View(muestra.yellow)
 ####################################################
 color<-"red"
 
-nombre1<-paste("BootTresMuestras",color,nucleo1,"2000",sep="")
-nombre2<-paste("BootTresMuestras",color,nucleo2,"2000",sep="")
-nombre3<-paste("BootTresMuestras",color,nucleo3,"2000",sep="")
-nombre4<-paste("BootTresMuestras",color,nucleo4,"2000",sep="")
+nombre1<-paste("BootMuestra_Corner",color,nucleo1,"2000",sep="")
+nombre2<-paste("BootMuestra_Corner",color,nucleo2,"2000",sep="")
+nombre3<-paste("BootMuestra_Corner",color,nucleo3,"2000",sep="")
+nombre4<-paste("BootMuestra_Corner",color,nucleo4,"2000",sep="")
 
 muestra1.red<-read_delim(nombre1)[,-1]
 muestra2.red<-read_delim(nombre2)[,-1]
@@ -87,7 +88,7 @@ View(muestra.red)
 ################################################
 ## Junto todas las bases
 
-muestra<-rbind(muestra.blue,muestra.yellow,muestra.red)
+muestra<-rbind(muestra.yellow,muestra.yellow,muestra.red)
 head(muestra)
 
 
