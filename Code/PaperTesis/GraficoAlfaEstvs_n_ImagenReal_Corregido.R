@@ -5,7 +5,7 @@ library("wesanderson")
 getwd()
 enableJIT(3)
 
-setwd("../PaperTesis/Data")
+setwd("C:/Users/Julia/Documents/GitHub/KernelEstimationGit/Data/PaperTesis")
 
 ## Estimaciones de alfa para cada una de las muestras elegidas
 
@@ -52,7 +52,7 @@ percentiles<-left_join(per.LI,per.LS,by=c('L','n','metodo'))
 datos<-left_join(muestra.f,percentiles,by=c('L','n','metodo'))%>%
   rename(alfa.est=estimador,li=per.x,ls=per.y)
 
-## Asignoo -20 a los l?mites IC para ML y LC cuando no convergieron
+## Asignoo -20 a los límites IC para ML y LC cuando no convergieron
 datos[1,5]=-20
 datos[1,6]=-20
 datos[16,5]=-20
@@ -65,10 +65,10 @@ head(datos)
 
 IC.long<-datos%>%mutate(long=ls-li)%>%select(n,metodo,long)%>%
   pivot_wider(names_from = metodo, values_from = long)
-#write.csv(IC.long,file("IC.long"))
+write.csv(datos.long,file("G:/Mi unidad/Procesamiento de imagenes/KerEst/Data/PaperTesis/IC.long"))
 
 #########################################################
-## Genero gr?fico
+## Genero gráfico
 
 legenda.nomb<-c("alfa.MV"="ML","alfa.GA"=expression(paste("  ",Gamma)),
                 "alfa.LN"="LN","alfa.LC"="LC")
@@ -83,15 +83,15 @@ ggplot()+geom_line(data = datos, aes(x = n, y = alfa.est, color=metodo,linetype=
                 position=position_dodge(.03))+ 
   labs(x = "n", y = expression(paste(widehat(alpha)))) +  
   scale_x_continuous(trans="log10",breaks=c(9,25 ,49,81,121,500))+
-  scale_colour_manual(name = "M?todo", 
+  scale_colour_manual(name = "Método", 
                       #values=wes_palette("Darjeeling", n = 4),
                       #values = c("#01AFBB","#DC4E07", "#668cff","magenta"),
                       values = c("#56B4E9","coral", "magenta","#009E73"),
                       labels = legenda.nomb)+
-  scale_linetype_manual(name = "M?todo", 
+  scale_linetype_manual(name = "Método", 
                         values = c("dashed", "twodash" ,"dotted","longdash"),
                         labels = legenda.nomb)+
-  scale_shape_manual(name = "M?todo", 
+  scale_shape_manual(name = "Método", 
                      values = c(17, 19, 18,15),
                      labels = legenda.nomb)+
   theme_few()+
@@ -105,4 +105,4 @@ ggplot()+geom_line(data = datos, aes(x = n, y = alfa.est, color=metodo,linetype=
         strip.text = element_text(size = 20))+
   theme(legend.title=element_blank())
 
- ggsave("../Figures/AlfaVsTamCincoMuestrasCorregido_v2.eps", plot = last_plot(), device = "eps",scale=1.2)
+ ggsave("C:/Users/Julia/Documents/GitHub/KernelEstimationGit/Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.pdf", plot = last_plot(), device = "pdf",scale=1.2)

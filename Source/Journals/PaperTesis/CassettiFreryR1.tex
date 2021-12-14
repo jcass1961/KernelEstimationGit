@@ -424,6 +424,7 @@ Thus, our approach assumes that $\alpha$ takes values in the range of $[-20,-1]$
 	\subfigure[$L=8$]{\includegraphics[width=.75\linewidth]{../../../Figures/PaperTesis/DensidadGI0L8.eps}}
 	\caption{$\mathcal{G}^0(\alpha,\gamma^*,L)$ densities.}\label{densidades} 
 \end{figure}
+%JC Programa DensitiesGI02.R Es el mismo programa para L=3 y L=8. Tenès que cambiar el valor de L
 
 Many methods of image filtering and edge detection use sliding masks to estimate parameters. 
 These mask are usually of size $3 \times 3$, $5 \times 5$, $7 \times 7$, $9 \times 9$ and $11 \times 11$. 
@@ -606,6 +607,7 @@ For homogeneous areas, $\widehat{\alpha}_{\text{{ML}}}$ is the one with the smal
 	\subfigure[\label{ECMSinContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=0.49\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3SinCont_BarrasErroryPercentil.eps}}
 	\caption{Sample Bias and MSE with uncontaminated data and $L=3$.}\label{SesgoyECMSinContL=3} 
 \end{figure*}    
+%JC Programa: GraficoSesgoSinCont_L3BarrasErroryPercentil.R
 
 A similar analysis was done for the case $L=8$. Figs.~\ref{SesgoSinContL=8} and~\ref{ECMSinContL=8} show that $\widehat{\alpha}_{\text{{ML}}}$ has the best performance for homogeneous
 areas in terms of bias, while $\widehat{\alpha}_{\text{{LN}}}$ outperforms the rest in extremely textured areas and with moderate texture.
@@ -616,6 +618,7 @@ areas in terms of bias, while $\widehat{\alpha}_{\text{{LN}}}$ outperforms the r
 	\subfigure[\label{ECMSinContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=0.49\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8SinCont_BarrasErroryPercentil.eps}}
 	\caption{Bias and MSE estimates for uncontaminated data and $L=8$.}\label{SesgoyECMSinContL=8} 
 \end{figure*}
+%JC Programa: GraficoSesgoSinCont_L8BarrasErroryPercentil.R
 
 
 Fig.~\ref{Fig:DistributionL=3_alfa=-3} shows estimates of the density of these estimators for $\alpha=-3$ and $L=3$. 
@@ -768,29 +771,29 @@ The horizontal line is the true value.
 
 \begin{figure}[hbt]
 	\centering
-	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L3n25.eps}}
-	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L3n25.eps}}
+	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L3n25.eps}}%JC Programa: GraficoInvluenciaL3alfa-1punto5n25.R
+	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-3n25.R
 	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL3a} 
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
-	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L3n25.eps}}
-	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L3n25.eps}}
+	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-5n25.R
+	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-8n25.R
 	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}\label{SEIFL3b} 
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
-	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L8n25.eps}}
-	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L8n25.eps}}
+	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-1punto5n25.R
+	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-3n25.R
 	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL8a} 
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
-	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L8n25.eps}}
-	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L8n25.eps}}
+	\subfigure[\label{InflL8alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-5n25.R
+	\subfigure[\label{InflL8alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-8n25.R
 	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{{LC}}}$ para $L=8$, $n=25$ y $\alpha=-5,-8$.}\label{SEIFL8b} 
 \end{figure}
 
@@ -818,6 +821,7 @@ Figures~\ref{SesgoyECMConContL=3} and~\ref{SesgoyECMConContL=8} present these qu
 	\subfigure[\label{ECMConContL=3}$\widehat{\text{MSE}}$]{\includegraphics[width=.49\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=3Cont_BarrasErrorypercentil.eps}}
 	\caption{Bias and MSE for contaminated data,  $\epsilon=0.05$ and $ L=3$.}\label{SesgoyECMConContL=3} 
 \end{figure*}
+%JC Programa: GraficoSesgoCont_L3BarrasError1ypercentil.R
 
 \begin{figure*}[hbt]
 	\centering
@@ -825,7 +829,7 @@ Figures~\ref{SesgoyECMConContL=3} and~\ref{SesgoyECMConContL=8} present these qu
 	\subfigure[\label{ECMConContL=8}$\widehat{\text{MSE}}$]{\includegraphics[width=.49\linewidth]{../../../Figures/PaperTesis/GraficoECMMVyGAyLNyLC_L=8Cont_BarrasErrorypercentil.eps}}
 	\caption{Bias and MSE for contaminated data,  $\epsilon=0.05$ and $ L=8$.}\label{SesgoyECMConContL=8} 
 \end{figure*}
-
+%JC Programa: GraficoSesgoCont_L3BarrasError1ypercentil.R
 
 At this level of contamination, it can be seen more clearly how the estimators are grouped by performance, $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have suchlike behavior, while the same happens with $\widehat{\alpha}_{\Gamma}$ and $\widehat{\alpha}_{\text{{LN}}}$.  
 The difference is noticeable, both in bias and in MSE, in favor of the MDE estimators for large values of $\alpha$. 

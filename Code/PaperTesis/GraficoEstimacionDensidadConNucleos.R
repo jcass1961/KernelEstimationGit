@@ -1,9 +1,9 @@
 library("cubature")
 library("Conake")
-library("statmod") ## nucleo IG
 require(ggplot2)
 require(ggfortify)
 require(ggthemes)
+require("statmod") ## nucleo IG
 
 
 enableJIT(3)
@@ -119,22 +119,19 @@ resultados <- data.frame(rangox, fest.GA, fest.LN, fest.IG)
 legenda.nomb<-c("Set1"=expression(Gamma),"Set2"="LN","Set3"="IG")
 
 ggplot(resultados, aes(x=rangox)) +
-  stat_function(fun=dGI0, args=list(alfa,gama,L), n=1000, colour="black", size=1.5) + 
-  geom_line(aes(y=fest.GA, colour="Set1",linetype="Set1"),size=2) +
-  geom_line(aes(y=fest.LN, colour="Set2",linetype="Set2"),size=2) +
-  geom_line(aes(y=fest.IG, colour="Set3",linetype="Set3"),size=2) +
+  geom_line(aes(y=fest.GA, colour="Set1",linetype="Set1",alpha =I(0.7)),size=2.5) +
+  geom_line(aes(y=fest.LN, colour="Set2",linetype="Set2",alpha =I(0.7)),size=2) +
+  geom_line(aes(y=fest.IG, colour="Set3",linetype="Set3",alpha =I(0.9)),size=1.8) +
+  stat_function(fun=dGI0, args=list(alfa,gama,L), n=1000, colour="black", size=1.2) + 
   xlim(0,5)+
   xlab("x")+
-  ylab("densidad")+
+  ylab(expression(widehat(f)[G[I]^0]))+
   geom_hline(yintercept=0) +
-scale_colour_manual(name = "Método", 
-                    #values=wes_palette("Darjeeling", n = 4),
-                    #values = c("#01AFBB","#DC4E07", "#668cff","magenta"),
-                    #values = c("#56B4E9","blue","magenta"),
-                    values = c("red","#69b3a2","#56B4E9"),
+scale_colour_manual(name = "Kernels",
+                    values = c("blue","red","green"),
                     labels = legenda.nomb)+
-  scale_linetype_manual(name = "Método", 
-                        values = c("Set1" ="dashed", "Set2"="twodash" ,"Set3"= "twodash"),
+  scale_linetype_manual(name = "Kernels", 
+                        values = c("Set1" ="solid", "Set2"="solid" ,"Set3"= "solid"),
                         labels = legenda.nomb)+
   theme_few()+
   theme(legend.position="top",
@@ -145,7 +142,7 @@ scale_colour_manual(name = "Método",
         axis.title.x = element_text( size = 20 ),
         strip.text = element_text(size = 20))
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Figures/Tesis/Capitulo5")
+setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Figures/PaperTesis")
 getwd()
 graf.nucleos<-"NucleosGALNyIG.pdf"
-ggsave(graf.alfa, plot = last_plot(), device = "pdf",scale=1.2)
+ggsave(graf.nucleos, plot = last_plot(), device = "pdf",scale=1.2)
