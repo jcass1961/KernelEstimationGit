@@ -1,8 +1,10 @@
 library(MASS)
-library("stats4")
+library(stats4)
 library(caTools)
 require(ggplot2)
 require(ggthemes)
+require(tidyr)
+require(rstudioapi)
 
 ######################################################################################################
 ######################################################################################################
@@ -10,7 +12,9 @@ require(ggthemes)
 
 ### DIRECTORIO DONDE ESTAN LAS BASES
 
-setwd("G:/Mi unidad/Github/KernelEstimationGit/Data/PaperTesis")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("../../Data/PaperTesis")
+
 
 L=3
 
@@ -59,12 +63,12 @@ base.df$alfa <- factor(base.df$alfa, levels = c("-1.5","-3","-5","-8"),
 
 head(base.df)
 
-p3<-ggplot(base.df, aes(x=alfa.est,color=metodo,group =metodo)) + 
-  facet_wrap(~alfa,labeller = label_parsed,ncol=2, scales = 'free_y') +
-  geom_line(stat='density', aes(linetype = metodo), size = 2) +
+p3<-ggplot(base.df, aes(x=alfa.est, color=metodo, group =metodo)) + 
+  facet_wrap(~alfa,labeller = label_parsed, ncol=2, scales = 'free_y') +
+  geom_line(stat='density', size = 2) +
   geom_vline(aes(xintercept=alfa2),
              color="blue", linetype="dashed", size=1)+
-  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-15,0))+
+  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-13,-1))+
   #scale_color_discrete(name = LegendTitle,labels = legenda.nomb)+
   scale_colour_manual(name = " ",
                       values = c("#56B4E9","coral", "magenta","#009E73"),
@@ -90,9 +94,12 @@ p3<-ggplot(base.df, aes(x=alfa.est,color=metodo,group =metodo)) +
   p3
 
 ######################################## 
-getwd()
-ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps", plot = last_plot(), device = "eps",scale=2)
-
+ggsave("../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps", 
+       plot = last_plot(), 
+       device = "eps", 
+       scale=2)
+system("convert ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf
+")
 
 ############################################################
 ############################################################

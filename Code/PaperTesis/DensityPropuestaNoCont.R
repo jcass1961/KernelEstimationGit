@@ -1,8 +1,10 @@
 library(MASS)
-library("stats4")
+library(stats4)
 library(caTools)
 require(ggplot2)
 require(ggthemes)
+require(tidyr)
+require(rstudioapi)
 
 ######################################################################################################
 ######################################################################################################
@@ -10,7 +12,8 @@ require(ggthemes)
 
 ### DIRECTORIO DONDE ESTAN LAS BASES
 
-setwd("G:/Mi unidad/Github/KernelEstimationGit/Data/PaperTesis")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("../../Data/PaperTesis")
 
 L=3
 
@@ -54,7 +57,7 @@ nombre.ticks<-c(-5,-3,-1)
 p<-ggplot(base.df, aes(x=alfa.est,color=metodo)) + 
   facet_wrap(~n,labeller = labeller(n=n.labs),ncol=3) + 
   geom_line(stat='density', aes(linetype = metodo), size = 2) +
-  scale_x_continuous(breaks=c(-3),limits = c(-10,0),labels=scaleFUN)+
+  scale_x_continuous(breaks=c(-3),limits = c(-10,0), labels=scaleFUN)+
   #scale_color_discrete(name = LegendTitle,labels = legenda.nomb)+
   scale_colour_manual(name = "",
                       values = c("#56B4E9","coral", "magenta","#009E73"),

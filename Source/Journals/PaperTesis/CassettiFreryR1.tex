@@ -276,10 +276,10 @@ They chose the Triangular distance because it presented the best performance.
 
 The Triangular distance is defined as:
 \begin{equation}
-	d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{\big(f_{\text{\tiny{V}}}(x)-f_{\text{\tiny{W}}}(x)\big)^2}{f_{\text{\tiny{V}}}(x)+f_{\text{\tiny{W}}}(x)}dx,
+	d_{\text{{T}}}(f_{\text{{V}}},f_{\text{{W}}})=\int_{S}\frac{\big(f_{\text{{V}}}(x)-f_{\text{{W}}}(x)\big)^2}{f_{\text{{V}}}(x)+f_{\text{{W}}}(x)}dx,
 	\label{DT}
 \end{equation}
-where $f_{\text{\tiny{V}}}$ and $f_{\text{\tiny{W}}}$ are two density functions with common support $S$.
+where $f_{\text{{V}}}$ and $f_{\text{{W}}}$ are two density functions with common support $S$.
 
 Gambini et al.~\cite{gambini2015} estimated the underlying density function with asymmetric kernels.
 In particular, the authors used the IG kernel, defined in subsection~\ref{asymmetrickernel}. 
@@ -446,14 +446,14 @@ The IG kernel has the highest percentage of these cases compared to the $\Gamma$
 	\centering                                    
 	\begin{tabular}{c c S[table-format=2.2]S[table-format=2.2]S[table-format=2.2] S[table-format=2.2] @{\hskip 4mm} S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]S[table-format=2.1]}                                    
 		\toprule                                    
-		\multirow{4 }{5mm}{$\alpha$} &\multirow{4 }{*}{ $n$  } & \multicolumn{4}{c}{\multirow{2 }{*}{$\widehat{\text{MISE}}$}} & \multicolumn{4}{c}{\centering \% }\\
+		 & & \multicolumn{4}{c}{\multirow{2 }{*}{$\widehat{\text{MISE}}$}} & \multicolumn{4}{c}{\centering \% }\\
 		&                          &                &               &         &     &   \multicolumn{4}{c}{non convergence cases}\\
-		
 		\cmidrule(lr){3-6}
 		\cmidrule(lr){7-10}
 		%\midrule
 		
-		&           & \mc{$\Gamma$} & \mc{LN}       & \mc{IG}     & \mc{$\text{IG}_{\text{E}}$}    & \mc{$\widehat{\alpha}_{\Gamma}$} & \mc{$\widehat{\alpha}_{\text{{LN}}}$}    & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}}$} & \mc{$\widehat{\alpha}_{\text{\tiny{IG}}_{\text{E}}}$}\\
+$\alpha$		& $n$           & \mc{$\Gamma$} & \mc{LN}       & \mc{IG}     & \mc{$\text{IG}_{\text{E}}$}    & \mc{$\widehat{\alpha}_{\Gamma}$} & \mc{$\widehat{\alpha}_{\text{{LN}}}$}    & \mc{$\widehat{\alpha}_{\text{{IG}}}$} & \mc{$\widehat{\alpha}_{\text{{IG}}_{\text{E}}}$}\\
+		\cmidrule(lr){1-2}
 		\cmidrule(lr){3-6}
 		\cmidrule(lr){7-10}                
 		\multirow{5 }{5mm}{$-1.5$} 
@@ -635,7 +635,7 @@ Moreover, from $n=49$ onwards the shape of the $\widehat{\alpha}_{\text{{LN}}}$ 
 In order to investigate the asymptotic behavior of these estimators, we studied estimates of their density functions for $n=500$ and all the texture parameters. 
 The result of this analysis is shown in Fig.~\ref{Fig:Densities_n500}, where
 the vertical blue lines indicate the true value. 
-Several scales were chosen for the $y$-axis in order to appreciate the differences between these density functions. 
+Notice that the ranges of the $y$-axis are different among the plots. 
 The heavytailnedess of these densities is noticeable.
 For $\alpha=-1.5$, all are quite concentrated around the true parameter value. 
 As the texture parameter reduces, the densities more spread.
@@ -644,7 +644,7 @@ The estimator which suffers the least with the texture reduction is $\widehat{\a
 
 \begin{figure}[hbt]
 	\centering
-	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps}
+	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa}
 	\caption{\label{Fig:Densities_n500} Density function of the estimators for $n=500$. }\label{Fig:DistEstimator}
 \end{figure}
 %JC Programa:AsymptoticDensityNoCont_n500.R	
@@ -773,21 +773,21 @@ The horizontal line is the true value.
 	\centering
 	\subfigure[\label{InflL3alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L3n25.eps}}%JC Programa: GraficoInvluenciaL3alfa-1punto5n25.R
 	\subfigure[\label{InflL3alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-3n25.R
-	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL3a} 
+	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL3a} 
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
 	\subfigure[\label{InflL3alfa-5n25}$\widehat{\alpha}=-5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-5L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-5n25.R
 	\subfigure[\label{InflL3alfa-8n25}$\widehat{\alpha}=-8$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-8L3n25.eps}}%JC Programa:GraficoInvluenciaL3alfa-8n25.R
-	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}\label{SEIFL3b} 
+	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{{{LC}}}}$ para $L=3$, $n=25$ y $\alpha=-5,-8$.}\label{SEIFL3b} 
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
 	\subfigure[\label{InflL8alfa-1.5n25}$\widehat{\alpha}=-1.5$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-1punto5L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-1punto5n25.R
 	\subfigure[\label{InflL8alfa-3n25}$\widehat{\alpha}=-3$]{\includegraphics[width=.48\linewidth]{../../../Figures/PaperTesis/CurvaInfluenciaAlfa-3L8n25.eps}}%JC Programa: GraficoInvluenciaL8alfa-3n25.R
-	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{\tiny{{LC}}}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL8a} 
+	\caption{SEIF for $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$, $\widehat{\alpha}_{\text{{{LC}}}}$ para $L=8$, $n=25$ y $\alpha=-1.5,-3$.}\label{SEIFL8a} 
 \end{figure}
 
 \begin{figure}[hbt]
@@ -852,7 +852,7 @@ In order to find the $\text{ENL}$ we selected manually four textureless areas an
 The final $\text{ENL}$ is their average weighted by the size of the areas. 
 We then set $\widehat L=3.21$ in the analysis of the multilook image.
 
-In order to obtain error measures, we performed a parametric bootstrap by the percentile method~\cite{Davison1997} of $2000$ replications to find confidence intervals of \SI{95}{\percent} levels for each method and each value of $n$.     
+We found the confidence intervals at the \SI{95}{\percent} level with bootstrap and the percentile method~\cite{Davison1997} with $2000$ replications.     
 This method uses the percentiles $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ of the distribution of $\widehat{\theta} $ generated by the bootstrap samples, where $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ are the sample percentiles of the distribution of $\widehat{\theta} $. 
 According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to the standard normal interval when there is evidence of non-normality.
 
@@ -958,13 +958,9 @@ We observe the same behaviour as before: $\widehat{\alpha}_{\text{{LN}}}$ has th
 %	}
 %\end{table} 
 
-%%% ACF Hasta acá
-Figure~\ref{CincoMuestras} shows five samples selected to perform another analysis of the performance of the estimation methods. 
-We chose nested sample of size $n=9,25,49,81,121$ corresponding to square windows. 
+We performed another analysis of the behavior of the estimation methods with the five samples shown in Figure~\ref{CincoMuestras}. 
+We chose nested squared samples of sides $n=9,25,49,81$ and $121$. 
 Figure~\ref{AlfaVsTamCincoMuestras} shows the estimates $\widehat{\alpha}$ for each method and each sample as functions of the sample size $n$. 
-\textcolor{red}{We performed a parametric bootstrap by the percentile method~\cite{Davison1997} of $2000$ replications to find confidence intervals of \SI{95}{\percent} level for each method and each value of $n$.     
-This method uses the percentiles $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ of the distribution of $\widehat{\theta} $ generated by the samples bootstrap, where $\theta^*_{(\alpha)}$ and $\theta^*_{(1-\alpha)}$ are the sample percentiles of the distribution of $\widehat{\theta} $. 
-According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to the standard normal interval when there is evidence of non-normality. }
 
 \begin{figure}[hbt]
 	\centering
@@ -972,18 +968,19 @@ According to Efron and Tibshirani~\cite{Efron93}, this method is preferable to t
 	\caption{Five samples used to compare $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and  $\widehat{\alpha}_{\text{{LC}}}$.}\label{CincoMuestras}
 \end{figure}
 
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.eps}
+	\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ for corresponding samples to image~\ref{CincoMuestras}.}\label{AlfaVsTamCincoMuestras}
+\end{figure}
+%JC programa: GraficoAlfaEstvs_n_ImagenReal_Corregido.R
+
+
 Table~\ref{TablaCincoMuestras} shows the estimates. 
 It can be seen that $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ have similar performance, and so have $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\Gamma}$. 
 For $n= 9$ none of the ML and LC methods converge, thus the value $-20$. 
 As the sample size increases, the estimates stabilize, showing that the LN method is the most stable while $\widehat{\alpha}_{\text{{ML}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ are the most unstable, giving poor estimates for small sample sizes.
 
-\textcolor{blue}{Gráfico corregido}
-\begin{figure}[hbt]
-	\centering
-	\includegraphics[width=0.8\linewidth]{../../../Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.eps}
-	\caption{ $\widehat{\alpha}_{\text{{ML}}}$, $\widehat{\alpha}_{\Gamma}$, $\widehat{\alpha}_{\text{{LN}}}$ and $\widehat{\alpha}_{\text{{LC}}}$ for corresponding samples to image~\ref{CincoMuestras}.}\label{AlfaVsTamCincoMuestras}
-\end{figure}
-%JC programa: GraficoAlfaEstvs_n_ImagenReal_Corregido.R
 
 \begin{table}[hbt]
 	\centering
@@ -1001,29 +998,27 @@ As the sample size increases, the estimates stabilize, showing that the LN metho
 	\end{tabular}
 \end{table}
 
-\textcolor{blue}{
-Table~\ref{tab:LongIC} presents the length of the confidence intervals corresponding to Fig.~\ref{AlfaVsTamCincoMuestras}. It can be seen that the corresponding lengths of ML and LC methods are, in general, wider than those of the other ones. All intervals widths decrease as the sample size increases; that is, estimates become progressively more precise. 
+In Table~\ref{tab:LongIC} we see the length of the confidence intervals depicted in Fig.~\ref{AlfaVsTamCincoMuestras}.
+In most cases, the ML and LC produce wider intervals than those from other methods. 
+All the widths decrease as the sample size increases; that is, estimates become progressively more precise. 
 It is noteworthy that the shortest confidence interval corresponds to the LN method in most cases. 
 It should be noted that there is no confidence interval for the cases where ML and LC methods did not converge.
-It is important to clarify that this analysis is performed for small sample sizes, which correspond to the chosen windows sizes. 
-}
+It is important to clarify that this analysis is performed for small samples corresponding to the chosen windows sizes. 
 
-\begin{table}[htbp]
+\begin{table}[htb]
 	\centering
 	\caption{\label{tab:LongIC}Length of bootstrap confidence intervals showed in Fig.\ref{AlfaVsTamCincoMuestras}}
-	\textcolor{blue}{
-	\begin{tabular}{ccccc}
+	\begin{tabular}{*5{r}}
 		\toprule 
 		n     &  $\widehat{\alpha}_{\text{{ML}}}$    &  $\widehat{\alpha}_{\Gamma}$  &  $\widehat{\alpha}_{\text{{LN}}}$ &  $\widehat{\alpha}_{\text{{LC}}}$ \\
 		\midrule
-		9     &    -  & 11.86 & 12.12 & - \\
+		9     &    ---  & 11.86 & 12.12 & --- \\
 		25    & 14.74 & 10.94 & 10.20 & 14.14 \\
 		49    & 3.94  & 3.25  & 2.28  & 9.65 \\
 		81    & 1.38  & 1.09  & 1.03  & 2.75 \\
 		121   & 0.85  & 0.77  & 0.83  & 1.31 \\
 		\bottomrule
 	\end{tabular}
-}
 \end{table}%
 
 
@@ -1045,14 +1040,7 @@ It is important to clarify that this analysis is performed for small sample size
 %	\end{table}
 
 Figure~\ref{CornerReflector} shows the same ESAR image with a corner reflector in a dark background. 
-We selected nested samples to estimate $\alpha$, some of them include the corner reflector.
-
-\begin{figure}[hbt]
-	\centering
-	\includegraphics[width=0.7\linewidth]{../../../Figures/PaperTesis/CornerJulia_Roja.eps}
-	\caption{Nested samples with and without a corner reflector.}\label{CornerReflector}
-\end{figure}
-
+We selected nested samples to estimate $\alpha$; only the two largest (in yellow and red) include the corner reflector.
 Table~\ref{ResultadosCorner} shows the estimates. 
 It can be seen that none of the estimators converge for $n=9$. 
 For the rest of the sample sizes, LN estimator is the most stable. 
@@ -1060,17 +1048,24 @@ Furthermore, the LN estimator does not show any change between the green sample 
 All the other methods showed changes in the estimation by changing the type of texture from one sample to another. 
 That is the kind of stability sought for a good estimator for these kinds of problems of image processing and understanding.
 
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=\linewidth]{../../../Figures/PaperTesis/CornerJulia_Roja.eps}
+	\caption{Nested samples with and without a corner reflector.}\label{CornerReflector}
+\end{figure}
+
+
 \begin{table}[hbt]
-	\caption{$\widehat{\alpha}$ estimated values.}\label{ResultadosCorner} 
+	\caption{Estimated $\widehat{\alpha}$ in nested boxes.}\label{ResultadosCorner} 
 	%\begin{tabular}{c 5*(c c c c c)}
-	\begin{tabular}{c c S[table-number-alignment = right] S[table-number-alignment = right] S[table-number-alignment = right] S[table-number-alignment = right]}
+	\begin{tabular}{c r S[table-number-alignment = right] S[table-number-alignment = right] S[table-number-alignment = right] S[table-number-alignment = right]}
 		\toprule
 		Color & $n$ &  ${\widehat\alpha}_{\text{MV}}$ & ${\widehat{\alpha}_{\Gamma}}$ &${\widehat\alpha}_{\text{{LN}}}$  &${\widehat\alpha}_{\text{{LC}}}$ \\
 		\cmidrule(lr){1-6}
 		Magenta     & 9   & -20.00   & -20.00  & -20.00   & -20.00    \\
 		Green       & 30  & -13.04  & -6.82  & -7.76     &  -20.00  \\
-		Yellow     & \textcolor{red}{72} - \textcolor{blue}{81}   & -4.72  & -5.09   & -7.99     &  -4.29    \\
-		Red        & \textcolor{red}{132} - \textcolor{blue}{144}  & -6.94  & -8.42   & -8.53     &   -6.79\\
+		Yellow     & {81}   & -4.72  & -5.09   & -7.99     &  -4.29    \\
+		Red        & {144}  & -6.94  & -8.42   & -8.53     &   -6.79\\
 		\bottomrule
 	\end{tabular}
 \end{table}
