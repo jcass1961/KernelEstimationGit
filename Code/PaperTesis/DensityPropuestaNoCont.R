@@ -1,10 +1,8 @@
 library(MASS)
-library(stats4)
+library("stats4")
 library(caTools)
 require(ggplot2)
 require(ggthemes)
-require(tidyr)
-require(rstudioapi)
 
 ######################################################################################################
 ######################################################################################################
@@ -12,8 +10,7 @@ require(rstudioapi)
 
 ### DIRECTORIO DONDE ESTAN LAS BASES
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-setwd("../../Data/PaperTesis")
+setwd("G:/Mi unidad/Github/KernelEstimationGit/Data/PaperTesis")
 
 L=3
 
@@ -33,7 +30,7 @@ base00 <- read.csv(nombre.base)
 head(base00)
 
 base0<-subset(base00,alfa.MV!=-20 & alfa.DT.GA.BFGS!=-20
-              & alfa.DT.LN.BFGS!=-20 & alfa.LC!=-0)[,1:7]
+             & alfa.DT.LN.BFGS!=-20 & alfa.LC!=-0)[,1:7]
 head(base0)
 colnames(base0)<-c("L","alfa","n","alfa.MV","alfa.GA","alfa.LN","alfa.LC")
 
@@ -52,16 +49,7 @@ legenda.nomb<-c("alfa.MV"=expression(paste("  ",widehat(alpha)[ML])),
 #legenda.nomb<-c("alfa.MV"="ML","alfa.GA"=expression(Gamma),"alfa.LN"="LN","alfa.LC"="LC")
 
 n.labs = c("9"="n=9","25"="n=25","49"="n=49","81"="n=81","121"="n=121","500"="n=500")
-#nombre.ticks<-c(-5,-3,-1)
-
-nombre.ticks<-factor(base.df$alfa.est, levels = c("-1","-3","-5"),
-       ordered = TRUE,
-       labels=c(expression(alpha==-1),
-                expression(alpha==-3),
-                expression(alpha==-5))
-)
-
-
+nombre.ticks<-c(-5,-3,-1)
 
 p<-ggplot(base.df, aes(x=alfa.est,color=metodo)) + 
   facet_wrap(~n,labeller = labeller(n=n.labs),ncol=3) + 
@@ -74,31 +62,28 @@ p<-ggplot(base.df, aes(x=alfa.est,color=metodo)) +
   scale_linetype_manual(name = "",
                         values = c("solid", "solid" ,"solid","solid"),
                         labels = legenda.nomb)+
-  # scale_shape_manual(name = " ",
-  #                    values = c(17, 19, 18,15),
-  #                    labels = legenda.nomb)+
+  scale_shape_manual(name = " ",
+                     values = c(17, 19, 18,15),
+                     labels = legenda.nomb)+
   theme_few()+
-  theme(text=element_text(size=35, family="serif"),
-        legend.position="top",
-        legend.text = element_text( size=35),
-        legend.title = element_text( size=35),
-        axis.text.y = element_text( size = 35 ),
-        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
-        axis.title.y = element_text( size = 35 ),
-        axis.title.x = element_text( size = 35 ),
+  theme(legend.position="top",
+        legend.text = element_text( size=25),
+        legend.title = element_text( size=25),
+        axis.text.y = element_text( size = 25 ),
+        axis.text.x = element_text(hjust = 1, size = 25,angle=45),
+        axis.title.y = element_text( size = 25 ),
+        axis.title.x = element_text( size = 25 ),
         #axis.ticks.length=unit(0.5,"cm"),
-        strip.text = element_text(size = 35))+
+        strip.text = element_text(size = 25))+
   labs(x=expression(paste(widehat(alpha))), y = "Density")
 p
-p1<-p+ geom_vline(aes(xintercept=-3),
-              color="blue", linetype="dashed", size=1)+ geom_hline(aes(yintercept=0),
-                                                                   color="black",  size=1)+
+p+ geom_vline(aes(xintercept=-3),
+                 color="blue", linetype="dashed", size=1)+ geom_hline(aes(yintercept=0),
+             color="black",  size=1)+
   facet_wrap(~n,labeller = labeller(n=n.labs),ncol=3)  
 ######################################## 
 getwd()
-ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/DensidadEstimadorNoCont.pdf", 
-       plot = last_plot(), 
-       device = "pdf", 
-       scale=2)
-system("convert ../../Figures/PaperTesis/DensidadEstimadorNoCont.pdf ../../Figures/PaperTesis/DensidadEstimadorNoCont.eps
-")
+ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/DensidadEstimadorNoCont.eps", plot = last_plot(), device = "eps",scale=2)
+
+
+

@@ -5,8 +5,7 @@ library("wesanderson")
 getwd()
 enableJIT(3)
 
-
-setwd("G:/Mi unidad/Procesamiento de imagenes/KerEst/Data/Tesis/ImagenReal")
+setwd("G:/Mi unidad/GitHub/KernelEstimationGit/Data/PaperTesis")
 
 ## Estimaciones de alfa para cada una de las muestras elegidas
 
@@ -33,24 +32,19 @@ muestra.f<-muestra.est%>% gather(.,key=metodo,value=estimador,3:6)
 base0 <- read.csv("G:/Mi unidad/Procesamiento de imagenes/KerEst/Data/Tesis/Bootstrap/Bootstrap2000_FinalCon121.csv", sep=";")
 head(base0)
 
-# base<-subset(base0,alfa.MV!=-20 & alfa.GA!=-20
-#              & alfa.LN!=-20 & alfa.LC!=-20)
-base<-base0%>%filter(alfa.MV!=-20 , alfa.GA!=-20,
-             alfa.LN!=-20, alfa.LC!=-20)
-View(base)
+base<-subset(base0,alfa.MV!=-20 & alfa.GA!=-20
+             & alfa.LN!=-20 & alfa.LC!=-20)
+
+head(base)
 
 base.f<-base%>% gather(.,key=metodo,value=estimador,3:6) 
 head(base.f)
-data.class(base.f)
 
 ## Calculo percentiles muestrales
 
-per.LI0<-base.f%>%group_by(L,n,metodo)
-per.LI<-per.LI0%>%summarise(per=quantile(estimador,0.025))
+per.LI<-base.f%>%group_by(L,n,metodo)%>%
+  summarise(per=quantile(estimador,0.025))
 per.LS<-base.f%>%group_by(L,n,metodo)%>%summarise(per=quantile(estimador,0.975))
-per.LI
-
-
 
 percentiles<-left_join(per.LI,per.LS,by=c('L','n','metodo'))
 
@@ -69,10 +63,11 @@ head(datos)
 ############################
 ### Calculo longitud de intervalos
 
+getwd()
 IC.long<-datos%>%mutate(long=ls-li)%>%select(n,metodo,long)%>%
   pivot_wider(names_from = metodo, values_from = long)
-write.csv(datos.long,file("G:/Mi unidad/Procesamiento de imagenes/KerEst/Data/PaperTesis/IC.long"))
-
+write.csv(IC.long,file("G:/Mi unidad/GitHub/KernelEstimationGit/Data/PaperTesis/IC.long"))
+write.csv(datos,file("G:/Mi unidad/GitHub/KernelEstimationGit/Data/PaperTesis/Per5MuestrasAnidadas"))
 #########################################################
 ## Genero gr?fico
 
@@ -82,37 +77,33 @@ legenda.nomb<-c("alfa.MV"="ML","alfa.GA"=expression(paste("  ",Gamma)),
 ticks<-n
 nombre.ticks<-c(9,25,49,81,121)
 
-nombre.x<-expression(italic(n))
 
 ggplot()+geom_line(data = datos, aes(x = n, y = alfa.est, color=metodo,linetype=metodo),size=2) +
   geom_point(data = datos, aes(x = n, y = alfa.est, color=metodo,shape=metodo),size=3.5) +
   geom_errorbar(data = datos,aes(x = n,  ymin=li, ymax=ls,color=metodo), width=.1,#'#0072B2'
                 position=position_dodge(.03))+ 
-  labs(x = nombre.x, y = expression(paste(widehat(alpha)))) +  
+  labs(x = "n", y = expression(paste(widehat(alpha)))) +  
   scale_x_continuous(trans="log10",breaks=c(9,25 ,49,81,121,500))+
-  scale_colour_manual(name = "Metodo", 
+  scale_colour_manual(name = "M?todo", 
                       #values=wes_palette("Darjeeling", n = 4),
                       #values = c("#01AFBB","#DC4E07", "#668cff","magenta"),
                       values = c("#56B4E9","coral", "magenta","#009E73"),
                       labels = legenda.nomb)+
-  scale_linetype_manual(name = "Metodo", 
+  scale_linetype_manual(name = "M?todo", 
                         values = c("dashed", "twodash" ,"dotted","longdash"),
                         labels = legenda.nomb)+
-  scale_shape_manual(name = "Metodo", 
+  scale_shape_manual(name = "M?todo", 
                      values = c(17, 19, 18,15),
                      labels = legenda.nomb)+
   theme_few()+
-  theme(text=element_text(size=35, family="serif"),
-        legend.position="top",
-        legend.text = element_text( size=35),
-        legend.title = element_text( size=35),
-        axis.text.y = element_text( size = 35 ),
-        axis.text.x = element_text(angle=70,hjust = 1, size = 35),
-        axis.title.y = element_text( size = 35 ),
-        axis.title.x = element_text( size = 35 ),
-        strip.text = element_text(size = 35))+
+  theme(legend.position="top",
+        legend.text = element_text( size=20),
+        legend.title = element_text( size=20),
+        axis.text.y = element_text( size = 20 ),
+        axis.text.x = element_text(angle=70,hjust = 1, size = 20),
+        axis.title.y = element_text( size = 20 ),
+        axis.title.x = element_text( size = 20 ),
+        strip.text = element_text(size = 20))+
   theme(legend.title=element_blank())
 
-
- ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.pdf", 
-        plot = last_plot(), device = "pdf",scale=2)
+ ggsave("C:/Users/Julia/Documents/GitHub/KernelEstimationGit/Figures/PaperTesis/AlfaVsTamCincoMuestrasCorregido_v2.pdf", plot = last_plot(), device = "pdf",scale=1.2)

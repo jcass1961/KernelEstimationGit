@@ -1,11 +1,8 @@
 library(MASS)
-library(stats4)
+library("stats4")
 library(caTools)
 require(ggplot2)
 require(ggthemes)
-require(tidyr)
-require(rstudioapi)
-library(tidyverse)
 
 ######################################################################################################
 ######################################################################################################
@@ -13,9 +10,7 @@ library(tidyverse)
 
 ### DIRECTORIO DONDE ESTAN LAS BASES
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-setwd("../../Data/PaperTesis")
-
+setwd("G:/Mi unidad/Github/KernelEstimationGit/Data/PaperTesis")
 
 L=3
 
@@ -64,44 +59,40 @@ base.df$alfa <- factor(base.df$alfa, levels = c("-1.5","-3","-5","-8"),
 
 head(base.df)
 
-p3<-ggplot(base.df, aes(x=alfa.est, color=metodo, group =metodo)) + 
-  facet_wrap(~alfa,labeller = label_parsed, ncol=2, scales = 'free_y') +
-  geom_line(stat='density', size = 2) +
+p3<-ggplot(base.df, aes(x=alfa.est,color=metodo,group =metodo)) + 
+  facet_wrap(~alfa,labeller = label_parsed,ncol=2, scales = 'free_y') +
+  geom_line(stat='density', aes(linetype = metodo), size = 2) +
   geom_vline(aes(xintercept=alfa2),
              color="blue", linetype="dashed", size=1)+
-  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-12,-1))+
+  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-13,-1))+
   #scale_color_discrete(name = LegendTitle,labels = legenda.nomb)+
   scale_colour_manual(name = " ",
                       values = c("#56B4E9","coral", "magenta","#009E73"),
                       labels = legenda.nomb)+
   scale_linetype_manual(name = " ",
-                        values = c("dashed", "twodash" ,"dotted","longdash"),
+                        values = c("solid", "solid" ,"solid","solid"),
                         labels = legenda.nomb)+
   scale_shape_manual(name = " ",
                      values = c(17, 19, 18,15),
                      labels = legenda.nomb)+
   theme_few()+
-  theme(text=element_text(size=35, family="serif"),
-        legend.position="top",
-        legend.text = element_text( size=35),
-        legend.title = element_text( size=35),
-        axis.text.y = element_text( size = 35 ),
-        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
-        axis.title.y = element_text( size = 35 ),
-        axis.title.x = element_text( size = 35 ),
+  theme(legend.position="top",
+        legend.text = element_text( size=28),
+        legend.title = element_text( size=28),
+        axis.text.y = element_text( size = 28 ),
+        axis.text.x = element_text(hjust = 1, size = 28,angle=45),
+        axis.title.y = element_text( size = 28 ),
+        axis.title.x = element_text( size = 28 ),
         #axis.ticks.length=unit(0.5,"cm"),
-        strip.text = element_text(size = 35))+
+        strip.text = element_text(size = 28))+
   labs(x=" ", y = "Density")
   #labs(x=expression(paste(widehat(alpha))), y = "Density")
   p3
 
 ######################################## 
-ggsave("../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf", 
-       plot = last_plot(), 
-       device = "pdf", 
-       scale=2)
-#system("convert ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf
-  #")
+getwd()
+ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps", plot = last_plot(), device = "eps",scale=2)
+
 
 ############################################################
 ############################################################

@@ -1,4 +1,4 @@
-setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/")
+setwd("C:/Users/usuario/Dropbox/Procesamiento de imagenes/KerEst/")
 
 library(MASS)
 library("stats4")
@@ -47,12 +47,13 @@ source("Code/Rutinas/DensitiesGI0Alejandro.R")
 source("Code/Rutinas/GraficaMuestra.R")
 
 #setwd("C:/Users/Usuario/Google Drive/Procesamiento de imagenes/Alejandro/ESAR")
-setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/ProgramasparaJSTAR/DatosRadarsat")
+setwd("C:/Users/usuario/Dropbox/Procesamiento de imagenes/KerEst/ProgramasparaJSTAR/DatosRadarsat")
 
-a0<-read.ENVI("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/Images/tesis/dlr_munich_4s.flt")
+a0<-read.ENVI("C:/Users/usuario/Dropbox/Procesamiento de imagenes/KerEst/Images/tesis/dlr_munich_4s.flt")
 
 b0<-a0^2
-elige.muestra(b0,"red")
+
+#elige.muestra(b0,"red")
 
 imagen.recortada<-b0[29:360,3:350]
 

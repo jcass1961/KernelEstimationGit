@@ -52,7 +52,6 @@ setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/ProgramasparaJSTA
 a0<-read.ENVI("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/Images/tesis/dlr_munich_4s.flt")
 
 b0<-a0^2
-elige.muestra(b0,"red")
 
 imagen.recortada<-b0[29:360,3:350]
 
@@ -75,26 +74,26 @@ m4<-recortada2[40:51,57:68]
 m5<-recortada2[43:45,60:63]
 
 
-a.estim1.r2<-estima.unpar(as.vector(m1)/mean(as.vector(m1)),L)
-a.estim1.r2
+# a.estim1.r2<-estima.unpar(as.vector(m1)/mean(as.vector(m1)),L)
+# a.estim1.r2
 
 a.estim2.r2<-estima.unpar(as.vector(m2)/mean(as.vector(m2)),L)#green
 a.estim2.r2
 
-a.estim3.r2<-estima.unpar(as.vector(m3)/mean(as.vector(m3)),L)#yellow
-a.estim3.r2
-
-a.estim4.r2<-estima.unpar(as.vector(m4)/mean(as.vector(m4)),L)#red
-a.estim4.r2
-
-a.estim5.r2<-estima.unpar(as.vector(m5)/mean(as.vector(m5)),L)
-a.estim5.r2
+# a.estim3.r2<-estima.unpar(as.vector(m3)/mean(as.vector(m3)),L)#yellow
+# a.estim3.r2
+# 
+# a.estim4.r2<-estima.unpar(as.vector(m4)/mean(as.vector(m4)),L)#red
+# a.estim4.r2
+# 
+# a.estim5.r2<-estima.unpar(as.vector(m5)/mean(as.vector(m5)),L)
+# a.estim5.r2
 ##########################################################
 ### Muestras
 
 green<-a.estim2.r2
-yellow<-a.estim3.r2
-red<-a.estim4.r2
+# yellow<-a.estim3.r2
+# red<-a.estim4.r2
 
 
 
