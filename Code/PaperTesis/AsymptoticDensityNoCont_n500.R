@@ -5,6 +5,7 @@ require(ggplot2)
 require(ggthemes)
 require(tidyr)
 require(rstudioapi)
+library(tidyverse)
 
 ######################################################################################################
 ######################################################################################################
@@ -68,7 +69,7 @@ p3<-ggplot(base.df, aes(x=alfa.est, color=metodo, group =metodo)) +
   geom_line(stat='density', size = 2) +
   geom_vline(aes(xintercept=alfa2),
              color="blue", linetype="dashed", size=1)+
-  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-13,-1))+
+  scale_x_continuous(breaks=c(-1.5,-3,-5,-8),limits = c(-12,-1))+
   #scale_color_discrete(name = LegendTitle,labels = legenda.nomb)+
   scale_colour_manual(name = " ",
                       values = c("#56B4E9","coral", "magenta","#009E73"),
@@ -80,26 +81,27 @@ p3<-ggplot(base.df, aes(x=alfa.est, color=metodo, group =metodo)) +
                      values = c(17, 19, 18,15),
                      labels = legenda.nomb)+
   theme_few()+
-  theme(legend.position="top",
-        legend.text = element_text( size=28),
-        legend.title = element_text( size=28),
-        axis.text.y = element_text( size = 28 ),
-        axis.text.x = element_text(hjust = 1, size = 28,angle=45),
-        axis.title.y = element_text( size = 28 ),
-        axis.title.x = element_text( size = 28 ),
+  theme(text=element_text(size=35, family="serif"),
+        legend.position="top",
+        legend.text = element_text( size=35),
+        legend.title = element_text( size=35),
+        axis.text.y = element_text( size = 35 ),
+        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
+        axis.title.y = element_text( size = 35 ),
+        axis.title.x = element_text( size = 35 ),
         #axis.ticks.length=unit(0.5,"cm"),
-        strip.text = element_text(size = 28))+
+        strip.text = element_text(size = 35))+
   labs(x=" ", y = "Density")
   #labs(x=expression(paste(widehat(alpha))), y = "Density")
   p3
 
 ######################################## 
-ggsave("../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps", 
+ggsave("../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf", 
        plot = last_plot(), 
-       device = "eps", 
+       device = "pdf", 
        scale=2)
-system("convert ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf
-")
+#system("convert ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.eps ../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa.pdf
+  #")
 
 ############################################################
 ############################################################

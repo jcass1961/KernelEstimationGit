@@ -10,7 +10,7 @@ require(ggthemes)
 
 ### DIRECTORIO DONDE ESTAN LAS BASES
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Data/Tesis/BasesFinalesUnParametroTesis")
+setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/Data/Tesis/BasesFinalesUnParametroTesis")
 
 L=3
 
@@ -202,11 +202,13 @@ head(datos.grafico)
 #### Graficos
 #### ALFA
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Figures/PaperTesis")
+setwd("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis")
 getwd()
 
 legenda.nomb<-c("MV"=expression(paste("  ",widehat(alpha)[ML])), "GA"=expression(paste("  ",widehat(alpha)[Gamma])), 
                 "LN"=expression(paste("  ",widehat(alpha)[LN])),"LC"=expression(paste("  ",widehat(alpha)[LC])))
+
+name.x<-expression(italic(n))
 
 pp1<-ggplot(data = datos.grafico, aes(x = n, y = 0)) +
   geom_line(size=1, color="blue") +
@@ -220,7 +222,7 @@ pp1+geom_line(data = datos.grafico, aes(x = n, y = sesgo, color=metodo,linetype=
                 position=position_dodge(.08))+ 
   #scale_color_manual(values = c("#56B4E9","coral", "magenta","#009E73"))+
   facet_wrap( ~ alfa.graf,labeller = label_parsed)+
-  labs(x = "n",              # t?tulo del eje x
+  labs(x = name.x,              # t?tulo del eje x
        y = "Bias") +  # t?tulo del eje y
   scale_x_continuous(trans="log10",breaks=c(9,25 ,49,81,121,500))+
   scale_colour_manual(name = "", 
@@ -243,16 +245,18 @@ pp1+geom_line(data = datos.grafico, aes(x = n, y = sesgo, color=metodo,linetype=
   #                       values = c(17, 19, 18,15),
   #                       labels = legenda.nomb)+
 theme_few()+
-  theme(legend.position="top",
-        legend.text = element_text( size=20),
-        legend.title = element_text( size=20),
-        axis.text.y = element_text( size = 20 ),
-        axis.text.x = element_text(angle=70,hjust = 1, size = 20),
-        axis.title.y = element_text( size = 20 ),
-        axis.title.x = element_text( size = 20 ),
-        strip.text = element_text(size = 20))
+  theme(text=element_text(size=35, family="serif"),
+        legend.position="top",
+        legend.text = element_text( size=35),
+        legend.title = element_text( size=35),
+        axis.text.y = element_text( size = 35 ),
+        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
+        axis.title.y = element_text( size = 35 ),
+        axis.title.x = element_text( size = 35 ),
+        #axis.ticks.length=unit(0.5,"cm"),
+        strip.text = element_text(size = 35))
 
-ggsave(graf.alfa, plot = last_plot(), device = "pdf",scale=1.2)
+ggsave(graf.alfa, plot = last_plot(), device = "pdf",scale=2)
 ##########################################################
 #########################################################
 
@@ -268,7 +272,7 @@ pp1+geom_line(data = datos.grafico, aes(x = n, y = ecm, color=metodo,linetype=me
   #              position=position_dodge(.1))+  
   geom_point(data = datos.grafico, aes(x = n, y = ecm, color=metodo,shape=metodo),size=3.5) +
   facet_wrap( ~ alfa.graf,labeller = label_parsed)+ 
-  labs( x = "n", y = "MSE")+ 
+  labs( x = name.x, y = "MSE")+ 
   scale_x_continuous(trans="log10",breaks=c(9,25 ,49,81,121,500))+
   scale_colour_manual(name = "", 
                       #values=wes_palette("Darjeeling", n = 4),
@@ -282,14 +286,16 @@ pp1+geom_line(data = datos.grafico, aes(x = n, y = ecm, color=metodo,linetype=me
                      values = c(17, 19, 18,15),
                      labels = legenda.nomb)+
   theme_few()+
-  theme(legend.position="top",
-        legend.text = element_text( size=20),
-        legend.title = element_text( size=20),
-        axis.text.y = element_text( size = 20 ),
-        axis.text.x = element_text(angle=70,hjust = 1, size = 20),
-        axis.title.y = element_text( size = 20 ),
-        axis.title.x = element_text( size = 20 ),
-        strip.text = element_text(size = 20))
+  theme(text=element_text(size=35, family="serif"),
+        legend.position="top",
+        legend.text = element_text( size=35),
+        legend.title = element_text( size=35),
+        axis.text.y = element_text( size = 35 ),
+        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
+        axis.title.y = element_text( size = 35 ),
+        axis.title.x = element_text( size = 35 ),
+        #axis.ticks.length=unit(0.5,"cm"),
+        strip.text = element_text(size = 35))
 
 
-ggsave(graf.ECM, plot = last_plot(), device = "pdf",scale=1.2)
+ggsave(graf.ECM, plot = last_plot(), device = "pdf",scale=2)

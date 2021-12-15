@@ -9,7 +9,7 @@ library("stats4")
 set.seed(1234)
 
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Data/Tesis/Cuantiles")
+setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/Data/Tesis/Cuantiles")
 
 
 L=8
@@ -39,14 +39,14 @@ ticks<-c(Cuantil.alfa,seq(8,20,2))
 nombre.ticks<-c(min(Cuantil.alfa),max(Cuantil.alfa),3,5,7,9,11)
 cant.black<-length(nombre.ticks)-2
 
-
+nombre.x<-expression(italic(z))
 
 pp1<-ggplot(datos1, aes(x=grilla)) +
-  geom_line(aes(y=datos1$alfa.GA, colour="Set1",linetype="Set1"),size=2) +
-  geom_line(aes(y=datos1$alfa.LC, colour="Set2",linetype="Set2"),size=2) +
-  geom_line(aes(y=datos1$alfa.LN, colour="Set3",linetype="Set3"),size=2) +
-  geom_line(aes(y=datos1$MV, colour="Set4",linetype="Set4"),size=2) +
-  labs(x="z", y = expression(paste(widehat(alpha))))+
+  geom_line(aes(y=alfa.GA, colour="Set1",linetype="Set1"),size=2) +
+  geom_line(aes(y=alfa.LC, colour="Set2",linetype="Set2"),size=2) +
+  geom_line(aes(y=alfa.LN, colour="Set3",linetype="Set3"),size=2) +
+  geom_line(aes(y=MV, colour="Set4",linetype="Set4"),size=2) +
+  labs(x=nombre.x, y = expression(paste(widehat(alpha))))+
   scale_x_continuous(breaks = nombre.ticks)+
   scale_colour_manual(name = " ", 
                       #values=wes_palette("Darjeeling", n = 4),
@@ -57,14 +57,16 @@ pp1<-ggplot(datos1, aes(x=grilla)) +
                         values = c("Set1" ="dashed", "Set2"="twodash" ,"Set3"= "dotted","Set4"="longdash"),
                         labels = legenda.nomb)+
   theme_few()+
-  theme(legend.position="top",
-        legend.text = element_text( size=30),
-        legend.title = element_text( size=30),
-        axis.text.y = element_text( size = 30 ),
-        axis.text.x = element_text(colour = c("red","red",rep("black",cant.black)),angle=70,hjust = 1, size = 30),
-        axis.title.y = element_text( size = 30 ),
-        axis.title.x = element_text( size = 30 ),
-        strip.text = element_text(size = 30))
+  theme(text=element_text(size=35, family="serif"),
+        legend.position="top",
+        legend.text = element_text( size=35),
+        legend.title = element_text( size=35),
+        axis.text.y = element_text( size = 35 ),
+        axis.text.x = element_text(colour = c("red","red",rep("black",cant.black)),
+                                   angle=70,hjust = 1, size = 35),
+        axis.title.y = element_text( size = 35 ),
+        axis.title.x = element_text( size = 35 ),
+        strip.text = element_text(size = 35))
 
 
 
@@ -72,8 +74,8 @@ pp1+geom_line(data=datos1, aes(x = grilla,y=alfa),size=2, color="blue")
 
 
 ##################### GRABA GRAFICOS
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Figures/PaperTesis")
+setwd("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis")
 getwd()
 
 graf.alfa<-paste("CurvaInfluenciaAlfa",alfa.nomb,"L",L,"n",n,".pdf",sep="")
-ggsave(graf.alfa, plot = last_plot(), device = "pdf",scale=1.2)
+ggsave(graf.alfa, plot = last_plot(), device = "pdf",scale=2)

@@ -8,8 +8,7 @@ require("statmod") ## nucleo IG
 
 enableJIT(3)
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Code/OtroPaper")
-#setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KernelEstimation/Code/OtroPaper")
+setwd("C:/Users/julia/Dropbox/Procesamiento de imagenes/KerEst/Code/OtroPaper")
 
 source("C:../Rutinas/Genera GI en funcion de alfa y gamma.R")
 source("C:../Rutinas/DefineDensidadGI_alfaygamma.R")
@@ -117,6 +116,7 @@ fest.IG<-sapply(rangox,fest0.IG)
 resultados <- data.frame(rangox, fest.GA, fest.LN, fest.IG)
 
 legenda.nomb<-c("Set1"=expression(Gamma),"Set2"="LN","Set3"="IG")
+nombre.x<-expression(italic(x))
 
 ggplot(resultados, aes(x=rangox)) +
   geom_line(aes(y=fest.GA, colour="Set1",linetype="Set1",alpha =I(0.7)),size=2.5) +
@@ -124,7 +124,7 @@ ggplot(resultados, aes(x=rangox)) +
   geom_line(aes(y=fest.IG, colour="Set3",linetype="Set3",alpha =I(0.9)),size=1.8) +
   stat_function(fun=dGI0, args=list(alfa,gama,L), n=1000, colour="black", size=1.2) + 
   xlim(0,5)+
-  xlab("x")+
+  xlab(nombre.x)+
   ylab(expression(widehat(f)[G[I]^0]))+
   geom_hline(yintercept=0) +
 scale_colour_manual(name = "Kernels",
@@ -134,15 +134,22 @@ scale_colour_manual(name = "Kernels",
                         values = c("Set1" ="solid", "Set2"="solid" ,"Set3"= "solid"),
                         labels = legenda.nomb)+
   theme_few()+
-  theme(legend.position="top",
-        legend.text = element_text( size=20),
-        legend.title = element_text( size=20),
-        axis.text.y = element_text( size = 20 ),
-        axis.title.y = element_text( size = 20 ),
-        axis.title.x = element_text( size = 20 ),
-        strip.text = element_text(size = 20))
+  theme(text=element_text(size=35, family="serif"),
+        legend.position="top",
+        legend.text = element_text( size=35),
+        legend.title = element_text( size=35),
+        axis.text.y = element_text( size = 35 ),
+        axis.text.x = element_text(hjust = 1, size = 35,angle=45),
+        axis.title.y = element_text( size = 35 ),
+        axis.title.x = element_text( size = 35 ),
+        #axis.ticks.length=unit(0.5,"cm"),
+        strip.text = element_text(size = 35))
 
-setwd("C:/Users/Usuario/Dropbox/Procesamiento de imagenes/KernelEstimation/Figures/PaperTesis")
 getwd()
+
 graf.nucleos<-"NucleosGALNyIG.pdf"
-ggsave(graf.nucleos, plot = last_plot(), device = "pdf",scale=1.2)
+ggsave("G:/Mi unidad/Github/KernelEstimationGit/figures/PaperTesis/graf.nucleos.pdf", 
+       plot = last_plot(), 
+       device = "pdf", 
+       scale=2)
+#ggsave(graf.nucleos, plot = last_plot(), device = "pdf",scale=1.2)
