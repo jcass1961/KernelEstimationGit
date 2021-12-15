@@ -39,7 +39,9 @@
 		
 		\item [-] Thank you very much for this careful observation. There was an error in Fig.~15. We fixed this error and also added Table~9, which shows the length of the bootstrap confidence intervals.
 		
-		\item [-] It can be seen in Table~9 that the length of the confidence intervals decrease as the sample size increases. \textcolor{blue}{It is important to note that for $n=9$ ML and LC methods did not converge. For this reason the confidence intervals for these cases are not shown. Tables $4-7$ were transformed in Tables $6-10$. All tables showing estimates are accompanied by their respective confidence intervals as a measure of estimation error.} 
+		\item [-] It can be seen in Table~9 that the length of the confidence intervals decrease as the sample size increases. It is important to note that, for $n=9$, neither ML or LC methods converge. 
+		For this reason the confidence intervals for these cases are not shown. Tables~4 to~7 are now Tables~6 to~10. 
+		All the new tables show the estimates accompanied by their respective confidence intervals as measures of the estimation error. 
 	\end{itemize}
 	
 	
@@ -64,21 +66,25 @@
 			\includegraphics[width=\linewidth]{AorAN.png}
 		\end{center}
 		According this recommendation, we write ``an MDE''.
-		\item We added ``and $\Omega$ is the parameter space.'' to the sentence after~(1).
+		\item We added ``where $\Omega$ is the parameter space.'' to the sentence after~(1).
 		\item We changed the text as follows:
 		\begin{quote}
 			In particular, several measures have been proposed to reflect the closeness  \DIFdelbegin \DIFdel{between two distribution functions.} \DIFdelend \DIFaddbegin \DIFadd{among the models that describe samples.}\DIFaddend
 		\end{quote}
 		\item It was wrong; we corrected it and now it reads ``$\alpha \in (-3,-1)$''.
-		\item \textcolor{blue}{Falta, creo que me dijiste que te la deje}
-		\item The equation $6$ is correct. We only consider the terms that depend on $\alpha$, which are those involved in the minimization.
+		\item We have justified our choice of texture parameters for the study, including a point in which the variance is infinite, with the following new paragraph:
+		\begin{quote}
+			Although the variance of a $\mathcal{G}^0$-distributed random variable is infinite when $\alpha>-2$, cf.~(3), we need to assess the behavior of estimators in such cases.
+			As noted by, among others Ref.~[15, Fig.~5], one should expect that extremely heterogeneous samples as, for instance, those from urban areas, are described in this region of the parameter space.
+		\end{quote}
+		\item Equation~(6) is correct because we only consider the terms that depend on $\alpha$, which are those involved in the minimization.
 		\item We added the following text to explain which was the initial point that was considered in the algorithm.
 		\begin{quote}
 			taking as a starting point $\alpha_0$ the alpha moment estimator when it exists. Otherwise we consider $\alpha_0=-1.5$.
 		\end{quote}
-		\item We rewrite equation $8$ as 
+		\item We rewrote equation~(8) as 
 		\begin{equation}
-			d_{\text{\tiny{T}}}(f_{\text{\tiny{V}}},f_{\text{\tiny{W}}})=\int_{S}\frac{(f_{\text{\tiny{V}}}(x)-f_{\text{\tiny{W}}}(x))^2}{f_{\text{\tiny{V}}}(x)+f_{\text{\tiny{W}}}(x)}dx,
+			d_{\text{{T}}}(f_{\text{{V}}},f_{\text{{W}}})=\int_{S}\frac{\big(f_{\text{{V}}}(x)-f_{\text{{W}}}(x)\big)^2}{f_{\text{{V}}}(x)+f_{\text{{W}}}(x)}dx,
 			\label{DT}
 		\end{equation}
 		
