@@ -122,7 +122,10 @@ Allende et al.~\cite{AllendeFreryetal:JSCS:05} studied the performance of maximu
 As expected, the lack of robustness is more pronounced for small samples. 
 They proposed M and AM estimators for the texture with good performance under contamination, but they suffer from numerical problems, especially with small samples.
 
-Tison et al.~\cite{Tison2004} showed that estimators based on logcumulants outperform the ML estimator for the parameters of the amplitude $\mathcal G^0$ distribution.
+Tison et al.~\cite{Tison2004} showed that estimators based on logcumulants 
+are well-suited to model amplitude single-look data from urban areas, where very large values are frequently observed.
+Nevertheless, that work overlooks the fact that estimation under the $\mathcal G^0$ distribution is more sensitive to very small values rather than to extremely large ones.
+In this work, we explore this fact and propose suitable solutions using kernels.
 
 A good estimator should have good behavior if the data come from the assumed model, and it should not present large deviations against small perturbation from the assumed model.
 In this sense, Refs.~\cite{APSAR2013ParameterEstimationStochasticDistances,gambini2015} are recent attempts at obtaining robust estimators for the textured parameter of the $\mathcal{G}^0$ model for intensity data.
@@ -628,7 +631,7 @@ Moreover, from $n=49$ onwards the shape of the $\widehat{\alpha}_{\text{{LN}}}$ 
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/DensidadEstimadorNoCont.eps}
-	\caption{\label{Fig:DistributionL=3_alfa=-3} Distribution of estimators for $\alpha=-3$ and  $L=3$ }\label{Fig:DistEstimator}
+	\caption{\label{Fig:DistributionL=3_alfa=-3} Sample density of estimators for $\alpha=-3$ and  $L=3$ }\label{Fig:DistEstimator}
 \end{figure}
 %JC Programa:DensityPropuestaNoCont.R	
 
@@ -645,7 +648,7 @@ The estimator which suffers the least with the texture reduction is $\widehat{\a
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=1\linewidth]{../../../Figures/PaperTesis/Asymptotic_n500_TodoAlfa}
-	\caption{\label{Fig:Densities_n500} Density function of the estimators for $n=500$. }\label{Fig:DistEstimator}
+	\caption{\label{Fig:Densities_n500} Sample density of the estimators for $n=500$. }\label{Fig:DistEstimator}
 \end{figure}
 %JC Programa:AsymptoticDensityNoCont_n500.R	
 
